@@ -1,0 +1,1109 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Basic Kinematics &#8212; Modeling and Control of Robots</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lec3-5/basic-kinematics';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Forward Kinematics" href="../lec6-8/fk.html" />
+    <link rel="prev" title="Robot Configuration" href="../lec2/configuration.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/iris_logo_2.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/iris_logo_2.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lec1/intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lec2/configuration.html">Robot Configuration</a></li>
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Basic Kinematics</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec6-8/fk.html">Forward Kinematics</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec9/ik.html">Inverse Kinematics</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec10/diff-trans.html">Derivative of Transformation</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec11-12/jacobian.html">Jacobian</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec13/singularity.html">Singularity &amp; Redundancy</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec14/statics.html">Statics</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec15/inverse_vk.html">Inverse Velocity Kinematics</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec16-17/nik.html">Numerical Inverse Kinematics</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec18/dyn.html">Dynamics (Lagrange formulation)</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec19/control_overview.html">Overview of Robot Control</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec20/djc.html">Decentralized Joint Control</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec21/cjc.html">Centralized Joint Control</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec22/osc.html">Operational Space Control</a></li>
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Flec3-5/basic-kinematics.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button"
+   title="Open an issue"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/lec3-5/basic-kinematics.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Basic Kinematics</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Basic Kinematics</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#elementary-rotations">Elementary Rotations</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#transformation-via-rotation-matrix">Transformation via Rotation Matrix</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#passive-rotation">Passive Rotation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#active-rotation">Active Rotation</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#composition-of-rotations">Composition of Rotations</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rotation-around-current-frame">Rotation around Current Frame</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rotation-around-fixed-frame">Rotation around Fixed Frame</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#rotation-parameterization">Rotation Parameterization</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#euler-angles">Euler Angles</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#angle-axis">Angle Axis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quaternion">Quaternion</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#homogeneous-transformations">Homogeneous Transformations</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="basic-kinematics">
+<h1>Basic Kinematics<a class="headerlink" href="#basic-kinematics" title="Permalink to this heading">#</a></h1>
+<p>The pose of a rigid body in 3D space is described by its position and
+orientation with respect to a reference frame. As shown in Fig.
+<span class="xref myst">1</span>{reference-type=”ref” reference=”fig.rbpos”}, let
+<span class="math notranslate nohighlight">\(O- x y z\)</span> be the reference frame and
+<span class="math notranslate nohighlight">\(\{\boldsymbol{x}, \boldsymbol{y}, \boldsymbol{z}\}\)</span> be the unit vectors
+of the frame axes. In order to represent the pose of the rigid body, we
+pick a fixed point <span class="math notranslate nohighlight">\(O^\prime\)</span> on the rigid body, and attach an
+orthonormal body frame <span class="math notranslate nohighlight">\(O^{\prime} - x^{\prime} y^{\prime} z^{\prime}\)</span>
+to the body, with origin in <span class="math notranslate nohighlight">\(O^{\prime}\)</span>.
+<span class="math notranslate nohighlight">\(\{\boldsymbol{x}^{\prime}, \boldsymbol{y}^{\prime}, \boldsymbol{z}^{\prime}\}\)</span>
+are the unit vectors of the body frame axes,</p>
+<figure class="align-default" id="pose-rigid-body">
+<a class="reference internal image-reference" href="../_images/pose_rigid_body.jpg"><img alt="../_images/pose_rigid_body.jpg" src="../_images/pose_rigid_body.jpg" style="width: 60%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 23 </span><span class="caption-text">Pose of a rigid body in a reference frame</span><a class="headerlink" href="#pose-rigid-body" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>To describe the position of the rigid body, we define a position vector
+<span class="math notranslate nohighlight">\(\boldsymbol{o}^{\prime}\)</span> pointing from the reference frame origin <span class="math notranslate nohighlight">\(O\)</span>
+to the body frame origin <span class="math notranslate nohighlight">\(O'\)</span>. We express <span class="math notranslate nohighlight">\(\boldsymbol{o}^{\prime}\)</span> in
+terms of <span class="math notranslate nohighlight">\(\{\boldsymbol{x}, \boldsymbol{y}, \boldsymbol{z}\}\)</span> of
+reference frame:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\boldsymbol{o}^{\prime}=o_{x}^{\prime} \boldsymbol{x}+o_{y}^{\prime} \boldsymbol{y}+o_{z}^{\prime} \boldsymbol{z}
+:=\left[\begin{array}{c}
+o_{x}^{\prime} \\
+o_{y}^{\prime} \\
+o_{z}^{\prime}
+\end{array}\right]
+=\left[\begin{array}{c}
+{\boldsymbol{o}^{\prime}}^T \boldsymbol{x} \\
+{\boldsymbol{o}^{\prime}}^T \boldsymbol{y} \\
+{\boldsymbol{o}^{\prime}}^T \boldsymbol{z}
+\end{array}\right]\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(o_{x}^{\prime}, o_{y}^{\prime}, o_{z}^{\prime}\)</span> are projections
+of <span class="math notranslate nohighlight">\(\boldsymbol{o}^{\prime}\)</span> in each axis in
+<span class="math notranslate nohighlight">\(\{\boldsymbol{x}, \boldsymbol{y}, \boldsymbol{z}\}\)</span>, and they are
+called the coordinates of the vector.</p>
+<p>To describe the orientation of the rigid body, we find the coordinates
+of each unit axis in
+<span class="math notranslate nohighlight">\(\{\boldsymbol{x}^{\prime}, \boldsymbol{y}^{\prime}, \boldsymbol{z}^{\prime}\}\)</span>
+of rigid body frame, in terms of
+<span class="math notranslate nohighlight">\(\{\boldsymbol{x}, \boldsymbol{y}, \boldsymbol{z}\}\)</span> of reference frame:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+&amp; \boldsymbol{x}^{\prime}=x_{x}^{\prime} \boldsymbol{x}+x_{y}^{\prime} \boldsymbol{y}+x_{z}^{\prime} \boldsymbol{z} \\
+&amp; \boldsymbol{y}^{\prime}=y_{x}^{\prime} \boldsymbol{x}+y_{y}^{\prime} \boldsymbol{y}+y_{z}^{\prime} \boldsymbol{z} \\
+&amp; \boldsymbol{z}^{\prime}=z_{x}^{\prime} \boldsymbol{x}+z_{y}^{\prime} \boldsymbol{y}+z_{z}^{\prime} \boldsymbol{z} .
+\end{aligned}\end{split}\]</div>
+<p>Write the above into the following compact notation:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\boldsymbol{R}=\left[\begin{array}{lll}
+\boldsymbol{x}^{\prime} &amp; \boldsymbol{y}^{\prime} &amp; \boldsymbol{z}^{\prime} 
+\end{array}\right]=\left[\begin{array}{ccc}
+x_{x}^{\prime} &amp; y_{x}^{\prime} &amp; z_{x}^{\prime} \\
+x_{y}^{\prime} &amp; y_{y}^{\prime} &amp; z_{y}^{\prime} \\
+x_{z}^{\prime} &amp; y_{z}^{\prime} &amp; z_{z}^{\prime}
+\end{array}\right]=\left[\begin{array}{lll}
+\boldsymbol{x}^{\prime T} \boldsymbol{x} &amp; \boldsymbol{y}^{\prime T} \boldsymbol{x} &amp; \boldsymbol{z}^{\prime T} \boldsymbol{x} \\
+\boldsymbol{x}^{\prime T} \boldsymbol{y} &amp; \boldsymbol{y}^{\prime T} \boldsymbol{y} &amp; \boldsymbol{z}^{\prime T} \boldsymbol{y} \\
+\boldsymbol{x}^{\prime T} \boldsymbol{z} &amp; \boldsymbol{y}^{\prime T} \boldsymbol{z} &amp; \boldsymbol{z}^{T} \boldsymbol{z}
+\end{array}\right]\end{split}\]</div>
+<p>with each column being the coordinates of each unit vector in
+<span class="math notranslate nohighlight">\(\{\boldsymbol{x}^{\prime}, \boldsymbol{y}^{\prime}, \boldsymbol{z}^{\prime}\}\)</span>.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The <span class="math notranslate nohighlight">\(\boldsymbol{R}\)</span> is called rotation matrix. Some properties of
+Rotation Matrix include</p>
+<ul class="simple">
+<li><p>Mutual orthogonality:
+<span class="math notranslate nohighlight">\(\boldsymbol{x}^{\prime T} \boldsymbol{y}^{\prime}=0\)</span>,
+<span class="math notranslate nohighlight">\(\boldsymbol{y}^{\prime T} \boldsymbol{z}^{\prime}=0\)</span>, and
+<span class="math notranslate nohighlight">\(\boldsymbol{z}^{\prime T} \boldsymbol{x}^{\prime}=0\)</span></p></li>
+<li><p>Unity: <span class="math notranslate nohighlight">\(\boldsymbol{x}^{\prime T} \boldsymbol{x}^{\prime}=1\)</span>,
+<span class="math notranslate nohighlight">\(\boldsymbol{y}^{\prime T} \boldsymbol{y}^{\prime}=1\)</span>, and
+<span class="math notranslate nohighlight">\(\boldsymbol{z}^{\prime T} \boldsymbol{z}^{\prime}=1\)</span></p></li>
+<li><p>Orthogonal matrix:
+<span class="math notranslate nohighlight">\(\boldsymbol{R}^{T} \boldsymbol{R}=\boldsymbol{I}_{3} \quad \rightarrow \quad \boldsymbol{R}^{T}=\boldsymbol{R}^{-1}\)</span></p></li>
+<li><p>The determinant of <span class="math notranslate nohighlight">\(\boldsymbol{R}\)</span>: <span class="math notranslate nohighlight">\(\det \boldsymbol{R}=1\)</span></p></li>
+</ul>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="elementary-rotations">
+<h1>Elementary Rotations<a class="headerlink" href="#elementary-rotations" title="Permalink to this heading">#</a></h1>
+<p>Consider the origin of the body frame coincides with the origin of the
+reference frame. The orientation of a body frame can be obtained via
+rotations of the reference frame about coordinate axes. Below, we
+consider right-handed rotation convention: rotations are positive if
+counter-clockwise about a axis.</p>
+<figure class="align-default" id="id1">
+<a class="reference internal image-reference" href="../_images/elementary_rotations.jpg"><img alt="../_images/elementary_rotations.jpg" src="../_images/elementary_rotations.jpg" style="width: 40%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 24 </span><span class="caption-text">Rotation of frame <span class="math notranslate nohighlight">\(O- x y z\)</span> by an angle <span class="math notranslate nohighlight">\(\alpha\)</span> about axis
+<span class="math notranslate nohighlight">\(\boldsymbol{z}\)</span></span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>As shown in Fig. <span class="xref myst">3</span>{reference-type=”ref”
+reference=”c1.rotation1”}, suppose the body frame
+<span class="math notranslate nohighlight">\(O- x^{\prime} y^{\prime} z^{\prime}\)</span> is a result of rotating a
+reference frame <span class="math notranslate nohighlight">\(O- x y z\)</span> by an angle <span class="math notranslate nohighlight">\(\alpha\)</span> about the axis
+<span class="math notranslate nohighlight">\(\boldsymbol{z}\)</span>. Then, the rotation matrix of
+<span class="math notranslate nohighlight">\(O- x^{\prime} y^{\prime} z^{\prime}\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\boldsymbol{R}_{z}(\alpha)=\left[\begin{array}{lll}
+\boldsymbol{x}^{\prime} &amp; \boldsymbol{y}^{\prime} &amp; \boldsymbol{z}^{\prime} 
+\end{array}\right]=\left[\begin{array}{ccc}
+\cos \alpha &amp; -\sin \alpha &amp; 0 \\
+\sin \alpha &amp; \cos \alpha &amp; 0 \\
+0 &amp; 0 &amp; 1
+\end{array}\right]\end{split}\]</div>
+<p>Similarly, the rotation matrix for an angle <span class="math notranslate nohighlight">\(\beta\)</span> about axis
+<span class="math notranslate nohighlight">\(\boldsymbol{y}\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\boldsymbol{R}_{y}(\beta)  =\left[\begin{array}{ccc}
+\cos \beta &amp; 0 &amp; \sin \beta \\
+0 &amp; 1 &amp; 0 \\
+-\sin \beta &amp; 0 &amp; \cos \beta
+\end{array}\right]\end{split}\]</div>
+<p>and the rotation matrix for an angle <span class="math notranslate nohighlight">\(\gamma\)</span> about axis
+<span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\boldsymbol{R}_{x}(\gamma)  =\left[\begin{array}{ccc}
+1 &amp; 0 &amp; 0 \\
+0 &amp; \cos \gamma &amp; -\sin \gamma \\
+0 &amp; \sin \gamma &amp; \cos \gamma
+\end{array}\right] .\end{split}\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Takeaway: the rotation matrix can be interpreted geometrically as a
+rotation about an axis in space needed to align a reference frame to a
+body frame.</p>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="transformation-via-rotation-matrix">
+<h1>Transformation via Rotation Matrix<a class="headerlink" href="#transformation-via-rotation-matrix" title="Permalink to this heading">#</a></h1>
+<section id="passive-rotation">
+<h2>Passive Rotation<a class="headerlink" href="#passive-rotation" title="Permalink to this heading">#</a></h2>
+<p>Consider that the origin of the body frame coincides with the origin of
+the reference frame, and that a point <span class="math notranslate nohighlight">\(P\)</span> in space expressed in
+<span class="math notranslate nohighlight">\(O- x y z\)</span> is</p>
+<figure class="align-default" id="coordinate-transformation">
+<a class="reference internal image-reference" href="../_images/coordinate_transformation.jpg"><img alt="../_images/coordinate_transformation.jpg" src="../_images/coordinate_transformation.jpg" style="width: 40%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 25 </span><span class="caption-text">Representation of a point <span class="math notranslate nohighlight">\(P\)</span> in two different coordinate
+frames</span><a class="headerlink" href="#coordinate-transformation" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<div class="math notranslate nohighlight">
+\[\begin{split}\boldsymbol{p}=p_{x} \boldsymbol{x} +
+p_{y} \boldsymbol{y} +
+p_{z}\boldsymbol{z} 
+=\left[\begin{array}{c}
+p_{x} \\
+p_{y} \\
+p_{z}
+\end{array}\right]\end{split}\]</div>
+<p>The same point can also be expressed in
+<span class="math notranslate nohighlight">\(O- x^{\prime} y^{\prime} z^{\prime}\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\boldsymbol{p}^{\prime}=p_{x}^{\prime} \boldsymbol{x}^{\prime} +
+p_{y}^{\prime} \boldsymbol{y}^{\prime} +
+p_{z}^{\prime}\boldsymbol{z}^{\prime} =\left[\begin{array}{c}
+p_{x}^{\prime} \\
+p_{y}^{\prime} \\
+p_{z}^{\prime}
+\end{array}\right]\end{split}\]</div>
+<p>To establish the relationship between two coordinates, we need to
+replace the unite vectors
+<span class="math notranslate nohighlight">\(\{\boldsymbol{x}^{\prime}, \boldsymbol{y}^{\prime}, \boldsymbol{x}^{\prime}\}\)</span>
+of the body frame with their coordinates in the reference frame using
+the rotation matrix <span class="math notranslate nohighlight">\(\boldsymbol{R}\)</span>. This leads to</p>
+<div class="math notranslate nohighlight">
+\[\label{equ.transform}
+    \boldsymbol{p}=\boldsymbol{R}\boldsymbol{p}^{\prime}\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Takeaway: <span class="math notranslate nohighlight">\(\boldsymbol{R}\)</span> represents the transformation matrix of the
+coordinates in frame <span class="math notranslate nohighlight">\(O- x^{\prime} y^{\prime} z^{\prime}\)</span> to the
+coordinates of the same vector in frame <span class="math notranslate nohighlight">\(O- x y z\)</span>.</p>
+</div>
+</section>
+<section id="active-rotation">
+<h2>Active Rotation<a class="headerlink" href="#active-rotation" title="Permalink to this heading">#</a></h2>
+<p>In another perspective to look at
+(<span class="xref myst">[equ.transform]</span>{reference-type=”ref”
+reference=”equ.transform”}), we can interpret <span class="math notranslate nohighlight">\(\boldsymbol{p}^{\prime}\)</span>
+be a vector also in the reference frame <span class="math notranslate nohighlight">\(O- x y z\)</span>;
+<span class="math notranslate nohighlight">\(\boldsymbol{R} \boldsymbol{p}^{\prime}\)</span> yields a vector
+<span class="math notranslate nohighlight">\(\boldsymbol{p}\)</span> with the same norm as that of <span class="math notranslate nohighlight">\(\boldsymbol{p}^{\prime}\)</span>
+but rotated with respect to <span class="math notranslate nohighlight">\(\boldsymbol{p}^{\prime}\)</span> according to the
+matrix <span class="math notranslate nohighlight">\(\boldsymbol{R}\)</span>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Takeaway: <span class="math notranslate nohighlight">\(\boldsymbol{R}\)</span> can be also interpreted as the matrix
+operator allowing rotation of a vector by a given angle about an axis in
+space.</p>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="composition-of-rotations">
+<h1>Composition of Rotations<a class="headerlink" href="#composition-of-rotations" title="Permalink to this heading">#</a></h1>
+<section id="rotation-around-current-frame">
+<h2>Rotation around Current Frame<a class="headerlink" href="#rotation-around-current-frame" title="Permalink to this heading">#</a></h2>
+<p>Let <span class="math notranslate nohighlight">\(O-{x_{0} y_{0} z_{0}}\)</span>,
+<span class="math notranslate nohighlight">\(O- x_{1} y_{1} z_{1}, O- x_{2} y_{2} z_{2}\)</span> be three frames with common
+origin <span class="math notranslate nohighlight">\(O\)</span>. The same vector <span class="math notranslate nohighlight">\(\boldsymbol{p}\)</span> can be expressed in each of
+the above frames, denoted as
+<span class="math notranslate nohighlight">\(\boldsymbol{p}^{0}, \boldsymbol{p}^{1}, \boldsymbol{p}^{2}\)</span>,
+respectively. Let <span class="math notranslate nohighlight">\(\boldsymbol{R}_{i}^{j}\)</span> denote the rotation matrix of
+frame <span class="math notranslate nohighlight">\(i\)</span> w.r.t. frame <span class="math notranslate nohighlight">\(j\)</span>. One has</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{p}^{1}=\boldsymbol{R}_{2}^{1} \boldsymbol{p}^{2}, \quad \boldsymbol{p}^{0}=\boldsymbol{R}_{1}^{0} \boldsymbol{p}^{1}, \quad \boldsymbol{p}^{0}=\boldsymbol{R}_{2}^{0} \boldsymbol{p}^{2}\]</div>
+<p>From the above equations, one can derive</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{R}_{2}^{0}=\boldsymbol{R}_{1}^{0} \boldsymbol{R}_{2}^{1}\]</div>
+<p>which is the composition of two rotations. <span class="math notranslate nohighlight">\(\boldsymbol{R}_{2}^{0}\)</span> can
+be thought of as first rotating <span class="math notranslate nohighlight">\(O- x_{0} y_{0} z_{0}\)</span> to
+<span class="math notranslate nohighlight">\(O- x_{1} y_{1} z_{1}\)</span>, according to <span class="math notranslate nohighlight">\(\boldsymbol{R}_{1}^{0}\)</span>, and then
+rotating <span class="math notranslate nohighlight">\(O- x_{1} y_{1} z_{1}\)</span> to <span class="math notranslate nohighlight">\(O - x_{2} y_{2} z_{2}\)</span>, according to
+<span class="math notranslate nohighlight">\(\boldsymbol{R}_{2}^{1}\)</span>. Here, the first rotation matrix
+<span class="math notranslate nohighlight">\(\boldsymbol{R}_{1}^{0}\)</span> is expressed in <span class="math notranslate nohighlight">\(O- x_{0} y_{0} z_{0}\)</span>, and the
+second rotation matrix <span class="math notranslate nohighlight">\(\boldsymbol{R}_{2}^{1}\)</span> is expressed in
+<span class="math notranslate nohighlight">\(O- x_{1} y_{1} z_{1}\)</span>.</p>
+<p>Hence, we can conclude the following <em>postmultiplication rule</em>:</p>
+<ul class="simple">
+<li><p>The frame with respect to which a rotation occurs (and the rotation
+matrix is ‘expressed’) is called the current frame.</p></li>
+<li><p>The composition of each rotation around the current frame is
+obtained by <em>postmultiplication</em> of the rotation matrices in order.</p></li>
+</ul>
+</section>
+<section id="rotation-around-fixed-frame">
+<h2>Rotation around Fixed Frame<a class="headerlink" href="#rotation-around-fixed-frame" title="Permalink to this heading">#</a></h2>
+<p>Let’s consider the following case. Suppose that we first rotate
+<span class="math notranslate nohighlight">\(O- x_{0} y_{0} z_{0}\)</span> to frame <span class="math notranslate nohighlight">\(O- x_{1} y_{1} z_{1}\)</span>, according to
+<span class="math notranslate nohighlight">\(\boldsymbol{R}_{1}^{0}\)</span> (which is expressed in the initial frame
+<span class="math notranslate nohighlight">\(O- x_{0} y_{0} z_{0}\)</span>). Next, we rotate the current frame
+<span class="math notranslate nohighlight">\(O- x_{1} y_{1} z_{1}\)</span> to the frame <span class="math notranslate nohighlight">\(O- x_{2} y_{2} z_{2}\)</span>, according to
+a new rotation matrix</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{R}_{1,2}^0\]</div>
+<p>which is ‘expressed’ <em>still</em> in the initial frame <span class="math notranslate nohighlight">\(O- x_{0} y_{0} z_{0}\)</span>
+(instead of the current frame <span class="math notranslate nohighlight">\(O- x_{1} y_{1} z_{1}\)</span> itself). We call
+this type of rotation “the rotation around the fixed frame”.</p>
+<p>To apply the <em>postmultipcation rule</em>, we need to find out the equivalent
+rotation to <span class="math notranslate nohighlight">\(\boldsymbol{R}_{1,2}^0\)</span> but ‘expressed’ in the current
+frame <span class="math notranslate nohighlight">\(O- x_{1} y_{1} z_{1}\)</span>. This will lead to the concept of
+similarity transformation derived using the perspective of “rotation
+matrix as a active transformation” (how?).</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Given a rotation matrix <span class="math notranslate nohighlight">\(\boldsymbol{R}^0\)</span> ‘expressed’ in the frame
+<span class="math notranslate nohighlight">\(O- x_{0} y_{0} z_{0}\)</span>, the equivalent rotation matrix
+<span class="math notranslate nohighlight">\(\boldsymbol{R}^1\)</span> ‘expressed’ in another frame <span class="math notranslate nohighlight">\(O- x_{1} y_{1} z_{1}\)</span>,
+where <span class="math notranslate nohighlight">\(O- x_{1} y_{1} z_{1}\)</span> is rotated by <span class="math notranslate nohighlight">\(\boldsymbol{R}_1^0\)</span> from
+<span class="math notranslate nohighlight">\(O- x_{0} y_{0} z_{0}\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{R}^1=(\boldsymbol{R}_1^0)^T\boldsymbol{R}^0\boldsymbol{R}_1^0\]</div>
+</div>
+<p>Back to the matrix <span class="math notranslate nohighlight">\(\boldsymbol{R}_{1,2}^0\)</span>, the equivalent rotation
+matrix ‘expressed’ in the current frame <span class="math notranslate nohighlight">\(O- x_{1} y_{1} z_{1}\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{R}_{1,2}^1=(\boldsymbol{R}_1^0)^T\boldsymbol{R}_{1,2}^0\boldsymbol{R}_1^0\]</div>
+<p>Then, following the <em>postmultipcation rule</em>, we can follow the to obtain
+the total rotation
+$<span class="math notranslate nohighlight">\(\boldsymbol{R}_{2}^{0}=\boldsymbol{R}_{1}^{0} \boldsymbol{R}_{1,2}^1=\boldsymbol{R}_{1}^{0} (\boldsymbol{R}_1^0)^T\boldsymbol{R}_{1,2}^0\boldsymbol{R}_1^0=\boldsymbol{R}_{1,2}^0\boldsymbol{R}_1^0\)</span>$</p>
+<p>Hence, we can conclude the following <em>premultiplication rule</em>:</p>
+<ul class="simple">
+<li><p>The same frame with respect to which a rotation occurs (and the
+rotation matrix is ‘expressed’) is called the fixed frame.</p></li>
+<li><p>The composition of each rotation around the fixed frame is obtained
+by <em>premultiplication</em> of the rotation matrices in order.</p></li>
+</ul>
+<p>Note: composition of rotations not commutative!</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="rotation-parameterization">
+<h1>Rotation Parameterization<a class="headerlink" href="#rotation-parameterization" title="Permalink to this heading">#</a></h1>
+<p>A rotation matrix has 9 elements, its mutual orthogonality and unity
+properties bring 6 constraints. Thus, only three independent parameters
+can minimally and sufficiently parameterize a rotation matrix.</p>
+<section id="euler-angles">
+<h2>Euler Angles<a class="headerlink" href="#euler-angles" title="Permalink to this heading">#</a></h2>
+<p>A rotation in space can be understood as a sequence of three elementary
+rotations. To fully describe all possible orientations, two successive
+rotations should not be made around parallel axes. When the first and
+third rotations are made around the same axis, the parameterization is
+called proper Euler angles. In the following, two sets of Euler angles
+are used; namely, the ZYZ Euler angles and the RPY (or Roll-PitchYaw)
+Euler angles.</p>
+<figure class="align-default" id="zyz-euler-angles">
+<a class="reference internal image-reference" href="../_images/zyz_euler_angles.jpg"><img alt="../_images/zyz_euler_angles.jpg" src="../_images/zyz_euler_angles.jpg" style="width: 60%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 26 </span><span class="caption-text">Parameterization of ZYZ Euler angles</span><a class="headerlink" href="#zyz-euler-angles" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p><strong>ZYZ Euler Angles</strong>: the rotation described by ZYZ Euler angles is done
+by first, rotating the current frame by <span class="math notranslate nohighlight">\(\varphi\)</span> about axis
+<span class="math notranslate nohighlight">\(\boldsymbol{z}\)</span>, second, rotating the current frame by angle
+<span class="math notranslate nohighlight">\(\vartheta\)</span> about axis <span class="math notranslate nohighlight">\(\boldsymbol{y}^{\prime}\)</span>, and then, rotating the
+current frame by the angle <span class="math notranslate nohighlight">\(\psi\)</span> about axis
+<span class="math notranslate nohighlight">\(\boldsymbol{z}^{\prime\prime}\)</span>. Thus, the rotation matrix from ZYZ
+Euler angles
+<span class="math notranslate nohighlight">\(\boldsymbol{\phi}=\left[\begin{array}{lll}\varphi &amp; \vartheta &amp; \psi\end{array}\right]^{T}\)</span>
+is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+\boldsymbol{R}(\boldsymbol{\phi}) &amp; =\boldsymbol{R}_{z}(\varphi) \boldsymbol{R}_{y^{\prime}}(\vartheta) \boldsymbol{R}_{z^{\prime \prime}}(\psi) =\left[\begin{array}{ccc}
+c_{\varphi} c_{\vartheta} c_{\psi}-s_{\varphi} s_{\psi} &amp; -c_{\varphi} c_{\vartheta} s_{\psi}-s_{\varphi} c_{\psi} &amp; c_{\varphi} s_{\vartheta} \\
+s_{\varphi} c_{\vartheta} c_{\psi}+c_{\varphi} s_{\psi} &amp; -s_{\varphi} c_{\vartheta} s_{\psi}+c_{\varphi} c_{\psi} &amp; s_{\varphi} s_{\vartheta} \\
+-s_{\vartheta} c_{\psi} &amp; s_{\vartheta} s_{\psi} &amp; c_{\vartheta}
+\end{array}\right] .
+\end{aligned}\end{split}\]</div>
+<p>Inversely, given a rotation matrix</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\boldsymbol{R}=\left[\begin{array}{lll}
+r_{11} &amp; r_{12} &amp; r_{13} \\
+r_{21} &amp; r_{22} &amp; r_{23} \\
+r_{31} &amp; r_{32} &amp; r_{33}
+\end{array}\right] .\end{split}\]</div>
+<p>the corresponding ZYZ Euler angles
+<span class="math notranslate nohighlight">\(\boldsymbol{\phi}=\left[\begin{array}{lll}\varphi &amp; \vartheta &amp; \psi\end{array}\right]^{T}\)</span>
+is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+&amp; \varphi=\operatorname{Atan} 2\left(r_{23}, r_{13}\right) \\
+&amp; \vartheta=\operatorname{Atan} 2\left(\sqrt{r_{13}^{2}+r_{23}^{2}}, r_{33}\right) \\
+&amp; \psi=\operatorname{Atan} 2\left(r_{32},-r_{31}\right) .
+\end{aligned}\end{split}\]</div>
+<p>if <span class="math notranslate nohighlight">\(s_{\vartheta}=0\)</span>, i.e., <span class="math notranslate nohighlight">\((r_{23}, r_{13})\not=(0,0)\)</span>; otherwise,
+only the sum or difference of <span class="math notranslate nohighlight">\(\varphi\)</span> and <span class="math notranslate nohighlight">\(\psi\)</span> is determined (why?)</p>
+<p><strong>RPY Euler Angles</strong>: the rotation from RPY Euler angles is obtained by
+first, rotating the reference frame by the angle <span class="math notranslate nohighlight">\(\varphi\)</span> about the
+current axis <span class="math notranslate nohighlight">\(\boldsymbol{z}\)</span> (roll), then, rotating the current frame
+by <span class="math notranslate nohighlight">\(\vartheta\)</span> about the fixed axis <span class="math notranslate nohighlight">\(\boldsymbol{y}\)</span> (pitch), and then,
+rotating the current frame by <span class="math notranslate nohighlight">\(\psi\)</span> about fixed axis <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span>
+(yaw). Thus, the resulting rotation matrix is obtained by
+premultiplication rule.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+\boldsymbol{R}(\boldsymbol{\phi}) &amp; =\boldsymbol{R}_{z}(\varphi) \boldsymbol{R}_{y}(\vartheta) \boldsymbol{R}_{x}(\psi)  =\left[\begin{array}{ccc}
+c_{\varphi} c_{\vartheta} &amp; c_{\varphi} s_{\vartheta} s_{\psi}-s_{\varphi} c_{\psi} &amp; c_{\varphi} s_{\vartheta} c_{\psi}+s_{\varphi} s_{\psi} \\
+s_{\varphi} c_{\vartheta} &amp; s_{\varphi} s_{\vartheta} s_{\psi}+c_{\varphi} c_{\psi} &amp; s_{\varphi} s_{\vartheta} c_{\psi}-c_{\varphi} s_{\psi} \\
+-s_{\vartheta} &amp; c_{\vartheta} s_{\psi} &amp; c_{\vartheta} c_{\psi}
+\end{array}\right] .
+\end{aligned}\end{split}\]</div>
+<p>Inversely, given rotation matrix</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\boldsymbol{R}=\left[\begin{array}{lll}
+r_{11} &amp; r_{12} &amp; r_{13} \\
+r_{21} &amp; r_{22} &amp; r_{23} \\
+r_{31} &amp; r_{32} &amp; r_{33}
+\end{array}\right],\end{split}\]</div>
+<p>the corresponding ZYX Euler Angles is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+&amp; \varphi=\operatorname{Atan} 2\left(r_{21}, r_{11}\right) \\
+&amp; \vartheta=\operatorname{Atan} 2\left(-r_{31}, \sqrt{r_{32}^{2}+r_{33}^{2}}\right) \\
+&amp; \psi=\operatorname{Atan} 2\left(r_{32}, r_{33}\right) .
+\end{aligned}\end{split}\]</div>
+<p>if <span class="math notranslate nohighlight">\(c_{\vartheta}\not=0\)</span>; otherwise, only the sum or difference of
+<span class="math notranslate nohighlight">\(\varphi\)</span> and <span class="math notranslate nohighlight">\(\psi\)</span> can be determined.</p>
+</section>
+<section id="angle-axis">
+<h2>Angle Axis<a class="headerlink" href="#angle-axis" title="Permalink to this heading">#</a></h2>
+<p>The angle-axis is a non-minimal implementation of rotations, which is
+defined by an angle <span class="math notranslate nohighlight">\(\vartheta\)</span> and a rotation axis vector
+<span class="math notranslate nohighlight">\(\boldsymbol{r}=\left[r_{x}, r_{y},  r_{z}\right]^{T}\)</span> (unit vector) in
+the reference frame <span class="math notranslate nohighlight">\(O- x y z\)</span>.</p>
+<figure class="align-default" id="id2">
+<a class="reference internal image-reference" href="../_images/angle_axis.jpg"><img alt="../_images/angle_axis.jpg" src="../_images/angle_axis.jpg" style="width: 40%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 27 </span><span class="caption-text">Rotation of an angle about an axis.</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>To derive the rotation matrix
+<span class="math notranslate nohighlight">\(\boldsymbol{R}(\vartheta, \boldsymbol{r})\)</span> from
+<span class="math notranslate nohighlight">\((\vartheta, \boldsymbol{r})\)</span>, we first create a ‘virtual’ frame
+<span class="math notranslate nohighlight">\(O_1- x_1 y_1 z_1\)</span> with its axis <span class="math notranslate nohighlight">\(\boldsymbol{z_1}\)</span> aligned with
+<span class="math notranslate nohighlight">\(\boldsymbol{r}\)</span>. Then, the rotation matrix for the rotation
+<span class="math notranslate nohighlight">\((\vartheta, \boldsymbol{r})\)</span> is ‘expressed’ in the current frame:
+<span class="math notranslate nohighlight">\(\boldsymbol{R}_{z}(\vartheta)\)</span>. Since our goal is to find the rotation
+matrix <span class="math notranslate nohighlight">\(\boldsymbol{R}(\vartheta, \boldsymbol{r})\)</span> ‘expressed’ in the
+reference frame <span class="math notranslate nohighlight">\(O- x y z\)</span>, we apply the previous similarity
+transformation:</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{R}(\vartheta, \boldsymbol{r})= \boldsymbol{R}_{b} \boldsymbol{R}_{z}(\vartheta) (\boldsymbol{R}_{b})^T\]</div>
+<p>with <span class="math notranslate nohighlight">\(\boldsymbol{R}_{1}\)</span> denoting the rotation from the reference frame
+to the virtual frame. From the geometry in Fig.
+<span class="xref myst">5</span>{reference-type=”ref”
+reference=”c1.fig.axis-angle”},</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{R}_{b}=\boldsymbol{R}_{z}(\alpha) \boldsymbol{R}_{y}(\beta)\]</div>
+<p>In sum, the rotation matrix is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\boldsymbol{R}(\vartheta, \boldsymbol{r})=\left[\begin{array}{ccc}
+r_{x}^{2}\left(1-c_{\vartheta}\right)+c_{\vartheta} &amp; r_{x} r_{y}\left(1-c_{\vartheta}\right)-r_{z} s_{\vartheta} &amp; r_{x} r_{z}\left(1-c_{\vartheta}\right)+r_{y} s_{\vartheta} \\
+r_{x} r_{y}\left(1-c_{\vartheta}\right)+r_{z} s_{\vartheta} &amp; r_{y}^{2}\left(1-c_{\vartheta}\right)+c_{\vartheta} &amp; r_{y} r_{z}\left(1-c_{\vartheta}\right)-r_{x} s_{\vartheta} \\
+r_{x} r_{z}\left(1-c_{\vartheta}\right)-r_{y} s_{\vartheta} &amp; r_{y} r_{z}\left(1-c_{\vartheta}\right)+r_{x} s_{\vartheta} &amp; r_{z}^{2}\left(1-c_{\vartheta}\right)+c_{\vartheta}
+\end{array}\right] .\end{split}\]</div>
+<p>with</p>
+<div class="math notranslate nohighlight">
+\[\begin{gathered}
+\sin \alpha=\frac{r_{y}}{\sqrt{r_{x}^{2}+r_{y}^{2}}} \quad \cos \alpha=\frac{r_{x}}{\sqrt{r_{x}^{2}+r_{y}^{2}}} \quad
+\sin \beta=\sqrt{r_{x}^{2}+r_{y}^{2}} \quad \cos \beta=r_{z} .
+\end{gathered}\]</div>
+<p>Also, the following property holds:
+$<span class="math notranslate nohighlight">\(\boldsymbol{R}(-\vartheta,-\boldsymbol{r})=\boldsymbol{R}(\vartheta, \boldsymbol{r})\)</span>$</p>
+<p>Inversely, given rotation matrix
+$<span class="math notranslate nohighlight">\(\boldsymbol{R}=\left[\begin{array}{lll}
+r_{11} &amp; r_{12} &amp; r_{13} \\
+r_{21} &amp; r_{22} &amp; r_{23} \\
+r_{31} &amp; r_{32} &amp; r_{33}
+\end{array}\right],\)</span>$</p>
+<p>then,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+ \vartheta=\cos ^{-1}\left(\frac{r_{11}+r_{22}+r_{33}-1}{2}\right) \quad \boldsymbol{r}=\frac{1}{2 \sin \vartheta}\left[\begin{array}{l}
+r_{32}-r_{23} \\
+r_{13}-r_{31} \\
+r_{21}-r_{12}
+\end{array}\right],
+\end{aligned}\end{split}\]</div>
+<p>if <span class="math notranslate nohighlight">\(\sin \vartheta \neq 0\)</span>; otherwise,
+<span class="math notranslate nohighlight">\((\vartheta, \boldsymbol{r})\)</span> is undefined.</p>
+</section>
+<section id="quaternion">
+<h2>Quaternion<a class="headerlink" href="#quaternion" title="Permalink to this heading">#</a></h2>
+<p>A non-minimal representation of rotations which does not suffer from the
+disadvantage encountered with the angle axis is provided by unit
+quaternions, defined as</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{Q}=\{\eta, \boldsymbol{\epsilon}\}, \quad\text{with}
+\quad
+\eta=\cos \frac{\vartheta}{2}, \quad \boldsymbol{\epsilon}=\sin \frac{\vartheta}{2} \boldsymbol{r}\]</div>
+<p><span class="math notranslate nohighlight">\(\eta\)</span> is called the scalar part while
+<span class="math notranslate nohighlight">\(\boldsymbol{\epsilon}=\left[\epsilon_{x} , \epsilon_{y} , \epsilon_{z}, \right]^{T}\)</span>
+is called vector part of the quaternion, and
+<span class="math notranslate nohighlight">\(\eta^{2}+\epsilon_{x}^{2}+\epsilon_{y}^{2}+\epsilon_{z}^{2}=1\)</span>. It is
+worth remarking that, unlike the angle/axis representation, a rotation
+by <span class="math notranslate nohighlight">\((-\vartheta, -\boldsymbol{r})\)</span> gives the same quaternion as that by
+<span class="math notranslate nohighlight">\((\vartheta, \boldsymbol{r})\)</span>.</p>
+<p>The rotation matrix corresponding to a given quaternion is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\boldsymbol{R}(\eta, \boldsymbol{\epsilon})=\left[\begin{array}{ccc}
+2\left(\eta^{2}+\epsilon_{x}^{2}\right)-1 &amp; 2\left(\epsilon_{x} \epsilon_{y}-\eta \epsilon_{z}\right) &amp; 2\left(\epsilon_{x} \epsilon_{z}+\eta \epsilon_{y}\right) \\
+2\left(\epsilon_{x} \epsilon_{y}+\eta \epsilon_{z}\right) &amp; 2\left(\eta^{2}+\epsilon_{y}^{2}\right)-1 &amp; 2\left(\epsilon_{y} \epsilon_{z}-\eta \epsilon_{x}\right) \\
+2\left(\epsilon_{x} \epsilon_{z}-\eta \epsilon_{y}\right) &amp; 2\left(\epsilon_{y} \epsilon_{z}+\eta \epsilon_{x}\right) &amp; 2\left(\eta^{2}+\epsilon_{z}^{2}\right)-1
+\end{array}\right]\end{split}\]</div>
+<p>Inversely, given rotation matrix</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\boldsymbol{R}=\left[\begin{array}{lll}
+r_{11} &amp; r_{12} &amp; r_{13} \\
+r_{21} &amp; r_{22} &amp; r_{23} \\
+r_{31} &amp; r_{32} &amp; r_{33}
+\end{array}\right],\end{split}\]</div>
+<p>the quaternion is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+\eta  =\frac{1}{2} \sqrt{r_{11}+r_{22}+r_{33}+1} \qquad
+\boldsymbol{\epsilon}  =\frac{1}{2}\left[\begin{array}{l}
+\operatorname{sgn}\left(r_{32}-r_{23}\right) \sqrt{r_{11}-r_{22}-r_{33}+1} \\
+\operatorname{sgn}\left(r_{13}-r_{31}\right) \sqrt{r_{22}-r_{33}-r_{11}+1} \\
+\operatorname{sgn}\left(r_{21}-r_{12}\right) \sqrt{r_{33}-r_{11}-r_{22}+1}
+\end{array}\right],
+\end{aligned}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\operatorname{sgn}(x)=1\)</span> for <span class="math notranslate nohighlight">\(x \geq 0\)</span> and
+<span class="math notranslate nohighlight">\(\operatorname{sgn}(x)=-1\)</span> for <span class="math notranslate nohighlight">\(x&lt;0\)</span>.</p>
+<p>The quaternion corresponding to <span class="math notranslate nohighlight">\(\boldsymbol{R}^{-1}=\boldsymbol{R}^{T}\)</span>
+is denoted as <span class="math notranslate nohighlight">\(\mathcal{Q}^{-1}\)</span>, and can be computed as</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{Q}^{-1}=\{\eta,-\boldsymbol{\epsilon}\}\]</div>
+<p>Let <span class="math notranslate nohighlight">\(\mathcal{Q}_{1}=\left\{\eta_{1}, \boldsymbol{\epsilon}_{1}\right\}\)</span>
+and <span class="math notranslate nohighlight">\(\mathcal{Q}_{2}=\left\{\eta_{2}, \boldsymbol{\epsilon}_{2}\right\}\)</span>
+denote the quaternions corresponding to the rotation matrices
+<span class="math notranslate nohighlight">\(\boldsymbol{R}_{1}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{R}_{2}\)</span>, respectively. The
+quaternion corresponding to the product
+<span class="math notranslate nohighlight">\(\boldsymbol{R}_{1} \boldsymbol{R}_{2}\)</span> is given by</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{Q}_{1} * \mathcal{Q}_{2}=\left\{\eta_{1} \eta_{2}-\boldsymbol{\epsilon}_{1}^{T} \boldsymbol{\epsilon}_{2}, \eta_{1} \boldsymbol{\epsilon}_{2}+\eta_{2} \boldsymbol{\epsilon}_{1}+\boldsymbol{\epsilon}_{1} \times \boldsymbol{\epsilon}_{2}\right\}\]</div>
+<p>where the quaternion product operator “*” has been formally
+introduced.</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="homogeneous-transformations">
+<h1>Homogeneous Transformations<a class="headerlink" href="#homogeneous-transformations" title="Permalink to this heading">#</a></h1>
+<figure class="align-default" id="homogenenous-transformation">
+<a class="reference internal image-reference" href="../_images/homogenenous_transformation.jpg"><img alt="../_images/homogenenous_transformation.jpg" src="../_images/homogenenous_transformation.jpg" style="width: 60%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 28 </span><span class="caption-text">Representation of a point <span class="math notranslate nohighlight">\(P\)</span> in different coordinate
+frames</span><a class="headerlink" href="#homogenenous-transformation" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Consider a reference frame <span class="math notranslate nohighlight">\(O_{0}- x_{0} y_{0} z_{0}\)</span> and another frame
+<span class="math notranslate nohighlight">\(O_{1}- x_{1} y_{1} z_{1}\)</span>. Let <span class="math notranslate nohighlight">\(\boldsymbol{o}_{1}^{0}\)</span> be the
+coordinate vector of the origin of Frame 1 w.r.t. Frame 0, and
+<span class="math notranslate nohighlight">\(\boldsymbol{R}_{1}^{0}\)</span> be the rotation matrix of Frame 1 w.r.t. Frame
+0. Let <span class="math notranslate nohighlight">\(\boldsymbol{p}^{0}\)</span> be the coordinate vector of any point <span class="math notranslate nohighlight">\(P\)</span>
+w.r.t. Frame 0, and <span class="math notranslate nohighlight">\(\boldsymbol{p}^{1}\)</span> be the coordinate vector of the
+same point <span class="math notranslate nohighlight">\(P\)</span> w.r.t. Frame 1. Then, we have the following relationship</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{p}^{0}=\boldsymbol{o}_{1}^{0}+\boldsymbol{R}_{1}^{0} \boldsymbol{p}^{1}\]</div>
+<p>To achieve a compact representation, the homogeneous representation of a
+generic vector <span class="math notranslate nohighlight">\(\boldsymbol{p}\)</span> is introduced:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\widetilde{\boldsymbol{p}}=\left[\begin{array}{l}
+\boldsymbol{p} \\
+1
+\end{array}\right] .\end{split}\]</div>
+<p>Then, the above relationship can be compactly written as</p>
+<div class="math notranslate nohighlight">
+\[\widetilde{\boldsymbol{p}}^{0}=\boldsymbol{A}_{1}^{0} \widetilde{\boldsymbol{p}}^{1}\]</div>
+<p>with</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\boldsymbol{A}_{1}^{0}=\left[\begin{array}{cc}
+\boldsymbol{R}_{1}^{0} &amp; \boldsymbol{o}_{1}^{0} \\
+\mathbf{0}^{T} &amp; 1
+\end{array}\right]\end{split}\]</div>
+<p>which is called <em>homogeneous transformation matrix</em>. All homogeneous
+transformation matrices belong to the <em>Special Euclidean Group</em>, denoted
+as <span class="math notranslate nohighlight">\(\boldsymbol{A}_{1}^{0}\in SE(3)\)</span>.</p>
+<p>The inverse transformation,</p>
+<div class="math notranslate nohighlight">
+\[
+\widetilde{\boldsymbol{p}}^{1}=\boldsymbol{A}_{0}^{1} \widetilde{\boldsymbol{p}}^{0}=\left(\boldsymbol{A}_{1}^{0}\right)^{-1} \widetilde{\boldsymbol{p}}^{0}
+\]</div>
+<p>with</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\boldsymbol{A}_{0}^{1}=\left[\begin{array}{cc}
+\boldsymbol{R}_{1}^{0 T} &amp; -\boldsymbol{R}_{1}^{0 T} \boldsymbol{o}_{1}^{0} \\
+\mathbf{0}^{T} &amp; 1
+\end{array}\right]=\left[\begin{array}{cc}
+\boldsymbol{R}_{0}^{1} &amp; -\boldsymbol{R}_{0}^{1} \boldsymbol{o}_{1}^{0} \\
+\mathbf{0}^{T} &amp; 1
+\end{array}\right].\end{split}\]</div>
+<p>Notice that for the homogeneous transformation matrix the orthogonality
+property does not hold;</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{A}^{-1} \neq \boldsymbol{A}^{T}\]</div>
+<p>Analogously to what presented for the rotation matrices, it is easy to
+verify that a sequence of coordinate transformations can be composed by
+the <em>postmultiplication rule</em></p>
+<div class="math notranslate nohighlight">
+\[\widetilde{\boldsymbol{p}}^{0}=\boldsymbol{A}_{1}^{0} \boldsymbol{A}_{2}^{1} \ldots \boldsymbol{A}_{n}^{n-1} \widetilde{\boldsymbol{p}}^{n}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\boldsymbol{A}_{i}^{i-1}\)</span> denotes the homogeneous transformation
+of Frame <span class="math notranslate nohighlight">\(i\)</span> with respect to the <em>current</em> Frame <span class="math notranslate nohighlight">\(i-1\)</span>.</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./lec3-5"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../lec2/configuration.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Robot Configuration</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../lec6-8/fk.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Forward Kinematics</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Basic Kinematics</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#elementary-rotations">Elementary Rotations</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#transformation-via-rotation-matrix">Transformation via Rotation Matrix</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#passive-rotation">Passive Rotation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#active-rotation">Active Rotation</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#composition-of-rotations">Composition of Rotations</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rotation-around-current-frame">Rotation around Current Frame</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rotation-around-fixed-frame">Rotation around Fixed Frame</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#rotation-parameterization">Rotation Parameterization</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#euler-angles">Euler Angles</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#angle-axis">Angle Axis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quaternion">Quaternion</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#homogeneous-transformations">Homogeneous Transformations</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Wanxin Jin @ IRIS Lab
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

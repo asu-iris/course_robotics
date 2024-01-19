@@ -1,0 +1,936 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Jacobian &#8212; Modeling and Control of Robots</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lec11-12/jacobian';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Singularity &amp; Redundancy" href="../lec13/singularity.html" />
+    <link rel="prev" title="Derivative of Transformation" href="../lec10/diff-trans.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/iris_logo_2.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/iris_logo_2.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lec1/intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lec2/configuration.html">Robot Configuration</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec3-5/basic-kinematics.html">Basic Kinematics</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec6-8/fk.html">Forward Kinematics</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec9/ik.html">Inverse Kinematics</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec10/diff-trans.html">Derivative of Transformation</a></li>
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Jacobian</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec13/singularity.html">Singularity &amp; Redundancy</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec14/statics.html">Statics</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec15/inverse_vk.html">Inverse Velocity Kinematics</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec16-17/nik.html">Numerical Inverse Kinematics</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec18/dyn.html">Dynamics (Lagrange formulation)</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec19/control_overview.html">Overview of Robot Control</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec20/djc.html">Decentralized Joint Control</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec21/cjc.html">Centralized Joint Control</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec22/osc.html">Operational Space Control</a></li>
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Flec11-12/jacobian.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button"
+   title="Open an issue"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/lec11-12/jacobian.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Jacobian</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Jacobian</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-jacobian">Linear Jacobian</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#angular-jacobian">Angular Jacobian</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#analytical-jacobian">Analytical Jacobian</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="jacobian">
+<h1>Jacobian<a class="headerlink" href="#jacobian" title="Permalink to this heading">#</a></h1>
+<p>The kinematics equation of an <span class="math notranslate nohighlight">\(n\)</span>-DOF manipulator is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\boldsymbol{T}_{e}(\boldsymbol{q})=\left[\begin{array}{cc}
+\boldsymbol{R}_{e}(\boldsymbol{q}) &amp; \boldsymbol{p}_{e}(\boldsymbol{q}) \\
+\mathbf{0}^{T} &amp; 1
+\end{array}\right]\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\boldsymbol{q}=\left[q_{1},\ldots, q_{n}\right]^{T}\)</span>. The goal of
+the differential kinematics is to find the relationship between the
+joint velocities and the end-effector linear and angular velocities. In
+other words, we want to find end-effector linear velocity
+<span class="math notranslate nohighlight">\(\dot{\boldsymbol{p}}_{e}\)</span> and angular velocity
+<span class="math notranslate nohighlight">\(\boldsymbol{\omega}_{e}\)</span> as a function of the joint velocities
+<span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}}\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+&amp; \dot{\boldsymbol{p}}_{e}=\boldsymbol{J}_{P}(\boldsymbol{q}) \dot{\boldsymbol{q}} \\
+&amp; \boldsymbol{\omega}_{e}=\boldsymbol{J}_{O}(\boldsymbol{q}) \dot{\boldsymbol{q}}
+\end{aligned}\end{split}\]</div>
+<p>In compact form, the above will be written as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\boldsymbol{v}_{e}=\left[\begin{array}{c}
+\dot{\boldsymbol{p}}_{e} \\
+\boldsymbol{\omega}_{e}
+\end{array}\right]=\boldsymbol{J}(\boldsymbol{q}) \dot{\boldsymbol{q}}\end{split}\]</div>
+<p>The <span class="math notranslate nohighlight">\((6 \times n)\)</span> matrix <span class="math notranslate nohighlight">\(\boldsymbol{J}(\boldsymbol{q})\)</span> is the
+geometric Jacobian</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\boldsymbol{J}(\boldsymbol{q})=\left[\begin{array}{l}
+\boldsymbol{J}_{P}(\boldsymbol{q}) \\
+\boldsymbol{J}_{O}(\boldsymbol{q})
+\end{array}\right]\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\boldsymbol{J}_{P}(\boldsymbol{q})\)</span> is called linear Jacobian and
+<span class="math notranslate nohighlight">\(\boldsymbol{J}_{O}(\boldsymbol{q})\)</span> angular Jacobian.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="linear-jacobian">
+<h1>Linear Jacobian<a class="headerlink" href="#linear-jacobian" title="Permalink to this heading">#</a></h1>
+<p>To compute linear Jacobian <span class="math notranslate nohighlight">\(\boldsymbol{J}_{P}(\boldsymbol{q})\)</span>, we can
+write the time derivative of <span class="math notranslate nohighlight">\(\boldsymbol{p}_{e}\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[\dot{\boldsymbol{p}}_{e}=\boldsymbol{J}_{P} \dot{\boldsymbol{q}}=\sum_{i=1}^{n} \boldsymbol{J}_{P i} \dot{q}_{i} .\]</div>
+<p>This expression shows how <span class="math notranslate nohighlight">\(\dot{\boldsymbol{p}}_{e}\)</span> can be obtained as
+the sum of the terms <span class="math notranslate nohighlight">\(\dot{q}_{i} \boldsymbol{J}_{P i}\)</span> Each term
+represents the contribution of the velocity of single Joint <span class="math notranslate nohighlight">\(i\)</span> to the
+end-effector linear velocity when all the other joints are still.</p>
+<p>If Joint <span class="math notranslate nohighlight">\(i\)</span> is prismatic,</p>
+<div class="math notranslate nohighlight">
+\[\dot{q}_{i} \boldsymbol{J}_{P i}=\dot{d}_{i} \boldsymbol{z}_{i-1}\]</div>
+<p>and then</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{J}_{P i}=\boldsymbol{z}_{i-1} \text {. }\]</div>
+<p>If Joint <span class="math notranslate nohighlight">\(i\)</span> is revolute,</p>
+<div class="math notranslate nohighlight">
+\[\dot{q}_{i} \boldsymbol{J}_{P i}=\boldsymbol{\omega}_{i-1, i} \times \boldsymbol{r}_{i-1, e}=\dot{\vartheta}_{i} \boldsymbol{z}_{i-1} \times\left(\boldsymbol{p}_{e}-\boldsymbol{p}_{i-1}\right)\]</div>
+<p>and then</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{J}_{P i}=\boldsymbol{z}_{i-1} \times\left(\boldsymbol{p}_{e}-\boldsymbol{p}_{i-1}\right)\]</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="angular-jacobian">
+<h1>Angular Jacobian<a class="headerlink" href="#angular-jacobian" title="Permalink to this heading">#</a></h1>
+<p>To compute angular Jacobian <span class="math notranslate nohighlight">\(\boldsymbol{J}_{O}(\boldsymbol{q})\)</span></p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{\omega}_{e}=\sum_{i=1}^{n} \boldsymbol{\omega}_{i-1, i}=\sum_{i=1}^{n} \boldsymbol{J}_{O i} \dot{q}_{i}\]</div>
+<p>If Joint <span class="math notranslate nohighlight">\(i\)</span> is prismatic, it is</p>
+<div class="math notranslate nohighlight">
+\[\dot{q}_{i} \boldsymbol{J}_{O i}=\mathbf{0}\]</div>
+<p>and then</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{J}_{O i}=\mathbf{0}\]</div>
+<p>If Joint <span class="math notranslate nohighlight">\(i\)</span> is revolute, it is</p>
+<div class="math notranslate nohighlight">
+\[\dot{q}_{i} \boldsymbol{J}_{O i}=\dot{\vartheta}_{i} \boldsymbol{z}_{i-1}\]</div>
+<p>and then</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{J}_{O i}=\boldsymbol{z}_{i-1}\]</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="summary">
+<h1>Summary<a class="headerlink" href="#summary" title="Permalink to this heading">#</a></h1>
+<p>In summary, the Jacobian can be partitioned into the <span class="math notranslate nohighlight">\((3 \times 1)\)</span>
+column vectors <span class="math notranslate nohighlight">\(\boldsymbol{J}_{P i}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{J}_{O i}\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\boldsymbol{J}=\left[\begin{array}{lll}
+\boldsymbol{J}_{P 1} &amp; &amp; \boldsymbol{J}_{P n} \\
+&amp; \cdots &amp; \\
+\boldsymbol{J}_{O 1} &amp; &amp; \boldsymbol{J}_{O n}
+\end{array}\right]\end{split}\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\label{c2.l1.equ5}
+    \left[\begin{array}{l}
+\boldsymbol{J}_{P i} \\
+\boldsymbol{J}_{O i}
+\end{array}\right]= \begin{cases}{\left[\begin{array}{c}
+\boldsymbol{z}_{i-1} \\
+\mathbf{0}
+\end{array}\right]} &amp; \text { for a prismatic joint } \\[14pt]
+{\left[\begin{array}{cc}
+\boldsymbol{z}_{i-1} \times\left(\boldsymbol{p}_{e}-\boldsymbol{p}_{i-1}\right) \\
+\boldsymbol{z}_{i-1}
+\end{array}\right]} &amp; \text { for a revolute joint. }\end{cases}\end{split}\]</div>
+<p>The above allow Jacobian computation in a simple, systematic way on the
+basis of direct kinematics relations. In fact, the vectors
+<span class="math notranslate nohighlight">\(\boldsymbol{z}_{i-1}, \boldsymbol{p}_{e}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{p}_{i-1}\)</span>
+are all functions of the joint variables.</p>
+<p>In particular, <span class="math notranslate nohighlight">\(\boldsymbol{z}_{i-1}\)</span> is given by the third column of
+the rotation matrix <span class="math notranslate nohighlight">\(\boldsymbol{R}_{i-1}^{0}\)</span>, i.e.,</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{z}_{i-1}=\boldsymbol{R}_{1}^{0}\left(q_{1}\right) \ldots \boldsymbol{R}_{i-1}^{i-2}\left(q_{i-1}\right) \boldsymbol{z}_{0}\]</div>
+<p>where
+<span class="math notranslate nohighlight">\(\boldsymbol{z}_{0}=\left[\begin{array}{lll}0 &amp; 0 &amp; 1\end{array}\right]^{T}\)</span>
+allows the selection of the third column. <span class="math notranslate nohighlight">\(\boldsymbol{p}_{e}\)</span> is the
+first three elements of the fourth column of the transformation matrix
+<span class="math notranslate nohighlight">\(\boldsymbol{T}_{e}^{0}\)</span>, i.e., by expressing
+<span class="math notranslate nohighlight">\(\widetilde{\boldsymbol{p}}_{e}\)</span> in the <span class="math notranslate nohighlight">\((4 \times 1)\)</span> homogeneous form</p>
+<div class="math notranslate nohighlight">
+\[\widetilde{\boldsymbol{p}}_{e}=\boldsymbol{A}_{1}^{0}\left(q_{1}\right) \ldots \boldsymbol{A}_{n}^{n-1}\left(q_{n}\right) \widetilde{\boldsymbol{p}}_{0}\]</div>
+<p>where
+<span class="math notranslate nohighlight">\(\widetilde{\boldsymbol{p}}_{0}=\left[\begin{array}{llll}0 &amp; 0 &amp; 0 &amp; 1\end{array}\right]^{T}\)</span>
+allows the selection of the fourth column. <span class="math notranslate nohighlight">\(\boldsymbol{p}_{i-1}\)</span> is the
+first three elements of the fourth column of the transformation matrix
+<span class="math notranslate nohighlight">\(\boldsymbol{T}_{i-1}^{0}\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[\widetilde{\boldsymbol{p}}_{i-1}=\boldsymbol{A}_{1}^{0}\left(q_{1}\right) \ldots \boldsymbol{A}_{i-1}^{i-2}\left(q_{i-1}\right) \widetilde{\boldsymbol{p}}_{0} .\]</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="examples">
+<h1>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h1>
+<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Three-link Planar Arm</div>
+<figure class="align-default" id="link-arm">
+<a class="reference internal image-reference" href="../_images/3link_arm.jpg"><img alt="../_images/3link_arm.jpg" src="../_images/3link_arm.jpg" style="width: 40%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 49 </span><span class="caption-text">The Jacobian is</span><a class="headerlink" href="#link-arm" title="Permalink to this image">#</a></p>
+<div class="legend">
+<div class="math notranslate nohighlight">
+\[\begin{split}\boldsymbol{J}(\boldsymbol{q})=\left[\begin{array}{ccc}
+\boldsymbol{z}_{0} \times\left(\boldsymbol{p}_{3}-\boldsymbol{p}_{0}\right) &amp; \boldsymbol{z}_{1} \times\left(\boldsymbol{p}_{3}-\boldsymbol{p}_{1}\right) &amp; \boldsymbol{z}_{2} \times\left(\boldsymbol{p}_{3}-\boldsymbol{p}_{2}\right) \\
+\boldsymbol{z}_{0} &amp; \boldsymbol{z}_{1} &amp; \boldsymbol{z}_{2}
+\end{array}\right]\end{split}\]</div>
+<p class="sd-card-text">Computation of the position vectors of the various links gives</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\boldsymbol{p}_{0}=\left[\begin{array}{l}
+0 \\
+0 \\
+0
+\end{array}\right] \quad \boldsymbol{p}_{1}=\left[\begin{array}{c}
+a_{1} c_{1} \\
+a_{1} s_{1} \\
+0
+\end{array}\right] \quad \boldsymbol{p}_{2}=\left[\begin{array}{c}
+a_{1} c_{1}+a_{2} c_{12} \\
+a_{1} s_{1}+a_{2} s_{12} \\
+0
+\end{array}\right]
+\quad
+\boldsymbol{p}_{3}=\left[\begin{array}{c}
+a_{1} c_{1}+a_{2} c_{12}+a_{3} c_{123} \\
+a_{1} s_{1}+a_{2} s_{12}+a_{3} s_{123} \\
+0
+\end{array}\right]\end{split}\]</div>
+<p class="sd-card-text">while computation of the unit vectors of revolute joint axes gives</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\boldsymbol{z}_{0}=\boldsymbol{z}_{1}=\boldsymbol{z}_{2}=\left[\begin{array}{l}
+0 \\
+0 \\
+1
+\end{array}\right]\end{split}\]</div>
+<p class="sd-card-text">since they are all parallel to axis <span class="math notranslate nohighlight">\(z_{0}\)</span>. Then,
+$<span class="math notranslate nohighlight">\(\boldsymbol{J}=\left[\begin{array}{ccc}
+-a_{1} s_{1}-a_{2} s_{12}-a_{3} s_{123} &amp; -a_{2} s_{12}-a_{3} s_{123} &amp; -a_{3} s_{123} \\
+a_{1} c_{1}+a_{2} c_{12}+a_{3} c_{123} &amp; a_{2} c_{12}+a_{3} c_{123} &amp; a_{3} c_{123} \\
+0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 \\
+1 &amp; 1 &amp; 1
+\end{array}\right]\)</span>$</p>
+</div>
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Anthropomorphic Arm</div>
+<figure class="align-default" id="anthropomorphic-arm">
+<a class="reference internal image-reference" href="../_images/anthropomorphic_arm.jpg"><img alt="../_images/anthropomorphic_arm.jpg" src="../_images/anthropomorphic_arm.jpg" style="width: 40%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 50 </span><span class="caption-text">The Jacobian is</span><a class="headerlink" href="#anthropomorphic-arm" title="Permalink to this image">#</a></p>
+<div class="legend">
+<div class="math notranslate nohighlight">
+\[\begin{split}\boldsymbol{J}=\left[\begin{array}{ccc}
+\boldsymbol{z}_{0} \times\left(\boldsymbol{p}_{3}-\boldsymbol{p}_{0}\right) &amp; \boldsymbol{z}_{1} \times\left(\boldsymbol{p}_{3}-\boldsymbol{p}_{1}\right) &amp; \boldsymbol{z}_{2} \times\left(\boldsymbol{p}_{3}-\boldsymbol{p}_{2}\right) \\
+\boldsymbol{z}_{0} &amp; \boldsymbol{z}_{1} &amp; \boldsymbol{z}_{2}
+\end{array}\right]\end{split}\]</div>
+<p class="sd-card-text">Computation of the position vectors of the various links gives</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{gathered}
+\boldsymbol{p}_{0}=\boldsymbol{p}_{1}=\left[\begin{array}{l}
+0 \\
+0 \\
+0
+\end{array}\right] \quad \boldsymbol{p}_{2}=\left[\begin{array}{c}
+a_{2} c_{1} c_{2} \\
+a_{2} s_{1} c_{2} \\
+a_{2} s_{2}
+\end{array}\right] \quad
+\boldsymbol{p}_{3}=\left[\begin{array}{c}
+c_{1}\left(a_{2} c_{2}+a_{3} c_{23}\right) \\
+s_{1}\left(a_{2} c_{2}+a_{3} c_{23}\right) \\
+a_{2} s_{2}+a_{3} s_{23}
+\end{array}\right]
+\end{gathered}\end{split}\]</div>
+<p class="sd-card-text">while computation of the unit vectors of revolute joint axes gives</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\boldsymbol{z}_{0}=\left[\begin{array}{l}
+0 \\
+0 \\
+1
+\end{array}\right] \quad \boldsymbol{z}_{1}=\boldsymbol{z}_{2}=\left[\begin{array}{c}
+s_{1} \\
+-c_{1} \\
+0
+\end{array}\right]\end{split}\]</div>
+<p class="sd-card-text">Then,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\boldsymbol{J}=\left[\begin{array}{ccc}
+-s_{1}\left(a_{2} c_{2}+a_{3} c_{23}\right) &amp; -c_{1}\left(a_{2} s_{2}+a_{3} s_{23}\right) &amp; -a_{3} c_{1} s_{23} \\
+c_{1}\left(a_{2} c_{2}+a_{3} c_{23}\right) &amp; -s_{1}\left(a_{2} s_{2}+a_{3} s_{23}\right) &amp; -a_{3} s_{1} s_{23} \\
+0 &amp; a_{2} c_{2}+a_{3} c_{23} &amp; a_{3} c_{23} \\
+0 &amp; s_{1} &amp; s_{1} \\
+0 &amp; -c_{1} &amp; -c_{1} \\
+1 &amp; 0 &amp; 0
+\end{array}\right]\end{split}\]</div>
+</div>
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Stanford Manipulator</div>
+<figure class="align-default" id="stanford-manipulator">
+<a class="reference internal image-reference" href="../_images/Stanford_manipulator.jpg"><img alt="../_images/Stanford_manipulator.jpg" src="../_images/Stanford_manipulator.jpg" style="width: 40%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 51 </span><span class="caption-text">The Jacobian</span><a class="headerlink" href="#stanford-manipulator" title="Permalink to this image">#</a></p>
+<div class="legend">
+<div class="math notranslate nohighlight">
+\[\begin{split}\boldsymbol{J}=\left[\begin{array}{cccccc}
+\boldsymbol{z}_{0} \times\left(\boldsymbol{p}_{6}-\boldsymbol{p}_{0}\right) &amp; \boldsymbol{z}_{1} \times\left(\boldsymbol{p}_{6}-\boldsymbol{p}_{1}\right) &amp; \boldsymbol{z}_{2} &amp;
+\boldsymbol{z}_{3} \times\left(\boldsymbol{p}_{6}-\boldsymbol{p}_{3}\right) &amp; \boldsymbol{z}_{4} \times\left(\boldsymbol{p}_{6}-\boldsymbol{p}_{4}\right) &amp; \boldsymbol{z}_{5} \times\left(\boldsymbol{p}_{6}-\boldsymbol{p}_{5}\right)\\
+\boldsymbol{z}_{0} &amp; \boldsymbol{z}_{1} &amp; \mathbf{0} &amp; \boldsymbol{z}_{3} &amp; \boldsymbol{z}_{4} &amp; \boldsymbol{z}_{5} \\
+\end{array}\right] .\end{split}\]</div>
+<p class="sd-card-text">Computation of the position vectors of the various links gives</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{gathered}
+\boldsymbol{p}_{0}=\boldsymbol{p}_{1}=\left[\begin{array}{l}
+0 \\
+0 \\
+0
+\end{array}\right] \quad \boldsymbol{p}_{3}=\boldsymbol{p}_{4}=\boldsymbol{p}_{5}=\left[\begin{array}{c}
+c_{1} s_{2} d_{3}-s_{1} d_{2} \\
+s_{1} s_{2} d_{3}+c_{1} d_{2} \\
+c_{2} d_{3}
+\end{array}\right] \quad
+\boldsymbol{p}_{6}=\left[\begin{array}{c}
+c_{1} s_{2} d_{3}-s_{1} d_{2}+\left(c_{1}\left(c_{2} c_{4} s_{5}+s_{2} c_{5}\right)-s_{1} s_{4} s_{5}\right) d_{6} \\
+s_{1} s_{2} d_{3}+c_{1} d_{2}+\left(s_{1}\left(c_{2} c_{4} s_{5}+s_{2} c_{5}\right)+c_{1} s_{4} s_{5}\right) d_{6} \\
+c_{2} d_{3}+\left(-s_{2} c_{4} s_{5}+c_{2} c_{5}\right) d_{6}
+\end{array}\right],
+\end{gathered}\end{split}\]</div>
+<p class="sd-card-text">while computation of the unit vectors of joint axes gives</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{gathered}
+\boldsymbol{z}_{0}=\left[\begin{array}{l}
+0 \\
+0 \\
+1
+\end{array}\right] \quad \boldsymbol{z}_{1}=\left[\begin{array}{c}
+-s_{1} \\
+c_{1} \\
+0
+\end{array}\right] \quad \boldsymbol{z}_{2}=\boldsymbol{z}_{3}=\left[\begin{array}{c}
+c_{1} s_{2} \\
+s_{1} s_{2} \\
+c_{2}
+\end{array}\right] \\
+\boldsymbol{z}_{4}=\left[\begin{array}{c}
+-c_{1} c_{2} s_{4}-s_{1} c_{4} \\
+-s_{1} c_{2} s_{4}+c_{1} c_{4} \\
+s_{2} s_{4}
+\end{array}\right] \quad \boldsymbol{z}_{5}=\left[\begin{array}{c}
+c_{1}\left(c_{2} c_{4} s_{5}+s_{2} c_{5}\right)-s_{1} s_{4} s_{5} \\
+s_{1}\left(c_{2} c_{4} s_{5}+s_{2} c_{5}\right)+c_{1} s_{4} s_{5} \\
+-s_{2} c_{4} s_{5}+c_{2} c_{5}
+\end{array}\right] .
+\end{gathered}\end{split}\]</div>
+</div>
+</figcaption>
+</figure>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="analytical-jacobian">
+<h1>Analytical Jacobian<a class="headerlink" href="#analytical-jacobian" title="Permalink to this heading">#</a></h1>
+<p>The geometric Jacobian is a mapping from joint velocities to the
+end-effector linear and angular velocity</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\boldsymbol{v}_{e}=\left[\begin{array}{c}
+\dot{\boldsymbol{p}}_{e} \\
+\boldsymbol{\omega}_{e}
+\end{array}\right]=\boldsymbol{J}(\boldsymbol{q}) \dot{\boldsymbol{q}}\end{split}\]</div>
+<p>If the end-effector pose is specified in terms of a minimal number of
+parameters in the operational space, say</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}{\boldsymbol{x}}_{e}=\left[\begin{array}{c}
+{\boldsymbol{p}}_{e} \\
+{\boldsymbol{\phi}}_{e}
+\end{array}\right]\end{split}\]</div>
+<p>we need to find a Jacobian in terms of</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\dot{\boldsymbol{x}}_{e}=\left[\begin{array}{c}
+\dot{\boldsymbol{p}}_{e} \\
+\dot{\boldsymbol{\phi}}_{e}
+\end{array}\right]=\boldsymbol{J}_{A}(\boldsymbol{q}) \dot{\boldsymbol{q}}\end{split}\]</div>
+<p>which is called analytical Jacobian.</p>
+<p>To do so, we may need find a mapping</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\left[\begin{array}{c}
+\dot{\boldsymbol{p}}_{e} \\
+\boldsymbol{\omega}_{e}
+\end{array}\right] =  \boldsymbol{T}\left[\begin{array}{c}
+\dot{\boldsymbol{p}}_{e} \\
+\dot{\boldsymbol{\phi}}_{e}
+\end{array}\right]\end{split}\]</div>
+<p>such that</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{J}_{A}(\boldsymbol{q}) = \boldsymbol{T}^{-1} \boldsymbol{J}(\boldsymbol{q})\]</div>
+<p>Since we know that the end-effector’s position is already in the minimal
+representation, <span class="math notranslate nohighlight">\(\boldsymbol{T}\)</span> has the form</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\boldsymbol{T}=
+\left[\begin{array}{cc}
+\boldsymbol{I} &amp; \boldsymbol{O} \\
+\boldsymbol{O} &amp; \boldsymbol{T}\left(\phi_{e}\right)
+\end{array}\right] \
+\end{split}\]</div>
+<p>In the following, we will find out the mapping</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{\omega}_{e}=\boldsymbol{T}\left(\phi_{e}\right)\dot{\boldsymbol{\phi}}_{e}\]</div>
+<p>for the Euler ZYZ Angle minimal representation
+<span class="math notranslate nohighlight">\({\boldsymbol{\phi}}_{e}=[{\varphi}, {\vartheta}, \psi]^T\)</span>.</p>
+<p>Consider the Euler ZYZ Angle, the vectors corresponding to the
+rotational velocities <span class="math notranslate nohighlight">\(\dot{\varphi}, \dot{\vartheta}, \dot\psi\)</span> have
+been represented with reference to the current frame. The next figure
+illustrates how to compute the contributions of each rotational velocity
+to the components of angular velocity about the axes of the reference
+frame.</p>
+<figure class="align-default" id="euler-angle-vel">
+<a class="reference internal image-reference" href="../_images/Euler_angle_vel.jpg"><img alt="../_images/Euler_angle_vel.jpg" src="../_images/Euler_angle_vel.jpg" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 52 </span><span class="caption-text">Rotational velocities of Euler angles ZYZ in current
+frame</span><a class="headerlink" href="#euler-angle-vel" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="euler-angle-vel-to-angular-vel">
+<a class="reference internal image-reference" href="../_images/Euler_angle_vel_to_angular_vel.jpg"><img alt="../_images/Euler_angle_vel_to_angular_vel.jpg" src="../_images/Euler_angle_vel_to_angular_vel.jpg" style="width: 50%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 53 </span><span class="caption-text">Composition of elementary rotational velocities for computing angular
+velocity</span><a class="headerlink" href="#euler-angle-vel-to-angular-vel" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The corresponding angular velocity for <span class="math notranslate nohighlight">\(\dot{\varphi}\)</span> is
+<span class="math notranslate nohighlight">\(\dot{\varphi}\left[\begin{array}{lll}0 &amp; 0 &amp; 1\end{array}\right]^{T}\)</span></p>
+<p>The corresponding angular velocity for <span class="math notranslate nohighlight">\(\dot{\vartheta}\)</span> is
+<span class="math notranslate nohighlight">\(\dot{\vartheta}\left[\begin{array}{lll}-s_{\varphi} &amp; c_{\varphi} &amp; 0\end{array}\right]^{T}\)</span></p>
+<p>The corresponding angular velocity for <span class="math notranslate nohighlight">\(\dot{\psi}\)</span> is
+<span class="math notranslate nohighlight">\(\dot{\psi}\left[\begin{array}{lll}c_{\varphi} s_{\vartheta} &amp; s_{\varphi} s_{\vartheta} &amp; c_{\vartheta}\end{array}\right]^{T}\)</span>,</p>
+<p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\boldsymbol{T}\left(\phi_{e}\right) =\left[\begin{array}{ccc}
+0 &amp; -s_{\varphi} &amp; c_{\varphi} s_{\vartheta} \\
+0 &amp; c_{\varphi} &amp; s_{\varphi} s_{\vartheta} \\
+1 &amp; 0 &amp; c_{\vartheta}
+\end{array}\right] .\end{split}\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Takeaway: From a physical viewpoint, the meaning of <span class="math notranslate nohighlight">\(\omega_{e}\)</span> is
+more intuitive than that of <span class="math notranslate nohighlight">\(\dot{\boldsymbol{\phi}}_{e}\)</span>. The three
+components of <span class="math notranslate nohighlight">\(\boldsymbol{\omega}_{e}\)</span> represent the components of
+angular velocity with respect to the base frame. Instead, the three
+elements of <span class="math notranslate nohighlight">\(\dot{\phi}_{e}\)</span> represent nonorthogonal components of
+angular velocity defined with respect to the axes of a frame that varies
+as the end-effector orientation varies. On the other hand, while the
+integral of <span class="math notranslate nohighlight">\(\dot{\phi}_{e}\)</span> over time gives <span class="math notranslate nohighlight">\(\phi_{e}\)</span>, the integral of
+<span class="math notranslate nohighlight">\(\omega_{e}\)</span> does not admit a clear physical interpretation, as can be
+seen in the following example.</p>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./lec11-12"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../lec10/diff-trans.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Derivative of Transformation</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../lec13/singularity.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Singularity &amp; Redundancy</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Jacobian</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-jacobian">Linear Jacobian</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#angular-jacobian">Angular Jacobian</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#analytical-jacobian">Analytical Jacobian</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Wanxin Jin @ IRIS Lab
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

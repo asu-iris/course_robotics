@@ -1,0 +1,920 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Robot Configuration &#8212; Modeling and Control of Robots</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lec2/configuration';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Basic Kinematics" href="../lec3-5/basic-kinematics.html" />
+    <link rel="prev" title="Introduction" href="../lec1/intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/iris_logo_2.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/iris_logo_2.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lec1/intro.html">Introduction</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Robot Configuration</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec3-5/basic-kinematics.html">Basic Kinematics</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec6-8/fk.html">Forward Kinematics</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec9/ik.html">Inverse Kinematics</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec10/diff-trans.html">Derivative of Transformation</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec11-12/jacobian.html">Jacobian</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec13/singularity.html">Singularity &amp; Redundancy</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec14/statics.html">Statics</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec15/inverse_vk.html">Inverse Velocity Kinematics</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec16-17/nik.html">Numerical Inverse Kinematics</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec18/dyn.html">Dynamics (Lagrange formulation)</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec19/control_overview.html">Overview of Robot Control</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec20/djc.html">Decentralized Joint Control</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec21/cjc.html">Centralized Joint Control</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec22/osc.html">Operational Space Control</a></li>
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Flec2/configuration.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button"
+   title="Open an issue"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/lec2/configuration.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Robot Configuration</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Robot Configuration</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">Configuration</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#degrees-of-freedom">Degrees of Freedom</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general-rule">General Rule</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dof-for-different-joints">DOF for Different Joints</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grubler-s-formula">Grübler’s Formula</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-space">Configuration Space</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#workspace-of-manipulators">Workspace of Manipulators</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="robot-configuration">
+<h1>Robot Configuration<a class="headerlink" href="#robot-configuration" title="Permalink to this heading">#</a></h1>
+<figure class="align-default" id="robotarm">
+<a class="reference internal image-reference" href="../_images/robotarm.png"><img alt="../_images/robotarm.png" src="../_images/robotarm.png" style="width: 40%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 5 </span><span class="caption-text">Franka Emika Panda robot arm</span><a class="headerlink" href="#robotarm" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>A robot manipulator is mechanically constructed by</p>
+<ul>
+<li><p>a set of rigid bodies, each body called a <strong>link</strong>,</p></li>
+<li><p><strong>joints</strong>, connecting two consecutive links and providing motion
+constraints (degrees of freedom)</p>
+<figure class="align-default" id="joints-types">
+<a class="reference internal image-reference" href="../_images/joints.png"><img alt="../_images/joints.png" src="../_images/joints.png" style="width: 60%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 6 </span><span class="caption-text">Different type of joints</span><a class="headerlink" href="#joints-types" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</li>
+<li><p><strong>actuators</strong>, such as electric/hydraulic/pneumatic actuators,
+deliver forces or torques that cause the robot’s links to move,</p>
+<figure class="align-default" id="electric-actuators">
+<a class="reference internal image-reference" href="../_images/electric_actuator.png"><img alt="../_images/electric_actuator.png" src="../_images/electric_actuator.png" style="width: 40%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 7 </span><span class="caption-text">Electric actuators</span><a class="headerlink" href="#electric-actuators" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="hydralic-actuator">
+<a class="reference internal image-reference" href="../_images/hydralic_actuator.png"><img alt="../_images/hydralic_actuator.png" src="../_images/hydralic_actuator.png" style="width: 40%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 8 </span><span class="caption-text">Hydralic actuator</span><a class="headerlink" href="#hydralic-actuator" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</li>
+<li><p><strong>an end effector</strong>, such as a gripper or hand, is attached to a
+specific link for specific tasks.</p>
+<figure class="align-default" id="endeffector1">
+<a class="reference internal image-reference" href="../_images/endeffector1.jpg"><img alt="../_images/endeffector1.jpg" src="../_images/endeffector1.jpg" style="width: 40%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 9 </span><span class="caption-text">The Barrett Hand</span><a class="headerlink" href="#endeffector1" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="endeffector2">
+<a class="reference internal image-reference" href="../_images/endeffector2.png"><img alt="../_images/endeffector2.png" src="../_images/endeffector2.png" style="width: 40%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 10 </span><span class="caption-text">The Shadow Hand</span><a class="headerlink" href="#endeffector2" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</li>
+</ul>
+<p>The fundamental structure of a manipulator is the serial or open
+kinematic chain. From a topological viewpoint, a kinematic chain is
+termed open when there is only one sequence of links connecting the two
+ends of the chain. Alternatively, a manipulator contains a closed
+kinematic chain when a sequence of links forms a loop.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="configuration">
+<h1>Configuration<a class="headerlink" href="#configuration" title="Permalink to this heading">#</a></h1>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The <strong>configuration</strong> of a robot is a complete specification of the
+position of every point of the robot. Since the robot’s links are rigid
+and of a known shape, only a few variables (coordinates in a general
+sense) can be selected to represent its configuration.</p>
+</div>
+<p>For example, in the following figure, the configuration of a door can be
+represented by a single variable, the hinge angle <span class="math notranslate nohighlight">\(\theta\)</span>. The
+configuration of a point on a plane can be described by two coordinates,
+<span class="math notranslate nohighlight">\((x, y)\)</span>. The configuration of a coin lying heads up on a flat table can
+be described by three coordinates: two coordinates <span class="math notranslate nohighlight">\((x, y)\)</span> that specify
+the location of a particular point on the coin, and one coordinate
+<span class="math notranslate nohighlight">\((\theta)\)</span> that specifies the coin’s orientation.</p>
+<figure class="align-default" id="id1">
+<a class="reference internal image-reference" href="../_images/examples.png"><img alt="../_images/examples.png" src="../_images/examples.png" style="width: 90%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 11 </span><span class="caption-text">(a) The configuration of a door is described by the angle <span class="math notranslate nohighlight">\(\theta\)</span>.
+(b) The configuration of a point in a plane is described by coordinates
+<span class="math notranslate nohighlight">\((x, y)\)</span>. (c) The configuration of a coin (heads up) on a table is
+described by <span class="math notranslate nohighlight">\((x, y, \theta)\)</span>, where <span class="math notranslate nohighlight">\(\theta\)</span> defines the direction in
+which Abraham Lincoln is looking.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The minimum number <span class="math notranslate nohighlight">\(n\)</span> of real-valued coordinates needed to represent
+the configuration is the number of <strong>degrees of freedom (dof)</strong> of the
+robot. The <span class="math notranslate nohighlight">\(n\)</span>-dimensional space containing all possible configurations
+of the robot is called the <strong>configuration space (C-space)</strong>. The
+configuration of a robot is represented by a point in its C-space.</p>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="degrees-of-freedom">
+<h1>Degrees of Freedom<a class="headerlink" href="#degrees-of-freedom" title="Permalink to this heading">#</a></h1>
+<section id="general-rule">
+<h2>General Rule<a class="headerlink" href="#general-rule" title="Permalink to this heading">#</a></h2>
+<p>We have the following general rule for determining the number of degrees
+of freedom of a system:</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>degrees of freedom =  number of variables - number of independent equations (constraints)</p>
+</div>
+<figure class="align-default" id="corn">
+<a class="reference internal image-reference" href="../_images/coin.png"><img alt="../_images/coin.png" src="../_images/coin.png" style="width: 40%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 12 </span><span class="caption-text">Degrees of freedom of a coin in 3D
+space</span><a class="headerlink" href="#corn" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Example: consider a coin in 3D space in Fig.
+<span class="xref myst">8</span>{reference-type=”ref” reference=”c1.fig.3dcoin”}, the
+coordinates for the three points <span class="math notranslate nohighlight">\(A, B\)</span>, and <span class="math notranslate nohighlight">\(C\)</span> are given by
+<span class="math notranslate nohighlight">\(\left(x_{A}, y_{A}, z_{A}\right),\left(x_{B}, y_{B}, z_{B}\right)\)</span>, and
+<span class="math notranslate nohighlight">\(\left(x_{C}, y_{C}, z_{C}\right)\)</span>, respectively. Point <span class="math notranslate nohighlight">\(A\)</span> can be
+placed freely (three degrees of freedom). The location of point <span class="math notranslate nohighlight">\(B\)</span> is
+subject to the constraint <span class="math notranslate nohighlight">\(d(A, B)=d_{A B}\)</span>, meaning it must lie on the
+sphere of radius <span class="math notranslate nohighlight">\(d_{A B}\)</span> centered at <span class="math notranslate nohighlight">\(A\)</span>. Thus we have <span class="math notranslate nohighlight">\(3-1=2\)</span>
+freedoms to specify, which can be expressed as the latitude and
+longitude for the point on the sphere. Finally, the location of point
+<span class="math notranslate nohighlight">\(C\)</span> must lie at the intersection of spheres centered at <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> of
+radius <span class="math notranslate nohighlight">\(d_{A C}\)</span> and <span class="math notranslate nohighlight">\(d_{B C}\)</span>, respectively. In the general case the
+intersection of two spheres is a circle, and the location of point <span class="math notranslate nohighlight">\(C\)</span>
+can be described by an angle that parametrizes this circle. Point <span class="math notranslate nohighlight">\(C\)</span>
+therefore adds <span class="math notranslate nohighlight">\(3-2=1\)</span> freedom. Once the position of point <span class="math notranslate nohighlight">\(C\)</span> is
+chosen, the coin is fixed in space. In summary, a rigid body in
+three-dimensional space has six freedoms, which can be described by the
+three coordinates parametrizing point <span class="math notranslate nohighlight">\(A\)</span>, the two angles parametrizing
+point <span class="math notranslate nohighlight">\(B\)</span>, and one angle parametrizing point <span class="math notranslate nohighlight">\(C\)</span>, provided <span class="math notranslate nohighlight">\(A, B\)</span>, and
+<span class="math notranslate nohighlight">\(C\)</span> are noncollinear.</p>
+<ul class="simple">
+<li><p>A rigid body moving in 3-dimensional space, which we call a spatial
+rigid body, has 6 degrees of freedom.</p></li>
+<li><p>A rigid body moving in a 2-dimensional plane, which we call a planar
+rigid body, has 3 degrees of freedom.</p></li>
+</ul>
+</section>
+<section id="dof-for-different-joints">
+<h2>DOF for Different Joints<a class="headerlink" href="#dof-for-different-joints" title="Permalink to this heading">#</a></h2>
+<p>In typical robots, a joint can be viewed as providing freedoms
+to allow one rigid body to move relative to another. It can also be
+viewed as providing constraints on the possible motions of the two rigid
+bodies it connects. The following table summarizes the freedoms and
+constraints provided by the various joint types.</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Joint type</p></th>
+<th class="head text-center"><p>dof <span class="math notranslate nohighlight">\(f\)</span></p></th>
+<th class="head text-center"><p>Constraint counts between two spatial bodies</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>Revolute (R)</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>5</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>Prismatic (P)</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>2</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>Helical (H)</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>5</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>Cylindrical (C)</p></td>
+<td class="text-center"><p>2</p></td>
+<td class="text-center"><p>4</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>Universal (U)</p></td>
+<td class="text-center"><p>2</p></td>
+<td class="text-center"><p>4</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>Spherical (S)</p></td>
+<td class="text-center"><p>3</p></td>
+<td class="text-center"><p>3</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="grubler-s-formula">
+<h2>Grübler’s Formula<a class="headerlink" href="#grubler-s-formula" title="Permalink to this heading">#</a></h2>
+<p>Since our robots consist of rigid bodies, the degree of freedom of a
+robot can be expressed as follows:</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>degrees of freedom =  number of variables - number of independent equations (constraints)</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Consider a mechanism consisting of <span class="math notranslate nohighlight">\(N\)</span> links, where the ground is also
+regarded as a link. Let <span class="math notranslate nohighlight">\(J\)</span> be the number of joints, <span class="math notranslate nohighlight">\(m\)</span> be the number
+of degrees of freedom of a rigid body <span class="math notranslate nohighlight">\((m=3\)</span> for planar mechanisms and
+<span class="math notranslate nohighlight">\(m=6\)</span> for spatial mechanisms), <span class="math notranslate nohighlight">\(f_{i}\)</span> be the number of freedoms
+provided by joint <span class="math notranslate nohighlight">\(i\)</span>, and <span class="math notranslate nohighlight">\(c_{i}\)</span> be the number of constraints provided
+by joint <span class="math notranslate nohighlight">\(i\)</span>, where <span class="math notranslate nohighlight">\(f_{i}+c_{i}=m\)</span> for all <span class="math notranslate nohighlight">\(i\)</span>. Then the Grübler’s
+formula for degrees of freedom of the robot is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+\operatorname{dof} &amp; =\underbrace{m(N-1)}_{\text {rigid body freedoms }}-\underbrace{\sum_{i=1}^{J} c_{i}}_{\text {joint constraints }} \\
+&amp; =m(N-1)-\sum_{i=1}^{J}\left(m-f_{i}\right) \\
+&amp; =m(N-1-J)+\sum_{i=1}^{J} f_{i} .
+\end{aligned}\end{split}\]</div>
+</div>
+<p>This formula holds only if all joint constraints are independent. If
+they are not independent then the formula provides a lower bound on the
+number of degrees of freedom. Below are some examples of using Grubler’s
+Formula to find the DoFs of different machenisms.</p>
+<figure class="align-default" id="gf-example1">
+<a class="reference internal image-reference" href="../_images/gf_example1.png"><img alt="../_images/gf_example1.png" src="../_images/gf_example1.png" style="width: 60%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 13 </span><span class="caption-text">(a) Four-bar linkage and (b) Slider-crank mechanism.</span><a class="headerlink" href="#gf-example1" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Four-bar linkage: <span class="math notranslate nohighlight">\(N=4, J=4\)</span>, and <span class="math notranslate nohighlight">\(f_{i}=1, i=1, \ldots, 4\)</span>. Thus,
+<span class="math notranslate nohighlight">\(\operatorname{dof}\)</span>=1.<br />
+Slider-crank: <span class="math notranslate nohighlight">\(N=4\)</span>, <span class="math notranslate nohighlight">\(J=4,\)</span> and <span class="math notranslate nohighlight">\(f_{i}=1, i=1, \ldots, 4\)</span>. Thus,
+<span class="math notranslate nohighlight">\(\operatorname{dof}\)</span>=1.</p>
+<figure class="align-default" id="gf-example2">
+<a class="reference internal image-reference" href="../_images/gf_example2.png"><img alt="../_images/gf_example2.png" src="../_images/gf_example2.png" style="width: 60%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 14 </span><span class="caption-text">(a) <span class="math notranslate nohighlight">\(k\)</span>-link planar serial chain. (b) Five-bar planar linkage. (c)
+Stephenson six-bar linkage. (d) Watt six-bar
+linkage.</span><a class="headerlink" href="#gf-example2" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The <span class="math notranslate nohighlight">\(k\)</span>-link planar robot: <span class="math notranslate nohighlight">\(N=k+1\)</span>, <span class="math notranslate nohighlight">\(J=k\)</span>, <span class="math notranslate nohighlight">\(f_{i}=1\)</span> for all <span class="math notranslate nohighlight">\(i\)</span>. Thus,
+<span class="math notranslate nohighlight">\(\operatorname{dof}=3((k+1)-1-k)+k=k\)</span>.<br />
+The five-bar linkage: <span class="math notranslate nohighlight">\(N=5\)</span>, <span class="math notranslate nohighlight">\(J=5\)</span>, each <span class="math notranslate nohighlight">\(f_{i}=1\)</span>. Therefore,
+<span class="math notranslate nohighlight">\(\operatorname{dof}=3(5-1-5)+5=2\)</span>.<br />
+Stephenson six-bar linkage: <span class="math notranslate nohighlight">\(N=6, J=7\)</span>, and <span class="math notranslate nohighlight">\(f_{i}=1\)</span> for all <span class="math notranslate nohighlight">\(i\)</span>.
+Therefore, <span class="math notranslate nohighlight">\(\operatorname{dof}=3(6-1-7)+7=1\)</span>.<br />
+Watt six-bar linkage: <span class="math notranslate nohighlight">\(N=6, J=7\)</span>, and <span class="math notranslate nohighlight">\(f_{i}=1\)</span> for all <span class="math notranslate nohighlight">\(i\)</span>. Therefore,
+<span class="math notranslate nohighlight">\(\operatorname{dof}=3(6-1-7)+7=1\)</span>.</p>
+<figure class="align-default" id="gf-example3">
+<a class="reference internal image-reference" href="../_images/gf_example3.png"><img alt="../_images/gf_example3.png" src="../_images/gf_example3.png" style="width: 60%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 15 </span><span class="caption-text">A planar mechanism with two overlapping
+joints.</span><a class="headerlink" href="#gf-example3" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The planar mechanism illustrated has three links that meet at a single
+point on the right of the large link. Recalling that a joint by
+definition connects exactly two links, the joint at this point of
+intersection should not be regarded as a single revolute joint. Rather,
+it is correctly interpreted as two revolute joints overlapping each
+other. The mechanism consists of eight links <span class="math notranslate nohighlight">\((N=8)\)</span>, eight revolute
+joints, and one prismatic joint. The Grübler’s formula:</p>
+<div class="math notranslate nohighlight">
+\[\operatorname{dof}=3(8-1-9)+9(1)=3\]</div>
+<figure class="align-default" id="gf-example4">
+<a class="reference internal image-reference" href="../_images/gf_example4.png"><img alt="../_images/gf_example4.png" src="../_images/gf_example4.png" style="width: 60%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 16 </span><span class="caption-text">Stewart-Gough
+platform</span><a class="headerlink" href="#gf-example4" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The Stewart-Gough platform consists of two platforms - the lower one
+stationary and regarded as ground, the upper one mobile - connected by
+six universal-prismatic-spherical (UPS) legs. The total number of links
+is <span class="math notranslate nohighlight">\(14(N=14)\)</span>. There are six universal joints (each with two degrees of
+freedom, <span class="math notranslate nohighlight">\(f_{i}=2\)</span> ), six prismatic joints (each with a single degree of
+freedom, <span class="math notranslate nohighlight">\(f_{i}=1\)</span> ), and six spherical joints (each with three degrees
+of freedom, <span class="math notranslate nohighlight">\(f_{i}=3\)</span> ). The total number of joints is 18 . Substituting
+these values into Grübler’s formula with <span class="math notranslate nohighlight">\(m=6\)</span> yields</p>
+<div class="math notranslate nohighlight">
+\[\operatorname{dof}=6(14-1-18)+6(1)+6(2)+6(3)=6 .\]</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="configuration-space">
+<h1>Configuration Space<a class="headerlink" href="#configuration-space" title="Permalink to this heading">#</a></h1>
+<p>Consider a point moving on the surface of a sphere. The C-space is
+2-dimensional, as the configuration can be described by two coordinates:
+latitude and longitude. As another example, a point moving on a plane
+also has a two-dimensional C-space, with coordinates <span class="math notranslate nohighlight">\((x, y)\)</span>. While
+both a plane and the surface of a sphere are 2-dimensional, they do not
+have the same shape. Unlike the plane, a larger sphere has the same
+shape as the original sphere, in that it wraps around in the same way.
+Only its size is different. For that matter, an oval-shaped American
+football also wraps around similarly to a sphere. The idea that the
+2-dimensional surfaces of a small sphere, a large sphere, and a football
+all have the same kind of shape, which is different from the shape of a
+plane, is expressed by the topology of the surfaces. Two spaces are
+topologically equivalent if one can be continuously deformed into the
+other without cutting or gluing. A sphere can be deformed into a
+football simply by stretching, without cutting or gluing, so those two
+spaces are topologically equivalent. You cannot turn a sphere into a
+plane without cutting it, however, so a sphere and a plane are not
+topologically equivalent.</p>
+<figure class="align-default" id="topology-summary">
+<a class="reference internal image-reference" href="../_images/topology_summary.jpeg"><img alt="../_images/topology_summary.jpeg" src="../_images/topology_summary.jpeg" style="width: 60%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 17 </span><span class="caption-text">Three topologically different two-dimensional C-spaces and coordinate
+representations. In the latitude-longitude representation of the sphere,
+the latitudes <span class="math notranslate nohighlight">\(-90^{\circ}\)</span> and <span class="math notranslate nohighlight">\(90^{\circ}\)</span> each correspond to a single
+point (the South Pole and the North Pole, respectively), and the
+longitude parameter wraps around at <span class="math notranslate nohighlight">\(180^{\circ}\)</span> and <span class="math notranslate nohighlight">\(-180^{\circ}\)</span>;
+the edges with the arrows are glued together. Similarly, the coordinate
+representations of the torus wrap around at the edges marked with
+corresponding
+arrows.</span><a class="headerlink" href="#topology-summary" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>There are two coordinate parameterizations/representations for a
+topology space.</p>
+<ul class="simple">
+<li><p><strong>explicit parametrization:</strong> A choice of <span class="math notranslate nohighlight">\(n\)</span> coordinates, or
+parameters, to represent an <span class="math notranslate nohighlight">\(n\)</span>-dimensional space is called an
+explicit parametrization of the space. Such an explicit
+parametrization is valid for a particular range of the parameters
+(e.g., <span class="math notranslate nohighlight">\(\left[-90^{\circ}, 90^{\circ}\right]\)</span> for latitude and
+<span class="math notranslate nohighlight">\(\left[-180^{\circ}, 180^{\circ}\right.\)</span> ) for longitude for a
+sphere, where, on Earth, negative values correspond to “south” and
+“west,” respectively).</p></li>
+<li><p><strong>implicit parametrization:</strong> An implicit representation views the
+<span class="math notranslate nohighlight">\(n\)</span>-dimensional space as embedded in a Euclidean space of more than
+<span class="math notranslate nohighlight">\(n\)</span> dimensions, just as a two-dimensional unit sphere can be viewed
+as a surface embedded in a three-dimensional Euclidean space. An
+implicit representation uses the coordinates of the
+higher-dimensional space (e.g., <span class="math notranslate nohighlight">\((x, y, z)\)</span> in the three-dimensional
+space), but subjects these coordinates to constraints that reduce
+the number of degrees of freedom (e.g., <span class="math notranslate nohighlight">\(x^{2}+y^{2}+z^{2}=1\)</span> for
+the unit sphere).</p></li>
+</ul>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="workspace-of-manipulators">
+<h1>Workspace of Manipulators<a class="headerlink" href="#workspace-of-manipulators" title="Permalink to this heading">#</a></h1>
+<p>The workspace is the portion of the environment the manipulator’s
+end-effector can access. Its shape and volume depend on the manipulator
+structure as well as on the presence of mechanical joint limits. Note
+that the workspace is independent of the task. In the following, we will
+show the workspace of different most common manipulators.</p>
+<p>Cartesian manipulator includes three prismatic joints whose axes
+typically are mutually orthogonal.</p>
+<figure class="align-default" id="cartesian-robot">
+<a class="reference internal image-reference" href="../_images/cartesian_robot.jpg"><img alt="../_images/cartesian_robot.jpg" src="../_images/cartesian_robot.jpg" style="width: 50%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 18 </span><span class="caption-text">Cartesian manipulator and its
+workspace</span><a class="headerlink" href="#cartesian-robot" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Cylindrical manipulator differs from Cartesian in that the first
+prismatic joint is replaced with a revolute joint.</p>
+<figure class="align-default" id="cylindrical-robot">
+<a class="reference internal image-reference" href="../_images/cylindrical_robot.jpg"><img alt="../_images/cylindrical_robot.jpg" src="../_images/cylindrical_robot.jpg" style="width: 50%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 19 </span><span class="caption-text">Cylindrical manipulator and its
+workspace</span><a class="headerlink" href="#cylindrical-robot" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Spherical manipulator differs from cylindrical in that the 2nd prismatic
+joint is replaced with a revolute joint.</p>
+<figure class="align-default" id="spherical-robot">
+<a class="reference internal image-reference" href="../_images/spherical_robot.jpg"><img alt="../_images/spherical_robot.jpg" src="../_images/spherical_robot.jpg" style="width: 40%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 20 </span><span class="caption-text">Spherical manipulator and its
+workspace</span><a class="headerlink" href="#spherical-robot" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>A special manipulator is SCARA manipulator that can be realized by
+disposing two revolute joints and one prismatic joint in such a way that
+all the axes of motion are parallel.</p>
+<figure class="align-default" id="scara-robot">
+<a class="reference internal image-reference" href="../_images/SCARA_robot.jpg"><img alt="../_images/SCARA_robot.jpg" src="../_images/SCARA_robot.jpg" style="width: 40%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 21 </span><span class="caption-text">SCARA manipulator and its
+workspace</span><a class="headerlink" href="#scara-robot" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Anthropomorphic manipulator is realized by three revolute joints; the
+revolute axis of the first joint is orthogonal to the axes of the other
+two which are parallel.</p>
+<figure class="align-default" id="anthropomophic-robot">
+<a class="reference internal image-reference" href="../_images/anthropomophic_robot.jpg"><img alt="../_images/anthropomophic_robot.jpg" src="../_images/anthropomophic_robot.jpg" style="width: 40%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 22 </span><span class="caption-text">Anthropomorphic manipulator and its
+workspace</span><a class="headerlink" href="#anthropomophic-robot" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./lec2"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../lec1/intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Introduction</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../lec3-5/basic-kinematics.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Basic Kinematics</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Robot Configuration</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">Configuration</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#degrees-of-freedom">Degrees of Freedom</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general-rule">General Rule</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dof-for-different-joints">DOF for Different Joints</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grubler-s-formula">Grübler’s Formula</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-space">Configuration Space</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#workspace-of-manipulators">Workspace of Manipulators</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Wanxin Jin @ IRIS Lab
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

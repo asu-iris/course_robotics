@@ -1,0 +1,1185 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Forward Kinematics &#8212; Modeling and Control of Robots</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lec6-8/fk';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Inverse Kinematics" href="../lec9/ik.html" />
+    <link rel="prev" title="Basic Kinematics" href="../lec3-5/basic-kinematics.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/iris_logo_2.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/iris_logo_2.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lec1/intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lec2/configuration.html">Robot Configuration</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec3-5/basic-kinematics.html">Basic Kinematics</a></li>
+
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Forward Kinematics</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec9/ik.html">Inverse Kinematics</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec10/diff-trans.html">Derivative of Transformation</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec11-12/jacobian.html">Jacobian</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec13/singularity.html">Singularity &amp; Redundancy</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec14/statics.html">Statics</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec15/inverse_vk.html">Inverse Velocity Kinematics</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec16-17/nik.html">Numerical Inverse Kinematics</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec18/dyn.html">Dynamics (Lagrange formulation)</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec19/control_overview.html">Overview of Robot Control</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec20/djc.html">Decentralized Joint Control</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec21/cjc.html">Centralized Joint Control</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec22/osc.html">Operational Space Control</a></li>
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Flec6-8/fk.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button"
+   title="Open an issue"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/lec6-8/fk.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Forward Kinematics</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Forward Kinematics</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#general-rule">General Rule</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#denavit-hartenberg-dh-convention">Denavit-Hartenberg (DH) Convention</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#workspace">Workspace</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#kinematic-redundancy">Kinematic Redundancy</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modified-dh-parameters">Modified DH parameters</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="forward-kinematics">
+<h1>Forward Kinematics<a class="headerlink" href="#forward-kinematics" title="Permalink to this heading">#</a></h1>
+<p>A manipulator is a kinematic chain of rigid bodies (links) connected by
+actuated joints. One end of the kinematic chain is mounted to a base and
+the other end to an end-effector (gripper, tool). Joints have two types:
+revolute and prismatic, as in Fig.
+<span class="xref myst">2</span>{reference-type=”ref”
+reference=”c1.fig.joints-types”}. The posture of a manipulator is
+described by a number of degrees of freedom (DOFs). Each DOF is
+typically associated with a joint variable. Manipulator (forward/direct)
+kinematics is to derive the relationship between joint motion and the
+motion of the end-effector.</p>
+<figure class="align-default" id="end-effector-frame">
+<a class="reference internal image-reference" href="../_images/end-effector_frame.jpg"><img alt="../_images/end-effector_frame.jpg" src="../_images/end-effector_frame.jpg" style="width: 50%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 29 </span><span class="caption-text">Description of the position and orientation of the end-effector
+frame</span><a class="headerlink" href="#end-effector-frame" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>With respect to a base frame <span class="math notranslate nohighlight">\(O_{b}-x_{b} y_{b} z_{b}\)</span>, the kinematics
+is expressed by the homogeneous transformation</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\boldsymbol{T}_{e}^{b}(\boldsymbol{q})=\left[\begin{array}{cccc}
+\boldsymbol{n}_{e}^{b}(\boldsymbol{q}) &amp; \boldsymbol{s}_{e}^{b}(\boldsymbol{q}) &amp; \boldsymbol{a}_{e}^{b}(\boldsymbol{q}) &amp; \boldsymbol{p}_{e}^{b}(\boldsymbol{q}) \\
+0 &amp; 0 &amp; 0 &amp; 1
+\end{array}\right]\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span> is the <span class="math notranslate nohighlight">\((n \times 1)\)</span> vector of joint variables,
+<span class="math notranslate nohighlight">\(\{\boldsymbol{n}_{e}, \boldsymbol{s}_{e}, \boldsymbol{a}_{e}\}\)</span> are the
+unit vectors of a frame attached to the end-effector, and
+<span class="math notranslate nohighlight">\(\boldsymbol{p}_{e}\)</span> is the position of the origin of the end-effector
+frame. If the end-effector is a gripper, the origin of the end-effector
+frame is located at the center of the gripper, <span class="math notranslate nohighlight">\(\boldsymbol{a}_{e}\)</span> is
+chosen in the approach direction to the object, <span class="math notranslate nohighlight">\(\boldsymbol{s}_{e}\)</span> is
+chosen normal to <span class="math notranslate nohighlight">\(\boldsymbol{a}_{e}\)</span> in the sliding plane of the jaws,
+and <span class="math notranslate nohighlight">\(\boldsymbol{n}_{e}\)</span> is chosen to complete the right-handed rule.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="general-rule">
+<h1>General Rule<a class="headerlink" href="#general-rule" title="Permalink to this heading">#</a></h1>
+<p>A manipulator chain composes of <span class="math notranslate nohighlight">\(n+1\)</span> links connected by <span class="math notranslate nohighlight">\(n\)</span> joints,
+where Link 0 is conventionally fixed to the ground/base. Each joint
+variable provides a single DOF. Define a frame attached to each link,
+from Link 0 to Link <span class="math notranslate nohighlight">\(n\)</span>. Then, the transformation of Frame <span class="math notranslate nohighlight">\(n\)</span> with
+respect to Frame 0 is</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{T}_{n}^{0}(\boldsymbol{q})=\boldsymbol{A}_{1}^{0}\left(q_{1}\right) \boldsymbol{A}_{2}^{1}\left(q_{2}\right) \ldots \boldsymbol{A}_{n}^{n-1}\left(q_{n}\right) .\]</div>
+<p>Computation is recursive by simple products of the homogeneous
+transformation matrices <span class="math notranslate nohighlight">\(\boldsymbol{A}_{i}^{i-1}\left(q_{i}\right)\)</span>
+(for <span class="math notranslate nohighlight">\(\left.i=1, \ldots, n\right)\)</span>, each of which is a function of a
+single joint variable. The kinematics describing the pose of the
+end-effector frame with respect to the base frame can be obtained as</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{T}_{e}^{b}(\boldsymbol{q})=\boldsymbol{T}_{0}^{b} \boldsymbol{T}_{n}^{0}(\boldsymbol{q}) \boldsymbol{T}_{e}^{n}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\boldsymbol{T}_{0}^{b}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{T}_{e}^{n}\)</span> are two
+(typically) constant homogeneous transformations describing the position
+and orientation of Frame 0 with respect to the base frame, and of the
+end-effector frame with respect to Frame <span class="math notranslate nohighlight">\(n\)</span>, respectively.</p>
+<figure class="align-default" id="forward-kin">
+<a class="reference internal image-reference" href="../_images/forward_kin.jpg"><img alt="../_images/forward_kin.jpg" src="../_images/forward_kin.jpg" style="width: 50%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 30 </span><span class="caption-text">Kinematics of a robot
+manipulator</span><a class="headerlink" href="#forward-kin" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Then, the question is: how to select a frame for each link to compute
+<span class="math notranslate nohighlight">\(\boldsymbol{A}_{i}^{i-1}\left(q_{i}\right)\)</span>? (The answer is in the next
+section)</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="denavit-hartenberg-dh-convention">
+<h1>Denavit-Hartenberg (DH) Convention<a class="headerlink" href="#denavit-hartenberg-dh-convention" title="Permalink to this heading">#</a></h1>
+<p>Denavit-Hartenberg (DH) Convention is to systematically and recursively
+define a frame to each link and obtain the transformation between two
+consecutive links.</p>
+<figure class="align-default" id="dh-convention">
+<a class="reference internal image-reference" href="../_images/DH_convention.jpg"><img alt="../_images/DH_convention.jpg" src="../_images/DH_convention.jpg" style="width: 50%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 31 </span><span class="caption-text">Denavit-Hartenberg convention and parameters for link Frame
+<span class="math notranslate nohighlight">\(i\)</span></span><a class="headerlink" href="#dh-convention" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>With reference to Fig. <span class="xref myst">3</span>{reference-type=”ref”
+reference=”c1.l2.dh”}, joint <span class="math notranslate nohighlight">\(i\)</span> connects Link <span class="math notranslate nohighlight">\(i-1\)</span> to Link <span class="math notranslate nohighlight">\(i\)</span>; DH
+convention sets the following rules to define link Frame
+<span class="math notranslate nohighlight">\(O_{i}-x_{i} y_{i} z_{i}\)</span>, given previous link Frame
+<span class="math notranslate nohighlight">\(O_{i-1}-x_{i-1} y_{i-1} z_{i-1}\)</span>:</p>
+<ul class="simple">
+<li><p>Choose axis <span class="math notranslate nohighlight">\(z_{i}\)</span> along the joint <span class="math notranslate nohighlight">\(i+1\)</span>.</p></li>
+<li><p>Locate the origin <span class="math notranslate nohighlight">\(O_{i}\)</span> at the intersection of axis <span class="math notranslate nohighlight">\(z_{i}\)</span> with
+the common normal to axes <span class="math notranslate nohighlight">\(z_{i}\)</span> and <span class="math notranslate nohighlight">\(z_{i-1}\)</span> . Also, locate an
+intermediate point <span class="math notranslate nohighlight">\(O_{i^{\prime}}\)</span> at the intersection of the
+common normal with axis <span class="math notranslate nohighlight">\(z_{i-1}\)</span>.</p></li>
+<li><p>Choose axis <span class="math notranslate nohighlight">\(x_{i}\)</span> along the common normal to axes <span class="math notranslate nohighlight">\(z_{i-1}\)</span> and
+<span class="math notranslate nohighlight">\(z_{i}\)</span> with direction from Joint <span class="math notranslate nohighlight">\(i\)</span> to Joint <span class="math notranslate nohighlight">\(i+1\)</span>.</p></li>
+<li><p>Choose axis <span class="math notranslate nohighlight">\(y_{i}\)</span> to complete a right-handed frame.</p></li>
+</ul>
+<p>Once the link frames are established, the position and orientation of
+link Frame <span class="math notranslate nohighlight">\(O_{i}-x_{i} y_{i} z_{i}\)</span> with respect to link Frame
+<span class="math notranslate nohighlight">\(O_{i-1}-x_{i-1} y_{i-1} z_{i-1}\)</span> have been determined by the following
+four parameters:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(a_{i}\)</span> distance between <span class="math notranslate nohighlight">\(O_{i}\)</span> and <span class="math notranslate nohighlight">\(O_{i^{\prime}}\)</span> — constant
+and depend only on the geometry of links</p></li>
+<li><p><span class="math notranslate nohighlight">\(\alpha_{i}\)</span> angle between axes <span class="math notranslate nohighlight">\(z_{i-1}\)</span> and <span class="math notranslate nohighlight">\(z_{i}\)</span> about axis
+<span class="math notranslate nohighlight">\(x_{i}\)</span> — constant and depend only on the geometry of links</p></li>
+<li><p><span class="math notranslate nohighlight">\(d_{i}\)</span> distance of between <span class="math notranslate nohighlight">\(O_{i-1}\)</span> and <span class="math notranslate nohighlight">\(O_{i^{\prime}}\)</span> along
+<span class="math notranslate nohighlight">\(z_{i-1}\)</span> — variable if Joint <span class="math notranslate nohighlight">\(i\)</span> is prismatic, otherwise constant</p></li>
+<li><p><span class="math notranslate nohighlight">\(\vartheta_{i}\)</span> angle between axes <span class="math notranslate nohighlight">\(x_{i-1}\)</span> and <span class="math notranslate nohighlight">\(x_{i}\)</span> about axis
+<span class="math notranslate nohighlight">\(z_{i-1}\)</span> — variable</p></li>
+</ul>
+<p>To compute <span class="math notranslate nohighlight">\(\boldsymbol{A}_{i}^{i-1}\left(q_{i}\right)\)</span>, we go the
+following steps. First, translate the Frame
+<span class="math notranslate nohighlight">\(O_{i-1}-x_{i-1} y_{i-1} z_{i-1}\)</span> by <span class="math notranslate nohighlight">\(d_{i}\)</span> along axis <span class="math notranslate nohighlight">\(z_{i-1}\)</span> and
+rotate it by <span class="math notranslate nohighlight">\(\vartheta_{i}\)</span> about axis <span class="math notranslate nohighlight">\(z_{i-1}\)</span>; this leads to the
+following transformation of the intermediate Frame <span class="math notranslate nohighlight">\(i^{\prime}\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\boldsymbol{A}_{i^{\prime}}^{i-1}=\left[\begin{array}{cccc}
+c_{\vartheta_{i}} &amp; -s_{\vartheta_{i}} &amp; 0 &amp; 0 \\
+s_{\vartheta_{i}} &amp; c_{\vartheta_{i}} &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 1 &amp; d_{i} \\
+0 &amp; 0 &amp; 0 &amp; 1
+\end{array}\right]\end{split}\]</div>
+<p>Second, translate the intermediate Frame <span class="math notranslate nohighlight">\(i^{\prime}\)</span> by <span class="math notranslate nohighlight">\(a_{i}\)</span> along
+axis <span class="math notranslate nohighlight">\(x_{i^{\prime}}\)</span> and rotate it by <span class="math notranslate nohighlight">\(\alpha_{i}\)</span> about axis
+<span class="math notranslate nohighlight">\(x_{i^{\prime}}\)</span>; this leads to the following transformation and Frame
+<span class="math notranslate nohighlight">\(O_{i}-x_{i} y_{i} z_{i}\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\boldsymbol{A}_{i}^{i^{\prime}}=\left[\begin{array}{cccc}
+1 &amp; 0 &amp; 0 &amp; a_{i} \\
+0 &amp; c_{\alpha_{i}} &amp; -s_{\alpha_{i}} &amp; 0 \\
+0 &amp; s_{\alpha_{i}} &amp; c_{\alpha_{i}} &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 1
+\end{array}\right]\end{split}\]</div>
+<p>Thus, the total transformation is obtained by <em>postmultiplication rule</em></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\boldsymbol{A}_{i}^{i-1}\left(q_{i}\right)=\boldsymbol{A}_{i^{\prime}}^{i-1} \boldsymbol{A}_{i}^{i^{\prime}}=\left[\begin{array}{cccc}
+c_{\vartheta_{i}} &amp; -s_{\vartheta_{i}} c_{\alpha_{i}} &amp; s_{\vartheta_{i}} s_{\alpha_{i}} &amp; a_{i} c_{\vartheta_{i}} \\
+s_{\vartheta_{i}} &amp; c_{\vartheta_{i}} c_{\alpha_{i}} &amp; -c_{\vartheta_{i}} s_{\alpha_{i}} &amp; a_{i} s_{\vartheta_{i}} \\
+0 &amp; s_{\alpha_{i}} &amp; c_{\alpha_{i}} &amp; d_{i} \\
+0 &amp; 0 &amp; 0 &amp; 1
+\end{array}\right]\end{split}\]</div>
+<p>The DH convention gives a nonunique definition of the link frame in the
+following cases. (1) For Frame 0, only the direction of axis <span class="math notranslate nohighlight">\(z_{0}\)</span> is
+specified; then <span class="math notranslate nohighlight">\(O_{0}\)</span> and <span class="math notranslate nohighlight">\(x_{0}\)</span> can be arbitrarily chosen. (2) For
+Frame <span class="math notranslate nohighlight">\(n\)</span>, since there is no Joint <span class="math notranslate nohighlight">\(n+1, z_{n}\)</span> is not uniquely defined
+while <span class="math notranslate nohighlight">\(x_{n}\)</span> has to be normal to axis <span class="math notranslate nohighlight">\(z_{n-1}\)</span>. Typically, Joint <span class="math notranslate nohighlight">\(n\)</span>
+is revolute, and thus <span class="math notranslate nohighlight">\(z_{n}\)</span> is to be aligned with the direction of
+<span class="math notranslate nohighlight">\(z_{n-1}\)</span>. (3) When two consecutive axes intersect, the direction of
+<span class="math notranslate nohighlight">\(x_{i}\)</span> is arbitrary. and (4) When Joint <span class="math notranslate nohighlight">\(i\)</span> is prismatic, the direction
+of <span class="math notranslate nohighlight">\(z_{i-1}\)</span> is arbitrary. In all such cases, the principle of choosing
+frames is to simplify the procedure; for instance, the axes of
+consecutive frames can be made parallel.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>To summarize, we write the following Algorithm to use DH convention for
+a robot manipulator.</p>
+<ol class="arabic simple">
+<li><p>Find and number each joint and set the directions of axes
+<span class="math notranslate nohighlight">\(z_{0}, \ldots, z_{n-1}\)</span></p></li>
+<li><p>Choose Frame <span class="math notranslate nohighlight">\(O_{0}-x_{0} y_{0} z_{0}\)</span>. If possible, choose
+<span class="math notranslate nohighlight">\(\{\boldsymbol{x}_{0}, \boldsymbol{y}_{0}, \boldsymbol{z}_{0}\}\)</span> to
+coincide with the base frame.</p></li>
+</ol>
+<p>Execute steps from 3 for <span class="math notranslate nohighlight">\(i=1, \ldots, n-1\)</span> :</p>
+<ol class="arabic simple" start="3">
+<li><p>Choose Frame <span class="math notranslate nohighlight">\(O_{i}-x_{i} y_{i} z_{i}\)</span> using the following rules.
+First, choose <span class="math notranslate nohighlight">\(O_{i}\)</span> at the intersection of <span class="math notranslate nohighlight">\(z_{i}\)</span> with the common
+normal to <span class="math notranslate nohighlight">\(z_{i-1}\)</span> and <span class="math notranslate nohighlight">\(z_{i}\)</span>. If <span class="math notranslate nohighlight">\(z_{i-1}\)</span> and <span class="math notranslate nohighlight">\(z_{i}\)</span> are
+parallel and Joint <span class="math notranslate nohighlight">\(i\)</span> is revolute, choose <span class="math notranslate nohighlight">\(O_{i}\)</span> so that
+<span class="math notranslate nohighlight">\(d_{i}=0\)</span>; if Joint <span class="math notranslate nohighlight">\(i\)</span> is prismatic, choose <span class="math notranslate nohighlight">\(O_{i}\)</span> at as a
+mechanical limit. Second, choose axis <span class="math notranslate nohighlight">\(x_{i}\)</span> along the common
+normal to axes <span class="math notranslate nohighlight">\(z_{i-1}\)</span> and <span class="math notranslate nohighlight">\(z_{i}\)</span> with direction from Joint <span class="math notranslate nohighlight">\(i\)</span>
+to Joint <span class="math notranslate nohighlight">\(i+1\)</span>, Third, choose axis <span class="math notranslate nohighlight">\(y_{i}\)</span> so as to obtain a
+right-handed frame.</p></li>
+</ol>
+<p>To complete:</p>
+<ol class="arabic simple" start="4">
+<li><p>Choose Frame <span class="math notranslate nohighlight">\(O_{n}-x_{n} y_{n} z_{n}\)</span>; if Joint <span class="math notranslate nohighlight">\(n\)</span> is revolute,
+then align <span class="math notranslate nohighlight">\(z_{n}\)</span> with <span class="math notranslate nohighlight">\(z_{n-1}\)</span>, otherwise, if Joint <span class="math notranslate nohighlight">\(n\)</span> is
+prismatic, then choose <span class="math notranslate nohighlight">\(z_{n}\)</span> arbitrarily. choose axis <span class="math notranslate nohighlight">\(x_{n}\)</span>
+along the common normal to axes <span class="math notranslate nohighlight">\(z_{n-1}\)</span> and <span class="math notranslate nohighlight">\(z_{n}\)</span>.</p></li>
+<li><p>For <span class="math notranslate nohighlight">\(i=1, \ldots, n\)</span>, establish the DH parameter table
+<span class="math notranslate nohighlight">\(a_{i}, d_{i}, \alpha_{i}, \vartheta_{i}\)</span>, compute the homogeneous
+transformation matrices
+<span class="math notranslate nohighlight">\(\boldsymbol{A}_{i}^{i-1}\left(q_{i}\right)\)</span>, and compute the
+homogeneous transformation
+<span class="math notranslate nohighlight">\(\boldsymbol{T}_{n}^{0}(\boldsymbol{q})=\boldsymbol{A}_{1}^{0} \ldots \boldsymbol{A}_{n}^{n-1}\)</span>
+that yields the pose of Frame <span class="math notranslate nohighlight">\(n\)</span> with respect to Frame 0 .</p></li>
+<li><p>Given <span class="math notranslate nohighlight">\(\boldsymbol{T}_{0}^{b}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{T}_{e}^{n}\)</span>, compute
+the kinematics function as <span class="math notranslate nohighlight">\(\boldsymbol{T}_{e}^{b}(\boldsymbol{q})=\)</span>
+<span class="math notranslate nohighlight">\(\boldsymbol{T}_{0}^{b} \boldsymbol{T}_{n}^{0} \boldsymbol{T}_{e}^{n}\)</span>.</p></li>
+</ol>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="examples">
+<h1>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h1>
+<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Three-link Planar Arm</div>
+<figure class="align-default" id="link-arm">
+<a class="reference internal image-reference" href="../_images/3link_arm.jpg"><img alt="../_images/3link_arm.jpg" src="../_images/3link_arm.jpg" style="width: 40%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 32 </span><span class="caption-text">Three link robot arm</span><a class="headerlink" href="#link-arm" title="Permalink to this image">#</a></p>
+<div class="legend">
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p class="sd-card-text">Link</p></th>
+<th class="head"><p class="sd-card-text"><span class="math notranslate nohighlight">\(a_{i}\)</span></p></th>
+<th class="head"><p class="sd-card-text"><span class="math notranslate nohighlight">\(\alpha_{i}\)</span></p></th>
+<th class="head"><p class="sd-card-text"><span class="math notranslate nohighlight">\(d_{i}\)</span></p></th>
+<th class="head"><p class="sd-card-text"><span class="math notranslate nohighlight">\(\vartheta_{i}\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p class="sd-card-text">1</p></td>
+<td><p class="sd-card-text"><span class="math notranslate nohighlight">\(a_{1}\)</span></p></td>
+<td><p class="sd-card-text">0</p></td>
+<td><p class="sd-card-text">0</p></td>
+<td><p class="sd-card-text"><span class="math notranslate nohighlight">\(\vartheta_{1}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p class="sd-card-text">2</p></td>
+<td><p class="sd-card-text"><span class="math notranslate nohighlight">\(a_{2}\)</span></p></td>
+<td><p class="sd-card-text">0</p></td>
+<td><p class="sd-card-text">0</p></td>
+<td><p class="sd-card-text"><span class="math notranslate nohighlight">\(\vartheta_{2}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p class="sd-card-text">3</p></td>
+<td><p class="sd-card-text"><span class="math notranslate nohighlight">\(a_{3}\)</span></p></td>
+<td><p class="sd-card-text">0</p></td>
+<td><p class="sd-card-text">0</p></td>
+<td><p class="sd-card-text"><span class="math notranslate nohighlight">\(\vartheta_{3}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<div class="math notranslate nohighlight">
+\[\begin{split}\boldsymbol{T}_{3}^{0}(\boldsymbol{q})=\boldsymbol{A}_{1}^{0} \boldsymbol{A}_{2}^{1} \boldsymbol{A}_{3}^{2}=\left[\begin{array}{cccc}
+c_{123} &amp; -s_{123} &amp; 0 &amp; a_{1} c_{1}+a_{2} c_{12}+a_{3} c_{123} \\
+s_{123} &amp; c_{123} &amp; 0 &amp; a_{1} s_{1}+a_{2} s_{12}+a_{3} s_{123} \\
+0 &amp; 0 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 1
+\end{array}\right]\end{split}\]</div>
+</div>
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Spherical Arm</div>
+<figure class="align-default" id="spherical-arm">
+<a class="reference internal image-reference" href="../_images/spherical_arm.jpg"><img alt="../_images/spherical_arm.jpg" src="../_images/spherical_arm.jpg" style="width: 50%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 33 </span><span class="caption-text">Three link robot arm</span><a class="headerlink" href="#spherical-arm" title="Permalink to this image">#</a></p>
+<div class="legend">
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p class="sd-card-text">Link</p></th>
+<th class="head"><p class="sd-card-text"><span class="math notranslate nohighlight">\(a_{i}\)</span></p></th>
+<th class="head"><p class="sd-card-text"><span class="math notranslate nohighlight">\(\alpha_{i}\)</span></p></th>
+<th class="head"><p class="sd-card-text"><span class="math notranslate nohighlight">\(d_{i}\)</span></p></th>
+<th class="head"><p class="sd-card-text"><span class="math notranslate nohighlight">\(\vartheta_{i}\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p class="sd-card-text">1</p></td>
+<td><p class="sd-card-text">0</p></td>
+<td><p class="sd-card-text"><span class="math notranslate nohighlight">\(-\pi / 2\)</span></p></td>
+<td><p class="sd-card-text">0</p></td>
+<td><p class="sd-card-text"><span class="math notranslate nohighlight">\(\vartheta_{1}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p class="sd-card-text">2</p></td>
+<td><p class="sd-card-text">0</p></td>
+<td><p class="sd-card-text"><span class="math notranslate nohighlight">\(\pi / 2\)</span></p></td>
+<td><p class="sd-card-text"><span class="math notranslate nohighlight">\(d_{2}\)</span></p></td>
+<td><p class="sd-card-text"><span class="math notranslate nohighlight">\(\vartheta_{2}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p class="sd-card-text">3</p></td>
+<td><p class="sd-card-text">0</p></td>
+<td><p class="sd-card-text">0</p></td>
+<td><p class="sd-card-text"><span class="math notranslate nohighlight">\(d_{3}\)</span></p></td>
+<td><p class="sd-card-text"></p></td>
+</tr>
+</tbody>
+</table>
+<div class="math notranslate nohighlight">
+\[\begin{split}\boldsymbol{T}_{3}^{0}(\boldsymbol{q})=\boldsymbol{A}_{1}^{0} \boldsymbol{A}_{2}^{1} \boldsymbol{A}_{3}^{2}=\left[\begin{array}{cccc}
+c_{1} c_{2} &amp; -s_{1} &amp; c_{1} s_{2} &amp; c_{1} s_{2} d_{3}-s_{1} d_{2} \\
+s_{1} c_{2} &amp; c_{1} &amp; s_{1} s_{2} &amp; s_{1} s_{2} d_{3}+c_{1} d_{2} \\
+-s_{2} &amp; 0 &amp; c_{2} &amp; c_{2} d_{3} \\
+0 &amp; 0 &amp; 0 &amp; 1
+\end{array}\right]\end{split}\]</div>
+</div>
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Anthropomorphic Arm</div>
+<figure class="align-default" id="anthropomorphic-arm">
+<a class="reference internal image-reference" href="../_images/anthropomorphic_arm.jpg"><img alt="../_images/anthropomorphic_arm.jpg" src="../_images/anthropomorphic_arm.jpg" style="width: 50%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 34 </span><span class="caption-text">Three link robot arm</span><a class="headerlink" href="#anthropomorphic-arm" title="Permalink to this image">#</a></p>
+<div class="legend">
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p class="sd-card-text">Link</p></th>
+<th class="head"><p class="sd-card-text"><span class="math notranslate nohighlight">\(a_{i}\)</span></p></th>
+<th class="head"><p class="sd-card-text"><span class="math notranslate nohighlight">\(\alpha_{i}\)</span></p></th>
+<th class="head"><p class="sd-card-text"><span class="math notranslate nohighlight">\(d_{i}\)</span></p></th>
+<th class="head"><p class="sd-card-text"><span class="math notranslate nohighlight">\(\vartheta_{i}\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p class="sd-card-text">1</p></td>
+<td><p class="sd-card-text">0</p></td>
+<td><p class="sd-card-text"><span class="math notranslate nohighlight">\(\pi / 2\)</span></p></td>
+<td><p class="sd-card-text">0</p></td>
+<td><p class="sd-card-text"><span class="math notranslate nohighlight">\(\vartheta_{1}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p class="sd-card-text">2</p></td>
+<td><p class="sd-card-text"><span class="math notranslate nohighlight">\(a_{2}\)</span></p></td>
+<td><p class="sd-card-text">0</p></td>
+<td><p class="sd-card-text">0</p></td>
+<td><p class="sd-card-text"><span class="math notranslate nohighlight">\(\vartheta_{2}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p class="sd-card-text">3</p></td>
+<td><p class="sd-card-text"><span class="math notranslate nohighlight">\(a_{3}\)</span></p></td>
+<td><p class="sd-card-text">0</p></td>
+<td><p class="sd-card-text">0</p></td>
+<td><p class="sd-card-text"><span class="math notranslate nohighlight">\(\vartheta_{3}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<div class="math notranslate nohighlight">
+\[\begin{split}\boldsymbol{T}_{3}^{0}(\boldsymbol{q})=\boldsymbol{A}_{1}^{0} \boldsymbol{A}_{2}^{1} \boldsymbol{A}_{3}^{2}=\left[\begin{array}{cccc}
+c_{1} c_{23} &amp; -c_{1} s_{23} &amp; s_{1} &amp; c_{1}\left(a_{2} c_{2}+a_{3} c_{23}\right) \\
+s_{1} c_{23} &amp; -s_{1} s_{23} &amp; -c_{1} &amp; s_{1}\left(a_{2} c_{2}+a_{3} c_{23}\right) \\
+s_{23} &amp; c_{23} &amp; 0 &amp; a_{2} s_{2}+a_{3} s_{23} \\
+0 &amp; 0 &amp; 0 &amp; 1
+\end{array}\right]\end{split}\]</div>
+</div>
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Spherical Wrist</div>
+<figure class="align-default" id="spherical-wrist">
+<a class="reference internal image-reference" href="../_images/spherical_wrist.jpg"><img alt="../_images/spherical_wrist.jpg" src="../_images/spherical_wrist.jpg" style="width: 50%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 35 </span><span class="caption-text">Three link robot arm</span><a class="headerlink" href="#spherical-wrist" title="Permalink to this image">#</a></p>
+<div class="legend">
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p class="sd-card-text">Link</p></th>
+<th class="head"><p class="sd-card-text"><span class="math notranslate nohighlight">\(a_{i}\)</span></p></th>
+<th class="head"><p class="sd-card-text"><span class="math notranslate nohighlight">\(\alpha_{i}\)</span></p></th>
+<th class="head"><p class="sd-card-text"><span class="math notranslate nohighlight">\(d_{i}\)</span></p></th>
+<th class="head"><p class="sd-card-text"><span class="math notranslate nohighlight">\(\vartheta_{i}\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p class="sd-card-text">4</p></td>
+<td><p class="sd-card-text">0</p></td>
+<td><p class="sd-card-text"><span class="math notranslate nohighlight">\(-\pi / 2\)</span></p></td>
+<td><p class="sd-card-text">0</p></td>
+<td><p class="sd-card-text"><span class="math notranslate nohighlight">\(\vartheta\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p class="sd-card-text">5</p></td>
+<td><p class="sd-card-text">0</p></td>
+<td><p class="sd-card-text"><span class="math notranslate nohighlight">\(\pi / 2\)</span></p></td>
+<td><p class="sd-card-text">0</p></td>
+<td><p class="sd-card-text"><span class="math notranslate nohighlight">\(\vartheta_{5}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p class="sd-card-text">6</p></td>
+<td><p class="sd-card-text">0</p></td>
+<td><p class="sd-card-text">0</p></td>
+<td><p class="sd-card-text"><span class="math notranslate nohighlight">\(d_{6}\)</span></p></td>
+<td><p class="sd-card-text"><span class="math notranslate nohighlight">\(\vartheta_{6}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<div class="math notranslate nohighlight">
+\[\begin{split}\boldsymbol{T}_{6}^{3}(\boldsymbol{q})=\boldsymbol{A}_{4}^{3} \boldsymbol{A}_{5}^{4} \boldsymbol{A}_{6}^{5}=\left[\begin{array}{cccc}
+c_{4} c_{5} c_{6}-s_{4} s_{6} &amp; -c_{4} c_{5} s_{6}-s_{4} c_{6} &amp; c_{4} s_{5} &amp; c_{4} s_{5} d_{6} \\
+s_{4} c_{5} c_{6}+c_{4} s_{6} &amp; -s_{4} c_{5} s_{6}+c_{4} c_{6} &amp; s_{4} s_{5} &amp; s_{4} s_{5} d_{6} \\
+-s_{5} c_{6} &amp; s_{5} s_{6} &amp; c_{5} &amp; c_{5} d_{6} \\
+0 &amp; 0 &amp; 0 &amp; 1
+\end{array}\right]\end{split}\]</div>
+</div>
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Stanford Manipulator</div>
+<figure class="align-default" id="stanford-manipulator">
+<a class="reference internal image-reference" href="../_images/Stanford_manipulator.jpg"><img alt="../_images/Stanford_manipulator.jpg" src="../_images/Stanford_manipulator.jpg" style="width: 50%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 36 </span><span class="caption-text">Stanford manipulator</span><a class="headerlink" href="#stanford-manipulator" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<div class="math notranslate nohighlight">
+\[\begin{split}\boldsymbol{T}_{6}^{0}=\boldsymbol{T}_{3}^{0} \boldsymbol{T}_{6}^{3}=\left[\begin{array}{cccc}
+\boldsymbol{n}^{0} &amp; \boldsymbol{s}^{0} &amp; \boldsymbol{a}^{0} &amp; \boldsymbol{p}^{0} \\
+0 &amp; 0 &amp; 0 &amp; 1
+\end{array}\right]\end{split}\]</div>
+<p class="sd-card-text">with</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\boldsymbol{p}_{6}^{0}=\left[\begin{array}{c}
+c_{1} s_{2} d_{3}-s_{1} d_{2}+\left(c_{1}\left(c_{2} c_{4} s_{5}+s_{2} c_{5}\right)-s_{1} s_{4} s_{5}\right) d_{6} \\
+s_{1} s_{2} d_{3}+c_{1} d_{2}+\left(s_{1}\left(c_{2} c_{4} s_{5}+s_{2} c_{5}\right)+c_{1} s_{4} s_{5}\right) d_{6} \\
+c_{2} d_{3}+\left(-s_{2} c_{4} s_{5}+c_{2} c_{5}\right) d_{6}
+\end{array}\right]\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+&amp; \boldsymbol{n}_{6}^{0}= {\left[\begin{array}{c}
+c_{1}\left(c_{2}\left(c_{4} c_{5} c_{6}-s_{4} s_{6}\right)-s_{2} s_{5} c_{6}\right)-s_{1}\left(s_{4} c_{5} c_{6}+c_{4} s_{6}\right) \\
+s_{1}\left(c_{2}\left(c_{4} c_{5} c_{6}-s_{4} s_{6}\right)-s_{2} s_{5} c_{6}\right)+c_{1}\left(s_{4} c_{5} c_{6}+c_{4} s_{6}\right) \\
+-s_{2}\left(c_{4} c_{5} c_{6}-s_{4} s_{6}\right)-c_{2} s_{5} c_{6}
+\end{array}\right] } \\
+&amp; \boldsymbol{s}_{6}^{0}=\left[\begin{array}{c}
+c_{1}\left(-c_{2}\left(c_{4} c_{5} s_{6}+s_{4} c_{6}\right)+s_{2} s_{5} s_{6}\right)-s_{1}\left(-s_{4} c_{5} s_{6}+c_{4} c_{6}\right) \\
+s_{1}\left(-c_{2}\left(c_{4} c_{5} s_{6}+s_{4} c_{6}\right)+s_{2} s_{5} s_{6}\right)+c_{1}\left(-s_{4} c_{5} s_{6}+c_{4} c_{6}\right) \\
+s_{2}\left(c_{4} c_{5} s_{6}+s_{4} c_{6}\right)+c_{2} s_{5} s_{6}
+\end{array}\right] \\
+&amp; \boldsymbol{a}_{6}^{0}=\left[\begin{array}{c}
+c_{1}\left(c_{2} c_{4} s_{5}+s_{2} c_{5}\right)-s_{1} s_{4} s_{5} \\
+s_{1}\left(c_{2} c_{4} s_{5}+s_{2} c_{5}\right)+c_{1} s_{4} s_{5} \\
+-s_{2} c_{4} s_{5}+c_{2} c_{5}
+\end{array}\right]
+\end{aligned}\end{split}\]</div>
+</div>
+</div>
+<div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Anthropomorphic Arm with Spherical Wrist</div>
+<figure class="align-default" id="anthropomorphic-manipulator">
+<a class="reference internal image-reference" href="../_images/anthropomorphic_manipulator.jpg"><img alt="../_images/anthropomorphic_manipulator.jpg" src="../_images/anthropomorphic_manipulator.jpg" style="width: 50%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 37 </span><span class="caption-text">Anthropomorphic manipulator</span><a class="headerlink" href="#anthropomorphic-manipulator" title="Permalink to this image">#</a></p>
+<div class="legend">
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p class="sd-card-text">Link</p></th>
+<th class="head"><p class="sd-card-text"><span class="math notranslate nohighlight">\(a_{i}\)</span></p></th>
+<th class="head"><p class="sd-card-text"><span class="math notranslate nohighlight">\(\alpha_{i}\)</span></p></th>
+<th class="head"><p class="sd-card-text"><span class="math notranslate nohighlight">\(d_{i}\)</span></p></th>
+<th class="head"><p class="sd-card-text"><span class="math notranslate nohighlight">\(\vartheta_{i}\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p class="sd-card-text">1</p></td>
+<td><p class="sd-card-text">0</p></td>
+<td><p class="sd-card-text"><span class="math notranslate nohighlight">\(\pi / 2\)</span></p></td>
+<td><p class="sd-card-text">0</p></td>
+<td><p class="sd-card-text"><span class="math notranslate nohighlight">\(\vartheta_{1}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p class="sd-card-text">2</p></td>
+<td><p class="sd-card-text"><span class="math notranslate nohighlight">\(a_{2}\)</span></p></td>
+<td><p class="sd-card-text">0</p></td>
+<td><p class="sd-card-text">0</p></td>
+<td><p class="sd-card-text"><span class="math notranslate nohighlight">\(\vartheta_{2}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p class="sd-card-text">3</p></td>
+<td><p class="sd-card-text">0</p></td>
+<td><p class="sd-card-text"><span class="math notranslate nohighlight">\(\pi / 2\)</span></p></td>
+<td><p class="sd-card-text">0</p></td>
+<td><p class="sd-card-text"><span class="math notranslate nohighlight">\(\vartheta_{3}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p class="sd-card-text">4</p></td>
+<td><p class="sd-card-text">0</p></td>
+<td><p class="sd-card-text"><span class="math notranslate nohighlight">\(-\pi / 2\)</span></p></td>
+<td><p class="sd-card-text"><span class="math notranslate nohighlight">\(d_{4}\)</span></p></td>
+<td><p class="sd-card-text"><span class="math notranslate nohighlight">\(\vartheta_{4}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p class="sd-card-text">5</p></td>
+<td><p class="sd-card-text">0</p></td>
+<td><p class="sd-card-text"><span class="math notranslate nohighlight">\(\pi / 2\)</span></p></td>
+<td><p class="sd-card-text">0</p></td>
+<td><p class="sd-card-text"><span class="math notranslate nohighlight">\(\vartheta_{5}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p class="sd-card-text">6</p></td>
+<td><p class="sd-card-text">0</p></td>
+<td><p class="sd-card-text">0</p></td>
+<td><p class="sd-card-text"><span class="math notranslate nohighlight">\(d_{6}\)</span></p></td>
+<td><p class="sd-card-text"><span class="math notranslate nohighlight">\(\vartheta_{6}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figcaption>
+</figure>
+<div class="math notranslate nohighlight">
+\[\begin{split}\boldsymbol{T}_{6}^{0}=\left[\begin{array}{cccc}
+\boldsymbol{n}^{0} &amp; \boldsymbol{s}^{0} &amp; \boldsymbol{a}^{0} &amp; \boldsymbol{p}^{0} \\
+0 &amp; 0 &amp; 0 &amp; 1
+\end{array}\right]\end{split}\]</div>
+<p class="sd-card-text">with</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+\boldsymbol{p}_{6}^{0}=&amp;\left[\begin{array}{c}
+a_{2} c_{1} c_{2}+d_{4} c_{1} s_{23}+d_{6}\left(c_{1}\left(c_{23} c_{4} s_{5}+s_{23} c_{5}\right)+s_{1} s_{4} s_{5}\right) \\
+a_{2} s_{1} c_{2}+d_{4} s_{1} s_{23}+d_{6}\left(s_{1}\left(c_{23} c_{4} s_{5}+s_{23} c_{5}\right)-c_{1} s_{4} s_{5}\right) \\
+a_{2} s_{2}-d_{4} c_{23}+d_{6}\left(s_{23} c_{4} s_{5}-c_{23} c_{5}\right)
+\end{array}\right]\\
+\boldsymbol{n}_{6}^{0}= &amp; {\left[\begin{array}{c}
+c_{1}\left(c_{23}\left(c_{4} c_{5} c_{6}-s_{4} s_{6}\right)-s_{23} s_{5} c_{6}\right)+s_{1}\left(s_{4} c_{5} c_{6}+c_{4} s_{6}\right) \\
+s_{1}\left(c_{23}\left(c_{4} c_{5} c_{6}-s_{4} s_{6}\right)-s_{23} s_{5} c_{6}\right)-c_{1}\left(s_{4} c_{5} c_{6}+c_{4} s_{6}\right) \\
+s_{23}\left(c_{4} c_{5} c_{6}-s_{4} s_{6}\right)+c_{23} s_{5} c_{6}
+\end{array}\right] } \\
+\boldsymbol{s}_{6}^{0}= &amp; {\left[\begin{array}{c}
+c_{1}\left(-c_{23}\left(c_{4} c_{5} s_{6}+s_{4} c_{6}\right)+s_{23} s_{5} s_{6}\right)+s_{1}\left(-s_{4} c_{5} s_{6}+c_{4} c_{6}\right) \\
+s_{1}\left(-c_{23}\left(c_{4} c_{5} s_{6}+s_{4} c_{6}\right)+s_{23} s_{5} s_{6}\right)-c_{1}\left(-s_{4} c_{5} s_{6}+c_{4} c_{6}\right) \\
+-s_{23}\left(c_{4} c_{5} s_{6}+s_{4} c_{6}\right)-c_{23} s_{5} s_{6}
+\end{array}\right] } \\
+\boldsymbol{a}_{6}^{0}= &amp; {\left[\begin{array}{c}
+c_{1}\left(c_{23} c_{4} s_{5}+s_{23} c_{5}\right)+s_{1} s_{4} s_{5} \\
+s_{1}\left(c_{23} c_{4} s_{5}+s_{23} c_{5}\right)-c_{1} s_{4} s_{5} \\
+s_{23} c_{4} s_{5}-c_{23} c_{5}
+\end{array}\right] }
+\end{aligned}\end{split}\]</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="workspace">
+<h1>Workspace<a class="headerlink" href="#workspace" title="Permalink to this heading">#</a></h1>
+<p>The manipulator workspace is the space reached by the origin of the
+end-effector frame when the manipulator’s joints tasks all allowable
+values. The workspace includes reachable workspace and dexterous
+workspace. The latter is the space that the origin of the end-effector
+frame can reach with different orientations, while the former is the
+space that the origin of the end-effector frame can reach with at least
+one orientation.</p>
+<p>For an <span class="math notranslate nohighlight">\(n\)</span>-DOF manipulator, the reachable workspace is the geometric
+locus of the points that can be achieved by considering the direct
+kinematics equation for the position part, i.e.,</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{p}_{e}=\boldsymbol{p}_{e}(\boldsymbol{q}), \quad q_{i m} \leq q_{i} \leq q_{i M} \quad i=1, \ldots, n,\]</div>
+<p>where <span class="math notranslate nohighlight">\(q_{i m}\left(q_{i M}\right)\)</span> denotes the minimum (maximum) limit
+at Joint <span class="math notranslate nohighlight">\(i\)</span>. The manipulator workspace (without end-effector) is
+reported in the data sheet given by the robot manufacturer in terms of a
+top view and a side view.</p>
+<p>In a manipulator, if actual mechanical parameters differ from the
+nominal value of parameters in data sheet, a deviation arises between
+the actual position reached and the position computed via direct
+kinematics. Such a deviation is defined accuracy. Accuracy attains
+typical values below one millimeter and depends on the structure as well
+as on manipulator dimensions. Another parameter that is usually listed
+in the performance data sheet of an industrial robot is repeatability
+which gives a measure of the manipulator’s ability to return to a
+previously reached position. Repeatability depends not only on the
+mechanical structure but also on the transducers and controller; it is
+expressed in metric units and is typically smaller than accuracy. For
+instance, for a manipulator with a maximum reach of <span class="math notranslate nohighlight">\(1.5 \mathrm{~m}\)</span>,
+accuracy varies from 0.2 to <span class="math notranslate nohighlight">\(1 \mathrm{~mm}\)</span> in the workspace, while
+repeatability varies from 0.02 to <span class="math notranslate nohighlight">\(0.2 \mathrm{~mm}\)</span>.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="kinematic-redundancy">
+<h1>Kinematic Redundancy<a class="headerlink" href="#kinematic-redundancy" title="Permalink to this heading">#</a></h1>
+<p>A manipulator is termed kinematically redundant when it has a number of
+DOFs which is greater than the number of variables that are necessary to
+describe a given task. With reference to the above-defined spaces, a
+manipulator is intrinsically redundant when the dimension of the
+operational space is smaller than the dimension of the joint space
+<span class="math notranslate nohighlight">\((m&lt;n)\)</span>. Redundancy is, anyhow, a concept relative to the task assigned
+to the manipulator; a manipulator can be redundant with respect to a
+task and nonredundant with respect to another. Even in the case of
+<span class="math notranslate nohighlight">\(m=n\)</span>, a manipulator can be functionally redundant when only a number of
+<span class="math notranslate nohighlight">\(r\)</span> components of operational space are of concern for the specific
+task, with <span class="math notranslate nohighlight">\(r&lt;m\)</span>.</p>
+<p>Consider again the three-DOF planar arm. If only the endeffector
+position (in the plane) is specified, that structure presents a
+functional redundancy <span class="math notranslate nohighlight">\((n=m=3, r=2)\)</span>; this is lost when also the
+end-effector orientation in the plane is specified <span class="math notranslate nohighlight">\((n=m=r=3)\)</span>. On the
+other hand, a four-DOF planar arm is intrinsically redundant
+<span class="math notranslate nohighlight">\((n=4, m=3)\)</span>. Yet, take the typical industrial robot with six DOFs; such
+manipulator is not intrinsically redundant <span class="math notranslate nohighlight">\((n=m=6)\)</span>, but it can become
+functionally redundant with regard to the task to execute. Thus, for
+instance, in a lasercutting task a functional redundancy will occur
+since the end-effector rotation about the approach direction is
+irrelevant to completion of the task <span class="math notranslate nohighlight">\((r=5)\)</span>.</p>
+<p>At this point, a question should arise spontaneously: Why to
+intentionally utilize a redundant manipulator? The answer is to
+recognize that redundancy can provide the manipulator with dexterity and
+versatility in its motion. The typical example is constituted by the
+human arm that has seven DOFs: three in the shoulder, one in the elbow
+and three in the wrist, without considering the DOFs in the fingers.
+This manipulator is intrinsically redundant; in fact, if the base and
+the hand position and orientation are both fixed - requiring six DOFs -
+the elbow can be moved, thanks to the additional available DOF Then, for
+instance, it is possible to avoid obstacles in the workspace. Further,
+if a joint of a redundant manipulator reaches its mechanical limit,
+there might be other joints that allow execution of the prescribed
+end-effector motion.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="modified-dh-parameters">
+<h1>Modified DH parameters<a class="headerlink" href="#modified-dh-parameters" title="Permalink to this heading">#</a></h1>
+<figure class="align-default" id="dhparameter">
+<a class="reference internal image-reference" href="../_images/DHParameter.png"><img alt="../_images/DHParameter.png" src="../_images/DHParameter.png" style="width: 50%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 38 </span><span class="caption-text">Modified DH parameters (or called Craig’s convention). Image from
+Wiki</span><a class="headerlink" href="#dhparameter" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Some books use modified (proximal) DH parameters [John J. Craig,
+Introduction to Robotics: Mechanics and Control (3rd Edition)]. The
+difference between the classic (distal) DH parameters and the modified
+DH parameters are the locations of the coordinates system attachment to
+the links and the order of the performed transformations.</p>
+<p>Compared with the classic DH parameters, the coordinates of frame,
+<span class="math notranslate nohighlight">\(O_{i-1}\)</span>, is put on Joint <span class="math notranslate nohighlight">\(i-1\)</span>, not the Joint <span class="math notranslate nohighlight">\(i\)</span> in classic DH
+convention;the coordinates of frame, <span class="math notranslate nohighlight">\(O_{i}\)</span>, is put on Joint <span class="math notranslate nohighlight">\(i\)</span>, not
+the Joint <span class="math notranslate nohighlight">\(i+1\)</span> in classic DH convention. Another difference is that
+according to the modified convention, the transform matrix is given by
+the following order of operations:</p>
+<div class="math notranslate nohighlight">
+\[^{i-1}T_i=\text{Rot}_{x_{i-1}}(\alpha_{i-1})\text{Trans}_{x_{i-1}}(a_{i-1})\text{Rot}_{z_{i}}(\theta_{i})\text{Trans}_{z_{i}}(d_{i})\]</div>
+<p>One example of using the above modified DH convention is Franka-Emika
+Panda robot arm, an increasingly popular robot for research and
+teaching. It has 7 joints which make it a redundant robot, that is, it
+has more joints than it needs to achieve an arbitrary position and
+orientation in the Cartesian workspace.</p>
+<p>The DH parameter defined for Panda Robot arm is as follows:
+<a class="reference external" href="https://frankaemika.github.io/docs/control_parameters.html">https://frankaemika.github.io/docs/control_parameters.html</a>. Please
+find a great tutorial (using Python) about Panda Arm’s forward
+kinematics at</p>
+<p><a class="github reference external" href="https://github.com/jhavl/dkt">jhavl/dkt</a></p>
+<figure class="align-default" id="dh-diagram">
+<a class="reference internal image-reference" href="../_images/dh-diagram.png"><img alt="../_images/dh-diagram.png" src="../_images/dh-diagram.png" style="width: 50%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 39 </span><span class="caption-text">Panda’s kinematic chain</span><a class="headerlink" href="#dh-diagram" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="cover">
+<a class="reference internal image-reference" href="../_images/cover.png"><img alt="../_images/cover.png" src="../_images/cover.png" style="width: 50%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 40 </span><span class="caption-text">Panda’s kinematic chain (from Peter Corke’s
+Tutorial</span><a class="headerlink" href="#cover" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./lec6-8"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../lec3-5/basic-kinematics.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Basic Kinematics</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../lec9/ik.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Inverse Kinematics</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Forward Kinematics</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#general-rule">General Rule</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#denavit-hartenberg-dh-convention">Denavit-Hartenberg (DH) Convention</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#workspace">Workspace</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#kinematic-redundancy">Kinematic Redundancy</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modified-dh-parameters">Modified DH parameters</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Wanxin Jin @ IRIS Lab
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
