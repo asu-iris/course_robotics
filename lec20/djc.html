@@ -1,0 +1,865 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Decentralized Joint Control &#8212; Modeling and Control of Robots</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lec20/djc';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Centralized Joint Control" href="../lec21/cjc.html" />
+    <link rel="prev" title="Overview of Robot Control" href="../lec19/control_overview.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/iris_logo_2.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/iris_logo_2.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lec1/intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lec2/configuration.html">Robot Configuration</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec3-5/basic-kinematics.html">Basic Kinematics</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec6-8/fk.html">Forward Kinematics</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec9/ik.html">Inverse Kinematics</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec10/diff-trans.html">Derivative of Transformation</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec11-12/jacobian.html">Jacobian</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec13/singularity.html">Singularity &amp; Redundancy</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec14/statics.html">Statics</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec15/inverse_vk.html">Inverse Velocity Kinematics</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec16-17/nik.html">Numerical Inverse Kinematics</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec18/dyn.html">Dynamics (Lagrange formulation)</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec19/control_overview.html">Overview of Robot Control</a></li>
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Decentralized Joint Control</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec21/cjc.html">Centralized Joint Control</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec22/osc.html">Operational Space Control</a></li>
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Flec20/djc.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button"
+   title="Open an issue"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/lec20/djc.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Decentralized Joint Control</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Decentralized Joint Control</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#single-joint-control-diagram">Single-Joint Control Diagram</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#single-joint-position-feedback">Single Joint Position feedback</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#single-joint-position-and-velocity-feedback">Single-Joint Position and Velocity Feedback</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="decentralized-joint-control">
+<h1>Decentralized Joint Control<a class="headerlink" href="#decentralized-joint-control" title="Permalink to this heading">#</a></h1>
+<p>The equation of motion of a manipulator without end-effector contact
+force and any joint friction is</p>
+<div class="math notranslate nohighlight">
+\[\label{equ.dyn}
+    \boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\boldsymbol{\tau}\]</div>
+<p>Let <span class="math notranslate nohighlight">\(\boldsymbol{q}_{m}=[\theta_{m1}, \theta_{m2}, ...\theta_{mn}]^T\)</span>
+denote the vector of all corresponding DM motor angles. The
+transmissions establish a relationship:</p>
+<div class="math notranslate nohighlight">
+\[\label{equ.motor_angle}
+    \boldsymbol{K}_{r} \boldsymbol{q}=\boldsymbol{q}_{m}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\boldsymbol{K}_{r}=\text{diag}(k_{r_1}, k_{r_2}, ..., k_{r_n})\)</span>
+is a diagonal matrix, and each diagonal element <span class="math notranslate nohighlight">\(k_{r_i}\)</span> is the gear
+ratio of joint <span class="math notranslate nohighlight">\(i\)</span>. Let
+<span class="math notranslate nohighlight">\(\boldsymbol{\tau}_{m}=[\tau_{m1},\tau_{m2},...,,\tau_{mn}]^T\)</span> denote
+the vector of all motor torques, one can write</p>
+<div class="math notranslate nohighlight">
+\[\label{equ.motor_torque}
+\boldsymbol{\tau}_{m}=\boldsymbol{K}_{r}^{-1} \boldsymbol{\tau}\]</div>
+<p>Substituting
+(<span class="xref myst">[equ.motor_angle]</span>{reference-type=”ref”
+reference=”equ.motor_angle”}) and
+(<span class="xref myst">[equ.motor_torque]</span>{reference-type=”ref”
+reference=”equ.motor_torque”}) into the manipulator dynamics
+(<span class="xref myst">[equ.dyn]</span>{reference-type=”ref” reference=”equ.dyn”})
+leads to</p>
+<div class="math notranslate nohighlight">
+\[\label{equ.dyn2}
+    \boldsymbol{K}_{r}^{-1} \boldsymbol{B}(\boldsymbol{q}) \boldsymbol{K}_{r}^{-1} \ddot{\boldsymbol{q}}_{m}+\boldsymbol{K}_{r}^{-1} \boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \boldsymbol{K}_{r}^{-1} \dot{\boldsymbol{q}}_{m}+\boldsymbol{K}_{r}^{-1} \boldsymbol{g}(\boldsymbol{q})=\boldsymbol{\tau}_{m}\]</div>
+<p>We have previously analyzed elements in matrix
+<span class="math notranslate nohighlight">\(\boldsymbol{B}(\boldsymbol{q})\)</span>, one can write it as</p>
+<div class="math notranslate nohighlight">
+\[\label{equ.bmat}
+    \boldsymbol{B}(\boldsymbol{q})=\overline{\boldsymbol{B}}+\Delta \boldsymbol{B}(\boldsymbol{q})
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\overline{\boldsymbol{B}}\)</span> is the diagonal matrix whose constant
+elements represent the average inertia at each joint, and elements in
+<span class="math notranslate nohighlight">\(\Delta \boldsymbol{B}(\boldsymbol{q})\)</span> represent the matrix of
+non-diagonal part. Substituting
+(<span class="xref myst">[equ.bmat]</span>{reference-type=”ref” reference=”equ.bmat”})
+into (<span class="xref myst">[equ.dyn2]</span>{reference-type=”ref”
+reference=”equ.dyn2”}) leads to</p>
+<div class="math notranslate nohighlight">
+\[\label{equ.decouple_model}
+    \underbrace{\boldsymbol{K}_{r}^{-1} \overline{\boldsymbol{B}} \boldsymbol{K}_{r}^{-1}}_{\boldsymbol{I}_m} \ddot{\boldsymbol{q}}_{m}+\underbrace{\boldsymbol{K}_{r}^{-1} \Delta \boldsymbol{B}(\boldsymbol{q}) \boldsymbol{K}_{r}^{-1} \ddot{\boldsymbol{q}}_{m}+\boldsymbol{K}_{r}^{-1} \boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \boldsymbol{K}_{r}^{-1} \dot{\boldsymbol{q}}_{m}+\boldsymbol{K}_{r}^{-1} \boldsymbol{g}(\boldsymbol{q})}_{\boldsymbol{D}}=\boldsymbol{\tau}_{m}\]</div>
+<p>The above equation (<span class="xref myst">[equ.decouple_model]</span>{reference-type=”ref”
+reference=”equ.decouple_model”}) will lead to the following diagram.</p>
+<figure class="align-default" id="decentralized-control3">
+<a class="reference internal image-reference" href="../_images/decentralized_control3.jpeg"><img alt="../_images/decentralized_control3.jpeg" src="../_images/decentralized_control3.jpeg" style="width: 70%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 71 </span><span class="caption-text">Dynamics diagram of a motor-driven
+manipulator.</span><a class="headerlink" href="#decentralized-control3" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>As shown in Fig. <span class="xref myst">1</span>{reference-type=”ref” reference=”fig:3”} and
+(<span class="xref myst">[equ.decouple_model]</span>{reference-type=”ref”
+reference=”equ.decouple_model”}), if we don’t consider <span class="math notranslate nohighlight">\(\boldsymbol{D}\)</span>,
+then</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{I}_m\boldsymbol{\ddot{q}}_m=\boldsymbol{\tau}_m,\]</div>
+<p>Note that in the above equation <span class="math notranslate nohighlight">\(\boldsymbol{I}_m\)</span> is also a diagonal
+matrix. This means that if we don’t consider the complex
+<span class="math notranslate nohighlight">\(\boldsymbol{D}\)</span>, each joint is a single-in-single-output system:</p>
+<div class="math notranslate nohighlight">
+\[\label{equ.single_joint_dyn}
+    {I}_m{\ddot{\theta}_m}=\tau_m\]</div>
+<p>for each joint motor and we can
+control each joint individually. However, <span class="math notranslate nohighlight">\(\boldsymbol{D}\)</span> in
+(<span class="xref myst">[equ.decouple_model]</span>{reference-type=”ref”
+reference=”equ.decouple_model”}) is a coupling term that prevents us
+from doing so. To address such, in the following, we still consider the
+control each joint as a single-in-single-out system, but consider
+<span class="math notranslate nohighlight">\(\boldsymbol{D}\)</span> as a disturbance to each joint.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="single-joint-control-diagram">
+<h1>Single-Joint Control Diagram<a class="headerlink" href="#single-joint-control-diagram" title="Permalink to this heading">#</a></h1>
+<p>For each joint (we omit the joint index <span class="math notranslate nohighlight">\(i\)</span> below), considering
+(<span class="xref myst">[equ.single_joint_dyn]</span>{reference-type=”ref”
+reference=”equ.single_joint_dyn”}) and the motor model in the previous
+lecture (Lecture 19), we have</p>
+<div class="math notranslate nohighlight">
+\[\label{equ.motor}
+I_m\ddot{\theta}_m+D=\tau_m=I_m\ddot{\theta}_m+\frac{k_t}{R_a}(\frac{DR_a}{k_t})=\tau_m=k_ti_a=k_t\frac{(v_a-k_v\dot{\theta}_m)}{R_a}=k_t\frac{(G_vv_c-k_v\dot{\theta}_m)}{R_a}
+\]</div>
+<p>Here, <span class="math notranslate nohighlight">\(D\)</span> is the disturbance torque in
+(<span class="xref myst">[equ.decouple_model]</span>{reference-type=”ref”
+reference=”equ.decouple_model”}) applied to each joint, <span class="math notranslate nohighlight">\({k}_{t}\)</span> is the
+torque constants; <span class="math notranslate nohighlight">\({i}_{a}\)</span> is the armature current; <span class="math notranslate nohighlight">\({v}_{a}\)</span> is the
+vector of armature voltage; <span class="math notranslate nohighlight">\({R}_{a}\)</span> is the armature resistance;
+<span class="math notranslate nohighlight">\({k}_{v}\)</span> is the back EMF constant; <span class="math notranslate nohighlight">\(\boldsymbol{v}_{c}\)</span> is the voltage
+of the servomotor, and <span class="math notranslate nohighlight">\(G_v\)</span> is amplifier. Those motor parameters have
+been shown in previous lecture. In the following, we will suppose
+<span class="math notranslate nohighlight">\(v_c=v_a\)</span>, i.e., <span class="math notranslate nohighlight">\(G_v=1\)</span>, for notation simplicity, and so we will
+directly treat <span class="math notranslate nohighlight">\(v_a\)</span> as the servo motor input voltage. But the analysis
+also holds for any <span class="math notranslate nohighlight">\(G_v\)</span>.</p>
+<p>The above (<span class="xref myst">[equ.motor]</span>{reference-type=”ref”
+reference=”equ.motor”}) corresponds to the following diagram:</p>
+<figure class="align-default" id="motor-model3">
+<a class="reference internal image-reference" href="../_images/motor_model3.jpeg"><img alt="../_images/motor_model3.jpeg" src="../_images/motor_model3.jpeg" style="width: 70%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 72 </span><span class="caption-text">Diagram of a motor-driven manipulator, with coupled joint terms
+treated as disturbance.</span><a class="headerlink" href="#motor-model3" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>In the above diagram, the closed loop is due to the DC motor model
+itself. We write input (<span class="math notranslate nohighlight">\(V_a\)</span>) to output (<span class="math notranslate nohighlight">\(\theta_m\)</span>) transfer function
+$<span class="math notranslate nohighlight">\(\label{equ.motortf}
+    G(s)=\frac{{\Theta}(s)}{V_a(s)}=\frac{k_m}{s(1+T_ms)}\)</span>$</p>
+<div class="math notranslate nohighlight">
+\[\frac{\dot{\Theta}(s)}{V_a(s)}=\frac{\frac{k_t}{R_aI_ms}}{1+\frac{k_t}{R_aI_ms}k_v}=\frac{k_m}{1+T_ms}\]</div>
+<div class="admonition-minimal-control-background admonition">
+<p class="admonition-title">Minimal Control Background</p>
+<p>For ease of the reader, we provide the following minimal background of
+control design. A typical closed-loop control diagram is shown below.
+Here, <span class="math notranslate nohighlight">\(\theta_r\)</span> is the reference input; <span class="math notranslate nohighlight">\(\theta_m\)</span> is the output; <span class="math notranslate nohighlight">\(D\)</span>
+is the disturbance; <span class="math notranslate nohighlight">\(G(s)\)</span> is the transfer function of the plant to be
+controlled; <span class="math notranslate nohighlight">\(C(s)\)</span> is the controller; <span class="math notranslate nohighlight">\(H(s)\)</span> is the backward pass
+transfer function (usually a constant due to sensor). The goal of
+control design is to find <span class="math notranslate nohighlight">\(C(s)\)</span> such that <span class="math notranslate nohighlight">\(\theta_m\)</span> is able to track
+<span class="math notranslate nohighlight">\(\theta_r\)</span> while <span class="math notranslate nohighlight">\(D\)</span> has as little effect on <span class="math notranslate nohighlight">\(\theta_m\)</span> as possible.</p>
+<figure class="align-default" id="fd-control2">
+<a class="reference internal image-reference" href="../_images/fd_control2.jpeg"><img alt="../_images/fd_control2.jpeg" src="../_images/fd_control2.jpeg" style="width: 70%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 73 </span><span class="caption-text">A typical control system diagram</span><a class="headerlink" href="#fd-control2" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>For the above control system, the forward path transfer function is</p>
+<div class="math notranslate nohighlight">
+\[P(s)=C(s)G(s)\]</div>
+<p>The backward path transfer function is $<span class="math notranslate nohighlight">\(H(s)\)</span>$ The
+open loop transfer function is</p>
+<div class="math notranslate nohighlight">
+\[C(s)G(s)H(s)\]</div>
+<p>The input-to-output
+transfer function is</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\Theta_m(s)}{\Theta_r(s)}=\frac{C(s)G(s)}{1+C(s)G(s)H(s)}
+\]</div>
+<p>The
+disturbance-to-output transfer function is</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\Theta_m(s)}{D(s)}=\frac{G(s)}{1+C(s)G(s)H(s)}
+\]</div>
+<p>The input (<span class="math notranslate nohighlight">\(\theta_r\)</span>) to output (<span class="math notranslate nohighlight">\(\theta_m\)</span>) response of the
+closed-loop system will be determined by the roots of the
+characteristics equation $<span class="math notranslate nohighlight">\(1+C(s)G(s)H(s)=0\)</span>$</p>
+</div>
+<div class="admonition-background-of-final-value-theorem admonition">
+<p class="admonition-title">Background of final value theorem</p>
+<p>If a continuous signal <span class="math notranslate nohighlight">\(f(t)\)</span> has its Laplace transformation <span class="math notranslate nohighlight">\(F(s)\)</span>,
+then the final value theorem states</p>
+<div class="math notranslate nohighlight">
+\[\lim_{t\rightarrow\infty}f(t)=\lim_{s\rightarrow 0}sF(s)\]</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="single-joint-position-feedback">
+<h1>Single Joint Position feedback<a class="headerlink" href="#single-joint-position-feedback" title="Permalink to this heading">#</a></h1>
+<p>The single joint motor system in Fig
+<span class="xref myst">2</span>{reference-type=”ref”
+reference=”fig:motor_model2”} is the plant we want to control. The plant
+transfer function <span class="math notranslate nohighlight">\(G(s)\)</span> is
+(<span class="xref myst">[equ.motortf]</span>{reference-type=”ref”
+reference=”equ.motortf”}), rewritten below</p>
+<div class="math notranslate nohighlight">
+\[G(s)=\frac{k_m}{s(1+T_ms)}\]</div>
+<p>We want to design a proportional-integral controller</p>
+<div class="math notranslate nohighlight">
+\[\begin{gathered}
+C_{P}(s)=K_{P} \frac{1+s T_{P}}{s} 
+\end{gathered}\]</div>
+<p>with <span class="math notranslate nohighlight">\(K_P\)</span> and <span class="math notranslate nohighlight">\(T_P\)</span> are design variable.</p>
+<p>The control diagram thus is shown below (note that the backward pass
+constant <span class="math notranslate nohighlight">\(k_{TP}\)</span> is fixed).</p>
+<figure class="align-default" id="p-control2">
+<a class="reference internal image-reference" href="../_images/p_control2.jpg"><img alt="../_images/p_control2.jpg" src="../_images/p_control2.jpg" style="width: 70%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 74 </span><span class="caption-text">Control diagram of position decentralized joint space
+control</span><a class="headerlink" href="#p-control2" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The transfer function of the forward path is</p>
+<div class="math notranslate nohighlight">
+\[P(s)=G(s)C_P(s)=\frac{k_{m} K_{P}\left(1+s T_{P}\right)}{s^{2}\left(1+s T_{m}\right)}\]</div>
+<p>The transfer function of the backward pass is</p>
+<div class="math notranslate nohighlight">
+\[H(s)=k_{T P}\]</div>
+<p>The root locus can be plotted as a function of the gain of the position
+loop <span class="math notranslate nohighlight">\(k_{m} K_{P} k_{T P} T_{P} / T_{m}\)</span>. Here, we derive into two cases
+to plot the root locus.</p>
+<ul>
+<li><p>If <span class="math notranslate nohighlight">\(T_{P}&lt;T_{m}\)</span>, the root locus is shown as below. Thus, the system
+is inherently unstable.</p>
+<figure class="align-default" id="p-control-rl-1">
+<a class="reference internal image-reference" href="../_images/p_control_rl_1.jpg"><img alt="../_images/p_control_rl_1.jpg" src="../_images/p_control_rl_1.jpg" style="width: 50%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 75 </span><span class="caption-text">Root locus when
+<span class="math notranslate nohighlight">\(T_{P}&lt;T_{m}\)</span></span><a class="headerlink" href="#p-control-rl-1" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</li>
+<li><p>If <span class="math notranslate nohighlight">\(T_{P}&gt;T_{m}\)</span>, the root locus is shown as below. As <span class="math notranslate nohighlight">\(T_{P}\)</span>
+increases, the absolute value of the real part of the two roots of
+the locus tending towards the asymptotes increases too, and the
+system has faster time response.</p>
+<figure class="align-default" id="p-control-rl-2">
+<a class="reference internal image-reference" href="../_images/p_control_rl_2.jpg"><img alt="../_images/p_control_rl_2.jpg" src="../_images/p_control_rl_2.jpg" style="width: 50%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 76 </span><span class="caption-text">Root locus when
+<span class="math notranslate nohighlight">\(T_{P}&gt;T_{m}\)</span></span><a class="headerlink" href="#p-control-rl-2" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</li>
+</ul>
+<p>The closed-loop input/output transfer function is</p>
+<div class="math notranslate nohighlight">
+\[\frac{\Theta_{m}(s)}{\Theta_{r}(s)}=\frac{P(s)}{1+P(s)H(s)}=\frac{{k_{m}K_P(1+T_Ps)}}{k_{TP}k_{m}K_P(1+T_Ps)+s^2(1+sT_m)},\]</div>
+<p>and the characteristic equation can be factorized into the following
+form</p>
+<div class="math notranslate nohighlight">
+\[{k_{TP}k_{m}K_P(1+T_Ps)+s^2(1+sT_m)}
+=
+{\left({\omega_{n}^{2}}+{2 \zeta }{\omega_{n}}s+{s^{2}}\right)(1+s \tau)}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\omega_{n}\)</span> and <span class="math notranslate nohighlight">\(\zeta\)</span> are the natural frequency and damping
+ratio of the complex poles:
+<span class="math notranslate nohighlight">\(\left(-\zeta \omega_{n}, \pm j \sqrt{1-\zeta^{2}} \omega_{n}\right)\)</span>,
+and <span class="math notranslate nohighlight">\(-1 / \tau\)</span> is the real pole. These poles correspond to the ones in
+the root locus in the above figures.</p>
+<p>The closed-loop disturbance/output transfer function is</p>
+<div class="math notranslate nohighlight">
+\[\frac{\Theta_{m}(s)}{D(s)}=-\frac{\frac{R_a}{K_t}G(s)}{1+P(s)H(s)}=-\frac{\frac{R_a}{K_t}k_ms}{k_{TP}k_{m}K_P(1+T_Ps)+s^2(1+sT_m)}\]</div>
+<p>If <span class="math notranslate nohighlight">\(\Theta_r(t)=0\)</span>, based on the final value theory, we have</p>
+<div class="math notranslate nohighlight">
+\[\lim_{t\rightarrow \infty} {\theta_{m}(t)}= \lim_{s\rightarrow 0} s{\Theta_{m}(s)}=\lim_{s\rightarrow 0} s\frac{\Theta_{m}(s)}{D(s)}{D(s)}\]</div>
+<p>thus,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\lim_{t\rightarrow \infty} {\theta_{m}(t)}= 
+    \begin{cases}
+        0\qquad &amp;\text{if}\quad D(t)\,\,\text{is constant signal}\\
+        \frac{R_a}{K_t}\frac{1}{K_{P} k_{T P}} \qquad &amp;\text{if}\quad D(t)\,\,\text{is ramp signal, such as $D(t)=vt$ }\\
+    \end{cases}\end{split}\]</div>
+<p>Hence, the controller can cancel the effect of constant disturbance, and
+the quantity</p>
+<div class="math notranslate nohighlight">
+\[K_{P} k_{T P}\]</div>
+<p>can be interpreted as the disturbance rejection factor for velocity (or
+higher-order) disturbance. Increasing <span class="math notranslate nohighlight">\(K_{P}\)</span> can help with reducing the
+effect of <span class="math notranslate nohighlight">\(D\)</span>, but too high <span class="math notranslate nohighlight">\(K_P\)</span> can lead to unacceptable oscillations
+of the output, as implied from the root locus.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="single-joint-position-and-velocity-feedback">
+<h1>Single-Joint Position and Velocity Feedback<a class="headerlink" href="#single-joint-position-and-velocity-feedback" title="Permalink to this heading">#</a></h1>
+<p>To control the motor system in Fig.
+<span class="xref myst">2</span>{reference-type=”ref”
+reference=”fig:motor_model2”}, we use both position and velocity
+controller $<span class="math notranslate nohighlight">\(\begin{gathered}
+C_{P}(s)=K_{P} \quad \text{and} \quad C_{V}(s)=K_{V} \frac{1+s T_{V}}{s} 
+\end{gathered}\)</span><span class="math notranslate nohighlight">\( where \)</span>K_p<span class="math notranslate nohighlight">\(, \)</span>K_v<span class="math notranslate nohighlight">\(, and \)</span>T_v$ are the design variables.</p>
+<p>The control diagram is shown below (Note that <span class="math notranslate nohighlight">\(k_{TV}\)</span> and <span class="math notranslate nohighlight">\(k_{TP}\)</span> in
+the backward pass are fixed).</p>
+<figure class="align-default" id="pv-control">
+<a class="reference internal image-reference" href="../_images/pv_control.jpeg"><img alt="../_images/pv_control.jpeg" src="../_images/pv_control.jpeg" style="width: 70%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 77 </span><span class="caption-text">Control diagram of position and velocity
+control</span><a class="headerlink" href="#pv-control" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>which can be further reduced into the following diagram:</p>
+<figure class="align-default" id="pv-control2">
+<a class="reference internal image-reference" href="../_images/pv_control2.jpeg"><img alt="../_images/pv_control2.jpeg" src="../_images/pv_control2.jpeg" style="width: 70%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 78 </span><span class="caption-text">Corresponding to Fig. <span class="xref myst">7</span>{reference-type=”ref”
+reference=”fig.pv_control”}, the equivalent control
+diagram</span><a class="headerlink" href="#pv-control2" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The transfer function of the forward path is</p>
+<div class="math notranslate nohighlight">
+\[P(s)=C(s)G(s)=\frac{k_{m} K_{P} K_{V}\left(1+s T_{V}\right)}{s^{2}\left(1+s T_{m}\right)}\]</div>
+<p>The transfer function of the backward path is</p>
+<div class="math notranslate nohighlight">
+\[H(s)=k_{T P}\left(1+s \frac{k_{T V}}{K_{P} k_{T P}}\right) .\]</div>
+<p>For simplicity, one can design</p>
+<div class="math notranslate nohighlight">
+\[T_m=T_v,\]</div>
+<p>then that the poles of the
+closed-loop system move on the root locus as a function of the loop gain
+<span class="math notranslate nohighlight">\(k_{m} K_{V} k_{T V}\)</span> is shown in the following figure:</p>
+<figure class="align-default" id="pv-control-rl-1">
+<a class="reference internal image-reference" href="../_images/pv_control_rl_1.jpg"><img alt="../_images/pv_control_rl_1.jpg" src="../_images/pv_control_rl_1.jpg" style="width: 50%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 79 </span><span class="caption-text">Root locus</span><a class="headerlink" href="#pv-control-rl-1" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>By increasing the position gain <span class="math notranslate nohighlight">\(K_{P}\)</span>, it is possible to confine the
+closed-loop poles into a region of the complex plane with large absolute
+values of the real part.</p>
+<p>The closed-loop input/output transfer function is</p>
+<div class="math notranslate nohighlight">
+\[\frac{\Theta_{m}(s)}{\Theta_{r}(s)}=\frac{C(s)G(s)}{1+C(s)G(s)H(s)}=\frac{\frac{1}{k_{T P}}}{1+\frac{s k_{T V}}{K_{P} k_{T P}}+\frac{s^{2}}{k_{m} K_{P} k_{T P} K_{V}}}=\frac{\frac{1}{k_{T P}}}{1+\frac{2 \zeta s}{\omega_{n}}+\frac{s^{2}}{\omega_{n}^{2}}}\]</div>
+<p>It can be recognized that, with a suitable choice of the gains, it is
+possible to obtain any value of natural frequency <span class="math notranslate nohighlight">\(\omega_{n}\)</span> and
+damping ratio <span class="math notranslate nohighlight">\(\zeta\)</span>. Hence, if <span class="math notranslate nohighlight">\(\omega_{n}\)</span> and <span class="math notranslate nohighlight">\(\zeta\)</span> are given as
+design requirements, the following relations is</p>
+<div class="math notranslate nohighlight">
+\[K_{V} k_{T V}=\frac{2 \zeta \omega_{n}}{k_{m}}\]</div>
+<div class="math notranslate nohighlight">
+\[K_{P} k_{T P} K_{V}=\frac{\omega_{n}^{2}}{k_{m}}\]</div>
+<p>For given transducer constants <span class="math notranslate nohighlight">\(k_{T P}\)</span> and <span class="math notranslate nohighlight">\(k_{T V}\)</span>, <span class="math notranslate nohighlight">\(K_{V}\)</span> and
+<span class="math notranslate nohighlight">\(K_{P}\)</span> can be chosen. The closed-loop disturbance/output transfer
+function is</p>
+<div class="math notranslate nohighlight">
+\[\frac{\Theta_{m}(s)}{D(s)}=-\frac{\frac{R_a}{k_t}G(s)}{1+P(s)H(s)}=-\frac{\frac{R_a}{k_t}k_ms}{(1+sT_m)(s^2+k_mK_Vk_{TV}s+k_mK_PK_Vk_{TP})}\]</div>
+<p>which shows that the disturbance rejection factor is</p>
+<p>If <span class="math notranslate nohighlight">\(\Theta_r(t)=0\)</span>, based on the final value theory, we have</p>
+<div class="math notranslate nohighlight">
+\[\lim_{t\rightarrow \infty} {\theta_{m}(t)}= \lim_{s\rightarrow 0} s{\Theta_{m}(s)}=\lim_{s\rightarrow 0} s\frac{\Theta_{m}(s)}{D(s)}{D(s)}\]</div>
+<p>thus,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\lim_{t\rightarrow \infty} {\theta_{m}(t)}= 
+    \begin{cases}
+        0\qquad &amp;\text{if}\quad D(t)\,\,\text{is constant signal}\\
+        \frac{R_a}{k_t}\frac{1}{K_{P} k_{T P} K_{V}} \qquad &amp;\text{if}\quad D(t)\,\,\text{is ramp signal, such as $D(t)=vt$ }\\
+    \end{cases}\end{split}\]</div>
+<p>Hence, the controller can cancel the effect of constant disturbance, and
+the quantity</p>
+<div class="math notranslate nohighlight">
+\[K_{P} k_{T P} K_{V}\]</div>
+<p>can be interpreted as the disturbance rejection factor for velocity (or
+higher-order) disturbance. Increasing <span class="math notranslate nohighlight">\(K_{P}\)</span> and <span class="math notranslate nohighlight">\(K_V\)</span> can help with
+reducing the effect of <span class="math notranslate nohighlight">\(D\)</span>.</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./lec20"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../lec19/control_overview.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Overview of Robot Control</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../lec21/cjc.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Centralized Joint Control</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Decentralized Joint Control</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#single-joint-control-diagram">Single-Joint Control Diagram</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#single-joint-position-feedback">Single Joint Position feedback</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#single-joint-position-and-velocity-feedback">Single-Joint Position and Velocity Feedback</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Wanxin Jin @ IRIS Lab
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,656 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Statics &#8212; Modeling and Control of Robots</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lec14/statics';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Inverse Velocity Kinematics" href="../lec15/inverse_vk.html" />
+    <link rel="prev" title="Singularity &amp; Redundancy" href="../lec13/singularity.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/iris_logo_2.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/iris_logo_2.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lec1/intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lec2/configuration.html">Robot Configuration</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec3-5/basic-kinematics.html">Basic Kinematics</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec6-8/fk.html">Forward Kinematics</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec9/ik.html">Inverse Kinematics</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec10/diff-trans.html">Derivative of Transformation</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec11-12/jacobian.html">Jacobian</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec13/singularity.html">Singularity &amp; Redundancy</a></li>
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Statics</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec15/inverse_vk.html">Inverse Velocity Kinematics</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec16-17/nik.html">Numerical Inverse Kinematics</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec18/dyn.html">Dynamics (Lagrange formulation)</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec19/control_overview.html">Overview of Robot Control</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec20/djc.html">Decentralized Joint Control</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec21/cjc.html">Centralized Joint Control</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec22/osc.html">Operational Space Control</a></li>
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Flec14/statics.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button"
+   title="Open an issue"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/lec14/statics.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Statics</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Statics</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#kineto-statics-duality">Kineto-Statics Duality</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#velocity-and-force-transformation">Velocity and Force Transformation</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="statics">
+<h1>Statics<a class="headerlink" href="#statics" title="Permalink to this heading">#</a></h1>
+<p>Statics is to determine the relationship between the generalized forces
+applied to the end-effector and the generalized torques applied to the
+joints when the manipulator is at equilibrium. Let <span class="math notranslate nohighlight">\(\boldsymbol{\tau}\)</span>
+be the <span class="math notranslate nohighlight">\((n \times 1)\)</span> joint torques and <span class="math notranslate nohighlight">\(\boldsymbol{\gamma}_{e}\)</span> the
+<span class="math notranslate nohighlight">\((r \times 1)\)</span> end-effector forces. We will apply the principle of
+virtual work to determine this relationship.</p>
+<p>The elementary work by the joint torques:</p>
+<div class="math notranslate nohighlight">
+\[d W_{\tau}=\boldsymbol{\tau}^{T} d \boldsymbol{q}\]</div>
+<p>As for the end-effector forces
+<span class="math notranslate nohighlight">\(\boldsymbol{\gamma}_{e}=\left[\boldsymbol{f}_{e}^{T} ,\boldsymbol{\mu}_{e}^{T}\right]^{T}\)</span>,
+including linear force <span class="math notranslate nohighlight">\(\boldsymbol{f}_{e}\)</span> and moment
+<span class="math notranslate nohighlight">\(\boldsymbol{\mu}_{e}\)</span>, the elementary work</p>
+<div class="math notranslate nohighlight">
+\[d W_{\gamma}=\boldsymbol{f}_{e}^{T} d \boldsymbol{p}_{e}+\boldsymbol{\mu}_{e}^{T} \boldsymbol{\omega}_{e} d t =\boldsymbol{f}_{e}^{T} \boldsymbol{J}_{P}(\boldsymbol{q}) d \boldsymbol{q}+\boldsymbol{\mu}_{e}^{T} \boldsymbol{J}_{O}(\boldsymbol{q}) d \boldsymbol{q}  =\boldsymbol{\gamma}_{e}^{T} \boldsymbol{J}(\boldsymbol{q}) d \boldsymbol{q}\]</div>
+<p>where <span class="math notranslate nohighlight">\(d \boldsymbol{p}_{e}\)</span> is the linear displacement and
+<span class="math notranslate nohighlight">\(\boldsymbol{\omega}_{e} d t\)</span> is the angular displacement.</p>
+<p>According to the principle of virtual work, the manipulator is at static
+equilibrium if and only if</p>
+<div class="math notranslate nohighlight">
+\[\delta W_{\tau}=\delta W_{\gamma} \quad \forall \delta \boldsymbol{q}\]</div>
+<p>This leads to</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{\tau}=\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{\gamma}_{e}\]</div>
+<p>stating a relationship between the end-effector forces and joint
+torques, established by the transpose of the geometric Jacobian.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="kineto-statics-duality">
+<h1>Kineto-Statics Duality<a class="headerlink" href="#kineto-statics-duality" title="Permalink to this heading">#</a></h1>
+<p>The kineto-statics duality states that</p>
+<div class="math notranslate nohighlight">
+\[\begin{aligned}
+    \boldsymbol{v}_{e}=\boldsymbol{J}(\boldsymbol{q}) \dot{\boldsymbol{q}} \quad\quad\quad 
+    \boldsymbol{\tau}=\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{\gamma}_{e}
+\end{aligned}\]</div>
+<ul class="simple">
+<li><p>The range space of <span class="math notranslate nohighlight">\(\boldsymbol{J}^{T}\)</span> is the subspace
+<span class="math notranslate nohighlight">\(\mathcal{R}\left(\boldsymbol{J}^{T}\right)\)</span> in <span class="math notranslate nohighlight">\(\mathbb{R}^{n}\)</span> of
+the joint torques that can balance the end-effector forces, given
+manipulator posture <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span>.</p></li>
+<li><p>The null space of <span class="math notranslate nohighlight">\(\boldsymbol{J}^{T}\)</span> is the subspace
+<span class="math notranslate nohighlight">\(\mathcal{N}\left(\boldsymbol{J}^{T}\right)\)</span> in <span class="math notranslate nohighlight">\(\mathbb{R}^{r}\)</span> of
+the end-effector forces that do not require any balancing joint
+torques, given manipulator posture <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span></p></li>
+</ul>
+<figure class="align-default" id="coordinate-mapping">
+<a class="reference internal image-reference" href="../_images/operation_to_joint.jpg"><img alt="../_images/operation_to_joint.jpg" src="../_images/operation_to_joint.jpg" style="width: 50%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 59 </span><span class="caption-text">Mapping between the end-effector force space and the joint torque
+space</span><a class="headerlink" href="#coordinate-mapping" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>It is worth remarking that the end-effector forces
+<span class="math notranslate nohighlight">\(\gamma_{e} \in \mathcal{N}\left(\boldsymbol{J}^{T}\right)\)</span> are entirely
+absorbed by the structure in that the mechanical constraint reaction
+forces can balance them exactly. Hence, a manipulator at a singular
+configuration remains in the given posture whatever end-effector force
+<span class="math notranslate nohighlight">\(\gamma_{e}\)</span> is applied so that
+<span class="math notranslate nohighlight">\(\gamma_{e} \in \mathcal{N}\left(J^{T}\right)\)</span></p>
+<p>The relations between the two subspaces are established by</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{N}(\boldsymbol{J}) \equiv \mathcal{R}^{\perp}\left(\boldsymbol{J}^{T}\right) \quad \mathcal{R}(\boldsymbol{J}) \equiv \mathcal{N}^{\perp}\left(\boldsymbol{J}^{T}\right)\]</div>
+<p>and then, once the manipulator Jacobian is known, it is possible to
+characterize completely differential kinematics and statics in terms of
+the range and null spaces of the Jacobian and its transpose.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="velocity-and-force-transformation">
+<h1>Velocity and Force Transformation<a class="headerlink" href="#velocity-and-force-transformation" title="Permalink to this heading">#</a></h1>
+<figure class="align-default" id="id1">
+<a class="reference internal image-reference" href="../_images/coordinate_mapping.jpg"><img alt="../_images/coordinate_mapping.jpg" src="../_images/coordinate_mapping.jpg" style="width: 50%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 60 </span><span class="caption-text">Representation of linear and angular velocities in different
+coordinate frames on the same rigid
+body</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The kineto-statics duality concept presented above can be useful to
+characterize the transformation of velocities and forces between two
+coordinate frames. Consider a reference coordinate frame
+<span class="math notranslate nohighlight">\(O_{0}-x_{0} y_{0} z_{0}\)</span> and a rigid body moving with respect to such a
+frame. Then let <span class="math notranslate nohighlight">\(O_{1}-x_{1} y_{1} z_{1}\)</span> and <span class="math notranslate nohighlight">\(O_{2}-x_{2} y_{2} z_{2}\)</span>
+be two coordinate frames attached to the body. The relationships between
+translational and rotational velocities of the two frames with respect
+to the reference frame are given by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+\boldsymbol{\omega}_{2} &amp; =\boldsymbol{\omega}_{1} \\
+\dot{\boldsymbol{p}}_{2} &amp; =\dot{\boldsymbol{p}}_{1}+\boldsymbol{\omega}_{1} \times \boldsymbol{r}_{12} .
+\end{aligned}\end{split}\]</div>
+<p>The above relations can be compactly written as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\left[\begin{array}{c}
+\dot{\boldsymbol{p}}_{2} \\
+\boldsymbol{\omega}_{2}
+\end{array}\right]=\left[\begin{array}{cc}
+\boldsymbol{I} &amp; -\boldsymbol{S}\left(\boldsymbol{r}_{12}\right) \\
+\boldsymbol{O} &amp; \boldsymbol{I}
+\end{array}\right]\left[\begin{array}{c}
+\dot{\boldsymbol{p}}_{1} \\
+\boldsymbol{\omega}_{1}
+\end{array}\right]\end{split}\]</div>
+<p>On the other hand, if vectors are referred to their own frames, it is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\left[\begin{array}{c}
+\dot{\boldsymbol{p}}_{2}^{2} \\
+\boldsymbol{\omega}_{2}^{2}
+\end{array}\right]=\left[\begin{array}{cc}
+\boldsymbol{R}_{1}^{2} &amp; -\boldsymbol{R}_{1}^{2} \boldsymbol{S}\left(\boldsymbol{r}_{12}^{1}\right) \\
+\boldsymbol{O} &amp; \boldsymbol{R}_{1}^{2}
+\end{array}\right]\left[\begin{array}{c}
+\dot{\boldsymbol{p}}_{1}^{1} \\
+\boldsymbol{\omega}_{1}^{1}
+\end{array}\right]\end{split}\]</div>
+<p>giving the relationship of velocity transformation between two frames.
+The above can be compactly written as</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{v}_{2}^{2}=\boldsymbol{J}_{1}^{2} \boldsymbol{v}_{1}^{1}\]</div>
+<p>By virtue of the kineto-statics duality, the force transformation
+between two frames is</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{\gamma}_{1}^{1}=\boldsymbol{J}_{1}^{2 T} \boldsymbol{\gamma}_{2}^{2}\]</div>
+<p>Finally, notice that the above analysis is instantaneous in that, if a
+coordinate frame varies with respect to the other, it is necessary to
+recompute the Jacobian of the transformation through the computation of
+the related rotation matrix of one frame with respect to the other.</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./lec14"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../lec13/singularity.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Singularity &amp; Redundancy</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../lec15/inverse_vk.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Inverse Velocity Kinematics</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Statics</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#kineto-statics-duality">Kineto-Statics Duality</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#velocity-and-force-transformation">Velocity and Force Transformation</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Wanxin Jin @ IRIS Lab
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

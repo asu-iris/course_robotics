@@ -1,0 +1,671 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Derivative of Transformation &#8212; Modeling and Control of Robots</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lec10/diff-trans';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Jacobian" href="../lec11-12/jacobian.html" />
+    <link rel="prev" title="Inverse Kinematics" href="../lec9/ik.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/iris_logo_2.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/iris_logo_2.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lec1/intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lec2/configuration.html">Robot Configuration</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec3-5/basic-kinematics.html">Basic Kinematics</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec6-8/fk.html">Forward Kinematics</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec9/ik.html">Inverse Kinematics</a></li>
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Derivative of Transformation</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec11-12/jacobian.html">Jacobian</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec13/singularity.html">Singularity &amp; Redundancy</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec14/statics.html">Statics</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec15/inverse_vk.html">Inverse Velocity Kinematics</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec16-17/nik.html">Numerical Inverse Kinematics</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec18/dyn.html">Dynamics (Lagrange formulation)</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec19/control_overview.html">Overview of Robot Control</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec20/djc.html">Decentralized Joint Control</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec21/cjc.html">Centralized Joint Control</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec22/osc.html">Operational Space Control</a></li>
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Flec10/diff-trans.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button"
+   title="Open an issue"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/lec10/diff-trans.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Derivative of Transformation</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Derivative of Transformation</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#derivative-of-pose-transformation">Derivative of Pose Transformation</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#manipulator-link-velocity">Manipulator Link Velocity</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-velocity">Linear Velocity</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#angular-velocity">Angular Velocity</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="derivative-of-transformation">
+<h1>Derivative of Transformation<a class="headerlink" href="#derivative-of-transformation" title="Permalink to this heading">#</a></h1>
+<p>Consider a time-varying rotation matrix
+<span class="math notranslate nohighlight">\(\boldsymbol{R}=\boldsymbol{R}(t)\)</span>. One has</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{R}(t) \boldsymbol{R}^{T}(t)=\boldsymbol{I}\]</div>
+<p>Differentiating the above equation with respect to time gives</p>
+<div class="math notranslate nohighlight">
+\[\dot{\boldsymbol{R}}(t) \boldsymbol{R}^{T}(t)+\boldsymbol{R}(t) \dot{\boldsymbol{R}}^{T}(t)=\boldsymbol{S}(t)+\boldsymbol{S}^{T}(t)=\boldsymbol{O}\]</div>
+<p>with the newly defined
+<span class="math notranslate nohighlight">\(\boldsymbol{S}(t)=\dot{\boldsymbol{R}}(t) \boldsymbol{R}^{T}(t)\)</span> being
+called a <span class="math notranslate nohighlight">\((3 \times 3)\)</span> skew-symmetric matrix, and</p>
+<div class="math notranslate nohighlight">
+\[\dot{\boldsymbol{R}}(t)=\boldsymbol{S}(t) \boldsymbol{R}(t)\]</div>
+<p>Next, let’s find the physical interpretation of <span class="math notranslate nohighlight">\(\boldsymbol{S}\)</span>.</p>
+<p>Consider <span class="math notranslate nohighlight">\({\boldsymbol{R}}(t)\)</span> represents a rotation of a moving frame
+<span class="math notranslate nohighlight">\(O'-x'y'z'\)</span> with respect to a fixed reference frame <span class="math notranslate nohighlight">\(O-xyz\)</span>. It means
+the following coordinate transformation
+<span class="math notranslate nohighlight">\(\boldsymbol{p}(t)=\boldsymbol{R}(t) \boldsymbol{p}^{\prime}\)</span>. Taking
+the derivative of both sides yields</p>
+<div class="math notranslate nohighlight">
+\[\dot{\boldsymbol{p}}(t)=\dot{\boldsymbol{R}}(t) \boldsymbol{p}^{\prime}=\boldsymbol{S}(t) \boldsymbol{R}(t) \boldsymbol{p}^{\prime}\]</div>
+<p>where we have used the defined skew-symmetric matrix
+<span class="math notranslate nohighlight">\(\boldsymbol{S}(t)\)</span>, and considered <span class="math notranslate nohighlight">\(\boldsymbol{p}^\prime\)</span> is fixed in
+the moving frame.</p>
+<p>Recall that in the mechanics courses, given the angular velocity
+<span class="math notranslate nohighlight">\(\boldsymbol{\omega}(t)=\left[\begin{array}{lll}\omega_{x} &amp; \omega_{y} &amp; \omega_{z}\end{array}\right]^{T}\)</span>
+of the moving frame <span class="math notranslate nohighlight">\(O'-x'y'z'\)</span>, with respect to the fixed frame, we
+also write the derivative as</p>
+<div class="math notranslate nohighlight">
+\[\dot{\boldsymbol{p}}(t)=\boldsymbol{\omega}(t) \times \boldsymbol{R}(t) \boldsymbol{p}^{\prime}\]</div>
+<p>Comparing the above two equations, we can conclude</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\boldsymbol{S}=\left[\begin{array}{ccc}
+0 &amp; -\omega_{z} &amp; \omega_{y} \\
+\omega_{z} &amp; 0 &amp; -\omega_{x} \\
+-\omega_{y} &amp; \omega_{x} &amp; 0
+\end{array}\right]=\boldsymbol{S}(\boldsymbol{\omega})\end{split}\]</div>
+<p>Hence, we can conclude the derivative of a rotation matrix is
+$<span class="math notranslate nohighlight">\(\dot{\boldsymbol{R}}=\boldsymbol{S}(\boldsymbol{\omega}) \boldsymbol{R}\)</span>$</p>
+<p><em>Note that in the above equation, <span class="math notranslate nohighlight">\(\boldsymbol{\omega}\)</span> is expressed in
+the fixed frame.</em></p>
+<p>One property of <span class="math notranslate nohighlight">\(\boldsymbol{S}(\boldsymbol{\omega})\)</span>: if
+<span class="math notranslate nohighlight">\(\boldsymbol{R}\)</span> denotes a rotation matrix, it can be shown that the
+following relation holds:</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{R} \boldsymbol{S}(\boldsymbol{\omega}) \boldsymbol{R}^{T}=\boldsymbol{S}(\boldsymbol{R} \boldsymbol{\omega})\]</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="derivative-of-pose-transformation">
+<h1>Derivative of Pose Transformation<a class="headerlink" href="#derivative-of-pose-transformation" title="Permalink to this heading">#</a></h1>
+<p>Pose transformation defines coordinate mapping of a point <span class="math notranslate nohighlight">\(P\)</span> from frame
+<span class="math notranslate nohighlight">\(O_1-x_1y_1z_1\)</span> to frame <span class="math notranslate nohighlight">\(O_0-x_0y_0z_0\)</span></p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{p}^{0}=\boldsymbol{o}_{1}^{0}+\boldsymbol{R}_{1}^{0} \boldsymbol{p}^{1}\]</div>
+<p>Differentiating the above equation with respect to time yields</p>
+<div class="math notranslate nohighlight">
+\[\dot{\boldsymbol{p}}^{0}=\dot{\boldsymbol{o}}_{1}^{0}+\boldsymbol{R}_{1}^{0} \dot{\boldsymbol{p}}^{1}+\dot{\boldsymbol{R}}_{1}^{0} \boldsymbol{p}^{1}=\dot{\boldsymbol{o}}_{1}^{0}+\boldsymbol{R}_{1}^{0} \dot{\boldsymbol{p}}^{1}+\boldsymbol{S}\left(\boldsymbol{\omega}_{1}^{0}\right) \boldsymbol{R}_{1}^{0} \boldsymbol{p}^{1}\]</div>
+<p>Since
+<span class="math notranslate nohighlight">\(\boldsymbol{R}_{1}^{0} \boldsymbol{p}^{1}=\boldsymbol{p}_{1}^{0}\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[\dot{\boldsymbol{p}}^{0}=\dot{\boldsymbol{o}}_{1}^{0}+\boldsymbol{R}_{1}^{0} \dot{\boldsymbol{p}}^{1}+\omega_{1}^{0} \times \boldsymbol{r}_{1}^{0}\]</div>
+<p>Notice that, if <span class="math notranslate nohighlight">\(\boldsymbol{p}^{1}\)</span> is fixed in Frame 1 , then it is</p>
+<div class="math notranslate nohighlight">
+\[\dot{\boldsymbol{p}}^{0}=\dot{\boldsymbol{o}}_{1}^{0}+\boldsymbol{\omega}_{1}^{0} \times \boldsymbol{r}_{1}^{0}\]</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="manipulator-link-velocity">
+<h1>Manipulator Link Velocity<a class="headerlink" href="#manipulator-link-velocity" title="Permalink to this heading">#</a></h1>
+<p>Consider the Link <span class="math notranslate nohighlight">\(i\)</span> of a manipulator. According to DH convention, the
+pose of Link <span class="math notranslate nohighlight">\(i\)</span> defines the transformation between Frame <span class="math notranslate nohighlight">\(i-1\)</span> and
+Frame <span class="math notranslate nohighlight">\(i\)</span>, as shown in the following figure below.</p>
+<figure class="align-default" id="manipulator-linki">
+<a class="reference internal image-reference" href="../_images/manipulator_linki.jpg"><img alt="../_images/manipulator_linki.jpg" src="../_images/manipulator_linki.jpg" style="width: 50%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 48 </span><span class="caption-text">Characterization of generic Link <span class="math notranslate nohighlight">\(i\)</span> of a
+manipulator</span><a class="headerlink" href="#manipulator-linki" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<section id="linear-velocity">
+<h2>Linear Velocity<a class="headerlink" href="#linear-velocity" title="Permalink to this heading">#</a></h2>
+<p>Let <span class="math notranslate nohighlight">\(\boldsymbol{p}_{i-1}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{p}_{i}\)</span> be the position of
+the origins of Frames <span class="math notranslate nohighlight">\(i-1\)</span> and <span class="math notranslate nohighlight">\(i\)</span>, respectively. Also, let
+<span class="math notranslate nohighlight">\(\boldsymbol{r}_{i-1, i}^{i-1}\)</span> denote the position of the origin of
+Frame <span class="math notranslate nohighlight">\(i\)</span> with respect to Frame <span class="math notranslate nohighlight">\(i-1\)</span> expressed in Frame <span class="math notranslate nohighlight">\(i-1\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{p}_{i}=\boldsymbol{p}_{i-1}+\boldsymbol{R}_{i-1} \boldsymbol{r}_{i-1, i}^{i-1}\]</div>
+<p>Based on the derivative of pose transformation, we have</p>
+<div class="math notranslate nohighlight">
+\[\dot{\boldsymbol{p}}_{i}=\dot{\boldsymbol{p}}_{i-1}+\boldsymbol{R}_{i-1} \dot{\boldsymbol{r}}_{i-1, i}^{i-1}+\boldsymbol{\omega}_{i-1} \times \boldsymbol{R}_{i-1} \boldsymbol{r}_{i-1, i}^{i-1}=\dot{\boldsymbol{p}}_{i-1}+\boldsymbol{v}_{i-1, i}+\omega_{i-1} \times \boldsymbol{r}_{i-1, i}\]</div>
+<p>which gives the linear velocity of Link <span class="math notranslate nohighlight">\(i\)</span> as a function of the
+translational and rotational velocities of Link <span class="math notranslate nohighlight">\(i-1\)</span>.</p>
+</section>
+<section id="angular-velocity">
+<h2>Angular Velocity<a class="headerlink" href="#angular-velocity" title="Permalink to this heading">#</a></h2>
+<p>Since</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{R}_{i}=\boldsymbol{R}_{i-1} \boldsymbol{R}_{i}^{i-1}\]</div>
+<p>Its time derivative</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{S}\left(\boldsymbol{\omega}_{i}\right) \boldsymbol{R}_{i}=\boldsymbol{S}\left(\boldsymbol{\omega}_{i-1}\right) \boldsymbol{R}_{i}+\boldsymbol{R}_{i-1} \boldsymbol{S}\left(\boldsymbol{\omega}_{i-1, i}^{i-1}\right) \boldsymbol{R}_{i}^{i-1}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\boldsymbol{\omega}_{i-1, i}^{i-1}\)</span> denotes the angular velocity
+of Frame <span class="math notranslate nohighlight">\(i\)</span> with respect to Frame <span class="math notranslate nohighlight">\(i-1\)</span> expressed in Frame <span class="math notranslate nohighlight">\(i-1\)</span>. The
+second term on the right-hand side can be rewritten as</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{R}_{i-1} \boldsymbol{S}\left(\boldsymbol{\omega}_{i-1, i}^{i-1}\right) \boldsymbol{R}_{i}^{i-1}=\boldsymbol{R}_{i-1} \boldsymbol{S}\left(\boldsymbol{\omega}_{i-1, i}^{i-1}\right) \boldsymbol{R}_{i-1}^{T} \boldsymbol{R}_{i-1} \boldsymbol{R}_{i}^{i-1}=\boldsymbol{S}\left(\boldsymbol{R}_{i-1} \boldsymbol{\omega}_{i-1, i}^{i-1}\right) \boldsymbol{R}_{i}\]</div>
+<p>by recalling the property of the skew-symmetric matrix. Then,</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{S}\left(\boldsymbol{\omega}_{i}\right) \boldsymbol{R}_{i}=\boldsymbol{S}\left(\boldsymbol{\omega}_{i-1}\right) \boldsymbol{R}_{i}+\boldsymbol{S}\left(\boldsymbol{R}_{i-1} \boldsymbol{\omega}_{i-1, i}^{i-1}\right) \boldsymbol{R}_{i}\]</div>
+<p>leading to</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{\omega}_{i}=\boldsymbol{\omega}_{i-1}+\boldsymbol{R}_{i-1} \boldsymbol{\omega}_{i-1, i}^{i-1}=\boldsymbol{\omega}_{i-1}+\boldsymbol{\omega}_{i-1, i}\]</div>
+<p>which gives the expression of the angular velocity of Link <span class="math notranslate nohighlight">\(i\)</span> as a
+function of the angular velocities of Link <span class="math notranslate nohighlight">\(i-1\)</span> and of Link <span class="math notranslate nohighlight">\(i\)</span> with
+respect to Link <span class="math notranslate nohighlight">\(i-1\)</span>.</p>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this heading">#</a></h2>
+<p>Considering different types of Joint <span class="math notranslate nohighlight">\(i\)</span>, according to the above
+derivative of linear velocity and angular velocity, we have the
+following conclusions.</p>
+<p><strong>If Joint <span class="math notranslate nohighlight">\(i\)</span> is prismatic</strong></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+\boldsymbol{\omega}_{i} &amp; =\boldsymbol{\omega}_{i-1} \\
+\dot{\boldsymbol{p}}_{i} &amp; =\dot{\boldsymbol{p}}_{i-1}+\dot{d}_{i} \boldsymbol{z}_{i-1}+\boldsymbol{\omega}_{i} \times \boldsymbol{r}_{i-1, i}
+\end{aligned}\end{split}\]</div>
+<p><strong>If Joint <span class="math notranslate nohighlight">\(i\)</span> is revolute</strong></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+\boldsymbol{\omega}_{i} &amp; =\boldsymbol{\omega}_{i-1}+\dot{\vartheta}_{i} \boldsymbol{z}_{i-1} \\
+\dot{\boldsymbol{p}}_{i} &amp; =\dot{\boldsymbol{p}}_{i-1}+\boldsymbol{\omega}_{i} \times \boldsymbol{r}_{i-1, i}
+\end{aligned}\end{split}\]</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./lec10"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../lec9/ik.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Inverse Kinematics</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../lec11-12/jacobian.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Jacobian</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Derivative of Transformation</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#derivative-of-pose-transformation">Derivative of Pose Transformation</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#manipulator-link-velocity">Manipulator Link Velocity</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-velocity">Linear Velocity</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#angular-velocity">Angular Velocity</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Wanxin Jin @ IRIS Lab
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
