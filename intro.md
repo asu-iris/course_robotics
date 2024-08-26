@@ -1,6 +1,6 @@
 # Welcome
 
-Welcome to the course of Modeling and Control of Robotics (MAE 547, Fall 2023).
+Welcome to the course of Modeling and Control of Robotics (MAE 547, Fall 2024).
 
 ## Course objectives
 This course covers theory and methods for modeling and control of robots. Homogeneous transforms, direct and inverse kinematics, Jacobian, statics, dynamics, and control of robotic arms will be discussed.
@@ -21,11 +21,12 @@ This note is available online as an open-source resource. The majority of its co
 
 ## About Me
 
-I am an Assistant Professor in the Ira A. Fulton Schools of Engineering at Arizona State University. This is my webpage: https://wanxinjin.github.io/
+I am an Assistant Professor in the Ira A. Fulton Schools of Engineering at Arizona State University. PI of [Intelligent Robotics and Interactive Systems (IRIS)](https://asu-iris.github.io/) Lab.
+This is the lab webpage: https://asu-iris.github.io/
 
 
 
-## About my IRIS Lab
+## About  IRIS Lab
 
 
 The [Intelligent Robotics and Interactive Systems (IRIS)](https://asu-iris.github.io/) Lab focues on:

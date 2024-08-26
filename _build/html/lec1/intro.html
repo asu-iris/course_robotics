@@ -360,9 +360,7 @@ document.write(`
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</label>
+
 </div></div>
       
     </div>
@@ -378,17 +376,6 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#events-in-robotics-history">Events in robotics history</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#robotics-vs-artificial-intelligence">Robotics vs. Artificial Intelligence</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#anatomy-of-a-robotic-system">Anatomy of a robotic system</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-the-iris-lab">About the IRIS Lab</a></li>
-</ul>
-            </nav>
         </div>
     </div>
 </div>
@@ -400,106 +387,112 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="introduction">
 <h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h1>
-<section id="events-in-robotics-history">
-<h2>Events in robotics history<a class="headerlink" href="#events-in-robotics-history" title="Permalink to this heading">#</a></h2>
-<figure class="align-default" id="history1">
-<a class="reference internal image-reference" href="../_images/history1.jpg"><img alt="../_images/history1.jpg" src="../_images/history1.jpg" style="width: 90%;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 1 </span><span class="caption-text">History of robotics (old)</span><a class="headerlink" href="#history1" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
-<figure class="align-default" id="history2">
-<a class="reference internal image-reference" href="../_images/history2.jpg"><img alt="../_images/history2.jpg" src="../_images/history2.jpg" style="width: 90%;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 2 </span><span class="caption-text">History of robotics (modern)</span><a class="headerlink" href="#history2" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
-<figure class="align-default" id="history3">
-<a class="reference internal image-reference" href="../_images/history3.jpg"><img alt="../_images/history3.jpg" src="../_images/history3.jpg" style="width: 90%;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 3 </span><span class="caption-text">History of robotics (nowdays)</span><a class="headerlink" href="#history3" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
-</section>
-<section id="robotics-vs-artificial-intelligence">
-<h2>Robotics vs. Artificial Intelligence<a class="headerlink" href="#robotics-vs-artificial-intelligence" title="Permalink to this heading">#</a></h2>
-<ul class="simple">
-<li><p>Robots are usually physically embodied</p></li>
-<li><p>Artificial Intelligence is usually not</p></li>
-</ul>
-</section>
-<section id="anatomy-of-a-robotic-system">
-<h2>Anatomy of a robotic system<a class="headerlink" href="#anatomy-of-a-robotic-system" title="Permalink to this heading">#</a></h2>
-<figure class="align-default" id="anatomy">
-<a class="reference internal image-reference" href="../_images/anatomy.jpg"><img alt="../_images/anatomy.jpg" src="../_images/anatomy.jpg" style="width: 90%;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 4 </span><span class="caption-text">Anatomy of a robotic system</span><a class="headerlink" href="#anatomy" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
-<div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-0">
-Computation &amp; algorithms</label><div class="sd-tab-content docutils">
-<ul class="simple">
-<li><p>Robot modelling &amp; control</p></li>
-<li><p>Optimization</p></li>
-<li><p>Optimal control</p></li>
-<li><p>Safety and collision avoidance</p></li>
-<li><p>Manipulation</p></li>
-<li><p>Robot learning</p></li>
-<li><p>Motion planning</p></li>
-<li><p>Navigation and mapping</p></li>
-<li><p>Multi-robot coordination</p></li>
-<li><p>Human-robot interaction</p></li>
-</ul>
-</div>
-<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-1">
-Sensing</label><div class="sd-tab-content docutils">
-<ul class="simple">
-<li><p>Force and tactile sensing</p></li>
-<li><p>Computer vision</p></li>
-<li><p>Range sensing</p></li>
-<li><p>Sensor fusion</p></li>
-</ul>
-</div>
-<input id="sd-tab-item-2" name="sd-tab-set-0" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-2">
-Actuators/Hardware</label><div class="sd-tab-content docutils">
-<ul class="simple">
-<li><p>Mechanisms</p></li>
-<li><p>Actuators</p></li>
-<li><p>Kinematics/dynamics</p></li>
-<li><p>Bioinspired design</p></li>
-<li><p>Manipulators &amp; graspers</p></li>
-</ul>
-</div>
-<input id="sd-tab-item-3" name="sd-tab-set-0" type="radio">
-</input><label class="sd-tab-label" for="sd-tab-item-3">
-System Design</label><div class="sd-tab-content docutils">
-<ul class="simple">
-<li><p>Legged</p></li>
-<li><p>Mobile</p></li>
-<li><p>Aerial</p></li>
-<li><p>Underwater</p></li>
-<li><p>Micro/nano</p></li>
-<li><p>Manufacturing</p></li>
-<li><p>Parallel robots</p></li>
-<li><p>Soft robots</p></li>
-</ul>
-</div>
-</div>
-</section>
-<section id="about-the-iris-lab">
-<h2>About the IRIS Lab<a class="headerlink" href="#about-the-iris-lab" title="Permalink to this heading">#</a></h2>
-<p>The <a class="reference external" href="https://asu-iris.github.io/">Intelligent Robotics and Interactive Systems (IRIS)</a> Lab focues on:</p>
-<ul class="simple">
-<li><p><strong>Human robot alignment</strong>: We develop methods to empower a robot with the ability to efficiently understand and be understood by human users through a variety of physical interactions. We explore how robots can aptly respond to and collaborate meaningfully with users.</p></li>
-<li><p><strong>Contact-rich robot manipulation:</strong> We leverage physical principles to derive representations/models that enable robots to interact efficiently with their surroundings. We develop algorithms to enable robots manipulate objects through contact efficiently and robustly.</p></li>
-<li><p><strong>Fundamental methods in robotics:</strong> We focus on developing fundamental theories and algorithms for achieving efficient, safe, and robust robot intelligence. Our methods lie at the intersection of model-based (control and optimization) and data-driven approaches, harnessing the complementary benefits of both.</p></li>
-</ul>
-<p>The IRIS lab is constantly seeking  robotics enthusiasts to join the lab. Anyone interested in joining could apply here: <a class="reference external" href="https://asu-iris.github.io/joining/">https://asu-iris.github.io/joining/</a></p>
-</section>
+<p><a class="reference download internal" download="" href="../_downloads/ad7df5e96ebdd11bc04ebbc2fe3718a2/lec0-intro.pdf"><span class="xref download myst">Introduction presentation</span></a></p>
+<!-- 
+## Events in robotics history
+
+```{figure} ./intro/history1.jpg
+---
+width: 90%
+name: history1
+---
+History of robotics (old)
+```
+
+
+```{figure} ./intro/history2.jpg
+---
+width: 90%
+name: history2
+---
+History of robotics (modern)
+```
+
+```{figure} ./intro/history3.jpg
+---
+width: 90%
+name: history3
+---
+History of robotics (nowdays)
+``` -->
+<!-- <embed src="./lec0-intro.pdf" width="500" height="375" /> -->
+<!-- ## Robotics vs. Artificial Intelligence
+
+- Robots are usually physically embodied
+- Artificial Intelligence is usually not
+
+
+## Anatomy of a robotic system
+
+
+```{figure} ./intro/anatomy.jpg
+---
+width: 90%
+name: anatomy
+---
+Anatomy of a robotic system
+```
+
+
+````{tab-set}
+```{tab-item} Computation & algorithms
+- Robot modelling & control
+- Optimization
+- Optimal control 
+- Safety and collision avoidance 
+- Manipulation 
+- Robot learning 
+- Motion planning 
+- Navigation and mapping 
+- Multi-robot coordination
+- Human-robot interaction
+```
+
+```{tab-item} Sensing
+- Force and tactile sensing
+- Computer vision 
+- Range sensing 
+- Sensor fusion 
+```
+
+```{tab-item} Actuators/Hardware
+- Mechanisms 
+- Actuators
+- Kinematics/dynamics 
+- Bioinspired design 
+- Manipulators & graspers 
+
+```
+
+
+```{tab-item} System Design
+- Legged
+- Mobile
+- Aerial
+- Underwater
+- Micro/nano
+- Manufacturing 
+- Parallel robots 
+- Soft robots 
+```
+
+
+
+```` -->
+<!-- ## About the IRIS Lab
+
+
+The [Intelligent Robotics and Interactive Systems (IRIS)](https://asu-iris.github.io/) Lab focues on:
+
+- **Human robot alignment**: We develop methods to empower a robot with the ability to efficiently understand and be understood by human users through a variety of physical interactions. We explore how robots can aptly respond to and collaborate meaningfully with users.
+
+- **Contact-rich robot manipulation:** We leverage physical principles to derive representations/models that enable robots to interact efficiently with their surroundings. We develop algorithms to enable robots manipulate objects through contact efficiently and robustly.
+
+- **Fundamental methods in robotics:** We focus on developing fundamental theories and algorithms for achieving efficient, safe, and robust robot intelligence. Our methods lie at the intersection of model-based (control and optimization) and data-driven approaches, harnessing the complementary benefits of both.
+
+The IRIS lab is constantly seeking  robotics enthusiasts to join the lab. Anyone interested in joining could apply here: https://asu-iris.github.io/joining/
+
+ -->
 </section>
 
     <script type="text/x-thebe-config">
@@ -560,23 +553,6 @@ System Design</label><div class="sd-tab-content docutils">
             </div>
             
             
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#events-in-robotics-history">Events in robotics history</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#robotics-vs-artificial-intelligence">Robotics vs. Artificial Intelligence</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#anatomy-of-a-robotic-system">Anatomy of a robotic system</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-the-iris-lab">About the IRIS Lab</a></li>
-</ul>
-  </nav></div>
-
-</div></div>
               
             
           </div>

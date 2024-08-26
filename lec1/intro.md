@@ -1,6 +1,13 @@
 # Introduction
 
+[Introduction presentation](./lec0-intro.pdf)
 
+
+
+
+
+
+<!-- 
 ## Events in robotics history
 
 ```{figure} ./intro/history1.jpg
@@ -26,10 +33,14 @@ width: 90%
 name: history3
 ---
 History of robotics (nowdays)
-```
+``` -->
 
 
-## Robotics vs. Artificial Intelligence
+
+<!-- <embed src="./lec0-intro.pdf" width="500" height="375" /> -->
+
+
+<!-- ## Robotics vs. Artificial Intelligence
 
 - Robots are usually physically embodied
 - Artificial Intelligence is usually not
@@ -91,10 +102,10 @@ Anatomy of a robotic system
 
 
 
-````
+```` -->
 
 
-## About the IRIS Lab
+<!-- ## About the IRIS Lab
 
 
 The [Intelligent Robotics and Interactive Systems (IRIS)](https://asu-iris.github.io/) Lab focues on:
@@ -107,6 +118,6 @@ The [Intelligent Robotics and Interactive Systems (IRIS)](https://asu-iris.githu
 
 The IRIS lab is constantly seeking  robotics enthusiasts to join the lab. Anyone interested in joining could apply here: https://asu-iris.github.io/joining/
 
-
+ -->
 
 
