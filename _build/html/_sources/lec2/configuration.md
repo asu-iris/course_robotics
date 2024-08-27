@@ -2,7 +2,7 @@
 author:
 - Wanxin Jin
 date: Aug. 22, 2023
-title: "Lecture 2: Robot Manipulator and Configuration"
+title: "Lecture 2: Robot Arm and Configuration"
 ---
 
 # Robot Configuration

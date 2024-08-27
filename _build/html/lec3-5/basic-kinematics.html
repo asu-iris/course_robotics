@@ -417,24 +417,24 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="basic-kinematics">
 <h1>Basic Kinematics<a class="headerlink" href="#basic-kinematics" title="Permalink to this heading">#</a></h1>
-<p>The pose of a rigid body in 3D space is described by its position and
-orientation with respect to a reference frame. As shown in Fig.
-<span class="xref myst">1</span>{reference-type=”ref” reference=”fig.rbpos”}, let
-<span class="math notranslate nohighlight">\(O- x y z\)</span> be the reference frame and
+<p>The pose of a rigid body in 3D space is represented by its position and
+orientation with respect to a reference frame. As shown in <a class="reference internal" href="#pose-rigid-body"><span class="std std-numref">Fig. 18</span></a>, let
+<span class="math notranslate nohighlight">\(O-xyz\)</span> be the reference frame and
 <span class="math notranslate nohighlight">\(\{\boldsymbol{x}, \boldsymbol{y}, \boldsymbol{z}\}\)</span> be the unit vectors
-of the frame axes. In order to represent the pose of the rigid body, we
+of the frame axes.
+To represent the pose of the rigid body, we
 pick a fixed point <span class="math notranslate nohighlight">\(O^\prime\)</span> on the rigid body, and attach an
-orthonormal body frame <span class="math notranslate nohighlight">\(O^{\prime} - x^{\prime} y^{\prime} z^{\prime}\)</span>
-to the body, with origin in <span class="math notranslate nohighlight">\(O^{\prime}\)</span>.
+body frame <span class="math notranslate nohighlight">\(O^{\prime}-x^{\prime} y^{\prime} z^{\prime}\)</span>
+to the body, with origin in <span class="math notranslate nohighlight">\(O^{\prime}\)</span> and
 <span class="math notranslate nohighlight">\(\{\boldsymbol{x}^{\prime}, \boldsymbol{y}^{\prime}, \boldsymbol{z}^{\prime}\}\)</span>
-are the unit vectors of the body frame axes,</p>
+being the unit vectors,</p>
 <figure class="align-default" id="pose-rigid-body">
 <a class="reference internal image-reference" href="../_images/pose_rigid_body.jpg"><img alt="../_images/pose_rigid_body.jpg" src="../_images/pose_rigid_body.jpg" style="width: 60%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 18 </span><span class="caption-text">Pose of a rigid body in a reference frame</span><a class="headerlink" href="#pose-rigid-body" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>To describe the position of the rigid body, we define a position vector
+<p>To describe the position of the rigid body,  define a position vector
 <span class="math notranslate nohighlight">\(\boldsymbol{o}^{\prime}\)</span> pointing from the reference frame origin <span class="math notranslate nohighlight">\(O\)</span>
 to the body frame origin <span class="math notranslate nohighlight">\(O'\)</span>. We express <span class="math notranslate nohighlight">\(\boldsymbol{o}^{\prime}\)</span> in
 terms of <span class="math notranslate nohighlight">\(\{\boldsymbol{x}, \boldsymbol{y}, \boldsymbol{z}\}\)</span> of
@@ -451,22 +451,20 @@ o_{z}^{\prime}
 {\boldsymbol{o}^{\prime}}^T \boldsymbol{y} \\
 {\boldsymbol{o}^{\prime}}^T \boldsymbol{z}
 \end{array}\right]\end{split}\]</div>
-<p>where <span class="math notranslate nohighlight">\(o_{x}^{\prime}, o_{y}^{\prime}, o_{z}^{\prime}\)</span> are projections
-of <span class="math notranslate nohighlight">\(\boldsymbol{o}^{\prime}\)</span> in each axis in
-<span class="math notranslate nohighlight">\(\{\boldsymbol{x}, \boldsymbol{y}, \boldsymbol{z}\}\)</span>, and they are
-called the coordinates of the vector.</p>
+<p>where <span class="math notranslate nohighlight">\(o_{x}^{\prime}, o_{y}^{\prime}, o_{z}^{\prime}\)</span>, called the coordinates of the vector <span class="math notranslate nohighlight">\(\boldsymbol{o}^{\prime}\)</span>, are projections
+of <span class="math notranslate nohighlight">\(\boldsymbol{o}^{\prime}\)</span> in
+<span class="math notranslate nohighlight">\(\{\boldsymbol{x}, \boldsymbol{y}, \boldsymbol{z}\}\)</span>.</p>
 <p>To describe the orientation of the rigid body, we find the coordinates
-of each unit axis in
+of each unit axis
 <span class="math notranslate nohighlight">\(\{\boldsymbol{x}^{\prime}, \boldsymbol{y}^{\prime}, \boldsymbol{z}^{\prime}\}\)</span>
-of rigid body frame, in terms of
-<span class="math notranslate nohighlight">\(\{\boldsymbol{x}, \boldsymbol{y}, \boldsymbol{z}\}\)</span> of reference frame:</p>
+of rigid body frame, in the reference frame:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{aligned}
 &amp; \boldsymbol{x}^{\prime}=x_{x}^{\prime} \boldsymbol{x}+x_{y}^{\prime} \boldsymbol{y}+x_{z}^{\prime} \boldsymbol{z} \\
 &amp; \boldsymbol{y}^{\prime}=y_{x}^{\prime} \boldsymbol{x}+y_{y}^{\prime} \boldsymbol{y}+y_{z}^{\prime} \boldsymbol{z} \\
 &amp; \boldsymbol{z}^{\prime}=z_{x}^{\prime} \boldsymbol{x}+z_{y}^{\prime} \boldsymbol{y}+z_{z}^{\prime} \boldsymbol{z} .
 \end{aligned}\end{split}\]</div>
-<p>Write the above into the following compact notation:</p>
+<p>We write the above into the following compact notation:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\boldsymbol{R}=\left[\begin{array}{lll}
 \boldsymbol{x}^{\prime} &amp; \boldsymbol{y}^{\prime} &amp; \boldsymbol{z}^{\prime} 
@@ -484,7 +482,7 @@ x_{z}^{\prime} &amp; y_{z}^{\prime} &amp; z_{z}^{\prime}
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>The <span class="math notranslate nohighlight">\(\boldsymbol{R}\)</span> is called rotation matrix. Some properties of
-Rotation Matrix include</p>
+Rotation Matrix:</p>
 <ul class="simple">
 <li><p>Mutual orthogonality:
 <span class="math notranslate nohighlight">\(\boldsymbol{x}^{\prime T} \boldsymbol{y}^{\prime}=0\)</span>,
@@ -503,7 +501,7 @@ Rotation Matrix include</p>
 <h1>Elementary Rotations<a class="headerlink" href="#elementary-rotations" title="Permalink to this heading">#</a></h1>
 <p>Consider the origin of the body frame coincides with the origin of the
 reference frame. The orientation of a body frame can be obtained via
-rotations of the reference frame about coordinate axes. Below, we
+rotations of the reference frame about frame axes. Below, we
 consider right-handed rotation convention: rotations are positive if
 counter-clockwise about a axis.</p>
 <figure class="align-default" id="id1">
@@ -513,16 +511,13 @@ counter-clockwise about a axis.</p>
 <span class="math notranslate nohighlight">\(\boldsymbol{z}\)</span></span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>As shown in Fig. <span class="xref myst">3</span>{reference-type=”ref”
-reference=”c1.rotation1”}, suppose the body frame
+<p>As shown in  <a class="reference internal" href="#id1"><span class="std std-numref">Fig. 19</span></a>, suppose the body frame
 <span class="math notranslate nohighlight">\(O- x^{\prime} y^{\prime} z^{\prime}\)</span> is a result of rotating a
 reference frame <span class="math notranslate nohighlight">\(O- x y z\)</span> by an angle <span class="math notranslate nohighlight">\(\alpha\)</span> about the axis
 <span class="math notranslate nohighlight">\(\boldsymbol{z}\)</span>. Then, the rotation matrix of
 <span class="math notranslate nohighlight">\(O- x^{\prime} y^{\prime} z^{\prime}\)</span> is</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\boldsymbol{R}_{z}(\alpha)=\left[\begin{array}{lll}
-\boldsymbol{x}^{\prime} &amp; \boldsymbol{y}^{\prime} &amp; \boldsymbol{z}^{\prime} 
-\end{array}\right]=\left[\begin{array}{ccc}
+\[\begin{split}\boldsymbol{R}_{z}(\alpha)=\left[\begin{array}{ccc}
 \cos \alpha &amp; -\sin \alpha &amp; 0 \\
 \sin \alpha &amp; \cos \alpha &amp; 0 \\
 0 &amp; 0 &amp; 1
@@ -543,12 +538,11 @@ reference frame <span class="math notranslate nohighlight">\(O- x y z\)</span> b
 0 &amp; \cos \gamma &amp; -\sin \gamma \\
 0 &amp; \sin \gamma &amp; \cos \gamma
 \end{array}\right] .\end{split}\]</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Takeaway: the rotation matrix can be interpreted geometrically as a
+<!-- ```{note}
+Takeaway: the rotation matrix can be interpreted geometrically as a
 rotation about an axis in space needed to align a reference frame to a
-body frame.</p>
-</div>
+body frame.
+``` -->
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="transformation-via-rotation-matrix">
 <h1>Transformation via Rotation Matrix<a class="headerlink" href="#transformation-via-rotation-matrix" title="Permalink to this heading">#</a></h1>

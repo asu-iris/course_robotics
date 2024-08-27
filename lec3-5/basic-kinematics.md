@@ -7,17 +7,19 @@ title: "Lecture 3-5: Basic Kinematics"
 
 # Basic Kinematics
 
-The pose of a rigid body in 3D space is described by its position and
-orientation with respect to a reference frame. As shown in Fig.
-[1](#fig.rbpos){reference-type="ref" reference="fig.rbpos"}, let
-$O- x y z$ be the reference frame and
+
+The pose of a rigid body in 3D space is represented by its position and
+orientation with respect to a reference frame. As shown in {numref}`pose_rigid_body`, let
+$O-xyz$ be the reference frame and
 $\{\boldsymbol{x}, \boldsymbol{y}, \boldsymbol{z}\}$ be the unit vectors
-of the frame axes. In order to represent the pose of the rigid body, we
+of the frame axes. 
+To represent the pose of the rigid body, we
 pick a fixed point $O^\prime$ on the rigid body, and attach an
-orthonormal body frame $O^{\prime} - x^{\prime} y^{\prime} z^{\prime}$
-to the body, with origin in $O^{\prime}$.
+ body frame $O^{\prime}-x^{\prime} y^{\prime} z^{\prime}$
+to the body, with origin in $O^{\prime}$ and
 $\{\boldsymbol{x}^{\prime}, \boldsymbol{y}^{\prime}, \boldsymbol{z}^{\prime}\}$
-are the unit vectors of the body frame axes,
+being the unit vectors,
+
 
 
 ```{figure} ./kinematics/pose_rigid_body.jpg
@@ -29,7 +31,7 @@ Pose of a rigid body in a reference frame
 ```
 
 
-To describe the position of the rigid body, we define a position vector
+To describe the position of the rigid body,  define a position vector
 $\boldsymbol{o}^{\prime}$ pointing from the reference frame origin $O$
 to the body frame origin $O'$. We express $\boldsymbol{o}^{\prime}$ in
 terms of $\{\boldsymbol{x}, \boldsymbol{y}, \boldsymbol{z}\}$ of
@@ -47,16 +49,14 @@ o_{z}^{\prime}
 {\boldsymbol{o}^{\prime}}^T \boldsymbol{z}
 \end{array}\right]$$
 
-where $o_{x}^{\prime}, o_{y}^{\prime}, o_{z}^{\prime}$ are projections
-of $\boldsymbol{o}^{\prime}$ in each axis in
-$\{\boldsymbol{x}, \boldsymbol{y}, \boldsymbol{z}\}$, and they are
-called the coordinates of the vector.
+where $o_{x}^{\prime}, o_{y}^{\prime}, o_{z}^{\prime}$, called the coordinates of the vector $\boldsymbol{o}^{\prime}$, are projections
+of $\boldsymbol{o}^{\prime}$ in 
+$\{\boldsymbol{x}, \boldsymbol{y}, \boldsymbol{z}\}$.
 
 To describe the orientation of the rigid body, we find the coordinates
-of each unit axis in
+of each unit axis 
 $\{\boldsymbol{x}^{\prime}, \boldsymbol{y}^{\prime}, \boldsymbol{z}^{\prime}\}$
-of rigid body frame, in terms of
-$\{\boldsymbol{x}, \boldsymbol{y}, \boldsymbol{z}\}$ of reference frame:
+of rigid body frame, in the reference frame:
 
 $$\begin{aligned}
 & \boldsymbol{x}^{\prime}=x_{x}^{\prime} \boldsymbol{x}+x_{y}^{\prime} \boldsymbol{y}+x_{z}^{\prime} \boldsymbol{z} \\
@@ -64,7 +64,7 @@ $$\begin{aligned}
 & \boldsymbol{z}^{\prime}=z_{x}^{\prime} \boldsymbol{x}+z_{y}^{\prime} \boldsymbol{y}+z_{z}^{\prime} \boldsymbol{z} .
 \end{aligned}$$
 
-Write the above into the following compact notation:
+We write the above into the following compact notation:
 
 $$\boldsymbol{R}=\left[\begin{array}{lll}
 \boldsymbol{x}^{\prime} & \boldsymbol{y}^{\prime} & \boldsymbol{z}^{\prime} 
@@ -84,7 +84,7 @@ $\{\boldsymbol{x}^{\prime}, \boldsymbol{y}^{\prime}, \boldsymbol{z}^{\prime}\}$.
 
 :::{important}
 The $\boldsymbol{R}$ is called rotation matrix. Some properties of
-Rotation Matrix include
+Rotation Matrix:
 
 -   Mutual orthogonality:
     $\boldsymbol{x}^{\prime T} \boldsymbol{y}^{\prime}=0$,
@@ -100,11 +100,25 @@ Rotation Matrix include
 
 -   The determinant of $\boldsymbol{R}$: $\det \boldsymbol{R}=1$
 :::
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Elementary Rotations
+
 
 Consider the origin of the body frame coincides with the origin of the
 reference frame. The orientation of a body frame can be obtained via
-rotations of the reference frame about coordinate axes. Below, we
+rotations of the reference frame about frame axes. Below, we
 consider right-handed rotation convention: rotations are positive if
 counter-clockwise about a axis.
 
@@ -120,16 +134,13 @@ $\boldsymbol{z}$
 
 
 
-As shown in Fig. [3](#c1.rotation1){reference-type="ref"
-reference="c1.rotation1"}, suppose the body frame
+As shown in  {numref}`elementary_rotations`, suppose the body frame
 $O- x^{\prime} y^{\prime} z^{\prime}$ is a result of rotating a
 reference frame $O- x y z$ by an angle $\alpha$ about the axis
 $\boldsymbol{z}$. Then, the rotation matrix of
 $O- x^{\prime} y^{\prime} z^{\prime}$ is
 
-$$\boldsymbol{R}_{z}(\alpha)=\left[\begin{array}{lll}
-\boldsymbol{x}^{\prime} & \boldsymbol{y}^{\prime} & \boldsymbol{z}^{\prime} 
-\end{array}\right]=\left[\begin{array}{ccc}
+$$\boldsymbol{R}_{z}(\alpha)=\left[\begin{array}{ccc}
 \cos \alpha & -\sin \alpha & 0 \\
 \sin \alpha & \cos \alpha & 0 \\
 0 & 0 & 1
@@ -153,14 +164,13 @@ $$\boldsymbol{R}_{x}(\gamma)  =\left[\begin{array}{ccc}
 0 & \sin \gamma & \cos \gamma
 \end{array}\right] .$$
 
-```{note}
+<!-- ```{note}
 Takeaway: the rotation matrix can be interpreted geometrically as a
 rotation about an axis in space needed to align a reference frame to a
 body frame.
-```
+``` -->
 
 # Transformation via Rotation Matrix
-
 ## Passive Rotation
 
 Consider that the origin of the body frame coincides with the origin of
