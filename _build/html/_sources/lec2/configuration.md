@@ -14,7 +14,7 @@ title: "Lecture 2: Robot Manipulator and Configuration"
 width: 40%
 name: robotarm
 ---
-Franka Emika Panda robot arm
+Franka research robot arm
 ```
 
 A robot manipulator is mechanically constructed by
