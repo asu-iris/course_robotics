@@ -18,13 +18,13 @@ pick a fixed point $O^\prime$ on the rigid body, and attach an
  body frame $O^{\prime}-x^{\prime} y^{\prime} z^{\prime}$
 to the body, with origin in $O^{\prime}$ and
 $\{\boldsymbol{x}^{\prime}, \boldsymbol{y}^{\prime}, \boldsymbol{z}^{\prime}\}$
-being the unit vectors,
+being the unit vectors.
 
 
 
 ```{figure} ./kinematics/pose_rigid_body.jpg
 ---
-width: 60%
+width: 80%
 name: pose_rigid_body
 ---
 Pose of a rigid body in a reference frame
@@ -56,12 +56,12 @@ $\{\boldsymbol{x}, \boldsymbol{y}, \boldsymbol{z}\}$.
 To describe the orientation of the rigid body, we find the coordinates
 of each unit axis 
 $\{\boldsymbol{x}^{\prime}, \boldsymbol{y}^{\prime}, \boldsymbol{z}^{\prime}\}$
-of rigid body frame, in the reference frame:
+of the body frame, in the reference frame:
 
 $$\begin{aligned}
 & \boldsymbol{x}^{\prime}=x_{x}^{\prime} \boldsymbol{x}+x_{y}^{\prime} \boldsymbol{y}+x_{z}^{\prime} \boldsymbol{z} \\
 & \boldsymbol{y}^{\prime}=y_{x}^{\prime} \boldsymbol{x}+y_{y}^{\prime} \boldsymbol{y}+y_{z}^{\prime} \boldsymbol{z} \\
-& \boldsymbol{z}^{\prime}=z_{x}^{\prime} \boldsymbol{x}+z_{y}^{\prime} \boldsymbol{y}+z_{z}^{\prime} \boldsymbol{z} .
+& \boldsymbol{z}^{\prime}=z_{x}^{\prime} \boldsymbol{x}+z_{y}^{\prime} \boldsymbol{y}+z_{z}^{\prime} \boldsymbol{z} 
 \end{aligned}$$
 
 We write the above into the following compact notation:
@@ -76,14 +76,14 @@ x_{z}^{\prime} & y_{z}^{\prime} & z_{z}^{\prime}
 \boldsymbol{x}^{\prime T} \boldsymbol{x} & \boldsymbol{y}^{\prime T} \boldsymbol{x} & \boldsymbol{z}^{\prime T} \boldsymbol{x} \\
 \boldsymbol{x}^{\prime T} \boldsymbol{y} & \boldsymbol{y}^{\prime T} \boldsymbol{y} & \boldsymbol{z}^{\prime T} \boldsymbol{y} \\
 \boldsymbol{x}^{\prime T} \boldsymbol{z} & \boldsymbol{y}^{\prime T} \boldsymbol{z} & \boldsymbol{z}^{T} \boldsymbol{z}
-\end{array}\right]$$
+\end{array}\right]$$(equ.rotation_matrix)
 
-with each column being the coordinates of each unit vector in
+with each column being the coordinates of each unit vector 
 $\{\boldsymbol{x}^{\prime}, \boldsymbol{y}^{\prime}, \boldsymbol{z}^{\prime}\}$.
 
 
 :::{important}
-The $\boldsymbol{R}$ is called rotation matrix. Some properties of
+The above $\boldsymbol{R}$ is called rotation matrix. Some properties of
 Rotation Matrix:
 
 -   Mutual orthogonality:
@@ -98,7 +98,7 @@ Rotation Matrix:
 -   Orthogonal matrix:
     $\boldsymbol{R}^{T} \boldsymbol{R}=\boldsymbol{I}_{3} \quad \rightarrow \quad \boldsymbol{R}^{T}=\boldsymbol{R}^{-1}$
 
--   The determinant of $\boldsymbol{R}$: $\det \boldsymbol{R}=1$
+-   The determinant of $\boldsymbol{R}$: $|\det \boldsymbol{R}|=1$
 :::
 
 
@@ -117,15 +117,15 @@ Rotation Matrix:
 
 
 Consider the origin of the body frame coincides with the origin of the
-reference frame. The orientation of a body frame can be obtained via
-rotations of the reference frame about frame axes. Below, we
+reference frame. The orientation of a body frame can be obtained by the
+rotating the reference frame about its axes. Below, we
 consider right-handed rotation convention: rotations are positive if
 counter-clockwise about a axis.
 
 
 ```{figure} ./kinematics/elementary_rotations.jpg
 ---
-width: 40%
+width: 60%
 name: elementary_rotations
 ---
 Rotation of frame $O- x y z$ by an angle $\alpha$ about axis
@@ -173,18 +173,22 @@ body frame.
 # Transformation via Rotation Matrix
 ## Passive Rotation
 
-Consider that the origin of the body frame coincides with the origin of
-the reference frame, and that a point $P$ in space expressed in
-$O- x y z$ is
+
 
 ```{figure} ./kinematics/coordinate_transformation.jpg
 ---
-width: 40%
+width: 60%
 name: coordinate_transformation
 ---
 Representation of a point $P$ in two different coordinate
 frames
 ```
+
+
+As in {numref}`coordinate_transformation`,
+consider that the origin of the body frame coincides with the origin of
+the reference frame, and that a point $P$ expressed in
+$O- x y z$ is
 
 
 
@@ -201,43 +205,57 @@ p_{z}
 The same point can also be expressed in
 $O- x^{\prime} y^{\prime} z^{\prime}$ as
 
-$$\boldsymbol{p}^{\prime}=p_{x}^{\prime} \boldsymbol{x}^{\prime} +
+$$\boldsymbol{p}=p_{x}^{\prime} \boldsymbol{x}^{\prime} +
 p_{y}^{\prime} \boldsymbol{y}^{\prime} +
-p_{z}^{\prime}\boldsymbol{z}^{\prime} =\left[\begin{array}{c}
+p_{z}^{\prime}\boldsymbol{z}^{\prime} =\boldsymbol{R}\left[\begin{array}{c}
+p_{x}^{\prime} \\
+p_{y}^{\prime} \\
+p_{z}^{\prime}
+\end{array}\right]$$
+where we have applied the definition of the rotation matrix in {eq}`equ.rotation_matrix`. Therefore, one has
+
+$$\left[\begin{array}{c}
+p_{x} \\
+p_{y} \\
+p_{z}
+\end{array}\right]=\boldsymbol{R}\left[\begin{array}{c}
 p_{x}^{\prime} \\
 p_{y}^{\prime} \\
 p_{z}^{\prime}
 \end{array}\right]$$
 
-To establish the relationship between two coordinates, we need to
+and we simply write the above as
+
+
+<!-- To establish the relationship between two coordinates, we need to
 replace the unite vectors
 $\{\boldsymbol{x}^{\prime}, \boldsymbol{y}^{\prime}, \boldsymbol{x}^{\prime}\}$
 of the body frame with their coordinates in the reference frame using
-the rotation matrix $\boldsymbol{R}$. This leads to
+the rotation matrix $\boldsymbol{R}$. This leads to-->
 
-$$\label{equ.transform}
-    \boldsymbol{p}=\boldsymbol{R}\boldsymbol{p}^{\prime}$$
+$$
+    \boldsymbol{p}=\boldsymbol{R}\boldsymbol{p}^{\prime}
+$$(equ.transform) 
 
 ```{note}
-Takeaway: $\boldsymbol{R}$ represents the transformation matrix of the
-coordinates in frame $O- x^{\prime} y^{\prime} z^{\prime}$ to the
-coordinates of the same vector in frame $O- x y z$.
+$\boldsymbol{R}$ is a transformation matrix of the
+coordinates of the same vector, from frame $O- x^{\prime} y^{\prime} z^{\prime}$ to the
+to frame $O- x y z$.
 ```
 
 ## Active Rotation
 
-In another perspective to look at
-([\[equ.transform\]](#equ.transform){reference-type="ref"
-reference="equ.transform"}), we can interpret $\boldsymbol{p}^{\prime}$
-be a vector also in the reference frame $O- x y z$;
-$\boldsymbol{R} \boldsymbol{p}^{\prime}$ yields a vector
-$\boldsymbol{p}$ with the same norm as that of $\boldsymbol{p}^{\prime}$
-but rotated with respect to $\boldsymbol{p}^{\prime}$ according to the
+
+
+
+In another perspective to look at {eq}`equ.transform`, we can interpret $\boldsymbol{p}^{\prime}$
+be a vector also expressed in the reference frame $O- x y z$.
+$\boldsymbol{R} \boldsymbol{p}^{\prime}$ turns the vector $\boldsymbol{p}^{\prime}$ to $\boldsymbol{p}$ in the same reference frame $O- x y z$, according to the
 matrix $\boldsymbol{R}$.
 
 
 ```{note}
-Takeaway: $\boldsymbol{R}$ can be also interpreted as the matrix
+$\boldsymbol{R}$ can be also interpreted as the matrix
 operator allowing rotation of a vector by a given angle about an axis in
 space.
 ```
@@ -270,6 +288,9 @@ $\boldsymbol{R}_{1}^{0}$ is expressed in $O- x_{0} y_{0} z_{0}$, and the
 second rotation matrix $\boldsymbol{R}_{2}^{1}$ is expressed in
 $O- x_{1} y_{1} z_{1}$.
 
+
+
+```{important}
 Hence, we can conclude the following *postmultiplication rule*:
 
 -   The frame with respect to which a rotation occurs (and the rotation
@@ -277,6 +298,10 @@ Hence, we can conclude the following *postmultiplication rule*:
 
 -   The composition of each rotation around the current frame is
     obtained by *postmultiplication* of the rotation matrices in order.
+```
+
+
+
 
 ## Rotation around Fixed Frame
 
@@ -293,9 +318,39 @@ which is 'expressed' *still* in the initial frame $O- x_{0} y_{0} z_{0}$
 (instead of the current frame $O- x_{1} y_{1} z_{1}$ itself). We call
 this type of rotation \"the rotation around the fixed frame\".
 
-To apply the *postmultipcation rule*, we need to find out the equivalent
-rotation to $\boldsymbol{R}_{1,2}^0$ but 'expressed' in the current
-frame $O- x_{1} y_{1} z_{1}$. This will lead to the concept of
+To  apply the *postmultipcation rule*, we need to find out a 
+rotation $\boldsymbol{R}_{2}^1$, which is equivalent to $\boldsymbol{R}_{1,2}^0$, but 'expressed' in the current
+frame $O- x_{1} y_{1} z_{1}$, as we previous did (that is how we define our rotation matrix in the first place!).
+
+
+
+```{note}
+To do so, let's consider any vector $\boldsymbol{p}^1$ expressed in frame $O- x_{1} y_{1} z_{1}$. We follow the following procedure.
+
+-   Step 1: passive rotation. Let's first transform $\boldsymbol{p}^1$ to the corrdinates in frame  0: $\boldsymbol{R}^0_1\boldsymbol{p}^1$
+
+-   Step 2: active rotation. In frame 0, use the rotation matrix $\boldsymbol{R}_{1,2}^0$ to turn   $\boldsymbol{R}^0_1\boldsymbol{p}^1$ into a new vector but still in frame 0: 
+
+$$\boldsymbol{R}_{1,2}^0\boldsymbol{R}^0_1\boldsymbol{p}^1$$
+
+-   Step 3: passive rotation. Since  the above $\boldsymbol{R}_{1,2}^0\boldsymbol{R}^0_1\boldsymbol{p}^1$ is in frame 0, we want to transform it back to frame 1, by
+
+
+$$(\boldsymbol{R}^0_1)^T\boldsymbol{R}_{1,2}^0\boldsymbol{R}^0_1\boldsymbol{p}^1$$
+
+-   Step 4: active rotation. Now,  $(\boldsymbol{R}^0_1)^T\boldsymbol{R}_{1,2}^0\boldsymbol{R}^0_1\boldsymbol{p}^1$ is in frame 1, which is definitely different from our original $\boldsymbol{p}^1$.  So, we can consider this difference is due to we have applied an active rotation $\boldsymbol{R}^1_2$ to turn $\boldsymbol{p}^1$ into $(\boldsymbol{R}^0_1)^T\boldsymbol{R}_{1,2}^0\boldsymbol{R}^0_1\boldsymbol{p}^1$. That is to say,
+
+
+$$\boldsymbol{R}^1_2\boldsymbol{p}^1=(\boldsymbol{R}^0_1)^T\boldsymbol{R}_{1,2}^0\boldsymbol{R}^0_1\boldsymbol{p}^1$$
+
+```
+
+
+
+
+
+
+<!-- This will lead to the concept of
 similarity transformation derived using the perspective of \"rotation
 matrix as a active transformation\" (how?).
 
@@ -307,17 +362,22 @@ where $O- x_{1} y_{1} z_{1}$ is rotated by $\boldsymbol{R}_1^0$ from
 $O- x_{0} y_{0} z_{0}$ is
 
 $$\boldsymbol{R}^1=(\boldsymbol{R}_1^0)^T\boldsymbol{R}^0\boldsymbol{R}_1^0$$
-:::
+::: -->
 
-Back to the matrix $\boldsymbol{R}_{1,2}^0$, the equivalent rotation
-matrix 'expressed' in the current frame $O- x_{1} y_{1} z_{1}$ is
+<!-- Back to the matrix $\boldsymbol{R}_{1,2}^0$, the equivalent rotation
+matrix 'expressed' in the current frame $O- x_{1} y_{1} z_{1}$ is -->
 
-$$\boldsymbol{R}_{1,2}^1=(\boldsymbol{R}_1^0)^T\boldsymbol{R}_{1,2}^0\boldsymbol{R}_1^0$$
+Then, we have
+
+$$\boldsymbol{R}_{2}^1=(\boldsymbol{R}_1^0)^T\boldsymbol{R}_{1,2}^0\boldsymbol{R}_1^0$$
 
 Then, following the *postmultipcation rule*, we can follow the to obtain
 the total rotation
-$$\boldsymbol{R}_{2}^{0}=\boldsymbol{R}_{1}^{0} \boldsymbol{R}_{1,2}^1=\boldsymbol{R}_{1}^{0} (\boldsymbol{R}_1^0)^T\boldsymbol{R}_{1,2}^0\boldsymbol{R}_1^0=\boldsymbol{R}_{1,2}^0\boldsymbol{R}_1^0$$
 
+$$\boldsymbol{R}_{2}^{0}=\boldsymbol{R}_{1}^{0} \boldsymbol{R}_{2}^1=\boldsymbol{R}_{1}^{0} (\boldsymbol{R}_1^0)^T\boldsymbol{R}_{1,2}^0\boldsymbol{R}_1^0=\boldsymbol{R}_{1,2}^0\boldsymbol{R}_1^0$$
+
+
+```{important}
 Hence, we can conclude the following *premultiplication rule*:
 
 -   The same frame with respect to which a rotation occurs (and the
@@ -325,6 +385,11 @@ Hence, we can conclude the following *premultiplication rule*:
 
 -   The composition of each rotation around the fixed frame is obtained
     by *premultiplication* of the rotation matrices in order.
+```
+
+
+
+
 
 Note: composition of rotations not commutative!
 
