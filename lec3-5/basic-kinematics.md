@@ -75,7 +75,7 @@ x_{z}^{\prime} & y_{z}^{\prime} & z_{z}^{\prime}
 \end{array}\right]=\left[\begin{array}{lll}
 \boldsymbol{x}^{\prime T} \boldsymbol{x} & \boldsymbol{y}^{\prime T} \boldsymbol{x} & \boldsymbol{z}^{\prime T} \boldsymbol{x} \\
 \boldsymbol{x}^{\prime T} \boldsymbol{y} & \boldsymbol{y}^{\prime T} \boldsymbol{y} & \boldsymbol{z}^{\prime T} \boldsymbol{y} \\
-\boldsymbol{x}^{\prime T} \boldsymbol{z} & \boldsymbol{y}^{\prime T} \boldsymbol{z} & \boldsymbol{z}^{T} \boldsymbol{z}
+\boldsymbol{x}^{\prime T} \boldsymbol{z} & \boldsymbol{y}^{\prime T} \boldsymbol{z} & \boldsymbol{z}^{\prime T} \boldsymbol{z}
 \end{array}\right]$$(equ.rotation_matrix)
 
 with each column being the coordinates of each unit vector 
@@ -238,7 +238,7 @@ $$
 $$(equ.transform) 
 
 ```{note}
-$\boldsymbol{R}$ is a transformation matrix of the
+$\boldsymbol{R}$ is a transformation (mapping) for the
 coordinates of the same vector, from frame $O- x^{\prime} y^{\prime} z^{\prime}$ to the
 to frame $O- x y z$.
 ```
@@ -249,15 +249,23 @@ to frame $O- x y z$.
 
 
 In another perspective to look at {eq}`equ.transform`, we can interpret $\boldsymbol{p}^{\prime}$
-be a vector also expressed in the reference frame $O- x y z$.
-$\boldsymbol{R} \boldsymbol{p}^{\prime}$ turns the vector $\boldsymbol{p}^{\prime}$ to $\boldsymbol{p}$ in the same reference frame $O- x y z$, according to the
+be a vector also expressed in the reference frame $O- x y z$, that is,
+
+$$
+\boldsymbol{p}=p_{x}^{\prime} \boldsymbol{x} +
+p_{y}^{\prime} \boldsymbol{y} +
+p_{z}^{\prime}\boldsymbol{z}
+$$
+
+
+$\boldsymbol{R} \boldsymbol{p}^{\prime}$ turns the vector $\boldsymbol{p}^{\prime}$ to a new vector $\boldsymbol{p}$ in the same reference frame $O- x y z$, according to the
 matrix $\boldsymbol{R}$.
 
 
 ```{note}
-$\boldsymbol{R}$ can be also interpreted as the matrix
-operator allowing rotation of a vector by a given angle about an axis in
-space.
+$\boldsymbol{R}$ can be also interpreted as the rotation
+operator to rotate  a vector to a new vector in the same
+coordinate system, where both vectors are expressed.
 ```
 
 
@@ -286,7 +294,7 @@ rotating $O- x_{1} y_{1} z_{1}$ to $O - x_{2} y_{2} z_{2}$, according to
 $\boldsymbol{R}_{2}^{1}$. Here, the first rotation matrix
 $\boldsymbol{R}_{1}^{0}$ is expressed in $O- x_{0} y_{0} z_{0}$, and the
 second rotation matrix $\boldsymbol{R}_{2}^{1}$ is expressed in
-$O- x_{1} y_{1} z_{1}$.
+$O- x_{1} y_{1} z_{1}$ (we will call it current frame).
 
 
 
@@ -316,11 +324,11 @@ $$\boldsymbol{R}_{1,2}^0$$
 
 which is 'expressed' *still* in the initial frame $O- x_{0} y_{0} z_{0}$
 (instead of the current frame $O- x_{1} y_{1} z_{1}$ itself). We call
-this type of rotation \"the rotation around the fixed frame\".
+this type of rotation \"the rotation around the fixed frame\", i.e., the rotation happens in the 'very original' frame.
 
 To  apply the *postmultipcation rule*, we need to find out a 
 rotation $\boldsymbol{R}_{2}^1$, which is equivalent to $\boldsymbol{R}_{1,2}^0$, but 'expressed' in the current
-frame $O- x_{1} y_{1} z_{1}$, as we previous did (that is how we define our rotation matrix in the first place!).
+frame $O- x_{1} y_{1} z_{1}$.
 
 
 
@@ -371,7 +379,10 @@ Then, we have
 
 $$\boldsymbol{R}_{2}^1=(\boldsymbol{R}_1^0)^T\boldsymbol{R}_{1,2}^0\boldsymbol{R}_1^0$$
 
-Then, following the *postmultipcation rule*, we can follow the to obtain
+We call the above equation the "similarity transformation": it is used to transform a rotation $\boldsymbol{R}_{1,2}^0$ from frame 0 to frame 1.
+
+
+Following the *postmultipcation rule*, we can follow the to obtain
 the total rotation
 
 $$\boldsymbol{R}_{2}^{0}=\boldsymbol{R}_{1}^{0} \boldsymbol{R}_{2}^1=\boldsymbol{R}_{1}^{0} (\boldsymbol{R}_1^0)^T\boldsymbol{R}_{1,2}^0\boldsymbol{R}_1^0=\boldsymbol{R}_{1,2}^0\boldsymbol{R}_1^0$$
@@ -393,30 +404,27 @@ Hence, we can conclude the following *premultiplication rule*:
 
 Note: composition of rotations not commutative!
 
-# Rotation Parameterization
+# Rotation Parameterization (Representation)
 
 A rotation matrix has 9 elements, its mutual orthogonality and unity
-properties bring 6 constraints. Thus, only three independent parameters
-can minimally and sufficiently parameterize a rotation matrix.
+properties bring 6 constraints. Thus, each robotion matrix has 3DOFs! We only need to use three independent parameters
+to represent a rotation matrix.
 
 ## Euler Angles
 
 A rotation in space can be understood as a sequence of three elementary
-rotations. To fully describe all possible orientations, two successive
-rotations should not be made around parallel axes. When the first and
-third rotations are made around the same axis, the parameterization is
-called proper Euler angles. In the following, two sets of Euler angles
-are used; namely, the ZYZ Euler angles and the RPY (or Roll-PitchYaw)
-Euler angles.
+rotations. Such rotation representation is called Euler-angles represnetation, and the elementary rotation angles are called Euler angles. To fully describe all possible orientations, two successive
+rotations should not be made around parallel axes. In the following, two sets of Euler angles
+are used; namely, the ZYZ Euler angles and the Roll-Pitch-Yaw (RPY) (or ZYX Euler angles).
 
 
 
 ```{figure} ./kinematics/zyz_euler_angles.jpg
 ---
-width: 60%
+width: 80%
 name: zyz_euler_angles
 ---
-Parameterization of ZYZ Euler angles
+ZYZ Euler angles
 ```
 
 
@@ -460,13 +468,13 @@ $$\begin{aligned}
 if $s_{\vartheta}=0$, i.e., $(r_{23}, r_{13})\not=(0,0)$; otherwise,
 only the sum or difference of $\varphi$ and $\psi$ is determined (why?)
 
-**RPY Euler Angles**: the rotation from RPY Euler angles is obtained by
+**RPY (ZYX Euler angles)**: I think about RPY rotations is a process of "a fighter jet from parking --> taxiing (yaw) --> take-off (pitch) --> fighting (roll)". Formally, RPY is obtained by
 first, rotating the reference frame by the angle $\varphi$ about the
-current axis $\boldsymbol{z}$ (roll), then, rotating the current frame
+current axis $\boldsymbol{z}$ (yaw), then, rotating the current frame
 by $\vartheta$ about the fixed axis $\boldsymbol{y}$ (pitch), and then,
 rotating the current frame by $\psi$ about fixed axis $\boldsymbol{x}$
-(yaw). Thus, the resulting rotation matrix is obtained by
-premultiplication rule.
+(roll). Thus, the resulting rotation matrix is obtained by
+postmultiplication rule.
 
 $$\begin{aligned}
 \boldsymbol{R}(\boldsymbol{\phi}) & =\boldsymbol{R}_{z}(\varphi) \boldsymbol{R}_{y}(\vartheta) \boldsymbol{R}_{x}(\psi)  =\left[\begin{array}{ccc}
@@ -497,17 +505,17 @@ $\varphi$ and $\psi$ can be determined.
 
 ## Angle Axis
 
-The angle-axis is a non-minimal implementation of rotations, which is
-defined by an angle $\vartheta$ and a rotation axis vector
-$\boldsymbol{r}=\left[r_{x}, r_{y},  r_{z}\right]^{T}$ (unit vector) in
-the reference frame $O- x y z$.
+Given a rotation 
+defined by an angle $\vartheta$ around a unit axis vector
+$\boldsymbol{r}=\left[r_{x}, r_{y},  r_{z}\right]^{T}$  in
+the reference frame $O- x y z$, the  angle-axis  representation is defined as $(\vartheta, \boldsymbol{r})$.
 
 
 
 ```{figure} ./kinematics/angle_axis.jpg
 ---
-width: 40%
-name: zyz_euler_angles
+width: 60%
+name: zyz_euler_angles2
 ---
 Rotation of an angle about an axis.
 ```
@@ -517,23 +525,19 @@ Rotation of an angle about an axis.
 
 To derive the rotation matrix
 $\boldsymbol{R}(\vartheta, \boldsymbol{r})$ from
-$(\vartheta, \boldsymbol{r})$, we first create a 'virtual' frame
+$(\vartheta, \boldsymbol{r})$, we first create a body frame
 $O_1- x_1 y_1 z_1$ with its axis $\boldsymbol{z_1}$ aligned with
-$\boldsymbol{r}$. Then, the rotation matrix for the rotation
-$(\vartheta, \boldsymbol{r})$ is 'expressed' in the current frame:
+$\boldsymbol{r}$. Then, the rotation of $\vartheta$ about $\boldsymbol{r}$ can be  'expressed' in the current frame:
 $\boldsymbol{R}_{z}(\vartheta)$. Since our goal is to find the rotation
 matrix $\boldsymbol{R}(\vartheta, \boldsymbol{r})$ 'expressed' in the
-reference frame $O- x y z$, we apply the previous similarity
+reference frame $O- x y z$, we similarly apply the previous similarity
 transformation:
 
-$$\boldsymbol{R}(\vartheta, \boldsymbol{r})= \boldsymbol{R}_{b} \boldsymbol{R}_{z}(\vartheta) (\boldsymbol{R}_{b})^T$$
+$$\boldsymbol{R}(\vartheta, \boldsymbol{r})= \boldsymbol{R}_{1} \boldsymbol{R}_{z}(\vartheta) (\boldsymbol{R}_{1})^T$$
 
-with $\boldsymbol{R}_{1}$ denoting the rotation from the reference frame
-to the virtual frame. From the geometry in Fig.
-[5](#c1.fig.axis-angle){reference-type="ref"
-reference="c1.fig.axis-angle"},
+with $\boldsymbol{R}_{1}$ denoting the rotation of the body frame in reference framework. From  {numref}`zyz_euler_angles2`, we have
 
-$$\boldsymbol{R}_{b}=\boldsymbol{R}_{z}(\alpha) \boldsymbol{R}_{y}(\beta)$$
+$$\boldsymbol{R}_{1}=\boldsymbol{R}_{z}(\alpha) \boldsymbol{R}_{y}(\beta)$$
 
 In sum, the rotation matrix is
 
@@ -551,9 +555,12 @@ $$\begin{gathered}
 \end{gathered}$$
 
 Also, the following property holds:
+
 $$\boldsymbol{R}(-\vartheta,-\boldsymbol{r})=\boldsymbol{R}(\vartheta, \boldsymbol{r})$$
 
 Inversely, given rotation matrix
+
+
 $$\boldsymbol{R}=\left[\begin{array}{lll}
 r_{11} & r_{12} & r_{13} \\
 r_{21} & r_{22} & r_{23} \\
@@ -575,10 +582,10 @@ if $\sin \vartheta \neq 0$; otherwise,
 $(\vartheta, \boldsymbol{r})$ is undefined.
 
 ## Quaternion
-
-A non-minimal representation of rotations which does not suffer from the
-disadvantage encountered with the angle axis is provided by unit
-quaternions, defined as
+Given a rotation 
+defined by an angle $\vartheta$ around a unit axis vector
+$\boldsymbol{r}=\left[r_{x}, r_{y},  r_{z}\right]^{T}$  in
+the reference frame $O- x y z$,  its quaternion is defined as
 
 $$\mathcal{Q}=\{\eta, \boldsymbol{\epsilon}\}, \quad\text{with}
 \quad
@@ -622,8 +629,7 @@ $$\begin{aligned}
 where $\operatorname{sgn}(x)=1$ for $x \geq 0$ and
 $\operatorname{sgn}(x)=-1$ for $x<0$.
 
-The quaternion corresponding to $\boldsymbol{R}^{-1}=\boldsymbol{R}^{T}$
-is denoted as $\mathcal{Q}^{-1}$, and can be computed as
+Similar to the inverse of a rotation matrix $\boldsymbol{R}$, a quaternion also has its own inverse,  denoted as $\mathcal{Q}^{-1}$, corresponding to $\boldsymbol{R}^{-1}=\boldsymbol{R}^{T}$. Quanternion inverse can be easily computed as
 
 $$\mathcal{Q}^{-1}=\{\eta,-\boldsymbol{\epsilon}\}$$
 
@@ -643,7 +649,7 @@ introduced.
 
 ```{figure} ./kinematics/homogenenous_transformation.jpg
 ---
-width: 60%
+width: 80%
 name: homogenenous_transformation
 ---
 Representation of a point $P$ in different coordinate
@@ -653,18 +659,17 @@ frames
 
 
 
-Consider a reference frame $O_{0}- x_{0} y_{0} z_{0}$ and another frame
+Consider a reference frame $O_{0}- x_{0} y_{0} z_{0}$ and body frame 
 $O_{1}- x_{1} y_{1} z_{1}$. Let $\boldsymbol{o}_{1}^{0}$ be the
-coordinate vector of the origin of Frame 1 w.r.t. Frame 0, and
-$\boldsymbol{R}_{1}^{0}$ be the rotation matrix of Frame 1 w.r.t. Frame
-0. Let $\boldsymbol{p}^{0}$ be the coordinate vector of any point $P$
-w.r.t. Frame 0, and $\boldsymbol{p}^{1}$ be the coordinate vector of the
-same point $P$ w.r.t. Frame 1. Then, we have the following relationship
+coordinate of the origin of body frame in reference frame, and
+$\boldsymbol{R}_{1}^{0}$ be the rotation matrix of body frame in reference frame. Let $\boldsymbol{p}^{0}$ be the coordinate of any point $P$
+in reference frame, and $\boldsymbol{p}^{1}$ be the coordinate of the
+same point $P$ in body frame. Then, we have the following relationship
 
 $$\boldsymbol{p}^{0}=\boldsymbol{o}_{1}^{0}+\boldsymbol{R}_{1}^{0} \boldsymbol{p}^{1}$$
 
-To achieve a compact representation, the homogeneous representation of a
-generic vector $\boldsymbol{p}$ is introduced:
+To achieve a compact representation, we first introduce the concept of "homogeneous coordinate" of a
+3D vector $\boldsymbol{p}$, defined as
 
 $$\widetilde{\boldsymbol{p}}=\left[\begin{array}{l}
 \boldsymbol{p} \\
@@ -677,25 +682,27 @@ $$\widetilde{\boldsymbol{p}}^{0}=\boldsymbol{A}_{1}^{0} \widetilde{\boldsymbol{p
 
 with
 
-$$\boldsymbol{A}_{1}^{0}=\left[\begin{array}{cc}
+$$\boldsymbol{T}_{1}^{0}=\left[\begin{array}{cc}
 \boldsymbol{R}_{1}^{0} & \boldsymbol{o}_{1}^{0} \\
 \mathbf{0}^{T} & 1
 \end{array}\right]$$
 
-which is called *homogeneous transformation matrix*. All homogeneous
-transformation matrices belong to the *Special Euclidean Group*, denoted
-as $\boldsymbol{A}_{1}^{0}\in SE(3)$.
+which is called *homogeneous transformation matrix*. 
 
-The inverse transformation,
+<!-- All homogeneous -->
+<!-- transformation matrices belong to the *Special Euclidean Group*, denoted -->
+<!-- as $\boldsymbol{A}_{1}^{0}\in SE(3)$. -->
+
+The inverse  of the homogeneous transformation $\boldsymbol{T}_{1}^{0}$,
 
 $$
-\widetilde{\boldsymbol{p}}^{1}=\boldsymbol{A}_{0}^{1} \widetilde{\boldsymbol{p}}^{0}=\left(\boldsymbol{A}_{1}^{0}\right)^{-1} \widetilde{\boldsymbol{p}}^{0}
+\widetilde{\boldsymbol{p}}^{1}=\boldsymbol{T}_{0}^{1} \widetilde{\boldsymbol{p}}^{0}=\left(\boldsymbol{T}_{1}^{0}\right)^{-1} \widetilde{\boldsymbol{p}}^{0}
 $$
 
 
 with 
 
-$$\boldsymbol{A}_{0}^{1}=\left[\begin{array}{cc}
+$$\boldsymbol{T}_{0}^{1}=\left[\begin{array}{cc}
 \boldsymbol{R}_{1}^{0 T} & -\boldsymbol{R}_{1}^{0 T} \boldsymbol{o}_{1}^{0} \\
 \mathbf{0}^{T} & 1
 \end{array}\right]=\left[\begin{array}{cc}
@@ -704,15 +711,15 @@ $$\boldsymbol{A}_{0}^{1}=\left[\begin{array}{cc}
 \end{array}\right].$$
 
 Notice that for the homogeneous transformation matrix the orthogonality
-property does not hold; 
+property does not hold:
 
-$$\boldsymbol{A}^{-1} \neq \boldsymbol{A}^{T}$$
+$$\boldsymbol{T}^{-1} \neq \boldsymbol{T}^{T}$$
 
-Analogously to what presented for the rotation matrices, it is easy to
-verify that a sequence of coordinate transformations can be composed by
+Following the derivation of sequential rotation transformation, it is easy to
+verify that a sequence of homogeneous transformations can be composed by
 the *postmultiplication rule*
 
-$$\widetilde{\boldsymbol{p}}^{0}=\boldsymbol{A}_{1}^{0} \boldsymbol{A}_{2}^{1} \ldots \boldsymbol{A}_{n}^{n-1} \widetilde{\boldsymbol{p}}^{n}$$
+$$\widetilde{\boldsymbol{p}}^{0}=\boldsymbol{T}_{1}^{0} \boldsymbol{T}_{2}^{1} \ldots \boldsymbol{T}_{n}^{n-1} \widetilde{\boldsymbol{p}}^{n}$$
 
-where $\boldsymbol{A}_{i}^{i-1}$ denotes the homogeneous transformation
-of Frame $i$ with respect to the *current* Frame $i-1$.
+where $\boldsymbol{T}_{i}^{i-1}$ denotes the homogeneous transformation
+of frame $i$ with respect to the *current* frame $i-1$.
