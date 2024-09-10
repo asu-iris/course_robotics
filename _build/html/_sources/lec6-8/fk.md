@@ -7,30 +7,28 @@ title: "Lecture 6-8: Denavit--Hartenberg Convention"
 
 # Forward Kinematics
 
-A manipulator is a kinematic chain of rigid bodies (links) connected by
+A robot arm is a kinematic chain of rigid bodies (links) connected by
 actuated joints. One end of the kinematic chain is mounted to a base and
-the other end to an end-effector (gripper, tool). Joints have two types:
-revolute and prismatic, as in Fig.
-[2](#c1.fig.joints-types){reference-type="ref"
-reference="c1.fig.joints-types"}. The posture of a manipulator is
-described by a number of degrees of freedom (DOFs). Each DOF is
-typically associated with a joint variable. Manipulator (forward/direct)
-kinematics is to derive the relationship between joint motion and the
-motion of the end-effector.
+the other end to an end-effector (gripper, tool). Joints have two tyipcal types (though we learned many):
+revolute and prismatic, as in 
+{numref}`end-effector_frame`. The pose of a robot arm is
+described by all joints (all DoFs). Each DOF is
+typically associated with a joint variable. Forward
+kinematics (FK) is to derive the relationship between joint variables and the
+pose of the end-effector.
 
 
 ```{figure} ./kinematics/end-effector_frame.jpg
 ---
-width: 50%
+width: 70%
 name: end-effector_frame
 ---
-Description of the position and orientation of the end-effector
+Description of the pose (position and orientation) of the end-effector
 frame
 ```
 
-
-
-With respect to a base frame $O_{b}-x_{b} y_{b} z_{b}$, the kinematics
+Consider a robot arm of $n$ joints. Define $\boldsymbol{q}=[q_1, q_2, ..., q_n]$ as the $(n \times 1)$ vector of joint variables.
+With respect to a base frame $O_{b}-x_{b} y_{b} z_{b}$, the FK
 is expressed by the homogeneous transformation
 
 $$\boldsymbol{T}_{e}^{b}(\boldsymbol{q})=\left[\begin{array}{cccc}
@@ -38,54 +36,65 @@ $$\boldsymbol{T}_{e}^{b}(\boldsymbol{q})=\left[\begin{array}{cccc}
 0 & 0 & 0 & 1
 \end{array}\right]$$
 
-where $\boldsymbol{q}$ is the $(n \times 1)$ vector of joint variables,
+where 
 $\{\boldsymbol{n}_{e}, \boldsymbol{s}_{e}, \boldsymbol{a}_{e}\}$ are the
-unit vectors of a frame attached to the end-effector, and
+unit vectors of  the end-effector frame, and
 $\boldsymbol{p}_{e}$ is the position of the origin of the end-effector
 frame. If the end-effector is a gripper, the origin of the end-effector
 frame is located at the center of the gripper, $\boldsymbol{a}_{e}$ is
 chosen in the approach direction to the object, $\boldsymbol{s}_{e}$ is
-chosen normal to $\boldsymbol{a}_{e}$ in the sliding plane of the jaws,
+chosen in the sliding plane of the jaws,
 and $\boldsymbol{n}_{e}$ is chosen to complete the right-handed rule.
 
-# General Rule
-
-A manipulator chain composes of $n+1$ links connected by $n$ joints,
-where Link 0 is conventionally fixed to the ground/base. Each joint
-variable provides a single DOF. Define a frame attached to each link,
-from Link 0 to Link $n$. Then, the transformation of Frame $n$ with
-respect to Frame 0 is
-
-$$\boldsymbol{T}_{n}^{0}(\boldsymbol{q})=\boldsymbol{A}_{1}^{0}\left(q_{1}\right) \boldsymbol{A}_{2}^{1}\left(q_{2}\right) \ldots \boldsymbol{A}_{n}^{n-1}\left(q_{n}\right) .$$
-
-Computation is recursive by simple products of the homogeneous
-transformation matrices $\boldsymbol{A}_{i}^{i-1}\left(q_{i}\right)$
-(for $\left.i=1, \ldots, n\right)$, each of which is a function of a
-single joint variable. The kinematics describing the pose of the
-end-effector frame with respect to the base frame can be obtained as
-
-$$\boldsymbol{T}_{e}^{b}(\boldsymbol{q})=\boldsymbol{T}_{0}^{b} \boldsymbol{T}_{n}^{0}(\boldsymbol{q}) \boldsymbol{T}_{e}^{n}$$
-
-where $\boldsymbol{T}_{0}^{b}$ and $\boldsymbol{T}_{e}^{n}$ are two
-(typically) constant homogeneous transformations describing the position
-and orientation of Frame 0 with respect to the base frame, and of the
-end-effector frame with respect to Frame $n$, respectively.
 
 
-```{figure} ./kinematics/forward_kin.jpg
+# Math Convention in a Robot Arm
+
+
+
+
+
+<!-- ```{figure} ./kinematics/forward_kin.jpg
 ---
-width: 50%
+width: 70%
 name: forward_kin
 ---
 Kinematics of a robot
 manipulator
 ```
+ -->
+
+
+A robot arm composes of $n+1$ links connected by $n$ joints,
+where Link 0 is conventionally fixed to the ground/base. Each joint
+variable provides one DOF. Define a frame attached to each link,
+from Link 0 to Link $n$. Then,  the transformation of Frame $n$ with
+respect to Frame 0 is (postmultiplication rule)
+
+
+$$\boldsymbol{T}_{n}^{0}(\boldsymbol{q})=\boldsymbol{T}_{1}^{0}\left(q_{1}\right) \boldsymbol{T}_{2}^{1}\left(q_{2}\right) \ldots \boldsymbol{T}_{n}^{n-1}\left(q_{n}\right) .$$
+
+Each homogeneous
+transformation $\boldsymbol{T}_{i}^{i-1}\left(q_{i}\right)$
+(for $\left.i=1, \ldots, n\right)$ is a function of a
+corresponding joint variable $q_i$. 
+
+Typically, the base frame can be different from the frame of Link 0, the end-effector frame is different from the frame of Link n.The FK describing the pose of the
+end-effector frame with respect to the base frame is
+
+$$\boldsymbol{T}_{e}^{b}(\boldsymbol{q})=\boldsymbol{T}_{0}^{b} \boldsymbol{T}_{n}^{0}(\boldsymbol{q}) \boldsymbol{T}_{e}^{n}$$
+
+where $\boldsymbol{T}_{0}^{b}$ and $\boldsymbol{T}_{e}^{n}$ are two
+constant homogeneous transformations describing the position
+and orientation of Frame 0 with respect to the base frame, and of the
+end-effector frame with respect to Frame $n$, respectively.
 
 
 
-Then, the question is: how to select a frame for each link to compute
-$\boldsymbol{A}_{i}^{i-1}\left(q_{i}\right)$? (The answer is in the next
-section)
+
+
+New question: how to neatly choose frame for each link to faciliate the computation of 
+$\boldsymbol{T}_{i}^{i-1}\left(q_{i}\right)$? This is why DH convention comes to help.
 
 # Denavit-Hartenberg (DH) Convention
 
@@ -95,36 +104,39 @@ consecutive links.
 
 ```{figure} ./kinematics/DH_convention.jpg
 ---
-width: 50%
+width: 70%
 name: DH_convention
 ---
 Denavit-Hartenberg convention and parameters for link Frame
 $i$
 ```
 
-
-With reference to Fig. [3](#c1.l2.dh){reference-type="ref"
-reference="c1.l2.dh"}, joint $i$ connects Link $i-1$ to Link $i$; DH
+```{important}
+With reference to {numref}`DH_convention`, joint $i$ connects Link $i-1$ to Link $i$; DH
 convention sets the following rules to define link Frame
 $O_{i}-x_{i} y_{i} z_{i}$, given previous link Frame
 $O_{i-1}-x_{i-1} y_{i-1} z_{i-1}$:
 
--   Choose axis $z_{i}$ along the joint $i+1$.
+-   Choose axis $z_{i}$ along the joint $i+1$, and axis $z_{i-1}$ along the joint $i$.
 
--   Locate the origin $O_{i}$ at the intersection of axis $z_{i}$ with
-    the common normal to axes $z_{i}$ and $z_{i-1}$ . Also, locate an
+
+-   Choose the origin $O_{i}$ at the intersection of $z_{i}$ with
+    the common normal to $z_{i}$ and $z_{i-1}$ . 
+
+-   Choose  $x_{i}$ along the common normal to      $z_{i}$ and $z_{i-1}$  with direction  from Joint $i$ to Joint $i+1$.
+
+-   Choose  $y_{i}$ to complete a right-handed frame.
+```
+
+<!-- Choose an
     intermediate point $O_{i^{\prime}}$ at the intersection of the
-    common normal with axis $z_{i-1}$.
+    common normal with axis $z_{i-1}$. -->
 
--   Choose axis $x_{i}$ along the common normal to axes $z_{i-1}$ and
-    $z_{i}$ with direction from Joint $i$ to Joint $i+1$.
 
--   Choose axis $y_{i}$ to complete a right-handed frame.
-
-Once the link frames are established, the position and orientation of
-link Frame $O_{i}-x_{i} y_{i} z_{i}$ with respect to link Frame
-$O_{i-1}-x_{i-1} y_{i-1} z_{i-1}$ have been determined by the following
-four parameters:
+Once the link frames are established by DH convention, the pose of
+link Frame $O_{i}-x_{i} y_{i} z_{i}$ in the link Frame
+$O_{i-1}-x_{i-1} y_{i-1} z_{i-1}$ can be determined by 
+four basic parameters, with the help of an intermediate frame $O_{i^{\prime}}-x_{i^{\prime}} y_{i^{\prime}} z_{i^{\prime}}$ shown in {numref}`DH_convention`:
 
 -   $a_{i}$ distance between $O_{i}$ and $O_{i^{\prime}}$ --- constant
     and depend only on the geometry of links
@@ -138,11 +150,10 @@ four parameters:
 -   $\vartheta_{i}$ angle between axes $x_{i-1}$ and $x_{i}$ about axis
     $z_{i-1}$ --- variable
 
-To compute $\boldsymbol{A}_{i}^{i-1}\left(q_{i}\right)$, we go the
-following steps. First, translate the Frame
-$O_{i-1}-x_{i-1} y_{i-1} z_{i-1}$ by $d_{i}$ along axis $z_{i-1}$ and
-rotate it by $\vartheta_{i}$ about axis $z_{i-1}$; this leads to the
-following transformation of the intermediate Frame $i^{\prime}$
+To compute $\boldsymbol{T}_{i}^{i-1}\left(q_{i}\right)$, we perform four basic transformations. First, translate the Frame
+$O_{i-1}-x_{i-1} y_{i-1} z_{i-1}$ by $d_{i}$ along axis $z_{i-1}$. Second, 
+Rotate the resulting frame by $\vartheta_{i}$ about $z_{i-1}$. These two steps lead to the
+ pose of the intermediate Frame $O_{i^{\prime}}-x_{i^{\prime}} y_{i^{\prime}} z_{i^{\prime}}$ in Frame $O_{i-1}-x_{i-1} y_{i-1} z_{i-1}$:
 
 $$\boldsymbol{A}_{i^{\prime}}^{i-1}=\left[\begin{array}{cccc}
 c_{\vartheta_{i}} & -s_{\vartheta_{i}} & 0 & 0 \\
@@ -151,10 +162,10 @@ s_{\vartheta_{i}} & c_{\vartheta_{i}} & 0 & 0 \\
 0 & 0 & 0 & 1
 \end{array}\right]$$
 
-Second, translate the intermediate Frame $i^{\prime}$ by $a_{i}$ along
-axis $x_{i^{\prime}}$ and rotate it by $\alpha_{i}$ about axis
-$x_{i^{\prime}}$; this leads to the following transformation and Frame
-$O_{i}-x_{i} y_{i} z_{i}$.
+Third, translate the intermediate Frame $i^{\prime}$ by $a_{i}$ along
+axis $x_{i^{\prime}}$, and fourth, rotate it by $\alpha_{i}$ about axis
+$x_{i^{\prime}}$. The last two steps lead  to the pose of 
+$O_{i}-x_{i} y_{i} z_{i}$ in  Frame $O_{i^{\prime}}-x_{i^{\prime}} y_{i^{\prime}} z_{i^{\prime}}$:
 
 $$\boldsymbol{A}_{i}^{i^{\prime}}=\left[\begin{array}{cccc}
 1 & 0 & 0 & a_{i} \\
@@ -163,9 +174,10 @@ $$\boldsymbol{A}_{i}^{i^{\prime}}=\left[\begin{array}{cccc}
 0 & 0 & 0 & 1
 \end{array}\right]$$
 
-Thus, the total transformation is obtained by *postmultiplication rule*
+In sum of the above four steps, the total transformation of link $i$'s Frame
+$O_{i}-x_{i} y_{i} z_{i}$ in the link $i-1$'s Frame $O_{i-1}-x_{i-1} y_{i-1} z_{i-1}$ is 
 
-$$\boldsymbol{A}_{i}^{i-1}\left(q_{i}\right)=\boldsymbol{A}_{i^{\prime}}^{i-1} \boldsymbol{A}_{i}^{i^{\prime}}=\left[\begin{array}{cccc}
+$$\boldsymbol{T}_{i}^{i-1}\left(q_{i}\right)=\boldsymbol{A}_{i^{\prime}}^{i-1} \boldsymbol{A}_{i}^{i^{\prime}}=\left[\begin{array}{cccc}
 c_{\vartheta_{i}} & -s_{\vartheta_{i}} c_{\alpha_{i}} & s_{\vartheta_{i}} s_{\alpha_{i}} & a_{i} c_{\vartheta_{i}} \\
 s_{\vartheta_{i}} & c_{\vartheta_{i}} c_{\alpha_{i}} & -c_{\vartheta_{i}} s_{\alpha_{i}} & a_{i} s_{\vartheta_{i}} \\
 0 & s_{\alpha_{i}} & c_{\alpha_{i}} & d_{i} \\
@@ -173,58 +185,73 @@ s_{\vartheta_{i}} & c_{\vartheta_{i}} c_{\alpha_{i}} & -c_{\vartheta_{i}} s_{\al
 \end{array}\right]$$
 
 The DH convention gives a nonunique definition of the link frame in the
-following cases. (1) For Frame 0, only the direction of axis $z_{0}$ is
-specified; then $O_{0}$ and $x_{0}$ can be arbitrarily chosen. (2) For
+following cases. 
+
+-  For Frame 0, only the direction of axis $z_{0}$ is
+specified; then $O_{0}$ and $x_{0}$ can be arbitrarily chosen. 
+
+-  For
 Frame $n$, since there is no Joint $n+1, z_{n}$ is not uniquely defined
 while $x_{n}$ has to be normal to axis $z_{n-1}$. Typically, Joint $n$
 is revolute, and thus $z_{n}$ is to be aligned with the direction of
-$z_{n-1}$. (3) When two consecutive axes intersect, the direction of
-$x_{i}$ is arbitrary. and (4) When Joint $i$ is prismatic, the direction
-of $z_{i-1}$ is arbitrary. In all such cases, the principle of choosing
+$z_{n-1}$. 
+
+-  When two consecutive axes intersect, the direction of
+$x_{i}$ is arbitrary. and 
+
+- When Joint $i$ is prismatic, the direction
+of $z_{i-1}$ is arbitrary. 
+
+In all such cases, the principle of choosing
 frames is to simplify the procedure; for instance, the axes of
 consecutive frames can be made parallel.
 
 ```{important}
-To summarize, we write the following Algorithm to use DH convention for
-a robot manipulator.
+To summarize, we write the following DH convention for
+a robot arm.
 
-1.  Find and number each joint and set the directions of axes
+1.  Identify  each joint and set the directions of axes
     $z_{0}, \ldots, z_{n-1}$
 
 2.  Choose Frame $O_{0}-x_{0} y_{0} z_{0}$. If possible, choose
     $\{\boldsymbol{x}_{0}, \boldsymbol{y}_{0}, \boldsymbol{z}_{0}\}$ to
     coincide with the base frame.
 
-Execute steps from 3 for $i=1, \ldots, n-1$ :
+Repeat step 3 from link $i=1$ to link $n-1$ :
 
-3.  Choose Frame $O_{i}-x_{i} y_{i} z_{i}$ using the following rules.
+3.  Choose link i's Frame $O_{i}-x_{i} y_{i} z_{i}$ as follows.
+
     First, choose $O_{i}$ at the intersection of $z_{i}$ with the common
     normal to $z_{i-1}$ and $z_{i}$. If $z_{i-1}$ and $z_{i}$ are
     parallel and Joint $i$ is revolute, choose $O_{i}$ so that
     $d_{i}=0$; if Joint $i$ is prismatic, choose $O_{i}$ at as a
-    mechanical limit. Second, choose axis $x_{i}$ along the common
-    normal to axes $z_{i-1}$ and $z_{i}$ with direction from Joint $i$
-    to Joint $i+1$, Third, choose axis $y_{i}$ so as to obtain a
-    right-handed frame.
+    mechanical limit. Second, choose  $x_{i}$ along the common
+    normal to  $z_{i-1}$ and $z_{i}$ with direction from Joint $i$
+    to Joint $i+1$, Third, choose axis $y_{i}$ using
+    right-handed rule.
 
-To complete:
+Calculate transformation:
 
-4.  Choose Frame $O_{n}-x_{n} y_{n} z_{n}$; if Joint $n$ is revolute,
+4.  Choose final link's Frame $O_{n}-x_{n} y_{n} z_{n}$; if Joint $n$ is revolute,
     then align $z_{n}$ with $z_{n-1}$, otherwise, if Joint $n$ is
     prismatic, then choose $z_{n}$ arbitrarily. choose axis $x_{n}$
     along the common normal to axes $z_{n-1}$ and $z_{n}$.
 
-5.  For $i=1, \ldots, n$, establish the DH parameter table
-    $a_{i}, d_{i}, \alpha_{i}, \vartheta_{i}$, compute the homogeneous
-    transformation matrices
-    $\boldsymbol{A}_{i}^{i-1}\left(q_{i}\right)$, and compute the
-    homogeneous transformation
-    $\boldsymbol{T}_{n}^{0}(\boldsymbol{q})=\boldsymbol{A}_{1}^{0} \ldots \boldsymbol{A}_{n}^{n-1}$
-    that yields the pose of Frame $n$ with respect to Frame 0 .
+5.  For $i=1, \ldots, n$, establish the four DH parameter
+    $a_{i}, d_{i}, \alpha_{i}, \vartheta_{i}$, compute the consecutive
+    transformation
+    $\boldsymbol{T}_{i}^{i-1}\left(q_{i}\right)$, and compute the
+     transformation
+    $\boldsymbol{T}_{n}^{0}(\boldsymbol{q})=\boldsymbol{T}_{1}^{0} \ldots \boldsymbol{T}_{n}^{n-1}$.
+
+
+Complete the assembly:
 
 6.  Given $\boldsymbol{T}_{0}^{b}$ and $\boldsymbol{T}_{e}^{n}$, compute
     the kinematics function as $\boldsymbol{T}_{e}^{b}(\boldsymbol{q})=$
     $\boldsymbol{T}_{0}^{b} \boldsymbol{T}_{n}^{0} \boldsymbol{T}_{e}^{n}$.
+
+    
 ```
 
 # Examples

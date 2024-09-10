@@ -678,7 +678,7 @@ $$\widetilde{\boldsymbol{p}}=\left[\begin{array}{l}
 
 Then, the above relationship can be compactly written as
 
-$$\widetilde{\boldsymbol{p}}^{0}=\boldsymbol{A}_{1}^{0} \widetilde{\boldsymbol{p}}^{1}$$
+$$\widetilde{\boldsymbol{p}}^{0}=\boldsymbol{T}_{1}^{0} \widetilde{\boldsymbol{p}}^{1}$$
 
 with
 

@@ -385,7 +385,7 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Forward Kinematics</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#general-rule">General Rule</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#math-convention-in-a-robot-arm">Math Convention in a Robot Arm</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#denavit-hartenberg-dh-convention">Denavit-Hartenberg (DH) Convention</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#workspace">Workspace</a></li>
@@ -405,70 +405,72 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="forward-kinematics">
 <h1>Forward Kinematics<a class="headerlink" href="#forward-kinematics" title="Permalink to this heading">#</a></h1>
-<p>A manipulator is a kinematic chain of rigid bodies (links) connected by
+<p>A robot arm is a kinematic chain of rigid bodies (links) connected by
 actuated joints. One end of the kinematic chain is mounted to a base and
-the other end to an end-effector (gripper, tool). Joints have two types:
-revolute and prismatic, as in Fig.
-<span class="xref myst">2</span>{reference-type=”ref”
-reference=”c1.fig.joints-types”}. The posture of a manipulator is
-described by a number of degrees of freedom (DOFs). Each DOF is
-typically associated with a joint variable. Manipulator (forward/direct)
-kinematics is to derive the relationship between joint motion and the
-motion of the end-effector.</p>
+the other end to an end-effector (gripper, tool). Joints have two tyipcal types (though we learned many):
+revolute and prismatic, as in
+<a class="reference internal" href="#end-effector-frame"><span class="std std-numref">Fig. 24</span></a>. The pose of a robot arm is
+described by all joints (all DoFs). Each DOF is
+typically associated with a joint variable. Forward
+kinematics (FK) is to derive the relationship between joint variables and the
+pose of the end-effector.</p>
 <figure class="align-default" id="end-effector-frame">
-<a class="reference internal image-reference" href="../_images/end-effector_frame.jpg"><img alt="../_images/end-effector_frame.jpg" src="../_images/end-effector_frame.jpg" style="width: 50%;" /></a>
+<a class="reference internal image-reference" href="../_images/end-effector_frame.jpg"><img alt="../_images/end-effector_frame.jpg" src="../_images/end-effector_frame.jpg" style="width: 70%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 24 </span><span class="caption-text">Description of the position and orientation of the end-effector
+<p><span class="caption-number">Fig. 24 </span><span class="caption-text">Description of the pose (position and orientation) of the end-effector
 frame</span><a class="headerlink" href="#end-effector-frame" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>With respect to a base frame <span class="math notranslate nohighlight">\(O_{b}-x_{b} y_{b} z_{b}\)</span>, the kinematics
+<p>Consider a robot arm of <span class="math notranslate nohighlight">\(n\)</span> joints. Define <span class="math notranslate nohighlight">\(\boldsymbol{q}=[q_1, q_2, ..., q_n]\)</span> as the <span class="math notranslate nohighlight">\((n \times 1)\)</span> vector of joint variables.
+With respect to a base frame <span class="math notranslate nohighlight">\(O_{b}-x_{b} y_{b} z_{b}\)</span>, the FK
 is expressed by the homogeneous transformation</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\boldsymbol{T}_{e}^{b}(\boldsymbol{q})=\left[\begin{array}{cccc}
 \boldsymbol{n}_{e}^{b}(\boldsymbol{q}) &amp; \boldsymbol{s}_{e}^{b}(\boldsymbol{q}) &amp; \boldsymbol{a}_{e}^{b}(\boldsymbol{q}) &amp; \boldsymbol{p}_{e}^{b}(\boldsymbol{q}) \\
 0 &amp; 0 &amp; 0 &amp; 1
 \end{array}\right]\end{split}\]</div>
-<p>where <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span> is the <span class="math notranslate nohighlight">\((n \times 1)\)</span> vector of joint variables,
+<p>where
 <span class="math notranslate nohighlight">\(\{\boldsymbol{n}_{e}, \boldsymbol{s}_{e}, \boldsymbol{a}_{e}\}\)</span> are the
-unit vectors of a frame attached to the end-effector, and
+unit vectors of  the end-effector frame, and
 <span class="math notranslate nohighlight">\(\boldsymbol{p}_{e}\)</span> is the position of the origin of the end-effector
 frame. If the end-effector is a gripper, the origin of the end-effector
 frame is located at the center of the gripper, <span class="math notranslate nohighlight">\(\boldsymbol{a}_{e}\)</span> is
 chosen in the approach direction to the object, <span class="math notranslate nohighlight">\(\boldsymbol{s}_{e}\)</span> is
-chosen normal to <span class="math notranslate nohighlight">\(\boldsymbol{a}_{e}\)</span> in the sliding plane of the jaws,
+chosen in the sliding plane of the jaws,
 and <span class="math notranslate nohighlight">\(\boldsymbol{n}_{e}\)</span> is chosen to complete the right-handed rule.</p>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="general-rule">
-<h1>General Rule<a class="headerlink" href="#general-rule" title="Permalink to this heading">#</a></h1>
-<p>A manipulator chain composes of <span class="math notranslate nohighlight">\(n+1\)</span> links connected by <span class="math notranslate nohighlight">\(n\)</span> joints,
+<section class="tex2jax_ignore mathjax_ignore" id="math-convention-in-a-robot-arm">
+<h1>Math Convention in a Robot Arm<a class="headerlink" href="#math-convention-in-a-robot-arm" title="Permalink to this heading">#</a></h1>
+<!-- ```{figure} ./kinematics/forward_kin.jpg
+---
+width: 70%
+name: forward_kin
+---
+Kinematics of a robot
+manipulator
+```
+ -->
+<p>A robot arm composes of <span class="math notranslate nohighlight">\(n+1\)</span> links connected by <span class="math notranslate nohighlight">\(n\)</span> joints,
 where Link 0 is conventionally fixed to the ground/base. Each joint
-variable provides a single DOF. Define a frame attached to each link,
-from Link 0 to Link <span class="math notranslate nohighlight">\(n\)</span>. Then, the transformation of Frame <span class="math notranslate nohighlight">\(n\)</span> with
-respect to Frame 0 is</p>
+variable provides one DOF. Define a frame attached to each link,
+from Link 0 to Link <span class="math notranslate nohighlight">\(n\)</span>. Then,  the transformation of Frame <span class="math notranslate nohighlight">\(n\)</span> with
+respect to Frame 0 is (postmultiplication rule)</p>
 <div class="math notranslate nohighlight">
-\[\boldsymbol{T}_{n}^{0}(\boldsymbol{q})=\boldsymbol{A}_{1}^{0}\left(q_{1}\right) \boldsymbol{A}_{2}^{1}\left(q_{2}\right) \ldots \boldsymbol{A}_{n}^{n-1}\left(q_{n}\right) .\]</div>
-<p>Computation is recursive by simple products of the homogeneous
-transformation matrices <span class="math notranslate nohighlight">\(\boldsymbol{A}_{i}^{i-1}\left(q_{i}\right)\)</span>
-(for <span class="math notranslate nohighlight">\(\left.i=1, \ldots, n\right)\)</span>, each of which is a function of a
-single joint variable. The kinematics describing the pose of the
-end-effector frame with respect to the base frame can be obtained as</p>
+\[\boldsymbol{T}_{n}^{0}(\boldsymbol{q})=\boldsymbol{T}_{1}^{0}\left(q_{1}\right) \boldsymbol{T}_{2}^{1}\left(q_{2}\right) \ldots \boldsymbol{T}_{n}^{n-1}\left(q_{n}\right) .\]</div>
+<p>Each homogeneous
+transformation <span class="math notranslate nohighlight">\(\boldsymbol{T}_{i}^{i-1}\left(q_{i}\right)\)</span>
+(for <span class="math notranslate nohighlight">\(\left.i=1, \ldots, n\right)\)</span> is a function of a
+corresponding joint variable <span class="math notranslate nohighlight">\(q_i\)</span>.</p>
+<p>Typically, the base frame can be different from the frame of Link 0, the end-effector frame is different from the frame of Link n.The FK describing the pose of the
+end-effector frame with respect to the base frame is</p>
 <div class="math notranslate nohighlight">
 \[\boldsymbol{T}_{e}^{b}(\boldsymbol{q})=\boldsymbol{T}_{0}^{b} \boldsymbol{T}_{n}^{0}(\boldsymbol{q}) \boldsymbol{T}_{e}^{n}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\boldsymbol{T}_{0}^{b}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{T}_{e}^{n}\)</span> are two
-(typically) constant homogeneous transformations describing the position
+constant homogeneous transformations describing the position
 and orientation of Frame 0 with respect to the base frame, and of the
 end-effector frame with respect to Frame <span class="math notranslate nohighlight">\(n\)</span>, respectively.</p>
-<figure class="align-default" id="forward-kin">
-<a class="reference internal image-reference" href="../_images/forward_kin.jpg"><img alt="../_images/forward_kin.jpg" src="../_images/forward_kin.jpg" style="width: 50%;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 25 </span><span class="caption-text">Kinematics of a robot
-manipulator</span><a class="headerlink" href="#forward-kin" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
-<p>Then, the question is: how to select a frame for each link to compute
-<span class="math notranslate nohighlight">\(\boldsymbol{A}_{i}^{i-1}\left(q_{i}\right)\)</span>? (The answer is in the next
-section)</p>
+<p>New question: how to neatly choose frame for each link to faciliate the computation of
+<span class="math notranslate nohighlight">\(\boldsymbol{T}_{i}^{i-1}\left(q_{i}\right)\)</span>? This is why DH convention comes to help.</p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="denavit-hartenberg-dh-convention">
 <h1>Denavit-Hartenberg (DH) Convention<a class="headerlink" href="#denavit-hartenberg-dh-convention" title="Permalink to this heading">#</a></h1>
@@ -476,31 +478,33 @@ section)</p>
 define a frame to each link and obtain the transformation between two
 consecutive links.</p>
 <figure class="align-default" id="dh-convention">
-<a class="reference internal image-reference" href="../_images/DH_convention.jpg"><img alt="../_images/DH_convention.jpg" src="../_images/DH_convention.jpg" style="width: 50%;" /></a>
+<a class="reference internal image-reference" href="../_images/DH_convention.jpg"><img alt="../_images/DH_convention.jpg" src="../_images/DH_convention.jpg" style="width: 70%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 26 </span><span class="caption-text">Denavit-Hartenberg convention and parameters for link Frame
+<p><span class="caption-number">Fig. 25 </span><span class="caption-text">Denavit-Hartenberg convention and parameters for link Frame
 <span class="math notranslate nohighlight">\(i\)</span></span><a class="headerlink" href="#dh-convention" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>With reference to Fig. <span class="xref myst">3</span>{reference-type=”ref”
-reference=”c1.l2.dh”}, joint <span class="math notranslate nohighlight">\(i\)</span> connects Link <span class="math notranslate nohighlight">\(i-1\)</span> to Link <span class="math notranslate nohighlight">\(i\)</span>; DH
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>With reference to <a class="reference internal" href="#dh-convention"><span class="std std-numref">Fig. 25</span></a>, joint <span class="math notranslate nohighlight">\(i\)</span> connects Link <span class="math notranslate nohighlight">\(i-1\)</span> to Link <span class="math notranslate nohighlight">\(i\)</span>; DH
 convention sets the following rules to define link Frame
 <span class="math notranslate nohighlight">\(O_{i}-x_{i} y_{i} z_{i}\)</span>, given previous link Frame
 <span class="math notranslate nohighlight">\(O_{i-1}-x_{i-1} y_{i-1} z_{i-1}\)</span>:</p>
 <ul class="simple">
-<li><p>Choose axis <span class="math notranslate nohighlight">\(z_{i}\)</span> along the joint <span class="math notranslate nohighlight">\(i+1\)</span>.</p></li>
-<li><p>Locate the origin <span class="math notranslate nohighlight">\(O_{i}\)</span> at the intersection of axis <span class="math notranslate nohighlight">\(z_{i}\)</span> with
-the common normal to axes <span class="math notranslate nohighlight">\(z_{i}\)</span> and <span class="math notranslate nohighlight">\(z_{i-1}\)</span> . Also, locate an
-intermediate point <span class="math notranslate nohighlight">\(O_{i^{\prime}}\)</span> at the intersection of the
-common normal with axis <span class="math notranslate nohighlight">\(z_{i-1}\)</span>.</p></li>
-<li><p>Choose axis <span class="math notranslate nohighlight">\(x_{i}\)</span> along the common normal to axes <span class="math notranslate nohighlight">\(z_{i-1}\)</span> and
-<span class="math notranslate nohighlight">\(z_{i}\)</span> with direction from Joint <span class="math notranslate nohighlight">\(i\)</span> to Joint <span class="math notranslate nohighlight">\(i+1\)</span>.</p></li>
-<li><p>Choose axis <span class="math notranslate nohighlight">\(y_{i}\)</span> to complete a right-handed frame.</p></li>
+<li><p>Choose axis <span class="math notranslate nohighlight">\(z_{i}\)</span> along the joint <span class="math notranslate nohighlight">\(i+1\)</span>, and axis <span class="math notranslate nohighlight">\(z_{i-1}\)</span> along the joint <span class="math notranslate nohighlight">\(i\)</span>.</p></li>
+<li><p>Choose the origin <span class="math notranslate nohighlight">\(O_{i}\)</span> at the intersection of <span class="math notranslate nohighlight">\(z_{i}\)</span> with
+the common normal to <span class="math notranslate nohighlight">\(z_{i}\)</span> and <span class="math notranslate nohighlight">\(z_{i-1}\)</span> .</p></li>
+<li><p>Choose  <span class="math notranslate nohighlight">\(x_{i}\)</span> along the common normal to      <span class="math notranslate nohighlight">\(z_{i}\)</span> and <span class="math notranslate nohighlight">\(z_{i-1}\)</span>  with direction  from Joint <span class="math notranslate nohighlight">\(i\)</span> to Joint <span class="math notranslate nohighlight">\(i+1\)</span>.</p></li>
+<li><p>Choose  <span class="math notranslate nohighlight">\(y_{i}\)</span> to complete a right-handed frame.</p></li>
 </ul>
-<p>Once the link frames are established, the position and orientation of
-link Frame <span class="math notranslate nohighlight">\(O_{i}-x_{i} y_{i} z_{i}\)</span> with respect to link Frame
-<span class="math notranslate nohighlight">\(O_{i-1}-x_{i-1} y_{i-1} z_{i-1}\)</span> have been determined by the following
-four parameters:</p>
+</div>
+<!-- Choose an
+    intermediate point $O_{i^{\prime}}$ at the intersection of the
+    common normal with axis $z_{i-1}$. -->
+<p>Once the link frames are established by DH convention, the pose of
+link Frame <span class="math notranslate nohighlight">\(O_{i}-x_{i} y_{i} z_{i}\)</span> in the link Frame
+<span class="math notranslate nohighlight">\(O_{i-1}-x_{i-1} y_{i-1} z_{i-1}\)</span> can be determined by
+four basic parameters, with the help of an intermediate frame <span class="math notranslate nohighlight">\(O_{i^{\prime}}-x_{i^{\prime}} y_{i^{\prime}} z_{i^{\prime}}\)</span> shown in <a class="reference internal" href="#dh-convention"><span class="std std-numref">Fig. 25</span></a>:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(a_{i}\)</span> distance between <span class="math notranslate nohighlight">\(O_{i}\)</span> and <span class="math notranslate nohighlight">\(O_{i^{\prime}}\)</span> — constant
 and depend only on the geometry of links</p></li>
@@ -511,11 +515,10 @@ and depend only on the geometry of links</p></li>
 <li><p><span class="math notranslate nohighlight">\(\vartheta_{i}\)</span> angle between axes <span class="math notranslate nohighlight">\(x_{i-1}\)</span> and <span class="math notranslate nohighlight">\(x_{i}\)</span> about axis
 <span class="math notranslate nohighlight">\(z_{i-1}\)</span> — variable</p></li>
 </ul>
-<p>To compute <span class="math notranslate nohighlight">\(\boldsymbol{A}_{i}^{i-1}\left(q_{i}\right)\)</span>, we go the
-following steps. First, translate the Frame
-<span class="math notranslate nohighlight">\(O_{i-1}-x_{i-1} y_{i-1} z_{i-1}\)</span> by <span class="math notranslate nohighlight">\(d_{i}\)</span> along axis <span class="math notranslate nohighlight">\(z_{i-1}\)</span> and
-rotate it by <span class="math notranslate nohighlight">\(\vartheta_{i}\)</span> about axis <span class="math notranslate nohighlight">\(z_{i-1}\)</span>; this leads to the
-following transformation of the intermediate Frame <span class="math notranslate nohighlight">\(i^{\prime}\)</span></p>
+<p>To compute <span class="math notranslate nohighlight">\(\boldsymbol{T}_{i}^{i-1}\left(q_{i}\right)\)</span>, we perform four basic transformations. First, translate the Frame
+<span class="math notranslate nohighlight">\(O_{i-1}-x_{i-1} y_{i-1} z_{i-1}\)</span> by <span class="math notranslate nohighlight">\(d_{i}\)</span> along axis <span class="math notranslate nohighlight">\(z_{i-1}\)</span>. Second,
+Rotate the resulting frame by <span class="math notranslate nohighlight">\(\vartheta_{i}\)</span> about <span class="math notranslate nohighlight">\(z_{i-1}\)</span>. These two steps lead to the
+pose of the intermediate Frame <span class="math notranslate nohighlight">\(O_{i^{\prime}}-x_{i^{\prime}} y_{i^{\prime}} z_{i^{\prime}}\)</span> in Frame <span class="math notranslate nohighlight">\(O_{i-1}-x_{i-1} y_{i-1} z_{i-1}\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\boldsymbol{A}_{i^{\prime}}^{i-1}=\left[\begin{array}{cccc}
 c_{\vartheta_{i}} &amp; -s_{\vartheta_{i}} &amp; 0 &amp; 0 \\
@@ -523,10 +526,10 @@ s_{\vartheta_{i}} &amp; c_{\vartheta_{i}} &amp; 0 &amp; 0 \\
 0 &amp; 0 &amp; 1 &amp; d_{i} \\
 0 &amp; 0 &amp; 0 &amp; 1
 \end{array}\right]\end{split}\]</div>
-<p>Second, translate the intermediate Frame <span class="math notranslate nohighlight">\(i^{\prime}\)</span> by <span class="math notranslate nohighlight">\(a_{i}\)</span> along
-axis <span class="math notranslate nohighlight">\(x_{i^{\prime}}\)</span> and rotate it by <span class="math notranslate nohighlight">\(\alpha_{i}\)</span> about axis
-<span class="math notranslate nohighlight">\(x_{i^{\prime}}\)</span>; this leads to the following transformation and Frame
-<span class="math notranslate nohighlight">\(O_{i}-x_{i} y_{i} z_{i}\)</span>.</p>
+<p>Third, translate the intermediate Frame <span class="math notranslate nohighlight">\(i^{\prime}\)</span> by <span class="math notranslate nohighlight">\(a_{i}\)</span> along
+axis <span class="math notranslate nohighlight">\(x_{i^{\prime}}\)</span>, and fourth, rotate it by <span class="math notranslate nohighlight">\(\alpha_{i}\)</span> about axis
+<span class="math notranslate nohighlight">\(x_{i^{\prime}}\)</span>. The last two steps lead  to the pose of
+<span class="math notranslate nohighlight">\(O_{i}-x_{i} y_{i} z_{i}\)</span> in  Frame <span class="math notranslate nohighlight">\(O_{i^{\prime}}-x_{i^{\prime}} y_{i^{\prime}} z_{i^{\prime}}\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\boldsymbol{A}_{i}^{i^{\prime}}=\left[\begin{array}{cccc}
 1 &amp; 0 &amp; 0 &amp; a_{i} \\
@@ -534,61 +537,72 @@ axis <span class="math notranslate nohighlight">\(x_{i^{\prime}}\)</span> and ro
 0 &amp; s_{\alpha_{i}} &amp; c_{\alpha_{i}} &amp; 0 \\
 0 &amp; 0 &amp; 0 &amp; 1
 \end{array}\right]\end{split}\]</div>
-<p>Thus, the total transformation is obtained by <em>postmultiplication rule</em></p>
+<p>In sum of the above four steps, the total transformation of link <span class="math notranslate nohighlight">\(i\)</span>’s Frame
+<span class="math notranslate nohighlight">\(O_{i}-x_{i} y_{i} z_{i}\)</span> in the link <span class="math notranslate nohighlight">\(i-1\)</span>’s Frame <span class="math notranslate nohighlight">\(O_{i-1}-x_{i-1} y_{i-1} z_{i-1}\)</span> is</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\boldsymbol{A}_{i}^{i-1}\left(q_{i}\right)=\boldsymbol{A}_{i^{\prime}}^{i-1} \boldsymbol{A}_{i}^{i^{\prime}}=\left[\begin{array}{cccc}
+\[\begin{split}\boldsymbol{T}_{i}^{i-1}\left(q_{i}\right)=\boldsymbol{A}_{i^{\prime}}^{i-1} \boldsymbol{A}_{i}^{i^{\prime}}=\left[\begin{array}{cccc}
 c_{\vartheta_{i}} &amp; -s_{\vartheta_{i}} c_{\alpha_{i}} &amp; s_{\vartheta_{i}} s_{\alpha_{i}} &amp; a_{i} c_{\vartheta_{i}} \\
 s_{\vartheta_{i}} &amp; c_{\vartheta_{i}} c_{\alpha_{i}} &amp; -c_{\vartheta_{i}} s_{\alpha_{i}} &amp; a_{i} s_{\vartheta_{i}} \\
 0 &amp; s_{\alpha_{i}} &amp; c_{\alpha_{i}} &amp; d_{i} \\
 0 &amp; 0 &amp; 0 &amp; 1
 \end{array}\right]\end{split}\]</div>
 <p>The DH convention gives a nonunique definition of the link frame in the
-following cases. (1) For Frame 0, only the direction of axis <span class="math notranslate nohighlight">\(z_{0}\)</span> is
-specified; then <span class="math notranslate nohighlight">\(O_{0}\)</span> and <span class="math notranslate nohighlight">\(x_{0}\)</span> can be arbitrarily chosen. (2) For
+following cases.</p>
+<ul class="simple">
+<li><p>For Frame 0, only the direction of axis <span class="math notranslate nohighlight">\(z_{0}\)</span> is
+specified; then <span class="math notranslate nohighlight">\(O_{0}\)</span> and <span class="math notranslate nohighlight">\(x_{0}\)</span> can be arbitrarily chosen.</p></li>
+<li><p>For
 Frame <span class="math notranslate nohighlight">\(n\)</span>, since there is no Joint <span class="math notranslate nohighlight">\(n+1, z_{n}\)</span> is not uniquely defined
 while <span class="math notranslate nohighlight">\(x_{n}\)</span> has to be normal to axis <span class="math notranslate nohighlight">\(z_{n-1}\)</span>. Typically, Joint <span class="math notranslate nohighlight">\(n\)</span>
 is revolute, and thus <span class="math notranslate nohighlight">\(z_{n}\)</span> is to be aligned with the direction of
-<span class="math notranslate nohighlight">\(z_{n-1}\)</span>. (3) When two consecutive axes intersect, the direction of
-<span class="math notranslate nohighlight">\(x_{i}\)</span> is arbitrary. and (4) When Joint <span class="math notranslate nohighlight">\(i\)</span> is prismatic, the direction
-of <span class="math notranslate nohighlight">\(z_{i-1}\)</span> is arbitrary. In all such cases, the principle of choosing
+<span class="math notranslate nohighlight">\(z_{n-1}\)</span>.</p></li>
+<li><p>When two consecutive axes intersect, the direction of
+<span class="math notranslate nohighlight">\(x_{i}\)</span> is arbitrary. and</p></li>
+<li><p>When Joint <span class="math notranslate nohighlight">\(i\)</span> is prismatic, the direction
+of <span class="math notranslate nohighlight">\(z_{i-1}\)</span> is arbitrary.</p></li>
+</ul>
+<p>In all such cases, the principle of choosing
 frames is to simplify the procedure; for instance, the axes of
 consecutive frames can be made parallel.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>To summarize, we write the following Algorithm to use DH convention for
-a robot manipulator.</p>
+<p>To summarize, we write the following DH convention for
+a robot arm.</p>
 <ol class="arabic simple">
-<li><p>Find and number each joint and set the directions of axes
+<li><p>Identify  each joint and set the directions of axes
 <span class="math notranslate nohighlight">\(z_{0}, \ldots, z_{n-1}\)</span></p></li>
 <li><p>Choose Frame <span class="math notranslate nohighlight">\(O_{0}-x_{0} y_{0} z_{0}\)</span>. If possible, choose
 <span class="math notranslate nohighlight">\(\{\boldsymbol{x}_{0}, \boldsymbol{y}_{0}, \boldsymbol{z}_{0}\}\)</span> to
 coincide with the base frame.</p></li>
 </ol>
-<p>Execute steps from 3 for <span class="math notranslate nohighlight">\(i=1, \ldots, n-1\)</span> :</p>
-<ol class="arabic simple" start="3">
-<li><p>Choose Frame <span class="math notranslate nohighlight">\(O_{i}-x_{i} y_{i} z_{i}\)</span> using the following rules.
-First, choose <span class="math notranslate nohighlight">\(O_{i}\)</span> at the intersection of <span class="math notranslate nohighlight">\(z_{i}\)</span> with the common
+<p>Repeat step 3 from link <span class="math notranslate nohighlight">\(i=1\)</span> to link <span class="math notranslate nohighlight">\(n-1\)</span> :</p>
+<ol class="arabic" start="3">
+<li><p>Choose link i’s Frame <span class="math notranslate nohighlight">\(O_{i}-x_{i} y_{i} z_{i}\)</span> as follows.</p>
+<p>First, choose <span class="math notranslate nohighlight">\(O_{i}\)</span> at the intersection of <span class="math notranslate nohighlight">\(z_{i}\)</span> with the common
 normal to <span class="math notranslate nohighlight">\(z_{i-1}\)</span> and <span class="math notranslate nohighlight">\(z_{i}\)</span>. If <span class="math notranslate nohighlight">\(z_{i-1}\)</span> and <span class="math notranslate nohighlight">\(z_{i}\)</span> are
 parallel and Joint <span class="math notranslate nohighlight">\(i\)</span> is revolute, choose <span class="math notranslate nohighlight">\(O_{i}\)</span> so that
 <span class="math notranslate nohighlight">\(d_{i}=0\)</span>; if Joint <span class="math notranslate nohighlight">\(i\)</span> is prismatic, choose <span class="math notranslate nohighlight">\(O_{i}\)</span> at as a
-mechanical limit. Second, choose axis <span class="math notranslate nohighlight">\(x_{i}\)</span> along the common
-normal to axes <span class="math notranslate nohighlight">\(z_{i-1}\)</span> and <span class="math notranslate nohighlight">\(z_{i}\)</span> with direction from Joint <span class="math notranslate nohighlight">\(i\)</span>
-to Joint <span class="math notranslate nohighlight">\(i+1\)</span>, Third, choose axis <span class="math notranslate nohighlight">\(y_{i}\)</span> so as to obtain a
-right-handed frame.</p></li>
+mechanical limit. Second, choose  <span class="math notranslate nohighlight">\(x_{i}\)</span> along the common
+normal to  <span class="math notranslate nohighlight">\(z_{i-1}\)</span> and <span class="math notranslate nohighlight">\(z_{i}\)</span> with direction from Joint <span class="math notranslate nohighlight">\(i\)</span>
+to Joint <span class="math notranslate nohighlight">\(i+1\)</span>, Third, choose axis <span class="math notranslate nohighlight">\(y_{i}\)</span> using
+right-handed rule.</p>
+</li>
 </ol>
-<p>To complete:</p>
+<p>Calculate transformation:</p>
 <ol class="arabic simple" start="4">
-<li><p>Choose Frame <span class="math notranslate nohighlight">\(O_{n}-x_{n} y_{n} z_{n}\)</span>; if Joint <span class="math notranslate nohighlight">\(n\)</span> is revolute,
+<li><p>Choose final link’s Frame <span class="math notranslate nohighlight">\(O_{n}-x_{n} y_{n} z_{n}\)</span>; if Joint <span class="math notranslate nohighlight">\(n\)</span> is revolute,
 then align <span class="math notranslate nohighlight">\(z_{n}\)</span> with <span class="math notranslate nohighlight">\(z_{n-1}\)</span>, otherwise, if Joint <span class="math notranslate nohighlight">\(n\)</span> is
 prismatic, then choose <span class="math notranslate nohighlight">\(z_{n}\)</span> arbitrarily. choose axis <span class="math notranslate nohighlight">\(x_{n}\)</span>
 along the common normal to axes <span class="math notranslate nohighlight">\(z_{n-1}\)</span> and <span class="math notranslate nohighlight">\(z_{n}\)</span>.</p></li>
-<li><p>For <span class="math notranslate nohighlight">\(i=1, \ldots, n\)</span>, establish the DH parameter table
-<span class="math notranslate nohighlight">\(a_{i}, d_{i}, \alpha_{i}, \vartheta_{i}\)</span>, compute the homogeneous
-transformation matrices
-<span class="math notranslate nohighlight">\(\boldsymbol{A}_{i}^{i-1}\left(q_{i}\right)\)</span>, and compute the
-homogeneous transformation
-<span class="math notranslate nohighlight">\(\boldsymbol{T}_{n}^{0}(\boldsymbol{q})=\boldsymbol{A}_{1}^{0} \ldots \boldsymbol{A}_{n}^{n-1}\)</span>
-that yields the pose of Frame <span class="math notranslate nohighlight">\(n\)</span> with respect to Frame 0 .</p></li>
+<li><p>For <span class="math notranslate nohighlight">\(i=1, \ldots, n\)</span>, establish the four DH parameter
+<span class="math notranslate nohighlight">\(a_{i}, d_{i}, \alpha_{i}, \vartheta_{i}\)</span>, compute the consecutive
+transformation
+<span class="math notranslate nohighlight">\(\boldsymbol{T}_{i}^{i-1}\left(q_{i}\right)\)</span>, and compute the
+transformation
+<span class="math notranslate nohighlight">\(\boldsymbol{T}_{n}^{0}(\boldsymbol{q})=\boldsymbol{T}_{1}^{0} \ldots \boldsymbol{T}_{n}^{n-1}\)</span>.</p></li>
+</ol>
+<p>Complete the assembly:</p>
+<ol class="arabic simple" start="6">
 <li><p>Given <span class="math notranslate nohighlight">\(\boldsymbol{T}_{0}^{b}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{T}_{e}^{n}\)</span>, compute
 the kinematics function as <span class="math notranslate nohighlight">\(\boldsymbol{T}_{e}^{b}(\boldsymbol{q})=\)</span>
 <span class="math notranslate nohighlight">\(\boldsymbol{T}_{0}^{b} \boldsymbol{T}_{n}^{0} \boldsymbol{T}_{e}^{n}\)</span>.</p></li>
@@ -604,7 +618,7 @@ Three-link Planar Arm</div>
 <figure class="align-default" id="link-arm">
 <a class="reference internal image-reference" href="../_images/3link_arm.jpg"><img alt="../_images/3link_arm.jpg" src="../_images/3link_arm.jpg" style="width: 40%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 27 </span><span class="caption-text">Three link robot arm</span><a class="headerlink" href="#link-arm" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 26 </span><span class="caption-text">Three link robot arm</span><a class="headerlink" href="#link-arm" title="Permalink to this image">#</a></p>
 <div class="legend">
 <table class="table">
 <thead>
@@ -655,7 +669,7 @@ Spherical Arm</div>
 <figure class="align-default" id="spherical-arm">
 <a class="reference internal image-reference" href="../_images/spherical_arm.jpg"><img alt="../_images/spherical_arm.jpg" src="../_images/spherical_arm.jpg" style="width: 50%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 28 </span><span class="caption-text">Three link robot arm</span><a class="headerlink" href="#spherical-arm" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 27 </span><span class="caption-text">Three link robot arm</span><a class="headerlink" href="#spherical-arm" title="Permalink to this image">#</a></p>
 <div class="legend">
 <table class="table">
 <thead>
@@ -706,7 +720,7 @@ Anthropomorphic Arm</div>
 <figure class="align-default" id="anthropomorphic-arm">
 <a class="reference internal image-reference" href="../_images/anthropomorphic_arm.jpg"><img alt="../_images/anthropomorphic_arm.jpg" src="../_images/anthropomorphic_arm.jpg" style="width: 50%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 29 </span><span class="caption-text">Three link robot arm</span><a class="headerlink" href="#anthropomorphic-arm" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 28 </span><span class="caption-text">Three link robot arm</span><a class="headerlink" href="#anthropomorphic-arm" title="Permalink to this image">#</a></p>
 <div class="legend">
 <table class="table">
 <thead>
@@ -757,7 +771,7 @@ Spherical Wrist</div>
 <figure class="align-default" id="spherical-wrist">
 <a class="reference internal image-reference" href="../_images/spherical_wrist.jpg"><img alt="../_images/spherical_wrist.jpg" src="../_images/spherical_wrist.jpg" style="width: 50%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 30 </span><span class="caption-text">Three link robot arm</span><a class="headerlink" href="#spherical-wrist" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 29 </span><span class="caption-text">Three link robot arm</span><a class="headerlink" href="#spherical-wrist" title="Permalink to this image">#</a></p>
 <div class="legend">
 <table class="table">
 <thead>
@@ -808,7 +822,7 @@ Stanford Manipulator</div>
 <figure class="align-default" id="stanford-manipulator">
 <a class="reference internal image-reference" href="../_images/Stanford_manipulator.jpg"><img alt="../_images/Stanford_manipulator.jpg" src="../_images/Stanford_manipulator.jpg" style="width: 50%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 31 </span><span class="caption-text">Stanford manipulator</span><a class="headerlink" href="#stanford-manipulator" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 30 </span><span class="caption-text">Stanford manipulator</span><a class="headerlink" href="#stanford-manipulator" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="math notranslate nohighlight">
@@ -850,7 +864,7 @@ Anthropomorphic Arm with Spherical Wrist</div>
 <figure class="align-default" id="anthropomorphic-manipulator">
 <a class="reference internal image-reference" href="../_images/anthropomorphic_manipulator.jpg"><img alt="../_images/anthropomorphic_manipulator.jpg" src="../_images/anthropomorphic_manipulator.jpg" style="width: 50%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 32 </span><span class="caption-text">Anthropomorphic manipulator</span><a class="headerlink" href="#anthropomorphic-manipulator" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 31 </span><span class="caption-text">Anthropomorphic manipulator</span><a class="headerlink" href="#anthropomorphic-manipulator" title="Permalink to this image">#</a></p>
 <div class="legend">
 <table class="table">
 <thead>
@@ -1011,7 +1025,7 @@ end-effector motion.</p>
 <figure class="align-default" id="dhparameter">
 <a class="reference internal image-reference" href="../_images/DHParameter.png"><img alt="../_images/DHParameter.png" src="../_images/DHParameter.png" style="width: 50%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 33 </span><span class="caption-text">Modified DH parameters (or called Craig’s convention). Image from
+<p><span class="caption-number">Fig. 32 </span><span class="caption-text">Modified DH parameters (or called Craig’s convention). Image from
 Wiki</span><a class="headerlink" href="#dhparameter" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
@@ -1041,13 +1055,13 @@ kinematics at</p>
 <figure class="align-default" id="dh-diagram">
 <a class="reference internal image-reference" href="../_images/dh-diagram.png"><img alt="../_images/dh-diagram.png" src="../_images/dh-diagram.png" style="width: 50%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 34 </span><span class="caption-text">Panda’s kinematic chain</span><a class="headerlink" href="#dh-diagram" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 33 </span><span class="caption-text">Panda’s kinematic chain</span><a class="headerlink" href="#dh-diagram" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="cover">
 <a class="reference internal image-reference" href="../_images/cover.png"><img alt="../_images/cover.png" src="../_images/cover.png" style="width: 50%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 35 </span><span class="caption-text">Panda’s kinematic chain (from Peter Corke’s
+<p><span class="caption-number">Fig. 34 </span><span class="caption-text">Panda’s kinematic chain (from Peter Corke’s
 Tutorial</span><a class="headerlink" href="#cover" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
@@ -1121,7 +1135,7 @@ Tutorial</span><a class="headerlink" href="#cover" title="Permalink to this imag
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Forward Kinematics</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#general-rule">General Rule</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#math-convention-in-a-robot-arm">Math Convention in a Robot Arm</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#denavit-hartenberg-dh-convention">Denavit-Hartenberg (DH) Convention</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#workspace">Workspace</a></li>
