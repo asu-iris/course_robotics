@@ -117,7 +117,7 @@ convention sets the following rules to define link Frame
 $O_{i}-x_{i} y_{i} z_{i}$, given previous link Frame
 $O_{i-1}-x_{i-1} y_{i-1} z_{i-1}$:
 
--   Choose axis $z_{i}$ along the joint $i+1$, and axis $z_{i-1}$ along the joint $i$.
+-   Choose axis $z_{i}$ along the joint $i+1$ (righthand rule), and axis $z_{i-1}$ along the joint $i$.
 
 
 -   Choose the origin $O_{i}$ at the intersection of $z_{i}$ with
@@ -196,10 +196,10 @@ while $x_{n}$ has to be normal to axis $z_{n-1}$. Typically, Joint $n$
 is revolute, and thus $z_{n}$ is to be aligned with the direction of
 $z_{n-1}$. 
 
--  When two consecutive axes intersect, the direction of
+-  When two consecutive axes intersect, the direction (+/-) of
 $x_{i}$ is arbitrary. and 
 
-- When Joint $i$ is prismatic, the direction
+- When Joint $i$ is prismatic, the direction (+/-)
 of $z_{i-1}$ is arbitrary. 
 
 In all such cases, the principle of choosing
@@ -270,7 +270,7 @@ Three link robot arm
 |  2  |   $a_{2}$   |     0       |     0    |  $\vartheta_{2}$|
 |  3   |  $a_{3}$   |     0       |     0    |  $\vartheta_{3}$|
 
-$$\boldsymbol{T}_{3}^{0}(\boldsymbol{q})=\boldsymbol{A}_{1}^{0} \boldsymbol{A}_{2}^{1} \boldsymbol{A}_{3}^{2}=\left[\begin{array}{cccc}
+$$\boldsymbol{T}_{3}^{0}(\boldsymbol{q})=\boldsymbol{T}_{1}^{0} \boldsymbol{T}_{2}^{1} \boldsymbol{T}_{3}^{2}=\left[\begin{array}{cccc}
 c_{123} & -s_{123} & 0 & a_{1} c_{1}+a_{2} c_{12}+a_{3} c_{123} \\
 s_{123} & c_{123} & 0 & a_{1} s_{1}+a_{2} s_{12}+a_{3} s_{123} \\
 0 & 0 & 1 & 0 \\
@@ -293,9 +293,9 @@ Three link robot arm
  | ------ |---------| -------------- |--------- |-----------------|
   |  1   |     0    |   $-\pi / 2$   |    0     | $\vartheta_{1}$|
   |  2   |     0    |   $\pi / 2$   |  $d_{2}$  | $\vartheta_{2}$|
-  |  3   |     0    |       0      |   $d_{3}$        |
+  |  3   |     0    |       0      |   $d_{3}$    | 0    |
 
-$$\boldsymbol{T}_{3}^{0}(\boldsymbol{q})=\boldsymbol{A}_{1}^{0} \boldsymbol{A}_{2}^{1} \boldsymbol{A}_{3}^{2}=\left[\begin{array}{cccc}
+$$\boldsymbol{T}_{3}^{0}(\boldsymbol{q})=\boldsymbol{T}_{1}^{0} \boldsymbol{T}_{2}^{1} \boldsymbol{T}_{3}^{2}=\left[\begin{array}{cccc}
 c_{1} c_{2} & -s_{1} & c_{1} s_{2} & c_{1} s_{2} d_{3}-s_{1} d_{2} \\
 s_{1} c_{2} & c_{1} & s_{1} s_{2} & s_{1} s_{2} d_{3}+c_{1} d_{2} \\
 -s_{2} & 0 & c_{2} & c_{2} d_{3} \\
@@ -319,7 +319,7 @@ Three link robot arm
   |  2  |   $a_{2}$   |     0      |      0   |   $\vartheta_{2}$|
   |  3 |   $a_{3}$    |    0      |      0    |  $\vartheta_{3}$|
 
-$$\boldsymbol{T}_{3}^{0}(\boldsymbol{q})=\boldsymbol{A}_{1}^{0} \boldsymbol{A}_{2}^{1} \boldsymbol{A}_{3}^{2}=\left[\begin{array}{cccc}
+$$\boldsymbol{T}_{3}^{0}(\boldsymbol{q})=\boldsymbol{T}_{1}^{0} \boldsymbol{T}_{2}^{1} \boldsymbol{T}_{3}^{2}=\left[\begin{array}{cccc}
 c_{1} c_{23} & -c_{1} s_{23} & s_{1} & c_{1}\left(a_{2} c_{2}+a_{3} c_{23}\right) \\
 s_{1} c_{23} & -s_{1} s_{23} & -c_{1} & s_{1}\left(a_{2} c_{2}+a_{3} c_{23}\right) \\
 s_{23} & c_{23} & 0 & a_{2} s_{2}+a_{3} s_{23} \\
@@ -343,7 +343,7 @@ Three link robot arm
   |  5  |      0    |   $\pi / 2$   |     0   |   $\vartheta_{5}$|
   |  6 |   0        |   0        | $d_{6}$  | $\vartheta_{6}$|
   
-$$\boldsymbol{T}_{6}^{3}(\boldsymbol{q})=\boldsymbol{A}_{4}^{3} \boldsymbol{A}_{5}^{4} \boldsymbol{A}_{6}^{5}=\left[\begin{array}{cccc}
+$$\boldsymbol{T}_{6}^{3}(\boldsymbol{q})=\boldsymbol{T}_{4}^{3} \boldsymbol{T}_{5}^{4} \boldsymbol{T}_{6}^{5}=\left[\begin{array}{cccc}
 c_{4} c_{5} c_{6}-s_{4} s_{6} & -c_{4} c_{5} s_{6}-s_{4} c_{6} & c_{4} s_{5} & c_{4} s_{5} d_{6} \\
 s_{4} c_{5} c_{6}+c_{4} s_{6} & -s_{4} c_{5} s_{6}+c_{4} c_{6} & s_{4} s_{5} & s_{4} s_{5} d_{6} \\
 -s_{5} c_{6} & s_{5} s_{6} & c_{5} & c_{5} d_{6} \\
@@ -521,7 +521,7 @@ if a joint of a redundant manipulator reaches its mechanical limit,
 there might be other joints that allow execution of the prescribed
 end-effector motion.
 
-# Modified DH parameters
+# Modified DH parameters (Optional)
 
 
 ```{figure} ./kinematics/DHParameter.png

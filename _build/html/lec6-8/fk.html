@@ -390,7 +390,7 @@ document.write(`
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#workspace">Workspace</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#kinematic-redundancy">Kinematic Redundancy</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modified-dh-parameters">Modified DH parameters</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modified-dh-parameters-optional">Modified DH parameters (Optional)</a></li>
 </ul>
 
             </nav>
@@ -491,7 +491,7 @@ convention sets the following rules to define link Frame
 <span class="math notranslate nohighlight">\(O_{i}-x_{i} y_{i} z_{i}\)</span>, given previous link Frame
 <span class="math notranslate nohighlight">\(O_{i-1}-x_{i-1} y_{i-1} z_{i-1}\)</span>:</p>
 <ul class="simple">
-<li><p>Choose axis <span class="math notranslate nohighlight">\(z_{i}\)</span> along the joint <span class="math notranslate nohighlight">\(i+1\)</span>, and axis <span class="math notranslate nohighlight">\(z_{i-1}\)</span> along the joint <span class="math notranslate nohighlight">\(i\)</span>.</p></li>
+<li><p>Choose axis <span class="math notranslate nohighlight">\(z_{i}\)</span> along the joint <span class="math notranslate nohighlight">\(i+1\)</span> (righthand rule), and axis <span class="math notranslate nohighlight">\(z_{i-1}\)</span> along the joint <span class="math notranslate nohighlight">\(i\)</span>.</p></li>
 <li><p>Choose the origin <span class="math notranslate nohighlight">\(O_{i}\)</span> at the intersection of <span class="math notranslate nohighlight">\(z_{i}\)</span> with
 the common normal to <span class="math notranslate nohighlight">\(z_{i}\)</span> and <span class="math notranslate nohighlight">\(z_{i-1}\)</span> .</p></li>
 <li><p>Choose  <span class="math notranslate nohighlight">\(x_{i}\)</span> along the common normal to      <span class="math notranslate nohighlight">\(z_{i}\)</span> and <span class="math notranslate nohighlight">\(z_{i-1}\)</span>  with direction  from Joint <span class="math notranslate nohighlight">\(i\)</span> to Joint <span class="math notranslate nohighlight">\(i+1\)</span>.</p></li>
@@ -556,9 +556,9 @@ Frame <span class="math notranslate nohighlight">\(n\)</span>, since there is no
 while <span class="math notranslate nohighlight">\(x_{n}\)</span> has to be normal to axis <span class="math notranslate nohighlight">\(z_{n-1}\)</span>. Typically, Joint <span class="math notranslate nohighlight">\(n\)</span>
 is revolute, and thus <span class="math notranslate nohighlight">\(z_{n}\)</span> is to be aligned with the direction of
 <span class="math notranslate nohighlight">\(z_{n-1}\)</span>.</p></li>
-<li><p>When two consecutive axes intersect, the direction of
+<li><p>When two consecutive axes intersect, the direction (+/-) of
 <span class="math notranslate nohighlight">\(x_{i}\)</span> is arbitrary. and</p></li>
-<li><p>When Joint <span class="math notranslate nohighlight">\(i\)</span> is prismatic, the direction
+<li><p>When Joint <span class="math notranslate nohighlight">\(i\)</span> is prismatic, the direction (+/-)
 of <span class="math notranslate nohighlight">\(z_{i-1}\)</span> is arbitrary.</p></li>
 </ul>
 <p>In all such cases, the principle of choosing
@@ -651,7 +651,7 @@ Three-link Planar Arm</div>
 </tbody>
 </table>
 <div class="math notranslate nohighlight">
-\[\begin{split}\boldsymbol{T}_{3}^{0}(\boldsymbol{q})=\boldsymbol{A}_{1}^{0} \boldsymbol{A}_{2}^{1} \boldsymbol{A}_{3}^{2}=\left[\begin{array}{cccc}
+\[\begin{split}\boldsymbol{T}_{3}^{0}(\boldsymbol{q})=\boldsymbol{T}_{1}^{0} \boldsymbol{T}_{2}^{1} \boldsymbol{T}_{3}^{2}=\left[\begin{array}{cccc}
 c_{123} &amp; -s_{123} &amp; 0 &amp; a_{1} c_{1}+a_{2} c_{12}+a_{3} c_{123} \\
 s_{123} &amp; c_{123} &amp; 0 &amp; a_{1} s_{1}+a_{2} s_{12}+a_{3} s_{123} \\
 0 &amp; 0 &amp; 1 &amp; 0 \\
@@ -697,12 +697,12 @@ Spherical Arm</div>
 <td><p class="sd-card-text">0</p></td>
 <td><p class="sd-card-text">0</p></td>
 <td><p class="sd-card-text"><span class="math notranslate nohighlight">\(d_{3}\)</span></p></td>
-<td><p class="sd-card-text"></p></td>
+<td><p class="sd-card-text">0</p></td>
 </tr>
 </tbody>
 </table>
 <div class="math notranslate nohighlight">
-\[\begin{split}\boldsymbol{T}_{3}^{0}(\boldsymbol{q})=\boldsymbol{A}_{1}^{0} \boldsymbol{A}_{2}^{1} \boldsymbol{A}_{3}^{2}=\left[\begin{array}{cccc}
+\[\begin{split}\boldsymbol{T}_{3}^{0}(\boldsymbol{q})=\boldsymbol{T}_{1}^{0} \boldsymbol{T}_{2}^{1} \boldsymbol{T}_{3}^{2}=\left[\begin{array}{cccc}
 c_{1} c_{2} &amp; -s_{1} &amp; c_{1} s_{2} &amp; c_{1} s_{2} d_{3}-s_{1} d_{2} \\
 s_{1} c_{2} &amp; c_{1} &amp; s_{1} s_{2} &amp; s_{1} s_{2} d_{3}+c_{1} d_{2} \\
 -s_{2} &amp; 0 &amp; c_{2} &amp; c_{2} d_{3} \\
@@ -753,7 +753,7 @@ Anthropomorphic Arm</div>
 </tbody>
 </table>
 <div class="math notranslate nohighlight">
-\[\begin{split}\boldsymbol{T}_{3}^{0}(\boldsymbol{q})=\boldsymbol{A}_{1}^{0} \boldsymbol{A}_{2}^{1} \boldsymbol{A}_{3}^{2}=\left[\begin{array}{cccc}
+\[\begin{split}\boldsymbol{T}_{3}^{0}(\boldsymbol{q})=\boldsymbol{T}_{1}^{0} \boldsymbol{T}_{2}^{1} \boldsymbol{T}_{3}^{2}=\left[\begin{array}{cccc}
 c_{1} c_{23} &amp; -c_{1} s_{23} &amp; s_{1} &amp; c_{1}\left(a_{2} c_{2}+a_{3} c_{23}\right) \\
 s_{1} c_{23} &amp; -s_{1} s_{23} &amp; -c_{1} &amp; s_{1}\left(a_{2} c_{2}+a_{3} c_{23}\right) \\
 s_{23} &amp; c_{23} &amp; 0 &amp; a_{2} s_{2}+a_{3} s_{23} \\
@@ -804,7 +804,7 @@ Spherical Wrist</div>
 </tbody>
 </table>
 <div class="math notranslate nohighlight">
-\[\begin{split}\boldsymbol{T}_{6}^{3}(\boldsymbol{q})=\boldsymbol{A}_{4}^{3} \boldsymbol{A}_{5}^{4} \boldsymbol{A}_{6}^{5}=\left[\begin{array}{cccc}
+\[\begin{split}\boldsymbol{T}_{6}^{3}(\boldsymbol{q})=\boldsymbol{T}_{4}^{3} \boldsymbol{T}_{5}^{4} \boldsymbol{T}_{6}^{5}=\left[\begin{array}{cccc}
 c_{4} c_{5} c_{6}-s_{4} s_{6} &amp; -c_{4} c_{5} s_{6}-s_{4} c_{6} &amp; c_{4} s_{5} &amp; c_{4} s_{5} d_{6} \\
 s_{4} c_{5} c_{6}+c_{4} s_{6} &amp; -s_{4} c_{5} s_{6}+c_{4} c_{6} &amp; s_{4} s_{5} &amp; s_{4} s_{5} d_{6} \\
 -s_{5} c_{6} &amp; s_{5} s_{6} &amp; c_{5} &amp; c_{5} d_{6} \\
@@ -1020,8 +1020,8 @@ if a joint of a redundant manipulator reaches its mechanical limit,
 there might be other joints that allow execution of the prescribed
 end-effector motion.</p>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="modified-dh-parameters">
-<h1>Modified DH parameters<a class="headerlink" href="#modified-dh-parameters" title="Permalink to this heading">#</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="modified-dh-parameters-optional">
+<h1>Modified DH parameters (Optional)<a class="headerlink" href="#modified-dh-parameters-optional" title="Permalink to this heading">#</a></h1>
 <figure class="align-default" id="dhparameter">
 <a class="reference internal image-reference" href="../_images/DHParameter.png"><img alt="../_images/DHParameter.png" src="../_images/DHParameter.png" style="width: 50%;" /></a>
 <figcaption>
@@ -1140,7 +1140,7 @@ Tutorial</span><a class="headerlink" href="#cover" title="Permalink to this imag
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#workspace">Workspace</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#kinematic-redundancy">Kinematic Redundancy</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modified-dh-parameters">Modified DH parameters</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modified-dh-parameters-optional">Modified DH parameters (Optional)</a></li>
 </ul>
 
   </nav></div>
