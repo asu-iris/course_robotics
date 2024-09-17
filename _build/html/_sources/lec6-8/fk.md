@@ -196,8 +196,11 @@ while $x_{n}$ has to be normal to axis $z_{n-1}$. Typically, Joint $n$
 is revolute, and thus $z_{n}$ is to be aligned with the direction of
 $z_{n-1}$. 
 
--  When two consecutive axes intersect, the direction (+/-) of
-$x_{i}$ is arbitrary. and 
+-  When two consecutive joint axes intersect, the direction (+/-) of
+$x_{i}$ is arbitrary. 
+
+-  When two consecutive joint axes parallel,
+$x_{i}$ is chosen such that $d_i=0$.  
 
 - When Joint $i$ is prismatic, the direction (+/-)
 of $z_{i-1}$ is arbitrary. 
@@ -260,7 +263,7 @@ Complete the assembly:
 ````{card} Three-link Planar Arm
 ```{figure} ./kinematics/3link_arm.jpg
 ---
-width: 40%
+width: 60%
 name: 3link_arm
 ---
 Three link robot arm
@@ -285,7 +288,7 @@ s_{123} & c_{123} & 0 & a_{1} s_{1}+a_{2} s_{12}+a_{3} s_{123} \\
 ````{card} Spherical Arm
 ```{figure} ./kinematics/spherical_arm.jpg
 ---
-width: 50%
+width: 70%
 name: spherical_arm
 ---
 Three link robot arm
@@ -309,7 +312,7 @@ s_{1} c_{2} & c_{1} & s_{1} s_{2} & s_{1} s_{2} d_{3}+c_{1} d_{2} \\
 ````{card} Anthropomorphic Arm
 ```{figure} ./kinematics/anthropomorphic_arm.jpg
 ---
-width: 50%
+width: 70%
 name: anthropomorphic_arm
 ---
 Three link robot arm
@@ -333,7 +336,7 @@ s_{23} & c_{23} & 0 & a_{2} s_{2}+a_{3} s_{23} \\
 ````{card} Spherical Wrist
 ```{figure} ./kinematics/spherical_wrist.jpg
 ---
-width: 50%
+width: 70%
 name: spherical_wrist
 ---
 Three link robot arm
@@ -356,7 +359,7 @@ s_{4} c_{5} c_{6}+c_{4} s_{6} & -s_{4} c_{5} s_{6}+c_{4} c_{6} & s_{4} s_{5} & s
 ````{card} Stanford Manipulator
 ```{figure} ./kinematics/Stanford_manipulator.jpg
 ---
-width: 50%
+width: 70%
 name: Stanford_manipulator
 ---
  Stanford manipulator
@@ -395,7 +398,7 @@ s_{1}\left(c_{2} c_{4} s_{5}+s_{2} c_{5}\right)+c_{1} s_{4} s_{5} \\
 ````{card} Anthropomorphic Arm with Spherical Wrist
 ```{figure} ./kinematics/anthropomorphic_manipulator.jpg
 ---
-width: 50%
+width: 80%
 name: anthropomorphic_manipulator
 ---
  Anthropomorphic manipulator
@@ -447,78 +450,61 @@ s_{23} c_{4} s_{5}-c_{23} c_{5}
 
 # Workspace
 
-The manipulator workspace is the space reached by the origin of the
-end-effector frame when the manipulator's joints tasks all allowable
+The robot arm workspace is the space reached by the origin of the
+end-effector frame when the robot arm's joints take all allowable
 values. The workspace includes reachable workspace and dexterous
 workspace. The latter is the space that the origin of the end-effector
 frame can reach with different orientations, while the former is the
 space that the origin of the end-effector frame can reach with at least
 one orientation.
 
-For an $n$-DOF manipulator, the reachable workspace is the geometric
-locus of the points that can be achieved by considering the direct
-kinematics equation for the position part, i.e.,
+For an $n$-DOF robot arm, the reachable workspace is formally defined
 
-$$\boldsymbol{p}_{e}=\boldsymbol{p}_{e}(\boldsymbol{q}), \quad q_{i m} \leq q_{i} \leq q_{i M} \quad i=1, \ldots, n,$$
+$$\{
+\boldsymbol{p}_{e}(\boldsymbol{q})\,|\, \quad q_{i m} \leq q_{i} \leq q_{i M} \quad i=1, \ldots, n,
+\}$$
 
-where $q_{i m}\left(q_{i M}\right)$ denotes the minimum (maximum) limit
-at Joint $i$. The manipulator workspace (without end-effector) is
-reported in the data sheet given by the robot manufacturer in terms of a
+where $q_{i m}\left(q_{i M}\right)$ denotes the minimum (maximum) values
+at Joint $i$. The workspace is typically
+reported in the data sheet of a robot manufacturer in terms of a
 top view and a side view.
 
-In a manipulator, if actual mechanical parameters differ from the
-nominal value of parameters in data sheet, a deviation arises between
-the actual position reached and the position computed via direct
-kinematics. Such a deviation is defined accuracy. Accuracy attains
-typical values below one millimeter and depends on the structure as well
-as on manipulator dimensions. Another parameter that is usually listed
-in the performance data sheet of an industrial robot is repeatability
-which gives a measure of the manipulator's ability to return to a
-previously reached position. Repeatability depends not only on the
-mechanical structure but also on the transducers and controller; it is
-expressed in metric units and is typically smaller than accuracy. For
-instance, for a manipulator with a maximum reach of $1.5 \mathrm{~m}$,
-accuracy varies from 0.2 to $1 \mathrm{~mm}$ in the workspace, while
+In a robot arm, if actual mechanical parameters differ from the
+nominal value in data sheet, an error arises between
+ actual position reached and  theorical position computed via direct
+kinematics. Such error is called accuracy. Nowdays, accuracy level of a decent-sized robot arm is typically below 1mm. 
+
+
+Another parameter  of a robot arm is repeatability
+which gives a measure of the robot's ability to return to a
+previously reached position. Repeatability depends on external disturbance and also on internal controller; it is typically smaller than accuracy. For
+instance, for a robot arm with a maximum reach of $1.5 \mathrm{~m}$,
+accuracy varies from 0.2 to $1 \mathrm{~mm}$, while
 repeatability varies from 0.02 to $0.2 \mathrm{~mm}$.
 
 # Kinematic Redundancy
 
-A manipulator is termed kinematically redundant when it has a number of
-DOFs which is greater than the number of variables that are necessary to
-describe a given task. With reference to the above-defined spaces, a
-manipulator is intrinsically redundant when the dimension of the
-operational space is smaller than the dimension of the joint space
-$(m<n)$. Redundancy is, anyhow, a concept relative to the task assigned
-to the manipulator; a manipulator can be redundant with respect to a
-task and nonredundant with respect to another. Even in the case of
-$m=n$, a manipulator can be functionally redundant when only a number of
-$r$ components of operational space are of concern for the specific
-task, with $r<m$.
+A robot arm is kinematically redundant when its 
+DOF $n$ is greater than dimension $m$ of the task space (also named operational space), typically refering to the  motion space of end-effector (frame). Redundancy is a concept relative to the task space; a robot arm can be redundant with respect to a
+task and nonredundant with respect to another.
 
-Consider again the three-DOF planar arm. If only the endeffector
-position (in the plane) is specified, that structure presents a
-functional redundancy $(n=m=3, r=2)$; this is lost when also the
-end-effector orientation in the plane is specified $(n=m=r=3)$. On the
+Consider the three-DOF planar arm. If one only cares about the end effector's
+position (i.e., the operation space is only the positional space of end effector), the robot arm is a
+functional redundancy $(n=3, n=2)$. When one care about both position and angle of the end-effector, then the robot is nonredundant, i.e., $n=3, n=3$. On the
 other hand, a four-DOF planar arm is intrinsically redundant
-$(n=4, m=3)$. Yet, take the typical industrial robot with six DOFs; such
-manipulator is not intrinsically redundant $(n=m=6)$, but it can become
-functionally redundant with regard to the task to execute. Thus, for
-instance, in a lasercutting task a functional redundancy will occur
-since the end-effector rotation about the approach direction is
-irrelevant to completion of the task $(r=5)$.
+$(n=4, m=3)$. 
 
-At this point, a question should arise spontaneously: Why to
-intentionally utilize a redundant manipulator? The answer is to
-recognize that redundancy can provide the manipulator with dexterity and
-versatility in its motion. The typical example is constituted by the
+At this point, a question may arise: Why to
+intentionally utilize a redundant robot arm? This is because  redundancy can provide a robot arm with dexterity and
+versatility in its motion. The typical example is the
 human arm that has seven DOFs: three in the shoulder, one in the elbow
 and three in the wrist, without considering the DOFs in the fingers.
-This manipulator is intrinsically redundant; in fact, if the base and
-the hand position and orientation are both fixed - requiring six DOFs -
-the elbow can be moved, thanks to the additional available DOF Then, for
-instance, it is possible to avoid obstacles in the workspace. Further,
-if a joint of a redundant manipulator reaches its mechanical limit,
-there might be other joints that allow execution of the prescribed
+Human arm is intrinsically redundant; in fact, if the base and
+the hand position and orientation are both fixed,
+the elbow can be moved, thanks to the additional available DOF. This can help us, for
+instance, avoid obstacles in the workspace. Further,
+if a joint of a redundant robot arm reaches its mechanical limit,
+there might be other joints that allow execution of the
 end-effector motion.
 
 # Modified DH parameters (Optional)
@@ -538,9 +524,9 @@ Wiki
 
 Some books use modified (proximal) DH parameters \[John J. Craig,
 Introduction to Robotics: Mechanics and Control (3rd Edition)\]. The
-difference between the classic (distal) DH parameters and the modified
-DH parameters are the locations of the coordinates system attachment to
-the links and the order of the performed transformations.
+difference between the classic  DH parameters and the modified
+DH parameters are the locations of the coordinate to
+each links and the order of the performed transformations.
 
 Compared with the classic DH parameters, the coordinates of frame,
 $O_{i-1}$, is put on Joint $i-1$, not the Joint $i$ in classic DH
@@ -549,7 +535,7 @@ the Joint $i+1$ in classic DH convention. Another difference is that
 according to the modified convention, the transform matrix is given by
 the following order of operations:
 
-$$^{i-1}T_i=\text{Rot}_{x_{i-1}}(\alpha_{i-1})\text{Trans}_{x_{i-1}}(a_{i-1})\text{Rot}_{z_{i}}(\theta_{i})\text{Trans}_{z_{i}}(d_{i})$$
+$$T^{i-1}_i=\text{Rot}_{x_{i-1}}(\alpha_{i-1})\text{Trans}_{x_{i-1}}(a_{i-1})\text{Rot}_{z_{i}}(\theta_{i})\text{Trans}_{z_{i}}(d_{i})$$
 
 One example of using the above modified DH convention is Franka-Emika
 Panda robot arm, an increasingly popular robot for research and

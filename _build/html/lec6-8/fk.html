@@ -556,8 +556,10 @@ Frame <span class="math notranslate nohighlight">\(n\)</span>, since there is no
 while <span class="math notranslate nohighlight">\(x_{n}\)</span> has to be normal to axis <span class="math notranslate nohighlight">\(z_{n-1}\)</span>. Typically, Joint <span class="math notranslate nohighlight">\(n\)</span>
 is revolute, and thus <span class="math notranslate nohighlight">\(z_{n}\)</span> is to be aligned with the direction of
 <span class="math notranslate nohighlight">\(z_{n-1}\)</span>.</p></li>
-<li><p>When two consecutive axes intersect, the direction (+/-) of
-<span class="math notranslate nohighlight">\(x_{i}\)</span> is arbitrary. and</p></li>
+<li><p>When two consecutive joint axes intersect, the direction (+/-) of
+<span class="math notranslate nohighlight">\(x_{i}\)</span> is arbitrary.</p></li>
+<li><p>When two consecutive joint axes parallel,
+<span class="math notranslate nohighlight">\(x_{i}\)</span> is chosen such that <span class="math notranslate nohighlight">\(d_i=0\)</span>.</p></li>
 <li><p>When Joint <span class="math notranslate nohighlight">\(i\)</span> is prismatic, the direction (+/-)
 of <span class="math notranslate nohighlight">\(z_{i-1}\)</span> is arbitrary.</p></li>
 </ul>
@@ -616,7 +618,7 @@ the kinematics function as <span class="math notranslate nohighlight">\(\boldsym
 <div class="sd-card-title sd-font-weight-bold docutils">
 Three-link Planar Arm</div>
 <figure class="align-default" id="link-arm">
-<a class="reference internal image-reference" href="../_images/3link_arm.jpg"><img alt="../_images/3link_arm.jpg" src="../_images/3link_arm.jpg" style="width: 40%;" /></a>
+<a class="reference internal image-reference" href="../_images/3link_arm.jpg"><img alt="../_images/3link_arm.jpg" src="../_images/3link_arm.jpg" style="width: 60%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 26 </span><span class="caption-text">Three link robot arm</span><a class="headerlink" href="#link-arm" title="Permalink to this image">#</a></p>
 <div class="legend">
@@ -667,7 +669,7 @@ s_{123} &amp; c_{123} &amp; 0 &amp; a_{1} s_{1}+a_{2} s_{12}+a_{3} s_{123} \\
 <div class="sd-card-title sd-font-weight-bold docutils">
 Spherical Arm</div>
 <figure class="align-default" id="spherical-arm">
-<a class="reference internal image-reference" href="../_images/spherical_arm.jpg"><img alt="../_images/spherical_arm.jpg" src="../_images/spherical_arm.jpg" style="width: 50%;" /></a>
+<a class="reference internal image-reference" href="../_images/spherical_arm.jpg"><img alt="../_images/spherical_arm.jpg" src="../_images/spherical_arm.jpg" style="width: 70%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 27 </span><span class="caption-text">Three link robot arm</span><a class="headerlink" href="#spherical-arm" title="Permalink to this image">#</a></p>
 <div class="legend">
@@ -718,7 +720,7 @@ s_{1} c_{2} &amp; c_{1} &amp; s_{1} s_{2} &amp; s_{1} s_{2} d_{3}+c_{1} d_{2} \\
 <div class="sd-card-title sd-font-weight-bold docutils">
 Anthropomorphic Arm</div>
 <figure class="align-default" id="anthropomorphic-arm">
-<a class="reference internal image-reference" href="../_images/anthropomorphic_arm.jpg"><img alt="../_images/anthropomorphic_arm.jpg" src="../_images/anthropomorphic_arm.jpg" style="width: 50%;" /></a>
+<a class="reference internal image-reference" href="../_images/anthropomorphic_arm.jpg"><img alt="../_images/anthropomorphic_arm.jpg" src="../_images/anthropomorphic_arm.jpg" style="width: 70%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 28 </span><span class="caption-text">Three link robot arm</span><a class="headerlink" href="#anthropomorphic-arm" title="Permalink to this image">#</a></p>
 <div class="legend">
@@ -769,7 +771,7 @@ s_{23} &amp; c_{23} &amp; 0 &amp; a_{2} s_{2}+a_{3} s_{23} \\
 <div class="sd-card-title sd-font-weight-bold docutils">
 Spherical Wrist</div>
 <figure class="align-default" id="spherical-wrist">
-<a class="reference internal image-reference" href="../_images/spherical_wrist.jpg"><img alt="../_images/spherical_wrist.jpg" src="../_images/spherical_wrist.jpg" style="width: 50%;" /></a>
+<a class="reference internal image-reference" href="../_images/spherical_wrist.jpg"><img alt="../_images/spherical_wrist.jpg" src="../_images/spherical_wrist.jpg" style="width: 70%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 29 </span><span class="caption-text">Three link robot arm</span><a class="headerlink" href="#spherical-wrist" title="Permalink to this image">#</a></p>
 <div class="legend">
@@ -820,7 +822,7 @@ s_{4} c_{5} c_{6}+c_{4} s_{6} &amp; -s_{4} c_{5} s_{6}+c_{4} c_{6} &amp; s_{4} s
 <div class="sd-card-title sd-font-weight-bold docutils">
 Stanford Manipulator</div>
 <figure class="align-default" id="stanford-manipulator">
-<a class="reference internal image-reference" href="../_images/Stanford_manipulator.jpg"><img alt="../_images/Stanford_manipulator.jpg" src="../_images/Stanford_manipulator.jpg" style="width: 50%;" /></a>
+<a class="reference internal image-reference" href="../_images/Stanford_manipulator.jpg"><img alt="../_images/Stanford_manipulator.jpg" src="../_images/Stanford_manipulator.jpg" style="width: 70%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 30 </span><span class="caption-text">Stanford manipulator</span><a class="headerlink" href="#stanford-manipulator" title="Permalink to this image">#</a></p>
 </figcaption>
@@ -862,7 +864,7 @@ s_{1}\left(c_{2} c_{4} s_{5}+s_{2} c_{5}\right)+c_{1} s_{4} s_{5} \\
 <div class="sd-card-title sd-font-weight-bold docutils">
 Anthropomorphic Arm with Spherical Wrist</div>
 <figure class="align-default" id="anthropomorphic-manipulator">
-<a class="reference internal image-reference" href="../_images/anthropomorphic_manipulator.jpg"><img alt="../_images/anthropomorphic_manipulator.jpg" src="../_images/anthropomorphic_manipulator.jpg" style="width: 50%;" /></a>
+<a class="reference internal image-reference" href="../_images/anthropomorphic_manipulator.jpg"><img alt="../_images/anthropomorphic_manipulator.jpg" src="../_images/anthropomorphic_manipulator.jpg" style="width: 80%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 31 </span><span class="caption-text">Anthropomorphic manipulator</span><a class="headerlink" href="#anthropomorphic-manipulator" title="Permalink to this image">#</a></p>
 <div class="legend">
@@ -951,73 +953,54 @@ s_{23} c_{4} s_{5}-c_{23} c_{5}
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="workspace">
 <h1>Workspace<a class="headerlink" href="#workspace" title="Permalink to this heading">#</a></h1>
-<p>The manipulator workspace is the space reached by the origin of the
-end-effector frame when the manipulator’s joints tasks all allowable
+<p>The robot arm workspace is the space reached by the origin of the
+end-effector frame when the robot arm’s joints take all allowable
 values. The workspace includes reachable workspace and dexterous
 workspace. The latter is the space that the origin of the end-effector
 frame can reach with different orientations, while the former is the
 space that the origin of the end-effector frame can reach with at least
 one orientation.</p>
-<p>For an <span class="math notranslate nohighlight">\(n\)</span>-DOF manipulator, the reachable workspace is the geometric
-locus of the points that can be achieved by considering the direct
-kinematics equation for the position part, i.e.,</p>
+<p>For an <span class="math notranslate nohighlight">\(n\)</span>-DOF robot arm, the reachable workspace is formally defined</p>
 <div class="math notranslate nohighlight">
-\[\boldsymbol{p}_{e}=\boldsymbol{p}_{e}(\boldsymbol{q}), \quad q_{i m} \leq q_{i} \leq q_{i M} \quad i=1, \ldots, n,\]</div>
-<p>where <span class="math notranslate nohighlight">\(q_{i m}\left(q_{i M}\right)\)</span> denotes the minimum (maximum) limit
-at Joint <span class="math notranslate nohighlight">\(i\)</span>. The manipulator workspace (without end-effector) is
-reported in the data sheet given by the robot manufacturer in terms of a
+\[\{
+\boldsymbol{p}_{e}(\boldsymbol{q})\,|\, \quad q_{i m} \leq q_{i} \leq q_{i M} \quad i=1, \ldots, n,
+\}\]</div>
+<p>where <span class="math notranslate nohighlight">\(q_{i m}\left(q_{i M}\right)\)</span> denotes the minimum (maximum) values
+at Joint <span class="math notranslate nohighlight">\(i\)</span>. The workspace is typically
+reported in the data sheet of a robot manufacturer in terms of a
 top view and a side view.</p>
-<p>In a manipulator, if actual mechanical parameters differ from the
-nominal value of parameters in data sheet, a deviation arises between
-the actual position reached and the position computed via direct
-kinematics. Such a deviation is defined accuracy. Accuracy attains
-typical values below one millimeter and depends on the structure as well
-as on manipulator dimensions. Another parameter that is usually listed
-in the performance data sheet of an industrial robot is repeatability
-which gives a measure of the manipulator’s ability to return to a
-previously reached position. Repeatability depends not only on the
-mechanical structure but also on the transducers and controller; it is
-expressed in metric units and is typically smaller than accuracy. For
-instance, for a manipulator with a maximum reach of <span class="math notranslate nohighlight">\(1.5 \mathrm{~m}\)</span>,
-accuracy varies from 0.2 to <span class="math notranslate nohighlight">\(1 \mathrm{~mm}\)</span> in the workspace, while
+<p>In a robot arm, if actual mechanical parameters differ from the
+nominal value in data sheet, an error arises between
+actual position reached and  theorical position computed via direct
+kinematics. Such error is called accuracy. Nowdays, accuracy level of a decent-sized robot arm is typically below 1mm.</p>
+<p>Another parameter  of a robot arm is repeatability
+which gives a measure of the robot’s ability to return to a
+previously reached position. Repeatability depends on external disturbance and also on internal controller; it is typically smaller than accuracy. For
+instance, for a robot arm with a maximum reach of <span class="math notranslate nohighlight">\(1.5 \mathrm{~m}\)</span>,
+accuracy varies from 0.2 to <span class="math notranslate nohighlight">\(1 \mathrm{~mm}\)</span>, while
 repeatability varies from 0.02 to <span class="math notranslate nohighlight">\(0.2 \mathrm{~mm}\)</span>.</p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="kinematic-redundancy">
 <h1>Kinematic Redundancy<a class="headerlink" href="#kinematic-redundancy" title="Permalink to this heading">#</a></h1>
-<p>A manipulator is termed kinematically redundant when it has a number of
-DOFs which is greater than the number of variables that are necessary to
-describe a given task. With reference to the above-defined spaces, a
-manipulator is intrinsically redundant when the dimension of the
-operational space is smaller than the dimension of the joint space
-<span class="math notranslate nohighlight">\((m&lt;n)\)</span>. Redundancy is, anyhow, a concept relative to the task assigned
-to the manipulator; a manipulator can be redundant with respect to a
-task and nonredundant with respect to another. Even in the case of
-<span class="math notranslate nohighlight">\(m=n\)</span>, a manipulator can be functionally redundant when only a number of
-<span class="math notranslate nohighlight">\(r\)</span> components of operational space are of concern for the specific
-task, with <span class="math notranslate nohighlight">\(r&lt;m\)</span>.</p>
-<p>Consider again the three-DOF planar arm. If only the endeffector
-position (in the plane) is specified, that structure presents a
-functional redundancy <span class="math notranslate nohighlight">\((n=m=3, r=2)\)</span>; this is lost when also the
-end-effector orientation in the plane is specified <span class="math notranslate nohighlight">\((n=m=r=3)\)</span>. On the
+<p>A robot arm is kinematically redundant when its
+DOF <span class="math notranslate nohighlight">\(n\)</span> is greater than dimension <span class="math notranslate nohighlight">\(m\)</span> of the task space (also named operational space), typically refering to the  motion space of end-effector (frame). Redundancy is a concept relative to the task space; a robot arm can be redundant with respect to a
+task and nonredundant with respect to another.</p>
+<p>Consider the three-DOF planar arm. If one only cares about the end effector’s
+position (i.e., the operation space is only the positional space of end effector), the robot arm is a
+functional redundancy <span class="math notranslate nohighlight">\((n=3, n=2)\)</span>. When one care about both position and angle of the end-effector, then the robot is nonredundant, i.e., <span class="math notranslate nohighlight">\(n=3, n=3\)</span>. On the
 other hand, a four-DOF planar arm is intrinsically redundant
-<span class="math notranslate nohighlight">\((n=4, m=3)\)</span>. Yet, take the typical industrial robot with six DOFs; such
-manipulator is not intrinsically redundant <span class="math notranslate nohighlight">\((n=m=6)\)</span>, but it can become
-functionally redundant with regard to the task to execute. Thus, for
-instance, in a lasercutting task a functional redundancy will occur
-since the end-effector rotation about the approach direction is
-irrelevant to completion of the task <span class="math notranslate nohighlight">\((r=5)\)</span>.</p>
-<p>At this point, a question should arise spontaneously: Why to
-intentionally utilize a redundant manipulator? The answer is to
-recognize that redundancy can provide the manipulator with dexterity and
-versatility in its motion. The typical example is constituted by the
+<span class="math notranslate nohighlight">\((n=4, m=3)\)</span>.</p>
+<p>At this point, a question may arise: Why to
+intentionally utilize a redundant robot arm? This is because  redundancy can provide a robot arm with dexterity and
+versatility in its motion. The typical example is the
 human arm that has seven DOFs: three in the shoulder, one in the elbow
 and three in the wrist, without considering the DOFs in the fingers.
-This manipulator is intrinsically redundant; in fact, if the base and
-the hand position and orientation are both fixed - requiring six DOFs -
-the elbow can be moved, thanks to the additional available DOF Then, for
-instance, it is possible to avoid obstacles in the workspace. Further,
-if a joint of a redundant manipulator reaches its mechanical limit,
-there might be other joints that allow execution of the prescribed
+Human arm is intrinsically redundant; in fact, if the base and
+the hand position and orientation are both fixed,
+the elbow can be moved, thanks to the additional available DOF. This can help us, for
+instance, avoid obstacles in the workspace. Further,
+if a joint of a redundant robot arm reaches its mechanical limit,
+there might be other joints that allow execution of the
 end-effector motion.</p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="modified-dh-parameters-optional">
@@ -1031,9 +1014,9 @@ Wiki</span><a class="headerlink" href="#dhparameter" title="Permalink to this im
 </figure>
 <p>Some books use modified (proximal) DH parameters [John J. Craig,
 Introduction to Robotics: Mechanics and Control (3rd Edition)]. The
-difference between the classic (distal) DH parameters and the modified
-DH parameters are the locations of the coordinates system attachment to
-the links and the order of the performed transformations.</p>
+difference between the classic  DH parameters and the modified
+DH parameters are the locations of the coordinate to
+each links and the order of the performed transformations.</p>
 <p>Compared with the classic DH parameters, the coordinates of frame,
 <span class="math notranslate nohighlight">\(O_{i-1}\)</span>, is put on Joint <span class="math notranslate nohighlight">\(i-1\)</span>, not the Joint <span class="math notranslate nohighlight">\(i\)</span> in classic DH
 convention;the coordinates of frame, <span class="math notranslate nohighlight">\(O_{i}\)</span>, is put on Joint <span class="math notranslate nohighlight">\(i\)</span>, not
@@ -1041,7 +1024,7 @@ the Joint <span class="math notranslate nohighlight">\(i+1\)</span> in classic D
 according to the modified convention, the transform matrix is given by
 the following order of operations:</p>
 <div class="math notranslate nohighlight">
-\[^{i-1}T_i=\text{Rot}_{x_{i-1}}(\alpha_{i-1})\text{Trans}_{x_{i-1}}(a_{i-1})\text{Rot}_{z_{i}}(\theta_{i})\text{Trans}_{z_{i}}(d_{i})\]</div>
+\[T^{i-1}_i=\text{Rot}_{x_{i-1}}(\alpha_{i-1})\text{Trans}_{x_{i-1}}(a_{i-1})\text{Rot}_{z_{i}}(\theta_{i})\text{Trans}_{z_{i}}(d_{i})\]</div>
 <p>One example of using the above modified DH convention is Franka-Emika
 Panda robot arm, an increasingly popular robot for research and
 teaching. It has 7 joints which make it a redundant robot, that is, it
