@@ -387,7 +387,7 @@ document.write(`
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Inverse Kinematics</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ik-of-three-link-planar-arm">IK of Three-link Planar Arm</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ik-of-manipulators-of-spherical-wrist">IK of Manipulators of Spherical Wrist</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ik-of-spherical-arm">IK of Spherical Arm</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ik-for-spherical-arm">IK for Spherical Arm</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ik-of-anthropomorphic-arm">IK of Anthropomorphic Arm</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ik-of-spherical-wrist">IK of Spherical Wrist</a></li>
 </ul>
@@ -406,24 +406,18 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="inverse-kinematics">
 <h1>Inverse Kinematics<a class="headerlink" href="#inverse-kinematics" title="Permalink to this heading">#</a></h1>
-<p>The inverse kinematics (IK) problem is to determine the joint variables
-given end-effector position and orientation. The solution to IK is of
-fundamental importance in order to transform the motion assignment in
-the end-effector in the operational space into the joint space motions
-for control purpose. The IK problem is complex since:</p>
+<p>The inverse kinematics (IK) is to determine  joint variables
+given end-effector position and orientation.  IK is important in robotics because it allows to transform  motion specification of  operational space into that of joint space. But IK  is complex, because</p>
 <ul class="simple">
-<li><p>Forward kinematics in general are nonlinear, and thus IK is not
-always possible to find a closed-form solution.</p></li>
-<li><p>Multiple or infinite solutions may exist for a IK problem, e.g., in
-the case of a redundant manipulator.</p></li>
-<li><p>There might be no admissible solutions, in view of the manipulator
-kinematic limits.</p></li>
+<li><p>FK is nonlinear, and thus IK is not
+always possible to find closed-form solutions.</p></li>
+<li><p>Multiple IK solutions may exist, e.g., for a redundant robot arm.</p></li>
+<li><p>There might be no feasbile IK solutions, e.g., due to
+mechanical limits.</p></li>
 </ul>
-<p>In this lecture, we only talk about the IK problem that permits a
-closed-form solution. This is only valid for some special-structured
-kinematic structures. Those IK solutions are all derived based on
-geometric intuition. For more generalized case of IK, we will leave it
-after we have learned differential kinematics.</p>
+<p>In this lecture, we only talk about IK  that has a
+closed-form solution. This is only the case for some special-structured
+robot arms. For more generalized case, we will leave IK in future lectures.</p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="ik-of-three-link-planar-arm">
 <h1>IK of Three-link Planar Arm<a class="headerlink" href="#ik-of-three-link-planar-arm" title="Permalink to this heading">#</a></h1>
@@ -433,39 +427,35 @@ after we have learned differential kinematics.</p>
 <p><span class="caption-number">Fig. 35 </span><span class="caption-text">A three link robot arm</span><a class="headerlink" href="#link-arm" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>Suppose the pose of the end-effector is specified with its planar
-position <span class="math notranslate nohighlight">\((p_{x}, p_{y})\)</span> and the angle <span class="math notranslate nohighlight">\(\phi\)</span> with the axis <span class="math notranslate nohighlight">\(x_{0}\)</span>. We
-want to use IK to find the corresponding joint variables
+<p>Suppose the pose of the end-effector is given by
+position <span class="math notranslate nohighlight">\((p_{x}, p_{y})\)</span> and the angle <span class="math notranslate nohighlight">\(\phi\)</span> w.r.t. <span class="math notranslate nohighlight">\(x_{0}\)</span>. We
+want to use IK to find the joint variables
 <span class="math notranslate nohighlight">\(\boldsymbol{q}=[\vartheta_{1}, \vartheta_{2}, \vartheta_{3}]\)</span>.</p>
-<p>To achieve so, we first identify the following relation holds</p>
-<div class="math notranslate nohighlight">
-\[\label{c1.l2.3link.sum}
+<p>To achieve so, as shown in <a class="reference internal" href="#link-arm"><span class="std std-numref">Fig. 35</span></a>, we can first identify</p>
+<div class="math notranslate nohighlight" id="equation-equ-sum">
+<span class="eqno">(3)<a class="headerlink" href="#equation-equ-sum" title="Permalink to this equation">#</a></span>\[
     \phi=\vartheta_{1}+\vartheta_{2}+\vartheta_{3}\]</div>
-<p>Also, the following equations can be obtained:</p>
+<p>Also in <a class="reference internal" href="#link-arm"><span class="std std-numref">Fig. 35</span></a>, we can find the position of point <span class="math notranslate nohighlight">\(W\)</span> is</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{aligned}
 &amp; p_{W x}=p_{x}-a_{3} c_{\phi}=a_{1} c_{1}+a_{2} c_{12} \\
 &amp; p_{W y}=p_{y}-a_{3} s_{\phi}=a_{1} s_{1}+a_{2} s_{12}
 \end{aligned}\end{split}\]</div>
-<p>which describe the position of point <span class="math notranslate nohighlight">\(W\)</span>, i.e., the origin of Frame 2;
-depending only on <span class="math notranslate nohighlight">\(\vartheta_{1}\)</span> and <span class="math notranslate nohighlight">\(\vartheta_{2}\)</span>.</p>
-<p>The cosine theorem to the triangle formed by links <span class="math notranslate nohighlight">\(a_{1}, a_{2}\)</span> and
-the segment connecting <span class="math notranslate nohighlight">\(W\)</span> and <span class="math notranslate nohighlight">\(O\)</span> gives</p>
+<p>Applying cosine theorem to the triangle formed by  <span class="math notranslate nohighlight">\(a_{1}, a_{2}\)</span> and
+the segment  <span class="math notranslate nohighlight">\(W-0\)</span> gives</p>
 <div class="math notranslate nohighlight">
 \[p_{W x}^{2}+p_{W y}^{2}=a_{1}^{2}+a_{2}^{2}-2 a_{1} a_{2} \cos \left(\pi-\vartheta_{2}\right) ;\]</div>
-<p>Solving <span class="math notranslate nohighlight">\(c_2\)</span> leads to</p>
+<p>Thus,</p>
 <div class="math notranslate nohighlight">
 \[c_{2}=\frac{p_{W x}^{2}+p_{W y}^{2}-a_{1}^{2}-a_{2}^{2}}{2 a_{1} a_{2}}\]</div>
 <p>For the existence of the triangle, it must be
 <span class="math notranslate nohighlight">\(\sqrt{p_{W x}^{2}+p_{W y}^{2}} \leq a_{1}+a_{2}\)</span>. This condition is not
-satisfied when the given point is outside the arm reachable workspace.
-Then, under the assumption of admissible solutions, it is</p>
+met when the given end-effector pose is outside the arm reachable workspace.</p>
 <div class="math notranslate nohighlight">
 \[\vartheta_{2}= \pm \cos ^{-1}\left(c_{2}\right)\]</div>
-<p>Thus, two admissible <span class="math notranslate nohighlight">\(\vartheta_{2}\)</span> are obtained: the elbow-up posture
-is obtained for <span class="math notranslate nohighlight">\(\vartheta_{2} \in(-\pi, 0)\)</span> while the elbow-down
-posture is obtained for <span class="math notranslate nohighlight">\(\vartheta_{2} \in(0, \pi)\)</span>, as shown in the
-figure blow.</p>
+<p>Thus, two solution <span class="math notranslate nohighlight">\(\vartheta_{2}\)</span> are obtained, as shown in <a class="reference internal" href="#postures-2link-arm"><span class="std std-numref">Fig. 36</span></a>: the elbow-up pose
+when <span class="math notranslate nohighlight">\(\vartheta_{2} \in(-\pi, 0)\)</span>;  elbow-down
+pose when <span class="math notranslate nohighlight">\(\vartheta_{2} \in(0, \pi)\)</span>.</p>
 <figure class="align-default" id="postures-2link-arm">
 <a class="reference internal image-reference" href="../_images/postures_2link_arm.jpg"><img alt="../_images/postures_2link_arm.jpg" src="../_images/postures_2link_arm.jpg" style="width: 50%;" /></a>
 <figcaption>
@@ -473,16 +463,11 @@ figure blow.</p>
 arm</span><a class="headerlink" href="#postures-2link-arm" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>To find <span class="math notranslate nohighlight">\(\vartheta_{1}\)</span> consider the angles <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> in the
-above figure. Notice that the determination of <span class="math notranslate nohighlight">\(\alpha\)</span> depends on the
-sign of <span class="math notranslate nohighlight">\(p_{W x}\)</span> and <span class="math notranslate nohighlight">\(p_{W y}\)</span>; then, it is necessary to compute
-<span class="math notranslate nohighlight">\(\alpha\)</span> as</p>
+<p>To find <span class="math notranslate nohighlight">\(\vartheta_{1}\)</span>， consider the angles <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> in <a class="reference internal" href="#postures-2link-arm"><span class="std std-numref">Fig. 36</span></a>. Notice that   <span class="math notranslate nohighlight">\(\alpha\)</span> depends on the
+sign of <span class="math notranslate nohighlight">\(p_{W x}\)</span> and <span class="math notranslate nohighlight">\(p_{W y}\)</span>; then,</p>
 <div class="math notranslate nohighlight">
 \[\alpha=\operatorname{Atan} 2\left(p_{W y}, p_{W x}\right) .\]</div>
 <p>To compute <span class="math notranslate nohighlight">\(\beta\)</span>, applying again the cosine theorem yields</p>
-<div class="math notranslate nohighlight">
-\[c_{\beta} \sqrt{p_{W x}^{2}+p_{W y}^{2}}=a_{1}+a_{2} c_{2}\]</div>
-<p>and resorting to the expression of <span class="math notranslate nohighlight">\(c_{2}\)</span> given above leads to</p>
 <div class="math notranslate nohighlight">
 \[\beta=\cos ^{-1}\left(\frac{p_{W x}^{2}+p_{W y}^{2}+a_{1}^{2}-a_{2}^{2}}{2 a_{1} \sqrt{p_{W x}^{2}+p_{W y}^{2}}}\right)\]</div>
 <p>with <span class="math notranslate nohighlight">\(\beta \in(0, \pi)\)</span> so as to preserve the existence of triangles.
@@ -491,75 +476,76 @@ Then, it is</p>
 \[\vartheta_{1}=\alpha \pm \beta\]</div>
 <p>where the positive sign holds for <span class="math notranslate nohighlight">\(\vartheta_{2}&lt;0\)</span> and the negative
 sign for <span class="math notranslate nohighlight">\(\vartheta_{2}&gt;0\)</span>. Finally, <span class="math notranslate nohighlight">\(\vartheta_{3}\)</span> is computed from
-(<span class="xref myst">[c1.l2.3link.sum]</span>{reference-type=”ref”
-reference=”c1.l2.3link.sum”}).</p>
+<a class="reference internal" href="#equation-equ-sum">(3)</a>.</p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="ik-of-manipulators-of-spherical-wrist">
 <h1>IK of Manipulators of Spherical Wrist<a class="headerlink" href="#ik-of-manipulators-of-spherical-wrist" title="Permalink to this heading">#</a></h1>
-<p>Most of manipulators are kinematically simple, since they are typically
-formed by an arm and a spherical wrist. This choice is partly motivated
-by the difficulty to find IK in the general case. In particular, a
-six-DOF kinematic structure has closed-form IK solutions if:</p>
+<p>Most of industrial robot arms are kinematically simple, the design is partly motivated
+by easing IK. In particular, a
+6-DOF robot has closed-form IK if:</p>
 <ul class="simple">
 <li><p>three consecutive revolute joint axes intersect at a common point,
-like for the spherical wrist;</p></li>
+like for the spherical wrist; or</p></li>
 <li><p>three consecutive revolute joint axes are parallel, like the
 three-link robot arm</p></li>
 </ul>
-<p>Inspired by IK to a three-link planar arm, an itermediate point on the
-manipulator can be found, such that the IK problem can be decoupled into
-two lower-dimentional sub-problems. Specifically, for a manipulator with
-spherical wrist, the natural choice is to locate such point <span class="math notranslate nohighlight">\(W\)</span> at the
-wrist position, i.e., at the intersection of the three revolute axes of
-the wrist. If the end-effector pose is <span class="math notranslate nohighlight">\(\boldsymbol{p}_{e}\)</span> and
+<p>Inspired by our above IK process to a three-link planar arm, an itermediate point <span class="math notranslate nohighlight">\(W\)</span> on the
+robot arm can be found, such that the IK can be decoupled into
+two lower-dimentional sub-problems. Specifically, for a robot arm with
+spherical wrist, a natural choice is to put <span class="math notranslate nohighlight">\(W\)</span> at the
+wrist position.
+As shown <a class="reference internal" href="#analytic-ik-decouple"><span class="std std-numref">Fig. 37</span></a>, if the end-effector pose is <span class="math notranslate nohighlight">\(\boldsymbol{p}_{e}\)</span> and
 <span class="math notranslate nohighlight">\(\boldsymbol{R}_{e}=\left[\begin{array}{lll}\boldsymbol{n}_{e} &amp; \boldsymbol{s}_{e} &amp; \boldsymbol{a}_{e}\end{array}\right]\)</span>,
 the wrist position will be</p>
 <div class="math notranslate nohighlight">
 \[\boldsymbol{p}_{W}=\boldsymbol{p}_{e}-d_{6} \boldsymbol{a}_{e}\]</div>
 <figure class="align-default" id="analytic-ik-decouple">
-<a class="reference internal image-reference" href="../_images/analytic_ik_decouple.jpg"><img alt="../_images/analytic_ik_decouple.jpg" src="../_images/analytic_ik_decouple.jpg" style="width: 50%;" /></a>
+<a class="reference internal image-reference" href="../_images/analytic_ik_decouple.jpg"><img alt="../_images/analytic_ik_decouple.jpg" src="../_images/analytic_ik_decouple.jpg" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 37 </span><span class="caption-text">Manipulator with spherical
+<p><span class="caption-number">Fig. 37 </span><span class="caption-text">Robot arm with spherical
 wrist</span><a class="headerlink" href="#analytic-ik-decouple" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>which is a function of the sole joint variables that determine the arm
-position. Hence, in the case of a (nonredundant) three-DOF arm, the
-inverse kinematics can be solved according to the following steps:</p>
+<p><span class="math notranslate nohighlight">\(\boldsymbol{p}_{W}\)</span> is a function of previous joint variables that determine the wrist
+position.</p>
+<p>Hence, for a special 6-DOF robot arm with sphere wirst,
+IK can be solved by the following steps:</p>
 <ul class="simple">
 <li><p>Compute the wrist position
 <span class="math notranslate nohighlight">\(\boldsymbol{p}_{W}\left(q_{1}, q_{2}, q_{3}\right)\)</span>.</p></li>
 <li><p>Solve inverse kinematics for <span class="math notranslate nohighlight">\(\left(q_{1}, q_{2}, q_{3}\right)\)</span>.</p></li>
 <li><p>Compute <span class="math notranslate nohighlight">\(\boldsymbol{R}_{3}^{0}\left(q_{1}, q_{2}, q_{3}\right)\)</span>.</p></li>
 <li><p>Compute
-<span class="math notranslate nohighlight">\(\boldsymbol{R}_{6}^{3}\left(\vartheta_{4}, \vartheta_{5}, \vartheta_{6}\right)=\boldsymbol{R}_{3}^{0 T} \boldsymbol{R}\)</span></p></li>
+<span class="math notranslate nohighlight">\(\boldsymbol{R}_{e}^{3}\left(\vartheta_{4}, \vartheta_{5}, \vartheta_{6}\right)=\boldsymbol{R}_{3}^{0 T} \boldsymbol{R}_e\)</span></p></li>
 <li><p>Solve inverse kinematics for orientation
 <span class="math notranslate nohighlight">\(\left(\vartheta_{4}, \vartheta_{5}, \vartheta_{6}\right)\)</span></p></li>
 </ul>
-<p>Therefore, on the basis of this kinematic decoupling, IK for the arm
-separately from the IK for the spherical wrist. Below are presented the
-solutions for two typical arms (spherical and anthropomorphic) as well
-as the solution for the spherical wrist.</p>
-<section id="ik-of-spherical-arm">
-<h2>IK of Spherical Arm<a class="headerlink" href="#ik-of-spherical-arm" title="Permalink to this heading">#</a></h2>
+<p>Therefore, IK is decoupled into: (1) IK for the arm (Step 1-2); and  (2) the IK for the spherical wrist (Step 3-5).</p>
+<p>Below are presented IK
+solutions for two types of arms (spherical and anthropomorphic)  and IK solution for the spherical wrist.</p>
+<section id="ik-for-spherical-arm">
+<h2>IK for Spherical Arm<a class="headerlink" href="#ik-for-spherical-arm" title="Permalink to this heading">#</a></h2>
 <p>Consider the spherical arm:</p>
 <figure class="align-default" id="spherical-arm">
-<a class="reference internal image-reference" href="../_images/spherical_arm1.jpg"><img alt="../_images/spherical_arm1.jpg" src="../_images/spherical_arm1.jpg" style="width: 50%;" /></a>
+<a class="reference internal image-reference" href="../_images/spherical_arm1.jpg"><img alt="../_images/spherical_arm1.jpg" src="../_images/spherical_arm1.jpg" style="width: 70%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 38 </span><span class="caption-text">Spherical arm</span><a class="headerlink" href="#spherical-arm" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>Its kinematics is
-$<span class="math notranslate nohighlight">\(\boldsymbol{T}_{3}^{0}(\boldsymbol{q})=\boldsymbol{A}_{1}^{0} \boldsymbol{A}_{2}^{1} \boldsymbol{A}_{3}^{2}=\left[\begin{array}{cccc}
+<p>Its FK is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\boldsymbol{T}_{3}^{0}(\boldsymbol{q})=\boldsymbol{T}_{1}^{0} \boldsymbol{T}_{2}^{1} \boldsymbol{T}_{3}^{2}=\left[\begin{array}{cccc}
 c_{1} c_{2} &amp; -s_{1} &amp; c_{1} s_{2} &amp; c_{1} s_{2} d_{3}-s_{1} d_{2} \\
 s_{1} c_{2} &amp; c_{1} &amp; s_{1} s_{2} &amp; s_{1} s_{2} d_{3}+c_{1} d_{2} \\
 -s_{2} &amp; 0 &amp; c_{2} &amp; c_{2} d_{3} \\
 0 &amp; 0 &amp; 0 &amp; 1
-\end{array}\right]\)</span>$</p>
-<p>To find the joint variables <span class="math notranslate nohighlight">\(\vartheta_{1}, \vartheta_{2}, d_{3}\)</span>
-corresponding to <span class="math notranslate nohighlight">\(\boldsymbol{p}_{W}=[p_{Wx}, p_{Wy}, p_{Wz}]^T\)</span>, we
-equate the first three elements of the fourth columns of the matrices
-and thus obtain the following after some equation manipulation</p>
+\end{array}\right]
+\end{split}\]</div>
+<p>To solve IK for the joint variables <span class="math notranslate nohighlight">\(\vartheta_{1}, \vartheta_{2}, d_{3}\)</span>
+given <span class="math notranslate nohighlight">\(\boldsymbol{p}_{W}=[p_{Wx}, p_{Wy}, p_{Wz}]^T\)</span>, just
+equate <span class="math notranslate nohighlight">\(\boldsymbol{p}_{W}\)</span>  to the first three elements of the fourth columns.
+This leads to the following (after some manipulation)</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\left[\begin{array}{c}
 p_{W x} c_{1}+p_{W y} s_{1} \\
@@ -583,7 +569,7 @@ d_{2}
 <h2>IK of Anthropomorphic Arm<a class="headerlink" href="#ik-of-anthropomorphic-arm" title="Permalink to this heading">#</a></h2>
 <p>Consider the anthropomorphic arm:</p>
 <figure class="align-default" id="anthropomorphic-arm">
-<a class="reference internal image-reference" href="../_images/anthropomorphic_arm1.jpg"><img alt="../_images/anthropomorphic_arm1.jpg" src="../_images/anthropomorphic_arm1.jpg" style="width: 50%;" /></a>
+<a class="reference internal image-reference" href="../_images/anthropomorphic_arm1.jpg"><img alt="../_images/anthropomorphic_arm1.jpg" src="../_images/anthropomorphic_arm1.jpg" style="width: 70%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 39 </span><span class="caption-text">Anthropomorphic arm</span><a class="headerlink" href="#anthropomorphic-arm" title="Permalink to this image">#</a></p>
 </figcaption>
@@ -597,8 +583,7 @@ s_{23} &amp; c_{23} &amp; 0 &amp; a_{2} s_{2}+a_{3} s_{23} \\
 \end{array}\right]\end{split}\]</div>
 <p>To find the joint variables <span class="math notranslate nohighlight">\(\vartheta_{1}, \vartheta_{2}, d_{3}\)</span>
 corresponding to <span class="math notranslate nohighlight">\(\boldsymbol{p}_{W}=[p_{Wx}, p_{Wy}, p_{Wz}]^T\)</span>, we
-equate the first three elements of the fourth columns of the matrices
-and thus obtain the following</p>
+equate the first three elements of the fourth columns of the matrix</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{aligned}
 &amp; p_{W x}=c_{1}\left(a_{2} c_{2}+a_{3} c_{23}\right) \\
@@ -609,10 +594,6 @@ and thus obtain the following</p>
 <div class="math notranslate nohighlight">
 \[\left(\vartheta_{1, \mathrm{I}}, \vartheta_{2, \mathrm{I}}, \vartheta_{3, \mathrm{I}}\right) \quad\left(\vartheta_{1, \mathrm{I}}, \vartheta_{2, \mathrm{III}}, \vartheta_{3, \mathrm{II}}\right) \quad\left(\vartheta_{1, \mathrm{II}}, \vartheta_{2, \mathrm{II}}, \vartheta_{3, \mathrm{I}}\right) \quad\left(\vartheta_{1, \mathrm{II}}, \vartheta_{2, \mathrm{IV}}, \vartheta_{3, \mathrm{II}}\right)\]</div>
 <p>with</p>
-<div class="math notranslate nohighlight">
-\[c_{3}=\frac{p_{W x}^{2}+p_{W y}^{2}+p_{W z}^{2}-a_{2}^{2}-a_{3}^{2}}{2 a_{2} a_{3}}\]</div>
-<div class="math notranslate nohighlight">
-\[s_{3}^+= \sqrt{1-c_{3}^{2}}\quad\quad s_{3}^-= -\sqrt{1-c_{3}^{2}}\]</div>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{aligned}
 \vartheta_{3, \mathbf{I}}&amp;=\operatorname{Atan} 2 \left( s_3^{+}, c_{3}\right)\\
@@ -634,12 +615,16 @@ and thus obtain the following</p>
 \vartheta_{2, \mathrm{III}}=\operatorname{Atan2} &amp; \left(\left(a_{2}+a_{3} c_{3}\right) p_{W z}-a_{3} s_{3}^{-} \sqrt{p_{W x}^{2}+p_{W y}^{2}},\right.  \left.\left(a_{2}+a_{3} c_{3}\right) \sqrt{p_{W x}^{2}+p_{W y}^{2}}+a_{3} s_{3}^{-} p_{W z}\right) \\
 \vartheta_{2, \mathrm{IV}}=\operatorname{Atan} 2 &amp; \left(\left(a_{2}+a_{3} c_{3}\right) p_{W z}+a_{3} s_{3}^{-} \sqrt{p_{W x}^{2}+p_{W y}^{2}},\right.  \left.-\left(a_{2}+a_{3} c_{3}\right) \sqrt{p_{W x}^{2}+p_{W y}^{2}}+a_{3} s_{3}^{-} p_{W z}\right)
 \end{aligned}\end{split}\]</div>
-<p>which are illustrated below: shoulder-right/elbow-up,
+<div class="math notranslate nohighlight">
+\[c_{3}=\frac{p_{W x}^{2}+p_{W y}^{2}+p_{W z}^{2}-a_{2}^{2}-a_{3}^{2}}{2 a_{2} a_{3}}\]</div>
+<div class="math notranslate nohighlight">
+\[s_{3}^+= \sqrt{1-c_{3}^{2}}\quad\quad s_{3}^-= -\sqrt{1-c_{3}^{2}}\]</div>
+<p>The four solutions  are illustrated below: shoulder-right/elbow-up,
 shoulder-left/elbowup, shoulder-right/elbow-down,
 shoulder-left/elbow-down; obviously, the forearm orientation is
 different for the two pairs of solutions.</p>
 <figure class="align-default" id="ik-solutions-anthropomorphic-arm">
-<a class="reference internal image-reference" href="../_images/4IK_solutions_anthropomorphic_arm.jpg"><img alt="../_images/4IK_solutions_anthropomorphic_arm.jpg" src="../_images/4IK_solutions_anthropomorphic_arm.jpg" style="width: 50%;" /></a>
+<a class="reference internal image-reference" href="../_images/4IK_solutions_anthropomorphic_arm.jpg"><img alt="../_images/4IK_solutions_anthropomorphic_arm.jpg" src="../_images/4IK_solutions_anthropomorphic_arm.jpg" style="width: 60%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 40 </span><span class="caption-text">The four configurations of an anthropomorphic arm compatible with a
 given wrist
@@ -651,7 +636,7 @@ position</span><a class="headerlink" href="#ik-solutions-anthropomorphic-arm" ti
 <h2>IK of Spherical Wrist<a class="headerlink" href="#ik-of-spherical-wrist" title="Permalink to this heading">#</a></h2>
 <p>Consider the spherical wrist below.</p>
 <figure class="align-default" id="spherical-wrist">
-<a class="reference internal image-reference" href="../_images/spherical_wrist1.jpg"><img alt="../_images/spherical_wrist1.jpg" src="../_images/spherical_wrist1.jpg" style="width: 50%;" /></a>
+<a class="reference internal image-reference" href="../_images/spherical_wrist1.jpg"><img alt="../_images/spherical_wrist1.jpg" src="../_images/spherical_wrist1.jpg" style="width: 70%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 41 </span><span class="caption-text">Spherical wrist</span><a class="headerlink" href="#spherical-wrist" title="Permalink to this image">#</a></p>
 </figcaption>
@@ -756,7 +741,7 @@ compute</p>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Inverse Kinematics</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ik-of-three-link-planar-arm">IK of Three-link Planar Arm</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ik-of-manipulators-of-spherical-wrist">IK of Manipulators of Spherical Wrist</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ik-of-spherical-arm">IK of Spherical Arm</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ik-for-spherical-arm">IK for Spherical Arm</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ik-of-anthropomorphic-arm">IK of Anthropomorphic Arm</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ik-of-spherical-wrist">IK of Spherical Wrist</a></li>
 </ul>

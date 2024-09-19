@@ -471,8 +471,8 @@ only the sum or difference of $\varphi$ and $\psi$ is determined (why?)
 **RPY (ZYX Euler angles)**: I think about RPY rotations is a process of "a fighter jet from parking --> taxiing (yaw) --> take-off (pitch) --> fighting (roll)". Formally, RPY is obtained by
 first, rotating the reference frame by the angle $\varphi$ about the
 current axis $\boldsymbol{z}$ (yaw), then, rotating the current frame
-by $\vartheta$ about the fixed axis $\boldsymbol{y}$ (pitch), and then,
-rotating the current frame by $\psi$ about fixed axis $\boldsymbol{x}$
+by $\vartheta$ about the current axis $\boldsymbol{y}$ (pitch), and then,
+rotating the current frame by $\psi$ about current axis $\boldsymbol{x}$
 (roll). Thus, the resulting rotation matrix is obtained by
 postmultiplication rule.
 
