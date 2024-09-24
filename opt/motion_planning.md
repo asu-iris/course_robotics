@@ -157,7 +157,7 @@ Search for a path from the start to the goal using [A* search](https://theory.st
 
 The basic RRT algorithm is as follows (from https://arxiv.org/pdf/1105.1186)
 
-```{figure} ./figures/RRT.png
+```{figure} ./figures/rrt.png
 ---
 width: 70%
 name: RRT
