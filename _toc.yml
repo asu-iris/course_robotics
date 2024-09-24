@@ -9,6 +9,7 @@ chapters:
 - file: lec3-5/basic-kinematics
 - file: lec6-8/fk
 - file: lec9/ik
+- file: opt/motion_planning
 - file: lec10/diff-trans
 - file: lec11-12/jacobian
 - file: lec13/singularity
@@ -20,5 +21,6 @@ chapters:
 - file: lec20/djc
 - file: lec21/cjc
 - file: lec22/osc
+
 # - file: notebooks
 # - file: markdown-notebooks
