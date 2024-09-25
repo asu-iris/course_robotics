@@ -96,7 +96,13 @@ Some methods (Please read the original paper if you are interested):
 - Smoothing
 
 
-## Probabilistic Roadmap (PRM) [(Python)](https://github.com/devanys/PRM-PathPlanning)
+## Probabilistic Roadmap (PRM) 
+
+
+Python example code (copyright, authored by IRIS Lab):
+https://colab.research.google.com/drive/1TvEIeUeZnZjJOjU33IVWLnP43DrFXxVY?usp=sharing 
+
+
 
 The basic PRM algorithm in robot configuration space {numref}`prm1` is as follows:
 
@@ -153,7 +159,10 @@ Search for a path from the start to the goal using [A* search](https://theory.st
 
 
 
-## Rapidly-exploring Random Trees (RRTs) [(Python)](https://github.com/nimRobotics/RRT)
+## Rapidly-exploring Random Trees (RRTs) 
+
+Python example code (copyright, authored by IRIS Lab): 
+https://colab.research.google.com/drive/1fxMlKzIWIWr6Qq49wTmTsIAJz5pp0ing?usp=sharing 
 
 The basic RRT algorithm is as follows (from https://arxiv.org/pdf/1105.1186)
 
