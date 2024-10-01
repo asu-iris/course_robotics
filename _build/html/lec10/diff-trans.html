@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Derivative of Transformation &#8212; Modeling and Control of Robots</title>
+    <title>Velocity Kinematics &#8212; Modeling and Control of Robots</title>
   
   
   
@@ -181,8 +181,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 <li class="toctree-l1"><a class="reference internal" href="../opt/motion_planning.html">Motion Planning</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Derivative of Transformation</a></li>
-
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Velocity Kinematics</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="../lec11-12/jacobian.html">Jacobian</a></li>
 
@@ -375,7 +374,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Derivative of Transformation</h1>
+    <h1>Velocity Kinematics</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -385,10 +384,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Derivative of Transformation</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#derivative-of-pose-transformation">Derivative of Pose Transformation</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#manipulator-link-velocity">Manipulator Link Velocity</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-velocity">Linear Velocity</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Velocity Kinematics</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#derivative-of-rotation">Derivative of Rotation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#derivative-of-rotation-translation">Derivative of Rotation + Translation</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#apply-to-links-of-a-robot-arm">Apply to links of a robot arm</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-translational-velocity">Linear (Translational) Velocity</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#angular-velocity">Angular Velocity</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
@@ -405,125 +407,142 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="derivative-of-transformation">
-<h1>Derivative of Transformation<a class="headerlink" href="#derivative-of-transformation" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="velocity-kinematics">
+<h1>Velocity Kinematics<a class="headerlink" href="#velocity-kinematics" title="Permalink to this heading">#</a></h1>
+<section id="derivative-of-rotation">
+<h2>Derivative of Rotation<a class="headerlink" href="#derivative-of-rotation" title="Permalink to this heading">#</a></h2>
 <p>Consider a time-varying rotation matrix
-<span class="math notranslate nohighlight">\(\boldsymbol{R}=\boldsymbol{R}(t)\)</span>. One has</p>
+<span class="math notranslate nohighlight">\(\boldsymbol{R}=\boldsymbol{R}(t)\)</span>. Based on the property of rotation matrix, we always have</p>
 <div class="math notranslate nohighlight">
 \[\boldsymbol{R}(t) \boldsymbol{R}^{T}(t)=\boldsymbol{I}\]</div>
 <p>Differentiating the above equation with respect to time gives</p>
 <div class="math notranslate nohighlight">
-\[\dot{\boldsymbol{R}}(t) \boldsymbol{R}^{T}(t)+\boldsymbol{R}(t) \dot{\boldsymbol{R}}^{T}(t)=\boldsymbol{S}(t)+\boldsymbol{S}^{T}(t)=\boldsymbol{O}\]</div>
-<p>with the newly defined
-<span class="math notranslate nohighlight">\(\boldsymbol{S}(t)=\dot{\boldsymbol{R}}(t) \boldsymbol{R}^{T}(t)\)</span> being
-called a <span class="math notranslate nohighlight">\((3 \times 3)\)</span> skew-symmetric matrix, and</p>
+\[\dot{\boldsymbol{R}}(t) \boldsymbol{R}^{T}(t)+\boldsymbol{R}(t) \dot{\boldsymbol{R}}^{T}(t)=\boldsymbol{0}\]</div>
+<p>Let’s define a new matrix</p>
+<div class="math notranslate nohighlight" id="equation-equ-skew">
+<span class="eqno">(4)<a class="headerlink" href="#equation-equ-skew" title="Permalink to this equation">#</a></span>\[\boldsymbol{S}=\dot{\boldsymbol{R}} \boldsymbol{R}^{T}\]</div>
+<p>Then, the above equation becomes</p>
 <div class="math notranslate nohighlight">
-\[\dot{\boldsymbol{R}}(t)=\boldsymbol{S}(t) \boldsymbol{R}(t)\]</div>
-<p>Next, let’s find the physical interpretation of <span class="math notranslate nohighlight">\(\boldsymbol{S}\)</span>.</p>
-<p>Consider <span class="math notranslate nohighlight">\({\boldsymbol{R}}(t)\)</span> represents a rotation of a moving frame
-<span class="math notranslate nohighlight">\(O'-x'y'z'\)</span> with respect to a fixed reference frame <span class="math notranslate nohighlight">\(O-xyz\)</span>. It means
-the following coordinate transformation
-<span class="math notranslate nohighlight">\(\boldsymbol{p}(t)=\boldsymbol{R}(t) \boldsymbol{p}^{\prime}\)</span>. Taking
-the derivative of both sides yields</p>
+\[
+\boldsymbol{S}+\boldsymbol{S}^{T}=\boldsymbol{0}
+\]</div>
+<p>Any matrix that satisfies the above equation is called skew-symmetric matrix (a square matrix whose transpose equals its negative).
+From <a class="reference internal" href="#equation-equ-skew">(4)</a>, we have</p>
+<div class="math notranslate nohighlight" id="equation-equ-skew2">
+<span class="eqno">(5)<a class="headerlink" href="#equation-equ-skew2" title="Permalink to this equation">#</a></span>\[\dot{\boldsymbol{R}}=\boldsymbol{S} \boldsymbol{R}\]</div>
+<p>Now, let’s find out what is <span class="math notranslate nohighlight">\(\boldsymbol{S}\)</span> and its physics interpretation.</p>
+<p>Suppose <span class="math notranslate nohighlight">\({\boldsymbol{R}}\)</span> represents a rotation of a moving body frame
+<span class="math notranslate nohighlight">\(O'-x'y'z'\)</span> with respect to a fixed reference frame <span class="math notranslate nohighlight">\(O-xyz\)</span>. Let’s consider a point <span class="math notranslate nohighlight">\(P\)</span>, rigidly fixed to the body frame (thus moving as body is moving), with its  body frame coordinate <span class="math notranslate nohighlight">\(\boldsymbol{p}^{\prime}\)</span>. Then, its coordinate in the reference frame <span class="math notranslate nohighlight">\(\boldsymbol{p}\)</span> is</p>
+<div class="math notranslate nohighlight" id="equation-equ-coordinate">
+<span class="eqno">(6)<a class="headerlink" href="#equation-equ-coordinate" title="Permalink to this equation">#</a></span>\[\boldsymbol{p}(t)=\boldsymbol{R}(t) \boldsymbol{p}^{\prime}\]</div>
+<p>which is time varying.</p>
+<p>Taking
+the derivative to  both sides of <a class="reference internal" href="#equation-equ-coordinate">(6)</a> yields</p>
+<div class="math notranslate nohighlight" id="equation-equ-skew3">
+<span class="eqno">(7)<a class="headerlink" href="#equation-equ-skew3" title="Permalink to this equation">#</a></span>\[\dot{\boldsymbol{p}}=\dot{\boldsymbol{R}} \boldsymbol{p}^{\prime}=\boldsymbol{S} \boldsymbol{R} \boldsymbol{p}^{\prime}\]</div>
+<p>where we have used <a class="reference internal" href="#equation-equ-skew">(4)</a>.</p>
+<p>Recall in your mechanics courses, given the angular velocity <span class="math notranslate nohighlight">\(\boldsymbol{\omega}\)</span> of a moving body with respect to a reference frame, any point <span class="math notranslate nohighlight">\(P\)</span> fixed on this body has a velocity in the reference frame as</p>
+<div class="math notranslate nohighlight" id="equation-equ-bke">
+<span class="eqno">(8)<a class="headerlink" href="#equation-equ-bke" title="Permalink to this equation">#</a></span>\[
+\dot{\boldsymbol{p}}=\boldsymbol{\omega} \times  \boldsymbol{p}=\boldsymbol{\omega} \times \boldsymbol{R} \boldsymbol{p}^{\prime}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\boldsymbol{\omega}=\left[\begin{array}{lll}\omega_{x} &amp; \omega_{y} &amp; \omega_{z}\end{array}\right]^{T}\)</span> is the angular velocity of the moving body, expressed in the  reference frame.</p>
+<p>If we look at and compare <a class="reference internal" href="#equation-equ-skew3">(7)</a> and <a class="reference internal" href="#equation-equ-bke">(8)</a>, we can find</p>
 <div class="math notranslate nohighlight">
-\[\dot{\boldsymbol{p}}(t)=\dot{\boldsymbol{R}}(t) \boldsymbol{p}^{\prime}=\boldsymbol{S}(t) \boldsymbol{R}(t) \boldsymbol{p}^{\prime}\]</div>
-<p>where we have used the defined skew-symmetric matrix
-<span class="math notranslate nohighlight">\(\boldsymbol{S}(t)\)</span>, and considered <span class="math notranslate nohighlight">\(\boldsymbol{p}^\prime\)</span> is fixed in
-the moving frame.</p>
-<p>Recall that in the mechanics courses, given the angular velocity
-<span class="math notranslate nohighlight">\(\boldsymbol{\omega}(t)=\left[\begin{array}{lll}\omega_{x} &amp; \omega_{y} &amp; \omega_{z}\end{array}\right]^{T}\)</span>
-of the moving frame <span class="math notranslate nohighlight">\(O'-x'y'z'\)</span>, with respect to the fixed frame, we
-also write the derivative as</p>
-<div class="math notranslate nohighlight">
-\[\dot{\boldsymbol{p}}(t)=\boldsymbol{\omega}(t) \times \boldsymbol{R}(t) \boldsymbol{p}^{\prime}\]</div>
-<p>Comparing the above two equations, we can conclude</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\boldsymbol{S}=\left[\begin{array}{ccc}
+\[\begin{split}\boldsymbol{S}=[\boldsymbol{\omega} \times]=\left[\begin{array}{ccc}
 0 &amp; -\omega_{z} &amp; \omega_{y} \\
 \omega_{z} &amp; 0 &amp; -\omega_{x} \\
 -\omega_{y} &amp; \omega_{x} &amp; 0
-\end{array}\right]=\boldsymbol{S}(\boldsymbol{\omega})\end{split}\]</div>
-<p>Hence, we can conclude the derivative of a rotation matrix is
-$<span class="math notranslate nohighlight">\(\dot{\boldsymbol{R}}=\boldsymbol{S}(\boldsymbol{\omega}) \boldsymbol{R}\)</span>$</p>
-<p><em>Note that in the above equation, <span class="math notranslate nohighlight">\(\boldsymbol{\omega}\)</span> is expressed in
-the fixed frame.</em></p>
-<p>One property of <span class="math notranslate nohighlight">\(\boldsymbol{S}(\boldsymbol{\omega})\)</span>: if
-<span class="math notranslate nohighlight">\(\boldsymbol{R}\)</span> denotes a rotation matrix, it can be shown that the
-following relation holds:</p>
+\end{array}\right]\end{split}\]</div>
+<p>Thus, this skew-symmetric matrix <span class="math notranslate nohighlight">\(\boldsymbol{S}\)</span> can be obtained directly from the body’s angular velocity <span class="math notranslate nohighlight">\(\boldsymbol{\omega}\)</span>. We typically write it as <span class="math notranslate nohighlight">\(\boldsymbol{S}(\boldsymbol{\omega})\)</span>.</p>
+<p>In sum, we can conclude the derivative of a rotation matrix is</p>
 <div class="math notranslate nohighlight">
-\[\boldsymbol{R} \boldsymbol{S}(\boldsymbol{\omega}) \boldsymbol{R}^{T}=\boldsymbol{S}(\boldsymbol{R} \boldsymbol{\omega})\]</div>
+\[\dot{\boldsymbol{R}}=\boldsymbol{S}(\boldsymbol{\omega}) \boldsymbol{R}\]</div>
+<p><em>Note that the above angular velocity <span class="math notranslate nohighlight">\(\boldsymbol{\omega}\)</span> is expressed in the reference frame! (not in the body frame)</em></p>
+<p>One property of <span class="math notranslate nohighlight">\(\boldsymbol{S}(\boldsymbol{\omega})\)</span>: For any rotation matrix
+<span class="math notranslate nohighlight">\(\boldsymbol{R}\)</span>, one has</p>
+<div class="math notranslate nohighlight" id="equation-equ-skewproperty">
+<span class="eqno">(9)<a class="headerlink" href="#equation-equ-skewproperty" title="Permalink to this equation">#</a></span>\[\boldsymbol{R} \boldsymbol{S}(\boldsymbol{\omega}) \boldsymbol{R}^{T}=\boldsymbol{S}(\boldsymbol{R} \boldsymbol{\omega})\]</div>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="derivative-of-pose-transformation">
-<h1>Derivative of Pose Transformation<a class="headerlink" href="#derivative-of-pose-transformation" title="Permalink to this heading">#</a></h1>
-<p>Pose transformation defines coordinate mapping of a point <span class="math notranslate nohighlight">\(P\)</span> from frame
-<span class="math notranslate nohighlight">\(O_1-x_1y_1z_1\)</span> to frame <span class="math notranslate nohighlight">\(O_0-x_0y_0z_0\)</span></p>
+<section id="derivative-of-rotation-translation">
+<h2>Derivative of Rotation + Translation<a class="headerlink" href="#derivative-of-rotation-translation" title="Permalink to this heading">#</a></h2>
+<p>Consider a transformation mapping the  coordinate mapping of a point <span class="math notranslate nohighlight">\(P\)</span> (NOT necessarily fixed on a moving body) from the body frame
+<span class="math notranslate nohighlight">\(O_1-x_1y_1z_1\)</span> to reference frame <span class="math notranslate nohighlight">\(O_0-x_0y_0z_0\)</span></p>
 <div class="math notranslate nohighlight">
-\[\boldsymbol{p}^{0}=\boldsymbol{o}_{1}^{0}+\boldsymbol{R}_{1}^{0} \boldsymbol{p}^{1}\]</div>
+\[\boldsymbol{p}^{0}=\boldsymbol{o}_{1}^{0}(t)+\boldsymbol{R}_{1}^{0}(t) \boldsymbol{p}^{1}\]</div>
 <p>Differentiating the above equation with respect to time yields</p>
-<div class="math notranslate nohighlight">
-\[\dot{\boldsymbol{p}}^{0}=\dot{\boldsymbol{o}}_{1}^{0}+\boldsymbol{R}_{1}^{0} \dot{\boldsymbol{p}}^{1}+\dot{\boldsymbol{R}}_{1}^{0} \boldsymbol{p}^{1}=\dot{\boldsymbol{o}}_{1}^{0}+\boldsymbol{R}_{1}^{0} \dot{\boldsymbol{p}}^{1}+\boldsymbol{S}\left(\boldsymbol{\omega}_{1}^{0}\right) \boldsymbol{R}_{1}^{0} \boldsymbol{p}^{1}\]</div>
+<div class="math notranslate nohighlight" id="equation-equ-vkin1">
+<span class="eqno">(10)<a class="headerlink" href="#equation-equ-vkin1" title="Permalink to this equation">#</a></span>\[\dot{\boldsymbol{p}}^{0}=\dot{\boldsymbol{o}}_{1}^{0}+\boldsymbol{R}_{1}^{0} \dot{\boldsymbol{p}}^{1}+\dot{\boldsymbol{R}}_{1}^{0} \boldsymbol{p}^{1}=\dot{\boldsymbol{o}}_{1}^{0}+\boldsymbol{R}_{1}^{0} \dot{\boldsymbol{p}}^{1}+\boldsymbol{S}\left(\boldsymbol{\omega}_{1}^{0}\right) \boldsymbol{R}_{1}^{0} \boldsymbol{p}^{1}\]</div>
+<p>In the above  <a class="reference internal" href="#equation-equ-vkin1">(10)</a>, because point <span class="math notranslate nohighlight">\(P\)</span> is not necessarily fixed on the body, so it has its own derivative <span class="math notranslate nohighlight">\(\dot{\boldsymbol{p}}^{1}\)</span>.</p>
 <p>Since
-<span class="math notranslate nohighlight">\(\boldsymbol{R}_{1}^{0} \boldsymbol{p}^{1}=\boldsymbol{p}_{1}^{0}\)</span>,</p>
+<span class="math notranslate nohighlight">\(\boldsymbol{R}_{1}^{0} \boldsymbol{p}^{1}=\boldsymbol{p}^{0}\)</span>, the above equation <a class="reference internal" href="#equation-equ-vkin1">(10)</a> becomes</p>
+<div class="math notranslate nohighlight" id="equation-equ-vkin2">
+<span class="eqno">(11)<a class="headerlink" href="#equation-equ-vkin2" title="Permalink to this equation">#</a></span>\[\dot{\boldsymbol{p}}^{0}=\dot{\boldsymbol{o}}_{1}^{0}+\boldsymbol{R}_{1}^{0} \dot{\boldsymbol{p}}^{1}+\omega_{1}^{0} \times \boldsymbol{p}^{0}\]</div>
+<p>Also, we can write <span class="math notranslate nohighlight">\(\boldsymbol{R}_{1}^{0} \dot{\boldsymbol{p}}^{1}=\dot{\boldsymbol{p}}^{0}\)</span> (ask yourself, what does this mean?), and <a class="reference internal" href="#equation-equ-vkin2">(11)</a> becomes</p>
 <div class="math notranslate nohighlight">
-\[\dot{\boldsymbol{p}}^{0}=\dot{\boldsymbol{o}}_{1}^{0}+\boldsymbol{R}_{1}^{0} \dot{\boldsymbol{p}}^{1}+\omega_{1}^{0} \times \boldsymbol{r}_{1}^{0}\]</div>
-<p>Notice that, if <span class="math notranslate nohighlight">\(\boldsymbol{p}^{1}\)</span> is fixed in Frame 1 , then it is</p>
+\[\dot{\boldsymbol{p}}^{0}=\dot{\boldsymbol{o}}_{1}^{0}+\dot{\boldsymbol{p}}^{0}+\omega_{1}^{0} \times \boldsymbol{p}^{0}\]</div>
+<p>Notice that, if <span class="math notranslate nohighlight">\(\boldsymbol{p}^{1}\)</span> is fixed in the moving body frame , then <a class="reference internal" href="#equation-equ-vkin1">(10)</a> can be further reduced to</p>
 <div class="math notranslate nohighlight">
-\[\dot{\boldsymbol{p}}^{0}=\dot{\boldsymbol{o}}_{1}^{0}+\boldsymbol{\omega}_{1}^{0} \times \boldsymbol{r}_{1}^{0}\]</div>
+\[\dot{\boldsymbol{p}}^{0}=\dot{\boldsymbol{o}}_{1}^{0}+\boldsymbol{\omega}_{1}^{0} \times \boldsymbol{p}^{0}\]</div>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="manipulator-link-velocity">
-<h1>Manipulator Link Velocity<a class="headerlink" href="#manipulator-link-velocity" title="Permalink to this heading">#</a></h1>
-<p>Consider the Link <span class="math notranslate nohighlight">\(i\)</span> of a manipulator. According to DH convention, the
-pose of Link <span class="math notranslate nohighlight">\(i\)</span> defines the transformation between Frame <span class="math notranslate nohighlight">\(i-1\)</span> and
-Frame <span class="math notranslate nohighlight">\(i\)</span>, as shown in the following figure below.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="apply-to-links-of-a-robot-arm">
+<h1>Apply to links of a robot arm<a class="headerlink" href="#apply-to-links-of-a-robot-arm" title="Permalink to this heading">#</a></h1>
+<p>Consider the Link <span class="math notranslate nohighlight">\(i\)</span> of a robot arm in <a class="reference internal" href="#manipulator-linki"><span class="std std-numref">Fig. 55</span></a>. We can apply DH convention to find the transformation between Frame <span class="math notranslate nohighlight">\(i-1\)</span> (attached to link <span class="math notranslate nohighlight">\(i-1\)</span>) and
+Frame <span class="math notranslate nohighlight">\(i\)</span> (attached to this link <span class="math notranslate nohighlight">\(i\)</span>). Next, we find out what the relationship between the velocity of those two links.</p>
 <figure class="align-default" id="manipulator-linki">
-<a class="reference internal image-reference" href="../_images/manipulator_linki.jpg"><img alt="../_images/manipulator_linki.jpg" src="../_images/manipulator_linki.jpg" style="width: 50%;" /></a>
+<a class="reference internal image-reference" href="../_images/manipulator_linki.jpg"><img alt="../_images/manipulator_linki.jpg" src="../_images/manipulator_linki.jpg" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 55 </span><span class="caption-text">Characterization of generic Link <span class="math notranslate nohighlight">\(i\)</span> of a
-manipulator</span><a class="headerlink" href="#manipulator-linki" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 55 </span><span class="caption-text">Link <span class="math notranslate nohighlight">\(i\)</span> of a
+robot arm</span><a class="headerlink" href="#manipulator-linki" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<section id="linear-velocity">
-<h2>Linear Velocity<a class="headerlink" href="#linear-velocity" title="Permalink to this heading">#</a></h2>
+<section id="linear-translational-velocity">
+<h2>Linear (Translational) Velocity<a class="headerlink" href="#linear-translational-velocity" title="Permalink to this heading">#</a></h2>
 <p>Let <span class="math notranslate nohighlight">\(\boldsymbol{p}_{i-1}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{p}_{i}\)</span> be the position of
-the origins of Frames <span class="math notranslate nohighlight">\(i-1\)</span> and <span class="math notranslate nohighlight">\(i\)</span>, respectively. Also, let
+the origins of Frame <span class="math notranslate nohighlight">\(i-1\)</span> and Frame <span class="math notranslate nohighlight">\(i\)</span>, respectively. Also, let
 <span class="math notranslate nohighlight">\(\boldsymbol{r}_{i-1, i}^{i-1}\)</span> denote the position of the origin of
-Frame <span class="math notranslate nohighlight">\(i\)</span> with respect to Frame <span class="math notranslate nohighlight">\(i-1\)</span> expressed in Frame <span class="math notranslate nohighlight">\(i-1\)</span>.</p>
-<div class="math notranslate nohighlight">
-\[\boldsymbol{p}_{i}=\boldsymbol{p}_{i-1}+\boldsymbol{R}_{i-1} \boldsymbol{r}_{i-1, i}^{i-1}\]</div>
-<p>Based on the derivative of pose transformation, we have</p>
-<div class="math notranslate nohighlight">
-\[\dot{\boldsymbol{p}}_{i}=\dot{\boldsymbol{p}}_{i-1}+\boldsymbol{R}_{i-1} \dot{\boldsymbol{r}}_{i-1, i}^{i-1}+\boldsymbol{\omega}_{i-1} \times \boldsymbol{R}_{i-1} \boldsymbol{r}_{i-1, i}^{i-1}=\dot{\boldsymbol{p}}_{i-1}+\boldsymbol{v}_{i-1, i}+\omega_{i-1} \times \boldsymbol{r}_{i-1, i}\]</div>
-<p>which gives the linear velocity of Link <span class="math notranslate nohighlight">\(i\)</span> as a function of the
-translational and rotational velocities of Link <span class="math notranslate nohighlight">\(i-1\)</span>.</p>
+Frame <span class="math notranslate nohighlight">\(i\)</span> from the origin of Frame <span class="math notranslate nohighlight">\(i-1\)</span>, expressed in Frame <span class="math notranslate nohighlight">\(i-1\)</span>.</p>
+<p>Let’s consider <span class="math notranslate nohighlight">\(\boldsymbol{p}_{i-1}\)</span> be position of Frame <span class="math notranslate nohighlight">\(i-1\)</span> in the reference frame (therefore, i omit the superscript here), and <span class="math notranslate nohighlight">\(\boldsymbol{R}_{i-1}\)</span> be the rotation of Frame <span class="math notranslate nohighlight">\(i-1\)</span> in the reference frame (i omit the superscript again). Then, the position of Frame <span class="math notranslate nohighlight">\(i\)</span> in the reference frame is</p>
+<div class="math notranslate nohighlight" id="equation-equ-linki-pos">
+<span class="eqno">(12)<a class="headerlink" href="#equation-equ-linki-pos" title="Permalink to this equation">#</a></span>\[\boldsymbol{p}_{i}=\boldsymbol{p}_{i-1}+\boldsymbol{R}_{i-1} \boldsymbol{r}_{i-1, i}^{i-1}\]</div>
+<p>Taking the derivative of both sides in the above equation with respect to time <span class="math notranslate nohighlight">\(t\)</span>, we have</p>
+<div class="math notranslate nohighlight" id="equation-equ-linki-pos-vel">
+<span class="eqno">(13)<a class="headerlink" href="#equation-equ-linki-pos-vel" title="Permalink to this equation">#</a></span>\[\begin{split}
+\begin{aligned}
+\dot{\boldsymbol{p}}_{i}&amp;=\dot{\boldsymbol{p}}_{i-1}+\boldsymbol{R}_{i-1} \dot{\boldsymbol{r}}_{i-1, i}^{i-1}+\boldsymbol{\omega}_{i-1} \times \boldsymbol{R}_{i-1} \boldsymbol{r}_{i-1, i}^{i-1}\\&amp;=\dot{\boldsymbol{p}}_{i-1}+\boldsymbol{v}_{i-1, i}+\omega_{i-1} \times \boldsymbol{r}_{i-1, i}
+\end{aligned}
+\end{split}\]</div>
+<p>Please carefully look at how first row becomes second row, and what each varible stands for.</p>
+<p>Therefore, the linear velocity <span class="math notranslate nohighlight">\(\dot{\boldsymbol{p}}_{i}\)</span> of Link <span class="math notranslate nohighlight">\(i\)</span> depends on the
+translational velocity <span class="math notranslate nohighlight">\(\dot{\boldsymbol{p}}_{i-1}\)</span> and rotational velocity  <span class="math notranslate nohighlight">\(\omega_{i-1}\)</span> of Link <span class="math notranslate nohighlight">\(i-1\)</span>, and also on their relative position <span class="math notranslate nohighlight">\(\boldsymbol{r}_{i-1, i}\)</span> and velocity <span class="math notranslate nohighlight">\(\boldsymbol{v}_{i-1, i}\)</span></p>
 </section>
 <section id="angular-velocity">
 <h2>Angular Velocity<a class="headerlink" href="#angular-velocity" title="Permalink to this heading">#</a></h2>
-<p>Since</p>
+<p>Next, let’s consider the rotation of Frame <span class="math notranslate nohighlight">\(i\)</span> in the reference frame (omit the superscipt 0 again)</p>
 <div class="math notranslate nohighlight">
 \[\boldsymbol{R}_{i}=\boldsymbol{R}_{i-1} \boldsymbol{R}_{i}^{i-1}\]</div>
-<p>Its time derivative</p>
-<div class="math notranslate nohighlight">
-\[\boldsymbol{S}\left(\boldsymbol{\omega}_{i}\right) \boldsymbol{R}_{i}=\boldsymbol{S}\left(\boldsymbol{\omega}_{i-1}\right) \boldsymbol{R}_{i}+\boldsymbol{R}_{i-1} \boldsymbol{S}\left(\boldsymbol{\omega}_{i-1, i}^{i-1}\right) \boldsymbol{R}_{i}^{i-1}\]</div>
+<p>Its time derivative is</p>
+<div class="math notranslate nohighlight" id="equation-equ-linki-rot-vel">
+<span class="eqno">(14)<a class="headerlink" href="#equation-equ-linki-rot-vel" title="Permalink to this equation">#</a></span>\[\boldsymbol{S}\left(\boldsymbol{\omega}_{i}\right) \boldsymbol{R}_{i}=\boldsymbol{S}\left(\boldsymbol{\omega}_{i-1}\right) \boldsymbol{R}_{i}+\boldsymbol{R}_{i-1} \boldsymbol{S}\left(\boldsymbol{\omega}_{i-1, i}^{i-1}\right) \boldsymbol{R}_{i}^{i-1}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\boldsymbol{\omega}_{i-1, i}^{i-1}\)</span> denotes the angular velocity
 of Frame <span class="math notranslate nohighlight">\(i\)</span> with respect to Frame <span class="math notranslate nohighlight">\(i-1\)</span> expressed in Frame <span class="math notranslate nohighlight">\(i-1\)</span>. The
-second term on the right-hand side can be rewritten as</p>
+second term on the right-hand side of <a class="reference internal" href="#equation-equ-linki-rot-vel">(14)</a> can be rewritten as</p>
 <div class="math notranslate nohighlight">
 \[\boldsymbol{R}_{i-1} \boldsymbol{S}\left(\boldsymbol{\omega}_{i-1, i}^{i-1}\right) \boldsymbol{R}_{i}^{i-1}=\boldsymbol{R}_{i-1} \boldsymbol{S}\left(\boldsymbol{\omega}_{i-1, i}^{i-1}\right) \boldsymbol{R}_{i-1}^{T} \boldsymbol{R}_{i-1} \boldsymbol{R}_{i}^{i-1}=\boldsymbol{S}\left(\boldsymbol{R}_{i-1} \boldsymbol{\omega}_{i-1, i}^{i-1}\right) \boldsymbol{R}_{i}\]</div>
-<p>by recalling the property of the skew-symmetric matrix. Then,</p>
-<div class="math notranslate nohighlight">
-\[\boldsymbol{S}\left(\boldsymbol{\omega}_{i}\right) \boldsymbol{R}_{i}=\boldsymbol{S}\left(\boldsymbol{\omega}_{i-1}\right) \boldsymbol{R}_{i}+\boldsymbol{S}\left(\boldsymbol{R}_{i-1} \boldsymbol{\omega}_{i-1, i}^{i-1}\right) \boldsymbol{R}_{i}\]</div>
-<p>leading to</p>
-<div class="math notranslate nohighlight">
-\[\boldsymbol{\omega}_{i}=\boldsymbol{\omega}_{i-1}+\boldsymbol{R}_{i-1} \boldsymbol{\omega}_{i-1, i}^{i-1}=\boldsymbol{\omega}_{i-1}+\boldsymbol{\omega}_{i-1, i}\]</div>
-<p>which gives the expression of the angular velocity of Link <span class="math notranslate nohighlight">\(i\)</span> as a
-function of the angular velocities of Link <span class="math notranslate nohighlight">\(i-1\)</span> and of Link <span class="math notranslate nohighlight">\(i\)</span> with
-respect to Link <span class="math notranslate nohighlight">\(i-1\)</span>.</p>
+<p>by recalling the property of the skew-symmetric matrix in <a class="reference internal" href="#equation-equ-skewproperty">(9)</a>. Then,</p>
+<div class="math notranslate nohighlight" id="equation-equ-linki-rot-vel2">
+<span class="eqno">(15)<a class="headerlink" href="#equation-equ-linki-rot-vel2" title="Permalink to this equation">#</a></span>\[\boldsymbol{S}\left(\boldsymbol{\omega}_{i}\right) \boldsymbol{R}_{i}=\boldsymbol{S}\left(\boldsymbol{\omega}_{i-1}\right) \boldsymbol{R}_{i}+\boldsymbol{S}\left(\boldsymbol{R}_{i-1} \boldsymbol{\omega}_{i-1, i}^{i-1}\right) \boldsymbol{R}_{i}\]</div>
+<p>If we cancel out all <span class="math notranslate nohighlight">\( \boldsymbol{R}_{i}\)</span> on both sides of <a class="reference internal" href="#equation-equ-linki-rot-vel2">(15)</a>, we can get</p>
+<div class="math notranslate nohighlight" id="equation-equ-linki-rot-vel3">
+<span class="eqno">(16)<a class="headerlink" href="#equation-equ-linki-rot-vel3" title="Permalink to this equation">#</a></span>\[\boldsymbol{\omega}_{i}=\boldsymbol{\omega}_{i-1}+\boldsymbol{R}_{i-1} \boldsymbol{\omega}_{i-1, i}^{i-1}=\boldsymbol{\omega}_{i-1}+\boldsymbol{\omega}_{i-1, i}\]</div>
+<p>Thus,  the angular velocity <span class="math notranslate nohighlight">\(\boldsymbol{\omega}_{i}\)</span> of Link <span class="math notranslate nohighlight">\(i\)</span> depends only on the angular velocity <span class="math notranslate nohighlight">\(\boldsymbol{\omega}_{i-1}\)</span> of Link <span class="math notranslate nohighlight">\(i-1\)</span> and their relative angular velocity <span class="math notranslate nohighlight">\(\boldsymbol{\omega}_{i-1, i}\)</span>.</p>
 </section>
 <section id="summary">
 <h2>Summary<a class="headerlink" href="#summary" title="Permalink to this heading">#</a></h2>
-<p>Considering different types of Joint <span class="math notranslate nohighlight">\(i\)</span>, according to the above
-derivative of linear velocity and angular velocity, we have the
-following conclusions.</p>
+<p>Considering different joint types for Joint <span class="math notranslate nohighlight">\(i\)</span> at a robot arm, according to <a class="reference internal" href="#equation-equ-linki-pos-vel">(13)</a> and <a class="reference internal" href="#equation-equ-linki-rot-vel3">(16)</a>, we can obtain</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
 <p><strong>If Joint <span class="math notranslate nohighlight">\(i\)</span> is prismatic</strong></p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{aligned}
@@ -536,6 +555,7 @@ following conclusions.</p>
 \boldsymbol{\omega}_{i} &amp; =\boldsymbol{\omega}_{i-1}+\dot{\vartheta}_{i} \boldsymbol{z}_{i-1} \\
 \dot{\boldsymbol{p}}_{i} &amp; =\dot{\boldsymbol{p}}_{i-1}+\boldsymbol{\omega}_{i} \times \boldsymbol{r}_{i-1, i}
 \end{aligned}\end{split}\]</div>
+</div>
 </section>
 </section>
 
@@ -606,10 +626,13 @@ following conclusions.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Derivative of Transformation</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#derivative-of-pose-transformation">Derivative of Pose Transformation</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#manipulator-link-velocity">Manipulator Link Velocity</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-velocity">Linear Velocity</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Velocity Kinematics</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#derivative-of-rotation">Derivative of Rotation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#derivative-of-rotation-translation">Derivative of Rotation + Translation</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#apply-to-links-of-a-robot-arm">Apply to links of a robot arm</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-translational-velocity">Linear (Translational) Velocity</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#angular-velocity">Angular Velocity</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>

@@ -5,153 +5,186 @@ date: Sep. 19, 2023
 title: "Lecture 10: Derivative of Transformation"
 ---
 
-# Derivative of Transformation
+# Velocity Kinematics
 
-
+## Derivative of Rotation
 Consider a time-varying rotation matrix
-$\boldsymbol{R}=\boldsymbol{R}(t)$. One has
+$\boldsymbol{R}=\boldsymbol{R}(t)$. Based on the property of rotation matrix, we always have 
 
 $$\boldsymbol{R}(t) \boldsymbol{R}^{T}(t)=\boldsymbol{I}$$
 
 Differentiating the above equation with respect to time gives
 
-$$\dot{\boldsymbol{R}}(t) \boldsymbol{R}^{T}(t)+\boldsymbol{R}(t) \dot{\boldsymbol{R}}^{T}(t)=\boldsymbol{S}(t)+\boldsymbol{S}^{T}(t)=\boldsymbol{O}$$
+$$\dot{\boldsymbol{R}}(t) \boldsymbol{R}^{T}(t)+\boldsymbol{R}(t) \dot{\boldsymbol{R}}^{T}(t)=\boldsymbol{0}$$
 
-with the newly defined
-$\boldsymbol{S}(t)=\dot{\boldsymbol{R}}(t) \boldsymbol{R}^{T}(t)$ being
-called a $(3 \times 3)$ skew-symmetric matrix, and
+Let's define a new matrix
 
-$$\dot{\boldsymbol{R}}(t)=\boldsymbol{S}(t) \boldsymbol{R}(t)$$
+$$\boldsymbol{S}=\dot{\boldsymbol{R}} \boldsymbol{R}^{T}$$(equ.skew) 
 
-Next, let's find the physical interpretation of $\boldsymbol{S}$.
+Then, the above equation becomes
 
-Consider ${\boldsymbol{R}}(t)$ represents a rotation of a moving frame
-$O'-x'y'z'$ with respect to a fixed reference frame $O-xyz$. It means
-the following coordinate transformation
-$\boldsymbol{p}(t)=\boldsymbol{R}(t) \boldsymbol{p}^{\prime}$. Taking
-the derivative of both sides yields
+$$
+\boldsymbol{S}+\boldsymbol{S}^{T}=\boldsymbol{0}
+$$
 
-$$\dot{\boldsymbol{p}}(t)=\dot{\boldsymbol{R}}(t) \boldsymbol{p}^{\prime}=\boldsymbol{S}(t) \boldsymbol{R}(t) \boldsymbol{p}^{\prime}$$
+Any matrix that satisfies the above equation is called skew-symmetric matrix (a square matrix whose transpose equals its negative). 
+From {eq}`equ.skew`, we have
 
-where we have used the defined skew-symmetric matrix
-$\boldsymbol{S}(t)$, and considered $\boldsymbol{p}^\prime$ is fixed in
-the moving frame.
 
-Recall that in the mechanics courses, given the angular velocity
-$\boldsymbol{\omega}(t)=\left[\begin{array}{lll}\omega_{x} & \omega_{y} & \omega_{z}\end{array}\right]^{T}$
-of the moving frame $O'-x'y'z'$, with respect to the fixed frame, we
-also write the derivative as
+$$\dot{\boldsymbol{R}}=\boldsymbol{S} \boldsymbol{R}$$(equ.skew2)
 
-$$\dot{\boldsymbol{p}}(t)=\boldsymbol{\omega}(t) \times \boldsymbol{R}(t) \boldsymbol{p}^{\prime}$$
+Now, let's find out what is $\boldsymbol{S}$ and its physics interpretation.
 
-Comparing the above two equations, we can conclude
+Suppose ${\boldsymbol{R}}$ represents a rotation of a moving body frame
+$O'-x'y'z'$ with respect to a fixed reference frame $O-xyz$. Let's consider a point $P$, rigidly fixed to the body frame (thus moving as body is moving), with its  body frame coordinate $\boldsymbol{p}^{\prime}$. Then, its coordinate in the reference frame $\boldsymbol{p}$ is 
 
-$$\boldsymbol{S}=\left[\begin{array}{ccc}
+$$\boldsymbol{p}(t)=\boldsymbol{R}(t) \boldsymbol{p}^{\prime}$$(equ.coordinate) 
+
+which is time varying. 
+
+
+ Taking
+the derivative to  both sides of {eq}`equ.coordinate` yields
+
+$$\dot{\boldsymbol{p}}=\dot{\boldsymbol{R}} \boldsymbol{p}^{\prime}=\boldsymbol{S} \boldsymbol{R} \boldsymbol{p}^{\prime}$$(equ.skew3)
+
+where we have used {eq}`equ.skew`.
+
+Recall in your mechanics courses, given the angular velocity $\boldsymbol{\omega}$ of a moving body with respect to a reference frame, any point $P$ fixed on this body has a velocity in the reference frame as 
+
+$$
+\dot{\boldsymbol{p}}=\boldsymbol{\omega} \times  \boldsymbol{p}=\boldsymbol{\omega} \times \boldsymbol{R} \boldsymbol{p}^{\prime}
+$$(equ.bke)
+
+where $\boldsymbol{\omega}=\left[\begin{array}{lll}\omega_{x} & \omega_{y} & \omega_{z}\end{array}\right]^{T}$ is the angular velocity of the moving body, expressed in the  reference frame.
+
+
+
+If we look at and compare {eq}`equ.skew3` and {eq}`equ.bke`, we can find
+
+$$\boldsymbol{S}=[\boldsymbol{\omega} \times]=\left[\begin{array}{ccc}
 0 & -\omega_{z} & \omega_{y} \\
 \omega_{z} & 0 & -\omega_{x} \\
 -\omega_{y} & \omega_{x} & 0
-\end{array}\right]=\boldsymbol{S}(\boldsymbol{\omega})$$
+\end{array}\right]$$
 
-Hence, we can conclude the derivative of a rotation matrix is
+Thus, this skew-symmetric matrix $\boldsymbol{S}$ can be obtained directly from the body's angular velocity $\boldsymbol{\omega}$. We typically write it as $\boldsymbol{S}(\boldsymbol{\omega})$.
+
+In sum, we can conclude the derivative of a rotation matrix is
+
 $$\dot{\boldsymbol{R}}=\boldsymbol{S}(\boldsymbol{\omega}) \boldsymbol{R}$$
 
-*Note that in the above equation, $\boldsymbol{\omega}$ is expressed in
-the fixed frame.*
 
-One property of $\boldsymbol{S}(\boldsymbol{\omega})$: if
-$\boldsymbol{R}$ denotes a rotation matrix, it can be shown that the
-following relation holds:
+*Note that the above angular velocity $\boldsymbol{\omega}$ is expressed in the reference frame! (not in the body frame)*
 
-$$\boldsymbol{R} \boldsymbol{S}(\boldsymbol{\omega}) \boldsymbol{R}^{T}=\boldsymbol{S}(\boldsymbol{R} \boldsymbol{\omega})$$
+One property of $\boldsymbol{S}(\boldsymbol{\omega})$: For any rotation matrix
+$\boldsymbol{R}$, one has
 
-# Derivative of Pose Transformation
+$$\boldsymbol{R} \boldsymbol{S}(\boldsymbol{\omega}) \boldsymbol{R}^{T}=\boldsymbol{S}(\boldsymbol{R} \boldsymbol{\omega})$$(equ.skewproperty)
 
-Pose transformation defines coordinate mapping of a point $P$ from frame
-$O_1-x_1y_1z_1$ to frame $O_0-x_0y_0z_0$
+## Derivative of Rotation + Translation
 
-$$\boldsymbol{p}^{0}=\boldsymbol{o}_{1}^{0}+\boldsymbol{R}_{1}^{0} \boldsymbol{p}^{1}$$
+Consider a transformation mapping the  coordinate mapping of a point $P$ (NOT necessarily fixed on a moving body) from the body frame
+$O_1-x_1y_1z_1$ to reference frame $O_0-x_0y_0z_0$
+
+$$\boldsymbol{p}^{0}=\boldsymbol{o}_{1}^{0}(t)+\boldsymbol{R}_{1}^{0}(t) \boldsymbol{p}^{1}$$
 
 Differentiating the above equation with respect to time yields
 
-$$\dot{\boldsymbol{p}}^{0}=\dot{\boldsymbol{o}}_{1}^{0}+\boldsymbol{R}_{1}^{0} \dot{\boldsymbol{p}}^{1}+\dot{\boldsymbol{R}}_{1}^{0} \boldsymbol{p}^{1}=\dot{\boldsymbol{o}}_{1}^{0}+\boldsymbol{R}_{1}^{0} \dot{\boldsymbol{p}}^{1}+\boldsymbol{S}\left(\boldsymbol{\omega}_{1}^{0}\right) \boldsymbol{R}_{1}^{0} \boldsymbol{p}^{1}$$
+$$\dot{\boldsymbol{p}}^{0}=\dot{\boldsymbol{o}}_{1}^{0}+\boldsymbol{R}_{1}^{0} \dot{\boldsymbol{p}}^{1}+\dot{\boldsymbol{R}}_{1}^{0} \boldsymbol{p}^{1}=\dot{\boldsymbol{o}}_{1}^{0}+\boldsymbol{R}_{1}^{0} \dot{\boldsymbol{p}}^{1}+\boldsymbol{S}\left(\boldsymbol{\omega}_{1}^{0}\right) \boldsymbol{R}_{1}^{0} \boldsymbol{p}^{1}$$(equ.vkin1)
+
+In the above  {eq}`equ.vkin1`, because point $P$ is not necessarily fixed on the body, so it has its own derivative $\dot{\boldsymbol{p}}^{1}$.
+
 
 Since
-$\boldsymbol{R}_{1}^{0} \boldsymbol{p}^{1}=\boldsymbol{p}_{1}^{0}$,
+$\boldsymbol{R}_{1}^{0} \boldsymbol{p}^{1}=\boldsymbol{p}^{0}$, the above equation {eq}`equ.vkin1` becomes
 
-$$\dot{\boldsymbol{p}}^{0}=\dot{\boldsymbol{o}}_{1}^{0}+\boldsymbol{R}_{1}^{0} \dot{\boldsymbol{p}}^{1}+\omega_{1}^{0} \times \boldsymbol{r}_{1}^{0}$$
+$$\dot{\boldsymbol{p}}^{0}=\dot{\boldsymbol{o}}_{1}^{0}+\boldsymbol{R}_{1}^{0} \dot{\boldsymbol{p}}^{1}+\omega_{1}^{0} \times \boldsymbol{p}^{0}$$(equ.vkin2)
 
-Notice that, if $\boldsymbol{p}^{1}$ is fixed in Frame 1 , then it is
+Also, we can write $\boldsymbol{R}_{1}^{0} \dot{\boldsymbol{p}}^{1}=\dot{\boldsymbol{p}}^{0}$ (ask yourself, what does this mean?), and {eq}`equ.vkin2` becomes
 
-$$\dot{\boldsymbol{p}}^{0}=\dot{\boldsymbol{o}}_{1}^{0}+\boldsymbol{\omega}_{1}^{0} \times \boldsymbol{r}_{1}^{0}$$
+$$\dot{\boldsymbol{p}}^{0}=\dot{\boldsymbol{o}}_{1}^{0}+\dot{\boldsymbol{p}}^{0}+\omega_{1}^{0} \times \boldsymbol{p}^{0}$$
 
-# Manipulator Link Velocity
+Notice that, if $\boldsymbol{p}^{1}$ is fixed in the moving body frame , then {eq}`equ.vkin1` can be further reduced to
 
-Consider the Link $i$ of a manipulator. According to DH convention, the
-pose of Link $i$ defines the transformation between Frame $i-1$ and
-Frame $i$, as shown in the following figure below.
+$$\dot{\boldsymbol{p}}^{0}=\dot{\boldsymbol{o}}_{1}^{0}+\boldsymbol{\omega}_{1}^{0} \times \boldsymbol{p}^{0}$$
+
+# Apply to links of a robot arm
+
+Consider the Link $i$ of a robot arm in {numref}`manipulator_linki`. We can apply DH convention to find the transformation between Frame $i-1$ (attached to link $i-1$) and
+Frame $i$ (attached to this link $i$). Next, we find out what the relationship between the velocity of those two links.
 
 
 ```{figure} ./diff_kinematics/manipulator_linki.jpg
 ---
-width: 50%
+width: 80%
 name: manipulator_linki
 ---
-Characterization of generic Link $i$ of a
-manipulator
+Link $i$ of a
+robot arm
 ```
 
 
 
-## Linear Velocity
+## Linear (Translational) Velocity
 
 Let $\boldsymbol{p}_{i-1}$ and $\boldsymbol{p}_{i}$ be the position of
-the origins of Frames $i-1$ and $i$, respectively. Also, let
+the origins of Frame $i-1$ and Frame $i$, respectively. Also, let
 $\boldsymbol{r}_{i-1, i}^{i-1}$ denote the position of the origin of
-Frame $i$ with respect to Frame $i-1$ expressed in Frame $i-1$.
+Frame $i$ from the origin of Frame $i-1$, expressed in Frame $i-1$.
 
-$$\boldsymbol{p}_{i}=\boldsymbol{p}_{i-1}+\boldsymbol{R}_{i-1} \boldsymbol{r}_{i-1, i}^{i-1}$$
 
-Based on the derivative of pose transformation, we have
+Let's consider $\boldsymbol{p}_{i-1}$ be position of Frame $i-1$ in the reference frame (therefore, i omit the superscript here), and $\boldsymbol{R}_{i-1}$ be the rotation of Frame $i-1$ in the reference frame (i omit the superscript again). Then, the position of Frame $i$ in the reference frame is
 
-$$\dot{\boldsymbol{p}}_{i}=\dot{\boldsymbol{p}}_{i-1}+\boldsymbol{R}_{i-1} \dot{\boldsymbol{r}}_{i-1, i}^{i-1}+\boldsymbol{\omega}_{i-1} \times \boldsymbol{R}_{i-1} \boldsymbol{r}_{i-1, i}^{i-1}=\dot{\boldsymbol{p}}_{i-1}+\boldsymbol{v}_{i-1, i}+\omega_{i-1} \times \boldsymbol{r}_{i-1, i}$$
+$$\boldsymbol{p}_{i}=\boldsymbol{p}_{i-1}+\boldsymbol{R}_{i-1} \boldsymbol{r}_{i-1, i}^{i-1}$$(equ.linki_pos)
 
-which gives the linear velocity of Link $i$ as a function of the
-translational and rotational velocities of Link $i-1$.
+Taking the derivative of both sides in the above equation with respect to time $t$, we have
+
+$$
+\begin{aligned}
+\dot{\boldsymbol{p}}_{i}&=\dot{\boldsymbol{p}}_{i-1}+\boldsymbol{R}_{i-1} \dot{\boldsymbol{r}}_{i-1, i}^{i-1}+\boldsymbol{\omega}_{i-1} \times \boldsymbol{R}_{i-1} \boldsymbol{r}_{i-1, i}^{i-1}\\&=\dot{\boldsymbol{p}}_{i-1}+\boldsymbol{v}_{i-1, i}+\omega_{i-1} \times \boldsymbol{r}_{i-1, i}
+\end{aligned}
+$$(equ.linki_pos_vel)
+
+Please carefully look at how first row becomes second row, and what each varible stands for.
+
+
+Therefore, the linear velocity $\dot{\boldsymbol{p}}_{i}$ of Link $i$ depends on the
+translational velocity $\dot{\boldsymbol{p}}_{i-1}$ and rotational velocity  $\omega_{i-1}$ of Link $i-1$, and also on their relative position $\boldsymbol{r}_{i-1, i}$ and velocity $\boldsymbol{v}_{i-1, i}$
 
 ## Angular Velocity
 
-Since
+Next, let's consider the rotation of Frame $i$ in the reference frame (omit the superscipt 0 again)
+
 
 $$\boldsymbol{R}_{i}=\boldsymbol{R}_{i-1} \boldsymbol{R}_{i}^{i-1}$$
 
-Its time derivative
+Its time derivative is
 
-$$\boldsymbol{S}\left(\boldsymbol{\omega}_{i}\right) \boldsymbol{R}_{i}=\boldsymbol{S}\left(\boldsymbol{\omega}_{i-1}\right) \boldsymbol{R}_{i}+\boldsymbol{R}_{i-1} \boldsymbol{S}\left(\boldsymbol{\omega}_{i-1, i}^{i-1}\right) \boldsymbol{R}_{i}^{i-1}$$
+$$\boldsymbol{S}\left(\boldsymbol{\omega}_{i}\right) \boldsymbol{R}_{i}=\boldsymbol{S}\left(\boldsymbol{\omega}_{i-1}\right) \boldsymbol{R}_{i}+\boldsymbol{R}_{i-1} \boldsymbol{S}\left(\boldsymbol{\omega}_{i-1, i}^{i-1}\right) \boldsymbol{R}_{i}^{i-1}$$(equ.linki_rot_vel)
 
 where $\boldsymbol{\omega}_{i-1, i}^{i-1}$ denotes the angular velocity
 of Frame $i$ with respect to Frame $i-1$ expressed in Frame $i-1$. The
-second term on the right-hand side can be rewritten as
+second term on the right-hand side of {eq}`equ.linki_rot_vel` can be rewritten as
 
 $$\boldsymbol{R}_{i-1} \boldsymbol{S}\left(\boldsymbol{\omega}_{i-1, i}^{i-1}\right) \boldsymbol{R}_{i}^{i-1}=\boldsymbol{R}_{i-1} \boldsymbol{S}\left(\boldsymbol{\omega}_{i-1, i}^{i-1}\right) \boldsymbol{R}_{i-1}^{T} \boldsymbol{R}_{i-1} \boldsymbol{R}_{i}^{i-1}=\boldsymbol{S}\left(\boldsymbol{R}_{i-1} \boldsymbol{\omega}_{i-1, i}^{i-1}\right) \boldsymbol{R}_{i}$$
 
-by recalling the property of the skew-symmetric matrix. Then,
+by recalling the property of the skew-symmetric matrix in {eq}`equ.skewproperty`. Then,
 
-$$\boldsymbol{S}\left(\boldsymbol{\omega}_{i}\right) \boldsymbol{R}_{i}=\boldsymbol{S}\left(\boldsymbol{\omega}_{i-1}\right) \boldsymbol{R}_{i}+\boldsymbol{S}\left(\boldsymbol{R}_{i-1} \boldsymbol{\omega}_{i-1, i}^{i-1}\right) \boldsymbol{R}_{i}$$
+$$\boldsymbol{S}\left(\boldsymbol{\omega}_{i}\right) \boldsymbol{R}_{i}=\boldsymbol{S}\left(\boldsymbol{\omega}_{i-1}\right) \boldsymbol{R}_{i}+\boldsymbol{S}\left(\boldsymbol{R}_{i-1} \boldsymbol{\omega}_{i-1, i}^{i-1}\right) \boldsymbol{R}_{i}$$(equ.linki_rot_vel2)
 
-leading to
+If we cancel out all $ \boldsymbol{R}_{i}$ on both sides of {eq}`equ.linki_rot_vel2`, we can get
 
-$$\boldsymbol{\omega}_{i}=\boldsymbol{\omega}_{i-1}+\boldsymbol{R}_{i-1} \boldsymbol{\omega}_{i-1, i}^{i-1}=\boldsymbol{\omega}_{i-1}+\boldsymbol{\omega}_{i-1, i}$$
+$$\boldsymbol{\omega}_{i}=\boldsymbol{\omega}_{i-1}+\boldsymbol{R}_{i-1} \boldsymbol{\omega}_{i-1, i}^{i-1}=\boldsymbol{\omega}_{i-1}+\boldsymbol{\omega}_{i-1, i}$$(equ.linki_rot_vel3)
 
-which gives the expression of the angular velocity of Link $i$ as a
-function of the angular velocities of Link $i-1$ and of Link $i$ with
-respect to Link $i-1$.
+Thus,  the angular velocity $\boldsymbol{\omega}_{i}$ of Link $i$ depends only on the angular velocity $\boldsymbol{\omega}_{i-1}$ of Link $i-1$ and their relative angular velocity $\boldsymbol{\omega}_{i-1, i}$.
 
 ## Summary
 
-Considering different types of Joint $i$, according to the above
-derivative of linear velocity and angular velocity, we have the
-following conclusions.
+Considering different joint types for Joint $i$ at a robot arm, according to {eq}`equ.linki_pos_vel` and {eq}`equ.linki_rot_vel3`, we can obtain
 
+
+:::{important}
 **If Joint $i$ is prismatic**
 
 $$\begin{aligned}
@@ -165,3 +198,4 @@ $$\begin{aligned}
 \boldsymbol{\omega}_{i} & =\boldsymbol{\omega}_{i-1}+\dot{\vartheta}_{i} \boldsymbol{z}_{i-1} \\
 \dot{\boldsymbol{p}}_{i} & =\dot{\boldsymbol{p}}_{i-1}+\boldsymbol{\omega}_{i} \times \boldsymbol{r}_{i-1, i}
 \end{aligned}$$
+:::
