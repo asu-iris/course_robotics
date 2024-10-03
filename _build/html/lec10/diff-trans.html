@@ -449,7 +449,7 @@ the derivative to  both sides of <a class="reference internal" href="#equation-e
 <p>where <span class="math notranslate nohighlight">\(\boldsymbol{\omega}=\left[\begin{array}{lll}\omega_{x} &amp; \omega_{y} &amp; \omega_{z}\end{array}\right]^{T}\)</span> is the angular velocity of the moving body, expressed in the  reference frame.</p>
 <p>If we look at and compare <a class="reference internal" href="#equation-equ-skew3">(7)</a> and <a class="reference internal" href="#equation-equ-bke">(8)</a>, we can find</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\boldsymbol{S}=[\boldsymbol{\omega} \times]=\left[\begin{array}{ccc}
+\[\begin{split}\boldsymbol{S}=[\boldsymbol{\omega} \times]=\boldsymbol{S}(\boldsymbol{\omega})=\left[\begin{array}{ccc}
 0 &amp; -\omega_{z} &amp; \omega_{y} \\
 \omega_{z} &amp; 0 &amp; -\omega_{x} \\
 -\omega_{y} &amp; \omega_{x} &amp; 0
@@ -472,16 +472,19 @@ the derivative to  both sides of <a class="reference internal" href="#equation-e
 \[\boldsymbol{p}^{0}=\boldsymbol{o}_{1}^{0}(t)+\boldsymbol{R}_{1}^{0}(t) \boldsymbol{p}^{1}\]</div>
 <p>Differentiating the above equation with respect to time yields</p>
 <div class="math notranslate nohighlight" id="equation-equ-vkin1">
-<span class="eqno">(10)<a class="headerlink" href="#equation-equ-vkin1" title="Permalink to this equation">#</a></span>\[\dot{\boldsymbol{p}}^{0}=\dot{\boldsymbol{o}}_{1}^{0}+\boldsymbol{R}_{1}^{0} \dot{\boldsymbol{p}}^{1}+\dot{\boldsymbol{R}}_{1}^{0} \boldsymbol{p}^{1}=\dot{\boldsymbol{o}}_{1}^{0}+\boldsymbol{R}_{1}^{0} \dot{\boldsymbol{p}}^{1}+\boldsymbol{S}\left(\boldsymbol{\omega}_{1}^{0}\right) \boldsymbol{R}_{1}^{0} \boldsymbol{p}^{1}\]</div>
-<p>In the above  <a class="reference internal" href="#equation-equ-vkin1">(10)</a>, because point <span class="math notranslate nohighlight">\(P\)</span> is not necessarily fixed on the body, so it has its own derivative <span class="math notranslate nohighlight">\(\dot{\boldsymbol{p}}^{1}\)</span>.</p>
+<span class="eqno">(10)<a class="headerlink" href="#equation-equ-vkin1" title="Permalink to this equation">#</a></span>\[\dot{\boldsymbol{p}}^{0}=\dot{\boldsymbol{o}}_{1}^{0}+\boldsymbol{R}_{1}^{0} \dot{\boldsymbol{p}}^{1}+\dot{\boldsymbol{R}}_{1}^{0} \boldsymbol{p}^{1}=\dot{\boldsymbol{o}}_{1}^{0}+\boldsymbol{R}_{1}^{0} \dot{{\boldsymbol{p}}}^{1}+\boldsymbol{S}\left(\boldsymbol{\omega}_{1}^{0}\right) \boldsymbol{R}_{1}^{0} \boldsymbol{p}^{1}\]</div>
+<p>In the above  <a class="reference internal" href="#equation-equ-vkin1">(10)</a>, because point <span class="math notranslate nohighlight">\(P\)</span> is not necessarily fixed on the body, and it may have its <em>local movement in the body frame</em> with the local velocity <span class="math notranslate nohighlight">\(\dot{{\boldsymbol{p}}}^{1}\)</span>. Special care should be paied to the notation of <span class="math notranslate nohighlight">\(\dot{{\boldsymbol{p}}}^{1}\)</span>: <span class="math notranslate nohighlight">\(\dot{{\boldsymbol{p}}}^{1}\)</span> is purely taking the derivative to xyz body coordinate instead of  body xyz axises.</p>
 <p>Since
-<span class="math notranslate nohighlight">\(\boldsymbol{R}_{1}^{0} \boldsymbol{p}^{1}=\boldsymbol{p}^{0}\)</span>, the above equation <a class="reference internal" href="#equation-equ-vkin1">(10)</a> becomes</p>
+<span class="math notranslate nohighlight">\(\boldsymbol{R}_{1}^{0} \boldsymbol{p}^{1}=\boldsymbol{p}^{0}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{S}\left(\boldsymbol{\omega}_{1}^{0}\right)=[\omega_{1}^{0} \times] \)</span>, the above equation <a class="reference internal" href="#equation-equ-vkin1">(10)</a> becomes</p>
 <div class="math notranslate nohighlight" id="equation-equ-vkin2">
 <span class="eqno">(11)<a class="headerlink" href="#equation-equ-vkin2" title="Permalink to this equation">#</a></span>\[\dot{\boldsymbol{p}}^{0}=\dot{\boldsymbol{o}}_{1}^{0}+\boldsymbol{R}_{1}^{0} \dot{\boldsymbol{p}}^{1}+\omega_{1}^{0} \times \boldsymbol{p}^{0}\]</div>
-<p>Also, we can write <span class="math notranslate nohighlight">\(\boldsymbol{R}_{1}^{0} \dot{\boldsymbol{p}}^{1}=\dot{\boldsymbol{p}}^{0}\)</span> (ask yourself, what does this mean?), and <a class="reference internal" href="#equation-equ-vkin2">(11)</a> becomes</p>
-<div class="math notranslate nohighlight">
-\[\dot{\boldsymbol{p}}^{0}=\dot{\boldsymbol{o}}_{1}^{0}+\dot{\boldsymbol{p}}^{0}+\omega_{1}^{0} \times \boldsymbol{p}^{0}\]</div>
-<p>Notice that, if <span class="math notranslate nohighlight">\(\boldsymbol{p}^{1}\)</span> is fixed in the moving body frame , then <a class="reference internal" href="#equation-equ-vkin1">(10)</a> can be further reduced to</p>
+<p>Here are some explaination of each term on the right side of <a class="reference internal" href="#equation-equ-vkin2">(11)</a>:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\dot{\boldsymbol{o}}_{1}^{0}\)</span> is the contribution to point <span class="math notranslate nohighlight">\(P\)</span>’s total velocity (in reference frame) by the translation of body frame.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\boldsymbol{R}_{1}^{0} \dot{\boldsymbol{p}}^{1}\)</span> is the contribution to point <span class="math notranslate nohighlight">\(P\)</span>’s total velocity (in reference frame)  by the local movement of <span class="math notranslate nohighlight">\(P\)</span> on the body frame. Here, <span class="math notranslate nohighlight">\(\dot{\boldsymbol{p}}^{1}\)</span> is the local velocity in the body frame, and <span class="math notranslate nohighlight">\(\boldsymbol{R}_{1}^{0} \dot{\boldsymbol{p}}^{1}\)</span> is the transformed local velocity to the reference frame.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\boldsymbol{S}\left(\boldsymbol{\omega}_{1}^{0}\right) \boldsymbol{R}_{1}^{0} \boldsymbol{p}^{1}=\omega_{1}^{0} \times \boldsymbol{p}^{0}\)</span> is the contribution to point <span class="math notranslate nohighlight">\(P\)</span>’s total velocity by the rotation of the body frame.</p></li>
+</ul>
+<p>Notice that, if <span class="math notranslate nohighlight">\(\boldsymbol{p}^{1}\)</span> is fixed in the moving body frame , then <a class="reference internal" href="#equation-equ-vkin2">(11)</a> can be further reduced to</p>
 <div class="math notranslate nohighlight">
 \[\dot{\boldsymbol{p}}^{0}=\dot{\boldsymbol{o}}_{1}^{0}+\boldsymbol{\omega}_{1}^{0} \times \boldsymbol{p}^{0}\]</div>
 </section>
@@ -506,16 +509,52 @@ Frame <span class="math notranslate nohighlight">\(i\)</span> from the origin of
 <p>Let’s consider <span class="math notranslate nohighlight">\(\boldsymbol{p}_{i-1}\)</span> be position of Frame <span class="math notranslate nohighlight">\(i-1\)</span> in the reference frame (therefore, i omit the superscript here), and <span class="math notranslate nohighlight">\(\boldsymbol{R}_{i-1}\)</span> be the rotation of Frame <span class="math notranslate nohighlight">\(i-1\)</span> in the reference frame (i omit the superscript again). Then, the position of Frame <span class="math notranslate nohighlight">\(i\)</span> in the reference frame is</p>
 <div class="math notranslate nohighlight" id="equation-equ-linki-pos">
 <span class="eqno">(12)<a class="headerlink" href="#equation-equ-linki-pos" title="Permalink to this equation">#</a></span>\[\boldsymbol{p}_{i}=\boldsymbol{p}_{i-1}+\boldsymbol{R}_{i-1} \boldsymbol{r}_{i-1, i}^{i-1}\]</div>
-<p>Taking the derivative of both sides in the above equation with respect to time <span class="math notranslate nohighlight">\(t\)</span>, we have</p>
+<p>Before we proceed, a question: how to obtain <span class="math notranslate nohighlight">\(\boldsymbol{p}_{i-1}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{R}_{i-1}\)</span>? and how to obtain <span class="math notranslate nohighlight">\(\boldsymbol{r}_{i-1, i}^{i-1}\)</span>?</p>
+<p>Similar to <a class="reference internal" href="#equation-equ-vkin1">(10)</a>, taking the derivative of both sides in the above equation with respect to time <span class="math notranslate nohighlight">\(t\)</span>, we have</p>
 <div class="math notranslate nohighlight" id="equation-equ-linki-pos-vel">
 <span class="eqno">(13)<a class="headerlink" href="#equation-equ-linki-pos-vel" title="Permalink to this equation">#</a></span>\[\begin{split}
 \begin{aligned}
-\dot{\boldsymbol{p}}_{i}&amp;=\dot{\boldsymbol{p}}_{i-1}+\boldsymbol{R}_{i-1} \dot{\boldsymbol{r}}_{i-1, i}^{i-1}+\boldsymbol{\omega}_{i-1} \times \boldsymbol{R}_{i-1} \boldsymbol{r}_{i-1, i}^{i-1}\\&amp;=\dot{\boldsymbol{p}}_{i-1}+\boldsymbol{v}_{i-1, i}+\omega_{i-1} \times \boldsymbol{r}_{i-1, i}
+\dot{\boldsymbol{p}}_{i}&amp;=\dot{\boldsymbol{p}}_{i-1}+\boldsymbol{R}_{i-1} \dot{\boldsymbol{r}}_{i-1, i}^{i-1}+\boldsymbol{\omega}_{i-1} \times \boldsymbol{R}_{i-1} \boldsymbol{r}_{i-1, i}^{i-1}\\&amp;=\dot{\boldsymbol{p}}_{i-1}+\boldsymbol{v}_{i-1, i}+\boldsymbol{\omega}_{i-1} \times \boldsymbol{r}_{i-1, i}
 \end{aligned}
 \end{split}\]</div>
-<p>Please carefully look at how first row becomes second row, and what each varible stands for.</p>
-<p>Therefore, the linear velocity <span class="math notranslate nohighlight">\(\dot{\boldsymbol{p}}_{i}\)</span> of Link <span class="math notranslate nohighlight">\(i\)</span> depends on the
-translational velocity <span class="math notranslate nohighlight">\(\dot{\boldsymbol{p}}_{i-1}\)</span> and rotational velocity  <span class="math notranslate nohighlight">\(\omega_{i-1}\)</span> of Link <span class="math notranslate nohighlight">\(i-1\)</span>, and also on their relative position <span class="math notranslate nohighlight">\(\boldsymbol{r}_{i-1, i}\)</span> and velocity <span class="math notranslate nohighlight">\(\boldsymbol{v}_{i-1, i}\)</span></p>
+<p>Here, we define <span class="math notranslate nohighlight">\(\boldsymbol{v}_{i-1, i}=\boldsymbol{R}_{i-1}\dot{\boldsymbol{r}}_{i-1, i}^{i-1}\)</span>, which is local translational velocity of Frame <span class="math notranslate nohighlight">\(i\)</span> in Frame <span class="math notranslate nohighlight">\(i-1\)</span>, but expressed in the reference frame.
+Please carefully look at how first row becomes second row, and ask yourself what each term stands for on the second row, similar to how we have analyzed to<a class="reference internal" href="#equation-equ-vkin2">(11)</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Now let’s think about what happens to <a class="reference internal" href="#equation-equ-linki-pos-vel">(13)</a> if joint <span class="math notranslate nohighlight">\(i\)</span> is revolute joint. In that case,</p>
+<ul class="simple">
+<li><p>how to compute  <span class="math notranslate nohighlight">\(\boldsymbol{r}_{i-1, i}\)</span>? Hint: think about forward kinematics.</p></li>
+<li><p>what is  <span class="math notranslate nohighlight">\(\boldsymbol{v}_{i-1, i}\)</span>? Hint: think about what is the relative motion of Frame <span class="math notranslate nohighlight">\(i\)</span> in Frame <span class="math notranslate nohighlight">\(i-1\)</span>. You may answer:</p></li>
+</ul>
+<div class="math notranslate nohighlight" id="equation-equ-rel-v">
+<span class="eqno">(14)<a class="headerlink" href="#equation-equ-rel-v" title="Permalink to this equation">#</a></span>\[\boldsymbol{v}_{i-1, i}=\boldsymbol{\omega}_{i-1, i}\times\boldsymbol{r}_{i-1, i}\]</div>
+<p>But what is <span class="math notranslate nohighlight">\(\boldsymbol{\omega}_{i-1, i}\)</span>? Actually, it is relative angular velocity of Frame <span class="math notranslate nohighlight">\(i\)</span> in Frame <span class="math notranslate nohighlight">\(i-1\)</span>, expressed in the reference frame.</p>
+<p>So, next quesetion, hwo to compute <span class="math notranslate nohighlight">\(\boldsymbol{\omega}_{i-1, i}\)</span>? Actually</p>
+<div class="math notranslate nohighlight" id="equation-equ-relative-omega">
+<span class="eqno">(15)<a class="headerlink" href="#equation-equ-relative-omega" title="Permalink to this equation">#</a></span>\[\boldsymbol{\omega}_{i-1, i}=\dot{\vartheta}\boldsymbol{z}_{i-1}\]</div>
+<p>What is <span class="math notranslate nohighlight">\(\boldsymbol{z}_{i-1}\)</span>? This is question for you!</p>
+<p>Combine <a class="reference internal" href="#equation-equ-linki-pos-vel">(13)</a>, <a class="reference internal" href="#equation-equ-rel-v">(14)</a> and <a class="reference internal" href="#equation-equ-relative-omega">(15)</a>, we have:
+<strong>If Joint <span class="math notranslate nohighlight">\(i\)</span> is revolute</strong></p>
+<div class="math notranslate nohighlight">
+\[\begin{aligned}
+\dot{\boldsymbol{p}}_{i} =\dot{\boldsymbol{p}}_{i-1}+(\dot{\vartheta}_{i} \boldsymbol{z}_{i-1}+\boldsymbol{\omega}_{i-1}) \times \boldsymbol{r}_{i-1, i}
+\end{aligned}\]</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Now let’s think about what happens to <a class="reference internal" href="#equation-equ-linki-pos-vel">(13)</a> if joint <span class="math notranslate nohighlight">\(i\)</span> is prismatic joint. In that case,</p>
+<ul class="simple">
+<li><p>what is  <span class="math notranslate nohighlight">\(\boldsymbol{v}_{i-1, i}\)</span>? Hint: think about what is the relative motion of Frame <span class="math notranslate nohighlight">\(i\)</span> in Frame <span class="math notranslate nohighlight">\(i-1\)</span>.  Actually</p></li>
+</ul>
+<div class="math notranslate nohighlight" id="equation-equ-relative-d">
+<span class="eqno">(16)<a class="headerlink" href="#equation-equ-relative-d" title="Permalink to this equation">#</a></span>\[\boldsymbol{v}_{i-1, i}=\dot{d_i}\boldsymbol{z}_{i-1}\]</div>
+<p>Combine <a class="reference internal" href="#equation-equ-linki-pos-vel">(13)</a>, <a class="reference internal" href="#equation-equ-rel-v">(14)</a> and <a class="reference internal" href="#equation-equ-relative-d">(16)</a>, we have:
+<strong>If Joint <span class="math notranslate nohighlight">\(i\)</span> is prismatic</strong></p>
+<div class="math notranslate nohighlight">
+\[\begin{aligned}
+\dot{\boldsymbol{p}}_{i} =\dot{\boldsymbol{p}}_{i-1}+\dot{d}_{i} \boldsymbol{z}_{i-1} +\boldsymbol{\omega}_{i-1}\times \boldsymbol{r}_{i-1, i}
+\end{aligned}\]</div>
+</div>
 </section>
 <section id="angular-velocity">
 <h2>Angular Velocity<a class="headerlink" href="#angular-velocity" title="Permalink to this heading">#</a></h2>
@@ -524,23 +563,43 @@ translational velocity <span class="math notranslate nohighlight">\(\dot{\boldsy
 \[\boldsymbol{R}_{i}=\boldsymbol{R}_{i-1} \boldsymbol{R}_{i}^{i-1}\]</div>
 <p>Its time derivative is</p>
 <div class="math notranslate nohighlight" id="equation-equ-linki-rot-vel">
-<span class="eqno">(14)<a class="headerlink" href="#equation-equ-linki-rot-vel" title="Permalink to this equation">#</a></span>\[\boldsymbol{S}\left(\boldsymbol{\omega}_{i}\right) \boldsymbol{R}_{i}=\boldsymbol{S}\left(\boldsymbol{\omega}_{i-1}\right) \boldsymbol{R}_{i}+\boldsymbol{R}_{i-1} \boldsymbol{S}\left(\boldsymbol{\omega}_{i-1, i}^{i-1}\right) \boldsymbol{R}_{i}^{i-1}\]</div>
+<span class="eqno">(17)<a class="headerlink" href="#equation-equ-linki-rot-vel" title="Permalink to this equation">#</a></span>\[\boldsymbol{S}\left(\boldsymbol{\omega}_{i}\right) \boldsymbol{R}_{i}=\boldsymbol{S}\left(\boldsymbol{\omega}_{i-1}\right) \boldsymbol{R}_{i}+\boldsymbol{R}_{i-1} \boldsymbol{S}\left(\boldsymbol{\omega}_{i-1, i}^{i-1}\right) \boldsymbol{R}_{i}^{i-1}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\boldsymbol{\omega}_{i-1, i}^{i-1}\)</span> denotes the angular velocity
 of Frame <span class="math notranslate nohighlight">\(i\)</span> with respect to Frame <span class="math notranslate nohighlight">\(i-1\)</span> expressed in Frame <span class="math notranslate nohighlight">\(i-1\)</span>. The
-second term on the right-hand side of <a class="reference internal" href="#equation-equ-linki-rot-vel">(14)</a> can be rewritten as</p>
+second term on the right-hand side of <a class="reference internal" href="#equation-equ-linki-rot-vel">(17)</a> can be rewritten as</p>
 <div class="math notranslate nohighlight">
 \[\boldsymbol{R}_{i-1} \boldsymbol{S}\left(\boldsymbol{\omega}_{i-1, i}^{i-1}\right) \boldsymbol{R}_{i}^{i-1}=\boldsymbol{R}_{i-1} \boldsymbol{S}\left(\boldsymbol{\omega}_{i-1, i}^{i-1}\right) \boldsymbol{R}_{i-1}^{T} \boldsymbol{R}_{i-1} \boldsymbol{R}_{i}^{i-1}=\boldsymbol{S}\left(\boldsymbol{R}_{i-1} \boldsymbol{\omega}_{i-1, i}^{i-1}\right) \boldsymbol{R}_{i}\]</div>
 <p>by recalling the property of the skew-symmetric matrix in <a class="reference internal" href="#equation-equ-skewproperty">(9)</a>. Then,</p>
 <div class="math notranslate nohighlight" id="equation-equ-linki-rot-vel2">
-<span class="eqno">(15)<a class="headerlink" href="#equation-equ-linki-rot-vel2" title="Permalink to this equation">#</a></span>\[\boldsymbol{S}\left(\boldsymbol{\omega}_{i}\right) \boldsymbol{R}_{i}=\boldsymbol{S}\left(\boldsymbol{\omega}_{i-1}\right) \boldsymbol{R}_{i}+\boldsymbol{S}\left(\boldsymbol{R}_{i-1} \boldsymbol{\omega}_{i-1, i}^{i-1}\right) \boldsymbol{R}_{i}\]</div>
-<p>If we cancel out all <span class="math notranslate nohighlight">\( \boldsymbol{R}_{i}\)</span> on both sides of <a class="reference internal" href="#equation-equ-linki-rot-vel2">(15)</a>, we can get</p>
+<span class="eqno">(18)<a class="headerlink" href="#equation-equ-linki-rot-vel2" title="Permalink to this equation">#</a></span>\[\boldsymbol{S}\left(\boldsymbol{\omega}_{i}\right) \boldsymbol{R}_{i}=\boldsymbol{S}\left(\boldsymbol{\omega}_{i-1}\right) \boldsymbol{R}_{i}+\boldsymbol{S}\left(\boldsymbol{R}_{i-1} \boldsymbol{\omega}_{i-1, i}^{i-1}\right) \boldsymbol{R}_{i}\]</div>
+<p>If we cancel out all <span class="math notranslate nohighlight">\( \boldsymbol{R}_{i}\)</span> on both sides of <a class="reference internal" href="#equation-equ-linki-rot-vel2">(18)</a>, we can get</p>
 <div class="math notranslate nohighlight" id="equation-equ-linki-rot-vel3">
-<span class="eqno">(16)<a class="headerlink" href="#equation-equ-linki-rot-vel3" title="Permalink to this equation">#</a></span>\[\boldsymbol{\omega}_{i}=\boldsymbol{\omega}_{i-1}+\boldsymbol{R}_{i-1} \boldsymbol{\omega}_{i-1, i}^{i-1}=\boldsymbol{\omega}_{i-1}+\boldsymbol{\omega}_{i-1, i}\]</div>
+<span class="eqno">(19)<a class="headerlink" href="#equation-equ-linki-rot-vel3" title="Permalink to this equation">#</a></span>\[\boldsymbol{\omega}_{i}=\boldsymbol{\omega}_{i-1}+\boldsymbol{R}_{i-1} \boldsymbol{\omega}_{i-1, i}^{i-1}=\boldsymbol{\omega}_{i-1}+\boldsymbol{\omega}_{i-1, i}\]</div>
 <p>Thus,  the angular velocity <span class="math notranslate nohighlight">\(\boldsymbol{\omega}_{i}\)</span> of Link <span class="math notranslate nohighlight">\(i\)</span> depends only on the angular velocity <span class="math notranslate nohighlight">\(\boldsymbol{\omega}_{i-1}\)</span> of Link <span class="math notranslate nohighlight">\(i-1\)</span> and their relative angular velocity <span class="math notranslate nohighlight">\(\boldsymbol{\omega}_{i-1, i}\)</span>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Now let’s think about what happens to <a class="reference internal" href="#equation-equ-linki-rot-vel3">(19)</a> if joint <span class="math notranslate nohighlight">\(i\)</span> is revolute joint. In that case,  what is <span class="math notranslate nohighlight">\(\boldsymbol{\omega}_{i-1, i}\)</span> and how to compute it?</p>
+<p>Actually, it is  <a class="reference internal" href="#equation-equ-relative-omega">(15)</a>! Combine <a class="reference internal" href="#equation-equ-linki-rot-vel3">(19)</a> and <a class="reference internal" href="#equation-equ-relative-omega">(15)</a>, we have:
+<strong>If Joint <span class="math notranslate nohighlight">\(i\)</span> is revolute</strong></p>
+<div class="math notranslate nohighlight">
+\[
+\boldsymbol{\omega}_{i}  =\boldsymbol{\omega}_{i-1}+\dot{\vartheta}_{i} \boldsymbol{z}_{i-1}
+\]</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Now let’s think about what happens to <a class="reference internal" href="#equation-equ-linki-rot-vel3">(19)</a> if joint <span class="math notranslate nohighlight">\(i\)</span> is prismatic. In that case,  what is <span class="math notranslate nohighlight">\(\boldsymbol{\omega}_{i-1, i}\)</span> and how to compute it?</p>
+<p>Actually, it is  <span class="math notranslate nohighlight">\(0\)</span>! Thus, we have:
+<strong>If Joint <span class="math notranslate nohighlight">\(i\)</span> is prismatic</strong></p>
+<div class="math notranslate nohighlight">
+\[
+\boldsymbol{\omega}_{i}  =\boldsymbol{\omega}_{i-1}
+\]</div>
+</div>
 </section>
 <section id="summary">
 <h2>Summary<a class="headerlink" href="#summary" title="Permalink to this heading">#</a></h2>
-<p>Considering different joint types for Joint <span class="math notranslate nohighlight">\(i\)</span> at a robot arm, according to <a class="reference internal" href="#equation-equ-linki-pos-vel">(13)</a> and <a class="reference internal" href="#equation-equ-linki-rot-vel3">(16)</a>, we can obtain</p>
+<p>Considering different joint types for Joint <span class="math notranslate nohighlight">\(i\)</span> at a robot arm, according to <a class="reference internal" href="#equation-equ-linki-pos-vel">(13)</a> and <a class="reference internal" href="#equation-equ-linki-rot-vel3">(19)</a>, we can obtain</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p><strong>If Joint <span class="math notranslate nohighlight">\(i\)</span> is prismatic</strong></p>

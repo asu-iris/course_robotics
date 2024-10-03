@@ -7,25 +7,27 @@ title: "Lecture 11-12: Jacobian"
 
 # Jacobian
 
-The kinematics equation of an $n$-DOF manipulator is
+Recall that FK of a $n$-DOF robot arm is
 
 $$\boldsymbol{T}_{e}(\boldsymbol{q})=\left[\begin{array}{cc}
 \boldsymbol{R}_{e}(\boldsymbol{q}) & \boldsymbol{p}_{e}(\boldsymbol{q}) \\
 \mathbf{0}^{T} & 1
 \end{array}\right]$$
 
-where $\boldsymbol{q}=\left[q_{1},\ldots, q_{n}\right]^{T}$. The goal of
-the differential kinematics is to find the relationship between the
-joint velocities and the end-effector linear and angular velocities. In
+where $\boldsymbol{q}=\left[q_{1},\ldots, q_{n}\right]^{T}$. The concept of
+jacobian is to find the relationship between the
+joint velocities and the end-effector linear (translational) and angular velocities. In
 other words, we want to find end-effector linear velocity
 $\dot{\boldsymbol{p}}_{e}$ and angular velocity
-$\boldsymbol{\omega}_{e}$ as a function of the joint velocities
-$\dot{\boldsymbol{q}}$.
+$\boldsymbol{\omega}_{e}$ as a linear function of the joint velocities
+$\dot{\boldsymbol{q}}$ like the following form:
 
 $$\begin{aligned}
 & \dot{\boldsymbol{p}}_{e}=\boldsymbol{J}_{P}(\boldsymbol{q}) \dot{\boldsymbol{q}} \\
 & \boldsymbol{\omega}_{e}=\boldsymbol{J}_{O}(\boldsymbol{q}) \dot{\boldsymbol{q}}
 \end{aligned}$$
+
+Here, $\boldsymbol{J}_{P}(\boldsymbol{q})$ and $\boldsymbol{J}_{O}(\boldsymbol{q})$ are called linear Jacobian and Angular Jacobian, respectively. The linear  matrices (Jacobians) themselves are a function of joint variable $\boldsymbol{q}$.
 
 In compact form, the above will be written as
 
@@ -34,16 +36,14 @@ $$\boldsymbol{v}_{e}=\left[\begin{array}{c}
 \boldsymbol{\omega}_{e}
 \end{array}\right]=\boldsymbol{J}(\boldsymbol{q}) \dot{\boldsymbol{q}}$$
 
-The $(6 \times n)$ matrix $\boldsymbol{J}(\boldsymbol{q})$ is the
-geometric Jacobian
+where 
 
 $$\boldsymbol{J}(\boldsymbol{q})=\left[\begin{array}{l}
 \boldsymbol{J}_{P}(\boldsymbol{q}) \\
 \boldsymbol{J}_{O}(\boldsymbol{q})
 \end{array}\right]$$
 
-where $\boldsymbol{J}_{P}(\boldsymbol{q})$ is called linear Jacobian and
-$\boldsymbol{J}_{O}(\boldsymbol{q})$ angular Jacobian.
+The stacked $(6 \times n)$ matrix $\boldsymbol{J}(\boldsymbol{q})$ is sometimes also called geometric Jacobian.
 
 # Linear Jacobian
 

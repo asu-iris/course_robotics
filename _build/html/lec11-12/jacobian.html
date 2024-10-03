@@ -67,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Singularity &amp; Redundancy" href="../lec13/singularity.html" />
-    <link rel="prev" title="Derivative of Transformation" href="../lec10/diff-trans.html" />
+    <link rel="prev" title="Velocity Kinematics" href="../lec10/diff-trans.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -181,8 +181,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 <li class="toctree-l1"><a class="reference internal" href="../opt/motion_planning.html">Motion Planning</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lec10/diff-trans.html">Derivative of Transformation</a></li>
-
+<li class="toctree-l1"><a class="reference internal" href="../lec10/diff-trans.html">Velocity Kinematics</a></li>
 
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Jacobian</a></li>
 
@@ -405,39 +404,38 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="jacobian">
 <h1>Jacobian<a class="headerlink" href="#jacobian" title="Permalink to this heading">#</a></h1>
-<p>The kinematics equation of an <span class="math notranslate nohighlight">\(n\)</span>-DOF manipulator is</p>
+<p>Recall that FK of a <span class="math notranslate nohighlight">\(n\)</span>-DOF robot arm is</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\boldsymbol{T}_{e}(\boldsymbol{q})=\left[\begin{array}{cc}
 \boldsymbol{R}_{e}(\boldsymbol{q}) &amp; \boldsymbol{p}_{e}(\boldsymbol{q}) \\
 \mathbf{0}^{T} &amp; 1
 \end{array}\right]\end{split}\]</div>
-<p>where <span class="math notranslate nohighlight">\(\boldsymbol{q}=\left[q_{1},\ldots, q_{n}\right]^{T}\)</span>. The goal of
-the differential kinematics is to find the relationship between the
-joint velocities and the end-effector linear and angular velocities. In
+<p>where <span class="math notranslate nohighlight">\(\boldsymbol{q}=\left[q_{1},\ldots, q_{n}\right]^{T}\)</span>. The concept of
+jacobian is to find the relationship between the
+joint velocities and the end-effector linear (translational) and angular velocities. In
 other words, we want to find end-effector linear velocity
 <span class="math notranslate nohighlight">\(\dot{\boldsymbol{p}}_{e}\)</span> and angular velocity
-<span class="math notranslate nohighlight">\(\boldsymbol{\omega}_{e}\)</span> as a function of the joint velocities
-<span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}}\)</span>.</p>
+<span class="math notranslate nohighlight">\(\boldsymbol{\omega}_{e}\)</span> as a linear function of the joint velocities
+<span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}}\)</span> like the following form:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{aligned}
 &amp; \dot{\boldsymbol{p}}_{e}=\boldsymbol{J}_{P}(\boldsymbol{q}) \dot{\boldsymbol{q}} \\
 &amp; \boldsymbol{\omega}_{e}=\boldsymbol{J}_{O}(\boldsymbol{q}) \dot{\boldsymbol{q}}
 \end{aligned}\end{split}\]</div>
+<p>Here, <span class="math notranslate nohighlight">\(\boldsymbol{J}_{P}(\boldsymbol{q})\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{J}_{O}(\boldsymbol{q})\)</span> are called linear Jacobian and Angular Jacobian, respectively. The linear  matrices (Jacobians) themselves are a function of joint variable <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span>.</p>
 <p>In compact form, the above will be written as</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\boldsymbol{v}_{e}=\left[\begin{array}{c}
 \dot{\boldsymbol{p}}_{e} \\
 \boldsymbol{\omega}_{e}
 \end{array}\right]=\boldsymbol{J}(\boldsymbol{q}) \dot{\boldsymbol{q}}\end{split}\]</div>
-<p>The <span class="math notranslate nohighlight">\((6 \times n)\)</span> matrix <span class="math notranslate nohighlight">\(\boldsymbol{J}(\boldsymbol{q})\)</span> is the
-geometric Jacobian</p>
+<p>where</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\boldsymbol{J}(\boldsymbol{q})=\left[\begin{array}{l}
 \boldsymbol{J}_{P}(\boldsymbol{q}) \\
 \boldsymbol{J}_{O}(\boldsymbol{q})
 \end{array}\right]\end{split}\]</div>
-<p>where <span class="math notranslate nohighlight">\(\boldsymbol{J}_{P}(\boldsymbol{q})\)</span> is called linear Jacobian and
-<span class="math notranslate nohighlight">\(\boldsymbol{J}_{O}(\boldsymbol{q})\)</span> angular Jacobian.</p>
+<p>The stacked <span class="math notranslate nohighlight">\((6 \times n)\)</span> matrix <span class="math notranslate nohighlight">\(\boldsymbol{J}(\boldsymbol{q})\)</span> is sometimes also called geometric Jacobian.</p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="linear-jacobian">
 <h1>Linear Jacobian<a class="headerlink" href="#linear-jacobian" title="Permalink to this heading">#</a></h1>
@@ -843,7 +841,7 @@ seen in the following example.</p>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Derivative of Transformation</p>
+        <p class="prev-next-title">Velocity Kinematics</p>
       </div>
     </a>
     <a class="right-next"

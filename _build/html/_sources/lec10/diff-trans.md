@@ -62,7 +62,7 @@ where $\boldsymbol{\omega}=\left[\begin{array}{lll}\omega_{x} & \omega_{y} & \om
 
 If we look at and compare {eq}`equ.skew3` and {eq}`equ.bke`, we can find
 
-$$\boldsymbol{S}=[\boldsymbol{\omega} \times]=\left[\begin{array}{ccc}
+$$\boldsymbol{S}=[\boldsymbol{\omega} \times]=\boldsymbol{S}(\boldsymbol{\omega})=\left[\begin{array}{ccc}
 0 & -\omega_{z} & \omega_{y} \\
 \omega_{z} & 0 & -\omega_{x} \\
 -\omega_{y} & \omega_{x} & 0
@@ -91,21 +91,30 @@ $$\boldsymbol{p}^{0}=\boldsymbol{o}_{1}^{0}(t)+\boldsymbol{R}_{1}^{0}(t) \boldsy
 
 Differentiating the above equation with respect to time yields
 
-$$\dot{\boldsymbol{p}}^{0}=\dot{\boldsymbol{o}}_{1}^{0}+\boldsymbol{R}_{1}^{0} \dot{\boldsymbol{p}}^{1}+\dot{\boldsymbol{R}}_{1}^{0} \boldsymbol{p}^{1}=\dot{\boldsymbol{o}}_{1}^{0}+\boldsymbol{R}_{1}^{0} \dot{\boldsymbol{p}}^{1}+\boldsymbol{S}\left(\boldsymbol{\omega}_{1}^{0}\right) \boldsymbol{R}_{1}^{0} \boldsymbol{p}^{1}$$(equ.vkin1)
+$$\dot{\boldsymbol{p}}^{0}=\dot{\boldsymbol{o}}_{1}^{0}+\boldsymbol{R}_{1}^{0} \dot{\boldsymbol{p}}^{1}+\dot{\boldsymbol{R}}_{1}^{0} \boldsymbol{p}^{1}=\dot{\boldsymbol{o}}_{1}^{0}+\boldsymbol{R}_{1}^{0} \dot{{\boldsymbol{p}}}^{1}+\boldsymbol{S}\left(\boldsymbol{\omega}_{1}^{0}\right) \boldsymbol{R}_{1}^{0} \boldsymbol{p}^{1}$$(equ.vkin1)
 
-In the above  {eq}`equ.vkin1`, because point $P$ is not necessarily fixed on the body, so it has its own derivative $\dot{\boldsymbol{p}}^{1}$.
+In the above  {eq}`equ.vkin1`, because point $P$ is not necessarily fixed on the body, and it may have its *local movement in the body frame* with the local velocity $\dot{{\boldsymbol{p}}}^{1}$. Special care should be paied to the notation of $\dot{{\boldsymbol{p}}}^{1}$: $\dot{{\boldsymbol{p}}}^{1}$ is purely taking the derivative to xyz body coordinate instead of  body xyz axises.
+
+
 
 
 Since
-$\boldsymbol{R}_{1}^{0} \boldsymbol{p}^{1}=\boldsymbol{p}^{0}$, the above equation {eq}`equ.vkin1` becomes
+$\boldsymbol{R}_{1}^{0} \boldsymbol{p}^{1}=\boldsymbol{p}^{0}$ and $\boldsymbol{S}\left(\boldsymbol{\omega}_{1}^{0}\right)=[\omega_{1}^{0} \times] $, the above equation {eq}`equ.vkin1` becomes
 
 $$\dot{\boldsymbol{p}}^{0}=\dot{\boldsymbol{o}}_{1}^{0}+\boldsymbol{R}_{1}^{0} \dot{\boldsymbol{p}}^{1}+\omega_{1}^{0} \times \boldsymbol{p}^{0}$$(equ.vkin2)
 
-Also, we can write $\boldsymbol{R}_{1}^{0} \dot{\boldsymbol{p}}^{1}=\dot{\boldsymbol{p}}^{0}$ (ask yourself, what does this mean?), and {eq}`equ.vkin2` becomes
 
-$$\dot{\boldsymbol{p}}^{0}=\dot{\boldsymbol{o}}_{1}^{0}+\dot{\boldsymbol{p}}^{0}+\omega_{1}^{0} \times \boldsymbol{p}^{0}$$
 
-Notice that, if $\boldsymbol{p}^{1}$ is fixed in the moving body frame , then {eq}`equ.vkin1` can be further reduced to
+Here are some explaination of each term on the right side of {eq}`equ.vkin2`:
+* $\dot{\boldsymbol{o}}_{1}^{0}$ is the contribution to point $P$'s total velocity (in reference frame) by the translation of body frame.
+
+* $\boldsymbol{R}_{1}^{0} \dot{\boldsymbol{p}}^{1}$ is the contribution to point $P$'s total velocity (in reference frame)  by the local movement of $P$ on the body frame. Here, $\dot{\boldsymbol{p}}^{1}$ is the local velocity in the body frame, and $\boldsymbol{R}_{1}^{0} \dot{\boldsymbol{p}}^{1}$ is the transformed local velocity to the reference frame.
+
+* $\boldsymbol{S}\left(\boldsymbol{\omega}_{1}^{0}\right) \boldsymbol{R}_{1}^{0} \boldsymbol{p}^{1}=\omega_{1}^{0} \times \boldsymbol{p}^{0}$ is the contribution to point $P$'s total velocity by the rotation of the body frame.
+
+
+
+Notice that, if $\boldsymbol{p}^{1}$ is fixed in the moving body frame , then {eq}`equ.vkin2` can be further reduced to
 
 $$\dot{\boldsymbol{p}}^{0}=\dot{\boldsymbol{o}}_{1}^{0}+\boldsymbol{\omega}_{1}^{0} \times \boldsymbol{p}^{0}$$
 
@@ -138,19 +147,72 @@ Let's consider $\boldsymbol{p}_{i-1}$ be position of Frame $i-1$ in the referenc
 
 $$\boldsymbol{p}_{i}=\boldsymbol{p}_{i-1}+\boldsymbol{R}_{i-1} \boldsymbol{r}_{i-1, i}^{i-1}$$(equ.linki_pos)
 
-Taking the derivative of both sides in the above equation with respect to time $t$, we have
+
+Before we proceed, a question: how to obtain $\boldsymbol{p}_{i-1}$ and $\boldsymbol{R}_{i-1}$? and how to obtain $\boldsymbol{r}_{i-1, i}^{i-1}$?
+
+
+
+Similar to {eq}`equ.vkin1`, taking the derivative of both sides in the above equation with respect to time $t$, we have
 
 $$
 \begin{aligned}
-\dot{\boldsymbol{p}}_{i}&=\dot{\boldsymbol{p}}_{i-1}+\boldsymbol{R}_{i-1} \dot{\boldsymbol{r}}_{i-1, i}^{i-1}+\boldsymbol{\omega}_{i-1} \times \boldsymbol{R}_{i-1} \boldsymbol{r}_{i-1, i}^{i-1}\\&=\dot{\boldsymbol{p}}_{i-1}+\boldsymbol{v}_{i-1, i}+\omega_{i-1} \times \boldsymbol{r}_{i-1, i}
+\dot{\boldsymbol{p}}_{i}&=\dot{\boldsymbol{p}}_{i-1}+\boldsymbol{R}_{i-1} \dot{\boldsymbol{r}}_{i-1, i}^{i-1}+\boldsymbol{\omega}_{i-1} \times \boldsymbol{R}_{i-1} \boldsymbol{r}_{i-1, i}^{i-1}\\&=\dot{\boldsymbol{p}}_{i-1}+\boldsymbol{v}_{i-1, i}+\boldsymbol{\omega}_{i-1} \times \boldsymbol{r}_{i-1, i}
 \end{aligned}
 $$(equ.linki_pos_vel)
 
-Please carefully look at how first row becomes second row, and what each varible stands for.
+
+Here, we define $\boldsymbol{v}_{i-1, i}=\boldsymbol{R}_{i-1}\dot{\boldsymbol{r}}_{i-1, i}^{i-1}$, which is local translational velocity of Frame $i$ in Frame $i-1$, but expressed in the reference frame.
+Please carefully look at how first row becomes second row, and ask yourself what each term stands for on the second row, similar to how we have analyzed to{eq}`equ.vkin2`. 
 
 
-Therefore, the linear velocity $\dot{\boldsymbol{p}}_{i}$ of Link $i$ depends on the
-translational velocity $\dot{\boldsymbol{p}}_{i-1}$ and rotational velocity  $\omega_{i-1}$ of Link $i-1$, and also on their relative position $\boldsymbol{r}_{i-1, i}$ and velocity $\boldsymbol{v}_{i-1, i}$
+```{note}
+
+Now let's think about what happens to {eq}`equ.linki_pos_vel` if joint $i$ is revolute joint. In that case, 
+* how to compute  $\boldsymbol{r}_{i-1, i}$? Hint: think about forward kinematics.
+* what is  $\boldsymbol{v}_{i-1, i}$? Hint: think about what is the relative motion of Frame $i$ in Frame $i-1$. You may answer:
+
+$$\boldsymbol{v}_{i-1, i}=\boldsymbol{\omega}_{i-1, i}\times\boldsymbol{r}_{i-1, i}$$(equ.rel_v)
+
+But what is $\boldsymbol{\omega}_{i-1, i}$? Actually, it is relative angular velocity of Frame $i$ in Frame $i-1$, expressed in the reference frame. 
+
+
+So, next quesetion, hwo to compute $\boldsymbol{\omega}_{i-1, i}$? Actually
+
+$$\boldsymbol{\omega}_{i-1, i}=\dot{\vartheta}\boldsymbol{z}_{i-1}$$(equ.relative_omega)
+
+What is $\boldsymbol{z}_{i-1}$? This is question for you!
+
+Combine {eq}`equ.linki_pos_vel`, {eq}`equ.rel_v` and {eq}`equ.relative_omega`, we have:
+**If Joint $i$ is revolute**
+
+$$\begin{aligned}
+\dot{\boldsymbol{p}}_{i} =\dot{\boldsymbol{p}}_{i-1}+(\dot{\vartheta}_{i} \boldsymbol{z}_{i-1}+\boldsymbol{\omega}_{i-1}) \times \boldsymbol{r}_{i-1, i}
+\end{aligned}$$
+```
+
+
+
+
+
+```{note}
+
+Now let's think about what happens to {eq}`equ.linki_pos_vel` if joint $i$ is prismatic joint. In that case, 
+* what is  $\boldsymbol{v}_{i-1, i}$? Hint: think about what is the relative motion of Frame $i$ in Frame $i-1$.  Actually
+
+$$\boldsymbol{v}_{i-1, i}=\dot{d_i}\boldsymbol{z}_{i-1}$$(equ.relative_d)
+
+
+Combine {eq}`equ.linki_pos_vel`, {eq}`equ.rel_v` and {eq}`equ.relative_d`, we have:
+**If Joint $i$ is prismatic**
+
+$$\begin{aligned}
+\dot{\boldsymbol{p}}_{i} =\dot{\boldsymbol{p}}_{i-1}+\dot{d}_{i} \boldsymbol{z}_{i-1} +\boldsymbol{\omega}_{i-1}\times \boldsymbol{r}_{i-1, i}
+\end{aligned}$$
+
+```
+
+
+
 
 ## Angular Velocity
 
@@ -178,6 +240,41 @@ If we cancel out all $ \boldsymbol{R}_{i}$ on both sides of {eq}`equ.linki_rot_v
 $$\boldsymbol{\omega}_{i}=\boldsymbol{\omega}_{i-1}+\boldsymbol{R}_{i-1} \boldsymbol{\omega}_{i-1, i}^{i-1}=\boldsymbol{\omega}_{i-1}+\boldsymbol{\omega}_{i-1, i}$$(equ.linki_rot_vel3)
 
 Thus,  the angular velocity $\boldsymbol{\omega}_{i}$ of Link $i$ depends only on the angular velocity $\boldsymbol{\omega}_{i-1}$ of Link $i-1$ and their relative angular velocity $\boldsymbol{\omega}_{i-1, i}$.
+
+
+```{note}
+
+Now let's think about what happens to {eq}`equ.linki_rot_vel3` if joint $i$ is revolute joint. In that case,  what is $\boldsymbol{\omega}_{i-1, i}$ and how to compute it? 
+
+
+Actually, it is  {eq}`equ.relative_omega`! Combine {eq}`equ.linki_rot_vel3` and {eq}`equ.relative_omega`, we have:
+**If Joint $i$ is revolute**
+
+$$
+\boldsymbol{\omega}_{i}  =\boldsymbol{\omega}_{i-1}+\dot{\vartheta}_{i} \boldsymbol{z}_{i-1}
+$$
+```
+
+
+```{note}
+
+Now let's think about what happens to {eq}`equ.linki_rot_vel3` if joint $i$ is prismatic. In that case,  what is $\boldsymbol{\omega}_{i-1, i}$ and how to compute it? 
+
+
+Actually, it is  $0$! Thus, we have:
+**If Joint $i$ is prismatic**
+
+$$
+\boldsymbol{\omega}_{i}  =\boldsymbol{\omega}_{i-1}
+$$
+```
+
+
+
+
+
+
+
 
 ## Summary
 
