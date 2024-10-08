@@ -286,7 +286,7 @@ Considering different joint types for Joint $i$ at a robot arm, according to {eq
 
 $$\begin{aligned}
 \boldsymbol{\omega}_{i} & =\boldsymbol{\omega}_{i-1} \\
-\dot{\boldsymbol{p}}_{i} & =\dot{\boldsymbol{p}}_{i-1}+\dot{d}_{i} \boldsymbol{z}_{i-1}+\boldsymbol{\omega}_{i} \times \boldsymbol{r}_{i-1, i}
+\dot{\boldsymbol{p}}_{i} & =\dot{\boldsymbol{p}}_{i-1}+\dot{d}_{i} \boldsymbol{z}_{i-1}+\boldsymbol{\omega}_{i-1} \times \boldsymbol{r}_{i-1, i}
 \end{aligned}$$
 
 **If Joint $i$ is revolute**

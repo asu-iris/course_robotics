@@ -15,21 +15,21 @@ $$\boldsymbol{T}_{e}(\boldsymbol{q})=\left[\begin{array}{cc}
 \end{array}\right]$$
 
 where $\boldsymbol{q}=\left[q_{1},\ldots, q_{n}\right]^{T}$. The concept of
-jacobian is to find the relationship between the
+_Jacobian_ is to find the relationship between the
 joint velocities and the end-effector linear (translational) and angular velocities. In
-other words, we want to find end-effector linear velocity
+other words, we want to find the end-effector's linear velocity
 $\dot{\boldsymbol{p}}_{e}$ and angular velocity
-$\boldsymbol{\omega}_{e}$ as a linear function of the joint velocities
-$\dot{\boldsymbol{q}}$ like the following form:
+$\boldsymbol{\omega}_{e}$ as a function of the joint velocities
+$\dot{\boldsymbol{q}}$ in the following form:
 
 $$\begin{aligned}
 & \dot{\boldsymbol{p}}_{e}=\boldsymbol{J}_{P}(\boldsymbol{q}) \dot{\boldsymbol{q}} \\
 & \boldsymbol{\omega}_{e}=\boldsymbol{J}_{O}(\boldsymbol{q}) \dot{\boldsymbol{q}}
 \end{aligned}$$
 
-Here, $\boldsymbol{J}_{P}(\boldsymbol{q})$ and $\boldsymbol{J}_{O}(\boldsymbol{q})$ are called linear Jacobian and Angular Jacobian, respectively. The linear  matrices (Jacobians) themselves are a function of joint variable $\boldsymbol{q}$.
+Here, the matrices $\boldsymbol{J}_{P}(\boldsymbol{q})$ and $\boldsymbol{J}_{O}(\boldsymbol{q})$ are called translational (linear) Jacobian and Angular Jacobian, respectively. Those  matrices (Jacobians) themselves are a function of joint variable $\boldsymbol{q}$.
 
-In compact form, the above will be written as
+In compact form, we use $\boldsymbol{v}_{e}$ to describe the six-vector velocity of the end-effector, combining the linear and angular velocities. $\boldsymbol{v}_{e}$ will be written as
 
 $$\boldsymbol{v}_{e}=\left[\begin{array}{c}
 \dot{\boldsymbol{p}}_{e} \\
@@ -43,110 +43,164 @@ $$\boldsymbol{J}(\boldsymbol{q})=\left[\begin{array}{l}
 \boldsymbol{J}_{O}(\boldsymbol{q})
 \end{array}\right]$$
 
-The stacked $(6 \times n)$ matrix $\boldsymbol{J}(\boldsymbol{q})$ is sometimes also called geometric Jacobian.
+The stacked $(6 \times n)$ matrix $\boldsymbol{J}(\boldsymbol{q})$ is sometimes also called geometric Jacobian. And $\boldsymbol{v}_{e}$ is often called the twist of the end-effector.
 
 # Linear Jacobian
 
 To compute linear Jacobian $\boldsymbol{J}_{P}(\boldsymbol{q})$, we can
-write the time derivative of $\boldsymbol{p}_{e}$ as
+write 
 
-$$\dot{\boldsymbol{p}}_{e}=\boldsymbol{J}_{P} \dot{\boldsymbol{q}}=\sum_{i=1}^{n} \boldsymbol{J}_{P i} \dot{q}_{i} .$$
+$$\dot{\boldsymbol{p}}_{e}=\boldsymbol{J}_{P}(\boldsymbol{q}) \dot{\boldsymbol{q}}=\sum_{i=1}^{n} \boldsymbol{J}_{P,i} \dot{q}_{i}
+=
+\begin{bmatrix}
+\boldsymbol{J}_{P,1} & \boldsymbol{J}_{P,2}& \cdots & \boldsymbol{J}_{P,n}
+\end{bmatrix}
+\begin{bmatrix}
+\dot{q}_{1} \\ \dot{q}_{2}\\ \vdots \\ \dot{q}_{n}
+\end{bmatrix}
+$$
 
 This expression shows how $\dot{\boldsymbol{p}}_{e}$ can be obtained as
-the sum of the terms $\dot{q}_{i} \boldsymbol{J}_{P i}$ Each term
-represents the contribution of the velocity of single Joint $i$ to the
-end-effector linear velocity when all the other joints are still.
+the sum of the terms $\dot{q}_{i} \boldsymbol{J}_{P,i}$. Each $\dot{q}_{i} \boldsymbol{J}_{P,i}$
+represents the contribution of the velocity of Joint $i$ to the linear velocity of the
+end-effector when all the other joints hold still. The following derivation is based on the  previous velocity kinematics.
 
 If Joint $i$ is prismatic,
 
-$$\dot{q}_{i} \boldsymbol{J}_{P i}=\dot{d}_{i} \boldsymbol{z}_{i-1}$$
+$$\dot{q}_{i} \boldsymbol{J}_{P, i}=\dot{d}_{i} \boldsymbol{z}_{i-1}$$
 
 and then
 
-$$\boldsymbol{J}_{P i}=\boldsymbol{z}_{i-1} \text {. }$$
+$$\boldsymbol{J}_{P, i}=\boldsymbol{z}_{i-1} \text {. }$$
 
 If Joint $i$ is revolute,
 
-$$\dot{q}_{i} \boldsymbol{J}_{P i}=\boldsymbol{\omega}_{i-1, i} \times \boldsymbol{r}_{i-1, e}=\dot{\vartheta}_{i} \boldsymbol{z}_{i-1} \times\left(\boldsymbol{p}_{e}-\boldsymbol{p}_{i-1}\right)$$
+$$\dot{q}_{i} \boldsymbol{J}_{P,i}=\boldsymbol{\omega}_{i-1, i} \times \boldsymbol{r}_{i-1, e}=\dot{\vartheta}_{i} \boldsymbol{z}_{i-1} \times\left(\boldsymbol{p}_{e}-\boldsymbol{p}_{i-1}\right)$$
 
 and then
 
-$$\boldsymbol{J}_{P i}=\boldsymbol{z}_{i-1} \times\left(\boldsymbol{p}_{e}-\boldsymbol{p}_{i-1}\right)$$
+$$\boldsymbol{J}_{P,i}=\boldsymbol{z}_{i-1} \times\left(\boldsymbol{p}_{e}-\boldsymbol{p}_{i-1}\right)$$
 
 # Angular Jacobian
 
-To compute angular Jacobian $\boldsymbol{J}_{O}(\boldsymbol{q})$
+To compute angular Jacobian $\boldsymbol{J}_{O}(\boldsymbol{q})$, we can write
 
-$$\boldsymbol{\omega}_{e}=\sum_{i=1}^{n} \boldsymbol{\omega}_{i-1, i}=\sum_{i=1}^{n} \boldsymbol{J}_{O i} \dot{q}_{i}$$
+$$\boldsymbol{\omega}_{e}=\sum_{i=1}^{n} \boldsymbol{J}_{O, i} \dot{q}_{i}
+=
+\begin{bmatrix}
+\boldsymbol{J}_{O,1} & \boldsymbol{J}_{O,2}& \cdots & \boldsymbol{J}_{O,n}
+\end{bmatrix}
+\begin{bmatrix}
+\dot{q}_{1} \\ \dot{q}_{2}\\ \vdots \\ \dot{q}_{n}
+\end{bmatrix}
+$$
+
+
+<!-- \sum_{i=1}^{n} \boldsymbol{\omega}_{i-1, i}= -->
+
+This expression shows how $\dot{\boldsymbol{p}}_{e}$ can be obtained as
+the sum of the terms $\dot{q}_{i} \boldsymbol{J}_{O,i}$. Each $\dot{q}_{i} \boldsymbol{J}_{O,i}$
+represents the contribution of the velocity of Joint $i$ to the angular velocity of the
+end-effector when all the other joints hold still. The following derivation is based on the  previous velocity kinematics.
+
 
 If Joint $i$ is prismatic, it is
 
-$$\dot{q}_{i} \boldsymbol{J}_{O i}=\mathbf{0}$$
+$$\dot{q}_{i} \boldsymbol{J}_{O,i}=\mathbf{0}$$
 
 and then
 
-$$\boldsymbol{J}_{O i}=\mathbf{0}$$
+$$\boldsymbol{J}_{O,i}=\mathbf{0}$$
 
 If Joint $i$ is revolute, it is
 
-$$\dot{q}_{i} \boldsymbol{J}_{O i}=\dot{\vartheta}_{i} \boldsymbol{z}_{i-1}$$
+$$\dot{q}_{i} \boldsymbol{J}_{O,i}=\dot{\vartheta}_{i} \boldsymbol{z}_{i-1}$$
 
 and then
 
-$$\boldsymbol{J}_{O i}=\boldsymbol{z}_{i-1}$$
+$$\boldsymbol{J}_{O,i}=\boldsymbol{z}_{i-1}$$
 
 # Summary
 
-In summary, the Jacobian can be partitioned into the $(3 \times 1)$
-column vectors $\boldsymbol{J}_{P i}$ and $\boldsymbol{J}_{O i}$ as
+:::{important}
+In summary, the velocity (twist) of the end-effector is 
 
-$$\boldsymbol{J}=\left[\begin{array}{lll}
-\boldsymbol{J}_{P 1} & & \boldsymbol{J}_{P n} \\
-& \cdots & \\
-\boldsymbol{J}_{O 1} & & \boldsymbol{J}_{O n}
-\end{array}\right]$$
+$$\boldsymbol{v}_e=\boldsymbol{J}(\boldsymbol{q})\boldsymbol{\dot{q}}=
+\begin{bmatrix}
+\boldsymbol{J}_{P,1} & \boldsymbol{J}_{P,2}& \cdots & \boldsymbol{J}_{P,n}\\
+\boldsymbol{J}_{O,1} & \boldsymbol{J}_{O,2}& \cdots & \boldsymbol{J}_{O,n}
+\end{bmatrix}
+\begin{bmatrix}
+\dot{q}_{1} \\ \dot{q}_{2}\\ \vdots \\ \dot{q}_{n}
+\end{bmatrix}
+$$
 
-where
+Here, Jacobian can be partitioned into 
 
-$$\label{c2.l1.equ5}
-    \left[\begin{array}{l}
-\boldsymbol{J}_{P i} \\
-\boldsymbol{J}_{O i}
-\end{array}\right]= \begin{cases}{\left[\begin{array}{c}
-\boldsymbol{z}_{i-1} \\
+$$\boldsymbol{J}(\boldsymbol{q})=
+\begin{bmatrix}
+\boldsymbol{J}_{P,1} & \boldsymbol{J}_{P,2}& \cdots & \boldsymbol{J}_{P,n}\\
+\boldsymbol{J}_{O,1} & \boldsymbol{J}_{O,2}& \cdots & \boldsymbol{J}_{O,n}
+\end{bmatrix}
+\
+$$
+
+where at the $i$-th column, 
+
+
+
+
+
+
+if the corresponding joint $i$ is prismatic joint, then
+
+$$
+\begin{bmatrix}
+\boldsymbol{J}_{P,i} \\
+\boldsymbol{J}_{O,i}
+\end{bmatrix}
+=  \begin{bmatrix}
+    \boldsymbol{z}_{i-1} \\
 \mathbf{0}
-\end{array}\right]} & \text { for a prismatic joint } \\[14pt]
-{\left[\begin{array}{cc}
-\boldsymbol{z}_{i-1} \times\left(\boldsymbol{p}_{e}-\boldsymbol{p}_{i-1}\right) \\
+    \end{bmatrix}
+$$(equ.jac_pris)
+
+
+if the corresponding joint $i$ is revolute joint, then
+
+$$
+\begin{bmatrix}
+\boldsymbol{J}_{P,i} \\
+\boldsymbol{J}_{O,i}
+\end{bmatrix}
+=  \begin{bmatrix}
+    \boldsymbol{z}_{i-1} \times\left(\boldsymbol{p}_{e}-\boldsymbol{p}_{i-1}\right) \\
 \boldsymbol{z}_{i-1}
-\end{array}\right]} & \text { for a revolute joint. }\end{cases}$$
+    \end{bmatrix}
+$$(equ.jac_revo)
 
-The above allow Jacobian computation in a simple, systematic way on the
-basis of direct kinematics relations. In fact, the vectors
+
+
+In the above {eq}`equ.jac_pris` or {eq}`equ.jac_revo`, the vectors
 $\boldsymbol{z}_{i-1}, \boldsymbol{p}_{e}$ and $\boldsymbol{p}_{i-1}$
-are all functions of the joint variables.
+are all functions of the joint variables, and can be obtained from FK. In particular, 
 
-In particular, $\boldsymbol{z}_{i-1}$ is given by the third column of
-the rotation matrix $\boldsymbol{R}_{i-1}^{0}$, i.e.,
+- $\boldsymbol{z}_{i-1}$ is given by the third column of
+the rotation matrix 
 
-$$\boldsymbol{z}_{i-1}=\boldsymbol{R}_{1}^{0}\left(q_{1}\right) \ldots \boldsymbol{R}_{i-1}^{i-2}\left(q_{i-1}\right) \boldsymbol{z}_{0}$$
+$$\boldsymbol{R}_{i-1}^{0}=\boldsymbol{R}_{1}^{0}\left(q_{1}\right) \ldots \boldsymbol{R}_{i-1}^{i-2}\left(q_{i-1}\right)$$
 
-where
-$\boldsymbol{z}_{0}=\left[\begin{array}{lll}0 & 0 & 1\end{array}\right]^{T}$
-allows the selection of the third column. $\boldsymbol{p}_{e}$ is the
+ - $\boldsymbol{p}_{e}$ is the
 first three elements of the fourth column of the transformation matrix
-$\boldsymbol{T}_{e}^{0}$, i.e., by expressing
-$\widetilde{\boldsymbol{p}}_{e}$ in the $(4 \times 1)$ homogeneous form
 
-$$\widetilde{\boldsymbol{p}}_{e}=\boldsymbol{A}_{1}^{0}\left(q_{1}\right) \ldots \boldsymbol{A}_{n}^{n-1}\left(q_{n}\right) \widetilde{\boldsymbol{p}}_{0}$$
+$$\boldsymbol{T}_{e}^{0}=\boldsymbol{T}_{1}^{0}\left(q_{1}\right) \ldots \boldsymbol{T}_{n}^{n-1}\left(q_{n}\right)\boldsymbol{T}_{e}^{n}$$
 
-where
-$\widetilde{\boldsymbol{p}}_{0}=\left[\begin{array}{llll}0 & 0 & 0 & 1\end{array}\right]^{T}$
-allows the selection of the fourth column. $\boldsymbol{p}_{i-1}$ is the
+- $\boldsymbol{p}_{i-1}$ is the
 first three elements of the fourth column of the transformation matrix
-$\boldsymbol{T}_{i-1}^{0}$,
 
-$$\widetilde{\boldsymbol{p}}_{i-1}=\boldsymbol{A}_{1}^{0}\left(q_{1}\right) \ldots \boldsymbol{A}_{i-1}^{i-2}\left(q_{i-1}\right) \widetilde{\boldsymbol{p}}_{0} .$$
+$$\boldsymbol{T}_{i-1}^{0}=\boldsymbol{T}_{1}^{0}\left(q_{1}\right) \ldots \boldsymbol{T}_{i-1}^{i-2}\left(q_{i-1}\right).$$
+:::
+
 
 # Examples
 
@@ -155,17 +209,19 @@ $$\widetilde{\boldsymbol{p}}_{i-1}=\boldsymbol{A}_{1}^{0}\left(q_{1}\right) \ldo
 ````{card} Three-link Planar Arm
 ```{figure} ../lec6-8/kinematics/3link_arm.jpg
 ---
-width: 40%
+width: 60%
 name: 3link_arm
 ---
-The Jacobian is
+```
+
+The Jacobian formula is
 
 $$\boldsymbol{J}(\boldsymbol{q})=\left[\begin{array}{ccc}
 \boldsymbol{z}_{0} \times\left(\boldsymbol{p}_{3}-\boldsymbol{p}_{0}\right) & \boldsymbol{z}_{1} \times\left(\boldsymbol{p}_{3}-\boldsymbol{p}_{1}\right) & \boldsymbol{z}_{2} \times\left(\boldsymbol{p}_{3}-\boldsymbol{p}_{2}\right) \\
 \boldsymbol{z}_{0} & \boldsymbol{z}_{1} & \boldsymbol{z}_{2}
 \end{array}\right]$$
 
-Computation of the position vectors of the various links gives
+From the forward kinematics, we have
 
 $$\boldsymbol{p}_{0}=\left[\begin{array}{l}
 0 \\
@@ -187,7 +243,7 @@ a_{1} s_{1}+a_{2} s_{12}+a_{3} s_{123} \\
 0
 \end{array}\right]$$
 
-while computation of the unit vectors of revolute joint axes gives
+and
 
 $$\boldsymbol{z}_{0}=\boldsymbol{z}_{1}=\boldsymbol{z}_{2}=\left[\begin{array}{l}
 0 \\
@@ -195,7 +251,8 @@ $$\boldsymbol{z}_{0}=\boldsymbol{z}_{1}=\boldsymbol{z}_{2}=\left[\begin{array}{l
 1
 \end{array}\right]$$
 
-since they are all parallel to axis $z_{0}$. Then,
+Then, assembly the Jacobian matricx
+
 $$\boldsymbol{J}=\left[\begin{array}{ccc}
 -a_{1} s_{1}-a_{2} s_{12}-a_{3} s_{123} & -a_{2} s_{12}-a_{3} s_{123} & -a_{3} s_{123} \\
 a_{1} c_{1}+a_{2} c_{12}+a_{3} c_{123} & a_{2} c_{12}+a_{3} c_{123} & a_{3} c_{123} \\
@@ -204,7 +261,7 @@ a_{1} c_{1}+a_{2} c_{12}+a_{3} c_{123} & a_{2} c_{12}+a_{3} c_{123} & a_{3} c_{1
 0 & 0 & 0 \\
 1 & 1 & 1
 \end{array}\right]$$
-```
+
 ````
 
 
@@ -214,17 +271,18 @@ a_{1} c_{1}+a_{2} c_{12}+a_{3} c_{123} & a_{2} c_{12}+a_{3} c_{123} & a_{3} c_{1
 ````{card}  Anthropomorphic Arm
 ```{figure} ../lec6-8/kinematics/anthropomorphic_arm.jpg
 ---
-width: 40%
+width: 70%
 name: anthropomorphic_arm
 ---
-The Jacobian is
+```
+The Jacobian formula is
 
 $$\boldsymbol{J}=\left[\begin{array}{ccc}
 \boldsymbol{z}_{0} \times\left(\boldsymbol{p}_{3}-\boldsymbol{p}_{0}\right) & \boldsymbol{z}_{1} \times\left(\boldsymbol{p}_{3}-\boldsymbol{p}_{1}\right) & \boldsymbol{z}_{2} \times\left(\boldsymbol{p}_{3}-\boldsymbol{p}_{2}\right) \\
 \boldsymbol{z}_{0} & \boldsymbol{z}_{1} & \boldsymbol{z}_{2}
 \end{array}\right]$$
 
-Computation of the position vectors of the various links gives
+From FK, we have
 
 $$\begin{gathered}
 \boldsymbol{p}_{0}=\boldsymbol{p}_{1}=\left[\begin{array}{l}
@@ -243,7 +301,7 @@ a_{2} s_{2}+a_{3} s_{23}
 \end{array}\right]
 \end{gathered}$$
 
-while computation of the unit vectors of revolute joint axes gives
+and
 
 $$\boldsymbol{z}_{0}=\left[\begin{array}{l}
 0 \\
@@ -265,19 +323,20 @@ c_{1}\left(a_{2} c_{2}+a_{3} c_{23}\right) & -s_{1}\left(a_{2} s_{2}+a_{3} s_{23
 0 & -c_{1} & -c_{1} \\
 1 & 0 & 0
 \end{array}\right]$$
-```
+
 ````
 
 
 
-````{card}  Stanford Manipulator
+<!-- ````{card}  Stanford Manipulator
 ```{figure} ../lec6-8/kinematics/Stanford_manipulator.jpg
 ---
-width: 40%
+width: 70%
 name: Stanford_manipulator
 ---
+```
 
-The Jacobian
+The Jacobian formula is
 
 $$\boldsymbol{J}=\left[\begin{array}{cccccc}
 \boldsymbol{z}_{0} \times\left(\boldsymbol{p}_{6}-\boldsymbol{p}_{0}\right) & \boldsymbol{z}_{1} \times\left(\boldsymbol{p}_{6}-\boldsymbol{p}_{1}\right) & \boldsymbol{z}_{2} &
@@ -285,7 +344,7 @@ $$\boldsymbol{J}=\left[\begin{array}{cccccc}
 \boldsymbol{z}_{0} & \boldsymbol{z}_{1} & \mathbf{0} & \boldsymbol{z}_{3} & \boldsymbol{z}_{4} & \boldsymbol{z}_{5} \\
 \end{array}\right] .$$
 
-Computation of the position vectors of the various links gives
+FK gives
 
 $$\begin{gathered}
 \boldsymbol{p}_{0}=\boldsymbol{p}_{1}=\left[\begin{array}{l}
@@ -304,7 +363,7 @@ c_{2} d_{3}+\left(-s_{2} c_{4} s_{5}+c_{2} c_{5}\right) d_{6}
 \end{array}\right],
 \end{gathered}$$
 
-while computation of the unit vectors of joint axes gives
+and  
 
 $$\begin{gathered}
 \boldsymbol{z}_{0}=\left[\begin{array}{l}
@@ -330,15 +389,16 @@ s_{1}\left(c_{2} c_{4} s_{5}+s_{2} c_{5}\right)+c_{1} s_{4} s_{5} \\
 -s_{2} c_{4} s_{5}+c_{2} c_{5}
 \end{array}\right] .
 \end{gathered}$$
-```
-````
+
+Final assembly is too large to fit here.
+```` -->
 
 
+<br/><br/>
 
+# Analytical Jacobian (Optional)
 
-# Analytical Jacobian
-
-The geometric Jacobian is a mapping from joint velocities to the
+The above derived Jacobian is a mapping from joint velocities to the
 end-effector linear and angular velocity
 
 $$\boldsymbol{v}_{e}=\left[\begin{array}{c}
@@ -359,16 +419,44 @@ we need to find a Jacobian in terms of
 $$\dot{\boldsymbol{x}}_{e}=\left[\begin{array}{c}
 \dot{\boldsymbol{p}}_{e} \\
 \dot{\boldsymbol{\phi}}_{e}
-\end{array}\right]=\boldsymbol{J}_{A}(\boldsymbol{q}) \dot{\boldsymbol{q}}$$
+\end{array}\right]
+=
+\begin{bmatrix}
+\boldsymbol{J}_{P}(\boldsymbol{q})\\
+\boldsymbol{J}_{\phi}(\boldsymbol{q})
+\end{bmatrix}
+\dot{\boldsymbol{q}}
+$$
 
-which is called analytical Jacobian.
+As you can see, the linear Jacobian remains the same as before, the only difference is the angular Jacobian $\boldsymbol{J}_{O}(\boldsymbol{q})$ becomes
 
-To do so, we may need find a mapping
+$$
+\dot{\boldsymbol{\phi}}_{e}=
+\boldsymbol{J}_{\phi}(\boldsymbol{q}) \dot{\boldsymbol{q}}
+$$
+
+We call the new Jacobian matrix
+
+$$
+\boldsymbol{J}_{A}(\boldsymbol{q})=\begin{bmatrix}
+\boldsymbol{J}_{P}(\boldsymbol{q})\\
+\boldsymbol{J}_{\phi}(\boldsymbol{q})
+\end{bmatrix}
+$$
+
+the _analytical Jacobian_(recall $\boldsymbol{J}$ is called geometrical Jacobian or Jacobian).
+
+
+Next question, how do we find $\boldsymbol{J}_{A}(\boldsymbol{q})$ from $\boldsymbol{J}$? To do so,  we may need find a mapping
 
 $$\left[\begin{array}{c}
 \dot{\boldsymbol{p}}_{e} \\
 \boldsymbol{\omega}_{e}
-\end{array}\right] =  \boldsymbol{T}\left[\begin{array}{c}
+\end{array}\right] =  \underbrace{\begin{bmatrix}
+\boldsymbol{I} & \boldsymbol{0} \\
+\boldsymbol{0} & \boldsymbol{N}\left(\phi_{e}\right)
+\end{bmatrix}}_{\boldsymbol{T}}
+\left[\begin{array}{c}
 \dot{\boldsymbol{p}}_{e} \\
 \dot{\boldsymbol{\phi}}_{e}
 \end{array}\right]$$
@@ -377,29 +465,16 @@ such that
 
 $$\boldsymbol{J}_{A}(\boldsymbol{q}) = \boldsymbol{T}^{-1} \boldsymbol{J}(\boldsymbol{q})$$
 
-Since we know that the end-effector's position is already in the minimal
-representation, $\boldsymbol{T}$ has the form
 
-$$\boldsymbol{T}=
-\left[\begin{array}{cc}
-\boldsymbol{I} & \boldsymbol{O} \\
-\boldsymbol{O} & \boldsymbol{T}\left(\phi_{e}\right)
-\end{array}\right] \
-$$
 
 In the following, we will find out the mapping
 
-$$\boldsymbol{\omega}_{e}=\boldsymbol{T}\left(\phi_{e}\right)\dot{\boldsymbol{\phi}}_{e}$$
+$$\boldsymbol{\omega}_{e}=\boldsymbol{N}\left(\phi_{e}\right)\dot{\boldsymbol{\phi}}_{e}$$
 
-for the Euler ZYZ Angle minimal representation
+for the Euler ZYZ Angle 
 ${\boldsymbol{\phi}}_{e}=[{\varphi}, {\vartheta}, \psi]^T$.
 
-Consider the Euler ZYZ Angle, the vectors corresponding to the
-rotational velocities $\dot{\varphi}, \dot{\vartheta}, \dot\psi$ have
-been represented with reference to the current frame. The next figure
-illustrates how to compute the contributions of each rotational velocity
-to the components of angular velocity about the axes of the reference
-frame.
+Recall the rotation induced from the Euler ZYZ Angle. The angualr velocities $\dot{\varphi}, \dot{\vartheta}, \dot\psi$ is always with respect to the current frame, as shown in {numref}`Euler_angle_vel`. 
 
 
 ```{figure} ./diff_kinematics/Euler_angle_vel.jpg
@@ -410,31 +485,38 @@ name: Euler_angle_vel
 Rotational velocities of Euler angles ZYZ in current
 frame
 ```
+Therefore, to compute $\boldsymbol{\omega}_{e}$, we just need to first,  express each Euler angle velocity $\dot{\varphi}, \dot{\vartheta}, \dot\psi$ from its respective current from to the reference
+frame, and second, sum them up!
 
 
-```{figure} ./diff_kinematics/Euler_angle_vel_to_angular_vel.jpg
+
+
+<!-- ```{figure} ./diff_kinematics/Euler_angle_vel_to_angular_vel.jpg
 ---
 width: 50%
 name: Euler_angle_vel_to_angular_vel
 ---
 Composition of elementary rotational velocities for computing angular
 velocity
-```
+``` -->
 
 
 
-The corresponding angular velocity for $\dot{\varphi}$ is
-$\dot{\varphi}\left[\begin{array}{lll}0 & 0 & 1\end{array}\right]^{T}$
+- The angular velocity corresponding to $\dot{\varphi}$ is
 
-The corresponding angular velocity for $\dot{\vartheta}$ is
-$\dot{\vartheta}\left[\begin{array}{lll}-s_{\varphi} & c_{\varphi} & 0\end{array}\right]^{T}$
+$$\dot{\varphi}\left[\begin{array}{lll}0 & 0 & 1\end{array}\right]^{T}$$
 
-The corresponding angular velocity for $\dot{\psi}$ is
-$\dot{\psi}\left[\begin{array}{lll}c_{\varphi} s_{\vartheta} & s_{\varphi} s_{\vartheta} & c_{\vartheta}\end{array}\right]^{T}$,
+- The angular velocity corresponding to  $\dot{\vartheta}$ is
+
+$$\dot{\vartheta}\left[\begin{array}{lll}-s_{\varphi} & c_{\varphi} & 0\end{array}\right]^{T}$$
+
+- The angular velocity corresponding to $\dot{\psi}$ is
+
+$$\dot{\psi}\left[\begin{array}{lll}c_{\varphi} s_{\vartheta} & s_{\varphi} s_{\vartheta} & c_{\vartheta}\end{array}\right]^{T}$$
 
 Thus,
 
-$$\boldsymbol{T}\left(\phi_{e}\right) =\left[\begin{array}{ccc}
+$$\boldsymbol{N}\left(\phi_{e}\right) =\left[\begin{array}{ccc}
 0 & -s_{\varphi} & c_{\varphi} s_{\vartheta} \\
 0 & c_{\varphi} & s_{\varphi} s_{\vartheta} \\
 1 & 0 & c_{\vartheta}
