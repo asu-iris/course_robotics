@@ -7,9 +7,9 @@ title: "Lecture 14: Statics and Duality"
 
 # Statics
 
-Statics is to determine the relationship between the generalized forces
+Statics is to determine the relationship between  force
 applied to the end-effector and the generalized torques applied to the
-joints when the manipulator is at equilibrium. Let $\boldsymbol{\tau}$
+joints when the robot arm is at equilibrium. Let $\boldsymbol{\tau}$
 be the $(n \times 1)$ joint torques and $\boldsymbol{\gamma}_{e}$ the
 $(r \times 1)$ end-effector forces. We will apply the principle of
 virtual work to determine this relationship.
