@@ -592,11 +592,11 @@ null space increases, but they must satisify (recall your linear algebra)</p>
 <div class="math notranslate nohighlight">
 \[\operatorname{dim}(\mathcal{R}(\boldsymbol{J}))+\operatorname{dim}(\mathcal{N}(\boldsymbol{J}))=n\]</div>
 <p>This means that there is a set of end-effector velocities which we will never be able to generate no matter what velocity of joints  we command at  configuration <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span>.</p>
-<p>If <span class="math notranslate nohighlight">\(\mathcal{N}(\boldsymbol{J}) \neq \emptyset\)</span>, we can find a projection matrix <span class="math notranslate nohighlight">\(\boldsymbol{P}\)</span>
-a <em>projection</em> <span class="math notranslate nohighlight">\((n \times n)\)</span> for the null space of <span class="math notranslate nohighlight">\(\boldsymbol{J}\)</span>, that is the range of <span class="math notranslate nohighlight">\(\boldsymbol{P}\)</span> equals the null space of <span class="math notranslate nohighlight">\(\boldsymbol{J}\)</span>:</p>
+<p>If <span class="math notranslate nohighlight">\(\mathcal{N}(\boldsymbol{J}) \neq \emptyset\)</span>, we can find a <span class="math notranslate nohighlight">\((n \times n)\)</span>  <em>projection</em>  matrix <span class="math notranslate nohighlight">\(\boldsymbol{P}\)</span>
+for the null space of <span class="math notranslate nohighlight">\(\boldsymbol{J}\)</span>, that is, the range of this projection matrix <span class="math notranslate nohighlight">\(\boldsymbol{P}\)</span> equals the null space of <span class="math notranslate nohighlight">\(\boldsymbol{J}\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[\mathcal{R}(\boldsymbol{P}) \equiv \mathcal{N}(\boldsymbol{J})\]</div>
-<p>The projection matrix <span class="math notranslate nohighlight">\(\boldsymbol{P}\)</span> can be</p>
+<p>The projection matrix <span class="math notranslate nohighlight">\(\boldsymbol{P}\)</span> has the closed-form solution:</p>
 <div class="math notranslate nohighlight">
 \[
 \boldsymbol{P}=\boldsymbol{I}-\boldsymbol{J}^T(\boldsymbol{J}\boldsymbol{J}^T)^{-1}\boldsymbol{J}

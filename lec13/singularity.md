@@ -253,12 +253,12 @@ $$\operatorname{dim}(\mathcal{R}(\boldsymbol{J}))+\operatorname{dim}(\mathcal{N}
 
 This means that there is a set of end-effector velocities which we will never be able to generate no matter what velocity of joints  we command at  configuration $\boldsymbol{q}$.
 
-If $\mathcal{N}(\boldsymbol{J}) \neq \emptyset$, we can find a projection matrix $\boldsymbol{P}$ 
-a *projection* $(n \times n)$ for the null space of $\boldsymbol{J}$, that is the range of $\boldsymbol{P}$ equals the null space of $\boldsymbol{J}$:
+If $\mathcal{N}(\boldsymbol{J}) \neq \emptyset$, we can find a $(n \times n)$  *projection*  matrix $\boldsymbol{P}$ 
+for the null space of $\boldsymbol{J}$, that is, the range of this projection matrix $\boldsymbol{P}$ equals the null space of $\boldsymbol{J}$:
 
 $$\mathcal{R}(\boldsymbol{P}) \equiv \mathcal{N}(\boldsymbol{J})$$
 
-The projection matrix $\boldsymbol{P}$ can be
+The projection matrix $\boldsymbol{P}$ has the closed-form solution:
 
 $$
 \boldsymbol{P}=\boldsymbol{I}-\boldsymbol{J}^T(\boldsymbol{J}\boldsymbol{J}^T)^{-1}\boldsymbol{J}
