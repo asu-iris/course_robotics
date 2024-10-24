@@ -401,32 +401,40 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="statics">
 <h1>Statics<a class="headerlink" href="#statics" title="Permalink to this heading">#</a></h1>
-<p>Statics is to determine the relationship between  force
+<p>The concept of statics in robotics is to find the relationship between  force
 applied to the end-effector and the generalized torques applied to the
-joints when the robot arm is at equilibrium. Let <span class="math notranslate nohighlight">\(\boldsymbol{\tau}\)</span>
-be the <span class="math notranslate nohighlight">\((n \times 1)\)</span> joint torques and <span class="math notranslate nohighlight">\(\boldsymbol{\gamma}_{e}\)</span> the
-<span class="math notranslate nohighlight">\((r \times 1)\)</span> end-effector forces. We will apply the principle of
-virtual work to determine this relationship.</p>
-<p>The elementary work by the joint torques:</p>
+joints when the robot arm is at equilibrium.  We will apply the <a class="reference external" href="https://en.wikipedia.org/wiki/Virtual_work#:~:text=The%20principle%20of%20virtual%20work%20states%20that%20in%20equilibrium%20the,the%20reaction%2C%20or%20constraint%20forces.">principle of
+virtual work</a> to determine this relationship.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The principle of virtual work states that in equilibrium the virtual work of the forces applied to a system is zero</p>
+</div>
+<p>Let <span class="math notranslate nohighlight">\(\boldsymbol{\tau}\)</span>
+be the <span class="math notranslate nohighlight">\((n \times 1)\)</span> joint torques and <span class="math notranslate nohighlight">\(\boldsymbol{\gamma}_{e}=\begin{bmatrix}
+\boldsymbol{f}_{e}\\
+\boldsymbol{\mu}_{e}
+\end{bmatrix}\)</span> the
+<span class="math notranslate nohighlight">\((r \times 1)\)</span> end-effector forces, including linear force <span class="math notranslate nohighlight">\(\boldsymbol{f}_{e}\)</span> and moment
+<span class="math notranslate nohighlight">\(\boldsymbol{\mu}_{e}\)</span>.</p>
+<p>The visual work by the joint torques:</p>
 <div class="math notranslate nohighlight">
 \[d W_{\tau}=\boldsymbol{\tau}^{T} d \boldsymbol{q}\]</div>
-<p>As for the end-effector forces
-<span class="math notranslate nohighlight">\(\boldsymbol{\gamma}_{e}=\left[\boldsymbol{f}_{e}^{T} ,\boldsymbol{\mu}_{e}^{T}\right]^{T}\)</span>,
-including linear force <span class="math notranslate nohighlight">\(\boldsymbol{f}_{e}\)</span> and moment
-<span class="math notranslate nohighlight">\(\boldsymbol{\mu}_{e}\)</span>, the elementary work</p>
+<p>where <span class="math notranslate nohighlight">\(d \boldsymbol{q}\)</span> is  the  joint virtual displacement.</p>
+<p>The visual work by the end-effector forces:</p>
 <div class="math notranslate nohighlight">
 \[d W_{\gamma}=\boldsymbol{f}_{e}^{T} d \boldsymbol{p}_{e}+\boldsymbol{\mu}_{e}^{T} \boldsymbol{\omega}_{e} d t =\boldsymbol{f}_{e}^{T} \boldsymbol{J}_{P}(\boldsymbol{q}) d \boldsymbol{q}+\boldsymbol{\mu}_{e}^{T} \boldsymbol{J}_{O}(\boldsymbol{q}) d \boldsymbol{q}  =\boldsymbol{\gamma}_{e}^{T} \boldsymbol{J}(\boldsymbol{q}) d \boldsymbol{q}\]</div>
-<p>where <span class="math notranslate nohighlight">\(d \boldsymbol{p}_{e}\)</span> is the linear displacement and
-<span class="math notranslate nohighlight">\(\boldsymbol{\omega}_{e} d t\)</span> is the angular displacement.</p>
+<p>where <span class="math notranslate nohighlight">\(d \boldsymbol{p}_{e}\)</span> is the linear virtual displacement and
+<span class="math notranslate nohighlight">\(\boldsymbol{\omega}_{e} d t\)</span> is the angular virtual displacement of the end-effector.</p>
 <p>According to the principle of virtual work, the manipulator is at static
 equilibrium if and only if</p>
 <div class="math notranslate nohighlight">
-\[\delta W_{\tau}=\delta W_{\gamma} \quad \forall \delta \boldsymbol{q}\]</div>
-<p>This leads to</p>
+\[\delta W_{\tau}=\delta W_{\gamma}, \quad \forall \delta \boldsymbol{q}\]</div>
+<p>This leads to the statics equation:</p>
 <div class="math notranslate nohighlight">
 \[\boldsymbol{\tau}=\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{\gamma}_{e}\]</div>
 <p>stating a relationship between the end-effector forces and joint
-torques, established by the transpose of the geometric Jacobian.</p>
+torques when the robot is at its equilibrium.</p>
+</br>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="kineto-statics-duality">
 <h1>Kineto-Statics Duality<a class="headerlink" href="#kineto-statics-duality" title="Permalink to this heading">#</a></h1>

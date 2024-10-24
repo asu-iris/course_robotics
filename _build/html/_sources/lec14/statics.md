@@ -7,38 +7,52 @@ title: "Lecture 14: Statics and Duality"
 
 # Statics
 
-Statics is to determine the relationship between  force
+The concept of statics in robotics is to find the relationship between  force
 applied to the end-effector and the generalized torques applied to the
-joints when the robot arm is at equilibrium. Let $\boldsymbol{\tau}$
-be the $(n \times 1)$ joint torques and $\boldsymbol{\gamma}_{e}$ the
-$(r \times 1)$ end-effector forces. We will apply the principle of
-virtual work to determine this relationship.
+joints when the robot arm is at equilibrium.  We will apply the [principle of
+virtual work](https://en.wikipedia.org/wiki/Virtual_work#:~:text=The%20principle%20of%20virtual%20work%20states%20that%20in%20equilibrium%20the,the%20reaction%2C%20or%20constraint%20forces.) to determine this relationship.
 
-The elementary work by the joint torques:
+```{important}
+The principle of virtual work states that in equilibrium the virtual work of the forces applied to a system is zero
+```
+
+
+Let $\boldsymbol{\tau}$
+be the $(n \times 1)$ joint torques and $\boldsymbol{\gamma}_{e}=\begin{bmatrix}
+\boldsymbol{f}_{e}\\
+\boldsymbol{\mu}_{e}
+\end{bmatrix}$ the
+$(r \times 1)$ end-effector forces, including linear force $\boldsymbol{f}_{e}$ and moment
+$\boldsymbol{\mu}_{e}$.
+
+
+The visual work by the joint torques:
 
 $$d W_{\tau}=\boldsymbol{\tau}^{T} d \boldsymbol{q}$$
 
-As for the end-effector forces
-$\boldsymbol{\gamma}_{e}=\left[\boldsymbol{f}_{e}^{T} ,\boldsymbol{\mu}_{e}^{T}\right]^{T}$,
-including linear force $\boldsymbol{f}_{e}$ and moment
-$\boldsymbol{\mu}_{e}$, the elementary work
+where $d \boldsymbol{q}$ is  the  joint virtual displacement.
+
+The visual work by the end-effector forces:
 
 $$d W_{\gamma}=\boldsymbol{f}_{e}^{T} d \boldsymbol{p}_{e}+\boldsymbol{\mu}_{e}^{T} \boldsymbol{\omega}_{e} d t =\boldsymbol{f}_{e}^{T} \boldsymbol{J}_{P}(\boldsymbol{q}) d \boldsymbol{q}+\boldsymbol{\mu}_{e}^{T} \boldsymbol{J}_{O}(\boldsymbol{q}) d \boldsymbol{q}  =\boldsymbol{\gamma}_{e}^{T} \boldsymbol{J}(\boldsymbol{q}) d \boldsymbol{q}$$
 
-where $d \boldsymbol{p}_{e}$ is the linear displacement and
-$\boldsymbol{\omega}_{e} d t$ is the angular displacement.
+where $d \boldsymbol{p}_{e}$ is the linear virtual displacement and
+$\boldsymbol{\omega}_{e} d t$ is the angular virtual displacement of the end-effector.
 
 According to the principle of virtual work, the manipulator is at static
 equilibrium if and only if
 
-$$\delta W_{\tau}=\delta W_{\gamma} \quad \forall \delta \boldsymbol{q}$$
+$$\delta W_{\tau}=\delta W_{\gamma}, \quad \forall \delta \boldsymbol{q}$$
 
-This leads to
+This leads to the statics equation:
 
 $$\boldsymbol{\tau}=\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{\gamma}_{e}$$
 
 stating a relationship between the end-effector forces and joint
-torques, established by the transpose of the geometric Jacobian.
+torques when the robot is at its equilibrium.
+
+
+</br>
 
 # Kineto-Statics Duality
 
