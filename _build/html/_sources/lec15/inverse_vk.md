@@ -111,39 +111,30 @@ $$w(\boldsymbol{q}_\text{ref})=\min _{\boldsymbol{p}_\text{ref}}\|\boldsymbol{p}
 where $\boldsymbol{o}$ is the position  of the
 obstacle.
 
-<!-- # Singularity
+# Singularity
 
 The inverse velocity kinematics for both the redundant and non-redundant
-manipulators require the current robot configuration $\boldsymbol{q}$ is
-nonsingular, i.e., the Jacobian $\boldsymbol{J}(\boldsymbol{q})$ has
+manipulators require the robot current configuration $\boldsymbol{q}$ is
+nonsingular, i.e., the Jacboobian $\boldsymbol{J}(\boldsymbol{q})$ has
 full rank. At a singular configuration,
-$\boldsymbol{v}_{e}=\boldsymbol{J} \dot{\boldsymbol{q}}$ contains
-linearly dependent equations, and it is possible to find a solution
+it is possible to find a solution
 $\dot{\boldsymbol{q}}$ only if
 $\boldsymbol{v}_{e} \in \mathcal{R}(\boldsymbol{J})$. This situation
-means that the assigned $\boldsymbol{v}_{e}$ is physically achievable by
+means that  $\boldsymbol{v}_{e}$ is physically achievable by
 finding a joint velocity $\dot{\boldsymbol{q}}$, even though it is at a
 singular configuration. If instead
 $\boldsymbol{v}_{e} \notin \mathcal{R}(\boldsymbol{J})$, the system of
 equations has no solution; this means that $\boldsymbol{v}_{e}$ cannot
-be achievable by the manipulator at the given posture.
+be achievable by the robot at the given posture.
 
-Inversion of the Jacobian can represent a serious inconvenience not only
+Inversion of the Jacobian can represent a serious problem not only
 at a singularity but also in the neighborhood of a singularity. In the
 neighborhood of a singularity, a relatively small $\boldsymbol{v}_{e}$
-(in terms of its norm) which can cause large joint velocities. Consider
-the example of the shoulder singularity for the anthropomorphic arm. If
-a path is assigned to the end-effector which passes nearby the base
-rotation axis, the base joint is forced to make a rotation of about
-$\pi$ in a relatively short time to allow the end-effector to keep
-tracking the imposed trajectory. An solution overcoming the problem of
-inverting differentia kinematics in the neighbourhood of a singularity
-is provided by the so-called damped least-squares (DLS) inverse
+(in terms of its norm) which can cause large joint velocities. To overcome  "singularity neighbourhood" issue, one can modify the pseudo-inverse of $\boldsymbol{J}$ to
 
 $$\boldsymbol{J}^{\star}=\boldsymbol{J}^{T}\left(\boldsymbol{J} \boldsymbol{J}^{T}+k^{2} \boldsymbol{I}\right)^{-1}$$
 
-where $k$ is a damping factor that renders the inversion better
-conditioned from a numerical viewpoint. It can be shown that such a
-solution can be obtained by minimizing the following objective
+ It can be shown that the above modification
+is equivalent to minimizing the following objective function (why? a homework problem)
 
-$$\min_{\dot{\boldsymbol{q}}}\quad \frac{1}{2}\left(\boldsymbol{v}_{e}-\boldsymbol{J} \dot{\boldsymbol{q}}\right)^{T}\left(\boldsymbol{v}_{e}-\boldsymbol{J} \dot{\boldsymbol{q}}\right)+\frac{1}{2} k^{2} \dot{\boldsymbol{q}}^{T} \dot{\boldsymbol{q}}$$ -->
+$$\min_{\dot{\boldsymbol{q}}}\quad \frac{1}{2}\left(\boldsymbol{v}_{e}-\boldsymbol{J} \dot{\boldsymbol{q}}\right)^{T}\left(\boldsymbol{v}_{e}-\boldsymbol{J} \dot{\boldsymbol{q}}\right)+\frac{1}{2} k^{2} \dot{\boldsymbol{q}}^{T} \dot{\boldsymbol{q}}$$

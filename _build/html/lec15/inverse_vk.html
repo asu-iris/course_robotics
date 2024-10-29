@@ -198,6 +198,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Inverse Velocity Kinematics</a></li>
 
 
+
 <li class="toctree-l1"><a class="reference internal" href="../lec16-17/nik.html">Numerical Inverse Kinematics</a></li>
 
 
@@ -390,6 +391,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#close-to-reference">Close-to-Reference</a></li>
 </ul>
 </li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#singularity">Singularity</a></li>
 </ul>
 
             </nav>
@@ -491,43 +493,33 @@ variables close to the center of their ranges.</p>
 \[w(\boldsymbol{q}_\text{ref})=\min _{\boldsymbol{p}_\text{ref}}\|\boldsymbol{p}(\boldsymbol{q}_\text{ref})-\boldsymbol{o}\|\]</div>
 <p>where <span class="math notranslate nohighlight">\(\boldsymbol{o}\)</span> is the position  of the
 obstacle.</p>
-<!-- # Singularity
-
-The inverse velocity kinematics for both the redundant and non-redundant
-manipulators require the current robot configuration $\boldsymbol{q}$ is
-nonsingular, i.e., the Jacobian $\boldsymbol{J}(\boldsymbol{q})$ has
-full rank. At a singular configuration,
-$\boldsymbol{v}_{e}=\boldsymbol{J} \dot{\boldsymbol{q}}$ contains
-linearly dependent equations, and it is possible to find a solution
-$\dot{\boldsymbol{q}}$ only if
-$\boldsymbol{v}_{e} \in \mathcal{R}(\boldsymbol{J})$. This situation
-means that the assigned $\boldsymbol{v}_{e}$ is physically achievable by
-finding a joint velocity $\dot{\boldsymbol{q}}$, even though it is at a
-singular configuration. If instead
-$\boldsymbol{v}_{e} \notin \mathcal{R}(\boldsymbol{J})$, the system of
-equations has no solution; this means that $\boldsymbol{v}_{e}$ cannot
-be achievable by the manipulator at the given posture.
-
-Inversion of the Jacobian can represent a serious inconvenience not only
-at a singularity but also in the neighborhood of a singularity. In the
-neighborhood of a singularity, a relatively small $\boldsymbol{v}_{e}$
-(in terms of its norm) which can cause large joint velocities. Consider
-the example of the shoulder singularity for the anthropomorphic arm. If
-a path is assigned to the end-effector which passes nearby the base
-rotation axis, the base joint is forced to make a rotation of about
-$\pi$ in a relatively short time to allow the end-effector to keep
-tracking the imposed trajectory. An solution overcoming the problem of
-inverting differentia kinematics in the neighbourhood of a singularity
-is provided by the so-called damped least-squares (DLS) inverse
-
-$$\boldsymbol{J}^{\star}=\boldsymbol{J}^{T}\left(\boldsymbol{J} \boldsymbol{J}^{T}+k^{2} \boldsymbol{I}\right)^{-1}$$
-
-where $k$ is a damping factor that renders the inversion better
-conditioned from a numerical viewpoint. It can be shown that such a
-solution can be obtained by minimizing the following objective
-
-$$\min_{\dot{\boldsymbol{q}}}\quad \frac{1}{2}\left(\boldsymbol{v}_{e}-\boldsymbol{J} \dot{\boldsymbol{q}}\right)^{T}\left(\boldsymbol{v}_{e}-\boldsymbol{J} \dot{\boldsymbol{q}}\right)+\frac{1}{2} k^{2} \dot{\boldsymbol{q}}^{T} \dot{\boldsymbol{q}}$$ -->
 </section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="singularity">
+<h1>Singularity<a class="headerlink" href="#singularity" title="Permalink to this heading">#</a></h1>
+<p>The inverse velocity kinematics for both the redundant and non-redundant
+manipulators require the robot current configuration <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span> is
+nonsingular, i.e., the Jacboobian <span class="math notranslate nohighlight">\(\boldsymbol{J}(\boldsymbol{q})\)</span> has
+full rank. At a singular configuration,
+it is possible to find a solution
+<span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}}\)</span> only if
+<span class="math notranslate nohighlight">\(\boldsymbol{v}_{e} \in \mathcal{R}(\boldsymbol{J})\)</span>. This situation
+means that  <span class="math notranslate nohighlight">\(\boldsymbol{v}_{e}\)</span> is physically achievable by
+finding a joint velocity <span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}}\)</span>, even though it is at a
+singular configuration. If instead
+<span class="math notranslate nohighlight">\(\boldsymbol{v}_{e} \notin \mathcal{R}(\boldsymbol{J})\)</span>, the system of
+equations has no solution; this means that <span class="math notranslate nohighlight">\(\boldsymbol{v}_{e}\)</span> cannot
+be achievable by the robot at the given posture.</p>
+<p>Inversion of the Jacobian can represent a serious problem not only
+at a singularity but also in the neighborhood of a singularity. In the
+neighborhood of a singularity, a relatively small <span class="math notranslate nohighlight">\(\boldsymbol{v}_{e}\)</span>
+(in terms of its norm) which can cause large joint velocities. To overcome  “singularity neighbourhood” issue, one can modify the pseudo-inverse of <span class="math notranslate nohighlight">\(\boldsymbol{J}\)</span> to</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{J}^{\star}=\boldsymbol{J}^{T}\left(\boldsymbol{J} \boldsymbol{J}^{T}+k^{2} \boldsymbol{I}\right)^{-1}\]</div>
+<p>It can be shown that the above modification
+is equivalent to minimizing the following objective function (why? a homework problem)</p>
+<div class="math notranslate nohighlight">
+\[\min_{\dot{\boldsymbol{q}}}\quad \frac{1}{2}\left(\boldsymbol{v}_{e}-\boldsymbol{J} \dot{\boldsymbol{q}}\right)^{T}\left(\boldsymbol{v}_{e}-\boldsymbol{J} \dot{\boldsymbol{q}}\right)+\frac{1}{2} k^{2} \dot{\boldsymbol{q}}^{T} \dot{\boldsymbol{q}}\]</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -604,6 +596,7 @@ $$\min_{\dot{\boldsymbol{q}}}\quad \frac{1}{2}\left(\boldsymbol{v}_{e}-\boldsymb
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#close-to-reference">Close-to-Reference</a></li>
 </ul>
 </li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#singularity">Singularity</a></li>
 </ul>
 
   </nav></div>
