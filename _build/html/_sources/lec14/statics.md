@@ -63,21 +63,20 @@ $$\begin{aligned}
     \boldsymbol{\tau}=\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{\gamma}_{e}
 \end{aligned}$$
 
--   The range space of $\boldsymbol{J}^{T}$ is the subspace
-    $\mathcal{R}\left(\boldsymbol{J}^{T}\right)$ in $\mathbb{R}^{n}$ of
-    the joint torques that can balance the end-effector forces, given
-    manipulator posture $\boldsymbol{q}$.
+-   The range space $\mathcal{R}\left(\boldsymbol{J}^{T}\right)$ of $\boldsymbol{J}^{T}$ is the subspace
+     in $\mathbb{R}^{n}$, where the
+    the joint torques that can balance the end-effector forces at robot pose $\boldsymbol{q}$.
 
--   The null space of $\boldsymbol{J}^{T}$ is the subspace
-    $\mathcal{N}\left(\boldsymbol{J}^{T}\right)$ in $\mathbb{R}^{r}$ of
+-   The null space $\mathcal{N}\left(\boldsymbol{J}^{T}\right)$ of $\boldsymbol{J}^{T}$ is the subspace
+     in $\mathbb{R}^{r}$ of
     the end-effector forces that do not require any balancing joint
-    torques, given manipulator posture $\boldsymbol{q}$
+    torques at robot pose $\boldsymbol{q}$.
 
 
 
 ```{figure} ../lec11-12/diff_kinematics/operation_to_joint.jpg
 ---
-width: 50%
+width: 70%
 name: coordinate_mapping
 ---
 Mapping between the end-effector force space and the joint torque
@@ -87,13 +86,10 @@ space
 
 It is worth remarking that the end-effector forces
 $\gamma_{e} \in \mathcal{N}\left(\boldsymbol{J}^{T}\right)$ are entirely
-absorbed by the structure in that the mechanical constraint reaction
-forces can balance them exactly. Hence, a manipulator at a singular
-configuration remains in the given posture whatever end-effector force
-$\gamma_{e}$ is applied so that
-$\gamma_{e} \in \mathcal{N}\left(J^{T}\right)$
+absorbed by the mechanical structure of the robot arm. 
 
-The relations between the two subspaces are established by
+
+From fundamental relationship in linear algebra, the relations between the two subspaces are established by
 
 $$\mathcal{N}(\boldsymbol{J}) \equiv \mathcal{R}^{\perp}\left(\boldsymbol{J}^{T}\right) \quad \mathcal{R}(\boldsymbol{J}) \equiv \mathcal{N}^{\perp}\left(\boldsymbol{J}^{T}\right)$$
 
@@ -101,12 +97,12 @@ and then, once the manipulator Jacobian is known, it is possible to
 characterize completely differential kinematics and statics in terms of
 the range and null spaces of the Jacobian and its transpose.
 
-# Velocity and Force Transformation
+# Velocity and Force Transformation (Optional)
 
 
 ```{figure} ../lec11-12/diff_kinematics/coordinate_mapping.jpg
 ---
-width: 50%
+width: 70%
 name: coordinate_mapping
 ---
 Representation of linear and angular velocities in different
@@ -115,8 +111,8 @@ body
 ```
 
 
-The kineto-statics duality concept presented above can be useful to
-characterize the transformation of velocities and forces between two
+The kineto-statics duality  can be useful to
+find the transformation of velocities and forces between two
 coordinate frames. Consider a reference coordinate frame
 $O_{0}-x_{0} y_{0} z_{0}$ and a rigid body moving with respect to such a
 frame. Then let $O_{1}-x_{1} y_{1} z_{1}$ and $O_{2}-x_{2} y_{2} z_{2}$

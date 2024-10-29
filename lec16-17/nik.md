@@ -7,11 +7,10 @@ title: "Lecture 16-17: Numerical Inverse Kinematics Algorithms"
 
 #  Numerical Inverse Kinematics
 
-Recall the problem of Inverse Kinematics (IK): given
-$\boldsymbol{x}_{d}$ (the desired end-effector pose in the operational
-space), we want to find the joint value $\boldsymbol{q}$ such that
+Recall IK problems: given a desired end-effector pose
+$\boldsymbol{x}_{d}$, we want to find the joint vector $\boldsymbol{q}$ such that
 $\boldsymbol{k}(\boldsymbol{q})=\boldsymbol{x}_d$. Here,
-$\boldsymbol{k}(\cdot)$ is the forward kinematics.
+$\boldsymbol{k}(\cdot)$ is the forward kinematics. In this chapter, we will show how to use Jacobian to solve this problem.
 
 To solve the above IK, we define the following operational space error
 between the desired $\boldsymbol{x}_{d}$ and the current end-effector
@@ -35,7 +34,7 @@ such that, when plug the controller to the error dynamics,
 $\boldsymbol{e}(t)\rightarrow 0$ as $t\rightarrow \infty$. The different
 controllers leads to different numerical IK algorithms.
 
-# Controller 1: Jacobian (Pseudo-)Inverse or Newton-Raphson Method
+# Jacobian Inverse or Newton-Raphson Method
 
 Let's define
 $\dot{\boldsymbol{q}}= \text{Controller}({\boldsymbol{x}}_d, \dot{\boldsymbol{x}}_d,  {\boldsymbol{q}}, {\boldsymbol{e}})$

@@ -386,7 +386,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Statics</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#kineto-statics-duality">Kineto-Statics Duality</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#velocity-and-force-transformation">Velocity and Force Transformation</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#velocity-and-force-transformation-optional">Velocity and Force Transformation (Optional)</a></li>
 </ul>
 
             </nav>
@@ -445,17 +445,16 @@ torques when the robot is at its equilibrium.</p>
     \boldsymbol{\tau}=\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{\gamma}_{e}
 \end{aligned}\]</div>
 <ul class="simple">
-<li><p>The range space of <span class="math notranslate nohighlight">\(\boldsymbol{J}^{T}\)</span> is the subspace
-<span class="math notranslate nohighlight">\(\mathcal{R}\left(\boldsymbol{J}^{T}\right)\)</span> in <span class="math notranslate nohighlight">\(\mathbb{R}^{n}\)</span> of
-the joint torques that can balance the end-effector forces, given
-manipulator posture <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span>.</p></li>
-<li><p>The null space of <span class="math notranslate nohighlight">\(\boldsymbol{J}^{T}\)</span> is the subspace
-<span class="math notranslate nohighlight">\(\mathcal{N}\left(\boldsymbol{J}^{T}\right)\)</span> in <span class="math notranslate nohighlight">\(\mathbb{R}^{r}\)</span> of
+<li><p>The range space <span class="math notranslate nohighlight">\(\mathcal{R}\left(\boldsymbol{J}^{T}\right)\)</span> of <span class="math notranslate nohighlight">\(\boldsymbol{J}^{T}\)</span> is the subspace
+in <span class="math notranslate nohighlight">\(\mathbb{R}^{n}\)</span>, where the
+the joint torques that can balance the end-effector forces at robot pose <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span>.</p></li>
+<li><p>The null space <span class="math notranslate nohighlight">\(\mathcal{N}\left(\boldsymbol{J}^{T}\right)\)</span> of <span class="math notranslate nohighlight">\(\boldsymbol{J}^{T}\)</span> is the subspace
+in <span class="math notranslate nohighlight">\(\mathbb{R}^{r}\)</span> of
 the end-effector forces that do not require any balancing joint
-torques, given manipulator posture <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span></p></li>
+torques at robot pose <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span>.</p></li>
 </ul>
 <figure class="align-default" id="coordinate-mapping">
-<a class="reference internal image-reference" href="../_images/operation_to_joint.jpg"><img alt="../_images/operation_to_joint.jpg" src="../_images/operation_to_joint.jpg" style="width: 50%;" /></a>
+<a class="reference internal image-reference" href="../_images/operation_to_joint.jpg"><img alt="../_images/operation_to_joint.jpg" src="../_images/operation_to_joint.jpg" style="width: 70%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 62 </span><span class="caption-text">Mapping between the end-effector force space and the joint torque
 space</span><a class="headerlink" href="#coordinate-mapping" title="Permalink to this image">#</a></p>
@@ -463,30 +462,26 @@ space</span><a class="headerlink" href="#coordinate-mapping" title="Permalink to
 </figure>
 <p>It is worth remarking that the end-effector forces
 <span class="math notranslate nohighlight">\(\gamma_{e} \in \mathcal{N}\left(\boldsymbol{J}^{T}\right)\)</span> are entirely
-absorbed by the structure in that the mechanical constraint reaction
-forces can balance them exactly. Hence, a manipulator at a singular
-configuration remains in the given posture whatever end-effector force
-<span class="math notranslate nohighlight">\(\gamma_{e}\)</span> is applied so that
-<span class="math notranslate nohighlight">\(\gamma_{e} \in \mathcal{N}\left(J^{T}\right)\)</span></p>
-<p>The relations between the two subspaces are established by</p>
+absorbed by the mechanical structure of the robot arm.</p>
+<p>From fundamental relationship in linear algebra, the relations between the two subspaces are established by</p>
 <div class="math notranslate nohighlight">
 \[\mathcal{N}(\boldsymbol{J}) \equiv \mathcal{R}^{\perp}\left(\boldsymbol{J}^{T}\right) \quad \mathcal{R}(\boldsymbol{J}) \equiv \mathcal{N}^{\perp}\left(\boldsymbol{J}^{T}\right)\]</div>
 <p>and then, once the manipulator Jacobian is known, it is possible to
 characterize completely differential kinematics and statics in terms of
 the range and null spaces of the Jacobian and its transpose.</p>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="velocity-and-force-transformation">
-<h1>Velocity and Force Transformation<a class="headerlink" href="#velocity-and-force-transformation" title="Permalink to this heading">#</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="velocity-and-force-transformation-optional">
+<h1>Velocity and Force Transformation (Optional)<a class="headerlink" href="#velocity-and-force-transformation-optional" title="Permalink to this heading">#</a></h1>
 <figure class="align-default" id="id1">
-<a class="reference internal image-reference" href="../_images/coordinate_mapping.jpg"><img alt="../_images/coordinate_mapping.jpg" src="../_images/coordinate_mapping.jpg" style="width: 50%;" /></a>
+<a class="reference internal image-reference" href="../_images/coordinate_mapping.jpg"><img alt="../_images/coordinate_mapping.jpg" src="../_images/coordinate_mapping.jpg" style="width: 70%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 63 </span><span class="caption-text">Representation of linear and angular velocities in different
 coordinate frames on the same rigid
 body</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>The kineto-statics duality concept presented above can be useful to
-characterize the transformation of velocities and forces between two
+<p>The kineto-statics duality  can be useful to
+find the transformation of velocities and forces between two
 coordinate frames. Consider a reference coordinate frame
 <span class="math notranslate nohighlight">\(O_{0}-x_{0} y_{0} z_{0}\)</span> and a rigid body moving with respect to such a
 frame. Then let <span class="math notranslate nohighlight">\(O_{1}-x_{1} y_{1} z_{1}\)</span> and <span class="math notranslate nohighlight">\(O_{2}-x_{2} y_{2} z_{2}\)</span>
@@ -605,7 +600,7 @@ the related rotation matrix of one frame with respect to the other.</p>
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Statics</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#kineto-statics-duality">Kineto-Statics Duality</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#velocity-and-force-transformation">Velocity and Force Transformation</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#velocity-and-force-transformation-optional">Velocity and Force Transformation (Optional)</a></li>
 </ul>
 
   </nav></div>

@@ -6,30 +6,29 @@ title: "Lecture 15: Inverse Velocity Kinematics"
 ---
 
 # Inverse Velocity Kinematics
-Suppose that a robot current configuration is
+Suppose that a robot arm has a configuration
 $\boldsymbol{q}\in\mathbb{R}^n$, and the motion of the end-effector is
-assigned to $\boldsymbol{v}_{e}\in\mathbb{R}^r$. We want to find the
+  $\boldsymbol{v}_{e}\in\mathbb{R}^r$. We want to find the
 corresponding joint velocity $\dot{\boldsymbol{q}}$ using the Jacobian
 
 $$\boldsymbol{v}_{e}=\boldsymbol{J}(\boldsymbol{q})\dot{\boldsymbol{q}}$$
 
-This problem is corned as *inverse velocity kinematics*.
+This problem is called as *inverse velocity kinematics*.
 
-# Non-redundant Manipulator
+# Non-redundant robot arm
 
-When the manipulator is non-redundant $r=n$ and $\boldsymbol{q}$ is not
+When a robot arm  is non-redundant $r=n$ and $\boldsymbol{q}$ is not
 a singular configuration, one can directly inverse the Jacobian
 
 $$\dot{\boldsymbol{q}}=\text{inv}(\boldsymbol{J}(\boldsymbol{q})) \boldsymbol{v}_{e}$$
 
-# Redundant Manipulator
+# Redundant robot arm
 
-When the manipulator is redundant $(r<n)$, the Jacobian matrix has more
-columns than rows, and thus there are infinite solutions
-$\dot{\boldsymbol{q}}$. We need to resort to optimization to pick the
-best solution $\dot{\boldsymbol{q}}$ in some sense!
+When the robot arm is redundant $(r<n)$,  there are infinite solutions
+$\dot{\boldsymbol{q}}$. We need to pick the
+best (in a sense discussed below) solution $\dot{\boldsymbol{q}}$ using optimization.
 
-## Minimal Norm Selction
+## Minimal Norm
 
 Once the end-effector velocity $\boldsymbol{v}_{e}$ and Jacobian
 $\boldsymbol{J}$ are given, we establish the following optimization to
@@ -40,9 +39,9 @@ $$\begin{aligned}
         \text{s.t.}\quad & \boldsymbol{v}_{e}  =\boldsymbol{J}(\boldsymbol{q}) \dot{\boldsymbol{q}}
     \end{aligned}$$
 
+Here, $\boldsymbol{W}$ is a weight matrix (usually diagonal).
 This means that we want to pick the best $\dot{\boldsymbol{q}}$ in the
-sense of having the minimal norm of joint velocities. By some
-derivation, if $\boldsymbol{q}$ is not a singular configuration, the
+sense of having the minimal norm of joint velocities. If $\boldsymbol{q}$ is not a singular configuration, the
 optimal solution to the above optimization is
 
 $$\dot{\boldsymbol{q}}=\boldsymbol{W}^{-1} \boldsymbol{J}^{T}\left(\boldsymbol{J} \boldsymbol{W}^{-1} \boldsymbol{J}^{T}\right)^{-1} \boldsymbol{v}_{e} .$$
@@ -54,24 +53,23 @@ $$\dot{\boldsymbol{q}}=\boldsymbol{J}^{\dagger} \boldsymbol{v}_{e} \quad \text{w
 
 is the right pseudo-inverse of $\boldsymbol{J}$.
 
-## Close-to-Reference Selction
+## Close-to-Reference
 
-We have other criteria to pick the best $\dot{\boldsymbol{q}}$. When we
-are given a reference $\dot{\boldsymbol{q}}_{0}$, we want to pick the
+When we are given a reference $\dot{\boldsymbol{q}}_{\text{ref}}$, we want to pick the
 best $\dot{\boldsymbol{q}}$ in the sense of having the minimal distance
-to $\dot{\boldsymbol{q}}_{0}$. Thus, we establish the following
+to $\dot{\boldsymbol{q}}_{\text{ref}}$. Thus, we establish the following
 optimization
 
 $$\begin{aligned}
         \min_{\dot{\boldsymbol{q}}} \quad &
-        \frac{1}{2}\left(\dot{\boldsymbol{q}}-\dot{\boldsymbol{q}}_{0}\right)^{T}\left(\dot{\boldsymbol{q}}-\dot{\boldsymbol{q}}_{0}\right)\\
+        \frac{1}{2}\left(\dot{\boldsymbol{q}}-\dot{\boldsymbol{q}}_{\text{ref}}\right)^{T}\left(\dot{\boldsymbol{q}}-\dot{\boldsymbol{q}}_{\text{ref}}\right)\\
         \text{s.t.}\quad & \boldsymbol{v}_{e}  =\boldsymbol{J}(\boldsymbol{q}) \dot{\boldsymbol{q}}
     \end{aligned}$$
 
-After doing some derivation, if $\boldsymbol{q}$ is not a singular
+If $\boldsymbol{q}$ is not a singular
 configuration, the solution to the above optimization is
 
-$$\dot{\boldsymbol{q}}=\boldsymbol{J}^{\dagger} \boldsymbol{v}_{e}+\left(\boldsymbol{I}_{n}-\boldsymbol{J}^{\dagger} \boldsymbol{J}\right) \dot{\boldsymbol{q}}_{0} .$$
+$$\dot{\boldsymbol{q}}=\boldsymbol{J}^{\dagger} \boldsymbol{v}_{e}+\left(\boldsymbol{I}_{n}-\boldsymbol{J}^{\dagger} \boldsymbol{J}\right) \dot{\boldsymbol{q}}_{\text{ref}}$$
 
 The obtained solution has two terms. The first term is the same as the
 solution of minimizing the joint velocity norm. In the second term,
@@ -80,41 +78,40 @@ null space projection matrix $\boldsymbol{P}$ (recall we have mentioned
 in our previous lecture), which allows the projection of any
 $\dot{\boldsymbol{q}}_{0}$ in the null space of $\boldsymbol{J}$.
 
-The final question is how to specify the reference
-$\dot{\boldsymbol{q}}_{0}$ for a redundant manipulator. A typical choice
+The final question is how to set 
+$\dot{\boldsymbol{q}}_{\text{ref}}$?
+
+
+A typical choice of $\dot{\boldsymbol{q}}_{\text{ref}}$
 is
 
-$$\dot{\boldsymbol{q}}_{0}=k_{0}\left(\frac{\partial w(\boldsymbol{q})}{\partial \boldsymbol{q}}\right)^{T}$$
+$$\dot{\boldsymbol{q}}_{\text{ref}}=k_{0}\left(\frac{\partial w(\boldsymbol{q}_{\text{ref}})}{\partial \boldsymbol{q}_{\text{ref}}}\right)^{T}$$
 
-where $k_{0}>0$ and $w(\boldsymbol{q})$ is a secondary objective
-function of the joint variables. Since the solution moves along the
-direction of the gradient of the objective function, it attempts to
-maximize it locally the secondary objective. Such a secondary objective
-can be the following:
+where $k_{0}>0$ and $w(\boldsymbol{q}_{\text{ref}})$ is another objective function--- we want ${\boldsymbol{q}}_{\text{ref}}$ moves in a direction of maximizing this objective function. The choice of this objective $w(\boldsymbol{q}_{\text{ref}})$ can be 
 
-\(1\) The manipulability measure:
-$$w(\boldsymbol{q})=\sqrt{\operatorname{det}\left(\boldsymbol{J}(\boldsymbol{q}) \boldsymbol{J}^{T}(\boldsymbol{q})\right)}$$
+\(1\) Manipulability objective function:
+$$w(\boldsymbol{q}_\text{ref})=\sqrt{\operatorname{det}\left(\boldsymbol{J}(\boldsymbol{q}_\text{ref}) \boldsymbol{J}^{T}(\boldsymbol{q}_\text{ref})\right)}$$
 
-By maximizing this measure, redundancy is exploited to move away from
+By maximizing this objective function, we want the refernece $\boldsymbol{q}_\text{ref}$ to move away from
 singularities.
 
-\(2\) The distance from mechanical joint limits:
+\(2\) The distance from joint limits:
 
-$$w(\boldsymbol{q})=-\frac{1}{2 n} \sum_{i=1}^{n}\left(\frac{q_{i}-\bar{q}_{i}}{q_{i M}-q_{i m}}\right)^{2}$$
+$$w(\boldsymbol{q}_\text{ref})=-\frac{1}{2 n} \sum_{i=1}^{n}\left(\frac{q_{i,\text{ref}}-\bar{q}_{i}}{q_{i,M}-q_{i,m}}\right)^{2}$$
 
-where $q_{i M}\left(q_{i m}\right)$ is the maximum (minimum) joint limit
+where $q_{i,M}\left(q_{i,m}\right)$ is the maximum (minimum) joint limit
 and $\bar{q}_{i}$ the middle point of the joint range; thus, by
-maximizing this distance, redundancy is exploited to keep the joint
+maximizing this distance, we aim to keep the joint
 variables close to the center of their ranges.
 
 \(3\) The distance from an obstacle:
 
-$$w(\boldsymbol{q})=\min _{\boldsymbol{p}, \boldsymbol{o}}\|\boldsymbol{p}(\boldsymbol{q})-\boldsymbol{o}\|$$
+$$w(\boldsymbol{q}_\text{ref})=\min _{\boldsymbol{p}_\text{ref}}\|\boldsymbol{p}(\boldsymbol{q}_\text{ref})-\boldsymbol{o}\|$$
 
-where $\boldsymbol{o}$ is the position vector of a suitable point on the
+where $\boldsymbol{o}$ is the position  of the
 obstacle.
 
-# Singularity
+<!-- # Singularity
 
 The inverse velocity kinematics for both the redundant and non-redundant
 manipulators require the current robot configuration $\boldsymbol{q}$ is
@@ -149,4 +146,4 @@ where $k$ is a damping factor that renders the inversion better
 conditioned from a numerical viewpoint. It can be shown that such a
 solution can be obtained by minimizing the following objective
 
-$$\min_{\dot{\boldsymbol{q}}}\quad \frac{1}{2}\left(\boldsymbol{v}_{e}-\boldsymbol{J} \dot{\boldsymbol{q}}\right)^{T}\left(\boldsymbol{v}_{e}-\boldsymbol{J} \dot{\boldsymbol{q}}\right)+\frac{1}{2} k^{2} \dot{\boldsymbol{q}}^{T} \dot{\boldsymbol{q}}$$
+$$\min_{\dot{\boldsymbol{q}}}\quad \frac{1}{2}\left(\boldsymbol{v}_{e}-\boldsymbol{J} \dot{\boldsymbol{q}}\right)^{T}\left(\boldsymbol{v}_{e}-\boldsymbol{J} \dot{\boldsymbol{q}}\right)+\frac{1}{2} k^{2} \dot{\boldsymbol{q}}^{T} \dot{\boldsymbol{q}}$$ -->

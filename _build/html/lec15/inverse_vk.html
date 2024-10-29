@@ -181,8 +181,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 <li class="toctree-l1"><a class="reference internal" href="../opt/motion_planning.html">Motion Planning</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lec10/diff-trans.html">Derivative of Transformation</a></li>
-
+<li class="toctree-l1"><a class="reference internal" href="../lec10/diff-trans.html">Velocity Kinematics</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="../lec11-12/jacobian.html">Jacobian</a></li>
 
@@ -197,7 +196,6 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Inverse Velocity Kinematics</a></li>
-
 
 
 <li class="toctree-l1"><a class="reference internal" href="../lec16-17/nik.html">Numerical Inverse Kinematics</a></li>
@@ -386,13 +384,12 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Inverse Velocity Kinematics</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#non-redundant-manipulator">Non-redundant Manipulator</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#redundant-manipulator">Redundant Manipulator</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#minimal-norm-selction">Minimal Norm Selction</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#close-to-reference-selction">Close-to-Reference Selction</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#non-redundant-robot-arm">Non-redundant robot arm</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#redundant-robot-arm">Redundant robot arm</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#minimal-norm">Minimal Norm</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#close-to-reference">Close-to-Reference</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#singularity">Singularity</a></li>
 </ul>
 
             </nav>
@@ -407,29 +404,28 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="inverse-velocity-kinematics">
 <h1>Inverse Velocity Kinematics<a class="headerlink" href="#inverse-velocity-kinematics" title="Permalink to this heading">#</a></h1>
-<p>Suppose that a robot current configuration is
+<p>Suppose that a robot arm has a configuration
 <span class="math notranslate nohighlight">\(\boldsymbol{q}\in\mathbb{R}^n\)</span>, and the motion of the end-effector is
-assigned to <span class="math notranslate nohighlight">\(\boldsymbol{v}_{e}\in\mathbb{R}^r\)</span>. We want to find the
+<span class="math notranslate nohighlight">\(\boldsymbol{v}_{e}\in\mathbb{R}^r\)</span>. We want to find the
 corresponding joint velocity <span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}}\)</span> using the Jacobian</p>
 <div class="math notranslate nohighlight">
 \[\boldsymbol{v}_{e}=\boldsymbol{J}(\boldsymbol{q})\dot{\boldsymbol{q}}\]</div>
-<p>This problem is corned as <em>inverse velocity kinematics</em>.</p>
+<p>This problem is called as <em>inverse velocity kinematics</em>.</p>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="non-redundant-manipulator">
-<h1>Non-redundant Manipulator<a class="headerlink" href="#non-redundant-manipulator" title="Permalink to this heading">#</a></h1>
-<p>When the manipulator is non-redundant <span class="math notranslate nohighlight">\(r=n\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span> is not
+<section class="tex2jax_ignore mathjax_ignore" id="non-redundant-robot-arm">
+<h1>Non-redundant robot arm<a class="headerlink" href="#non-redundant-robot-arm" title="Permalink to this heading">#</a></h1>
+<p>When a robot arm  is non-redundant <span class="math notranslate nohighlight">\(r=n\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span> is not
 a singular configuration, one can directly inverse the Jacobian</p>
 <div class="math notranslate nohighlight">
 \[\dot{\boldsymbol{q}}=\text{inv}(\boldsymbol{J}(\boldsymbol{q})) \boldsymbol{v}_{e}\]</div>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="redundant-manipulator">
-<h1>Redundant Manipulator<a class="headerlink" href="#redundant-manipulator" title="Permalink to this heading">#</a></h1>
-<p>When the manipulator is redundant <span class="math notranslate nohighlight">\((r&lt;n)\)</span>, the Jacobian matrix has more
-columns than rows, and thus there are infinite solutions
-<span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}}\)</span>. We need to resort to optimization to pick the
-best solution <span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}}\)</span> in some sense!</p>
-<section id="minimal-norm-selction">
-<h2>Minimal Norm Selction<a class="headerlink" href="#minimal-norm-selction" title="Permalink to this heading">#</a></h2>
+<section class="tex2jax_ignore mathjax_ignore" id="redundant-robot-arm">
+<h1>Redundant robot arm<a class="headerlink" href="#redundant-robot-arm" title="Permalink to this heading">#</a></h1>
+<p>When the robot arm is redundant <span class="math notranslate nohighlight">\((r&lt;n)\)</span>,  there are infinite solutions
+<span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}}\)</span>. We need to pick the
+best (in a sense discussed below) solution <span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}}\)</span> using optimization.</p>
+<section id="minimal-norm">
+<h2>Minimal Norm<a class="headerlink" href="#minimal-norm" title="Permalink to this heading">#</a></h2>
 <p>Once the end-effector velocity <span class="math notranslate nohighlight">\(\boldsymbol{v}_{e}\)</span> and Jacobian
 <span class="math notranslate nohighlight">\(\boldsymbol{J}\)</span> are given, we establish the following optimization to
 pick <span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}}\)</span></p>
@@ -438,9 +434,9 @@ pick <span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}}\)</span><
         \min_{\dot{\boldsymbol{q}}} \quad &amp;\frac{1}{2} \dot{\boldsymbol{q}}^{T} \boldsymbol{W} \dot{\boldsymbol{q}}\\
         \text{s.t.}\quad &amp; \boldsymbol{v}_{e}  =\boldsymbol{J}(\boldsymbol{q}) \dot{\boldsymbol{q}}
     \end{aligned}\end{split}\]</div>
-<p>This means that we want to pick the best <span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}}\)</span> in the
-sense of having the minimal norm of joint velocities. By some
-derivation, if <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span> is not a singular configuration, the
+<p>Here, <span class="math notranslate nohighlight">\(\boldsymbol{W}\)</span> is a weight matrix (usually diagonal).
+This means that we want to pick the best <span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}}\)</span> in the
+sense of having the minimal norm of joint velocities. If <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span> is not a singular configuration, the
 optimal solution to the above optimization is</p>
 <div class="math notranslate nohighlight">
 \[\dot{\boldsymbol{q}}=\boldsymbol{W}^{-1} \boldsymbol{J}^{T}\left(\boldsymbol{J} \boldsymbol{W}^{-1} \boldsymbol{J}^{T}\right)^{-1} \boldsymbol{v}_{e} .\]</div>
@@ -450,91 +446,88 @@ simplifies into</p>
 \[\dot{\boldsymbol{q}}=\boldsymbol{J}^{\dagger} \boldsymbol{v}_{e} \quad \text{with} \quad \boldsymbol{J}^{\dagger}=\boldsymbol{J}^{T}\left(\boldsymbol{J} \boldsymbol{J}^{T}\right)^{-1}\]</div>
 <p>is the right pseudo-inverse of <span class="math notranslate nohighlight">\(\boldsymbol{J}\)</span>.</p>
 </section>
-<section id="close-to-reference-selction">
-<h2>Close-to-Reference Selction<a class="headerlink" href="#close-to-reference-selction" title="Permalink to this heading">#</a></h2>
-<p>We have other criteria to pick the best <span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}}\)</span>. When we
-are given a reference <span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}}_{0}\)</span>, we want to pick the
+<section id="close-to-reference">
+<h2>Close-to-Reference<a class="headerlink" href="#close-to-reference" title="Permalink to this heading">#</a></h2>
+<p>When we are given a reference <span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}}_{\text{ref}}\)</span>, we want to pick the
 best <span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}}\)</span> in the sense of having the minimal distance
-to <span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}}_{0}\)</span>. Thus, we establish the following
+to <span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}}_{\text{ref}}\)</span>. Thus, we establish the following
 optimization</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{aligned}
         \min_{\dot{\boldsymbol{q}}} \quad &amp;
-        \frac{1}{2}\left(\dot{\boldsymbol{q}}-\dot{\boldsymbol{q}}_{0}\right)^{T}\left(\dot{\boldsymbol{q}}-\dot{\boldsymbol{q}}_{0}\right)\\
+        \frac{1}{2}\left(\dot{\boldsymbol{q}}-\dot{\boldsymbol{q}}_{\text{ref}}\right)^{T}\left(\dot{\boldsymbol{q}}-\dot{\boldsymbol{q}}_{\text{ref}}\right)\\
         \text{s.t.}\quad &amp; \boldsymbol{v}_{e}  =\boldsymbol{J}(\boldsymbol{q}) \dot{\boldsymbol{q}}
     \end{aligned}\end{split}\]</div>
-<p>After doing some derivation, if <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span> is not a singular
+<p>If <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span> is not a singular
 configuration, the solution to the above optimization is</p>
 <div class="math notranslate nohighlight">
-\[\dot{\boldsymbol{q}}=\boldsymbol{J}^{\dagger} \boldsymbol{v}_{e}+\left(\boldsymbol{I}_{n}-\boldsymbol{J}^{\dagger} \boldsymbol{J}\right) \dot{\boldsymbol{q}}_{0} .\]</div>
+\[\dot{\boldsymbol{q}}=\boldsymbol{J}^{\dagger} \boldsymbol{v}_{e}+\left(\boldsymbol{I}_{n}-\boldsymbol{J}^{\dagger} \boldsymbol{J}\right) \dot{\boldsymbol{q}}_{\text{ref}}\]</div>
 <p>The obtained solution has two terms. The first term is the same as the
 solution of minimizing the joint velocity norm. In the second term,
 <span class="math notranslate nohighlight">\(\left(\boldsymbol{I}-\boldsymbol{J}^{\dagger} \boldsymbol{J}\right)\)</span> is
 null space projection matrix <span class="math notranslate nohighlight">\(\boldsymbol{P}\)</span> (recall we have mentioned
 in our previous lecture), which allows the projection of any
 <span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}}_{0}\)</span> in the null space of <span class="math notranslate nohighlight">\(\boldsymbol{J}\)</span>.</p>
-<p>The final question is how to specify the reference
-<span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}}_{0}\)</span> for a redundant manipulator. A typical choice
+<p>The final question is how to set
+<span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}}_{\text{ref}}\)</span>?</p>
+<p>A typical choice of <span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}}_{\text{ref}}\)</span>
 is</p>
 <div class="math notranslate nohighlight">
-\[\dot{\boldsymbol{q}}_{0}=k_{0}\left(\frac{\partial w(\boldsymbol{q})}{\partial \boldsymbol{q}}\right)^{T}\]</div>
-<p>where <span class="math notranslate nohighlight">\(k_{0}&gt;0\)</span> and <span class="math notranslate nohighlight">\(w(\boldsymbol{q})\)</span> is a secondary objective
-function of the joint variables. Since the solution moves along the
-direction of the gradient of the objective function, it attempts to
-maximize it locally the secondary objective. Such a secondary objective
-can be the following:</p>
-<p>(1) The manipulability measure:
-$<span class="math notranslate nohighlight">\(w(\boldsymbol{q})=\sqrt{\operatorname{det}\left(\boldsymbol{J}(\boldsymbol{q}) \boldsymbol{J}^{T}(\boldsymbol{q})\right)}\)</span>$</p>
-<p>By maximizing this measure, redundancy is exploited to move away from
+\[\dot{\boldsymbol{q}}_{\text{ref}}=k_{0}\left(\frac{\partial w(\boldsymbol{q}_{\text{ref}})}{\partial \boldsymbol{q}_{\text{ref}}}\right)^{T}\]</div>
+<p>where <span class="math notranslate nohighlight">\(k_{0}&gt;0\)</span> and <span class="math notranslate nohighlight">\(w(\boldsymbol{q}_{\text{ref}})\)</span> is another objective function— we want <span class="math notranslate nohighlight">\({\boldsymbol{q}}_{\text{ref}}\)</span> moves in a direction of maximizing this objective function. The choice of this objective <span class="math notranslate nohighlight">\(w(\boldsymbol{q}_{\text{ref}})\)</span> can be</p>
+<p>(1) Manipulability objective function:
+$<span class="math notranslate nohighlight">\(w(\boldsymbol{q}_\text{ref})=\sqrt{\operatorname{det}\left(\boldsymbol{J}(\boldsymbol{q}_\text{ref}) \boldsymbol{J}^{T}(\boldsymbol{q}_\text{ref})\right)}\)</span>$</p>
+<p>By maximizing this objective function, we want the refernece <span class="math notranslate nohighlight">\(\boldsymbol{q}_\text{ref}\)</span> to move away from
 singularities.</p>
-<p>(2) The distance from mechanical joint limits:</p>
+<p>(2) The distance from joint limits:</p>
 <div class="math notranslate nohighlight">
-\[w(\boldsymbol{q})=-\frac{1}{2 n} \sum_{i=1}^{n}\left(\frac{q_{i}-\bar{q}_{i}}{q_{i M}-q_{i m}}\right)^{2}\]</div>
-<p>where <span class="math notranslate nohighlight">\(q_{i M}\left(q_{i m}\right)\)</span> is the maximum (minimum) joint limit
+\[w(\boldsymbol{q}_\text{ref})=-\frac{1}{2 n} \sum_{i=1}^{n}\left(\frac{q_{i,\text{ref}}-\bar{q}_{i}}{q_{i,M}-q_{i,m}}\right)^{2}\]</div>
+<p>where <span class="math notranslate nohighlight">\(q_{i,M}\left(q_{i,m}\right)\)</span> is the maximum (minimum) joint limit
 and <span class="math notranslate nohighlight">\(\bar{q}_{i}\)</span> the middle point of the joint range; thus, by
-maximizing this distance, redundancy is exploited to keep the joint
+maximizing this distance, we aim to keep the joint
 variables close to the center of their ranges.</p>
 <p>(3) The distance from an obstacle:</p>
 <div class="math notranslate nohighlight">
-\[w(\boldsymbol{q})=\min _{\boldsymbol{p}, \boldsymbol{o}}\|\boldsymbol{p}(\boldsymbol{q})-\boldsymbol{o}\|\]</div>
-<p>where <span class="math notranslate nohighlight">\(\boldsymbol{o}\)</span> is the position vector of a suitable point on the
+\[w(\boldsymbol{q}_\text{ref})=\min _{\boldsymbol{p}_\text{ref}}\|\boldsymbol{p}(\boldsymbol{q}_\text{ref})-\boldsymbol{o}\|\]</div>
+<p>where <span class="math notranslate nohighlight">\(\boldsymbol{o}\)</span> is the position  of the
 obstacle.</p>
-</section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="singularity">
-<h1>Singularity<a class="headerlink" href="#singularity" title="Permalink to this heading">#</a></h1>
-<p>The inverse velocity kinematics for both the redundant and non-redundant
-manipulators require the current robot configuration <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span> is
-nonsingular, i.e., the Jacobian <span class="math notranslate nohighlight">\(\boldsymbol{J}(\boldsymbol{q})\)</span> has
+<!-- # Singularity
+
+The inverse velocity kinematics for both the redundant and non-redundant
+manipulators require the current robot configuration $\boldsymbol{q}$ is
+nonsingular, i.e., the Jacobian $\boldsymbol{J}(\boldsymbol{q})$ has
 full rank. At a singular configuration,
-<span class="math notranslate nohighlight">\(\boldsymbol{v}_{e}=\boldsymbol{J} \dot{\boldsymbol{q}}\)</span> contains
+$\boldsymbol{v}_{e}=\boldsymbol{J} \dot{\boldsymbol{q}}$ contains
 linearly dependent equations, and it is possible to find a solution
-<span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}}\)</span> only if
-<span class="math notranslate nohighlight">\(\boldsymbol{v}_{e} \in \mathcal{R}(\boldsymbol{J})\)</span>. This situation
-means that the assigned <span class="math notranslate nohighlight">\(\boldsymbol{v}_{e}\)</span> is physically achievable by
-finding a joint velocity <span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}}\)</span>, even though it is at a
+$\dot{\boldsymbol{q}}$ only if
+$\boldsymbol{v}_{e} \in \mathcal{R}(\boldsymbol{J})$. This situation
+means that the assigned $\boldsymbol{v}_{e}$ is physically achievable by
+finding a joint velocity $\dot{\boldsymbol{q}}$, even though it is at a
 singular configuration. If instead
-<span class="math notranslate nohighlight">\(\boldsymbol{v}_{e} \notin \mathcal{R}(\boldsymbol{J})\)</span>, the system of
-equations has no solution; this means that <span class="math notranslate nohighlight">\(\boldsymbol{v}_{e}\)</span> cannot
-be achievable by the manipulator at the given posture.</p>
-<p>Inversion of the Jacobian can represent a serious inconvenience not only
+$\boldsymbol{v}_{e} \notin \mathcal{R}(\boldsymbol{J})$, the system of
+equations has no solution; this means that $\boldsymbol{v}_{e}$ cannot
+be achievable by the manipulator at the given posture.
+
+Inversion of the Jacobian can represent a serious inconvenience not only
 at a singularity but also in the neighborhood of a singularity. In the
-neighborhood of a singularity, a relatively small <span class="math notranslate nohighlight">\(\boldsymbol{v}_{e}\)</span>
+neighborhood of a singularity, a relatively small $\boldsymbol{v}_{e}$
 (in terms of its norm) which can cause large joint velocities. Consider
 the example of the shoulder singularity for the anthropomorphic arm. If
 a path is assigned to the end-effector which passes nearby the base
 rotation axis, the base joint is forced to make a rotation of about
-<span class="math notranslate nohighlight">\(\pi\)</span> in a relatively short time to allow the end-effector to keep
+$\pi$ in a relatively short time to allow the end-effector to keep
 tracking the imposed trajectory. An solution overcoming the problem of
 inverting differentia kinematics in the neighbourhood of a singularity
-is provided by the so-called damped least-squares (DLS) inverse</p>
-<div class="math notranslate nohighlight">
-\[\boldsymbol{J}^{\star}=\boldsymbol{J}^{T}\left(\boldsymbol{J} \boldsymbol{J}^{T}+k^{2} \boldsymbol{I}\right)^{-1}\]</div>
-<p>where <span class="math notranslate nohighlight">\(k\)</span> is a damping factor that renders the inversion better
+is provided by the so-called damped least-squares (DLS) inverse
+
+$$\boldsymbol{J}^{\star}=\boldsymbol{J}^{T}\left(\boldsymbol{J} \boldsymbol{J}^{T}+k^{2} \boldsymbol{I}\right)^{-1}$$
+
+where $k$ is a damping factor that renders the inversion better
 conditioned from a numerical viewpoint. It can be shown that such a
-solution can be obtained by minimizing the following objective</p>
-<div class="math notranslate nohighlight">
-\[\min_{\dot{\boldsymbol{q}}}\quad \frac{1}{2}\left(\boldsymbol{v}_{e}-\boldsymbol{J} \dot{\boldsymbol{q}}\right)^{T}\left(\boldsymbol{v}_{e}-\boldsymbol{J} \dot{\boldsymbol{q}}\right)+\frac{1}{2} k^{2} \dot{\boldsymbol{q}}^{T} \dot{\boldsymbol{q}}\]</div>
+solution can be obtained by minimizing the following objective
+
+$$\min_{\dot{\boldsymbol{q}}}\quad \frac{1}{2}\left(\boldsymbol{v}_{e}-\boldsymbol{J} \dot{\boldsymbol{q}}\right)^{T}\left(\boldsymbol{v}_{e}-\boldsymbol{J} \dot{\boldsymbol{q}}\right)+\frac{1}{2} k^{2} \dot{\boldsymbol{q}}^{T} \dot{\boldsymbol{q}}$$ -->
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -605,13 +598,12 @@ solution can be obtained by minimizing the following objective</p>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Inverse Velocity Kinematics</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#non-redundant-manipulator">Non-redundant Manipulator</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#redundant-manipulator">Redundant Manipulator</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#minimal-norm-selction">Minimal Norm Selction</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#close-to-reference-selction">Close-to-Reference Selction</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#non-redundant-robot-arm">Non-redundant robot arm</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#redundant-robot-arm">Redundant robot arm</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#minimal-norm">Minimal Norm</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#close-to-reference">Close-to-Reference</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#singularity">Singularity</a></li>
 </ul>
 
   </nav></div>
