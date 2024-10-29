@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Robot Configuration &#8212; Modeling and Control of Robots</title>
   
@@ -15,52 +14,49 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'lec2/configuration';</script>
@@ -77,19 +73,23 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -111,12 +111,20 @@ const thebe_selector_output = ".output, .cell_output"
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -131,9 +139,13 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
+  
+    
   
 
 <a class="navbar-brand logo" href="../intro.html">
+  
   
   
   
@@ -143,12 +155,23 @@ const thebe_selector_output = ".output, .cell_output"
       
     
     
-    <img src="../_static/iris_logo_2.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../_static/iris_logo_2.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../_static/iris_logo_2.png" class="logo__image only-light" alt="Modeling and Control of Robots - Home"/>
+    <script>document.write(`<img src="../_static/iris_logo_2.png" class="logo__image only-dark" alt="Modeling and Control of Robots - Home"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -181,8 +204,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 <li class="toctree-l1"><a class="reference internal" href="../opt/motion_planning.html">Motion Planning</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lec10/diff-trans.html">Derivative of Transformation</a></li>
-
+<li class="toctree-l1"><a class="reference internal" href="../lec10/diff-trans.html">Velocity Kinematics</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="../lec11-12/jacobian.html">Jacobian</a></li>
 
@@ -201,9 +223,6 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 <li class="toctree-l1"><a class="reference internal" href="../lec16-17/nik.html">Numerical Inverse Kinematics</a></li>
-
-
-
 
 <li class="toctree-l1"><a class="reference internal" href="../lec18/dyn.html">Dynamics (Lagrange formulation)</a></li>
 
@@ -239,7 +258,7 @@ const thebe_selector_output = ".output, .cell_output"
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -248,14 +267,14 @@ const thebe_selector_output = ".output, .cell_output"
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -345,26 +364,28 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
+
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
   </button>
 `);
 </script>
 
+
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</label>
+</button>
 </div></div>
       
     </div>
@@ -404,14 +425,14 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="robot-configuration">
-<h1>Robot Configuration<a class="headerlink" href="#robot-configuration" title="Permalink to this heading">#</a></h1>
+<h1>Robot Configuration<a class="headerlink" href="#robot-configuration" title="Link to this heading">#</a></h1>
 <figure class="align-default" id="robotarm">
 <a class="reference internal image-reference" href="../_images/robotarm.png"><img alt="../_images/robotarm.png" src="../_images/robotarm.png" style="width: 40%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 1 </span><span class="caption-text">Franka research robot arm</span><a class="headerlink" href="#robotarm" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 1 </span><span class="caption-text">Franka research robot arm</span><a class="headerlink" href="#robotarm" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>A robot manipulator is mechanically constructed by</p>
@@ -422,7 +443,7 @@ constraints (degrees of freedom)</p>
 <figure class="align-default" id="joints-types">
 <a class="reference internal image-reference" href="../_images/joints.png"><img alt="../_images/joints.png" src="../_images/joints.png" style="width: 60%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 2 </span><span class="caption-text">Different type of joints</span><a class="headerlink" href="#joints-types" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 2 </span><span class="caption-text">Different type of joints</span><a class="headerlink" href="#joints-types" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </li>
@@ -431,13 +452,13 @@ deliver forces or torques that cause the robot’s links to move,</p>
 <figure class="align-default" id="electric-actuators">
 <a class="reference internal image-reference" href="../_images/electric_actuator.png"><img alt="../_images/electric_actuator.png" src="../_images/electric_actuator.png" style="width: 40%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 3 </span><span class="caption-text">Electric actuators</span><a class="headerlink" href="#electric-actuators" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 3 </span><span class="caption-text">Electric actuators</span><a class="headerlink" href="#electric-actuators" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="hydralic-actuator">
 <a class="reference internal image-reference" href="../_images/hydralic_actuator.png"><img alt="../_images/hydralic_actuator.png" src="../_images/hydralic_actuator.png" style="width: 40%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 4 </span><span class="caption-text">Hydralic actuator</span><a class="headerlink" href="#hydralic-actuator" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 4 </span><span class="caption-text">Hydralic actuator</span><a class="headerlink" href="#hydralic-actuator" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </li>
@@ -446,13 +467,13 @@ specific link for specific tasks.</p>
 <figure class="align-default" id="endeffector1">
 <a class="reference internal image-reference" href="../_images/endeffector1.jpg"><img alt="../_images/endeffector1.jpg" src="../_images/endeffector1.jpg" style="width: 40%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 5 </span><span class="caption-text">The Barrett Hand</span><a class="headerlink" href="#endeffector1" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 5 </span><span class="caption-text">The Barrett Hand</span><a class="headerlink" href="#endeffector1" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="endeffector2">
 <a class="reference internal image-reference" href="../_images/endeffector2.png"><img alt="../_images/endeffector2.png" src="../_images/endeffector2.png" style="width: 40%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 6 </span><span class="caption-text">The Shadow Hand</span><a class="headerlink" href="#endeffector2" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 6 </span><span class="caption-text">The Shadow Hand</span><a class="headerlink" href="#endeffector2" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </li>
@@ -464,7 +485,7 @@ ends of the chain. Alternatively,
 kinematic chain is closed when a sequence of links forms a loop.</p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="configuration">
-<h1>Configuration<a class="headerlink" href="#configuration" title="Permalink to this heading">#</a></h1>
+<h1>Configuration<a class="headerlink" href="#configuration" title="Link to this heading">#</a></h1>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>The <strong>configuration</strong> of a robot is a complete specification of the
@@ -485,12 +506,12 @@ the location of a particular point on the coin, and
 <p><span class="caption-number">Fig. 7 </span><span class="caption-text">(a) The configuration of a door is represented by the angle <span class="math notranslate nohighlight">\(\theta\)</span>.
 (b) The configuration of a point in a plane is represented by coordinates
 <span class="math notranslate nohighlight">\((x, y)\)</span>. (c) The configuration of a coin (heads up) on a table is
-represented by <span class="math notranslate nohighlight">\((x, y, \theta)\)</span>.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+represented by <span class="math notranslate nohighlight">\((x, y, \theta)\)</span>.</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="degrees-of-freedom">
-<h1>Degrees of Freedom<a class="headerlink" href="#degrees-of-freedom" title="Permalink to this heading">#</a></h1>
+<h1>Degrees of Freedom<a class="headerlink" href="#degrees-of-freedom" title="Link to this heading">#</a></h1>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>The minimum number <span class="math notranslate nohighlight">\(n\)</span> of coordinates needed to represent
@@ -499,7 +520,7 @@ of a robot is called the <strong>configuration space (C-space)</strong>. The
 configuration of a robot is represented by a point in its C-space.</p>
 </div>
 <section id="general-rule">
-<h2>General Rule<a class="headerlink" href="#general-rule" title="Permalink to this heading">#</a></h2>
+<h2>General Rule<a class="headerlink" href="#general-rule" title="Link to this heading">#</a></h2>
 <p>We have the following general rule to determine the number of dof of a robot:</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
@@ -509,7 +530,7 @@ configuration of a robot is represented by a point in its C-space.</p>
 <a class="reference internal image-reference" href="../_images/coin.png"><img alt="../_images/coin.png" src="../_images/coin.png" style="width: 40%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 8 </span><span class="caption-text">A coin in 3D
-space</span><a class="headerlink" href="#corn" title="Permalink to this image">#</a></p>
+space</span><a class="headerlink" href="#corn" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Example: consider a coin in 3D space in
@@ -538,13 +559,13 @@ point <span class="math notranslate nohighlight">\(B\)</span>, and one angle par
 </ul>
 </section>
 <section id="dof-of-different-joint-types">
-<h2>DOF of Different Joint Types<a class="headerlink" href="#dof-of-different-joint-types" title="Permalink to this heading">#</a></h2>
+<h2>DOF of Different Joint Types<a class="headerlink" href="#dof-of-different-joint-types" title="Link to this heading">#</a></h2>
 <p>In a robot, a joint can be viewed as providing freedoms
 to allow one rigid body to move relative to another. It can also be
 viewed as providing constraints on the possible motions of the two rigid
 bodies it connects. The following table summarizes the freedoms and
 constraints provided by the various joint types.</p>
-<table class="table">
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head text-center"><p>Joint type</p></th>
 <th class="head text-center"><p>dof</p></th>
@@ -578,9 +599,10 @@ constraints provided by the various joint types.</p>
 </tr>
 </tbody>
 </table>
+</div>
 </section>
 <section id="grubler-s-formula">
-<h2>Grübler’s Formula<a class="headerlink" href="#grubler-s-formula" title="Permalink to this heading">#</a></h2>
+<h2>Grübler’s Formula<a class="headerlink" href="#grubler-s-formula" title="Link to this heading">#</a></h2>
 <!-- Since a robot consists of multiple rigid bodies,  degrees of freedom of a
 robot can be expressed as follows:
 
@@ -611,7 +633,7 @@ Formula to find the DoFs of different machenisms.</p>
 <figure class="align-default" id="gf-example1">
 <a class="reference internal image-reference" href="../_images/gf_example1.png"><img alt="../_images/gf_example1.png" src="../_images/gf_example1.png" style="width: 60%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 9 </span><span class="caption-text">(a) Four-bar linkage and (b) Slider-crank mechanism.</span><a class="headerlink" href="#gf-example1" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 9 </span><span class="caption-text">(a) Four-bar linkage and (b) Slider-crank mechanism.</span><a class="headerlink" href="#gf-example1" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>(Four-bar linkage): <span class="math notranslate nohighlight">\(L=4, J=4\)</span>, and <span class="math notranslate nohighlight">\(f_{i}=1, i=1, \ldots, 4\)</span>. Thus,
@@ -623,7 +645,7 @@ Slider-crank: <span class="math notranslate nohighlight">\(L=4\)</span>, <span c
 <figcaption>
 <p><span class="caption-number">Fig. 10 </span><span class="caption-text">(a) <span class="math notranslate nohighlight">\(k\)</span>-link planar serial chain. (b) Five-bar planar linkage. (c)
 Stephenson six-bar linkage. (d) Watt six-bar
-linkage.</span><a class="headerlink" href="#gf-example2" title="Permalink to this image">#</a></p>
+linkage.</span><a class="headerlink" href="#gf-example2" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>The <span class="math notranslate nohighlight">\(k\)</span>-link planar robot: <span class="math notranslate nohighlight">\(L=k+1\)</span>, <span class="math notranslate nohighlight">\(J=k\)</span>, <span class="math notranslate nohighlight">\(f_{i}=1\)</span> for all <span class="math notranslate nohighlight">\(i\)</span>. Thus,
@@ -638,7 +660,7 @@ Watt six-bar linkage: <span class="math notranslate nohighlight">\(L=6, J=7\)</s
 <a class="reference internal image-reference" href="../_images/gf_example3.png"><img alt="../_images/gf_example3.png" src="../_images/gf_example3.png" style="width: 60%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 11 </span><span class="caption-text">A planar mechanism with two overlapping
-joints.</span><a class="headerlink" href="#gf-example3" title="Permalink to this image">#</a></p>
+joints.</span><a class="headerlink" href="#gf-example3" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>The planar mechanism in <a class="reference internal" href="#gf-example3"><span class="std std-numref">Fig. 11</span></a> has three links that meet at a single
@@ -653,7 +675,7 @@ joints, and 1 prismatic joint. The Grübler’s formula:</p>
 <a class="reference internal image-reference" href="../_images/gf_example4.png"><img alt="../_images/gf_example4.png" src="../_images/gf_example4.png" style="width: 60%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 12 </span><span class="caption-text">Stewart-Gough
-platform</span><a class="headerlink" href="#gf-example4" title="Permalink to this image">#</a></p>
+platform</span><a class="headerlink" href="#gf-example4" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>The Stewart-Gough platform consists of two platforms - the lower one
@@ -728,7 +750,7 @@ topology space.
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="workspace-of-robot-arms">
-<h1>Workspace of Robot Arms<a class="headerlink" href="#workspace-of-robot-arms" title="Permalink to this heading">#</a></h1>
+<h1>Workspace of Robot Arms<a class="headerlink" href="#workspace-of-robot-arms" title="Link to this heading">#</a></h1>
 <p>The workspace is the space of the environment a robot arm’s
 end-effector can access. Its shape and volume depend on the robot arm’s
 structure as well as mechanical joint limits. The workspace is independent of the task. In the following, below is the workspace of different commonly used robot arms.</p>
@@ -738,7 +760,7 @@ typically are mutually orthogonal.</p>
 <a class="reference internal image-reference" href="../_images/cartesian_robot.jpg"><img alt="../_images/cartesian_robot.jpg" src="../_images/cartesian_robot.jpg" style="width: 50%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 13 </span><span class="caption-text">Cartesian robot arm and its
-workspace</span><a class="headerlink" href="#cartesian-robot" title="Permalink to this image">#</a></p>
+workspace</span><a class="headerlink" href="#cartesian-robot" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Cylindrical robot arm differs from Cartesian in that the first
@@ -747,7 +769,7 @@ prismatic joint is replaced with a revolute joint.</p>
 <a class="reference internal image-reference" href="../_images/cylindrical_robot.jpg"><img alt="../_images/cylindrical_robot.jpg" src="../_images/cylindrical_robot.jpg" style="width: 50%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 14 </span><span class="caption-text">Cylindrical robot arm and its
-workspace</span><a class="headerlink" href="#cylindrical-robot" title="Permalink to this image">#</a></p>
+workspace</span><a class="headerlink" href="#cylindrical-robot" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Spherical robot arm differs from cylindrical in that the 2nd prismatic
@@ -756,7 +778,7 @@ joint is replaced with a revolute joint.</p>
 <a class="reference internal image-reference" href="../_images/spherical_robot.jpg"><img alt="../_images/spherical_robot.jpg" src="../_images/spherical_robot.jpg" style="width: 40%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 15 </span><span class="caption-text">Spherical robot arm and its
-workspace</span><a class="headerlink" href="#spherical-robot" title="Permalink to this image">#</a></p>
+workspace</span><a class="headerlink" href="#spherical-robot" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>A special robot arm is SCARA robot arm, which has the feature that
@@ -765,7 +787,7 @@ all the axes of motion are parallel.</p>
 <a class="reference internal image-reference" href="../_images/SCARA_robot.jpg"><img alt="../_images/SCARA_robot.jpg" src="../_images/SCARA_robot.jpg" style="width: 40%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 16 </span><span class="caption-text">SCARA robot arm  and its
-workspace</span><a class="headerlink" href="#scara-robot" title="Permalink to this image">#</a></p>
+workspace</span><a class="headerlink" href="#scara-robot" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Anthropomorphic robot arm has three revolute joints; the
@@ -775,7 +797,7 @@ two which are parallel.</p>
 <a class="reference internal image-reference" href="../_images/anthropomophic_robot.jpg"><img alt="../_images/anthropomophic_robot.jpg" src="../_images/anthropomophic_robot.jpg" style="width: 40%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 17 </span><span class="caption-text">Anthropomorphic robot arm  and its
-workspace</span><a class="headerlink" href="#anthropomophic-robot" title="Permalink to this image">#</a></p>
+workspace</span><a class="headerlink" href="#anthropomophic-robot" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
@@ -805,11 +827,10 @@ workspace</span><a class="headerlink" href="#anthropomophic-robot" title="Permal
 
               
               
-                <footer class="bd-footer-article">
+              
+              
+                <footer class="prev-next-footer d-print-none">
                   
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="../lec1/intro.html"
@@ -829,10 +850,7 @@ workspace</span><a class="headerlink" href="#anthropomophic-robot" title="Permal
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -840,6 +858,7 @@ workspace</span><a class="headerlink" href="#anthropomophic-robot" title="Permal
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -878,9 +897,10 @@ By Wanxin Jin @ IRIS Lab
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
-      © Copyright 2022.
+      © Copyright 2023.
       <br/>
     
   </p>
@@ -904,8 +924,8 @@ By Wanxin Jin @ IRIS Lab
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>

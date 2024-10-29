@@ -43,10 +43,11 @@ specifically as
 
 $$\dot{\boldsymbol{q}}=
 \begin{cases}
-\boldsymbol{J}^{-1}(\boldsymbol{q})\left(\dot{\boldsymbol{x}}_{d}+\boldsymbol{K} \boldsymbol{e}\right)  \quad\quad\text{for non-redundant manipulators} \\
-\boldsymbol{J}^{\dagger}\left(\dot{\boldsymbol{x}}_{d}+\boldsymbol{K e}\right)+\left(\boldsymbol{I}_{n}-\boldsymbol{J}^{\dagger} \boldsymbol{J}\right) \dot{\boldsymbol{q}}_{0} \quad\quad\text{for redundant manipulators}
+\boldsymbol{J}^{-1}(\boldsymbol{q})\left(\dot{\boldsymbol{x}}_{d}+\boldsymbol{K} \boldsymbol{e}\right)  \quad\quad\text{for non-redundant robot arms} \\[10pt]
+\boldsymbol{J}^{\dagger}\left(\dot{\boldsymbol{x}}_{d}+\boldsymbol{K e}\right)+\left(\boldsymbol{I}_{n}-\boldsymbol{J}^{\dagger} \boldsymbol{J}\right) \dot{\boldsymbol{q}}_{\text{ref}} \quad\quad\text{for redundant robot arms}
 \end{cases}$$
 
+Here $\boldsymbol{K}$ is a positive definite (usually diagonal) matrix, and ${\boldsymbol{q}}_{\text{ref}}$ is any reference joint velocity, which can be set based on a second objective in the previous chapter. $\boldsymbol{J}^{\dagger}$ is the pseudo-inverse of Jacobian: $\boldsymbol{J}^{\dagger}=\boldsymbol{J}^{T}\left(\boldsymbol{J} \boldsymbol{J}^{T}\right)^{-1}$.
 ```
 
 
@@ -147,6 +148,7 @@ specifically as
 
 $$\dot{\boldsymbol{q}}=\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K} \boldsymbol{e}$$
 
+Here $\boldsymbol{K}$ is a positive definite (usually diagonal) matrix,
 ```
 
 Let's next find out if the above controller can solve the IK or not, by using the Lyapunov Stability.

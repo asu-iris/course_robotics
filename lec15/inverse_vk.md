@@ -17,7 +17,7 @@ This problem is called as *inverse velocity kinematics*.
 
 # Non-redundant robot arm
 
-When a robot arm  is non-redundant $r=n$ and $\boldsymbol{q}$ is not
+When a robot arm  is non-redundant, that is, $r=n$, and $\boldsymbol{q}$ is not
 a singular configuration, one can directly inverse the Jacobian
 
 $$\dot{\boldsymbol{q}}=\text{inv}(\boldsymbol{J}(\boldsymbol{q})) \boldsymbol{v}_{e}$$
@@ -90,6 +90,7 @@ $$\dot{\boldsymbol{q}}_{\text{ref}}=k_{0}\left(\frac{\partial w(\boldsymbol{q}_{
 where $k_{0}>0$ and $w(\boldsymbol{q}_{\text{ref}})$ is another objective function--- we want ${\boldsymbol{q}}_{\text{ref}}$ moves in a direction of maximizing this objective function. The choice of this objective $w(\boldsymbol{q}_{\text{ref}})$ can be 
 
 \(1\) Manipulability objective function:
+
 $$w(\boldsymbol{q}_\text{ref})=\sqrt{\operatorname{det}\left(\boldsymbol{J}(\boldsymbol{q}_\text{ref}) \boldsymbol{J}^{T}(\boldsymbol{q}_\text{ref})\right)}$$
 
 By maximizing this objective function, we want the refernece $\boldsymbol{q}_\text{ref}$ to move away from
