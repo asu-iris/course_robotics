@@ -500,7 +500,7 @@ first-order Tyler expension:</p>
 <p>By solving the above equation for <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span>, one can obtain the
 next updated guess</p>
 <div class="math notranslate nohighlight">
-\[\boldsymbol{q}_{t+1}=\boldsymbol{q}_t+\text{inv}\left(\boldsymbol{J}_{A}(\boldsymbol{q}_t)\right)(\boldsymbol{x}_d-\boldsymbol{t}(\boldsymbol{q}_t))=\boldsymbol{q}_t+\text{inv}\left(\boldsymbol{J}_{A}(\boldsymbol{q}_t)\right)\boldsymbol{e}_t\]</div>
+\[\boldsymbol{q}_{t+1}=\boldsymbol{q}_t+\text{inv}\left(\boldsymbol{J}(\boldsymbol{q}_t)\right)(\boldsymbol{x}_d-\boldsymbol{t}(\boldsymbol{q}_t))=\boldsymbol{q}_t+\text{inv}\left(\boldsymbol{J}(\boldsymbol{q}_t)\right)\boldsymbol{e}_t\]</div>
 <p>where <span class="math notranslate nohighlight">\(\text{inv}\)</span> is the general inverse operation (inverse for square
 matrix or pseudo-inverse for non-square matrix). Typically, one also
 needs a step size before
@@ -537,16 +537,16 @@ Obviously,</p>
 \[V(\boldsymbol{e})&gt;0 \quad \forall \boldsymbol{e} \neq \mathbf{0}, \quad V(\mathbf{0})=0 \quad \text{only for} \quad \boldsymbol{e}=\boldsymbol{0}\]</div>
 <p>Differentiating <span class="math notranslate nohighlight">\(V(\boldsymbol{e})\)</span> with respect to time gives</p>
 <div class="math notranslate nohighlight">
-\[\dot{V}=\boldsymbol{e}^{T} \boldsymbol{K} \dot{\boldsymbol{x}}_{d}-\boldsymbol{e}^{T} \boldsymbol{K} \dot{\boldsymbol{x}}_{e}=\boldsymbol{e}^{T} \boldsymbol{K} \dot{\boldsymbol{x}}_{d}-\boldsymbol{e}^{T} \boldsymbol{K} \boldsymbol{J}_{A}(\boldsymbol{q}) \dot{\boldsymbol{q}}\]</div>
+\[\dot{V}=\boldsymbol{e}^{T} \boldsymbol{K} \dot{\boldsymbol{x}}_{d}-\boldsymbol{e}^{T} \boldsymbol{K} \dot{\boldsymbol{x}}_{e}=\boldsymbol{e}^{T} \boldsymbol{K} \dot{\boldsymbol{x}}_{d}-\boldsymbol{e}^{T} \boldsymbol{K} \boldsymbol{J}(\boldsymbol{q}) \dot{\boldsymbol{q}}\]</div>
 <p>At this point, since <span class="math notranslate nohighlight">\(\boldsymbol{\dot{x}}_d=\boldsymbol{0}\)</span>, if we
 choose</p>
 <div class="math notranslate nohighlight">
-\[\dot{\boldsymbol{q}}=\boldsymbol{J}_{A}^{T}(\boldsymbol{q}) \boldsymbol{K} \boldsymbol{e}\]</div>
+\[\dot{\boldsymbol{q}}=\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K} \boldsymbol{e}\]</div>
 <p>This leads to</p>
 <div class="math notranslate nohighlight">
-\[\dot{V}=-\boldsymbol{e}^{T} \boldsymbol{K} \boldsymbol{J}_{A}(\boldsymbol{q}) \boldsymbol{J}_{A}^{T}(\boldsymbol{q}) \boldsymbol{K} \boldsymbol{e}\]</div>
+\[\dot{V}=-\boldsymbol{e}^{T} \boldsymbol{K} \boldsymbol{J}(\boldsymbol{q}) \boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K} \boldsymbol{e}\]</div>
 <p><span class="math notranslate nohighlight">\(\dot{V}\)</span> is negative definite, under the assumption of full rank for
-<span class="math notranslate nohighlight">\(\boldsymbol{J}_{A}(\boldsymbol{q})\)</span>. <span class="math notranslate nohighlight">\(\dot{V}&lt;0\)</span> with <span class="math notranslate nohighlight">\(V&gt;0\)</span> implies the
+<span class="math notranslate nohighlight">\(\boldsymbol{J}(\boldsymbol{q})\)</span>. <span class="math notranslate nohighlight">\(\dot{V}&lt;0\)</span> with <span class="math notranslate nohighlight">\(V&gt;0\)</span> implies the
 error dynamics will stabilize to <span class="math notranslate nohighlight">\(\boldsymbol{e}=\mathbf{0}\)</span>,
 according to Lyapunov Stablity. The block scheme for the Jacobian transpose IK algorithm is  shown below.</p>
 <figure class="align-default" id="ik-jacobian-transpose">
@@ -565,7 +565,7 @@ want to find the joint value <span class="math notranslate nohighlight">\(\bolds
 <p>The gradient descent to update current guess <span class="math notranslate nohighlight">\(\boldsymbol{q}_k\)</span> to next
 <span class="math notranslate nohighlight">\(\boldsymbol{q}_{k+1}\)</span></p>
 <div class="math notranslate nohighlight">
-\[\boldsymbol{q}_{k+1}=\boldsymbol{q}_{k}-\alpha{\left(\frac{d\boldsymbol{k}(\boldsymbol{q})}{d\boldsymbol{q}}\bigg\rvert_{\boldsymbol{q}=\boldsymbol{q}_k}\right)}^{T}(\boldsymbol{k}_{A}(\boldsymbol{q})-\boldsymbol{x}_d)=\boldsymbol{q}_{k}+\alpha{\boldsymbol{J}(\boldsymbol{q}_k)}^{T}\boldsymbol{e}_k\]</div>
+\[\boldsymbol{q}_{k+1}=\boldsymbol{q}_{k}-\alpha{\left(\frac{d\boldsymbol{k}(\boldsymbol{q})}{d\boldsymbol{q}}\bigg\rvert_{\boldsymbol{q}=\boldsymbol{q}_k}\right)}^{T}(\boldsymbol{k}(\boldsymbol{q})-\boldsymbol{x}_d)=\boldsymbol{q}_{k}+\alpha{\boldsymbol{J}(\boldsymbol{q}_k)}^{T}\boldsymbol{e}_k\]</div>
 <p>where <span class="math notranslate nohighlight">\(\alpha\)</span> is the gradient step size. The above results can be
 considered as the discrete-time version of the Jacobian transpose
 IK algorithm if <span class="math notranslate nohighlight">\(\boldsymbol{\dot{x}}_d=0\)</span>.</p>

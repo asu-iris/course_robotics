@@ -122,7 +122,7 @@ $$\boldsymbol{k}(\boldsymbol{q})\approx\boldsymbol{k}(\boldsymbol{q}_t)+\boldsym
 By solving the above equation for $\boldsymbol{q}$, one can obtain the
 next updated guess
 
-$$\boldsymbol{q}_{t+1}=\boldsymbol{q}_t+\text{inv}\left(\boldsymbol{J}_{A}(\boldsymbol{q}_t)\right)(\boldsymbol{x}_d-\boldsymbol{t}(\boldsymbol{q}_t))=\boldsymbol{q}_t+\text{inv}\left(\boldsymbol{J}_{A}(\boldsymbol{q}_t)\right)\boldsymbol{e}_t$$
+$$\boldsymbol{q}_{t+1}=\boldsymbol{q}_t+\text{inv}\left(\boldsymbol{J}(\boldsymbol{q}_t)\right)(\boldsymbol{x}_d-\boldsymbol{t}(\boldsymbol{q}_t))=\boldsymbol{q}_t+\text{inv}\left(\boldsymbol{J}(\boldsymbol{q}_t)\right)\boldsymbol{e}_t$$
 
 where $\text{inv}$ is the general inverse operation (inverse for square
 matrix or pseudo-inverse for non-square matrix). Typically, one also
@@ -166,19 +166,19 @@ $$V(\boldsymbol{e})>0 \quad \forall \boldsymbol{e} \neq \mathbf{0}, \quad V(\mat
 
 Differentiating $V(\boldsymbol{e})$ with respect to time gives
 
-$$\dot{V}=\boldsymbol{e}^{T} \boldsymbol{K} \dot{\boldsymbol{x}}_{d}-\boldsymbol{e}^{T} \boldsymbol{K} \dot{\boldsymbol{x}}_{e}=\boldsymbol{e}^{T} \boldsymbol{K} \dot{\boldsymbol{x}}_{d}-\boldsymbol{e}^{T} \boldsymbol{K} \boldsymbol{J}_{A}(\boldsymbol{q}) \dot{\boldsymbol{q}}$$
+$$\dot{V}=\boldsymbol{e}^{T} \boldsymbol{K} \dot{\boldsymbol{x}}_{d}-\boldsymbol{e}^{T} \boldsymbol{K} \dot{\boldsymbol{x}}_{e}=\boldsymbol{e}^{T} \boldsymbol{K} \dot{\boldsymbol{x}}_{d}-\boldsymbol{e}^{T} \boldsymbol{K} \boldsymbol{J}(\boldsymbol{q}) \dot{\boldsymbol{q}}$$
 
 At this point, since $\boldsymbol{\dot{x}}_d=\boldsymbol{0}$, if we
 choose
 
-$$\dot{\boldsymbol{q}}=\boldsymbol{J}_{A}^{T}(\boldsymbol{q}) \boldsymbol{K} \boldsymbol{e}$$
+$$\dot{\boldsymbol{q}}=\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K} \boldsymbol{e}$$
 
 This leads to
 
-$$\dot{V}=-\boldsymbol{e}^{T} \boldsymbol{K} \boldsymbol{J}_{A}(\boldsymbol{q}) \boldsymbol{J}_{A}^{T}(\boldsymbol{q}) \boldsymbol{K} \boldsymbol{e}$$
+$$\dot{V}=-\boldsymbol{e}^{T} \boldsymbol{K} \boldsymbol{J}(\boldsymbol{q}) \boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K} \boldsymbol{e}$$
 
 $\dot{V}$ is negative definite, under the assumption of full rank for
-$\boldsymbol{J}_{A}(\boldsymbol{q})$. $\dot{V}<0$ with $V>0$ implies the
+$\boldsymbol{J}(\boldsymbol{q})$. $\dot{V}<0$ with $V>0$ implies the
 error dynamics will stabilize to $\boldsymbol{e}=\mathbf{0}$,
 according to Lyapunov Stablity. The block scheme for the Jacobian transpose IK algorithm is  shown below.
 
@@ -207,7 +207,7 @@ $$\min_{\boldsymbol{q}}\quad\frac{1}{2}||\boldsymbol{k}(\boldsymbol{q})-\boldsym
 The gradient descent to update current guess $\boldsymbol{q}_k$ to next
 $\boldsymbol{q}_{k+1}$
 
-$$\boldsymbol{q}_{k+1}=\boldsymbol{q}_{k}-\alpha{\left(\frac{d\boldsymbol{k}(\boldsymbol{q})}{d\boldsymbol{q}}\bigg\rvert_{\boldsymbol{q}=\boldsymbol{q}_k}\right)}^{T}(\boldsymbol{k}_{A}(\boldsymbol{q})-\boldsymbol{x}_d)=\boldsymbol{q}_{k}+\alpha{\boldsymbol{J}(\boldsymbol{q}_k)}^{T}\boldsymbol{e}_k$$
+$$\boldsymbol{q}_{k+1}=\boldsymbol{q}_{k}-\alpha{\left(\frac{d\boldsymbol{k}(\boldsymbol{q})}{d\boldsymbol{q}}\bigg\rvert_{\boldsymbol{q}=\boldsymbol{q}_k}\right)}^{T}(\boldsymbol{k}(\boldsymbol{q})-\boldsymbol{x}_d)=\boldsymbol{q}_{k}+\alpha{\boldsymbol{J}(\boldsymbol{q}_k)}^{T}\boldsymbol{e}_k$$
 
 where $\alpha$ is the gradient step size. The above results can be
 considered as the discrete-time version of the Jacobian transpose
