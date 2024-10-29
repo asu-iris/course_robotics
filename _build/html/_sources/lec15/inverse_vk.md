@@ -49,7 +49,13 @@ $$\dot{\boldsymbol{q}}=\boldsymbol{W}^{-1} \boldsymbol{J}^{T}\left(\boldsymbol{J
 In particular, if $\boldsymbol{W}=\boldsymbol{I}$, the solution
 simplifies into
 
-$$\dot{\boldsymbol{q}}=\boldsymbol{J}^{\dagger} \boldsymbol{v}_{e} \quad \text{with} \quad \boldsymbol{J}^{\dagger}=\boldsymbol{J}^{T}\left(\boldsymbol{J} \boldsymbol{J}^{T}\right)^{-1}$$
+$$\dot{\boldsymbol{q}}=\boldsymbol{J}^{\dagger} \boldsymbol{v}_{e}$$
+
+with 
+
+$$
+\boldsymbol{J}^{\dagger}=\boldsymbol{J}^{T}\left(\boldsymbol{J} \boldsymbol{J}^{T}\right)^{-1}
+$$
 
 is the right pseudo-inverse of $\boldsymbol{J}$.
 
