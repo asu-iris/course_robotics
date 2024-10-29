@@ -36,7 +36,8 @@ controllers leads to different  IK algorithms.
 
 ## Jacobian Inverse or Newton-Raphson Method
 
-Let's define
+```{important}
+In Jacobian Inverse IK method, we set
 $\dot{\boldsymbol{q}}= \text{Controller}({\boldsymbol{x}}_d, \dot{\boldsymbol{x}}_d,  {\boldsymbol{q}}, {\boldsymbol{e}})$
 specifically as
 
@@ -46,6 +47,11 @@ $$\dot{\boldsymbol{q}}=
 \boldsymbol{J}^{\dagger}\left(\dot{\boldsymbol{x}}_{d}+\boldsymbol{K e}\right)+\left(\boldsymbol{I}_{n}-\boldsymbol{J}^{\dagger} \boldsymbol{J}\right) \dot{\boldsymbol{q}}_{0} \quad\quad\text{for redundant manipulators}
 \end{cases}$$
 
+```
+
+
+Let's next verify if the above controller can solve the IK or not, by examining if the error dynamics 
+is converging to 0. 
 Submitting the above controllers into the error dynamics, it easy to
 verify that
 
@@ -134,6 +140,21 @@ $\dot{\boldsymbol{x}}_d=\boldsymbol{0}$.
 ```
 
 ## Jacobian Transpose or Gradient-Based Method
+```{important}
+In Jacobian Transpose IK method, we set
+$\dot{\boldsymbol{q}}= \text{Controller}({\boldsymbol{x}}_d, \dot{\boldsymbol{x}}_d,  {\boldsymbol{q}}, {\boldsymbol{e}})$
+specifically as
+
+$$\dot{\boldsymbol{q}}=\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K} \boldsymbol{e}$$
+
+```
+
+Let's next find out if the above controller can solve the IK or not, by using the Lyapunov Stability.
+
+
+
+
+
 
 ```{admonition} Background about Lyapunov Stability
 

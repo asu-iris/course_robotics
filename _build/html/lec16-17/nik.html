@@ -430,7 +430,9 @@ a feedback control law</p>
 controllers leads to different  IK algorithms.</p>
 <section id="jacobian-inverse-or-newton-raphson-method">
 <h2>Jacobian Inverse or Newton-Raphson Method<a class="headerlink" href="#jacobian-inverse-or-newton-raphson-method" title="Permalink to this heading">#</a></h2>
-<p>Let’s define
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>In Jacobian Inverse IK method, we set
 <span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}}= \text{Controller}({\boldsymbol{x}}_d, \dot{\boldsymbol{x}}_d,  {\boldsymbol{q}}, {\boldsymbol{e}})\)</span>
 specifically as</p>
 <div class="math notranslate nohighlight">
@@ -439,7 +441,10 @@ specifically as</p>
 \boldsymbol{J}^{-1}(\boldsymbol{q})\left(\dot{\boldsymbol{x}}_{d}+\boldsymbol{K} \boldsymbol{e}\right)  \quad\quad\text{for non-redundant manipulators} \\
 \boldsymbol{J}^{\dagger}\left(\dot{\boldsymbol{x}}_{d}+\boldsymbol{K e}\right)+\left(\boldsymbol{I}_{n}-\boldsymbol{J}^{\dagger} \boldsymbol{J}\right) \dot{\boldsymbol{q}}_{0} \quad\quad\text{for redundant manipulators}
 \end{cases}\end{split}\]</div>
-<p>Submitting the above controllers into the error dynamics, it easy to
+</div>
+<p>Let’s next verify if the above controller can solve the IK or not, by examining if the error dynamics
+is converging to 0.
+Submitting the above controllers into the error dynamics, it easy to
 verify that</p>
 <div class="math notranslate nohighlight" id="equation-equ-method1">
 <span class="eqno">(25)<a class="headerlink" href="#equation-equ-method1" title="Permalink to this equation">#</a></span>\[\dot{\boldsymbol{e}}+\boldsymbol{K} \boldsymbol{e}=0 .\]</div>
@@ -512,6 +517,15 @@ discrete-time version of the Jacobian Inverse IK algorithm with
 </section>
 <section id="jacobian-transpose-or-gradient-based-method">
 <h2>Jacobian Transpose or Gradient-Based Method<a class="headerlink" href="#jacobian-transpose-or-gradient-based-method" title="Permalink to this heading">#</a></h2>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>In Jacobian Transpose IK method, we set
+<span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}}= \text{Controller}({\boldsymbol{x}}_d, \dot{\boldsymbol{x}}_d,  {\boldsymbol{q}}, {\boldsymbol{e}})\)</span>
+specifically as</p>
+<div class="math notranslate nohighlight">
+\[\dot{\boldsymbol{q}}=\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K} \boldsymbol{e}\]</div>
+</div>
+<p>Let’s next find out if the above controller can solve the IK or not, by using the Lyapunov Stability.</p>
 <div class="admonition-background-about-lyapunov-stability admonition">
 <p class="admonition-title">Background about Lyapunov Stability</p>
 <p>Consider the following error dynamics (ODE)</p>
