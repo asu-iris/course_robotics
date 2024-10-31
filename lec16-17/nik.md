@@ -10,7 +10,13 @@ title: "Lecture 16-17: Numerical Inverse Kinematics Algorithms"
 Recall IK problems: given a desired end-effector pose
 $\boldsymbol{x}_{d}$ (in operational space), we want to find the joint vector $\boldsymbol{q}$ such that
 $\boldsymbol{k}(\boldsymbol{q})=\boldsymbol{x}_d$. Here,
-$\boldsymbol{k}(\cdot)$ is the forward kinematics. In this chapter, we will show how to use Jacobian to solve this problem numerically.
+$\boldsymbol{k}(\cdot)$ is the forward kinematics. In this chapter, we will show how to use Jacobian to solve this problem numerically. Let's consider 
+
+$$
+\dot{\boldsymbol{x}}_{e}=\boldsymbol{J}_{A}(\boldsymbol{q}) \dot{\boldsymbol{q}}
+$$
+
+with $\boldsymbol{J}_{A}(\boldsymbol{q})$ is Jacobian (you will see why we use $\boldsymbol{J}_{A}(\boldsymbol{q})$ instead of $\boldsymbol{J}(\boldsymbol{q})$ to denote the Jacobian at the end of this lecture).
 
 To solve the above IK, we define the following operational space error
 between the desired $\boldsymbol{x}_{d}$ and the current end-effector
@@ -21,7 +27,7 @@ $$(equ.error)
 
 Consider the time derivative of {eq}`equ.error`
 
-$$\dot{\boldsymbol{e}}=\dot{\boldsymbol{x}}_{d}-\dot{\boldsymbol{x}}_{e}=\dot{\boldsymbol{x}}_{d}-\boldsymbol{J}(\boldsymbol{q}) \dot{\boldsymbol{q}}$$(equ.error_dyn)
+$$\dot{\boldsymbol{e}}=\dot{\boldsymbol{x}}_{d}-\dot{\boldsymbol{x}}_{e}=\dot{\boldsymbol{x}}_{d}-\boldsymbol{J}_{A}(\boldsymbol{q}) \dot{\boldsymbol{q}}$$(equ.error_dyn)
 
 The above {eq}`equ.error_dyn` is called *error dynamics*, as it show ODE of end-effector pose error
 $\boldsymbol{e}(t)$ over time $t$. Here, $\dot{\boldsymbol{q}}$ can be
@@ -43,11 +49,11 @@ specifically as
 
 $$\dot{\boldsymbol{q}}=
 \begin{cases}
-\boldsymbol{J}^{-1}(\boldsymbol{q})\left(\dot{\boldsymbol{x}}_{d}+\boldsymbol{K} \boldsymbol{e}\right)  \quad\quad\text{for non-redundant robot arms} \\[10pt]
-\boldsymbol{J}^{\dagger}\left(\dot{\boldsymbol{x}}_{d}+\boldsymbol{K e}\right)+\left(\boldsymbol{I}_{n}-\boldsymbol{J}^{\dagger} \boldsymbol{J}\right) \dot{\boldsymbol{q}}_{\text{ref}} \quad\quad\text{for redundant robot arms}
+\boldsymbol{J}_{A}^{-1}(\boldsymbol{q})\left(\dot{\boldsymbol{x}}_{d}+\boldsymbol{K} \boldsymbol{e}\right)  \quad\quad\text{for non-redundant robot arms} \\[10pt]
+\boldsymbol{J}_{A}^{\dagger}\left(\dot{\boldsymbol{x}}_{d}+\boldsymbol{K e}\right)+\left(\boldsymbol{I}_{n}-\boldsymbol{J}_{A}^{\dagger} \boldsymbol{J}_{A}\right) \dot{\boldsymbol{q}}_{\text{ref}} \quad\quad\text{for redundant robot arms}
 \end{cases}$$
 
-Here $\boldsymbol{K}$ is a positive definite (usually diagonal) matrix, and ${\boldsymbol{q}}_{\text{ref}}$ is any reference joint velocity, which can be set based on a second objective in the previous chapter. $\boldsymbol{J}^{\dagger}$ is the pseudo-inverse of Jacobian: $\boldsymbol{J}^{\dagger}=\boldsymbol{J}^{T}\left(\boldsymbol{J} \boldsymbol{J}^{T}\right)^{-1}$.
+Here $\boldsymbol{K}$ is a positive definite (usually diagonal) matrix, and ${\boldsymbol{q}}_{\text{ref}}$ is any reference joint velocity, which can be set based on a second objective in the previous chapter. $\boldsymbol{J}_{A}^{\dagger}$ is the pseudo-inverse of Jacobian: $\boldsymbol{J}_{A}^{\dagger}=\boldsymbol{J}_{A}^{T}\left(\boldsymbol{J}_{A} \boldsymbol{J}_{A}^{T}\right)^{-1}$.
 ```
 
 
@@ -101,7 +107,7 @@ $\boldsymbol{e}(t)\rightarrow \boldsymbol{0}$ as $t\rightarrow \infty$.
 The block scheme for the above IK algorithm is shown below (non-redundant robot arm),
 where $\boldsymbol{k}(\cdot)$ means the direct kinematics function.
 
-```{figure} ../lec11-12/diff_kinematics/IK_jacobian_inverse.jpg
+```{figure} ../lec10/diff_kinematics/IK_jacobian_inverse.jpg
 ---
 width: 80%
 name: IK_jacobian_inverse
@@ -124,17 +130,17 @@ Assume we have an initial guess $\boldsymbol{q}_t$. One
 can approximate {eq}`equ.ik_fk` at $\boldsymbol{q}_k$ using the
 first-order Tyler expension:
 
-$$\boldsymbol{k}(\boldsymbol{q})\approx\boldsymbol{k}(\boldsymbol{q}_t)+\boldsymbol{J}(\boldsymbol{q}_t)(\boldsymbol{q}-\boldsymbol{q}_t)=\boldsymbol{x}_d$$
+$$\boldsymbol{k}(\boldsymbol{q})\approx\boldsymbol{k}(\boldsymbol{q}_t)+\boldsymbol{J}_{A}(\boldsymbol{q}_t)(\boldsymbol{q}-\boldsymbol{q}_t)=\boldsymbol{x}_d$$
 
 By solving the above equation for $\boldsymbol{q}$, one can obtain the
 next updated guess
 
-$$\boldsymbol{q}_{t+1}=\boldsymbol{q}_t+\text{inv}\left(\boldsymbol{J}(\boldsymbol{q}_t)\right)(\boldsymbol{x}_d-\boldsymbol{t}(\boldsymbol{q}_t))=\boldsymbol{q}_t+\text{inv}\left(\boldsymbol{J}(\boldsymbol{q}_t)\right)\boldsymbol{e}_t$$
+$$\boldsymbol{q}_{t+1}=\boldsymbol{q}_t+\text{inv}\left(\boldsymbol{J}_{A}(\boldsymbol{q}_t)\right)(\boldsymbol{x}_d-\boldsymbol{t}(\boldsymbol{q}_t))=\boldsymbol{q}_t+\text{inv}\left(\boldsymbol{J}_{A}(\boldsymbol{q}_t)\right)\boldsymbol{e}_t$$
 
 where $\text{inv}$ is the general inverse operation (inverse for square
 matrix or pseudo-inverse for non-square matrix). Typically, one also
 needs a step size before
-$\text{inv}\left(\boldsymbol{J}(\boldsymbol{q}_t)\right)$ to stabilize
+$\text{inv}\left(\boldsymbol{J}_{A}(\boldsymbol{q}_t)\right)$ to stabilize
 the Newton-Raphson algorithm. The above results can be considered as the
 discrete-time version of the Jacobian Inverse IK algorithm with
 $\dot{\boldsymbol{x}}_d=\boldsymbol{0}$.
@@ -146,7 +152,7 @@ In Jacobian Transpose IK method, we set
 $\dot{\boldsymbol{q}}= \text{Controller}({\boldsymbol{x}}_d, \dot{\boldsymbol{x}}_d,  {\boldsymbol{q}}, {\boldsymbol{e}})$
 specifically as
 
-$$\dot{\boldsymbol{q}}=\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K} \boldsymbol{e}$$
+$$\dot{\boldsymbol{q}}=\boldsymbol{J}_{A}^{T}(\boldsymbol{q}) \boldsymbol{K} \boldsymbol{e}$$
 
 Here $\boldsymbol{K}$ is a positive definite (usually diagonal) matrix,
 ```
@@ -189,25 +195,25 @@ $$V(\boldsymbol{e})>0 \quad \forall \boldsymbol{e} \neq \mathbf{0}, \quad V(\mat
 
 Differentiating $V(\boldsymbol{e})$ with respect to time gives
 
-$$\dot{V}=\boldsymbol{e}^{T} \boldsymbol{K} \dot{\boldsymbol{x}}_{d}-\boldsymbol{e}^{T} \boldsymbol{K} \dot{\boldsymbol{x}}_{e}=\boldsymbol{e}^{T} \boldsymbol{K} \dot{\boldsymbol{x}}_{d}-\boldsymbol{e}^{T} \boldsymbol{K} \boldsymbol{J}(\boldsymbol{q}) \dot{\boldsymbol{q}}$$
+$$\dot{V}=\boldsymbol{e}^{T} \boldsymbol{K} \dot{\boldsymbol{x}}_{d}-\boldsymbol{e}^{T} \boldsymbol{K} \dot{\boldsymbol{x}}_{e}=\boldsymbol{e}^{T} \boldsymbol{K} \dot{\boldsymbol{x}}_{d}-\boldsymbol{e}^{T} \boldsymbol{K} \boldsymbol{J}_{A}(\boldsymbol{q}) \dot{\boldsymbol{q}}$$
 
 At this point, since $\boldsymbol{\dot{x}}_d=\boldsymbol{0}$, if we
 choose
 
-$$\dot{\boldsymbol{q}}=\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K} \boldsymbol{e}$$
+$$\dot{\boldsymbol{q}}=\boldsymbol{J}_{A}^{T}(\boldsymbol{q}) \boldsymbol{K} \boldsymbol{e}$$
 
 This leads to
 
-$$\dot{V}=-\boldsymbol{e}^{T} \boldsymbol{K} \boldsymbol{J}(\boldsymbol{q}) \boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K} \boldsymbol{e}$$
+$$\dot{V}=-\boldsymbol{e}^{T} \boldsymbol{K} \boldsymbol{J}_{A}(\boldsymbol{q}) \boldsymbol{J}_{A}^{T}(\boldsymbol{q}) \boldsymbol{K} \boldsymbol{e}$$
 
 $\dot{V}$ is negative definite, under the assumption of full rank for
-$\boldsymbol{J}(\boldsymbol{q})$. $\dot{V}<0$ with $V>0$ implies the
+$\boldsymbol{J}_{A}(\boldsymbol{q})$. $\dot{V}<0$ with $V>0$ implies the
 error dynamics will stabilize to $\boldsymbol{e}=\mathbf{0}$,
 according to Lyapunov Stablity. The block scheme for the Jacobian transpose IK algorithm is  shown below.
 
 
 
-```{figure} ../lec11-12/diff_kinematics/IK_jacobian_transpose.jpg
+```{figure} ../lec10/diff_kinematics/IK_jacobian_transpose.jpg
 ---
 width: 80%
 name: IK_jacobian_transpose
@@ -230,7 +236,7 @@ $$\min_{\boldsymbol{q}}\quad\frac{1}{2}||\boldsymbol{k}(\boldsymbol{q})-\boldsym
 The gradient descent to update current guess $\boldsymbol{q}_k$ to next
 $\boldsymbol{q}_{k+1}$
 
-$$\boldsymbol{q}_{k+1}=\boldsymbol{q}_{k}-\alpha{\left(\frac{d\boldsymbol{k}(\boldsymbol{q})}{d\boldsymbol{q}}\bigg\rvert_{\boldsymbol{q}=\boldsymbol{q}_k}\right)}^{T}(\boldsymbol{k}(\boldsymbol{q})-\boldsymbol{x}_d)=\boldsymbol{q}_{k}+\alpha{\boldsymbol{J}(\boldsymbol{q}_k)}^{T}\boldsymbol{e}_k$$
+$$\boldsymbol{q}_{k+1}=\boldsymbol{q}_{k}-\alpha{\left(\frac{d\boldsymbol{k}(\boldsymbol{q})}{d\boldsymbol{q}}\bigg\rvert_{\boldsymbol{q}=\boldsymbol{q}_k}\right)}^{T}(\boldsymbol{k}(\boldsymbol{q})-\boldsymbol{x}_d)=\boldsymbol{q}_{k}+\alpha{\boldsymbol{J}_{A}(\boldsymbol{q}_k)}^{T}\boldsymbol{e}_k$$
 
 where $\alpha$ is the gradient step size. The above results can be
 considered as the discrete-time version of the Jacobian transpose
@@ -278,8 +284,7 @@ transpose controller.
 
 # Definition of End-effector Error
 
-Both IK algorithms  require computing the end-effector error in the
-operational space. This is natural for the position
+Both IK algorithms  require computing the end-effector error. This is natural for the position
 error of the end-effector
 
 $$\boldsymbol{e}_{P}=\boldsymbol{p}_{d}-\boldsymbol{p}_{e}(\boldsymbol{q})$$
@@ -289,10 +294,10 @@ the desired and computed end-effector positions. Its time derivative is
 
 $$\dot{\boldsymbol{e}}_{P}=\dot{\boldsymbol{p}}_{d}-\dot{\boldsymbol{p}}_{e} .$$
 
-However, the problem arises when we consider defining the orientation
+However, the problem arises when we consider defining the end-effector orientation
 error. In the
-following, let's consider the typical types of orientation
-representation and its error.
+following, let's consider the typical orientation
+representations and its error definition.
 
 ## Euler-Angles Error
 
@@ -316,7 +321,7 @@ $$\boldsymbol{T}\left(\phi_{e}\right) =\left[\begin{array}{ccc}
 1 & 0 & c_{\vartheta}
 \end{array}\right] .$$
 
-## Angle-Axis Error 
+## Angle-Axis Error (Optional)
 If the desired orientation of the end-effector is given in rotation
 matrix
 $\boldsymbol{R}_{d}=\left[\begin{array}{lll}\boldsymbol{n}_{d} & \boldsymbol{s}_{d} & \boldsymbol{a}_{d}\end{array}\right]$
@@ -376,7 +381,7 @@ $$\boldsymbol{v}=\left[\begin{array}{c}
 \boldsymbol{L}^{-1}\left(\boldsymbol{L}^{T} \boldsymbol{\omega}_{d}+\boldsymbol{K}_{O} \boldsymbol{e}_{O}\right)
 \end{array}\right]$$
 
-## Quaternion Error 
+## Quaternion Error (Optional)
 
 If the desired orientation is given in quaternion
 $\mathcal{Q}_{d}=\left\{\eta_{d}, \boldsymbol{\epsilon}_{d}\right\}$ and
