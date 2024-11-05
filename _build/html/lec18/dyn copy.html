@@ -59,11 +59,9 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'lec18/dyn';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lec18/dyn copy';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Overview of Robot Control" href="../lec19/control_overview.html" />
-    <link rel="prev" title="Numerical Inverse Kinematics" href="../lec16-17/nik.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -126,6 +124,8 @@
       
       
       
+        
+      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -181,7 +181,7 @@
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
+        <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../lec1/intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lec2/configuration.html">Robot Configuration</a></li>
 
@@ -224,7 +224,7 @@
 
 <li class="toctree-l1"><a class="reference internal" href="../lec16-17/nik.html">Numerical Inverse Kinematics</a></li>
 
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Dynamics (Lagrangian formulation)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dyn.html">Dynamics (Lagrangian formulation)</a></li>
 
 
 
@@ -286,7 +286,7 @@
 <div class="article-header-buttons">
 
 
-<a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Flec18/dyn.html&body=Your%20issue%20content%20here." target="_blank"
+<a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Flec18/dyn copy.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button"
    title="Open an issue"
    data-bs-placement="bottom" data-bs-toggle="tooltip"
@@ -312,7 +312,7 @@
       
       
       
-      <li><a href="../_sources/lec18/dyn.md" target="_blank"
+      <li><a href="../_sources/lec18/dyn copy.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -407,7 +407,12 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Dynamics (Lagrangian formulation)</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#kinetic-energy-of-a-robot-arm">Kinetic Energy of a Robot Arm</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#kinetic-energy-of-a-robot-arm">Kinetic Energy of a Robot Arm</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kinetic-energy-of-link-i">Kinetic Energy of Link <span class="math notranslate nohighlight">\(i\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kinetic-energy-of-motor-i">Kinetic Energy of Motor <span class="math notranslate nohighlight">\(i\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#total-kinetic-energy">Total Kinetic Energy</a></li>
+</ul>
+</li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#computation-of-potential-energy">Computation of Potential Energy</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#equations-of-motion">Equations of Motion</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#property-skew-symmetry-of-dot-boldsymbol-b-2-boldsymbol-c">Property: Skew-symmetry of <span class="math notranslate nohighlight">\(\dot{\boldsymbol{B}}-2\boldsymbol{C}\)</span></a></li>
@@ -457,43 +462,51 @@ are the net torque/force at each joint.</p>
 <section class="tex2jax_ignore mathjax_ignore" id="kinetic-energy-of-a-robot-arm">
 <h1>Kinetic Energy of a Robot Arm<a class="headerlink" href="#kinetic-energy-of-a-robot-arm" title="Link to this heading">#</a></h1>
 <p>Consider a  <span class="math notranslate nohighlight">\(n\)</span>-DoF robot arm. The kinetic energy is due
-to the motion of each link.  The total kinetic energy is given by</p>
+to the motion of each link and the motion of each joint actuator:</p>
 <div class="math notranslate nohighlight">
-\[\mathcal{T}=\sum_{i=1}^{n}\mathcal{T}_{\ell_{i}}\]</div>
-<p>where <span class="math notranslate nohighlight">\(\mathcal{T}_{\ell_{i}}\)</span> is the kinetic energy of Link <span class="math notranslate nohighlight">\(i\)</span>.</p>
+\[\mathcal{T}=\sum_{i=1}^{n}\left(\mathcal{T}_{\ell_{i}}+\mathcal{T}_{m_{i}}\right)\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathcal{T}_{\ell_{i}}\)</span> is the kinetic energy of Link <span class="math notranslate nohighlight">\(i\)</span> and
+<span class="math notranslate nohighlight">\(\mathcal{T}_{m_{i}}\)</span> is the kinetic energy of the motor actuating Joint
+<span class="math notranslate nohighlight">\(i\)</span></p>
+<section id="kinetic-energy-of-link-i">
+<h2>Kinetic Energy of Link <span class="math notranslate nohighlight">\(i\)</span><a class="headerlink" href="#kinetic-energy-of-link-i" title="Link to this heading">#</a></h2>
 <figure class="align-default" id="linki-kinematics">
 <a class="reference internal image-reference" href="../_images/linki_kinematics.jpg"><img alt="../_images/linki_kinematics.jpg" src="../_images/linki_kinematics.jpg" style="width: 50%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 67 </span><span class="caption-text">Motion of Link <span class="math notranslate nohighlight">\(i\)</span></span><a class="headerlink" href="#linki-kinematics" title="Link to this image">#</a></p>
+<p><span class="caption-text">Kinematic description of Link <span class="math notranslate nohighlight">\(i\)</span> for Lagrange
+formulation</span><a class="headerlink" href="#linki-kinematics" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>As shown in  <a class="reference internal" href="#linki-kinematics"><span class="std std-numref">Fig. 67</span></a>, the kinetic energy contribution of Link <span class="math notranslate nohighlight">\(i\)</span> is given by</p>
-<div class="math notranslate nohighlight" id="equation-equ-ke-total">
-<span class="eqno">(27)<a class="headerlink" href="#equation-equ-ke-total" title="Link to this equation">#</a></span>\[
-            \mathcal{T}_{\ell_{i}}=\frac{1}{2} \int_{V_{\ell_{i}}} \dot{\boldsymbol{p}}_{i}^{* T} \dot{\boldsymbol{p}}_{i}^{*} \rho d V\]</div>
-<p>where  <span class="math notranslate nohighlight">\(\rho\)</span> is the density of the elementary particle of volume
-<span class="math notranslate nohighlight">\(d V\)</span>; <span class="math notranslate nohighlight">\(\dot{\boldsymbol{p}}_{i}^{*}\)</span> denotes the linear velocity vector of the elementary particle; and  <span class="math notranslate nohighlight">\(V_{\ell_{i}}\)</span> is the volume of Link <span class="math notranslate nohighlight">\(i\)</span>. Here, the position
-<span class="math notranslate nohighlight">\(\boldsymbol{p}_{i}^{*}\)</span> of the elementary particle is expressed in the base frame.</p>
-<p>The
-position  <span class="math notranslate nohighlight">\(\boldsymbol{p}_{l_{i}}\)</span> of the link center of mass (COM) defined as</p>
+<p>The kinetic energy contribution of Link <span class="math notranslate nohighlight">\(i\)</span> is given by</p>
 <div class="math notranslate nohighlight">
-\[\boldsymbol{p}_{\ell_{i}}=\frac{1}{m_{\ell_{i}}} \int_{V_{\ell_{i}}} \boldsymbol{p}_{i}^{*} \rho d V\]</div>
-<p>where <span class="math notranslate nohighlight">\(m_{\ell_{i}}\)</span> is the  mass of link <span class="math notranslate nohighlight">\(i\)</span>. We also define</p>
+\[\label{equ.link_ke}
+            \mathcal{T}_{\ell_{i}}=\frac{1}{2} \int_{V_{\ell_{i}}} \dot{\boldsymbol{p}}_{i}^{* T} \dot{\boldsymbol{p}}_{i}^{*} \rho d V\]</div>
+<p>where <span class="math notranslate nohighlight">\(\dot{\boldsymbol{p}}_{i}^{*}\)</span> denotes the linear velocity vector
+and <span class="math notranslate nohighlight">\(\rho\)</span> is the density of the elementary particle of volume
+<span class="math notranslate nohighlight">\(d V ; V_{\ell_{i}}\)</span> is the volume of Link <span class="math notranslate nohighlight">\(i\)</span>. Consider the position
+vector <span class="math notranslate nohighlight">\(\boldsymbol{p}_{i}^{*}\)</span> of the elementary particle and the
+position vector <span class="math notranslate nohighlight">\(\boldsymbol{p}_{l_{i}}\)</span> of the link center of mass,
+both expressed in the base frame. One has</p>
 <div class="math notranslate nohighlight">
 \[\boldsymbol{r}_{i}=\left[\begin{array}{lll}
 r_{i x} &amp; r_{i y} &amp; r_{i z}
 \end{array}\right]^{T}=\boldsymbol{p}_{i}^{*}-\boldsymbol{p}_{\ell_{i}}\]</div>
-<p>As a result, the velocity of an elementary particle of link <span class="math notranslate nohighlight">\(i\)</span>
-can be expressed as</p>
-<div class="math notranslate nohighlight" id="equation-equ-ke-vel">
-<span class="eqno">(28)<a class="headerlink" href="#equation-equ-ke-vel" title="Link to this equation">#</a></span>\[\label{equ.2}
+<p>with</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{p}_{\ell_{i}}=\frac{1}{m_{\ell_{i}}} \int_{V_{\ell_{i}}} \boldsymbol{p}_{i}^{*} \rho d V\]</div>
+<p>where <span class="math notranslate nohighlight">\(m_{\ell_{i}}\)</span> is the link mass. As a consequence, the link point
+velocity can be expressed as</p>
+<div class="math notranslate nohighlight">
+\[\label{equ.2}
     \begin{aligned}
 \dot{\boldsymbol{p}}_{i}^{*} &amp; =\dot{\boldsymbol{p}}_{\ell_{i}}+\boldsymbol{\omega}_{i} \times \boldsymbol{r}_{i}  =\dot{\boldsymbol{p}}_{\ell_{i}}+\boldsymbol{S}\left(\boldsymbol{\omega}_{i}\right) \boldsymbol{r}_{i}
 \end{aligned}\]</div>
-<p>where <span class="math notranslate nohighlight">\(\dot{\boldsymbol{p}}_{\ell_{i}}\)</span> is the linear velocity of COM and <span class="math notranslate nohighlight">\(\boldsymbol{\omega}_{i}\)</span> is the angular velocity of
-the link.</p>
-<p>By substituting <a class="reference internal" href="#equation-equ-ke-vel">(28)</a> into
-<a class="reference internal" href="#equation-equ-ke-total">(27)</a>, it leads to that the total kinetic energy of link <span class="math notranslate nohighlight">\(i\)</span>, <span class="math notranslate nohighlight">\( \mathcal{T}_{\ell_{i}}\)</span>, is the sumation of the following three terms</p>
+<p>where <span class="math notranslate nohighlight">\(\dot{\boldsymbol{p}}_{\ell_{i}}\)</span> is the linear velocity of the
+center of mass and <span class="math notranslate nohighlight">\(\boldsymbol{\omega}_{i}\)</span> is the angular velocity of
+the link. By substituting the velocity expression
+(<a class="reference internal" href="#equ.2"><span class="xref myst">[equ.2]</span></a>{reference-type=”ref” reference=”equ.2”}) into
+(<a class="reference internal" href="#equ.link_ke"><span class="xref myst">[equ.link_ke]</span></a>{reference-type=”ref”
+reference=”equ.link_ke”}), it leads to multiple terms</p>
 <p><strong>Translational term</strong></p>
 <div class="math notranslate nohighlight">
 \[\frac{1}{2} \int_{V_{\ell_{i}}} \dot{\boldsymbol{p}}_{\ell_{i}}^{T} \dot{\boldsymbol{p}}_{\ell_{i}} \rho d V=\frac{1}{2} m_{\ell_{i}} \dot{\boldsymbol{p}}_{\ell_{i}}^{T} \dot{\boldsymbol{p}}_{\ell_{i}}\]</div>
@@ -503,14 +516,14 @@ the link.</p>
 <p><strong>Rotational term</strong></p>
 <div class="math notranslate nohighlight">
 \[\frac{1}{2} \int_{V_{\ell_{i}}} \boldsymbol{r}_{i}^{T} \boldsymbol{S}^{T}\left(\boldsymbol{\omega}_{i}\right) \boldsymbol{S}\left(\boldsymbol{\omega}_{i}\right) \boldsymbol{r}_{i} \rho d V=\frac{1}{2} \boldsymbol{\omega}_{i}^{T}\left(\int_{V_{\ell_{i}}} \boldsymbol{S}^{T}\left(\boldsymbol{r}_{i}\right) \boldsymbol{S}\left(\boldsymbol{r}_{i}\right) \rho d V\right) \boldsymbol{\omega}_{i}=\frac{1}{2} \boldsymbol{\omega}_{i}^{T} \boldsymbol{I}_{\ell_{i}} \boldsymbol{\omega}_{i}\]</div>
-<p>Recall that</p>
+<p>In view of</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\boldsymbol{S}\left(\boldsymbol{r}_{i}\right)=\left[\begin{array}{ccc}
 0 &amp; -r_{i z} &amp; r_{i y} \\
 r_{i z} &amp; 0 &amp; -r_{i x} \\
 -r_{i y} &amp; r_{i x} &amp; 0
 \end{array}\right]\end{split}\]</div>
-<p>hence</p>
+<p>the matrix</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{aligned}
 \boldsymbol{I}_{\ell_{i}} &amp; =\left[\begin{array}{ccc}
@@ -524,8 +537,9 @@ I_{\ell_{i} x x} &amp; -I_{\ell_{i} x y} &amp; -I_{\ell_{i} x z} \\
 * &amp; * &amp; I_{\ell_{i} z z}
 \end{array}\right] . }
 \end{aligned}\end{split}\]</div>
-<p>is the inertia tensor relative to the COM of Link <span class="math notranslate nohighlight">\(i\)</span>. Notice that this inertia tensor is
-expressed in the base frame, thus is configuration-dependent. If the angular
+<p>represents the inertia tensor relative to the centre of mass of Link <span class="math notranslate nohighlight">\(i\)</span>
+when expressed in the base frame. Notice that the inertia tensor, when
+expressed in the base frame, is configuration-dependent. If the angular
 velocity of Link <span class="math notranslate nohighlight">\(i\)</span> is expressed with reference to a frame attached to
 the link (as in the Denavit-Hartenberg convention), it is</p>
 <div class="math notranslate nohighlight">
@@ -575,91 +589,75 @@ Jacobians to consider are then:</p>
 <p>It follows that the kinetic energy of Link <span class="math notranslate nohighlight">\(i\)</span> can be written as</p>
 <div class="math notranslate nohighlight">
 \[\mathcal{T}_{\ell_{i}}=\frac{1}{2} m_{\ell_{i}} \dot{\boldsymbol{q}}^{T} \boldsymbol{J}_{P}^{\left(\ell_{i}\right) T} \boldsymbol{J}_{P}^{\left(\ell_{i}\right)} \dot{\boldsymbol{q}}+\frac{1}{2} \dot{\boldsymbol{q}}^{T} \boldsymbol{J}_{O}^{\left(\ell_{i}\right) T} \boldsymbol{R}_{i} \boldsymbol{I}_{\ell_{i}}^{i} \boldsymbol{R}_{i}^{T} \boldsymbol{J}_{O}^{\left(\ell_{i}\right)} \dot{\boldsymbol{q}}\]</div>
-<!-- 
-## Kinetic Energy of Motor $i$
-
-
-```{figure} ./dynamics/motori_kinematics.jpg
----
-width: 50%
-name: motori_kinematics
----
-Kinematic description of Motor
-$i$
-```
-
-The motor of Joint $i$ is assumed to be located on Link $i-1$. The
-kinetic energy contribution of the motor of Joint $i$ can be computed in
+</section>
+<section id="kinetic-energy-of-motor-i">
+<h2>Kinetic Energy of Motor <span class="math notranslate nohighlight">\(i\)</span><a class="headerlink" href="#kinetic-energy-of-motor-i" title="Link to this heading">#</a></h2>
+<figure class="align-default" id="motori-kinematics">
+<a class="reference internal image-reference" href="../_images/motori_kinematics.jpg"><img alt="../_images/motori_kinematics.jpg" src="../_images/motori_kinematics.jpg" style="width: 50%;" /></a>
+<figcaption>
+<p><span class="caption-text">Kinematic description of Motor
+<span class="math notranslate nohighlight">\(i\)</span></span><a class="headerlink" href="#motori-kinematics" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The motor of Joint <span class="math notranslate nohighlight">\(i\)</span> is assumed to be located on Link <span class="math notranslate nohighlight">\(i-1\)</span>. The
+kinetic energy contribution of the motor of Joint <span class="math notranslate nohighlight">\(i\)</span> can be computed in
 a formally analogous way to that of the link. Consider the typical case
 of rotary electric motors (that can actuate both revolute and prismatic
 joints by means of suitable transmissions). It can be assumed that the
 contribution of the fixed part (stator) is included in that of the link
 on which such motor is located, and thus the sole contribution of the
-rotor is to be computed.
-
-The kinetic energy of Rotor $i$ can be written as
-
-$$\mathcal{T}_{m_{i}}=\frac{1}{2} m_{m_{i}} \dot{\boldsymbol{p}}_{m_{i}}^{T} \dot{\boldsymbol{p}}_{m_{i}}+\frac{1}{2} \boldsymbol{\omega}_{m_{i}}^{T} \boldsymbol{I}_{m_{i}} \boldsymbol{\omega}_{m_{i}}$$
-
-where $m_{m_{i}}$ is the mass of the rotor,
-$\dot{\boldsymbol{p}}_{m_{i}}$ denotes the linear velocity of the centre
-of mass of the rotor, $\boldsymbol{I}_{m_{i}}$ is the inertia tensor of
+rotor is to be computed.</p>
+<p>The kinetic energy of Rotor <span class="math notranslate nohighlight">\(i\)</span> can be written as</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{T}_{m_{i}}=\frac{1}{2} m_{m_{i}} \dot{\boldsymbol{p}}_{m_{i}}^{T} \dot{\boldsymbol{p}}_{m_{i}}+\frac{1}{2} \boldsymbol{\omega}_{m_{i}}^{T} \boldsymbol{I}_{m_{i}} \boldsymbol{\omega}_{m_{i}}\]</div>
+<p>where <span class="math notranslate nohighlight">\(m_{m_{i}}\)</span> is the mass of the rotor,
+<span class="math notranslate nohighlight">\(\dot{\boldsymbol{p}}_{m_{i}}\)</span> denotes the linear velocity of the centre
+of mass of the rotor, <span class="math notranslate nohighlight">\(\boldsymbol{I}_{m_{i}}\)</span> is the inertia tensor of
 the rotor relative to its centre of mass, and
-$\boldsymbol{\omega}_{m_{i}}$ denotes the angular velocity of the rotor.
-
-Let $\vartheta_{m_{i}}$ denote the angular position of the rotor. On the
-assumption of a rigid transmission, one has
-
-$$k_{r i} \dot{q}_{i}=\dot{\vartheta}_{m_{i}}$$
-
-where $k_{r i}$ is gear reduction ratio. For a prismatic joint, gear
-reduction ratio is a dimensional quantity.
-
-The total angular velocity of the rotor is
-
-$$\boldsymbol{\omega}_{m_{i}}=\boldsymbol{\omega}_{i-1}+k_{r i} \dot{q}_{i} \boldsymbol{z}_{m_{i}}$$
-
-where $\boldsymbol{\omega}_{i-1}$ is the angular velocity of Link $i-1$
-on which the motor is located, and $\boldsymbol{z}_{m_{i}}$ denotes the
-unit vector along the rotor axis.
-
-To express the rotor kinetic energy as a function of the joint
+<span class="math notranslate nohighlight">\(\boldsymbol{\omega}_{m_{i}}\)</span> denotes the angular velocity of the rotor.</p>
+<p>Let <span class="math notranslate nohighlight">\(\vartheta_{m_{i}}\)</span> denote the angular position of the rotor. On the
+assumption of a rigid transmission, one has</p>
+<div class="math notranslate nohighlight">
+\[k_{r i} \dot{q}_{i}=\dot{\vartheta}_{m_{i}}\]</div>
+<p>where <span class="math notranslate nohighlight">\(k_{r i}\)</span> is gear reduction ratio. For a prismatic joint, gear
+reduction ratio is a dimensional quantity.</p>
+<p>The total angular velocity of the rotor is</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{\omega}_{m_{i}}=\boldsymbol{\omega}_{i-1}+k_{r i} \dot{q}_{i} \boldsymbol{z}_{m_{i}}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\boldsymbol{\omega}_{i-1}\)</span> is the angular velocity of Link <span class="math notranslate nohighlight">\(i-1\)</span>
+on which the motor is located, and <span class="math notranslate nohighlight">\(\boldsymbol{z}_{m_{i}}\)</span> denotes the
+unit vector along the rotor axis.</p>
+<p>To express the rotor kinetic energy as a function of the joint
 variables, it is worth expressing the linear velocity of the rotor
-centre of mass as
-
-$$\dot{\boldsymbol{p}}_{m_{i}}=\boldsymbol{J}_{P}^{\left(m_{i}\right)} \dot{\boldsymbol{q}}$$
-
-The Jacobian to compute is then
-
-$$\boldsymbol{J}_{P}^{\left(m_{i}\right)}=\left[\begin{array}{llllll}
-\boldsymbol{J}_{P 1}^{\left(m_{i}\right)} & \ldots & \boldsymbol{J}_{P, i-1}^{\left(m_{i}\right)} & \mathbf{0} & \ldots & \mathbf{0}
-\end{array}\right]$$
-
-whose columns are given by
-
-$$\boldsymbol{J}_{P j}^{\left(m_{i}\right)}= \begin{cases}\boldsymbol{z}_{j-1} & \text { for a prismatic joint } \\ \boldsymbol{z}_{j-1} \times\left(\boldsymbol{p}_{m_{i}}-\boldsymbol{p}_{j-1}\right) & \text { for a revolute joint }\end{cases}$$
-
-where $\boldsymbol{p}_{j-1}$ is the position vector of the origin of
-Frame $j-1$.
-
-The angular velocity expressed as a function of the joint variables is
-$$\boldsymbol{\omega}_{m_{i}}=\boldsymbol{J}_{O}^{\left(m_{i}\right)} \dot{\boldsymbol{q}}$$
-
-The Jacobian to compute is then
-
-$$\boldsymbol{J}_{O}^{\left(m_{i}\right)}=\left[\begin{array}{llllll}
-\boldsymbol{J}_{O 1}^{\left(m_{i}\right)} & \ldots & \boldsymbol{J}_{O, i}^{\left(m_{i}\right)} & \mathbf{0} & \ldots & \mathbf{0}
-\end{array}\right]$$
-
-whose columns are
-
-$$\boldsymbol{\jmath}_{O j}^{\left(m_{i}\right)}= \begin{cases}\boldsymbol{J}_{O j}^{\left(\ell_{i}\right)} & j=1, \ldots, i-1 \\ k_{r i} \boldsymbol{z}_{m_{i}} & j=i .\end{cases}$$
-
-Hence, the kinetic energy of Rotor $i$ can be written as
-
-$$\mathcal{T}_{m_{i}}=\frac{1}{2} m_{m_{i}} \dot{\boldsymbol{q}}^{T} \boldsymbol{J}_{P}^{\left(m_{i}\right) T} \boldsymbol{J}_{P}^{\left(m_{i}\right)} \dot{\boldsymbol{q}}+\frac{1}{2} \dot{\boldsymbol{q}}^{T} \boldsymbol{J}_{O}^{\left(m_{i}\right) T} \boldsymbol{R}_{m_{i}} \boldsymbol{I}_{m_{i}}^{m_{i}} \boldsymbol{R}_{m_{i}}^{T} \boldsymbol{J}_{O}^{\left(m_{i}\right)} \dot{\boldsymbol{q}}$$
-
-## Total Kinetic Energy -->
+centre of mass as</p>
+<div class="math notranslate nohighlight">
+\[\dot{\boldsymbol{p}}_{m_{i}}=\boldsymbol{J}_{P}^{\left(m_{i}\right)} \dot{\boldsymbol{q}}\]</div>
+<p>The Jacobian to compute is then</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{J}_{P}^{\left(m_{i}\right)}=\left[\begin{array}{llllll}
+\boldsymbol{J}_{P 1}^{\left(m_{i}\right)} &amp; \ldots &amp; \boldsymbol{J}_{P, i-1}^{\left(m_{i}\right)} &amp; \mathbf{0} &amp; \ldots &amp; \mathbf{0}
+\end{array}\right]\]</div>
+<p>whose columns are given by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\boldsymbol{J}_{P j}^{\left(m_{i}\right)}= \begin{cases}\boldsymbol{z}_{j-1} &amp; \text { for a prismatic joint } \\ \boldsymbol{z}_{j-1} \times\left(\boldsymbol{p}_{m_{i}}-\boldsymbol{p}_{j-1}\right) &amp; \text { for a revolute joint }\end{cases}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\boldsymbol{p}_{j-1}\)</span> is the position vector of the origin of
+Frame <span class="math notranslate nohighlight">\(j-1\)</span>.</p>
+<p>The angular velocity expressed as a function of the joint variables is
+$<span class="math notranslate nohighlight">\(\boldsymbol{\omega}_{m_{i}}=\boldsymbol{J}_{O}^{\left(m_{i}\right)} \dot{\boldsymbol{q}}\)</span>$</p>
+<p>The Jacobian to compute is then</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{J}_{O}^{\left(m_{i}\right)}=\left[\begin{array}{llllll}
+\boldsymbol{J}_{O 1}^{\left(m_{i}\right)} &amp; \ldots &amp; \boldsymbol{J}_{O, i}^{\left(m_{i}\right)} &amp; \mathbf{0} &amp; \ldots &amp; \mathbf{0}
+\end{array}\right]\]</div>
+<p>whose columns are</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\boldsymbol{\jmath}_{O j}^{\left(m_{i}\right)}= \begin{cases}\boldsymbol{J}_{O j}^{\left(\ell_{i}\right)} &amp; j=1, \ldots, i-1 \\ k_{r i} \boldsymbol{z}_{m_{i}} &amp; j=i .\end{cases}\end{split}\]</div>
+<p>Hence, the kinetic energy of Rotor <span class="math notranslate nohighlight">\(i\)</span> can be written as</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{T}_{m_{i}}=\frac{1}{2} m_{m_{i}} \dot{\boldsymbol{q}}^{T} \boldsymbol{J}_{P}^{\left(m_{i}\right) T} \boldsymbol{J}_{P}^{\left(m_{i}\right)} \dot{\boldsymbol{q}}+\frac{1}{2} \dot{\boldsymbol{q}}^{T} \boldsymbol{J}_{O}^{\left(m_{i}\right) T} \boldsymbol{R}_{m_{i}} \boldsymbol{I}_{m_{i}}^{m_{i}} \boldsymbol{R}_{m_{i}}^{T} \boldsymbol{J}_{O}^{\left(m_{i}\right)} \dot{\boldsymbol{q}}\]</div>
+</section>
+<section id="total-kinetic-energy">
+<h2>Total Kinetic Energy<a class="headerlink" href="#total-kinetic-energy" title="Link to this heading">#</a></h2>
 <p>Finally, by summing the kinetic energies of Links and motors, the total
 kinetic energy of the manipulator with actuators is given by the
 quadratic form</p>
@@ -672,6 +670,7 @@ quadratic form</p>
 \end{aligned}\]</div>
 <p>is the <span class="math notranslate nohighlight">\((n \times n)\)</span> inertia matrix which is symmetric, positive
 definite, and configuration - dependent (in general).</p>
+</section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="computation-of-potential-energy">
 <h1>Computation of Potential Energy<a class="headerlink" href="#computation-of-potential-energy" title="Link to this heading">#</a></h1>
@@ -820,7 +819,7 @@ is a skew-symmetric matrix.</p>
 <figure class="align-default" id="link-arm">
 <a class="reference internal image-reference" href="../_images/2link_arm.jpg"><img alt="../_images/2link_arm.jpg" src="../_images/2link_arm.jpg" style="width: 50%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 68 </span><span class="caption-text">wo-link planar arm</span><a class="headerlink" href="#link-arm" title="Link to this image">#</a></p>
+<p><span class="caption-text">wo-link planar arm</span><a class="headerlink" href="#link-arm" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>The vector of generalized coordinates is
@@ -988,24 +987,6 @@ joints.</p>
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="../lec16-17/nik.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Numerical Inverse Kinematics</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="../lec19/control_overview.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Overview of Robot Control</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               
@@ -1023,7 +1004,12 @@ joints.</p>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Dynamics (Lagrangian formulation)</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#kinetic-energy-of-a-robot-arm">Kinetic Energy of a Robot Arm</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#kinetic-energy-of-a-robot-arm">Kinetic Energy of a Robot Arm</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kinetic-energy-of-link-i">Kinetic Energy of Link <span class="math notranslate nohighlight">\(i\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kinetic-energy-of-motor-i">Kinetic Energy of Motor <span class="math notranslate nohighlight">\(i\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#total-kinetic-energy">Total Kinetic Energy</a></li>
+</ul>
+</li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#computation-of-potential-energy">Computation of Potential Energy</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#equations-of-motion">Equations of Motion</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#property-skew-symmetry-of-dot-boldsymbol-b-2-boldsymbol-c">Property: Skew-symmetry of <span class="math notranslate nohighlight">\(\dot{\boldsymbol{B}}-2\boldsymbol{C}\)</span></a></li>

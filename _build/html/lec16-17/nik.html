@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Numerical Inverse Kinematics &#8212; Modeling and Control of Robots</title>
   
@@ -15,52 +14,49 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'lec16-17/nik';</script>
@@ -77,19 +73,23 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -111,12 +111,20 @@ const thebe_selector_output = ".output, .cell_output"
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -131,9 +139,13 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
+  
+    
   
 
 <a class="navbar-brand logo" href="../intro.html">
+  
   
   
   
@@ -143,12 +155,23 @@ const thebe_selector_output = ".output, .cell_output"
       
     
     
-    <img src="../_static/iris_logo_2.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../_static/iris_logo_2.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../_static/iris_logo_2.png" class="logo__image only-light" alt="Modeling and Control of Robots - Home"/>
+    <script>document.write(`<img src="../_static/iris_logo_2.png" class="logo__image only-dark" alt="Modeling and Control of Robots - Home"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -235,7 +258,7 @@ const thebe_selector_output = ".output, .cell_output"
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -244,14 +267,14 @@ const thebe_selector_output = ".output, .cell_output"
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -341,26 +364,28 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
+
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
   </button>
 `);
 </script>
 
+
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</label>
+</button>
 </div></div>
       
     </div>
@@ -388,8 +413,6 @@ document.write(`
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#definition-of-end-effector-error">Definition of End-effector Error</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#euler-angles-error">Euler-Angles Error</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#angle-axis-error-optional">Angle-Axis Error (Optional)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quaternion-error-optional">Quaternion Error (Optional)</a></li>
 </ul>
 </li>
 </ul>
@@ -402,10 +425,10 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="numerical-inverse-kinematics">
-<h1>Numerical Inverse Kinematics<a class="headerlink" href="#numerical-inverse-kinematics" title="Permalink to this heading">#</a></h1>
+<h1>Numerical Inverse Kinematics<a class="headerlink" href="#numerical-inverse-kinematics" title="Link to this heading">#</a></h1>
 <p>Recall IK problems: given a desired end-effector pose
 <span class="math notranslate nohighlight">\(\boldsymbol{x}_{d}\)</span> (in operational space), we want to find the joint vector <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span> such that
 <span class="math notranslate nohighlight">\(\boldsymbol{k}(\boldsymbol{q})=\boldsymbol{x}_d\)</span>. Here,
@@ -419,11 +442,11 @@ document.write(`
 between the desired <span class="math notranslate nohighlight">\(\boldsymbol{x}_{d}\)</span> and the current end-effector
 pose <span class="math notranslate nohighlight">\(\boldsymbol{x}_{e}\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-equ-error">
-<span class="eqno">(23)<a class="headerlink" href="#equation-equ-error" title="Permalink to this equation">#</a></span>\[\boldsymbol{e}=\boldsymbol{x}_{d}-\boldsymbol{x}_{e}=\boldsymbol{x}_{d}-\boldsymbol{k}(\boldsymbol{q})
+<span class="eqno">(23)<a class="headerlink" href="#equation-equ-error" title="Link to this equation">#</a></span>\[\boldsymbol{e}=\boldsymbol{x}_{d}-\boldsymbol{x}_{e}=\boldsymbol{x}_{d}-\boldsymbol{k}(\boldsymbol{q})
 \]</div>
 <p>Consider the time derivative of <a class="reference internal" href="#equation-equ-error">(23)</a></p>
 <div class="math notranslate nohighlight" id="equation-equ-error-dyn">
-<span class="eqno">(24)<a class="headerlink" href="#equation-equ-error-dyn" title="Permalink to this equation">#</a></span>\[\dot{\boldsymbol{e}}=\dot{\boldsymbol{x}}_{d}-\dot{\boldsymbol{x}}_{e}=\dot{\boldsymbol{x}}_{d}-\boldsymbol{J}_{A}(\boldsymbol{q}) \dot{\boldsymbol{q}}\]</div>
+<span class="eqno">(24)<a class="headerlink" href="#equation-equ-error-dyn" title="Link to this equation">#</a></span>\[\dot{\boldsymbol{e}}=\dot{\boldsymbol{x}}_{d}-\dot{\boldsymbol{x}}_{e}=\dot{\boldsymbol{x}}_{d}-\boldsymbol{J}_{A}(\boldsymbol{q}) \dot{\boldsymbol{q}}\]</div>
 <p>The above <a class="reference internal" href="#equation-equ-error-dyn">(24)</a> is called <em>error dynamics</em>, as it show ODE of end-effector pose error
 <span class="math notranslate nohighlight">\(\boldsymbol{e}(t)\)</span> over time <span class="math notranslate nohighlight">\(t\)</span>. Here, <span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}}\)</span> can be
 viewed as the control input. From a control perspective, we want to find
@@ -434,7 +457,7 @@ a feedback control law</p>
 <span class="math notranslate nohighlight">\(\boldsymbol{e}(t)\rightarrow 0\)</span> as <span class="math notranslate nohighlight">\(t\rightarrow \infty\)</span>. The different
 controllers leads to different  IK algorithms.</p>
 <section id="jacobian-inverse-or-newton-raphson-method">
-<h2>Jacobian Inverse or Newton-Raphson Method<a class="headerlink" href="#jacobian-inverse-or-newton-raphson-method" title="Permalink to this heading">#</a></h2>
+<h2>Jacobian Inverse or Newton-Raphson Method<a class="headerlink" href="#jacobian-inverse-or-newton-raphson-method" title="Link to this heading">#</a></h2>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>In Jacobian Inverse IK method, we set
@@ -453,7 +476,7 @@ is converging to 0.
 Submitting the above controllers into the error dynamics, it easy to
 verify that</p>
 <div class="math notranslate nohighlight" id="equation-equ-method1">
-<span class="eqno">(25)<a class="headerlink" href="#equation-equ-method1" title="Permalink to this equation">#</a></span>\[\dot{\boldsymbol{e}}+\boldsymbol{K} \boldsymbol{e}=0 .\]</div>
+<span class="eqno">(25)<a class="headerlink" href="#equation-equ-method1" title="Link to this equation">#</a></span>\[\dot{\boldsymbol{e}}+\boldsymbol{K} \boldsymbol{e}=0 .\]</div>
 <p>If <span class="math notranslate nohighlight">\(\boldsymbol{K}\)</span> is a positive definite (usually diagonal) matrix,
 <a class="reference internal" href="#equation-equ-method1">(25)</a> is asymptotically stable. The error tends to zero along the
 trajectory with a convergence rate that depends on the eigenvalues of
@@ -493,7 +516,7 @@ where <span class="math notranslate nohighlight">\(\boldsymbol{k}(\cdot)\)</span
 <a class="reference internal image-reference" href="../_images/IK_jacobian_inverse.jpg"><img alt="../_images/IK_jacobian_inverse.jpg" src="../_images/IK_jacobian_inverse.jpg" style="width: 80%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 64 </span><span class="caption-text">IK algorithm with Jacobian
-inverse</span><a class="headerlink" href="#ik-jacobian-inverse" title="Permalink to this image">#</a></p>
+inverse</span><a class="headerlink" href="#ik-jacobian-inverse" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="admonition-why-it-s-also-named-newton-raphson-method admonition">
@@ -501,7 +524,7 @@ inverse</span><a class="headerlink" href="#ik-jacobian-inverse" title="Permalink
 <p>The naming of Newton-Raphson method comes from the perspective of “IK as solving nonlinear equations”</p>
 <p>Specifically, consider the following nonlinear equation from FK</p>
 <div class="math notranslate nohighlight" id="equation-equ-ik-fk">
-<span class="eqno">(26)<a class="headerlink" href="#equation-equ-ik-fk" title="Permalink to this equation">#</a></span>\[\boldsymbol{k}(\boldsymbol{q})=\boldsymbol{x}_d\]</div>
+<span class="eqno">(26)<a class="headerlink" href="#equation-equ-ik-fk" title="Link to this equation">#</a></span>\[\boldsymbol{k}(\boldsymbol{q})=\boldsymbol{x}_d\]</div>
 <p>given <span class="math notranslate nohighlight">\(\boldsymbol{x}_d\)</span>.</p>
 <p>Assume we have an initial guess <span class="math notranslate nohighlight">\(\boldsymbol{q}_t\)</span>. One
 can approximate <a class="reference internal" href="#equation-equ-ik-fk">(26)</a> at <span class="math notranslate nohighlight">\(\boldsymbol{q}_k\)</span> using the
@@ -522,7 +545,7 @@ discrete-time version of the Jacobian Inverse IK algorithm with
 </div>
 </section>
 <section id="jacobian-transpose-or-gradient-based-method">
-<h2>Jacobian Transpose or Gradient-Based Method<a class="headerlink" href="#jacobian-transpose-or-gradient-based-method" title="Permalink to this heading">#</a></h2>
+<h2>Jacobian Transpose or Gradient-Based Method<a class="headerlink" href="#jacobian-transpose-or-gradient-based-method" title="Link to this heading">#</a></h2>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>In Jacobian Transpose IK method, we set
@@ -574,7 +597,7 @@ according to Lyapunov Stablity. The block scheme for the Jacobian transpose IK a
 <a class="reference internal image-reference" href="../_images/IK_jacobian_transpose.jpg"><img alt="../_images/IK_jacobian_transpose.jpg" src="../_images/IK_jacobian_transpose.jpg" style="width: 80%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 65 </span><span class="caption-text">Block scheme of the inverse kinematics algorithm with Jacobian
-transpose</span><a class="headerlink" href="#ik-jacobian-transpose" title="Permalink to this image">#</a></p>
+transpose</span><a class="headerlink" href="#ik-jacobian-transpose" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="admonition-why-it-s-also-named-gradient-based-method admonition">
@@ -633,8 +656,8 @@ transpose controller.
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="definition-of-end-effector-error">
-<h1>Definition of End-effector Error<a class="headerlink" href="#definition-of-end-effector-error" title="Permalink to this heading">#</a></h1>
-<p>Both IK algorithms  require computing the end-effector error. This is natural for the position
+<h1>Definition of End-effector Error<a class="headerlink" href="#definition-of-end-effector-error" title="Link to this heading">#</a></h1>
+<p>Both IK algorithms above  require computing the end-effector error. It is straightforward to define the position
 error of the end-effector</p>
 <div class="math notranslate nohighlight">
 \[\boldsymbol{e}_{P}=\boldsymbol{p}_{d}-\boldsymbol{p}_{e}(\boldsymbol{q})\]</div>
@@ -642,57 +665,144 @@ error of the end-effector</p>
 the desired and computed end-effector positions. Its time derivative is</p>
 <div class="math notranslate nohighlight">
 \[\dot{\boldsymbol{e}}_{P}=\dot{\boldsymbol{p}}_{d}-\dot{\boldsymbol{p}}_{e} .\]</div>
-<p>However, the problem arises when we consider defining the end-effector orientation
+<p>However, the problem arises when we define the end-effector orientation
 error. In the
 following, let’s consider the typical orientation
 representations and its error definition.</p>
 <section id="euler-angles-error">
-<h2>Euler-Angles Error<a class="headerlink" href="#euler-angles-error" title="Permalink to this heading">#</a></h2>
+<h2>Euler-Angles Error<a class="headerlink" href="#euler-angles-error" title="Link to this heading">#</a></h2>
 <p>The orientation error using Euler angles is</p>
 <div class="math notranslate nohighlight">
 \[\boldsymbol{e}_{O}=\boldsymbol{\phi}_{d}-\boldsymbol{\phi}_{e}(\boldsymbol{q})\]</div>
 <p>where <span class="math notranslate nohighlight">\(\boldsymbol{\phi}_{d}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{\phi}_{e}\)</span> denote
-respectively the desired and computed set of Euler angles. Its time
+respectively the desired and computed Euler angles of the end-effector. Its time
 derivative is</p>
 <div class="math notranslate nohighlight">
 \[\dot{\boldsymbol{e}}_{O}=\dot{\boldsymbol{\phi}}_{d}-\dot{\boldsymbol{\phi}}_{e}\]</div>
-<p>The analytical Jacobian for ZYZ-Euler angles was given in previous
-lectures: <span class="math notranslate nohighlight">\(\boldsymbol{J}_{A}=\boldsymbol{T}^{-1}\boldsymbol{J}\)</span> with
-<span class="math notranslate nohighlight">\(\boldsymbol{J}\)</span> being the geometric jacobian and</p>
+<p>In order to apply any of the above IK algorithms, we need to find a Jacobian in terms of</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\boldsymbol{T}\left(\phi_{e}\right) =\left[\begin{array}{ccc}
+\[\begin{split}\dot{\boldsymbol{x}}_{e}=\left[\begin{array}{c}
+\dot{\boldsymbol{p}}_{e} \\
+\dot{\boldsymbol{\phi}}_{e}
+\end{array}\right]
+=
+\boldsymbol{J}_{A} \dot{\boldsymbol{q}}
+=
+\begin{bmatrix}
+\boldsymbol{J}_{P}(\boldsymbol{q})\\
+\boldsymbol{J}_{\phi}(\boldsymbol{q})
+\end{bmatrix}
+\dot{\boldsymbol{q}}
+\end{split}\]</div>
+<p>As you can see, compared to the Jacobian <span class="math notranslate nohighlight">\(
+\boldsymbol{J}=\begin{bmatrix}
+\boldsymbol{J}_{P}(\boldsymbol{q})\\
+\boldsymbol{J}_{O}(\boldsymbol{q})
+\end{bmatrix}\)</span>  we have learned in the Jacobian lecture, the linear Jacobian <span class="math notranslate nohighlight">\(\boldsymbol{J}_{P}(\boldsymbol{q})\)</span> remains the same as before, the only difference is the angular Jacobian <span class="math notranslate nohighlight">\(\boldsymbol{J}_{O}(\boldsymbol{q})\)</span> becomes</p>
+<div class="math notranslate nohighlight">
+\[
+\dot{\boldsymbol{\phi}}_{e}=
+\boldsymbol{J}_{\phi}(\boldsymbol{q}) \dot{\boldsymbol{q}}
+\]</div>
+<p>We call the new Jacobian matrix</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\boldsymbol{J}_{A}(\boldsymbol{q})=\begin{bmatrix}
+\boldsymbol{J}_{P}(\boldsymbol{q})\\
+\boldsymbol{J}_{\phi}(\boldsymbol{q})
+\end{bmatrix}
+\end{split}\]</div>
+<p>the <em>analytical Jacobian</em>(recall <span class="math notranslate nohighlight">\(\boldsymbol{J}\)</span> is called geometrical Jacobian or Jacobian). This is the reason why we in the above used <span class="math notranslate nohighlight">\(\boldsymbol{J}_{A}\)</span> instead of <span class="math notranslate nohighlight">\(\boldsymbol{J}\)</span>!</p>
+<p>Next question, how do we find <span class="math notranslate nohighlight">\(\boldsymbol{J}_{A}(\boldsymbol{q})\)</span> from <span class="math notranslate nohighlight">\(\boldsymbol{J}\)</span>? To do so,  we may need find a mapping</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\left[\begin{array}{c}
+\dot{\boldsymbol{p}}_{e} \\
+\boldsymbol{\omega}_{e}
+\end{array}\right] =  \underbrace{\begin{bmatrix}
+\boldsymbol{I} &amp; \boldsymbol{0} \\
+\boldsymbol{0} &amp; \boldsymbol{N}\left(\phi_{e}\right)
+\end{bmatrix}}_{\boldsymbol{T}}
+\left[\begin{array}{c}
+\dot{\boldsymbol{p}}_{e} \\
+\dot{\boldsymbol{\phi}}_{e}
+\end{array}\right]\end{split}\]</div>
+<p>such that</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{J}_{A}(\boldsymbol{q}) = \boldsymbol{T}^{-1} \boldsymbol{J}(\boldsymbol{q})\]</div>
+<p>In the following, we will find out the mapping</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{\omega}_{e}=\boldsymbol{N}\left(\phi_{e}\right)\dot{\boldsymbol{\phi}}_{e}\]</div>
+<p>for the Euler ZYZ Angle
+<span class="math notranslate nohighlight">\({\boldsymbol{\phi}}_{e}=[{\varphi}, {\vartheta}, \psi]^T\)</span>.</p>
+<p>Recall the rotation induced from the Euler ZYZ Angle. The angualr velocities <span class="math notranslate nohighlight">\(\dot{\varphi}, \dot{\vartheta}, \dot\psi\)</span> is always with respect to the current frame, as shown in <a class="reference internal" href="#euler-angle-vel"><span class="std std-numref">Fig. 66</span></a>.</p>
+<figure class="align-default" id="euler-angle-vel">
+<a class="reference internal image-reference" href="../_images/Euler_angle_vel.jpg"><img alt="../_images/Euler_angle_vel.jpg" src="../_images/Euler_angle_vel.jpg" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 66 </span><span class="caption-text">Rotational velocities of Euler angles ZYZ in current
+frame</span><a class="headerlink" href="#euler-angle-vel" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Therefore, to compute <span class="math notranslate nohighlight">\(\boldsymbol{\omega}_{e}\)</span>, we just need to first,  express each Euler angle velocity <span class="math notranslate nohighlight">\(\dot{\varphi}, \dot{\vartheta}, \dot\psi\)</span> from its respective current from to the reference
+frame, and second, sum them up!</p>
+<ul class="simple">
+<li><p>The angular velocity corresponding to <span class="math notranslate nohighlight">\(\dot{\varphi}\)</span> is</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\dot{\varphi}\left[\begin{array}{lll}0 &amp; 0 &amp; 1\end{array}\right]^{T}\]</div>
+<ul class="simple">
+<li><p>The angular velocity corresponding to  <span class="math notranslate nohighlight">\(\dot{\vartheta}\)</span> is</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\dot{\vartheta}\left[\begin{array}{lll}-s_{\varphi} &amp; c_{\varphi} &amp; 0\end{array}\right]^{T}\]</div>
+<ul class="simple">
+<li><p>The angular velocity corresponding to <span class="math notranslate nohighlight">\(\dot{\psi}\)</span> is</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\dot{\psi}\left[\begin{array}{lll}c_{\varphi} s_{\vartheta} &amp; s_{\varphi} s_{\vartheta} &amp; c_{\vartheta}\end{array}\right]^{T}\]</div>
+<p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\boldsymbol{N}\left(\phi_{e}\right) =\left[\begin{array}{ccc}
 0 &amp; -s_{\varphi} &amp; c_{\varphi} s_{\vartheta} \\
 0 &amp; c_{\varphi} &amp; s_{\varphi} s_{\vartheta} \\
 1 &amp; 0 &amp; c_{\vartheta}
 \end{array}\right] .\end{split}\]</div>
-</section>
-<section id="angle-axis-error-optional">
-<h2>Angle-Axis Error (Optional)<a class="headerlink" href="#angle-axis-error-optional" title="Permalink to this heading">#</a></h2>
-<p>If the desired orientation of the end-effector is given in rotation
+<!-- 
+
+
+
+
+
+## Angle-Axis Error (Optional)
+If the desired orientation of the end-effector is given in rotation
 matrix
-<span class="math notranslate nohighlight">\(\boldsymbol{R}_{d}=\left[\begin{array}{lll}\boldsymbol{n}_{d} &amp; \boldsymbol{s}_{d} &amp; \boldsymbol{a}_{d}\end{array}\right]\)</span>
-and current end-effector’s rotation matrix is
-<span class="math notranslate nohighlight">\(\boldsymbol{R}_{e}(\boldsymbol{q})=\left[\begin{array}{lll}\boldsymbol{n}_{e}(\boldsymbol{q}) &amp; \boldsymbol{s}_{e}(\boldsymbol{q}) &amp; \boldsymbol{a}_{e}(\boldsymbol{q})\end{array}\right]\)</span>,
-the orientation error vector can be defined as</p>
-<div class="math notranslate nohighlight">
-\[\boldsymbol{e}_{O}=\boldsymbol{r} \sin \vartheta\]</div>
-<p>where <span class="math notranslate nohighlight">\(\vartheta\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{r}\)</span> are the angle and axis of the
-rotation needed to align <span class="math notranslate nohighlight">\(\boldsymbol{R}\)</span> with <span class="math notranslate nohighlight">\(\boldsymbol{R}_{d}\)</span></p>
-<div class="math notranslate nohighlight">
-\[\boldsymbol{R}(\vartheta, \boldsymbol{r})=\boldsymbol{R}_{d} \boldsymbol{R}_{e}^{T}(\boldsymbol{q})\]</div>
-<p>Via derivation, one can also obtain</p>
-<div class="math notranslate nohighlight">
-\[\boldsymbol{e}_{O}=\frac{1}{2}\left(\boldsymbol{n}_{e}(\boldsymbol{q}) \times \boldsymbol{n}_{d}+\boldsymbol{s}_{e}(\boldsymbol{q}) \times \boldsymbol{s}_{d}+\boldsymbol{a}_{e}(\boldsymbol{q}) \times \boldsymbol{a}_{d}\right)\]</div>
-<p>Differentiating the above error vector with respect to time</p>
-<div class="math notranslate nohighlight">
-\[\dot{\boldsymbol{e}}_{O}=\boldsymbol{L}^{T} \boldsymbol{\omega}_{d}-\boldsymbol{L} \boldsymbol{\omega}_{e}\]</div>
-<p>with</p>
-<div class="math notranslate nohighlight">
-\[\boldsymbol{L}=-\frac{1}{2}\left(\boldsymbol{S}\left(\boldsymbol{n}_{d}\right) \boldsymbol{S}\left(\boldsymbol{n}_{e}\right)+\boldsymbol{S}\left(\boldsymbol{s}_{d}\right) \boldsymbol{S}\left(\boldsymbol{s}_{e}\right)+\boldsymbol{S}\left(\boldsymbol{a}_{d}\right) \boldsymbol{S}\left(\boldsymbol{a}_{e}\right)\right)\]</div>
-<p>where <span class="math notranslate nohighlight">\(\boldsymbol{S}(\cdot)\)</span> is the skew-symmetric operator. The
-operational space error</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\dot{\boldsymbol{e}}=\left[\begin{array}{c}
+$\boldsymbol{R}_{d}=\left[\begin{array}{lll}\boldsymbol{n}_{d} & \boldsymbol{s}_{d} & \boldsymbol{a}_{d}\end{array}\right]$
+and current end-effector's rotation matrix is
+$\boldsymbol{R}_{e}(\boldsymbol{q})=\left[\begin{array}{lll}\boldsymbol{n}_{e}(\boldsymbol{q}) & \boldsymbol{s}_{e}(\boldsymbol{q}) & \boldsymbol{a}_{e}(\boldsymbol{q})\end{array}\right]$,
+the orientation error vector can be defined as
+
+$$\boldsymbol{e}_{O}=\boldsymbol{r} \sin \vartheta$$
+
+where $\vartheta$ and $\boldsymbol{r}$ are the angle and axis of the
+rotation needed to align $\boldsymbol{R}$ with $\boldsymbol{R}_{d}$
+
+$$\boldsymbol{R}(\vartheta, \boldsymbol{r})=\boldsymbol{R}_{d} \boldsymbol{R}_{e}^{T}(\boldsymbol{q})$$
+
+Via derivation, one can also obtain
+
+$$\boldsymbol{e}_{O}=\frac{1}{2}\left(\boldsymbol{n}_{e}(\boldsymbol{q}) \times \boldsymbol{n}_{d}+\boldsymbol{s}_{e}(\boldsymbol{q}) \times \boldsymbol{s}_{d}+\boldsymbol{a}_{e}(\boldsymbol{q}) \times \boldsymbol{a}_{d}\right)$$
+
+Differentiating the above error vector with respect to time
+
+$$\dot{\boldsymbol{e}}_{O}=\boldsymbol{L}^{T} \boldsymbol{\omega}_{d}-\boldsymbol{L} \boldsymbol{\omega}_{e}$$
+
+with
+
+$$\boldsymbol{L}=-\frac{1}{2}\left(\boldsymbol{S}\left(\boldsymbol{n}_{d}\right) \boldsymbol{S}\left(\boldsymbol{n}_{e}\right)+\boldsymbol{S}\left(\boldsymbol{s}_{d}\right) \boldsymbol{S}\left(\boldsymbol{s}_{e}\right)+\boldsymbol{S}\left(\boldsymbol{a}_{d}\right) \boldsymbol{S}\left(\boldsymbol{a}_{e}\right)\right)$$
+
+where $\boldsymbol{S}(\cdot)$ is the skew-symmetric operator. The
+operational space error
+
+$$\dot{\boldsymbol{e}}=\left[\begin{array}{c}
 \dot{\boldsymbol{e}}_{P} \\
 \dot{\boldsymbol{e}}_{O}
 \end{array}\right]=\left[\begin{array}{c}
@@ -702,77 +812,86 @@ operational space error</p>
 \dot{\boldsymbol{p}}_{d} \\
 \boldsymbol{L}^{T} \boldsymbol{\omega}_{d}
 \end{array}\right]-\left[\begin{array}{cc}
-\boldsymbol{I} &amp; \boldsymbol{O} \\
-\boldsymbol{O} &amp; \boldsymbol{L}
-\end{array}\right] \boldsymbol{J} \dot{\boldsymbol{q}}\end{split}\]</div>
-<p>To ensure the error dynamics above is converging to
-<span class="math notranslate nohighlight">\(\boldsymbol{e}=\boldsymbol{0}\)</span>, the Jacobian-inverse controller will be</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\dot{\boldsymbol{q}}=
+\boldsymbol{I} & \boldsymbol{O} \\
+\boldsymbol{O} & \boldsymbol{L}
+\end{array}\right] \boldsymbol{J} \dot{\boldsymbol{q}}$$
+
+To ensure the error dynamics above is converging to
+$\boldsymbol{e}=\boldsymbol{0}$, the Jacobian-inverse controller will be
+
+$$\dot{\boldsymbol{q}}=
 \begin{cases}
 \boldsymbol{J}^{-1} \boldsymbol{v}  \quad\quad\text{for non-redundant manipulators} \\
 \boldsymbol{J}^{\dagger}\boldsymbol{v}+\left(\boldsymbol{I}_{n}-\boldsymbol{J}^{\dagger} \boldsymbol{J}\right) \dot{\boldsymbol{q}}_{0} \quad\quad\text{for redundant manipulators}
-\end{cases}\end{split}\]</div>
-<p>with</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\boldsymbol{v}=\left[\begin{array}{c}
+\end{cases}$$
+
+with
+
+$$\boldsymbol{v}=\left[\begin{array}{c}
 \dot{\boldsymbol{p}}_{d}+\boldsymbol{K}_{P} \boldsymbol{e}_{P} \\
 \boldsymbol{L}^{-1}\left(\boldsymbol{L}^{T} \boldsymbol{\omega}_{d}+\boldsymbol{K}_{O} \boldsymbol{e}_{O}\right)
-\end{array}\right]\end{split}\]</div>
-</section>
-<section id="quaternion-error-optional">
-<h2>Quaternion Error (Optional)<a class="headerlink" href="#quaternion-error-optional" title="Permalink to this heading">#</a></h2>
-<p>If the desired orientation is given in quaternion
-<span class="math notranslate nohighlight">\(\mathcal{Q}_{d}=\left\{\eta_{d}, \boldsymbol{\epsilon}_{d}\right\}\)</span> and
+\end{array}\right]$$
+
+## Quaternion Error (Optional)
+
+If the desired orientation is given in quaternion
+$\mathcal{Q}_{d}=\left\{\eta_{d}, \boldsymbol{\epsilon}_{d}\right\}$ and
 current quaternion of end-effector is
-<span class="math notranslate nohighlight">\(\mathcal{Q}_{e}=\left\{\eta_{e}, \boldsymbol{\epsilon}_{e}\right\}\)</span>,
+$\mathcal{Q}_{e}=\left\{\eta_{e}, \boldsymbol{\epsilon}_{e}\right\}$,
 one can define an error quaternion
-<span class="math notranslate nohighlight">\(\Delta \mathcal{Q}=\{\Delta \eta, \Delta \epsilon\}\)</span></p>
-<div class="math notranslate nohighlight">
-\[\Delta \mathcal{Q}=\mathcal{Q}_{d} * \mathcal{Q}_{e}^{-1}\]</div>
-<p>which represents the rotation needed to align <span class="math notranslate nohighlight">\(\mathcal{Q}_{e}\)</span> and
-<span class="math notranslate nohighlight">\(\mathcal{Q}_{d}\)</span>. <span class="math notranslate nohighlight">\(\Delta \mathcal{Q}=\{1, \mathbf{0}\}\)</span> if and only if
-<span class="math notranslate nohighlight">\(\mathcal{Q}_{e}\)</span> and <span class="math notranslate nohighlight">\(\mathcal{Q}_{d}\)</span> are aligned. From the above
-error quaternion, one can define the orientation error vector</p>
-<div class="math notranslate nohighlight">
-\[\boldsymbol{e}_{O}=\Delta \boldsymbol{\epsilon}=\eta_{e}(\boldsymbol{q}) \boldsymbol{\epsilon}_{d}-\eta_{d} \boldsymbol{\epsilon}_{e}(\boldsymbol{q})-\boldsymbol{S}\left(\boldsymbol{\epsilon}_{d}\right) \boldsymbol{\epsilon}_{e}(\boldsymbol{q})\]</div>
-<p>where <span class="math notranslate nohighlight">\(\boldsymbol{S}(\cdot)\)</span> is the skew-symmetric operator. At this
-point, we define</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\boldsymbol{v}=\left[\begin{array}{l}
+$\Delta \mathcal{Q}=\{\Delta \eta, \Delta \epsilon\}$
+
+$$\Delta \mathcal{Q}=\mathcal{Q}_{d} * \mathcal{Q}_{e}^{-1}$$
+
+which represents the rotation needed to align $\mathcal{Q}_{e}$ and
+$\mathcal{Q}_{d}$. $\Delta \mathcal{Q}=\{1, \mathbf{0}\}$ if and only if
+$\mathcal{Q}_{e}$ and $\mathcal{Q}_{d}$ are aligned. From the above
+error quaternion, one can define the orientation error vector
+
+$$\boldsymbol{e}_{O}=\Delta \boldsymbol{\epsilon}=\eta_{e}(\boldsymbol{q}) \boldsymbol{\epsilon}_{d}-\eta_{d} \boldsymbol{\epsilon}_{e}(\boldsymbol{q})-\boldsymbol{S}\left(\boldsymbol{\epsilon}_{d}\right) \boldsymbol{\epsilon}_{e}(\boldsymbol{q})$$
+
+where $\boldsymbol{S}(\cdot)$ is the skew-symmetric operator. At this
+point, we define
+
+$$\boldsymbol{v}=\left[\begin{array}{l}
 \dot{\boldsymbol{p}}_{d}+\boldsymbol{K}_{P} \boldsymbol{e}_{P} \\
 \boldsymbol{\omega}_{d}+\boldsymbol{K}_{O} \boldsymbol{e}_{O}
-\end{array}\right]\end{split}\]</div>
-<p>and set the Jacobian-inverse controller</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\dot{\boldsymbol{q}}=
+\end{array}\right]$$
+
+and set the Jacobian-inverse controller
+
+$$\dot{\boldsymbol{q}}=
 \begin{cases}
 \boldsymbol{J}^{-1} \boldsymbol{v}  \quad\quad\text{for non-redundant manipulators} \\
 \boldsymbol{J}^{\dagger}\boldsymbol{v}+\left(\boldsymbol{I}_{n}-\boldsymbol{J}^{\dagger} \boldsymbol{J}\right) \dot{\boldsymbol{q}}_{0} \quad\quad\text{for redundant manipulators}
-\end{cases}\end{split}\]</div>
-<p>Next, we will show using the above controller, we will achieve the
-convergence of <span class="math notranslate nohighlight">\(\mathcal{Q}_{e}\)</span> to <span class="math notranslate nohighlight">\(\mathcal{Q}_{d}\)</span>. To do so, we
-define the following Lyapunov function</p>
-<div class="math notranslate nohighlight">
-\[V=\left(\eta_{d}-\eta_{e}\right)^{2}+\left(\boldsymbol{\epsilon}_{d}-\boldsymbol{\epsilon}_{e}\right)^{T}\left(\boldsymbol{\epsilon}_{d}-\boldsymbol{\epsilon}_{e}\right)\]</div>
-<p>It can be shown that</p>
-<div class="math notranslate nohighlight">
-\[\dot{V}=-\boldsymbol{e}_{O}^{T} \boldsymbol{K}_{O} \boldsymbol{e}_{O}\]</div>
-<p>To prove the above, we will need to use the following relationships</p>
-<div class="math notranslate nohighlight">
-\[\boldsymbol\omega_{d}-\boldsymbol\omega_{e}+\boldsymbol{K}_{O} \boldsymbol{e}_{O}=\mathbf{0}\]</div>
-<p>which is a result of
-<span class="math notranslate nohighlight">\(\dot{\boldsymbol{\omega}}_{O}=\boldsymbol{J}_{O}\dot{\boldsymbol{q}}\)</span>,
-and the quaternion derivatives</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\begin{aligned}
-\dot{\eta}_{e} &amp; =-\frac{1}{2} \boldsymbol{\epsilon}_{e}^{T} \boldsymbol{\omega}_{e} \\
-\dot{\boldsymbol{\epsilon}}_{e} &amp; =\frac{1}{2}\left(\eta_{e} \boldsymbol{I}_{3}-\boldsymbol{S}\left(\boldsymbol{\epsilon}_{e}\right)\right) \boldsymbol{\omega}_{e}
+\end{cases}$$
+
+Next, we will show using the above controller, we will achieve the
+convergence of $\mathcal{Q}_{e}$ to $\mathcal{Q}_{d}$. To do so, we
+define the following Lyapunov function
+
+$$V=\left(\eta_{d}-\eta_{e}\right)^{2}+\left(\boldsymbol{\epsilon}_{d}-\boldsymbol{\epsilon}_{e}\right)^{T}\left(\boldsymbol{\epsilon}_{d}-\boldsymbol{\epsilon}_{e}\right)$$
+
+It can be shown that
+
+$$\dot{V}=-\boldsymbol{e}_{O}^{T} \boldsymbol{K}_{O} \boldsymbol{e}_{O}$$
+
+To prove the above, we will need to use the following relationships
+
+$$\boldsymbol\omega_{d}-\boldsymbol\omega_{e}+\boldsymbol{K}_{O} \boldsymbol{e}_{O}=\mathbf{0}$$
+
+which is a result of
+$\dot{\boldsymbol{\omega}}_{O}=\boldsymbol{J}_{O}\dot{\boldsymbol{q}}$,
+and the quaternion derivatives
+
+$$\begin{aligned}
+\dot{\eta}_{e} & =-\frac{1}{2} \boldsymbol{\epsilon}_{e}^{T} \boldsymbol{\omega}_{e} \\
+\dot{\boldsymbol{\epsilon}}_{e} & =\frac{1}{2}\left(\eta_{e} \boldsymbol{I}_{3}-\boldsymbol{S}\left(\boldsymbol{\epsilon}_{e}\right)\right) \boldsymbol{\omega}_{e}
 \end{aligned} \qquad\qquad
 \begin{aligned}
-\dot{\eta}_{d} &amp; =-\frac{1}{2} \boldsymbol{\epsilon}_{d}^{T} \boldsymbol{\omega}_{d} \\
-\dot{\boldsymbol{\epsilon}}_{d} &amp; =\frac{1}{2}\left(\eta_{e} \boldsymbol{I}_{3}-\boldsymbol{S}\left(\boldsymbol{\epsilon}_{d}\right)\right) \boldsymbol{\omega}_{d}
-\end{aligned}\end{split}\]</div>
+\dot{\eta}_{d} & =-\frac{1}{2} \boldsymbol{\epsilon}_{d}^{T} \boldsymbol{\omega}_{d} \\
+\dot{\boldsymbol{\epsilon}}_{d} & =\frac{1}{2}\left(\eta_{e} \boldsymbol{I}_{3}-\boldsymbol{S}\left(\boldsymbol{\epsilon}_{d}\right)\right) \boldsymbol{\omega}_{d}
+\end{aligned}$$ -->
 <!-- # Second-Order IK Algorithms 
 
 The above IK algorithms can be defined as first-order algorithms,
@@ -857,11 +976,10 @@ accelerations chosen to optimize another objective function. -->
 
               
               
-                <footer class="bd-footer-article">
+              
+              
+                <footer class="prev-next-footer d-print-none">
                   
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="../lec15/inverse_vk.html"
@@ -881,10 +999,7 @@ accelerations chosen to optimize another objective function. -->
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -892,6 +1007,7 @@ accelerations chosen to optimize another objective function. -->
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -906,8 +1022,6 @@ accelerations chosen to optimize another objective function. -->
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#definition-of-end-effector-error">Definition of End-effector Error</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#euler-angles-error">Euler-Angles Error</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#angle-axis-error-optional">Angle-Axis Error (Optional)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quaternion-error-optional">Quaternion Error (Optional)</a></li>
 </ul>
 </li>
 </ul>
@@ -932,9 +1046,10 @@ By Wanxin Jin @ IRIS Lab
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
-      © Copyright 2022.
+      © Copyright 2023.
       <br/>
     
   </p>
@@ -958,8 +1073,8 @@ By Wanxin Jin @ IRIS Lab
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>

@@ -44,59 +44,60 @@ are the net torque/force at each joint.
 
 
 Consider a  $n$-DoF robot arm. The kinetic energy is due
-to the motion of each link.  The total kinetic energy is given by 
+to the motion of each link and the motion of each joint actuator:
 
-$$\mathcal{T}=\sum_{i=1}^{n}\mathcal{T}_{\ell_{i}}$$
+$$\mathcal{T}=\sum_{i=1}^{n}\left(\mathcal{T}_{\ell_{i}}+\mathcal{T}_{m_{i}}\right)$$
 
-where $\mathcal{T}_{\ell_{i}}$ is the kinetic energy of Link $i$.
+where $\mathcal{T}_{\ell_{i}}$ is the kinetic energy of Link $i$ and
+$\mathcal{T}_{m_{i}}$ is the kinetic energy of the motor actuating Joint
+$i$
+
+## Kinetic Energy of Link $i$
+
 
 ```{figure} ./dynamics/linki_kinematics.jpg
 ---
 width: 50%
 name: linki_kinematics
 ---
-Motion of Link $i$ 
+Kinematic description of Link $i$ for Lagrange
+formulation
 ```
 
+The kinetic energy contribution of Link $i$ is given by
 
+$$\label{equ.link_ke}
+            \mathcal{T}_{\ell_{i}}=\frac{1}{2} \int_{V_{\ell_{i}}} \dot{\boldsymbol{p}}_{i}^{* T} \dot{\boldsymbol{p}}_{i}^{*} \rho d V$$
 
-As shown in  {numref}`linki_kinematics`, the kinetic energy contribution of Link $i$ is given by
-
-$$
-            \mathcal{T}_{\ell_{i}}=\frac{1}{2} \int_{V_{\ell_{i}}} \dot{\boldsymbol{p}}_{i}^{* T} \dot{\boldsymbol{p}}_{i}^{*} \rho d V$$ (equ.ke_total)
-
-where  $\rho$ is the density of the elementary particle of volume
-$d V$; $\dot{\boldsymbol{p}}_{i}^{*}$ denotes the linear velocity vector of the elementary particle; and  $V_{\ell_{i}}$ is the volume of Link $i$. Here, the position
- $\boldsymbol{p}_{i}^{*}$ of the elementary particle is expressed in the base frame. 
-
-The
-position  $\boldsymbol{p}_{l_{i}}$ of the link center of mass (COM) defined as  
-
-$$\boldsymbol{p}_{\ell_{i}}=\frac{1}{m_{\ell_{i}}} \int_{V_{\ell_{i}}} \boldsymbol{p}_{i}^{*} \rho d V$$
-where $m_{\ell_{i}}$ is the  mass of link $i$. We also define
+where $\dot{\boldsymbol{p}}_{i}^{*}$ denotes the linear velocity vector
+and $\rho$ is the density of the elementary particle of volume
+$d V ; V_{\ell_{i}}$ is the volume of Link $i$. Consider the position
+vector $\boldsymbol{p}_{i}^{*}$ of the elementary particle and the
+position vector $\boldsymbol{p}_{l_{i}}$ of the link center of mass,
+both expressed in the base frame. One has
 
 $$\boldsymbol{r}_{i}=\left[\begin{array}{lll}
 r_{i x} & r_{i y} & r_{i z}
 \end{array}\right]^{T}=\boldsymbol{p}_{i}^{*}-\boldsymbol{p}_{\ell_{i}}$$
 
+with
 
+$$\boldsymbol{p}_{\ell_{i}}=\frac{1}{m_{\ell_{i}}} \int_{V_{\ell_{i}}} \boldsymbol{p}_{i}^{*} \rho d V$$
 
-
- As a result, the velocity of an elementary particle of link $i$ 
- can be expressed as
+where $m_{\ell_{i}}$ is the link mass. As a consequence, the link point
+velocity can be expressed as
 
 $$\label{equ.2}
     \begin{aligned}
 \dot{\boldsymbol{p}}_{i}^{*} & =\dot{\boldsymbol{p}}_{\ell_{i}}+\boldsymbol{\omega}_{i} \times \boldsymbol{r}_{i}  =\dot{\boldsymbol{p}}_{\ell_{i}}+\boldsymbol{S}\left(\boldsymbol{\omega}_{i}\right) \boldsymbol{r}_{i}
-\end{aligned}$$ (equ.ke_vel)
+\end{aligned}$$
 
-where $\dot{\boldsymbol{p}}_{\ell_{i}}$ is the linear velocity of COM and $\boldsymbol{\omega}_{i}$ is the angular velocity of
-the link. 
-
-
-
-By substituting {eq}`equ.ke_vel` into
-{eq}`equ.ke_total`, it leads to that the total kinetic energy of link $i$, $ \mathcal{T}_{\ell_{i}}$, is the sumation of the following three terms
+where $\dot{\boldsymbol{p}}_{\ell_{i}}$ is the linear velocity of the
+center of mass and $\boldsymbol{\omega}_{i}$ is the angular velocity of
+the link. By substituting the velocity expression
+([\[equ.2\]](#equ.2){reference-type="ref" reference="equ.2"}) into
+([\[equ.link_ke\]](#equ.link_ke){reference-type="ref"
+reference="equ.link_ke"}), it leads to multiple terms
 
 **Translational term**
 
@@ -106,14 +107,11 @@ $$\frac{1}{2} \int_{V_{\ell_{i}}} \dot{\boldsymbol{p}}_{\ell_{i}}^{T} \dot{\bold
 
 $$2\left(\frac{1}{2} \int_{V_{\ell_{i}}} \dot{\boldsymbol{p}}_{\ell_{i}}^{T} \boldsymbol{S}\left(\boldsymbol{\omega}_{i}\right) \boldsymbol{r}_{i} \rho d V\right)=2\left(\frac{1}{2} \dot{\boldsymbol{p}}_{\ell_{i}}^{T} \boldsymbol{S}\left(\boldsymbol{\omega}_{i}\right) \int_{V_{\ell_{i}}}\left(\boldsymbol{p}_{i}^{*}-\boldsymbol{p}_{\ell_{i}}\right) \rho d V\right)=0$$
 
-
 **Rotational term**
-
-
 
 $$\frac{1}{2} \int_{V_{\ell_{i}}} \boldsymbol{r}_{i}^{T} \boldsymbol{S}^{T}\left(\boldsymbol{\omega}_{i}\right) \boldsymbol{S}\left(\boldsymbol{\omega}_{i}\right) \boldsymbol{r}_{i} \rho d V=\frac{1}{2} \boldsymbol{\omega}_{i}^{T}\left(\int_{V_{\ell_{i}}} \boldsymbol{S}^{T}\left(\boldsymbol{r}_{i}\right) \boldsymbol{S}\left(\boldsymbol{r}_{i}\right) \rho d V\right) \boldsymbol{\omega}_{i}=\frac{1}{2} \boldsymbol{\omega}_{i}^{T} \boldsymbol{I}_{\ell_{i}} \boldsymbol{\omega}_{i}$$
 
-Recall that 
+In view of
 
 $$\boldsymbol{S}\left(\boldsymbol{r}_{i}\right)=\left[\begin{array}{ccc}
 0 & -r_{i z} & r_{i y} \\
@@ -121,7 +119,7 @@ r_{i z} & 0 & -r_{i x} \\
 -r_{i y} & r_{i x} & 0
 \end{array}\right]$$
 
-hence
+the matrix
 
 $$\begin{aligned}
 \boldsymbol{I}_{\ell_{i}} & =\left[\begin{array}{ccc}
@@ -136,8 +134,9 @@ I_{\ell_{i} x x} & -I_{\ell_{i} x y} & -I_{\ell_{i} x z} \\
 \end{array}\right] . }
 \end{aligned}$$
 
-is the inertia tensor relative to the COM of Link $i$. Notice that this inertia tensor is
-expressed in the base frame, thus is configuration-dependent. If the angular
+represents the inertia tensor relative to the centre of mass of Link $i$
+when expressed in the base frame. Notice that the inertia tensor, when
+expressed in the base frame, is configuration-dependent. If the angular
 velocity of Link $i$ is expressed with reference to a frame attached to
 the link (as in the Denavit-Hartenberg convention), it is
 
@@ -194,7 +193,7 @@ $j-1$.
 It follows that the kinetic energy of Link $i$ can be written as
 
 $$\mathcal{T}_{\ell_{i}}=\frac{1}{2} m_{\ell_{i}} \dot{\boldsymbol{q}}^{T} \boldsymbol{J}_{P}^{\left(\ell_{i}\right) T} \boldsymbol{J}_{P}^{\left(\ell_{i}\right)} \dot{\boldsymbol{q}}+\frac{1}{2} \dot{\boldsymbol{q}}^{T} \boldsymbol{J}_{O}^{\left(\ell_{i}\right) T} \boldsymbol{R}_{i} \boldsymbol{I}_{\ell_{i}}^{i} \boldsymbol{R}_{i}^{T} \boldsymbol{J}_{O}^{\left(\ell_{i}\right)} \dot{\boldsymbol{q}}$$
-<!-- 
+
 ## Kinetic Energy of Motor $i$
 
 
@@ -278,7 +277,7 @@ Hence, the kinetic energy of Rotor $i$ can be written as
 
 $$\mathcal{T}_{m_{i}}=\frac{1}{2} m_{m_{i}} \dot{\boldsymbol{q}}^{T} \boldsymbol{J}_{P}^{\left(m_{i}\right) T} \boldsymbol{J}_{P}^{\left(m_{i}\right)} \dot{\boldsymbol{q}}+\frac{1}{2} \dot{\boldsymbol{q}}^{T} \boldsymbol{J}_{O}^{\left(m_{i}\right) T} \boldsymbol{R}_{m_{i}} \boldsymbol{I}_{m_{i}}^{m_{i}} \boldsymbol{R}_{m_{i}}^{T} \boldsymbol{J}_{O}^{\left(m_{i}\right)} \dot{\boldsymbol{q}}$$
 
-## Total Kinetic Energy -->
+## Total Kinetic Energy
 
 Finally, by summing the kinetic energies of Links and motors, the total
 kinetic energy of the manipulator with actuators is given by the

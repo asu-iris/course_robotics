@@ -284,7 +284,7 @@ transpose controller.
 
 # Definition of End-effector Error
 
-Both IK algorithms  require computing the end-effector error. This is natural for the position
+Both IK algorithms above  require computing the end-effector error. It is straightforward to define the position
 error of the end-effector
 
 $$\boldsymbol{e}_{P}=\boldsymbol{p}_{d}-\boldsymbol{p}_{e}(\boldsymbol{q})$$
@@ -294,7 +294,7 @@ the desired and computed end-effector positions. Its time derivative is
 
 $$\dot{\boldsymbol{e}}_{P}=\dot{\boldsymbol{p}}_{d}-\dot{\boldsymbol{p}}_{e} .$$
 
-However, the problem arises when we consider defining the end-effector orientation
+However, the problem arises when we define the end-effector orientation
 error. In the
 following, let's consider the typical orientation
 representations and its error definition.
@@ -306,20 +306,128 @@ The orientation error using Euler angles is
 $$\boldsymbol{e}_{O}=\boldsymbol{\phi}_{d}-\boldsymbol{\phi}_{e}(\boldsymbol{q})$$
 
 where $\boldsymbol{\phi}_{d}$ and $\boldsymbol{\phi}_{e}$ denote
-respectively the desired and computed set of Euler angles. Its time
+respectively the desired and computed Euler angles of the end-effector. Its time
 derivative is
 
 $$\dot{\boldsymbol{e}}_{O}=\dot{\boldsymbol{\phi}}_{d}-\dot{\boldsymbol{\phi}}_{e}$$
 
-The analytical Jacobian for ZYZ-Euler angles was given in previous
-lectures: $\boldsymbol{J}_{A}=\boldsymbol{T}^{-1}\boldsymbol{J}$ with
-$\boldsymbol{J}$ being the geometric jacobian and
 
-$$\boldsymbol{T}\left(\phi_{e}\right) =\left[\begin{array}{ccc}
+In order to apply any of the above IK algorithms, we need to find a Jacobian in terms of
+
+$$\dot{\boldsymbol{x}}_{e}=\left[\begin{array}{c}
+\dot{\boldsymbol{p}}_{e} \\
+\dot{\boldsymbol{\phi}}_{e}
+\end{array}\right]
+=
+\boldsymbol{J}_{A} \dot{\boldsymbol{q}}
+=
+\begin{bmatrix}
+\boldsymbol{J}_{P}(\boldsymbol{q})\\
+\boldsymbol{J}_{\phi}(\boldsymbol{q})
+\end{bmatrix}
+\dot{\boldsymbol{q}}
+$$
+
+As you can see, compared to the Jacobian $
+\boldsymbol{J}=\begin{bmatrix}
+\boldsymbol{J}_{P}(\boldsymbol{q})\\
+\boldsymbol{J}_{O}(\boldsymbol{q})
+\end{bmatrix}$  we have learned in the Jacobian lecture, the linear Jacobian $\boldsymbol{J}_{P}(\boldsymbol{q})$ remains the same as before, the only difference is the angular Jacobian $\boldsymbol{J}_{O}(\boldsymbol{q})$ becomes
+
+$$
+\dot{\boldsymbol{\phi}}_{e}=
+\boldsymbol{J}_{\phi}(\boldsymbol{q}) \dot{\boldsymbol{q}}
+$$
+
+We call the new Jacobian matrix
+
+$$
+\boldsymbol{J}_{A}(\boldsymbol{q})=\begin{bmatrix}
+\boldsymbol{J}_{P}(\boldsymbol{q})\\
+\boldsymbol{J}_{\phi}(\boldsymbol{q})
+\end{bmatrix}
+$$
+
+the _analytical Jacobian_(recall $\boldsymbol{J}$ is called geometrical Jacobian or Jacobian). This is the reason why we in the above used $\boldsymbol{J}_{A}$ instead of $\boldsymbol{J}$!
+
+
+Next question, how do we find $\boldsymbol{J}_{A}(\boldsymbol{q})$ from $\boldsymbol{J}$? To do so,  we may need find a mapping
+
+$$\left[\begin{array}{c}
+\dot{\boldsymbol{p}}_{e} \\
+\boldsymbol{\omega}_{e}
+\end{array}\right] =  \underbrace{\begin{bmatrix}
+\boldsymbol{I} & \boldsymbol{0} \\
+\boldsymbol{0} & \boldsymbol{N}\left(\phi_{e}\right)
+\end{bmatrix}}_{\boldsymbol{T}}
+\left[\begin{array}{c}
+\dot{\boldsymbol{p}}_{e} \\
+\dot{\boldsymbol{\phi}}_{e}
+\end{array}\right]$$
+
+
+such that
+
+$$\boldsymbol{J}_{A}(\boldsymbol{q}) = \boldsymbol{T}^{-1} \boldsymbol{J}(\boldsymbol{q})$$
+
+
+
+In the following, we will find out the mapping
+
+$$\boldsymbol{\omega}_{e}=\boldsymbol{N}\left(\phi_{e}\right)\dot{\boldsymbol{\phi}}_{e}$$
+
+for the Euler ZYZ Angle 
+${\boldsymbol{\phi}}_{e}=[{\varphi}, {\vartheta}, \psi]^T$.
+
+Recall the rotation induced from the Euler ZYZ Angle. The angualr velocities $\dot{\varphi}, \dot{\vartheta}, \dot\psi$ is always with respect to the current frame, as shown in {numref}`Euler_angle_vel`. 
+
+
+```{figure} ../lec11-12/diff_kinematics/Euler_angle_vel.jpg
+---
+width: 80%
+name: Euler_angle_vel
+---
+Rotational velocities of Euler angles ZYZ in current
+frame
+```
+Therefore, to compute $\boldsymbol{\omega}_{e}$, we just need to first,  express each Euler angle velocity $\dot{\varphi}, \dot{\vartheta}, \dot\psi$ from its respective current from to the reference
+frame, and second, sum them up!
+
+
+
+
+- The angular velocity corresponding to $\dot{\varphi}$ is
+
+$$\dot{\varphi}\left[\begin{array}{lll}0 & 0 & 1\end{array}\right]^{T}$$
+
+- The angular velocity corresponding to  $\dot{\vartheta}$ is
+
+$$\dot{\vartheta}\left[\begin{array}{lll}-s_{\varphi} & c_{\varphi} & 0\end{array}\right]^{T}$$
+
+- The angular velocity corresponding to $\dot{\psi}$ is
+
+$$\dot{\psi}\left[\begin{array}{lll}c_{\varphi} s_{\vartheta} & s_{\varphi} s_{\vartheta} & c_{\vartheta}\end{array}\right]^{T}$$
+
+Thus,
+
+$$\boldsymbol{N}\left(\phi_{e}\right) =\left[\begin{array}{ccc}
 0 & -s_{\varphi} & c_{\varphi} s_{\vartheta} \\
 0 & c_{\varphi} & s_{\varphi} s_{\vartheta} \\
 1 & 0 & c_{\vartheta}
 \end{array}\right] .$$
+
+
+
+
+
+
+
+
+<!-- 
+
+
+
+
 
 ## Angle-Axis Error (Optional)
 If the desired orientation of the end-effector is given in rotation
@@ -440,7 +548,9 @@ $$\begin{aligned}
 \begin{aligned}
 \dot{\eta}_{d} & =-\frac{1}{2} \boldsymbol{\epsilon}_{d}^{T} \boldsymbol{\omega}_{d} \\
 \dot{\boldsymbol{\epsilon}}_{d} & =\frac{1}{2}\left(\eta_{e} \boldsymbol{I}_{3}-\boldsymbol{S}\left(\boldsymbol{\epsilon}_{d}\right)\right) \boldsymbol{\omega}_{d}
-\end{aligned}$$
+\end{aligned}$$ -->
+
+
 
 <!-- # Second-Order IK Algorithms 
 
