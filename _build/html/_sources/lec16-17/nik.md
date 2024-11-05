@@ -170,7 +170,7 @@ Consider the following error dynamics (ODE)
 
 $$\dot{\boldsymbol{x}}(t)=\boldsymbol{f}(\boldsymbol{x}),\quad \text{given}\quad \boldsymbol{x}(0)$$
 
-If there exists a Lyapunov function $V(\boldsymbol{e})$ such that
+If there exists a Lyapunov function $V(\boldsymbol{x})$ such that
 
 -   $V(\boldsymbol{x})>0 \quad \forall \boldsymbol{x} \neq \mathbf{0}$
 
