@@ -33,7 +33,7 @@ generalized force $\xi_i$ is dual to $q_i$ in the sense that
 $\xi_i*q_i$ generate power). In compact form, the above equation can be
 written as
 
-$$\frac{d}{d t}\left(\frac{\partial \mathcal{L}}{\partial \dot{\boldsymbol{q}}}\right)^{T}-\left(\frac{\partial \mathcal{L}}{\partial \boldsymbol{q}}\right)^{T}=\boldsymbol{\xi}$$
+$$\frac{d}{d t}\left(\frac{\partial \mathcal{L}}{\partial \dot{\boldsymbol{q}}}\right)^{T}-\left(\frac{\partial \mathcal{L}}{\partial \boldsymbol{q}}\right)^{T}=\boldsymbol{\xi}$$(equ.lf)
 
 For an open-chain robot arm, the generalized
 coordinates are joint variables $\boldsymbol{q}$. The generalized forces
@@ -53,14 +53,14 @@ where $\mathcal{T}_{\ell_{i}}$ is the kinetic energy of Link $i$.
 ```{figure} ./dynamics/linki_kinematics.jpg
 ---
 width: 50%
-name: linki_kinematics
+name: linki_kinematics1
 ---
 Motion of Link $i$ 
 ```
 
 
 
-As shown in  {numref}`linki_kinematics`, the kinetic energy contribution of Link $i$ is given by
+As shown in  {numref}`linki_kinematics1`, the kinetic energy contribution of Link $i$ is given by
 
 $$
             \mathcal{T}_{\ell_{i}}=\frac{1}{2} \int_{V_{\ell_{i}}} \dot{\boldsymbol{p}}_{i}^{* T} \dot{\boldsymbol{p}}_{i}^{*} \rho d V$$ (equ.ke_total)
@@ -100,18 +100,18 @@ By substituting {eq}`equ.ke_vel` into
 
 **Translational term**
 
-$$\frac{1}{2} \int_{V_{\ell_{i}}} \dot{\boldsymbol{p}}_{\ell_{i}}^{T} \dot{\boldsymbol{p}}_{\ell_{i}} \rho d V=\frac{1}{2} m_{\ell_{i}} \dot{\boldsymbol{p}}_{\ell_{i}}^{T} \dot{\boldsymbol{p}}_{\ell_{i}}$$
+$$\frac{1}{2} \int_{V_{\ell_{i}}} \dot{\boldsymbol{p}}_{\ell_{i}}^{T} \dot{\boldsymbol{p}}_{\ell_{i}} \rho d V=\frac{1}{2} m_{\ell_{i}} \dot{\boldsymbol{p}}_{\ell_{i}}^{T} \dot{\boldsymbol{p}}_{\ell_{i}}$$(eq.term_trans)
 
 **Cross term**
 
-$$2\left(\frac{1}{2} \int_{V_{\ell_{i}}} \dot{\boldsymbol{p}}_{\ell_{i}}^{T} \boldsymbol{S}\left(\boldsymbol{\omega}_{i}\right) \boldsymbol{r}_{i} \rho d V\right)=2\left(\frac{1}{2} \dot{\boldsymbol{p}}_{\ell_{i}}^{T} \boldsymbol{S}\left(\boldsymbol{\omega}_{i}\right) \int_{V_{\ell_{i}}}\left(\boldsymbol{p}_{i}^{*}-\boldsymbol{p}_{\ell_{i}}\right) \rho d V\right)=0$$
+$$2\left(\frac{1}{2} \int_{V_{\ell_{i}}} \dot{\boldsymbol{p}}_{\ell_{i}}^{T} \boldsymbol{S}\left(\boldsymbol{\omega}_{i}\right) \boldsymbol{r}_{i} \rho d V\right)=2\left(\frac{1}{2} \dot{\boldsymbol{p}}_{\ell_{i}}^{T} \boldsymbol{S}\left(\boldsymbol{\omega}_{i}\right) \int_{V_{\ell_{i}}}\left(\boldsymbol{p}_{i}^{*}-\boldsymbol{p}_{\ell_{i}}\right) \rho d V\right)=0$$(eq.term_cross)
 
 
 **Rotational term**
 
 
 
-$$\frac{1}{2} \int_{V_{\ell_{i}}} \boldsymbol{r}_{i}^{T} \boldsymbol{S}^{T}\left(\boldsymbol{\omega}_{i}\right) \boldsymbol{S}\left(\boldsymbol{\omega}_{i}\right) \boldsymbol{r}_{i} \rho d V=\frac{1}{2} \boldsymbol{\omega}_{i}^{T}\left(\int_{V_{\ell_{i}}} \boldsymbol{S}^{T}\left(\boldsymbol{r}_{i}\right) \boldsymbol{S}\left(\boldsymbol{r}_{i}\right) \rho d V\right) \boldsymbol{\omega}_{i}=\frac{1}{2} \boldsymbol{\omega}_{i}^{T} \boldsymbol{I}_{\ell_{i}} \boldsymbol{\omega}_{i}$$
+$$\frac{1}{2} \int_{V_{\ell_{i}}} \boldsymbol{r}_{i}^{T} \boldsymbol{S}^{T}\left(\boldsymbol{\omega}_{i}\right) \boldsymbol{S}\left(\boldsymbol{\omega}_{i}\right) \boldsymbol{r}_{i} \rho d V=\frac{1}{2} \boldsymbol{\omega}_{i}^{T}\left(\int_{V_{\ell_{i}}} \boldsymbol{S}^{T}\left(\boldsymbol{r}_{i}\right) \boldsymbol{S}\left(\boldsymbol{r}_{i}\right) \rho d V\right) \boldsymbol{\omega}_{i}=\frac{1}{2} \boldsymbol{\omega}_{i}^{T} \boldsymbol{I}_{\ell_{i}} \boldsymbol{\omega}_{i}$$(eq.term_rot)
 
 Recall that 
 
@@ -121,7 +121,7 @@ r_{i z} & 0 & -r_{i x} \\
 -r_{i y} & r_{i x} & 0
 \end{array}\right]$$
 
-hence
+Then,
 
 $$\begin{aligned}
 \boldsymbol{I}_{\ell_{i}} & =\left[\begin{array}{ccc}
@@ -129,44 +129,58 @@ $$\begin{aligned}
 * & \int\left(r_{i x}^{2}+r_{i z}^{2}\right) \rho d V & -\int r_{i y} r_{i z} \rho d V \\
 * & * & \int\left(r_{i x}^{2}+r_{i y}^{2}\right) \rho d V
 \end{array}\right] 
-=  {\left[\begin{array}{ccc}
-I_{\ell_{i} x x} & -I_{\ell_{i} x y} & -I_{\ell_{i} x z} \\
-* & I_{\ell_{i} y y} & -I_{\ell_{i} y z} \\
-* & * & I_{\ell_{i} z z}
-\end{array}\right] . }
 \end{aligned}$$
 
-is the inertia tensor relative to the COM of Link $i$. Notice that this inertia tensor is
-expressed in the base frame, thus is configuration-dependent. If the angular
-velocity of Link $i$ is expressed with reference to a frame attached to
-the link (as in the Denavit-Hartenberg convention), it is
+is the inertia tensor relative to the COM of Link $i$. Since $\boldsymbol{r}_i$ is expressed in the base frame, this inertia tensor is thus also
+expressed in the base frame, thus is configuration-dependent.
 
-$$\boldsymbol{\omega}_{i}^{i}=\boldsymbol{R}_{i}^{T} \boldsymbol{\omega}_{i}$$
+Let's consider $\boldsymbol{r}_i^i$ be expressed in the frame of link $i$
+
+$$\boldsymbol{r}_{i}=\boldsymbol{R}_{i} \boldsymbol{r}_{i}^{i}$$
 
 where $\boldsymbol{R}_{i}$ is the rotation matrix from Link $i$ frame to
-the base frame. When referred to the link frame, the inertia tensor is
-constant. Let $\boldsymbol{I}_{\ell_{i}}^{i}$ denote such tensor:
+the base frame. Then, from {eq}`eq.term_rot`,  we have 
 
-$$\boldsymbol{I}_{\ell_{i}}^{i}=\boldsymbol{R}_{i}^{T} \boldsymbol{I}_{\ell_{i}} \boldsymbol{R}_{i}$$
+$$
+\begin{aligned}
+&\frac{1}{2} \boldsymbol{\omega}_{i}^{T}\left(\int_{V_{\ell_{i}}} \boldsymbol{S}^{T}\left(\boldsymbol{R}_{i} \boldsymbol{r}_{i}^{i}\right) \boldsymbol{S}\left(\boldsymbol{R}_{i} \boldsymbol{r}_{i}^{i}\right) \rho d V\right) \boldsymbol{\omega}_{i}\\
+=&
+\frac{1}{2} \boldsymbol{\omega}_{i}^{T}\left(\int_{V_{\ell_{i}}} 
+\boldsymbol{R}_{i} \boldsymbol{S}^{T}\left(\boldsymbol{r}_{i}^{i}\right) \boldsymbol{R}_{i} ^T \boldsymbol{R}_{i} \boldsymbol{S}\left( \boldsymbol{r}_{i}^{i}\right) \boldsymbol{R}_{i}^T
+\rho d V\right) \boldsymbol{\omega}_{i}\\
+=&
+\frac{1}{2} \boldsymbol{\omega}_{i}^{T} \boldsymbol{R}_{i} \left(\int_{V_{\ell_{i}}} 
+\boldsymbol{S}^{T}\left(\boldsymbol{r}_{i}^{i}\right)   \boldsymbol{S}\left( \boldsymbol{r}_{i}^{i}\right) 
+\rho d V\right) \boldsymbol{R}_{i}^T\boldsymbol{\omega}_{i}\\
+=&
+\frac{1}{2} \boldsymbol{\omega}_{i}^{T} \boldsymbol{R}_{i} \boldsymbol{I}_{\ell_{i}}^{i} \boldsymbol{R}_{i}^{T}\boldsymbol{\omega}_{i}
+\end{aligned}
+$$
 
-If the axes of Link $i$ frame coincide with the central axes of inertia,
-the inertia tensor relative to the centre of mass is a diagonal matrix.
-By summing the translational and rotational terms,
+Here, 
 
-$$\mathcal{T}_{\ell_{i}}=\frac{1}{2} m_{\ell_{i}} \dot{\boldsymbol{p}}_{\ell_{i}}^{T} \dot{\boldsymbol{p}}_{\ell_{i}}+\frac{1}{2} \boldsymbol{\omega}_{i}^{T} \boldsymbol{R}_{i} \boldsymbol{I}_{\ell_{i}}^{i} \boldsymbol{R}_{i}^{T} \boldsymbol{\omega}_{i}$$
+$$ 
+\boldsymbol{I}_{\ell_{i}}^{i} =\left(\int_{V_{\ell_{i}}} 
+\boldsymbol{S}^{T}\left(\boldsymbol{r}_{i}^{i}\right)   \boldsymbol{S}\left( \boldsymbol{r}_{i}^{i}\right) 
+\rho d V\right)
+$$
 
-At this point, it is necessary to express the kinetic energy as a
-function of the generalized coordinates of the system, that are the
-joint variables. To this end,
+ is expressed in the body frame (link $i$ frame), and thus is configuration-independent.
+
+
+By summing the translational and rotational terms, the total kinetic energy in {eq}`equ.ke_total` of link $i$ is
+
+$$\mathcal{T}_{\ell_{i}}=\frac{1}{2} m_{\ell_{i}} \dot{\boldsymbol{p}}_{\ell_{i}}^{T} \dot{\boldsymbol{p}}_{\ell_{i}}+\frac{1}{2} \boldsymbol{\omega}_{i}^{T} \boldsymbol{R}_{i} \boldsymbol{I}_{\ell_{i}}^{i} \boldsymbol{R}_{i}^{T} \boldsymbol{\omega}_{i}$$(equ.ke_total2)
+
+Now, let's find out the linear and angular velocities of Link $i$ using Jacobian! Using our previous method to find Jacobian up to link $i$, we have
+
 
 $$\begin{aligned}
 \dot{\boldsymbol{p}}_{\ell_{i}} & =\boldsymbol{\jmath}_{P 1}^{\left(\ell_{i}\right)} \dot{q}_{1}+\ldots+\boldsymbol{J}_{P i}^{\left(\ell_{i}\right)} \dot{q}_{i}=\boldsymbol{J}_{P}^{\left(\ell_{i}\right)} \dot{\boldsymbol{q}} \\
 \boldsymbol{\omega}_{i} & =\boldsymbol{\jmath}_{O 1}^{\left(\ell_{i}\right)} \dot{q}_{1}+\ldots+\boldsymbol{J}_{O i}^{\left(\ell_{i}\right)} \dot{q}_{i}=\boldsymbol{J}_{O}^{\left(\ell_{i}\right)} \dot{\boldsymbol{q}},
 \end{aligned}$$
 
-where the contributions of the Jacobian columns relative to the joint
-velocities have been taken into account up to current Link $i$. The
-Jacobians to consider are then:
+where (think about why the columns after $i$ is zeros?)
 
 $$\begin{aligned}
 \boldsymbol{J}_{P}^{\left(\ell_{i}\right)}  =\left[\begin{array}{llllll}
@@ -191,7 +205,7 @@ where $\boldsymbol{p}_{j-1}$ is the position of the origin of Frame
 $j-1$ and $\boldsymbol{z}_{j-1}$ is the unit vector of axis $z$ of Frame
 $j-1$.
 
-It follows that the kinetic energy of Link $i$ can be written as
+It follows that the kinetic energy of Link $i$ in {eq}`equ.ke_total2` can be written as
 
 $$\mathcal{T}_{\ell_{i}}=\frac{1}{2} m_{\ell_{i}} \dot{\boldsymbol{q}}^{T} \boldsymbol{J}_{P}^{\left(\ell_{i}\right) T} \boldsymbol{J}_{P}^{\left(\ell_{i}\right)} \dot{\boldsymbol{q}}+\frac{1}{2} \dot{\boldsymbol{q}}^{T} \boldsymbol{J}_{O}^{\left(\ell_{i}\right) T} \boldsymbol{R}_{i} \boldsymbol{I}_{\ell_{i}}^{i} \boldsymbol{R}_{i}^{T} \boldsymbol{J}_{O}^{\left(\ell_{i}\right)} \dot{\boldsymbol{q}}$$
 <!-- 
@@ -280,31 +294,30 @@ $$\mathcal{T}_{m_{i}}=\frac{1}{2} m_{m_{i}} \dot{\boldsymbol{q}}^{T} \boldsymbol
 
 ## Total Kinetic Energy -->
 
-Finally, by summing the kinetic energies of Links and motors, the total
-kinetic energy of the manipulator with actuators is given by the
-quadratic form
+Finally, by summing the kinetic energies of all Links, the total
+kinetic energy of a robot arm is given by
 
-$$\mathcal{T}=\frac{1}{2} \dot{\boldsymbol{q}}^{T} \boldsymbol{B}(\boldsymbol{q}) \dot{\boldsymbol{q}}=\frac{1}{2} \sum_{i=1}^{n} \sum_{j=1}^{n} b_{i j}(\boldsymbol{q}) \dot{q}_{i} \dot{q}_{j}$$
+$$\mathcal{T}=\frac{1}{2} \dot{\boldsymbol{q}}^{T} \boldsymbol{B}(\boldsymbol{q}) \dot{\boldsymbol{q}}=\frac{1}{2} \sum_{i=1}^{n} \sum_{j=1}^{n} b_{i j}(\boldsymbol{q}) \dot{q}_{i} \dot{q}_{j}$$(equ.ke_total_final)
 
 where
 
 $$\begin{aligned}
-\boldsymbol{B}(\boldsymbol{q})=\sum_{i=1}^{n}\left(m_{\ell_{i}}\right. & \boldsymbol{J}_{P}^{\left(\ell_{i}\right) T} \boldsymbol{J}_{P}^{\left(\ell_{i}\right)}+\boldsymbol{J}_{O}^{\left(\ell_{i}\right) T} \boldsymbol{R}_{i} \boldsymbol{I}_{\ell_{i}}^{i} \boldsymbol{R}_{i}^{T} \boldsymbol{J}_{O}^{\left(\ell_{i}\right)}+\left.  m_{m_{i}} \boldsymbol{J}_{P}^{\left(m_{i}\right) T} \boldsymbol{J}_{P}^{\left(m_{i}\right)}+\boldsymbol{J}_{O}^{\left(m_{i}\right) T} \boldsymbol{R}_{m_{i}} \boldsymbol{I}_{m_{i}}^{m_{i}} \boldsymbol{R}_{m_{i}}^{T} \boldsymbol{J}_{O}^{\left(m_{i}\right)}\right)
+\boldsymbol{B}(\boldsymbol{q})=\sum_{i=1}^{n}\left(m_{\ell_{i}}\right. & \boldsymbol{J}_{P}^{\left(\ell_{i}\right) T} \boldsymbol{J}_{P}^{\left(\ell_{i}\right)}+\boldsymbol{J}_{O}^{\left(\ell_{i}\right) T} \boldsymbol{R}_{i} \boldsymbol{I}_{\ell_{i}}^{i} \boldsymbol{R}_{i}^{T} \boldsymbol{J}_{O}^{\left(\ell_{i}\right)}\left.\right)
 \end{aligned}$$
 
 is the $(n \times n)$ inertia matrix which is symmetric, positive
 definite, and configuration - dependent (in general).
 
-# Computation of Potential Energy
+</br></br></br>
 
-As done for kinetic energy, the potential energy stored in the
-manipulator is given by the sum of the contributions relative to each
-link as well as to each rotor:
+# Potential Energy of a Robot Arm
 
-$$\mathcal{U}=\sum_{i=1}^{n}\left(\mathcal{U}_{\ell_{i}}+\mathcal{U}_{m_{i}}\right)$$
+The potential energy of a robot arm is given by the sum of the contributions of each
+link:
 
-On the assumption of rigid links, the potential energy of gravitational
-forces is
+$$\mathcal{U}=\sum_{i=1}^{n}\mathcal{U}_{\ell_{i}}$$
+
+The potential energy of Link $i$ is
 
 $$\mathcal{U}_{\ell_{i}}=-\int_{V_{\ell_{i}}} \boldsymbol{g}_{0}^{T} \boldsymbol{p}_{i}^{*} \rho d V=-m_{\ell_{i}} \boldsymbol{g}_{0}^{T} \boldsymbol{p}_{\ell_{i}}$$
 
@@ -312,32 +325,30 @@ where $\boldsymbol{g}_{0}$ is the gravity acceleration vector in the
 base frame (e.g., $\boldsymbol{g}_{0}=$
 $\left[\begin{array}{lll}0 & 0 & -g\end{array}\right]^{T}$ if $z$ is the
 vertical axis), and $\boldsymbol{p}_{\ell_{i}}$ the center of mass of
-Link $i$. As regards the contribution of Rotor $i$, one has
+Link $i$. 
 
-$$\mathcal{U}_{m_{i}}=-m_{m_{i}} \boldsymbol{g}_{0}^{T} \boldsymbol{p}_{m_{i}}$$
+The total potential energy of the robot arm is 
 
-The total potential energy is given by
+$$\mathcal{U}=-\sum_{i=1}^{n}m_{\ell_{i}} \boldsymbol{g}_{0}^{T} \boldsymbol{p}_{\ell_{i}}$$(equ.pe_total_final)
 
-$$\mathcal{U}=-\sum_{i=1}^{n}\left(m_{\ell_{i}} \boldsymbol{g}_{0}^{T} \boldsymbol{p}_{\ell_{i}}+m_{m_{i}} \boldsymbol{g}_{0}^{T} \boldsymbol{p}_{m_{i}}\right)$$
+which shows that potential energy is only a function of  the joint
+variable ${\boldsymbol{q}}$ because 
+$\boldsymbol{p}_{\ell_{i}}$ is a function
+of $\boldsymbol{q}$,
 
-which reveals that potential energy, through the vectors
-$\boldsymbol{p}_{\ell_{i}}$ and $\boldsymbol{p}_{m_{i}}$ is a function
-only of the joint variables $\boldsymbol{q}$, and not of the joint
-velocities $\dot{\boldsymbol{q}}$
+</br></br></br>
 
-# Equations of Motion
+# Dynamics Equation
 
-Having computed the total kinetic and potential energy of the system,
-the Lagrangian for the manipulator is
+Having computed the total kinetic energy {eq}`equ.ke_total_final` and potential energy {eq}`equ.pe_total_final` of the robot arm,
+the Lagrangian of the system is
 
-$$\mathcal{L}(\boldsymbol{q}, \dot{\boldsymbol{q}})=\mathcal{T}(\boldsymbol{q}, \dot{\boldsymbol{q}})-\mathcal{U}(\boldsymbol{q})$$
+$$\mathcal{L}(\boldsymbol{q}, \dot{\boldsymbol{q}})=\mathcal{T}(\boldsymbol{q}, \dot{\boldsymbol{q}})-\mathcal{U}(\boldsymbol{q})=\frac{1}{2} \dot{\boldsymbol{q}}^{T} \boldsymbol{B}(\boldsymbol{q}) \dot{\boldsymbol{q}}-\mathcal{U}(\boldsymbol{q})$$
 
-Taking the derivatives required by Lagrange equations
-$\frac{d}{d t}\left(\frac{\partial \mathcal{L}}{\partial \dot{\boldsymbol{q}}}\right)^{T}-\left(\frac{\partial \mathcal{L}}{\partial \boldsymbol{q}}\right)^{T}=\boldsymbol{\xi}$
-and recalling that $\mathcal{U}$ does not depend on
-$\dot{\boldsymbol{q}}$ yields
+By applying Lagrange formulation {eq}`equ.lf`,
+we have
 
-$$\boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{n}(\boldsymbol{q}, \dot{\boldsymbol{q}})=\boldsymbol{\xi}$$
+$$\boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{n}(\boldsymbol{q}, \dot{\boldsymbol{q}})=\boldsymbol{\xi}$$(equ.arm_dyn)
 
 where
 
@@ -357,12 +368,13 @@ $$\frac{\partial \mathcal{T}}{\partial q_{i}}=\frac{1}{2} \sum_{j=1}^{n} \sum_{k
 Further,
 
 $$\begin{aligned}
-\frac{\partial \mathcal{U}}{\partial q_{i}} & =-\sum_{j=1}^{n}\left(m_{\ell_{j}} \boldsymbol{g}_{0}^{T} \frac{\partial \boldsymbol{p}_{\ell_{j}}}{\partial q_{i}}+m_{m_{j}} \boldsymbol{g}_{0}^{T} \frac{\partial \boldsymbol{p}_{m_{j}}}{\partial q_{i}}\right) =-\sum_{j=1}^{n}\left(m_{\ell_{j}} \boldsymbol{g}_{0}^{T} \boldsymbol{J}_{P i}^{\left(\ell_{j}\right)}(\boldsymbol{q})+m_{m_{j}} \boldsymbol{g}_{0}^{T} \boldsymbol{J}_{P i}^{\left(m_{j}\right)}(\boldsymbol{q})\right)=g_{i}(\boldsymbol{q})
+\frac{\partial \mathcal{U}}{\partial q_{i}} & =-\sum_{j=1}^{n}m_{\ell_{j}} \boldsymbol{g}_{0}^{T} \frac{\partial \boldsymbol{p}_{\ell_{j}}}{\partial q_{i}} =-\sum_{j=1}^{n}m_{\ell_{j}} \boldsymbol{g}_{0}^{T} \boldsymbol{J}_{P i}^{\left(\ell_{j}\right)}(\boldsymbol{q})=g_{i}(\boldsymbol{q})
 \end{aligned}$$
 
 As a result, the equations of motion are
 
-$$\sum_{j=1}^{n} b_{i j}(\boldsymbol{q}) \ddot{q}_{j}+\sum_{j=1}^{n} \sum_{k=1}^{n} h_{i j k}(\boldsymbol{q}) \dot{q}_{k} \dot{q}_{j}+g_{i}(\boldsymbol{q})=\xi_{i} \quad i=1, \ldots, n .$$
+$$\sum_{j=1}^{n} b_{i j}(\boldsymbol{q}) \ddot{q}_{j}+\sum_{j=1}^{n} \sum_{k=1}^{n} h_{i j k}(\boldsymbol{q}) \dot{q}_{k} \dot{q}_{j}+g_{i}(\boldsymbol{q})=\xi_{i} \quad i=1, \ldots, n .$$(equ.arm_dyn2)
+
 
 where
 
@@ -388,6 +400,7 @@ A physical interpretation of the above reveals that:
 
 Regarding the generalized force $\boldsymbol{\xi}$ at the manipulator
 joints, it is
+
 $$\boldsymbol{\xi}=\underbrace{\boldsymbol{\tau}}_{\text{motor torque}}-\underbrace{\boldsymbol{F}_{v} \dot{\boldsymbol{q}}}_{\text{viscous friction torques}}-\underbrace{\boldsymbol{F}_{s} \operatorname{sgn}(\dot{\boldsymbol{q}})}_{\text{Coulomb friction torques}}-\underbrace{\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{h}_{e}}_{\text{torques induced by  contact forces.}}$$
 
 where $\boldsymbol{F}_{v}$ denotes the $(n \times n)$ diagonal matrix of
@@ -415,7 +428,10 @@ Here, the definition of $c_{ijk}$ is from $$\begin{aligned}
 \end{aligned}$$
 
 Therefore,
+
 $$c_{ijk}=\frac{1}{2}\Big(\frac{\partial b_{i j}}{\partial q_{k}}+\frac{\partial b_{i k}}{\partial q_{j}}- \frac{\partial b_{j k}}{\partial q_{i}}\Big)$$
+
+</br></br></br>
 
 ## Property: Skew-symmetry of $\dot{\boldsymbol{B}}-2\boldsymbol{C}$
 
@@ -438,13 +454,12 @@ gravity:
 $$\label{equ.power_forces}
 \dot{\boldsymbol{q}}^{T}(-\boldsymbol{F}_v{\dot{\boldsymbol{q}}}-\boldsymbol{F}_s\text{sgn}({\dot{\boldsymbol{q}}})-\boldsymbol{g}(\boldsymbol{q})-\boldsymbol{\tau}-\boldsymbol{J}^T(\boldsymbol{q})\boldsymbol{h}_{e})$$
 
-Let ([\[equ.diff_kinenergy\]](#equ.diff_kinenergy){reference-type="ref"
-reference="equ.diff_kinenergy"}) equal
-([\[equ.power_forces\]](#equ.power_forces){reference-type="ref"
-reference="equ.power_forces"}), leading to $$\label{equ.intermediate}
+ $$\label{equ.intermediate}
     \dot{\boldsymbol{q}}^{T}\boldsymbol{B}(\boldsymbol{q})\ddot{\boldsymbol{q}}+\frac{1}{2}\left(
     \dot{\boldsymbol{q}}^{T} \dot{\boldsymbol{B}}(\boldsymbol{q})\dot{\boldsymbol{q}}
     \right)=\dot{\boldsymbol{q}}^{T}(-\boldsymbol{F}_v{\dot{\boldsymbol{q}}}-\boldsymbol{F}_s\text{sgn}({\dot{\boldsymbol{q}}})-\boldsymbol{g}(\boldsymbol{q})-\boldsymbol{\tau}-\boldsymbol{J}^T(\boldsymbol{q})\boldsymbol{h}_{e})$$
+
+
 Recall the dynamics equation we have previously introduced,
 
 $$\boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{F}_{v} \dot{\boldsymbol{q}}+\boldsymbol{F}_{s} \operatorname{sgn}(\dot{\boldsymbol{q}})+\boldsymbol{g}(\boldsymbol{q})=\boldsymbol{\tau}-\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{h}_{e}$$
@@ -459,6 +474,9 @@ $$\frac{1}{2}  \dot{\boldsymbol{q}}^{T} \boldsymbol{B}(\boldsymbol{q})\dot{\bold
 which holds for any $\dot{\boldsymbol{q}}$. It means that
 $\boldsymbol{B}(\boldsymbol{q})\dot{\boldsymbol{q}}-2\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}})$
 is a skew-symmetric matrix.
+
+
+</br></br></br>
 
 # Examples: Two-link Planar Arm
 

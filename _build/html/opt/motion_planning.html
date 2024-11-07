@@ -1,12 +1,13 @@
 
+
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="../" >
+<html lang="en" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Motion Planning &#8212; Modeling and Control of Robots</title>
   
@@ -14,49 +15,52 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
-  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
-    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="../_static/doctools.js?v=9a2dae69"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="../_static/copybutton.js?v=f281be69"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'opt/motion_planning';</script>
@@ -73,23 +77,19 @@
 
   
   
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
-  
-  <div id="pst-scroll-pixel-helper"></div>
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -111,20 +111,12 @@
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
-
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
-</div>
-
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
-    </header>
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
   
-
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
-      
-      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -139,13 +131,9 @@
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
-
-  
-    
   
 
 <a class="navbar-brand logo" href="../intro.html">
-  
   
   
   
@@ -155,23 +143,12 @@
       
     
     
-    <img src="../_static/iris_logo_2.png" class="logo__image only-light" alt="Modeling and Control of Robots - Home"/>
-    <script>document.write(`<img src="../_static/iris_logo_2.png" class="logo__image only-dark" alt="Modeling and Control of Robots - Home"/>`);</script>
+    <img src="../_static/iris_logo_2.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/iris_logo_2.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item">
-
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
-        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -224,7 +201,7 @@
 
 <li class="toctree-l1"><a class="reference internal" href="../lec16-17/nik.html">Numerical Inverse Kinematics</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="../lec18/dyn.html">Dynamics (Lagrange formulation)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lec18/dyn.html">Dynamics (Lagrangian formulation)</a></li>
 
 
 
@@ -258,7 +235,7 @@
 
       </div>
       
-      <main id="main-content" class="bd-main" role="main">
+      <main id="main-content" class="bd-main">
         
         
 
@@ -267,14 +244,14 @@
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article d-print-none">
+              <div class="bd-header-article">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</button></div>
+</label></div>
       
     </div>
   
@@ -364,28 +341,26 @@
 </button>
 
 
-
 <script>
 document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
   </button>
 `);
 </script>
 
-
 <script>
 document.write(`
-  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
   </button>
 `);
 </script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</button>
+</label>
 </div></div>
       
     </div>
@@ -424,20 +399,20 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article">
+                <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="motion-planning">
-<h1>Motion Planning<a class="headerlink" href="#motion-planning" title="Link to this heading">#</a></h1>
+<h1>Motion Planning<a class="headerlink" href="#motion-planning" title="Permalink to this heading">#</a></h1>
 <p>Motion planning is the problem of finding a robot motion from start
 state to a goal state that avoids obstacles in the environment (also statisfies other constraints).</p>
 <figure class="align-default" id="link-arm">
 <a class="reference internal image-reference" href="../_images/motion-planning.gif"><img alt="../_images/motion-planning.gif" src="../_images/motion-planning.gif" style="width: 70%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 42 </span><span class="caption-text">Robot arm motion planning</span><a class="headerlink" href="#link-arm" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 42 </span><span class="caption-text">Robot arm motion planning</span><a class="headerlink" href="#link-arm" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <section id="configuration-space">
-<h2>Configuration Space<a class="headerlink" href="#configuration-space" title="Link to this heading">#</a></h2>
+<h2>Configuration Space<a class="headerlink" href="#configuration-space" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p><strong>Configuration of a robot</strong>:  a representation of a robot pose, typically using the joint vector <span class="math notranslate nohighlight">\(q\in R^n\)</span>.</p></li>
 <li><p><strong>Configuration space (C-Space)</strong>: the space that contains all possible robot configurations.</p></li>
@@ -464,7 +439,7 @@ C=C_{free}\cup C_{obs}
 <p><span class="caption-number">Fig. 43 </span><span class="caption-text">(a) A circular mobile robot (open circle) and a workspace obstacle
 (gray triangle). The configuration of the robot is represented by <span class="math notranslate nohighlight">\((x, y)\)</span> at its center. (b) In  C-space, the obstacle is “grown” by the radius of the robot
 and the robot is treated as a point. Any <span class="math notranslate nohighlight">\((x, y)\)</span> configuration outside the bold line is
-collision-free.</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
+collision-free.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="id2">
@@ -472,17 +447,17 @@ collision-free.</span><a class="headerlink" href="#id1" title="Link to this imag
 <figcaption>
 <p><span class="caption-number">Fig. 44 </span><span class="caption-text">(Left) The joint angles of a 2R robot arm. (Middle) The arm navigating
 among obstacles A, B, and C. (Right) The same motion in C-space. Three intermediate
-points, 4, 7, and 10, along the path are labeled.</span><a class="headerlink" href="#id2" title="Link to this image">#</a></p>
+points, 4, 7, and 10, along the path are labeled.</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="optimization-based-motion-planning-not-convered">
-<h2>Optimization-based motion planning (NOT convered)<a class="headerlink" href="#optimization-based-motion-planning-not-convered" title="Link to this heading">#</a></h2>
+<h2>Optimization-based motion planning (NOT convered)<a class="headerlink" href="#optimization-based-motion-planning-not-convered" title="Permalink to this heading">#</a></h2>
 <p>Robot motion is generated by solving an optimization problem that minimizes (or maximizes) a given cost function (such as minimal jerk, control energy) while satisfying various constraints, such as obstacle avoidance and robot dynamics. Mathmatically,</p>
 <figure class="align-default" id="id3">
 <a class="reference internal image-reference" href="../_images/opt_mp.png"><img alt="../_images/opt_mp.png" src="../_images/opt_mp.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 45 </span><span class="caption-text">General formulation for optimization-based robot motion planning</span><a class="headerlink" href="#id3" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 45 </span><span class="caption-text">General formulation for optimization-based robot motion planning</span><a class="headerlink" href="#id3" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Some methods (Please read the original paper if you are interested):</p>
@@ -497,15 +472,15 @@ points, 4, 7, and 10, along the path are labeled.</span><a class="headerlink" hr
 </ul>
 </section>
 <section id="sampling-based-motion-planning-focused-here">
-<h2>Sampling-based motion planning (focused here)<a class="headerlink" href="#sampling-based-motion-planning-focused-here" title="Link to this heading">#</a></h2>
+<h2>Sampling-based motion planning (focused here)<a class="headerlink" href="#sampling-based-motion-planning-focused-here" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://ieeexplore.ieee.org/document/508439">Probabilistic Roadmap</a></p></li>
-<li><p><a class="reference internal" href="#"><span class="xref myst">Rapidly-exploring Random Trees (RRTs)</span></a></p></li>
+<li><p><span class="xref myst">Rapidly-exploring Random Trees (RRTs)</span></p></li>
 <li><p>Smoothing</p></li>
 </ul>
 </section>
 <section id="probabilistic-roadmap-prm">
-<h2>Probabilistic Roadmap (PRM)<a class="headerlink" href="#probabilistic-roadmap-prm" title="Link to this heading">#</a></h2>
+<h2>Probabilistic Roadmap (PRM)<a class="headerlink" href="#probabilistic-roadmap-prm" title="Permalink to this heading">#</a></h2>
 <p>Python example code (copyright, authored by IRIS Lab):
 <a class="reference external" href="https://colab.research.google.com/drive/1TvEIeUeZnZjJOjU33IVWLnP43DrFXxVY?usp=sharing">https://colab.research.google.com/drive/1TvEIeUeZnZjJOjU33IVWLnP43DrFXxVY?usp=sharing</a></p>
 <p>The basic PRM algorithm in robot configuration space <a class="reference internal" href="#prm1"><span class="std std-numref">Fig. 46</span></a> is as follows:</p>
@@ -517,43 +492,43 @@ points, 4, 7, and 10, along the path are labeled.</span><a class="headerlink" hr
 <figure class="align-default" id="prm1">
 <a class="reference internal image-reference" href="../_images/prm-1.png"><img alt="../_images/prm-1.png" src="../_images/prm-1.png" style="width: 70%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 46 </span><span class="caption-text">Configuration space: balck blocks show obstacle space and the while show free space. The start is shown in green  and goal in red.</span><a class="headerlink" href="#prm1" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 46 </span><span class="caption-text">Configuration space: balck blocks show obstacle space and the while show free space. The start is shown in green  and goal in red.</span><a class="headerlink" href="#prm1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="prm2">
 <a class="reference internal image-reference" href="../_images/prm-2.png"><img alt="../_images/prm-2.png" src="../_images/prm-2.png" style="width: 70%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 47 </span><span class="caption-text">Sample <span class="math notranslate nohighlight">\(N\)</span> configurations at random from the C-space.</span><a class="headerlink" href="#prm2" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 47 </span><span class="caption-text">Sample <span class="math notranslate nohighlight">\(N\)</span> configurations at random from the C-space.</span><a class="headerlink" href="#prm2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="prm3">
 <a class="reference internal image-reference" href="../_images/prm-3.png"><img alt="../_images/prm-3.png" src="../_images/prm-3.png" style="width: 70%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 48 </span><span class="caption-text">Only add the samples in free space  and the start and goal to the roadmap (also known as milestones).</span><a class="headerlink" href="#prm3" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 48 </span><span class="caption-text">Only add the samples in free space  and the start and goal to the roadmap (also known as milestones).</span><a class="headerlink" href="#prm3" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="prm4">
 <a class="reference internal image-reference" href="../_images/prm-4.png"><img alt="../_images/prm-4.png" src="../_images/prm-4.png" style="width: 70%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 49 </span><span class="caption-text">Each milestone is linked by straight paths to its nearest neighbors. The collision-free links are retained as local paths to form the PRM</span><a class="headerlink" href="#prm4" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 49 </span><span class="caption-text">Each milestone is linked by straight paths to its nearest neighbors. The collision-free links are retained as local paths to form the PRM</span><a class="headerlink" href="#prm4" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="prm5">
 <a class="reference internal image-reference" href="../_images/prm-5.png"><img alt="../_images/prm-5.png" src="../_images/prm-5.png" style="width: 70%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 50 </span><span class="caption-text">Search for a path from the start to the goal using <a class="reference external" href="https://theory.stanford.edu/~amitp/GameProgramming/AStarComparison.html">A* search</a> algorithms.</span><a class="headerlink" href="#prm5" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 50 </span><span class="caption-text">Search for a path from the start to the goal using <a class="reference external" href="https://theory.stanford.edu/~amitp/GameProgramming/AStarComparison.html">A* search</a> algorithms.</span><a class="headerlink" href="#prm5" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="rapidly-exploring-random-trees-rrts">
-<h2>Rapidly-exploring Random Trees (RRTs)<a class="headerlink" href="#rapidly-exploring-random-trees-rrts" title="Link to this heading">#</a></h2>
+<h2>Rapidly-exploring Random Trees (RRTs)<a class="headerlink" href="#rapidly-exploring-random-trees-rrts" title="Permalink to this heading">#</a></h2>
 <p>Python example code (copyright, authored by IRIS Lab):
 <a class="reference external" href="https://colab.research.google.com/drive/1fxMlKzIWIWr6Qq49wTmTsIAJz5pp0ing?usp=sharing">https://colab.research.google.com/drive/1fxMlKzIWIWr6Qq49wTmTsIAJz5pp0ing?usp=sharing</a></p>
 <p>The basic RRT algorithm is as follows (from <a class="reference external" href="https://arxiv.org/pdf/1105.1186">https://arxiv.org/pdf/1105.1186</a>)</p>
 <figure class="align-default" id="rrt">
 <a class="reference internal image-reference" href="../_images/rrt.png"><img alt="../_images/rrt.png" src="../_images/rrt.png" style="width: 70%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 51 </span><span class="caption-text">Basic RRT algorithm</span><a class="headerlink" href="#rrt" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 51 </span><span class="caption-text">Basic RRT algorithm</span><a class="headerlink" href="#rrt" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>A visualization of how RRT works step by step in 2D space is shown as follows.</p>
@@ -561,17 +536,17 @@ points, 4, 7, and 10, along the path are labeled.</span><a class="headerlink" hr
 <figure class="align-default" id="rrt1">
 <a class="reference internal image-reference" href="../_images/rrt-1.png"><img alt="../_images/rrt-1.png" src="../_images/rrt-1.png" style="width: 90%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 52 </span><span class="caption-text">The 1st iteration in RRT algoritm</span><a class="headerlink" href="#rrt1" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 52 </span><span class="caption-text">The 1st iteration in RRT algoritm</span><a class="headerlink" href="#rrt1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="rrt2">
 <a class="reference internal image-reference" href="../_images/rrt-2.png"><img alt="../_images/rrt-2.png" src="../_images/rrt-2.png" style="width: 90%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 53 </span><span class="caption-text">The 2nd iteration of RRT to n-th iteration</span><a class="headerlink" href="#rrt2" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 53 </span><span class="caption-text">The 2nd iteration of RRT to n-th iteration</span><a class="headerlink" href="#rrt2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <section id="variants-of-rrt">
-<h3>Variants of RRT<a class="headerlink" href="#variants-of-rrt" title="Link to this heading">#</a></h3>
+<h3>Variants of RRT<a class="headerlink" href="#variants-of-rrt" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>bidirectional or multi-directional RRT</p></li>
 <li><p><a class="reference external" href="https://arxiv.org/abs/1105.1186">RRT*</a>: Swap new point in as parent for nearby vertices who can be reached
@@ -579,17 +554,17 @@ along shorter path through new point than through their original
 (current) parent.</p></li>
 </ul>
 <figure class="align-default" id="rrts">
-<a class="reference internal image-reference" href="../_images/rrt*.png"><img alt="../_images/rrt%2A.png" src="../_images/rrt%2A.png" style="width: 90%;" /></a>
+<a class="reference internal image-reference" href="../_images/rrt*.png"><img alt="../_images/rrt*.png" src="../_images/rrt*.png" style="width: 90%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 54 </span><span class="caption-text">(Left) The tree generated by an RRT after 5,000 nodes. The goal
 region is the square at the top right corner, and the shortest path is indicated. (Right)
-The tree generated by RRT* after 5,000 nodes. Figure from original paper (<a class="reference external" href="https://arxiv.org/abs/1105.1186">https://arxiv.org/abs/1105.1186</a>).</span><a class="headerlink" href="#rrts" title="Link to this image">#</a></p>
+The tree generated by RRT* after 5,000 nodes. Figure from original paper (<a class="reference external" href="https://arxiv.org/abs/1105.1186">https://arxiv.org/abs/1105.1186</a>).</span><a class="headerlink" href="#rrts" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 </section>
 <section id="smoothing">
-<h2>Smoothing<a class="headerlink" href="#smoothing" title="Link to this heading">#</a></h2>
+<h2>Smoothing<a class="headerlink" href="#smoothing" title="Permalink to this heading">#</a></h2>
 <p>Randomized motion planners tend to find not so great paths for
 execution: very jagged, often dynamially infeasbile. So, people usually do smoothing before using the planned path.</p>
 <ul class="simple">
@@ -630,10 +605,11 @@ shorter path, it subdivides again; and so on.</p></li>
 
               
               
-              
-              
-                <footer class="prev-next-footer d-print-none">
+                <footer class="bd-footer-article">
                   
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="../lec9/ik.html"
@@ -653,7 +629,10 @@ shorter path, it subdivides again; and so on.</p></li>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
+</div></div>
+  
 </div>
+
                 </footer>
               
             </div>
@@ -661,7 +640,6 @@ shorter path, it subdivides again; and so on.</p></li>
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -699,10 +677,9 @@ By Wanxin Jin @ IRIS Lab
   
   <div class="footer-item">
     
-
   <p class="copyright">
     
-      © Copyright 2023.
+      © Copyright 2022.
       <br/>
     
   </p>
@@ -726,8 +703,8 @@ By Wanxin Jin @ IRIS Lab
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
 
   <footer class="bd-footer">
   </footer>
