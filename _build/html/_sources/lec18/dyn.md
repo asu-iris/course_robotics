@@ -26,7 +26,7 @@ where $\mathcal{T}$ and $\mathcal{U}$ are the kinetic energy and
 potential energy of the system, respectively. The dynamics
 from the Lagrangian is
 
-$$\frac{d}{d t} \frac{\partial \mathcal{L}}{\partial \dot{q}_{i}}-\frac{\partial \mathcal{L}}{\partial q_{i}}=\xi_{i} \quad i=1, \ldots, n$$
+$$\frac{d}{d t} \frac{\partial \mathcal{L}}{\partial \dot{q}_{i}}-\frac{\partial \mathcal{L}}{\partial q_{i}}=\xi_{i} \quad i=1, \ldots, n$$(equ.lf2)
 
 where $\xi_{i}$ is the generalized force associated with $q_{i}$ (the
 generalized force $\xi_i$ is dual to $q_i$ in the sense that
@@ -294,8 +294,9 @@ $$\mathcal{T}_{m_{i}}=\frac{1}{2} m_{m_{i}} \dot{\boldsymbol{q}}^{T} \boldsymbol
 
 ## Total Kinetic Energy -->
 
+```{important}
 Finally, by summing the kinetic energies of all Links, the total
-kinetic energy of a robot arm is given by
+kinetic energy of a robot arm is 
 
 $$\mathcal{T}=\frac{1}{2} \dot{\boldsymbol{q}}^{T} \boldsymbol{B}(\boldsymbol{q}) \dot{\boldsymbol{q}}=\frac{1}{2} \sum_{i=1}^{n} \sum_{j=1}^{n} b_{i j}(\boldsymbol{q}) \dot{q}_{i} \dot{q}_{j}$$(equ.ke_total_final)
 
@@ -306,7 +307,8 @@ $$\begin{aligned}
 \end{aligned}$$
 
 is the $(n \times n)$ inertia matrix which is symmetric, positive
-definite, and configuration - dependent (in general).
+definite, and configuration - dependent.
+```
 
 </br></br></br>
 
@@ -319,42 +321,52 @@ $$\mathcal{U}=\sum_{i=1}^{n}\mathcal{U}_{\ell_{i}}$$
 
 The potential energy of Link $i$ is
 
-$$\mathcal{U}_{\ell_{i}}=-\int_{V_{\ell_{i}}} \boldsymbol{g}_{0}^{T} \boldsymbol{p}_{i}^{*} \rho d V=-m_{\ell_{i}} \boldsymbol{g}_{0}^{T} \boldsymbol{p}_{\ell_{i}}$$
+$$\mathcal{U}_{\ell_{i}}=-\int_{V_{\ell_{i}}} \boldsymbol{g}^{T} \boldsymbol{p}_{i}^{*} \rho d V=-m_{\ell_{i}} \boldsymbol{g}^{T} \boldsymbol{p}_{\ell_{i}}$$
 
-where $\boldsymbol{g}_{0}$ is the gravity acceleration vector in the
-base frame (e.g., $\boldsymbol{g}_{0}=$
+where $\boldsymbol{g}$ is the gravity acceleration vector in the
+base frame (e.g., $\boldsymbol{g}=$
 $\left[\begin{array}{lll}0 & 0 & -g\end{array}\right]^{T}$ if $z$ is the
 vertical axis), and $\boldsymbol{p}_{\ell_{i}}$ the center of mass of
 Link $i$. 
 
+
+```{important}
 The total potential energy of the robot arm is 
 
-$$\mathcal{U}=-\sum_{i=1}^{n}m_{\ell_{i}} \boldsymbol{g}_{0}^{T} \boldsymbol{p}_{\ell_{i}}$$(equ.pe_total_final)
+$$\mathcal{U}=-\sum_{i=1}^{n}m_{\ell_{i}} \boldsymbol{g}^{T} \boldsymbol{p}_{\ell_{i}}$$(equ.pe_total_final)
 
 which shows that potential energy is only a function of  the joint
 variable ${\boldsymbol{q}}$ because 
 $\boldsymbol{p}_{\ell_{i}}$ is a function
 of $\boldsymbol{q}$,
+```
 
 </br></br></br>
 
-# Dynamics Equation
+# Dynamics Equation (Different Forms)
 
-Having computed the total kinetic energy {eq}`equ.ke_total_final` and potential energy {eq}`equ.pe_total_final` of the robot arm,
+### Vector Form
+Having computed the total kinetic energy $\mathcal{T}(\boldsymbol{q}, \dot{\boldsymbol{q}})$ in {eq}`equ.ke_total_final` and potential energy $\mathcal{U}(\boldsymbol{q})$ in {eq}`equ.pe_total_final` of the robot arm,
 the Lagrangian of the system is
 
-$$\mathcal{L}(\boldsymbol{q}, \dot{\boldsymbol{q}})=\mathcal{T}(\boldsymbol{q}, \dot{\boldsymbol{q}})-\mathcal{U}(\boldsymbol{q})=\frac{1}{2} \dot{\boldsymbol{q}}^{T} \boldsymbol{B}(\boldsymbol{q}) \dot{\boldsymbol{q}}-\mathcal{U}(\boldsymbol{q})$$
+$$\mathcal{L}(\boldsymbol{q}, \dot{\boldsymbol{q}})=\mathcal{T}(\boldsymbol{q}, \dot{\boldsymbol{q}})-\mathcal{U}(\boldsymbol{q})$$
 
-By applying Lagrange formulation {eq}`equ.lf`,
-we have
+
+```{important}
+By applying the vector form of Lagrange formulation {eq}`equ.lf`,
+we have the vector form of the dynamics equation:
 
 $$\boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{n}(\boldsymbol{q}, \dot{\boldsymbol{q}})=\boldsymbol{\xi}$$(equ.arm_dyn)
 
 where
 
 $$\boldsymbol{n}(\boldsymbol{q}, \dot{\boldsymbol{q}})=\dot{\boldsymbol{B}}(\boldsymbol{q}) \dot{\boldsymbol{q}}-\frac{1}{2}\left(\frac{\partial}{\partial \boldsymbol{q}}\left(\dot{\boldsymbol{q}}^{T} \boldsymbol{B}(\boldsymbol{q}) \dot{\boldsymbol{q}}\right)\right)^{T}+\left(\frac{\partial \mathcal{U}(\boldsymbol{q})}{\partial \boldsymbol{q}}\right)^{T}$$
+```
 
-In detail, noticing that $\mathcal{U}$ does not depend on
+
+### Detailed Form
+
+Below, let's also apply the detailed form of Lagrange formulation {eq}`equ.lf2`. Notice that $\mathcal{U}$ does not depend on
 $\dot{\boldsymbol{q}}$ and
 
 $$\begin{aligned}
@@ -368,10 +380,11 @@ $$\frac{\partial \mathcal{T}}{\partial q_{i}}=\frac{1}{2} \sum_{j=1}^{n} \sum_{k
 Further,
 
 $$\begin{aligned}
-\frac{\partial \mathcal{U}}{\partial q_{i}} & =-\sum_{j=1}^{n}m_{\ell_{j}} \boldsymbol{g}_{0}^{T} \frac{\partial \boldsymbol{p}_{\ell_{j}}}{\partial q_{i}} =-\sum_{j=1}^{n}m_{\ell_{j}} \boldsymbol{g}_{0}^{T} \boldsymbol{J}_{P i}^{\left(\ell_{j}\right)}(\boldsymbol{q})=g_{i}(\boldsymbol{q})
+\frac{\partial \mathcal{U}}{\partial q_{i}} & =-\sum_{j=1}^{n}m_{\ell_{j}} \boldsymbol{g}^{T} \frac{\partial \boldsymbol{p}_{\ell_{j}}}{\partial q_{i}} =-\sum_{j=1}^{n}m_{\ell_{j}} \boldsymbol{g}^{T} \boldsymbol{J}_{P i}^{\left(\ell_{j}\right)}(\boldsymbol{q})=g_{i}(\boldsymbol{q})
 \end{aligned}$$
 
-As a result, the equations of motion are
+```{important}
+By applying the detailed form of Lagrange formulation {eq}`equ.lf2`, the detailed form of the dynamics equation is 
 
 $$\sum_{j=1}^{n} b_{i j}(\boldsymbol{q}) \ddot{q}_{j}+\sum_{j=1}^{n} \sum_{k=1}^{n} h_{i j k}(\boldsymbol{q}) \dot{q}_{k} \dot{q}_{j}+g_{i}(\boldsymbol{q})=\xi_{i} \quad i=1, \ldots, n .$$(equ.arm_dyn2)
 
@@ -379,29 +392,86 @@ $$\sum_{j=1}^{n} b_{i j}(\boldsymbol{q}) \ddot{q}_{j}+\sum_{j=1}^{n} \sum_{k=1}^
 where
 
 $$h_{i j k}=\frac{\partial b_{i j}}{\partial q_{k}}-\frac{1}{2} \frac{\partial b_{j k}}{\partial q_{i}}$$
+```
 
-A physical interpretation of the above reveals that:
 
--   For the acceleration terms: The coefficient $b_{i i}$ represents the
-    moment of inertia at Joint $i$ axis, in the current manipulator
-    configuration, when the other joints are blocked. The coefficient
-    $b_{i j}$ accounts for the effect of acceleration of Joint $j$ on
+A physical interpretation to each term in  {eq}`equ.arm_dyn2` 
+
+-   Acceleration term $\sum_{j=1}^{n} b_{i j}(\boldsymbol{q}) \ddot{q}_{j}$: the diagonal coefficient $b_{i i}$ represents the
+    moment of inertia at Joint $i$ axis, and off-diagonal coefficient
+    $b_{i j}$ accounts for the coupling effect of acceleration of Joint $i$ on
     Joint $j$.
 
--   For the quadratic velocity terms: The term
-    $h_{i j j} \dot{q}_{j}^{2}$ is the centrifugal effect induced on
-    Joint $i$ by velocity of Joint $j$. The term
+-   For the quadratic velocity term $\sum_{j=1}^{n} \sum_{k=1}^{n} h_{i j k}(\boldsymbol{q}) \dot{q}_{k} \dot{q}_{j}$: the term
+    $h_{i j j} \dot{q}_{j}^{2}$ is the centrifugal effect to
+    Joint $i$ by  Joint $j$. The term
     $h_{i j k} \dot{q}_{j} \dot{q}_{k}$ represents the Coriolis effect
-    induced on Joint $i$ by velocities of Joints $j$ and $k$.
+     on Joint $i$ by Joints $j$ and $k$.
 
--   For the configuration-dependent terms: The term $g_{i}$ represents
-    the moment generated at Joint $i$ axis of the manipulator, in the
-    current configuration, by the presence of gravity.
+-   For the configuration-dependent term $g_{i}(\boldsymbol{q})$: the term $g_{i}$ represents
+    the moment generated at Joint $i$ axis  by the gravity.
 
-Regarding the generalized force $\boldsymbol{\xi}$ at the manipulator
-joints, it is
 
-$$\boldsymbol{\xi}=\underbrace{\boldsymbol{\tau}}_{\text{motor torque}}-\underbrace{\boldsymbol{F}_{v} \dot{\boldsymbol{q}}}_{\text{viscous friction torques}}-\underbrace{\boldsymbol{F}_{s} \operatorname{sgn}(\dot{\boldsymbol{q}})}_{\text{Coulomb friction torques}}-\underbrace{\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{h}_{e}}_{\text{torques induced by  contact forces.}}$$
+### Other commonly-used form
+
+
+In may textbooks/papers, there is another commonly-used form of dynamics equation derived from {eq}`equ.arm_dyn2`. We introduce below.  The quadratic velocity term in  {eq}`equ.arm_dyn2` has
+
+
+ $$\begin{aligned}
+    \sum_{j=1}^{n} \sum_{k=1}^{n}h_{ijk}\dot{q}_{k} \dot{q}_{j}&=
+\sum_{j=1}^{n} \sum_{k=1}^{n}\Big(\frac{\partial b_{i j}}{\partial q_{k}}-\frac{1}{2} \frac{\partial b_{j k}}{\partial q_{i}}\Big)\dot{q}_{k} \dot{q}_{j}\\
+&=\sum_{j=1}^{n} \sum_{k=1}^{n}\Big(\frac{1}{2}\frac{\partial b_{i j}}{\partial q_{k}}+\frac{1}{2}\frac{\partial b_{i j}}{\partial q_{k}}-\frac{1}{2} \frac{\partial b_{j k}}{\partial q_{i}}\Big)\dot{q}_{k} \dot{q}_{j}\\
+&=\sum_{j=1}^{n} \sum_{k=1}^{n}\underbrace{\Big(\frac{1}{2}\frac{\partial b_{i j}}{\partial q_{k}}+\frac{1}{2}\frac{\partial b_{i k}}{\partial q_{j}}-\frac{1}{2} \frac{\partial b_{j k}}{\partial q_{i}}\Big)}_{c_{ijk}}\dot{q}_{k} \dot{q}_{j}
+\end{aligned}$$
+
+Thus, we define
+
+$$c_{ijk}=\frac{1}{2}\Big(\frac{\partial b_{i j}}{\partial q_{k}}+\frac{\partial b_{i k}}{\partial q_{j}}- \frac{\partial b_{j k}}{\partial q_{i}}\Big)$$
+
+
+and the dynamics equation in {eq}`equ.arm_dyn2` becomes
+
+$$
+\begin{aligned}
+\sum_{j=1}^{n} b_{i j}(\boldsymbol{q}) \ddot{q}_{j}+\sum_{j=1}^{n} \sum_{k=1}^{n} h_{i j k}(\boldsymbol{q}) \dot{q}_{k} \dot{q}_{j}+g_{i}(\boldsymbol{q})&=
+\sum_{j=1}^{n} b_{i j}(\boldsymbol{q}) \ddot{q}_{j}+\sum_{j=1}^{n} \sum_{k=1}^{n} c_{i j k}(\boldsymbol{q}) \dot{q}_{k} \dot{q}_{j}+g_{i}(\boldsymbol{q})\\
+&=\sum_{j=1}^{n} b_{i j}(\boldsymbol{q}) \ddot{q}_{j}+\sum_{j=1}^{n} \Big(\sum_{k=1}^{n}c_{ijk}\dot{q}_{k}\Big) \dot{q}_{j}+g_{i}(\boldsymbol{q})\\
+&=\sum_{j=1}^{n} b_{i j}(\boldsymbol{q}) \ddot{q}_{j}+\sum_{j=1}^{n} C_{ij} \dot{q}_{j}+g_{i}(\boldsymbol{q})\\
+&=\xi_{i}
+\quad i=1, \ldots, n .
+\end{aligned}
+$$(equ.arm_dyn3)
+
+with
+
+$$C_{ij}=\sum_{k=1}^{n}c_{ijk}\dot{q}_{k}$$
+
+```{important}
+By writing  {eq}`equ.arm_dyn3`into a compact vector form, we have a new form of dynamics equation
+
+$$\boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}={\boldsymbol{\xi}}$$(equ.arm_dyn4)
+
+where $\boldsymbol{C}$ is a  $(n \times n)$ matrix such that its
+elements $C_{i j}$ is calculated by
+
+$$C_{ij}=\sum_{k=1}^{n}c_{ijk}\dot{q}_{k}$$
+
+with 
+
+$$c_{ijk}=\frac{1}{2}\Big(\frac{\partial b_{i j}}{\partial q_{k}}+\frac{\partial b_{i k}}{\partial q_{j}}- \frac{\partial b_{j k}}{\partial q_{i}}\Big)$$
+
+
+```
+
+
+## Generalized forces/torques
+
+
+
+The generalized force $\boldsymbol{\xi}$ applied on the right side of {eq}`equ.arm_dyn` or {eq}`equ.arm_dyn2` includes
+
+$$\boldsymbol{\xi}=\underbrace{\boldsymbol{\tau}}_{\text{motor torque}}-\underbrace{\boldsymbol{F}_{v} \dot{\boldsymbol{q}}}_{\text{viscous friction torques}}-\underbrace{\boldsymbol{F}_{s} \operatorname{sgn}(\dot{\boldsymbol{q}})}_{\text{Coulomb friction torques}}-\underbrace{\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{h}_{e}}_{\text{torques  by  contact forces.}}$$
 
 where $\boldsymbol{F}_{v}$ denotes the $(n \times n)$ diagonal matrix of
 viscous friction coefficients; $\boldsymbol{F}_{s}$ is an $(n \times n)$
@@ -411,32 +481,14 @@ functions of the single joint velocities; and $\boldsymbol{h}_{e}$
 denotes the vector of force and moment exerted by the end-effector on
 the environment.
 
-In summary, the equations of motion for a robot manipulator is
 
-$$\boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{F}_{v} \dot{\boldsymbol{q}}+\boldsymbol{F}_{s} \operatorname{sgn}(\dot{\boldsymbol{q}})+\boldsymbol{g}(\boldsymbol{q})=\boldsymbol{\tau}-\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{h}_{e}$$
 
-where $\boldsymbol{C}$ is a suitable $(n \times n)$ matrix such that its
-elements $c_{i j}$ satisfy the equation
 
-$$\sum_{j=1}^{n} c_{i j} \dot{q}_{j}=\sum_{j=1}^{n} \Big(\sum_{k=1}^{n}c_{ijk}\dot{q}_{k}\Big) \dot{q}_{j}=\sum_{j=1}^{n} \sum_{k=1}^{n} h_{i j k} \dot{q}_{k} \dot{q}_{j}$$
+</br></br>
 
-Here, the definition of $c_{ijk}$ is from $$\begin{aligned}
-    \sum_{j=1}^{n} \sum_{k=1}^{n}h_{ijk}\dot{q}_{k} \dot{q}_{j}=
-\sum_{j=1}^{n} \sum_{k=1}^{n}\Big(\frac{\partial b_{i j}}{\partial q_{k}}-\frac{1}{2} \frac{\partial b_{j k}}{\partial q_{i}}\Big)\dot{q}_{k} \dot{q}_{j}
-&=\sum_{j=1}^{n} \sum_{k=1}^{n}\Big(\frac{1}{2}\frac{\partial b_{i j}}{\partial q_{k}}+\frac{1}{2}\frac{\partial b_{i j}}{\partial q_{k}}-\frac{1}{2} \frac{\partial b_{j k}}{\partial q_{i}}\Big)\dot{q}_{k} \dot{q}_{j}\\
-&=\sum_{j=1}^{n} \sum_{k=1}^{n}\underbrace{\Big(\frac{1}{2}\frac{\partial b_{i j}}{\partial q_{k}}+\frac{1}{2}\frac{\partial b_{i k}}{\partial q_{j}}-\frac{1}{2} \frac{\partial b_{j k}}{\partial q_{i}}\Big)}_{c_{ijk}}\dot{q}_{k} \dot{q}_{j}
-\end{aligned}$$
+## Skew-symmetry of $\dot{\boldsymbol{B}}-2\boldsymbol{C}$
 
-Therefore,
-
-$$c_{ijk}=\frac{1}{2}\Big(\frac{\partial b_{i j}}{\partial q_{k}}+\frac{\partial b_{i k}}{\partial q_{j}}- \frac{\partial b_{j k}}{\partial q_{i}}\Big)$$
-
-</br></br></br>
-
-## Property: Skew-symmetry of $\dot{\boldsymbol{B}}-2\boldsymbol{C}$
-
-The proof idea: the total time derivative of kinetic energy of the
-manipulator equals the power generated by all the forces/torques
+The idea: the total time derivative of kinetic energy of a robot arm equals the power generated by all the forces/torques
 including the gravity.
 
 The time derivative of the kinetic energy: 
@@ -446,28 +498,28 @@ $$\label{equ.diff_kinenergy}
     \dot{\boldsymbol{q}}^{T} \boldsymbol{B}(\boldsymbol{q})\dot{\boldsymbol{q}}
     \right)=\dot{\boldsymbol{q}}^{T}\boldsymbol{B}(\boldsymbol{q})\ddot{\boldsymbol{q}}+\frac{1}{2}\left(
     \dot{\boldsymbol{q}}^{T} \dot{\boldsymbol{B}}(\boldsymbol{q})\dot{\boldsymbol{q}}
-    \right)$$
+    \right)$$(equ.dke_dt)
 
 The power generated by all (generalized) external forces including
 gravity: 
 
 $$\label{equ.power_forces}
-\dot{\boldsymbol{q}}^{T}(-\boldsymbol{F}_v{\dot{\boldsymbol{q}}}-\boldsymbol{F}_s\text{sgn}({\dot{\boldsymbol{q}}})-\boldsymbol{g}(\boldsymbol{q})-\boldsymbol{\tau}-\boldsymbol{J}^T(\boldsymbol{q})\boldsymbol{h}_{e})$$
+\dot{\boldsymbol{q}}^{T}(-\boldsymbol{F}_v{\dot{\boldsymbol{q}}}-\boldsymbol{F}_s\text{sgn}({\dot{\boldsymbol{q}}})-\boldsymbol{g}(\boldsymbol{q})-\boldsymbol{\tau}-\boldsymbol{J}^T(\boldsymbol{q})\boldsymbol{h}_{e})$$(equ.power)
 
- $$\label{equ.intermediate}
+Equalling {eq}`equ.power` to {eq}`equ.dke_dt`, we have
+
+ $$
     \dot{\boldsymbol{q}}^{T}\boldsymbol{B}(\boldsymbol{q})\ddot{\boldsymbol{q}}+\frac{1}{2}\left(
     \dot{\boldsymbol{q}}^{T} \dot{\boldsymbol{B}}(\boldsymbol{q})\dot{\boldsymbol{q}}
-    \right)=\dot{\boldsymbol{q}}^{T}(-\boldsymbol{F}_v{\dot{\boldsymbol{q}}}-\boldsymbol{F}_s\text{sgn}({\dot{\boldsymbol{q}}})-\boldsymbol{g}(\boldsymbol{q})-\boldsymbol{\tau}-\boldsymbol{J}^T(\boldsymbol{q})\boldsymbol{h}_{e})$$
+    \right)=\dot{\boldsymbol{q}}^{T}(-\boldsymbol{F}_v{\dot{\boldsymbol{q}}}-\boldsymbol{F}_s\text{sgn}({\dot{\boldsymbol{q}}})-\boldsymbol{g}(\boldsymbol{q})-\boldsymbol{\tau}-\boldsymbol{J}^T(\boldsymbol{q})\boldsymbol{h}_{e})$$(equ.intermediate)
 
+Recall the dynamics equation:
 
-Recall the dynamics equation we have previously introduced,
+$$\boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\boldsymbol{\tau}-\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{h}_{e}-\boldsymbol{F}_{v} \dot{\boldsymbol{q}}-\boldsymbol{F}_{s} \operatorname{sgn}(\dot{\boldsymbol{q}})
+$$(equ.dyn_equ)
 
-$$\boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{F}_{v} \dot{\boldsymbol{q}}+\boldsymbol{F}_{s} \operatorname{sgn}(\dot{\boldsymbol{q}})+\boldsymbol{g}(\boldsymbol{q})=\boldsymbol{\tau}-\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{h}_{e}$$
-
-We multiply $\dot{\boldsymbol{q}}^T$ on both sides of the above dynamics
-equation and subtract
-([\[equ.intermediate\]](#equ.intermediate){reference-type="ref"
-reference="equ.intermediate"}) on both sides. This yields
+We multiply $\dot{\boldsymbol{q}}^T$ on both sides of {eq}`equ.dyn_equ` and subtract
+{eq}`equ.dyn_equ` from {eq}`equ.intermediate` on both sides. This yields
 
 $$\frac{1}{2}  \dot{\boldsymbol{q}}^{T} \boldsymbol{B}(\boldsymbol{q})\dot{\boldsymbol{q}}-\dot{\boldsymbol{q}}^T\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}=\frac{1}{2}  \dot{\boldsymbol{q}}^{T} \big( \boldsymbol{B}(\boldsymbol{q})\dot{\boldsymbol{q}}-2\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}})\big) \dot{\boldsymbol{q}}=\boldsymbol{0}$$
 
@@ -478,8 +530,8 @@ is a skew-symmetric matrix.
 
 </br></br></br>
 
-# Examples: Two-link Planar Arm
-
+<!-- # Examples: Two-link Planar Arm -->
+<!-- 
 Consider the two-link planar arm below.
 
 
@@ -637,4 +689,4 @@ $$\begin{aligned}
 \end{aligned}$$
 
 where $\tau_{1}$ and $\tau_{2}$ denote the torques applied to the
-joints.
+joints. -->
