@@ -412,7 +412,7 @@ A physical interpretation to each term in  {eq}`equ.arm_dyn2`
     the moment generated at Joint $i$ axis  by the gravity.
 
 
-### Other commonly-used form
+### Christoffel-Symbols Form
 
 
 In may textbooks/papers, there is another commonly-used form of dynamics equation derived from {eq}`equ.arm_dyn2`. We introduce below.  The quadratic velocity term in  {eq}`equ.arm_dyn2` has
@@ -429,8 +429,8 @@ Thus, we define
 
 $$c_{ijk}=\frac{1}{2}\Big(\frac{\partial b_{i j}}{\partial q_{k}}+\frac{\partial b_{i k}}{\partial q_{j}}- \frac{\partial b_{j k}}{\partial q_{i}}\Big)$$
 
-
-and the dynamics equation in {eq}`equ.arm_dyn2` becomes
+which is called _Christoffel-symbols_.
+Then, the dynamics equation in {eq}`equ.arm_dyn2` becomes
 
 $$
 \begin{aligned}
@@ -530,8 +530,8 @@ is a skew-symmetric matrix.
 
 </br></br></br>
 
-<!-- # Examples: Two-link Planar Arm -->
-<!-- 
+# Example: Two-link Planar Arm 
+
 Consider the two-link planar arm below.
 
 
@@ -549,16 +549,9 @@ The vector of generalized coordinates is
 $\boldsymbol{q}=\left[\begin{array}{ll}\vartheta_{1} & \vartheta_{2}\end{array}\right]^{T}$.
 Let $\ell_{1}, \ell_{2}$ be the distances of the centres of mass of the
 two links from the respective joint axes. Also let
-$m_{\ell_{1}}, m_{\ell_{2}}$ be the masses of the two links, and
-$m_{m_{1}}, m_{m_{2}}$ the masses of the rotors of the two joint motors.
-Finally, let $I_{m_{1}}, I_{m_{2}}$ be the moments of inertia with
-respect to the axes of the two rotors, and $I_{\ell_{1}}, I_{\ell_{2}}$
+$m_{\ell_{1}}, m_{\ell_{2}}$ be the masses of the two links, and let $I_{\ell_{1}}, I_{\ell_{2}}$ be
 the moments of inertia relative to the Centers of mass of the two links,
-respectively. It is assumed that
-$\boldsymbol{p}_{m_{i}}=\boldsymbol{p}_{i-1}$ and
-$\boldsymbol{z}_{m_{i}}=\boldsymbol{z}_{i-1}$, for $i=1,2$, i.e., the
-motors are located on the joint axes with centres of mass located at the
-origins of the respective frames.
+respectively.
 
 With the chosen coordinate frames, computation of the Jacobians for each
 link is
@@ -583,32 +576,6 @@ a_{1} c_{1}+\ell_{2} c_{12} & \ell_{2} c_{12} \\
 1 & 1
 \end{array}\right]$$
 
-Notice that $\boldsymbol{\omega}_{i}$, for $i=1,2$, is aligned with
-$z_{0}$, and thus $\boldsymbol{R}_{i}$ has no effect. It is then
-possible to refer to the scalar moments of inertia $I_{\ell_{i}}$.
-
-Computation of the Jacobians for each motor is
-
-$$\boldsymbol{J}_{P}^{\left(m_{1}\right)}=\left[\begin{array}{cc}
-0 & 0 \\
-0 & 0 \\
-0 & 0
-\end{array}\right] \quad \boldsymbol{J}_{P}^{\left(m_{2}\right)}=\left[\begin{array}{cc}
--a_{1} s_{1} & 0 \\
-a_{1} c_{1} & 0 \\
-0 & 0
-\end{array}\right]\quad
-\boldsymbol{J}_{O}^{\left(m_{1}\right)}=\left[\begin{array}{cc}
-0 & 0 \\
-0 & 0 \\
-k_{r 1} & 0
-\end{array}\right] \quad \boldsymbol{J}_{O}^{\left(m_{2}\right)}=\left[\begin{array}{cc}
-0 & 0 \\
-0 & 0 \\
-1 & k_{r 2}
-\end{array}\right]$$
-
-where $k_{r i}$ is the gear reduction ratio of Motor $i$.
 
 The inertia matrix is
 
@@ -618,13 +585,12 @@ b_{21}\left(\vartheta_{2}\right) & b_{22}
 \end{array}\right]$$
 
 $$\begin{aligned}
-b_{11}= & I_{\ell_{1}}+m_{\ell_{1}} \ell_{1}^{2}+k_{r 1}^{2} I_{m_{1}}+I_{\ell_{2}}+m_{\ell_{2}}\left(a_{1}^{2}+\ell_{2}^{2}+2 a_{1} \ell_{2} c_{2}\right) \\
-& \quad+I_{m_{2}}+m_{m_{2}} a_{1}^{2} \\
-b_{12}= & b_{21}=I_{\ell_{2}}+m_{\ell_{2}}\left(\ell_{2}^{2}+a_{1} \ell_{2} c_{2}\right)+k_{r 2} I_{m_{2}} \\
-b_{22}= & I_{\ell_{2}}+m_{\ell_{2}} \ell_{2}^{2}+k_{r 2}^{2} I_{m_{2}} .
+b_{11}= & I_{\ell_{1}}+m_{\ell_{1}} \ell_{1}^{2}+I_{\ell_{2}}+m_{\ell_{2}}\left(a_{1}^{2}+\ell_{2}^{2}+2 a_{1} \ell_{2} c_{2}\right) \\
+b_{12}= & b_{21}=I_{\ell_{2}}+m_{\ell_{2}}\left(\ell_{2}^{2}+a_{1} \ell_{2} c_{2}\right) \\
+b_{22}= & I_{\ell_{2}}+m_{\ell_{2}} \ell_{2}^{2}
 \end{aligned}$$
 
-Compared to the previous example, the inertia matrix is now
+<!-- Compared to the previous example, the inertia matrix is now
 configurationdependent. Notice that the term $k_{r 2} I_{m_{2}}$ in the
 off-diagonal term of the inertia matrix derives from having considered
 the rotational part of the motor kinetic energy as due to the total
@@ -633,7 +599,7 @@ preceding link in the kinematic chain. At first approximation,
 especially in the case of high values of the gear reduction ratio, this
 contribution could be neglected; in the resulting reduced model, motor
 inertias would appear uniquely in the elements on the diagonal of the
-inertia matrix with terms of the type $k_{r i}^{2} I_{m_{i}}$
+inertia matrix with terms of the type $k_{r i}^{2} I_{m_{i}}$ -->
 
 The computation of Christoffel symbols gives
 
@@ -653,40 +619,38 @@ h \dot{\vartheta}_{2} & h\left(\dot{\vartheta}_{1}+\dot{\vartheta}_{2}\right) \\
 -h \dot{\vartheta}_{1} & 0
 \end{array}\right]$$
 
-Computing the matrix $\boldsymbol{N}$ in $(7.47)$ gives
+We can verify that
 
 $$\begin{aligned}
-\boldsymbol{N}(\boldsymbol{q}, \dot{\boldsymbol{q}}) & =\dot{\boldsymbol{B}}(\boldsymbol{q})-2 \boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) =\left[\begin{array}{cc}
-2 h \dot{\vartheta}_{2} & h \dot{\vartheta}_{2} \\
-h \dot{\vartheta}_{2} & 0
-\end{array}\right]-2\left[\begin{array}{cc}
-h \dot{\vartheta}_{2} & h\left(\dot{\vartheta}_{1}+\dot{\vartheta}_{2}\right) \\
--h \dot{\vartheta}_{1} & 0
-\end{array}\right]  =\left[\begin{array}{cc}
+\dot{\boldsymbol{B}}(\boldsymbol{q})-2 \boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}})   =\left[\begin{array}{cc}
 0 & -2 h \dot{\vartheta}_{1}-h \dot{\vartheta}_{2} \\
 2 h \dot{\vartheta}_{1}+h \dot{\vartheta}_{2} & 0
 \end{array}\right]
 \end{aligned}$$
 
-that allows the verification of the skew-symmetry property. As for the
+is skew-symmetry. 
+
+
+As for the
 gravitational terms, since
-$\boldsymbol{g}_{0}=\left[\begin{array}{lll}0 & -g & 0\end{array}\right]^{T}$,
+$\boldsymbol{g}=\left[\begin{array}{lll}0 & -g & 0\end{array}\right]^{T}$,
 
 $$\begin{aligned}
-& g_{1}=\left(m_{\ell_{1}} \ell_{1}+m_{m_{2}} a_{1}+m_{\ell_{2}} a_{1}\right) g c_{1}+m_{\ell_{2}} \ell_{2} g c_{12} \\
+& g_{1}=\left(m_{\ell_{1}} \ell_{1}+m_{\ell_{2}} a_{1}\right) g c_{1}+m_{\ell_{2}} \ell_{2} g c_{12} \\
 & g_{2}=m_{\ell_{2}} \ell_{2} g c_{12} .
 \end{aligned}$$
 
-In the absence of friction and tip contact forces, the resulting
-equations of motion are
+In  absence of friction and  contact forces, the 
+dynamics equation is 
+
 
 $$\begin{aligned}
-\left(I_{\ell_{1}}\right. & \left.+m_{\ell_{1}} \ell_{1}^{2}+k_{r 1}^{2} I_{m_{1}}+I_{\ell_{2}}+m_{\ell_{2}}\left(a_{1}^{2}+\ell_{2}^{2}+2 a_{1} \ell_{2} c_{2}\right)+I_{m_{2}}+m_{m_{2}} a_{1}^{2}\right) \ddot{\vartheta}_{1} \\
-& +\left(I_{\ell_{2}}+m_{\ell_{2}}\left(\ell_{2}^{2}+a_{1} \ell_{2} c_{2}\right)+k_{r 2} I_{m_{2}}\right) \ddot{\vartheta}_{2}  -2 m_{\ell_{2}} a_{1} \ell_{2} s_{2} \dot{\vartheta}_{1} \dot{\vartheta}_{2}-m_{\ell_{2}} a_{1} \ell_{2} s_{2} \dot{\vartheta}_{2}^{2} \\
-& +\left(m_{\ell_{1}} \ell_{1}+m_{m_{2}} a_{1}+m_{\ell_{2}} a_{1}\right) g c_{1}+m_{\ell_{2}} \ell_{2} g c_{12}=\tau_{1} \\
-\left(I_{\ell_{2}}\right. & \left.+m_{\ell_{2}}\left(\ell_{2}^{2}+a_{1} \ell_{2} c_{2}\right)+k_{r 2} I_{m_{2}}\right) \ddot{\vartheta}_{1}+\left(I_{\ell_{2}}+m_{\ell_{2}} \ell_{2}^{2}+k_{r 2}^{2} I_{m_{2}}\right) \ddot{\vartheta}_{2} \\
+\left(I_{\ell_{1}}\right. & \left.+m_{\ell_{1}} \ell_{1}^{2}+I_{\ell_{2}}+m_{\ell_{2}}\left(a_{1}^{2}+\ell_{2}^{2}+2 a_{1} \ell_{2} c_{2}\right)\right) \ddot{\vartheta}_{1} \\
+& +\left(I_{\ell_{2}}+m_{\ell_{2}}\left(\ell_{2}^{2}+a_{1} \ell_{2} c_{2}\right)\right) \ddot{\vartheta}_{2}  -2 m_{\ell_{2}} a_{1} \ell_{2} s_{2} \dot{\vartheta}_{1} \dot{\vartheta}_{2}-m_{\ell_{2}} a_{1} \ell_{2} s_{2} \dot{\vartheta}_{2}^{2} \\
+& +\left(m_{\ell_{1}} \ell_{1}+m_{\ell_{2}} a_{1}\right) g c_{1}+m_{\ell_{2}} \ell_{2} g c_{12}=\tau_{1} \\
+\left(I_{\ell_{2}}\right. & \left.+m_{\ell_{2}}\left(\ell_{2}^{2}+a_{1} \ell_{2} c_{2}\right)\right) \ddot{\vartheta}_{1}+\left(I_{\ell_{2}}+m_{\ell_{2}} \ell_{2}^{2}\right) \ddot{\vartheta}_{2} \\
 & +m_{\ell_{2}} a_{1} \ell_{2} s_{2} \dot{\vartheta}_{1}^{2}+m_{\ell_{2}} \ell_{2} g c_{12}=\tau_{2}
 \end{aligned}$$
 
 where $\tau_{1}$ and $\tau_{2}$ denote the torques applied to the
-joints. -->
+each joint, respectively.
