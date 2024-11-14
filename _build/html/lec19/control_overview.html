@@ -1,62 +1,66 @@
 
+
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="../" >
+<html lang="en" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Overview of Robot Control &#8212; Modeling and Control of Robots</title>
+    <title>Overview of Robot Arm Control &#8212; Modeling and Control of Robots</title>
   
   
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
-  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
-    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="../_static/doctools.js?v=9a2dae69"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="../_static/copybutton.js?v=f281be69"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'lec19/control_overview';</script>
@@ -73,23 +77,19 @@
 
   
   
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
-  
-  <div id="pst-scroll-pixel-helper"></div>
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -111,20 +111,12 @@
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
-
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
-</div>
-
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
-    </header>
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
   
-
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
-      
-      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -139,13 +131,9 @@
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
-
-  
-    
   
 
 <a class="navbar-brand logo" href="../intro.html">
-  
   
   
   
@@ -155,23 +143,12 @@
       
     
     
-    <img src="../_static/iris_logo_2.png" class="logo__image only-light" alt="Modeling and Control of Robots - Home"/>
-    <script>document.write(`<img src="../_static/iris_logo_2.png" class="logo__image only-dark" alt="Modeling and Control of Robots - Home"/>`);</script>
+    <img src="../_static/iris_logo_2.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/iris_logo_2.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item">
-
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
-        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -229,7 +206,7 @@
 
 
 
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Overview of Robot Control</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Overview of Robot Arm Control</a></li>
 
 
 
@@ -258,7 +235,7 @@
 
       </div>
       
-      <main id="main-content" class="bd-main" role="main">
+      <main id="main-content" class="bd-main">
         
         
 
@@ -267,14 +244,14 @@
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article d-print-none">
+              <div class="bd-header-article">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</button></div>
+</label></div>
       
     </div>
   
@@ -364,28 +341,26 @@
 </button>
 
 
-
 <script>
 document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
   </button>
 `);
 </script>
 
-
 <script>
 document.write(`
-  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
   </button>
 `);
 </script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</button>
+</label>
 </div></div>
       
     </div>
@@ -396,7 +371,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Overview of Robot Control</h1>
+    <h1>Overview of Robot Arm Control</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -406,10 +381,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Overview of Robot Control</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#model-of-acutuator">Model of Acutuator</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transmissions-between-actuator-and-joint">Transmissions between Actuator and Joint</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#electric-motor-dc-model">Electric Motor (DC) Model</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Overview of Robot Arm Control</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-joint-motors">Modeling Joint Motors</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transmissions-between-motor-and-joint">Transmissions between Motor and Joint</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#electric-motor-model">Electric Motor Model</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#manipulator-as-an-integrator">“Manipulator as an Integrator”</a></li>
@@ -424,71 +399,70 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article">
+                <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="overview-of-robot-control">
-<h1>Overview of Robot Control<a class="headerlink" href="#overview-of-robot-control" title="Link to this heading">#</a></h1>
-<p>The control of a robot manipulator is to determine the time sequence of
-control action (i.e., torques in each joint) to guarantee the execution
-of a specified task while satisfying the transient and steady-state
-error. In many robotics tasks, the task is specified usually in the
+  <section class="tex2jax_ignore mathjax_ignore" id="overview-of-robot-arm-control">
+<h1>Overview of Robot Arm Control<a class="headerlink" href="#overview-of-robot-arm-control" title="Permalink to this heading">#</a></h1>
+<p>The control of a robot arm is to determine the time sequence of
+control inputs (i.e., joint torques) to achieve a specified task. In many robotics tasks, the task is specified usually in the
 operational space (such as end-effector motion and forces), whereas
-control (joint torque) is usually made in the joint space. There are two
+control inputs (joint torque) is usually made in the joint space. There are two
 control schemes: joint space control and operational space control. In
-both schemes, the control architecture has closed loops.</p>
-<p>The joint space control scheme is shown in Fig.
-<a class="reference internal" href="#fig.joint_control"><span class="xref myst">1</span></a>{reference-type=”ref”
-reference=”fig.joint_control”}. First, manipulator inverse kinematics is
-solved to transform the specified end-effector motion
-<span class="math notranslate nohighlight">\(\boldsymbol{x}_{d}\)</span> to the corresponding joint motion
-<span class="math notranslate nohighlight">\(\boldsymbol{q}_{d}\)</span> in the joint space. Then, a joint space control
-scheme is designed that allows the actual motion <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span> to
-track <span class="math notranslate nohighlight">\(\boldsymbol{q}_{d}\)</span>. However, the controller does not <em>directly</em>
-regulate the operational space motion <span class="math notranslate nohighlight">\(\boldsymbol{x}_{e}\)</span>, thus,
-<span class="math notranslate nohighlight">\(\boldsymbol{x}_{e}\)</span> is controlled in an open-loop fashion through the
-manipulator mechanical structure, which could have less accuracy due to
-the uncertainty of the structure (construction tolerance, lack of
-calibration, gear backlash, elasticity)…</p>
-<figure class="align-default" id="joint-control">
-<a class="reference internal image-reference" href="../_images/joint_control.jpg"><img alt="../_images/joint_control.jpg" src="../_images/joint_control.jpg" style="width: 70%;" /></a>
+both schemes, the control diagram is closed-loops</p>
+<figure class="align-default" id="joint-control222">
+<a class="reference internal image-reference" href="../_images/joint_control.jpg"><img alt="../_images/joint_control.jpg" src="../_images/joint_control.jpg" style="width: 99%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 69 </span><span class="caption-text">Joint space control</span><a class="headerlink" href="#joint-control" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 69 </span><span class="caption-text">Joint space control</span><a class="headerlink" href="#joint-control222" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>The operational space control is shown in Fig.
-<a class="reference internal" href="#fig.operational_space_control"><span class="xref myst">2</span></a>{reference-type=”ref”
-reference=”fig.operational_space_control”}. In this control scheme,
-inverse kinematics is now embedded into the feedback control loop, and
-the operational space motion <span class="math notranslate nohighlight">\(\boldsymbol{x}_{e}\)</span> is directly fed back
+<!-- ```{figure} ./control/joint_control.jpg
+---
+width: 50%
+name: joint_control222
+---
+Motion of Link $i$ 
+```
+
+
+
+As shown in  {numref}`joint_control222`, -->
+<p>The joint space control is shown in <a class="reference internal" href="#joint-control222"><span class="std std-numref">Fig. 69</span></a>. Here, inverse kinematics is
+use to convert the specified end-effector motion
+<span class="math notranslate nohighlight">\(\boldsymbol{x}_{d}\)</span> to the desired joint motion
+<span class="math notranslate nohighlight">\(\boldsymbol{q}_{d}\)</span>. Then, a joint space controller
+is designed to allow the actual joint value <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span> to
+track <span class="math notranslate nohighlight">\(\boldsymbol{q}_{d}\)</span>. As you can see, the controller   <em>directly</em>
+regulates the joint tracking error <span class="math notranslate nohighlight">\(\boldsymbol{q}_{e}=\boldsymbol{q}_{d}-\boldsymbol{q}_{}\)</span>, instead of operational space error <span class="math notranslate nohighlight">\(\boldsymbol{x}_{e}=\boldsymbol{x}_{d}-\boldsymbol{x}_{}\)</span>. Thus,
+<span class="math notranslate nohighlight">\(\boldsymbol{x}_{e}\)</span> is controlled in an open-loop fashion (<span class="math notranslate nohighlight">\(\boldsymbol{q}_{e}\)</span> is controlled in closed-loop way). This can lead to operational space control error if IK has some error.</p>
+<figure class="align-default" id="operational-space-control222">
+<a class="reference internal image-reference" href="../_images/operational_space_control.jpg"><img alt="../_images/operational_space_control.jpg" src="../_images/operational_space_control.jpg" style="width: 99%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 70 </span><span class="caption-text">Operational space control</span><a class="headerlink" href="#operational-space-control222" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The operational space control is shown in <a class="reference internal" href="#operational-space-control222"><span class="std std-numref">Fig. 70</span></a>.
+Here, the operational space motion <span class="math notranslate nohighlight">\(\boldsymbol{x}_{e}\)</span> is directly fed back
 to the controller. Thus, it addresses the drawbacks of joint space
-control. However, the control algorithm is typically of a greater
-complexity, and measuring the operational space motion
-<span class="math notranslate nohighlight">\(\boldsymbol{x}_{e}\)</span> is challenging (such as typically using vision).</p>
-<figure class="align-default" id="id1">
-<a class="reference internal image-reference" href="../_images/joint_control.jpg"><img alt="../_images/joint_control.jpg" src="../_images/joint_control.jpg" style="width: 70%;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 70 </span><span class="caption-text">Operational_space_control</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
+control. However, the control algorithm  typically is more complex in design and it requires  measuring the operational space motion
+<span class="math notranslate nohighlight">\(\boldsymbol{x}_{}\)</span>, which is challenging challenging.</p>
+<p></br> </br></p>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="model-of-acutuator">
-<h1>Model of Acutuator<a class="headerlink" href="#model-of-acutuator" title="Link to this heading">#</a></h1>
-<p>According to the previous lecture, the equation of motion of a
-manipulator without external end-effector forces <span class="math notranslate nohighlight">\(\boldsymbol{h}_{e}\)</span>
-and static friction (<span class="math notranslate nohighlight">\(-\text{sign}(\boldsymbol{\dot{q}})\)</span>, difficult to
-model accurately) is</p>
+<section class="tex2jax_ignore mathjax_ignore" id="modeling-joint-motors">
+<h1>Modeling Joint Motors<a class="headerlink" href="#modeling-joint-motors" title="Permalink to this heading">#</a></h1>
+<p>According to the previous lecture, the dynamics equation of a
+robot arm only with joint input torque <span class="math notranslate nohighlight">\(\boldsymbol{\tau}\)</span> is:</p>
 <div class="math notranslate nohighlight">
 \[\boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{F}_{v} \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\boldsymbol{\tau}\]</div>
 <figure class="align-default" id="motori-kinematics">
-<a class="reference internal image-reference" href="../_images/motori_kinematics.jpg"><img alt="../_images/motori_kinematics.jpg" src="../_images/motori_kinematics.jpg" style="width: 50%;" /></a>
+<a class="reference internal image-reference" href="../_images/motori_kinematics.jpg"><img alt="../_images/motori_kinematics.jpg" src="../_images/motori_kinematics.jpg" style="width: 70%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 71 </span><span class="caption-text">Transmission between actuator (electric motor) and
-joint</span><a class="headerlink" href="#motori-kinematics" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 71 </span><span class="caption-text">Transmission between  motor and
+joint</span><a class="headerlink" href="#motori-kinematics" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<section id="transmissions-between-actuator-and-joint">
-<h2>Transmissions between Actuator and Joint<a class="headerlink" href="#transmissions-between-actuator-and-joint" title="Link to this heading">#</a></h2>
-<p>Let <span class="math notranslate nohighlight">\(\boldsymbol{q}_{m}\)</span> denote the vector of joint actuator
+<section id="transmissions-between-motor-and-joint">
+<h2>Transmissions between Motor and Joint<a class="headerlink" href="#transmissions-between-motor-and-joint" title="Permalink to this heading">#</a></h2>
+<p>As shown in <a class="reference internal" href="#motori-kinematics"><span class="std std-numref">Fig. 71</span></a>, let <span class="math notranslate nohighlight">\(\boldsymbol{q}_{m}\)</span> denote the vector of motor joint
 displacements (motor’s rotor angle). The transmissions - assumed to be
 rigid and with no backlash - between the motor and joint motion is</p>
 <div class="math notranslate nohighlight">
@@ -496,15 +470,16 @@ rigid and with no backlash - between the motor and joint motion is</p>
     \boldsymbol{K}_{r} \boldsymbol{q}=\boldsymbol{q}_{m}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\boldsymbol{K}_{r}\)</span> is a <span class="math notranslate nohighlight">\((n \times n)\)</span> diagonal matrix,
 typically much greater than identity. Let <span class="math notranslate nohighlight">\(\boldsymbol{\tau}_{m}\)</span>
-denotes the vector of the actuator driving torques, based on principle
+denotes the vector of the motor driving torques, based on principle
 of virtual work, one has the following transmission between motor torque
-and joint torque:</p>
+and joint input torque:</p>
 <div class="math notranslate nohighlight">
 \[\label{equ.transmission_model2}
 \boldsymbol{\tau}_{m}=\boldsymbol{K}_{r}^{-1} \boldsymbol{\tau}\]</div>
 </section>
-<section id="electric-motor-dc-model">
-<h2>Electric Motor (DC) Model<a class="headerlink" href="#electric-motor-dc-model" title="Link to this heading">#</a></h2>
+<section id="electric-motor-model">
+<h2>Electric Motor Model<a class="headerlink" href="#electric-motor-model" title="Permalink to this heading">#</a></h2>
+<p>For a direct current (DC) motor, we have the following model:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\label{equ.dc_model}
     \begin{aligned}
@@ -519,8 +494,8 @@ voltages; <span class="math notranslate nohighlight">\(\boldsymbol{R}_{a}\)</spa
 the amplifiers; and <span class="math notranslate nohighlight">\(\boldsymbol{v}_{c}\)</span> is the voltages of the
 servomotors.</p>
 <p>Based on
-(<a class="reference internal" href="#equ.transmission_model"><span class="xref myst">[equ.transmission_model]</span></a>{reference-type=”ref”
-reference=”equ.transmission_model”}-<a class="reference internal" href="#equ.dc_model"><span class="xref myst">[equ.dc_model]</span></a>{reference-type=”ref”
+(<span class="xref myst">[equ.transmission_model]</span>{reference-type=”ref”
+reference=”equ.transmission_model”}-<span class="xref myst">[equ.dc_model]</span>{reference-type=”ref”
 reference=”equ.dc_model”}), we have</p>
 <div class="math notranslate nohighlight">
 \[\label{equ.voltage_control}
@@ -529,21 +504,21 @@ reference=”equ.dc_model”}), we have</p>
 voltage <span class="math notranslate nohighlight">\(\boldsymbol{v}_c\)</span>, the generated joint torque
 <span class="math notranslate nohighlight">\(\boldsymbol{\tau}\)</span>, and the joint velocity <span class="math notranslate nohighlight">\(\boldsymbol{\dot{q}}\)</span>. The
 overall diagram modeling DC motor and manipulator is shown in Fig.
-<a class="reference internal" href="#fig.voltage_control"><span class="xref myst">4</span></a>{reference-type=”ref”
+<span class="xref myst">4</span>{reference-type=”ref”
 reference=”fig.voltage_control”}.</p>
 <figure class="align-default" id="voltage-control">
 <a class="reference internal image-reference" href="../_images/voltage_control.jpg"><img alt="../_images/voltage_control.jpg" src="../_images/voltage_control.jpg" style="width: 70%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 72 </span><span class="caption-text">DC motor with
-manipulator</span><a class="headerlink" href="#voltage-control" title="Link to this image">#</a></p>
+manipulator</span><a class="headerlink" href="#voltage-control" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="manipulator-as-an-integrator">
-<h1>“Manipulator as an Integrator”<a class="headerlink" href="#manipulator-as-an-integrator" title="Link to this heading">#</a></h1>
+<h1>“Manipulator as an Integrator”<a class="headerlink" href="#manipulator-as-an-integrator" title="Permalink to this heading">#</a></h1>
 <p>If the following assumptions hold for
-(<a class="reference internal" href="#equ.voltage_control"><span class="xref myst">[equ.voltage_control]</span></a>{reference-type=”ref”
+(<span class="xref myst">[equ.voltage_control]</span>{reference-type=”ref”
 reference=”equ.voltage_control”}):</p>
 <ul class="simple">
 <li><p>the elements of matrix <span class="math notranslate nohighlight">\(\boldsymbol{K}_{r}\)</span>, characterizing the
@@ -572,7 +547,7 @@ the matrix
 diagonal.</p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="torque-controlled-system-more-general">
-<h1>Torque-Controlled System (more general)<a class="headerlink" href="#torque-controlled-system-more-general" title="Link to this heading">#</a></h1>
+<h1>Torque-Controlled System (more general)<a class="headerlink" href="#torque-controlled-system-more-general" title="Permalink to this heading">#</a></h1>
 <p>If the assumption in the above section does not hold, the whole system,
 for example, when <span class="math notranslate nohighlight">\(\left(\boldsymbol{K}_{r}=\boldsymbol{I}\right)\)</span>, we
 do not have such a nice property of “manipulator as an integrator”. In
@@ -589,9 +564,9 @@ voltage of the servomotor and the current:</p>
 \[\label{equ.voltage_current}
     \boldsymbol{i}_{a}=\boldsymbol{G}_{i} \boldsymbol{v}_{c}\]</div>
 <p>Therefore, based on
-(<a class="reference internal" href="#equ.current_torque"><span class="xref myst">[equ.current_torque]</span></a>{reference-type=”ref”
+(<span class="xref myst">[equ.current_torque]</span>{reference-type=”ref”
 reference=”equ.current_torque”}) and
-(<a class="reference internal" href="#equ.voltage_control"><span class="xref myst">[equ.voltage_control]</span></a>{reference-type=”ref”
+(<span class="xref myst">[equ.voltage_control]</span>{reference-type=”ref”
 reference=”equ.voltage_control”}), we have</p>
 <div class="math notranslate nohighlight">
 \[
@@ -627,10 +602,11 @@ a manipulator by regulating the voltage to the servomotor.</p>
 
               
               
-              
-              
-                <footer class="prev-next-footer d-print-none">
+                <footer class="bd-footer-article">
                   
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="../lec18/dyn.html"
@@ -650,7 +626,10 @@ a manipulator by regulating the voltage to the servomotor.</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
+</div></div>
+  
 </div>
+
                 </footer>
               
             </div>
@@ -659,17 +638,16 @@ a manipulator by regulating the voltage to the servomotor.</p>
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
-
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
     <i class="fa-solid fa-list"></i> Contents
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Overview of Robot Control</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#model-of-acutuator">Model of Acutuator</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transmissions-between-actuator-and-joint">Transmissions between Actuator and Joint</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#electric-motor-dc-model">Electric Motor (DC) Model</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Overview of Robot Arm Control</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-joint-motors">Modeling Joint Motors</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transmissions-between-motor-and-joint">Transmissions between Motor and Joint</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#electric-motor-model">Electric Motor Model</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#manipulator-as-an-integrator">“Manipulator as an Integrator”</a></li>
@@ -696,10 +674,9 @@ By Wanxin Jin @ IRIS Lab
   
   <div class="footer-item">
     
-
   <p class="copyright">
     
-      © Copyright 2023.
+      © Copyright 2022.
       <br/>
     
   </p>
@@ -723,8 +700,8 @@ By Wanxin Jin @ IRIS Lab
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
 
   <footer class="bd-footer">
   </footer>

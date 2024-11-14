@@ -1,12 +1,13 @@
 
+
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="../" >
+<html lang="en" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Operational Space Control &#8212; Modeling and Control of Robots</title>
   
@@ -14,49 +15,52 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
-  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
-    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="../_static/doctools.js?v=9a2dae69"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="../_static/copybutton.js?v=f281be69"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'lec22/osc';</script>
@@ -72,23 +76,19 @@
 
   
   
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
-  
-  <div id="pst-scroll-pixel-helper"></div>
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -110,20 +110,12 @@
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
-
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
-</div>
-
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
-    </header>
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
   
-
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
-      
-      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -138,13 +130,9 @@
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
-
-  
-    
   
 
 <a class="navbar-brand logo" href="../intro.html">
-  
   
   
   
@@ -154,23 +142,12 @@
       
     
     
-    <img src="../_static/iris_logo_2.png" class="logo__image only-light" alt="Modeling and Control of Robots - Home"/>
-    <script>document.write(`<img src="../_static/iris_logo_2.png" class="logo__image only-dark" alt="Modeling and Control of Robots - Home"/>`);</script>
+    <img src="../_static/iris_logo_2.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/iris_logo_2.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item">
-
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
-        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -228,7 +205,7 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="../lec19/control_overview.html">Overview of Robot Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lec19/control_overview.html">Overview of Robot Arm Control</a></li>
 
 
 
@@ -257,7 +234,7 @@
 
       </div>
       
-      <main id="main-content" class="bd-main" role="main">
+      <main id="main-content" class="bd-main">
         
         
 
@@ -266,14 +243,14 @@
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article d-print-none">
+              <div class="bd-header-article">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</button></div>
+</label></div>
       
     </div>
   
@@ -363,28 +340,26 @@
 </button>
 
 
-
 <script>
 document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
   </button>
 `);
 </script>
 
-
 <script>
 document.write(`
-  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
   </button>
 `);
 </script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</button>
+</label>
 </div></div>
       
     </div>
@@ -418,10 +393,10 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article">
+                <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="operational-space-control">
-<h1>Operational Space Control<a class="headerlink" href="#operational-space-control" title="Link to this heading">#</a></h1>
+<h1>Operational Space Control<a class="headerlink" href="#operational-space-control" title="Permalink to this heading">#</a></h1>
 <p>If the motion <span class="math notranslate nohighlight">\(\boldsymbol{x}_d\)</span> is specified in the operational space,
 the joint variable <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span> can be transformed into the
 operational space variables through forward kinematics:
@@ -452,24 +427,24 @@ position <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span>, c
 two types of controllers for the operational space control.</p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="controller-i-pd-control-with-gravity-compensation">
-<h1>Controller I: PD Control with Gravity Compensation<a class="headerlink" href="#controller-i-pd-control-with-gravity-compensation" title="Link to this heading">#</a></h1>
+<h1>Controller I: PD Control with Gravity Compensation<a class="headerlink" href="#controller-i-pd-control-with-gravity-compensation" title="Permalink to this heading">#</a></h1>
 <p>Given a constant end-effector pose <span class="math notranslate nohighlight">\(\boldsymbol{x}_{d}\)</span>, one can define
 the pose error of the end-effector as in
-(<a class="reference internal" href="#equ.end_pose_error"><span class="xref myst">[equ.end_pose_error]</span></a>{reference-type=”ref”
+(<span class="xref myst">[equ.end_pose_error]</span>{reference-type=”ref”
 reference=”equ.end_pose_error”}). We want to design a controller
-(<a class="reference internal" href="#equ.controller"><span class="xref myst">[equ.controller]</span></a>{reference-type=”ref”
+(<span class="xref myst">[equ.controller]</span>{reference-type=”ref”
 reference=”equ.controller”}), such that from any initial configuration,
 say <span class="math notranslate nohighlight">\(\boldsymbol{q}_0\)</span>, the controlled manipulator
-(<a class="reference internal" href="#equ.manipulator_control"><span class="xref myst">[equ.manipulator_control]</span></a>{reference-type=”ref”
+(<span class="xref myst">[equ.manipulator_control]</span>{reference-type=”ref”
 reference=”equ.manipulator_control”}) will eventually reach
 <span class="math notranslate nohighlight">\(\boldsymbol{x}_{d}\)</span>. That means the end-effector error in
-(<a class="reference internal" href="#equ.end_pose_error"><span class="xref myst">[equ.end_pose_error]</span></a>{reference-type=”ref”
+(<span class="xref myst">[equ.end_pose_error]</span>{reference-type=”ref”
 reference=”equ.end_pose_error”}) has</p>
 <div class="math notranslate nohighlight">
 \[\boldsymbol{e}(t)\rightarrow \boldsymbol{0}\quad \text{as}\quad
 t\rightarrow \infty\]</div>
 <p>Below, we will design the controller
-(<a class="reference internal" href="#equ.controller"><span class="xref myst">[equ.controller]</span></a>{reference-type=”ref”
+(<span class="xref myst">[equ.controller]</span>{reference-type=”ref”
 reference=”equ.controller”}) based on the Lyapunov method (see
 background of Lyapunov method in Lecture 16-17). First, we take the
 vector <span class="math notranslate nohighlight">\(\begin{bmatrix}\boldsymbol{e}\\
@@ -485,7 +460,7 @@ candidate:</p>
 <a class="reference internal image-reference" href="../_images/operational_PD_gravity_compensation.jpg"><img alt="../_images/operational_PD_gravity_compensation.jpg" src="../_images/operational_PD_gravity_compensation.jpg" style="width: 70%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 85 </span><span class="caption-text">Block diagram of operational space PD control with gravity
-compensation</span><a class="headerlink" href="#operational-pd-gravity-compensation" title="Link to this image">#</a></p>
+compensation</span><a class="headerlink" href="#operational-pd-gravity-compensation" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Since <span class="math notranslate nohighlight">\(\dot{\boldsymbol{x}}_{d}=\mathbf{0}\)</span>,</p>
@@ -496,7 +471,7 @@ compensation</span><a class="headerlink" href="#operational-pd-gravity-compensat
 \[\dot{V}=\dot{\boldsymbol{q}}^{T} \boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\frac{1}{2} \dot{\boldsymbol{q}}^{T} \dot{\boldsymbol{B}}(\boldsymbol{q}) \dot{\boldsymbol{q}}-\dot{\boldsymbol{q}}^{T} \boldsymbol{J}_{A}^{T}(\boldsymbol{q}) \boldsymbol{K}_{P} {\boldsymbol{e}}\]</div>
 <p>Similar to the derivation in the previous lecture, we replace
 <span class="math notranslate nohighlight">\(\boldsymbol{B}\ddot{\boldsymbol{q}}\)</span> form dynamics
-(<a class="reference internal" href="#equ.manipulator"><span class="xref myst">[equ.manipulator]</span></a>{reference-type=”ref”
+(<span class="xref myst">[equ.manipulator]</span>{reference-type=”ref”
 reference=”equ.manipulator”}) and consider the property that
 <span class="math notranslate nohighlight">\(\boldsymbol{N}=\dot{\boldsymbol{B}}-2 \boldsymbol{C}\)</span> is a
 skew-symmetric matrix (see in the property of dynamics in Lecture 18).
@@ -532,10 +507,10 @@ dynamics under control</p>
 \[\boldsymbol{J}_{A}^{T}(\boldsymbol{q}) \boldsymbol{K}_{P} {\boldsymbol{e}}=\mathbf{0}\quad \rightarrow\quad {\boldsymbol{e}}=\boldsymbol{x}_{d}-\boldsymbol{x}_{e}=\mathbf{0}\]</div>
 <p>This concludes that the controlled manipulator will asymptotically reach
 <span class="math notranslate nohighlight">\(\boldsymbol{x}_d\)</span>. The control scheme is in Fig.
-<a class="reference internal" href="#fig:3"><span class="xref myst">1</span></a>{reference-type=”ref” reference=”fig:3”}.</p>
+<span class="xref myst">1</span>{reference-type=”ref” reference=”fig:3”}.</p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="controller-ii-inverse-dynamics-control">
-<h1>Controller II: Inverse Dynamics Control<a class="headerlink" href="#controller-ii-inverse-dynamics-control" title="Link to this heading">#</a></h1>
+<h1>Controller II: Inverse Dynamics Control<a class="headerlink" href="#controller-ii-inverse-dynamics-control" title="Permalink to this heading">#</a></h1>
 <p>Recall the joint space inverse dynamics control of a manipulator in the
 previous lecture (Lecture 21), we set the controller of the following
 form</p>
@@ -548,7 +523,7 @@ form</p>
 <p>where <span class="math notranslate nohighlight">\(\boldsymbol{y}\)</span> is a new input vector whose expression is to be
 determined yet. The above controller directly leads to the controlled
 manipulator
-(<a class="reference internal" href="#equ.manipulator_control"><span class="xref myst">[equ.manipulator_control]</span></a>{reference-type=”ref”
+(<span class="xref myst">[equ.manipulator_control]</span>{reference-type=”ref”
 reference=”equ.manipulator_control”}) as</p>
 <div class="math notranslate nohighlight">
 \[\boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\boldsymbol{B}(\boldsymbol{q}) \boldsymbol{y}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})\]</div>
@@ -558,12 +533,12 @@ reference=”equ.manipulator_control”}) as</p>
 \boldsymbol{\ddot{q}}=\boldsymbol{y}\]</div>
 <p>Again, we will discuss how to set
 this new control input vector <span class="math notranslate nohighlight">\(\boldsymbol{y}\)</span>, but the particular form
-of controller (<a class="reference internal" href="#equ:u"><span class="xref myst">[equ:u]</span></a>{reference-type=”ref”
+of controller (<span class="xref myst">[equ:u]</span>{reference-type=”ref”
 reference=”equ:u”}) leads to a linear relationship between the input
 signal <span class="math notranslate nohighlight">\(\boldsymbol{y}\)</span> and the manipulator’s joint acceleration
 <span class="math notranslate nohighlight">\(\ddot{\boldsymbol{q}}\)</span>.</p>
 <p>The new control input <span class="math notranslate nohighlight">\(\boldsymbol{y}\)</span> in
-(<a class="reference internal" href="#equ:u"><span class="xref myst">[equ:u]</span></a>{reference-type=”ref” reference=”equ:u”}) is to be
+(<span class="xref myst">[equ:u]</span>{reference-type=”ref” reference=”equ:u”}) is to be
 designed to track a changing <span class="math notranslate nohighlight">\(\boldsymbol{x}_{d}(t)\)</span>. To this end, we
 differentiate the jacobian equation</p>
 <div class="math notranslate nohighlight">
@@ -573,7 +548,7 @@ differentiate the jacobian equation</p>
 \[\label{equ.dotjacobian}
     \ddot{\boldsymbol{x}}_{e}=\boldsymbol{J}_{A}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\dot{\boldsymbol{J}}_{A}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}\]</div>
 <p>For a nonredundant manipulator, the above
-(<a class="reference internal" href="#equ.dotjacobian"><span class="xref myst">[equ.dotjacobian]</span></a>{reference-type=”ref”
+(<span class="xref myst">[equ.dotjacobian]</span>{reference-type=”ref”
 reference=”equ.dotjacobian”}) suggests the following choice of
 <span class="math notranslate nohighlight">\(\boldsymbol{y}\)</span>:</p>
 <div class="admonition important">
@@ -584,9 +559,9 @@ reference=”equ.dotjacobian”}) suggests the following choice of
 </div>
 <p>with <span class="math notranslate nohighlight">\(\boldsymbol{K}_{P}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{K}_{D}\)</span> positive definite
 matrices. In fact, plugging
-(<a class="reference internal" href="#equ.ysignal"><span class="xref myst">[equ.ysignal]</span></a>{reference-type=”ref”
+(<span class="xref myst">[equ.ysignal]</span>{reference-type=”ref”
 reference=”equ.ysignal”}) to
-(<a class="reference internal" href="#equ.dyn_new"><span class="xref myst">[equ.dyn_new]</span></a>{reference-type=”ref”
+(<span class="xref myst">[equ.dyn_new]</span>{reference-type=”ref”
 reference=”equ.dyn_new”}) leads to the error dynamics</p>
 <div class="math notranslate nohighlight">
 \[\ddot{{\boldsymbol{e}}}+\boldsymbol{K}_{D} \dot{{\boldsymbol{e}}}+\boldsymbol{K}_{P} {\boldsymbol{e}}=\mathbf{0}\]</div>
@@ -597,7 +572,7 @@ convergence rate to zero, as specified in the previous lecture (Lecture
 of the second-order system versus the values of <span class="math notranslate nohighlight">\(\boldsymbol{K}_{P}\)</span> and
 <span class="math notranslate nohighlight">\(\boldsymbol{K}_{D}\)</span>.</p>
 <p>The resulting inverse dynamics control scheme is reported in Fig.
-<a class="reference internal" href="#fig:44"><span class="xref myst">2</span></a>{reference-type=”ref” reference=”fig:44”}. Again in this
+<span class="xref myst">2</span>{reference-type=”ref” reference=”fig:44”}. Again in this
 case, besides <span class="math notranslate nohighlight">\(\boldsymbol{x}_{e}\)</span> and
 <span class="math notranslate nohighlight">\(\dot{\boldsymbol{x}}_{e}, \boldsymbol{q}\)</span> and <span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}}\)</span>
 are also to be measured. If measurements of <span class="math notranslate nohighlight">\(\boldsymbol{x}_{e}\)</span> and
@@ -608,7 +583,7 @@ direct kinematics functions <span class="math notranslate nohighlight">\(\boldsy
 <a class="reference internal image-reference" href="../_images/operational_PD_gravity_compensation2.jpg"><img alt="../_images/operational_PD_gravity_compensation2.jpg" src="../_images/operational_PD_gravity_compensation2.jpg" style="width: 70%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 86 </span><span class="caption-text">Block scheme of operational space PD control with gravity
-compensation</span><a class="headerlink" href="#operational-pd-gravity-compensation2" title="Link to this image">#</a></p>
+compensation</span><a class="headerlink" href="#operational-pd-gravity-compensation2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
@@ -638,10 +613,11 @@ compensation</span><a class="headerlink" href="#operational-pd-gravity-compensat
 
               
               
-              
-              
-                <footer class="prev-next-footer d-print-none">
+                <footer class="bd-footer-article">
                   
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="../lec21/cjc.html"
@@ -652,7 +628,10 @@ compensation</span><a class="headerlink" href="#operational-pd-gravity-compensat
         <p class="prev-next-title">Centralized Joint Control</p>
       </div>
     </a>
+</div></div>
+  
 </div>
+
                 </footer>
               
             </div>
@@ -660,7 +639,6 @@ compensation</span><a class="headerlink" href="#operational-pd-gravity-compensat
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -693,10 +671,9 @@ By Wanxin Jin @ IRIS Lab
   
   <div class="footer-item">
     
-
   <p class="copyright">
     
-      © Copyright 2023.
+      © Copyright 2022.
       <br/>
     
   </p>
@@ -720,8 +697,8 @@ By Wanxin Jin @ IRIS Lab
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
 
   <footer class="bd-footer">
   </footer>

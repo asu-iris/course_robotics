@@ -2,91 +2,97 @@
 author:
 - Wanxin Jin
 date: Nov. 17, 2023
-title: "Lecture 19: Overview of Robot Control"
+title: "Lecture 19: Overview of Robot Arm Control"
 ---
 
-# Overview of Robot Control
+# Overview of Robot Arm Control
 
-The control of a robot manipulator is to determine the time sequence of
-control action (i.e., torques in each joint) to guarantee the execution
-of a specified task while satisfying the transient and steady-state
-error. In many robotics tasks, the task is specified usually in the
+The control of a robot arm is to determine the time sequence of
+control inputs (i.e., joint torques) to achieve a specified task. In many robotics tasks, the task is specified usually in the
 operational space (such as end-effector motion and forces), whereas
-control (joint torque) is usually made in the joint space. There are two
+control inputs (joint torque) is usually made in the joint space. There are two
 control schemes: joint space control and operational space control. In
-both schemes, the control architecture has closed loops.
+both schemes, the control diagram is closed-loops
 
-The joint space control scheme is shown in Fig.
-[1](#fig.joint_control){reference-type="ref"
-reference="fig.joint_control"}. First, manipulator inverse kinematics is
-solved to transform the specified end-effector motion
-$\boldsymbol{x}_{d}$ to the corresponding joint motion
-$\boldsymbol{q}_{d}$ in the joint space. Then, a joint space control
-scheme is designed that allows the actual motion $\boldsymbol{q}$ to
-track $\boldsymbol{q}_{d}$. However, the controller does not *directly*
-regulate the operational space motion $\boldsymbol{x}_{e}$, thus,
-$\boldsymbol{x}_{e}$ is controlled in an open-loop fashion through the
-manipulator mechanical structure, which could have less accuracy due to
-the uncertainty of the structure (construction tolerance, lack of
-calibration, gear backlash, elasticity)\...
+
 
 
 
 ```{figure} ./control/joint_control.jpg
 ---
-width: 70%
-name: joint_control
+width: 99%
+name: joint_control222
 ---
 Joint space control
 ```
 
 
-The operational space control is shown in Fig.
-[2](#fig.operational_space_control){reference-type="ref"
-reference="fig.operational_space_control"}. In this control scheme,
-inverse kinematics is now embedded into the feedback control loop, and
-the operational space motion $\boldsymbol{x}_{e}$ is directly fed back
-to the controller. Thus, it addresses the drawbacks of joint space
-control. However, the control algorithm is typically of a greater
-complexity, and measuring the operational space motion
-$\boldsymbol{x}_{e}$ is challenging (such as typically using vision).
-
-
-
-```{figure} ./control/joint_control.jpg
+<!-- ```{figure} ./control/joint_control.jpg
 ---
-width: 70%
-name: joint_control
+width: 50%
+name: joint_control222
 ---
-Operational_space_control
+Motion of Link $i$ 
 ```
 
 
 
+As shown in  {numref}`joint_control222`, -->
 
-# Model of Acutuator
 
-According to the previous lecture, the equation of motion of a
-manipulator without external end-effector forces $\boldsymbol{h}_{e}$
-and static friction ($-\text{sign}(\boldsymbol{\dot{q}})$, difficult to
-model accurately) is
+The joint space control is shown in {numref}`joint_control222`. Here, inverse kinematics is
+use to convert the specified end-effector motion
+$\boldsymbol{x}_{d}$ to the desired joint motion
+$\boldsymbol{q}_{d}$. Then, a joint space controller
+ is designed to allow the actual joint value $\boldsymbol{q}$ to
+track $\boldsymbol{q}_{d}$. As you can see, the controller   *directly*
+regulates the joint tracking error $\boldsymbol{q}_{e}=\boldsymbol{q}_{d}-\boldsymbol{q}_{}$, instead of operational space error $\boldsymbol{x}_{e}=\boldsymbol{x}_{d}-\boldsymbol{x}_{}$. Thus,
+$\boldsymbol{x}_{e}$ is controlled in an open-loop fashion ($\boldsymbol{q}_{e}$ is controlled in closed-loop way). This can lead to operational space control error if IK has some error.
+
+
+
+```{figure} ./control/operational_space_control.jpg
+---
+width: 99%
+name: operational_space_control222
+---
+Operational space control
+```
+
+
+
+The operational space control is shown in {numref}`operational_space_control222`. 
+Here, the operational space motion $\boldsymbol{x}_{e}$ is directly fed back
+to the controller. Thus, it addresses the drawbacks of joint space
+control. However, the control algorithm  typically is more complex in design and it requires  measuring the operational space motion
+$\boldsymbol{x}_{}$, which is challenging challenging.
+
+
+
+</br> </br>
+
+
+# Modeling Joint Motors
+
+According to the previous lecture, the dynamics equation of a
+robot arm only with joint input torque $\boldsymbol{\tau}$ is:
 
 $$\boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{F}_{v} \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\boldsymbol{\tau}$$
 
 
 ```{figure} ../lec18/dynamics/motori_kinematics.jpg
 ---
-width: 50%
+width: 70%
 name: motori_kinematics
 ---
-Transmission between actuator (electric motor) and
+Transmission between  motor and
 joint
 ```
 
 
-## Transmissions between Actuator and Joint
+## Transmissions between Motor and Joint
 
-Let $\boldsymbol{q}_{m}$ denote the vector of joint actuator
+As shown in {numref}`motori_kinematics`, let $\boldsymbol{q}_{m}$ denote the vector of motor joint 
 displacements (motor's rotor angle). The transmissions - assumed to be
 rigid and with no backlash - between the motor and joint motion is
 
@@ -95,14 +101,16 @@ $$\label{equ.transmission_model}
 
 where $\boldsymbol{K}_{r}$ is a $(n \times n)$ diagonal matrix,
 typically much greater than identity. Let $\boldsymbol{\tau}_{m}$
-denotes the vector of the actuator driving torques, based on principle
+denotes the vector of the motor driving torques, based on principle
 of virtual work, one has the following transmission between motor torque
-and joint torque:
+and joint input torque:
 
 $$\label{equ.transmission_model2}
 \boldsymbol{\tau}_{m}=\boldsymbol{K}_{r}^{-1} \boldsymbol{\tau}$$
 
-## Electric Motor (DC) Model
+## Electric Motor Model
+
+For a direct current (DC) motor, we have the following model:
 
 $$\label{equ.dc_model}
     \begin{aligned}
