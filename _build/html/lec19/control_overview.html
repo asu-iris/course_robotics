@@ -415,25 +415,14 @@ both schemes, the control diagram is closed-loops</p>
 <p><span class="caption-number">Fig. 69 </span><span class="caption-text">Joint space control</span><a class="headerlink" href="#joint-control222" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<!-- ```{figure} ./control/joint_control.jpg
----
-width: 50%
-name: joint_control222
----
-Motion of Link $i$ 
-```
-
-
-
-As shown in  {numref}`joint_control222`, -->
 <p>The joint space control is shown in <a class="reference internal" href="#joint-control222"><span class="std std-numref">Fig. 69</span></a>. Here, inverse kinematics is
 use to convert the specified end-effector motion
 <span class="math notranslate nohighlight">\(\boldsymbol{x}_{d}\)</span> to the desired joint motion
 <span class="math notranslate nohighlight">\(\boldsymbol{q}_{d}\)</span>. Then, a joint space controller
 is designed to allow the actual joint value <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span> to
 track <span class="math notranslate nohighlight">\(\boldsymbol{q}_{d}\)</span>. As you can see, the controller   <em>directly</em>
-regulates the joint tracking error <span class="math notranslate nohighlight">\(\boldsymbol{q}_{e}=\boldsymbol{q}_{d}-\boldsymbol{q}_{}\)</span>, instead of operational space error <span class="math notranslate nohighlight">\(\boldsymbol{x}_{e}=\boldsymbol{x}_{d}-\boldsymbol{x}_{}\)</span>. Thus,
-<span class="math notranslate nohighlight">\(\boldsymbol{x}_{e}\)</span> is controlled in an open-loop fashion (<span class="math notranslate nohighlight">\(\boldsymbol{q}_{e}\)</span> is controlled in closed-loop way). This can lead to operational space control error if IK has some error.</p>
+regulates the joint tracking error <span class="math notranslate nohighlight">\(\boldsymbol{q}_{d}-\boldsymbol{q}_{}\)</span>, instead of operational space error <span class="math notranslate nohighlight">\(\boldsymbol{x}_{d}-\boldsymbol{x}_{e}\)</span>. Thus, end-effector pose
+<span class="math notranslate nohighlight">\(\boldsymbol{x}_{e}\)</span> is controlled in an open-loop fashion (instead, <span class="math notranslate nohighlight">\(\boldsymbol{q}_{}\)</span> is controlled in closed-loop way). This can lead to operational space control error if IK has some error.</p>
 <figure class="align-default" id="operational-space-control222">
 <a class="reference internal image-reference" href="../_images/operational_space_control.jpg"><img alt="../_images/operational_space_control.jpg" src="../_images/operational_space_control.jpg" style="width: 99%;" /></a>
 <figcaption>
@@ -444,7 +433,7 @@ regulates the joint tracking error <span class="math notranslate nohighlight">\(
 Here, the operational space motion <span class="math notranslate nohighlight">\(\boldsymbol{x}_{e}\)</span> is directly fed back
 to the controller. Thus, it addresses the drawbacks of joint space
 control. However, the control algorithm  typically is more complex in design and it requires  measuring the operational space motion
-<span class="math notranslate nohighlight">\(\boldsymbol{x}_{}\)</span>, which is challenging challenging.</p>
+<span class="math notranslate nohighlight">\(\boldsymbol{x}_{e}\)</span>, which is typically challenging.</p>
 <p></br> </br></p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="modeling-joint-motors">

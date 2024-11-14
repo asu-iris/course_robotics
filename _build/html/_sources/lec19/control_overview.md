@@ -27,18 +27,6 @@ Joint space control
 ```
 
 
-<!-- ```{figure} ./control/joint_control.jpg
----
-width: 50%
-name: joint_control222
----
-Motion of Link $i$ 
-```
-
-
-
-As shown in  {numref}`joint_control222`, -->
-
 
 The joint space control is shown in {numref}`joint_control222`. Here, inverse kinematics is
 use to convert the specified end-effector motion
@@ -46,8 +34,8 @@ $\boldsymbol{x}_{d}$ to the desired joint motion
 $\boldsymbol{q}_{d}$. Then, a joint space controller
  is designed to allow the actual joint value $\boldsymbol{q}$ to
 track $\boldsymbol{q}_{d}$. As you can see, the controller   *directly*
-regulates the joint tracking error $\boldsymbol{q}_{e}=\boldsymbol{q}_{d}-\boldsymbol{q}_{}$, instead of operational space error $\boldsymbol{x}_{e}=\boldsymbol{x}_{d}-\boldsymbol{x}_{}$. Thus,
-$\boldsymbol{x}_{e}$ is controlled in an open-loop fashion ($\boldsymbol{q}_{e}$ is controlled in closed-loop way). This can lead to operational space control error if IK has some error.
+regulates the joint tracking error $\boldsymbol{q}_{d}-\boldsymbol{q}_{}$, instead of operational space error $\boldsymbol{x}_{d}-\boldsymbol{x}_{e}$. Thus, end-effector pose
+$\boldsymbol{x}_{e}$ is controlled in an open-loop fashion (instead, $\boldsymbol{q}_{}$ is controlled in closed-loop way). This can lead to operational space control error if IK has some error.
 
 
 
@@ -65,7 +53,7 @@ The operational space control is shown in {numref}`operational_space_control222`
 Here, the operational space motion $\boldsymbol{x}_{e}$ is directly fed back
 to the controller. Thus, it addresses the drawbacks of joint space
 control. However, the control algorithm  typically is more complex in design and it requires  measuring the operational space motion
-$\boldsymbol{x}_{}$, which is challenging challenging.
+$\boldsymbol{x}_{e}$, which is typically challenging.
 
 
 
