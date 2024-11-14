@@ -84,8 +84,8 @@ As shown in {numref}`motori_kinematics`, let $\boldsymbol{q}_{m}$ denote the vec
 displacements (motor's rotor angle). The transmissions - assumed to be
 rigid and with no backlash - between the motor and joint motion is
 
-$$\label{equ.transmission_model}
-    \boldsymbol{K}_{r} \boldsymbol{q}=\boldsymbol{q}_{m}$$
+$$
+    \boldsymbol{K}_{r} \boldsymbol{q}=\boldsymbol{q}_{m}$$(equ.transmission_model)
 
 where $\boldsymbol{K}_{r}$ is a $(n \times n)$ diagonal matrix,
 typically much greater than identity. Let $\boldsymbol{\tau}_{m}$
@@ -93,31 +93,29 @@ denotes the vector of the motor driving torques, based on principle
 of virtual work, one has the following transmission between motor torque
 and joint input torque:
 
-$$\label{equ.transmission_model2}
-\boldsymbol{\tau}_{m}=\boldsymbol{K}_{r}^{-1} \boldsymbol{\tau}$$
+$$
+\boldsymbol{\tau}_{m}=\boldsymbol{K}_{r}^{-1} \boldsymbol{\tau}$$(equ.transmission_model2)
 
 ## Electric Motor Model
 
 For a direct current (DC) motor, we have the following model:
 
-$$\label{equ.dc_model}
+$$
     \begin{aligned}
  \boldsymbol{\tau}_m& =\boldsymbol{K}_{t} \boldsymbol{i}_{a} \\
 \boldsymbol{v}_{a} & =\boldsymbol{R}_{a} \boldsymbol{i}_{a}+\boldsymbol{K}_{v} \dot{\boldsymbol{q}}_{m} \\
 \boldsymbol{v}_{a} & =\boldsymbol{G}_{v} \boldsymbol{v}_{c}
-\end{aligned}$$
+\end{aligned}$$(equ.dc_model)
 
 Here, $\boldsymbol{K}_{t}$ is the torque constants; $\boldsymbol{i}_{a}$
 is the armature currents; $\boldsymbol{v}_{a}$ is the vector of armature
 voltages; $\boldsymbol{R}_{a}$ is the armature resistances;
-$\boldsymbol{K}_{v}$ is the back EMF constants; $\boldsymbol{G}_{v}$ is
-the amplifiers; and $\boldsymbol{v}_{c}$ is the voltages of the
+$\boldsymbol{K}_{v}$ is the back electromotive force (EMF) constants; $\boldsymbol{G}_{v}$ is
+the voltage amplifiers; and $\boldsymbol{v}_{c}$ is the voltages of the
 servomotors.
 
 Based on
-([\[equ.transmission_model\]](#equ.transmission_model){reference-type="ref"
-reference="equ.transmission_model"}-[\[equ.dc_model\]](#equ.dc_model){reference-type="ref"
-reference="equ.dc_model"}), we have
+{eq}`equ.transmission_model`-{eq}`equ.dc_model`, we have
 
 $$\label{equ.voltage_control}
     \boldsymbol{\tau}=\boldsymbol{K}_{r} \boldsymbol{K}_{t} \boldsymbol{R}_{a}^{-1}\left(\boldsymbol{G}_{v} \boldsymbol{v}_{c}-\boldsymbol{K}_{v} \boldsymbol{K}_{r} \dot{\boldsymbol{q}}\right)$$
@@ -125,15 +123,13 @@ $$\label{equ.voltage_control}
 The above equation unveils a relationship between the applied servomotor
 voltage $\boldsymbol{v}_c$, the generated joint torque
 $\boldsymbol{\tau}$, and the joint velocity $\boldsymbol{\dot{q}}$. The
-overall diagram modeling DC motor and manipulator is shown in Fig.
-[4](#fig.voltage_control){reference-type="ref"
-reference="fig.voltage_control"}.
+overall diagram modeling DC motor and manipulator is shown in {numref}`voltage_control`
 
 
 
 ```{figure} ./control/voltage_control.jpg
 ---
-width: 70%
+width: 90%
 name: voltage_control
 ---
 DC motor with
