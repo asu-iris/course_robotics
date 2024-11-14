@@ -421,7 +421,7 @@ use to convert the specified end-effector motion
 <span class="math notranslate nohighlight">\(\boldsymbol{q}_{d}\)</span>. Then, a joint space controller
 is designed to allow the actual joint value <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span> to
 track <span class="math notranslate nohighlight">\(\boldsymbol{q}_{d}\)</span>. As you can see, the controller   <em>directly</em>
-regulates the joint tracking error <span class="math notranslate nohighlight">\(\boldsymbol{q}_{d}-\boldsymbol{q}_{}\)</span>, instead of operational space error <span class="math notranslate nohighlight">\(\boldsymbol{x}_{d}-\boldsymbol{x}_{e}\)</span>. Thus, end-effector pose
+regulates the joint tracking error <span class="math notranslate nohighlight">\(\boldsymbol{q}_{d}-\boldsymbol{q}_{}\)</span>, instead of operational space error <span class="math notranslate nohighlight">\(\boldsymbol{x}_{d}-\boldsymbol{x}_{e}\)</span>. Thus, the end-effector pose
 <span class="math notranslate nohighlight">\(\boldsymbol{x}_{e}\)</span> is controlled in an open-loop fashion (instead, <span class="math notranslate nohighlight">\(\boldsymbol{q}_{}\)</span> is controlled in closed-loop way). This can lead to operational space control error if IK has some error.</p>
 <figure class="align-default" id="operational-space-control222">
 <a class="reference internal image-reference" href="../_images/operational_space_control.jpg"><img alt="../_images/operational_space_control.jpg" src="../_images/operational_space_control.jpg" style="width: 99%;" /></a>

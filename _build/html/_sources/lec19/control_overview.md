@@ -34,7 +34,7 @@ $\boldsymbol{x}_{d}$ to the desired joint motion
 $\boldsymbol{q}_{d}$. Then, a joint space controller
  is designed to allow the actual joint value $\boldsymbol{q}$ to
 track $\boldsymbol{q}_{d}$. As you can see, the controller   *directly*
-regulates the joint tracking error $\boldsymbol{q}_{d}-\boldsymbol{q}_{}$, instead of operational space error $\boldsymbol{x}_{d}-\boldsymbol{x}_{e}$. Thus, end-effector pose
+regulates the joint tracking error $\boldsymbol{q}_{d}-\boldsymbol{q}_{}$, instead of operational space error $\boldsymbol{x}_{d}-\boldsymbol{x}_{e}$. Thus, the end-effector pose
 $\boldsymbol{x}_{e}$ is controlled in an open-loop fashion (instead, $\boldsymbol{q}_{}$ is controlled in closed-loop way). This can lead to operational space control error if IK has some error.
 
 
