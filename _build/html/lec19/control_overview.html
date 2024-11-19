@@ -476,15 +476,17 @@ joint</span><a class="headerlink" href="#motori-kinematics" title="Link to this 
 </figure>
 <section id="joint-motor-transmission">
 <h2>Joint-Motor Transmission<a class="headerlink" href="#joint-motor-transmission" title="Link to this heading">#</a></h2>
-<p>As shown in <a class="reference internal" href="#motori-kinematics"><span class="std std-numref">Fig. 71</span></a>, let <span class="math notranslate nohighlight">\(\boldsymbol{q}_{m}\)</span> denote the vector of motor joint
-displacements (motor’s rotor angle). The transmissions - assumed to be
+<p>As shown in <a class="reference internal" href="#motori-kinematics"><span class="std std-numref">Fig. 71</span></a>, let  <span class="math notranslate nohighlight">\(\boldsymbol{q}_{m}=[\theta_{m1}, \theta_{m2}, ...\theta_{mn}]^T\)</span>
+be the vector of joint motor angles. The transmissions - assumed to be
 rigid and with no backlash - between the motor and joint motion is</p>
 <div class="math notranslate nohighlight" id="equation-equ-transmission-model">
 <span class="eqno">(52)<a class="headerlink" href="#equation-equ-transmission-model" title="Link to this equation">#</a></span>\[
     \boldsymbol{K}_{r} \boldsymbol{q}=\boldsymbol{q}_{m}\]</div>
-<p>where <span class="math notranslate nohighlight">\(\boldsymbol{K}_{r}\)</span> is called joint-motor transmission matrix, which is <span class="math notranslate nohighlight">\((n \times n)\)</span> diagonal,
-typically much greater than identity. Let <span class="math notranslate nohighlight">\(\boldsymbol{\tau}_{m}\)</span>
-denotes the vector of the motor driving torques, based on principle
+<p>where <span class="math notranslate nohighlight">\(\boldsymbol{K}_{r}=\text{diag}(k_{r_1}, k_{r_2}, ..., k_{r_n})\)</span>
+is a diagonal   joint-motor transmission matrix, and each diagonal element <span class="math notranslate nohighlight">\(k_{r_i}\)</span> is the gear
+ratio of joint <span class="math notranslate nohighlight">\(i\)</span> is,
+typically much greater than identity. Let <span class="math notranslate nohighlight">\(\boldsymbol{\tau}_{m}=[\tau_{m1},\tau_{m2},...,,\tau_{mn}]^T\)</span> denote
+the vector of all motor torques. Based on principle
 of virtual work, one has the following transmission between motor torque
 and joint input torque:</p>
 <div class="math notranslate nohighlight" id="equation-equ-transmission-model2">

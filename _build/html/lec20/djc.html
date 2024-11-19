@@ -406,7 +406,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Decentralized Joint Control</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Decentralized Joint Control</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-idea-of-how-we-do-decentralized-control">The idea of how we do decentralized control</a></li>
+</ul>
+</li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#single-joint-control-diagram">Single-Joint Control Diagram</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#single-joint-position-feedback">Single Joint Position feedback</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#single-joint-position-and-velocity-feedback">Single-Joint Position and Velocity Feedback</a></li>
@@ -426,77 +429,71 @@ document.write(`
 <h1>Decentralized Joint Control<a class="headerlink" href="#decentralized-joint-control" title="Link to this heading">#</a></h1>
 <p>The equation of motion of a manipulator without end-effector contact
 force and any joint friction is</p>
-<div class="math notranslate nohighlight">
-\[\label{equ.dyn}
+<div class="math notranslate nohighlight" id="equation-equ-control-arm-dyn">
+<span class="eqno">(59)<a class="headerlink" href="#equation-equ-control-arm-dyn" title="Link to this equation">#</a></span>\[
     \boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\boldsymbol{\tau}\]</div>
-<p>Let <span class="math notranslate nohighlight">\(\boldsymbol{q}_{m}=[\theta_{m1}, \theta_{m2}, ...\theta_{mn}]^T\)</span>
-denote the vector of all corresponding DM motor angles. The
-transmissions establish a relationship:</p>
-<div class="math notranslate nohighlight">
-\[\label{equ.motor_angle}
-    \boldsymbol{K}_{r} \boldsymbol{q}=\boldsymbol{q}_{m}\]</div>
-<p>where <span class="math notranslate nohighlight">\(\boldsymbol{K}_{r}=\text{diag}(k_{r_1}, k_{r_2}, ..., k_{r_n})\)</span>
+<p>From the previous chapter, the joint-motor
+transmission gives</p>
+<div class="math notranslate nohighlight" id="equation-equ-motor-angle">
+<span class="eqno">(60)<a class="headerlink" href="#equation-equ-motor-angle" title="Link to this equation">#</a></span>\[
+    \boldsymbol{q}_{m}=\boldsymbol{K}_{r} \boldsymbol{q}\]</div>
+<!-- $\boldsymbol{K}_{r}=\text{diag}(k_{r_1}, k_{r_2}, ..., k_{r_n})$ -->
+<p>where <span class="math notranslate nohighlight">\(\boldsymbol{K}_{r}\)</span>
 is a diagonal matrix, and each diagonal element <span class="math notranslate nohighlight">\(k_{r_i}\)</span> is the gear
 ratio of joint <span class="math notranslate nohighlight">\(i\)</span>. Let
-<span class="math notranslate nohighlight">\(\boldsymbol{\tau}_{m}=[\tau_{m1},\tau_{m2},...,,\tau_{mn}]^T\)</span> denote
+<span class="math notranslate nohighlight">\(\boldsymbol{\tau}_{m}\)</span> denote
 the vector of all motor torques, one can write</p>
-<div class="math notranslate nohighlight">
-\[\label{equ.motor_torque}
-\boldsymbol{\tau}_{m}=\boldsymbol{K}_{r}^{-1} \boldsymbol{\tau}\]</div>
-<p>Substituting
-(<a class="reference internal" href="#equ.motor_angle"><span class="xref myst">[equ.motor_angle]</span></a>{reference-type=”ref”
-reference=”equ.motor_angle”}) and
-(<a class="reference internal" href="#equ.motor_torque"><span class="xref myst">[equ.motor_torque]</span></a>{reference-type=”ref”
-reference=”equ.motor_torque”}) into the manipulator dynamics
-(<a class="reference internal" href="#equ.dyn"><span class="xref myst">[equ.dyn]</span></a>{reference-type=”ref” reference=”equ.dyn”})
+<div class="math notranslate nohighlight" id="equation-equ-motor-torque">
+<span class="eqno">(61)<a class="headerlink" href="#equation-equ-motor-torque" title="Link to this equation">#</a></span>\[
+\boldsymbol{\tau}= \boldsymbol{K}_{r}\boldsymbol{\tau}_{m}\]</div>
+<p>Substituting <a class="reference internal" href="#equation-equ-motor-torque">(61)</a> and <a class="reference internal" href="#equation-equ-motor-angle">(60)</a>
+into the robot arm dynamics <a class="reference internal" href="#equation-equ-control-arm-dyn">(59)</a>
 leads to</p>
-<div class="math notranslate nohighlight">
-\[\label{equ.dyn2}
+<div class="math notranslate nohighlight" id="equation-equ-control-dyn2">
+<span class="eqno">(62)<a class="headerlink" href="#equation-equ-control-dyn2" title="Link to this equation">#</a></span>\[
     \boldsymbol{K}_{r}^{-1} \boldsymbol{B}(\boldsymbol{q}) \boldsymbol{K}_{r}^{-1} \ddot{\boldsymbol{q}}_{m}+\boldsymbol{K}_{r}^{-1} \boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \boldsymbol{K}_{r}^{-1} \dot{\boldsymbol{q}}_{m}+\boldsymbol{K}_{r}^{-1} \boldsymbol{g}(\boldsymbol{q})=\boldsymbol{\tau}_{m}\]</div>
-<p>We have previously analyzed elements in matrix
+<section id="the-idea-of-how-we-do-decentralized-control">
+<h2>The idea of how we do decentralized control<a class="headerlink" href="#the-idea-of-how-we-do-decentralized-control" title="Link to this heading">#</a></h2>
+<p>We have previously (in dynamics lecture) analyzed the inertia matrix
 <span class="math notranslate nohighlight">\(\boldsymbol{B}(\boldsymbol{q})\)</span>, one can write it as</p>
-<div class="math notranslate nohighlight">
-\[\label{equ.bmat}
+<div class="math notranslate nohighlight" id="equation-equ-bmat2">
+<span class="eqno">(63)<a class="headerlink" href="#equation-equ-bmat2" title="Link to this equation">#</a></span>\[
     \boldsymbol{B}(\boldsymbol{q})=\overline{\boldsymbol{B}}+\Delta \boldsymbol{B}(\boldsymbol{q})
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(\overline{\boldsymbol{B}}\)</span> is the diagonal matrix whose constant
 elements represent the average inertia at each joint, and elements in
 <span class="math notranslate nohighlight">\(\Delta \boldsymbol{B}(\boldsymbol{q})\)</span> represent the matrix of
-non-diagonal part. Substituting
-(<a class="reference internal" href="#equ.bmat"><span class="xref myst">[equ.bmat]</span></a>{reference-type=”ref” reference=”equ.bmat”})
-into (<a class="reference internal" href="#equ.dyn2"><span class="xref myst">[equ.dyn2]</span></a>{reference-type=”ref”
-reference=”equ.dyn2”}) leads to</p>
-<div class="math notranslate nohighlight">
-\[\label{equ.decouple_model}
+non-diagonal part.</p>
+<p>Substituting <a class="reference internal" href="#equation-equ-bmat2">(63)</a>
+into <a class="reference internal" href="#equation-equ-control-dyn2">(62)</a> leads to</p>
+<div class="math notranslate nohighlight" id="equation-equ-decouple-model">
+<span class="eqno">(64)<a class="headerlink" href="#equation-equ-decouple-model" title="Link to this equation">#</a></span>\[
     \underbrace{\boldsymbol{K}_{r}^{-1} \overline{\boldsymbol{B}} \boldsymbol{K}_{r}^{-1}}_{\boldsymbol{I}_m} \ddot{\boldsymbol{q}}_{m}+\underbrace{\boldsymbol{K}_{r}^{-1} \Delta \boldsymbol{B}(\boldsymbol{q}) \boldsymbol{K}_{r}^{-1} \ddot{\boldsymbol{q}}_{m}+\boldsymbol{K}_{r}^{-1} \boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \boldsymbol{K}_{r}^{-1} \dot{\boldsymbol{q}}_{m}+\boldsymbol{K}_{r}^{-1} \boldsymbol{g}(\boldsymbol{q})}_{\boldsymbol{D}}=\boldsymbol{\tau}_{m}\]</div>
-<p>The above equation (<a class="reference internal" href="#equ.decouple_model"><span class="xref myst">[equ.decouple_model]</span></a>{reference-type=”ref”
-reference=”equ.decouple_model”}) will lead to the following diagram.</p>
+<p>Here, <span class="math notranslate nohighlight">\(\boldsymbol{I}_m\)</span> is also a diagonal
+matrix, whose each diagonal entry encodes the inertia  at that joint.  <span class="math notranslate nohighlight">\(\boldsymbol{D}\)</span> in <a class="reference internal" href="#equation-equ-decouple-model">(64)</a>
+is a coupling term between different joints.</p>
+<p>The above equation <a class="reference internal" href="#equation-equ-decouple-model">(64)</a> corresponds to the following diagram</p>
 <figure class="align-default" id="decentralized-control3">
-<a class="reference internal image-reference" href="../_images/decentralized_control3.jpeg"><img alt="../_images/decentralized_control3.jpeg" src="../_images/decentralized_control3.jpeg" style="width: 70%;" /></a>
+<a class="reference internal image-reference" href="../_images/decentralized_control3.jpeg"><img alt="../_images/decentralized_control3.jpeg" src="../_images/decentralized_control3.jpeg" style="width: 99%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 74 </span><span class="caption-text">Dynamics diagram of a motor-driven
-manipulator.</span><a class="headerlink" href="#decentralized-control3" title="Link to this image">#</a></p>
+robot arm.</span><a class="headerlink" href="#decentralized-control3" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>As shown in Fig. <a class="reference internal" href="#fig:3"><span class="xref myst">1</span></a>{reference-type=”ref” reference=”fig:3”} and
-(<a class="reference internal" href="#equ.decouple_model"><span class="xref myst">[equ.decouple_model]</span></a>{reference-type=”ref”
-reference=”equ.decouple_model”}), if we don’t consider <span class="math notranslate nohighlight">\(\boldsymbol{D}\)</span>,
+<p>As shown in both <a class="reference internal" href="#equation-equ-decouple-model">(64)</a> and <a class="reference internal" href="#decentralized-control3"><span class="std std-numref">Fig. 74</span></a>, if we don’t consider the coupling term <span class="math notranslate nohighlight">\(\boldsymbol{D}\)</span>,
 then</p>
 <div class="math notranslate nohighlight">
 \[\boldsymbol{I}_m\boldsymbol{\ddot{q}}_m=\boldsymbol{\tau}_m,\]</div>
-<p>Note that in the above equation <span class="math notranslate nohighlight">\(\boldsymbol{I}_m\)</span> is also a diagonal
-matrix. This means that if we don’t consider the complex
-<span class="math notranslate nohighlight">\(\boldsymbol{D}\)</span>, each joint is a single-in-single-output system:</p>
+<p>This means that if we don’t consider the complex
+<span class="math notranslate nohighlight">\(\boldsymbol{D}\)</span>, each joint is a single-in-single-output system (i will use <span class="math notranslate nohighlight">\(\ddot{\theta}_m\)</span> and <span class="math notranslate nohighlight">\(q_m\)</span> interchangeably for each joint below):</p>
 <div class="math notranslate nohighlight">
 \[\label{equ.single_joint_dyn}
     {I}_m{\ddot{\theta}_m}=\tau_m\]</div>
-<p>for each joint motor and we can
-control each joint individually. However, <span class="math notranslate nohighlight">\(\boldsymbol{D}\)</span> in
-(<a class="reference internal" href="#equ.decouple_model"><span class="xref myst">[equ.decouple_model]</span></a>{reference-type=”ref”
-reference=”equ.decouple_model”}) is a coupling term that prevents us
+<p>However, <span class="math notranslate nohighlight">\(\boldsymbol{D}\)</span> in <a class="reference internal" href="#equation-equ-decouple-model">(64)</a> is a coupling term that prevents us
 from doing so. To address such, in the following, we still consider the
 control each joint as a single-in-single-out system, but consider
 <span class="math notranslate nohighlight">\(\boldsymbol{D}\)</span> as a disturbance to each joint.</p>
+</section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="single-joint-control-diagram">
 <h1>Single-Joint Control Diagram<a class="headerlink" href="#single-joint-control-diagram" title="Link to this heading">#</a></h1>
@@ -509,7 +506,7 @@ lecture (Lecture 19), we have</p>
 I_m\ddot{\theta}_m+D=\tau_m=I_m\ddot{\theta}_m+\frac{k_t}{R_a}(\frac{DR_a}{k_t})=\tau_m=k_ti_a=k_t\frac{(v_a-k_v\dot{\theta}_m)}{R_a}=k_t\frac{(G_vv_c-k_v\dot{\theta}_m)}{R_a}
 \]</div>
 <p>Here, <span class="math notranslate nohighlight">\(D\)</span> is the disturbance torque in
-(<a class="reference internal" href="#equ.decouple_model"><span class="xref myst">[equ.decouple_model]</span></a>{reference-type=”ref”
+(<a class="reference internal" href="#equation-equ-decouple-model">(64)</a>{reference-type=”ref”
 reference=”equ.decouple_model”}) applied to each joint, <span class="math notranslate nohighlight">\({k}_{t}\)</span> is the
 torque constants; <span class="math notranslate nohighlight">\({i}_{a}\)</span> is the armature current; <span class="math notranslate nohighlight">\({v}_{a}\)</span> is the
 vector of armature voltage; <span class="math notranslate nohighlight">\({R}_{a}\)</span> is the armature resistance;
@@ -822,7 +819,10 @@ reducing the effect of <span class="math notranslate nohighlight">\(D\)</span>.<
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Decentralized Joint Control</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Decentralized Joint Control</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-idea-of-how-we-do-decentralized-control">The idea of how we do decentralized control</a></li>
+</ul>
+</li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#single-joint-control-diagram">Single-Joint Control Diagram</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#single-joint-position-feedback">Single Joint Position feedback</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#single-joint-position-and-velocity-feedback">Single-Joint Position and Velocity Feedback</a></li>

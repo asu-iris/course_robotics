@@ -9,89 +9,90 @@ title: "Lecture 20: Decentralized Joint Control"
 The equation of motion of a manipulator without end-effector contact
 force and any joint friction is
 
-$$\label{equ.dyn}
-    \boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\boldsymbol{\tau}$$
+$$
+    \boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\boldsymbol{\tau}$$(equ.control_arm_dyn)
 
-Let $\boldsymbol{q}_{m}=[\theta_{m1}, \theta_{m2}, ...\theta_{mn}]^T$
-denote the vector of all corresponding DM motor angles. The
-transmissions establish a relationship:
+From the previous chapter, the joint-motor
+transmission gives
 
-$$\label{equ.motor_angle}
-    \boldsymbol{K}_{r} \boldsymbol{q}=\boldsymbol{q}_{m}$$
+$$
+    \boldsymbol{q}_{m}=\boldsymbol{K}_{r} \boldsymbol{q}$$(equ.motor_angle)
 
-where $\boldsymbol{K}_{r}=\text{diag}(k_{r_1}, k_{r_2}, ..., k_{r_n})$
+<!-- $\boldsymbol{K}_{r}=\text{diag}(k_{r_1}, k_{r_2}, ..., k_{r_n})$ -->
+
+where $\boldsymbol{K}_{r}$
 is a diagonal matrix, and each diagonal element $k_{r_i}$ is the gear
 ratio of joint $i$. Let
-$\boldsymbol{\tau}_{m}=[\tau_{m1},\tau_{m2},...,,\tau_{mn}]^T$ denote
+$\boldsymbol{\tau}_{m}$ denote
 the vector of all motor torques, one can write
 
-$$\label{equ.motor_torque}
-\boldsymbol{\tau}_{m}=\boldsymbol{K}_{r}^{-1} \boldsymbol{\tau}$$
+$$
+\boldsymbol{\tau}= \boldsymbol{K}_{r}\boldsymbol{\tau}_{m}$$(equ.motor_torque)
 
-Substituting
-([\[equ.motor_angle\]](#equ.motor_angle){reference-type="ref"
-reference="equ.motor_angle"}) and
-([\[equ.motor_torque\]](#equ.motor_torque){reference-type="ref"
-reference="equ.motor_torque"}) into the manipulator dynamics
-([\[equ.dyn\]](#equ.dyn){reference-type="ref" reference="equ.dyn"})
+Substituting {eq}`equ.motor_torque` and {eq}`equ.motor_angle`
+into the robot arm dynamics {eq}`equ.control_arm_dyn`
 leads to
 
- $$\label{equ.dyn2}
-    \boldsymbol{K}_{r}^{-1} \boldsymbol{B}(\boldsymbol{q}) \boldsymbol{K}_{r}^{-1} \ddot{\boldsymbol{q}}_{m}+\boldsymbol{K}_{r}^{-1} \boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \boldsymbol{K}_{r}^{-1} \dot{\boldsymbol{q}}_{m}+\boldsymbol{K}_{r}^{-1} \boldsymbol{g}(\boldsymbol{q})=\boldsymbol{\tau}_{m}$$
+ $$
+    \boldsymbol{K}_{r}^{-1} \boldsymbol{B}(\boldsymbol{q}) \boldsymbol{K}_{r}^{-1} \ddot{\boldsymbol{q}}_{m}+\boldsymbol{K}_{r}^{-1} \boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \boldsymbol{K}_{r}^{-1} \dot{\boldsymbol{q}}_{m}+\boldsymbol{K}_{r}^{-1} \boldsymbol{g}(\boldsymbol{q})=\boldsymbol{\tau}_{m}$$(equ.control_dyn2)
+
+## The idea of how we do decentralized control
 
 
-We have previously analyzed elements in matrix
+
+We have previously (in dynamics lecture) analyzed the inertia matrix
 $\boldsymbol{B}(\boldsymbol{q})$, one can write it as 
 
-$$\label{equ.bmat}
-    \boldsymbol{B}(\boldsymbol{q})=\overline{\boldsymbol{B}}+\Delta \boldsymbol{B}(\boldsymbol{q})
 $$
+    \boldsymbol{B}(\boldsymbol{q})=\overline{\boldsymbol{B}}+\Delta \boldsymbol{B}(\boldsymbol{q})
+$$(equ.bmat2)
 
 
 where $\overline{\boldsymbol{B}}$ is the diagonal matrix whose constant
 elements represent the average inertia at each joint, and elements in
 $\Delta \boldsymbol{B}(\boldsymbol{q})$ represent the matrix of
-non-diagonal part. Substituting
-([\[equ.bmat\]](#equ.bmat){reference-type="ref" reference="equ.bmat"})
-into ([\[equ.dyn2\]](#equ.dyn2){reference-type="ref"
-reference="equ.dyn2"}) leads to 
-
-$$\label{equ.decouple_model}
-    \underbrace{\boldsymbol{K}_{r}^{-1} \overline{\boldsymbol{B}} \boldsymbol{K}_{r}^{-1}}_{\boldsymbol{I}_m} \ddot{\boldsymbol{q}}_{m}+\underbrace{\boldsymbol{K}_{r}^{-1} \Delta \boldsymbol{B}(\boldsymbol{q}) \boldsymbol{K}_{r}^{-1} \ddot{\boldsymbol{q}}_{m}+\boldsymbol{K}_{r}^{-1} \boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \boldsymbol{K}_{r}^{-1} \dot{\boldsymbol{q}}_{m}+\boldsymbol{K}_{r}^{-1} \boldsymbol{g}(\boldsymbol{q})}_{\boldsymbol{D}}=\boldsymbol{\tau}_{m}$$
+non-diagonal part. 
 
 
-The above equation ([\[equ.decouple_model\]](#equ.decouple_model){reference-type="ref"
-reference="equ.decouple_model"}) will lead to the following diagram.
+Substituting {eq}`equ.bmat2`
+into {eq}`equ.control_dyn2` leads to 
+
+$$
+    \underbrace{\boldsymbol{K}_{r}^{-1} \overline{\boldsymbol{B}} \boldsymbol{K}_{r}^{-1}}_{\boldsymbol{I}_m} \ddot{\boldsymbol{q}}_{m}+\underbrace{\boldsymbol{K}_{r}^{-1} \Delta \boldsymbol{B}(\boldsymbol{q}) \boldsymbol{K}_{r}^{-1} \ddot{\boldsymbol{q}}_{m}+\boldsymbol{K}_{r}^{-1} \boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \boldsymbol{K}_{r}^{-1} \dot{\boldsymbol{q}}_{m}+\boldsymbol{K}_{r}^{-1} \boldsymbol{g}(\boldsymbol{q})}_{\boldsymbol{D}}=\boldsymbol{\tau}_{m}$$(equ.decouple_model)
+
+
+Here, $\boldsymbol{I}_m$ is also a diagonal
+matrix, whose each diagonal entry encodes the inertia  at that joint.  $\boldsymbol{D}$ in {eq}`equ.decouple_model`
+ is a coupling term between different joints.
+
+
+
+
+The above equation {eq}`equ.decouple_model` corresponds to the following diagram
 
 
 ```{figure} ../lec19/control/decentralized_control3.jpeg
 ---
-width: 70%
+width: 99%
 name: decentralized_control3
 ---
 Dynamics diagram of a motor-driven
-manipulator.
+robot arm.
 ```
 
-As shown in Fig. [1](#fig:3){reference-type="ref" reference="fig:3"} and
-([\[equ.decouple_model\]](#equ.decouple_model){reference-type="ref"
-reference="equ.decouple_model"}), if we don't consider $\boldsymbol{D}$,
+As shown in both {eq}`equ.decouple_model` and {numref}`decentralized_control3`, if we don't consider the coupling term $\boldsymbol{D}$,
 then 
 
 $$\boldsymbol{I}_m\boldsymbol{\ddot{q}}_m=\boldsymbol{\tau}_m,$$
 
 
-Note that in the above equation $\boldsymbol{I}_m$ is also a diagonal
-matrix. This means that if we don't consider the complex
-$\boldsymbol{D}$, each joint is a single-in-single-output system:
+This means that if we don't consider the complex
+$\boldsymbol{D}$, each joint is a single-in-single-output system (i will use $\ddot{\theta}_m$ and $q_m$ interchangeably for each joint below):
 
 $$\label{equ.single_joint_dyn}
     {I}_m{\ddot{\theta}_m}=\tau_m$$ 
 
-for each joint motor and we can
-control each joint individually. However, $\boldsymbol{D}$ in
-([\[equ.decouple_model\]](#equ.decouple_model){reference-type="ref"
-reference="equ.decouple_model"}) is a coupling term that prevents us
+ However, $\boldsymbol{D}$ in {eq}`equ.decouple_model` is a coupling term that prevents us
 from doing so. To address such, in the following, we still consider the
 control each joint as a single-in-single-out system, but consider
 $\boldsymbol{D}$ as a disturbance to each joint.

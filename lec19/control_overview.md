@@ -80,16 +80,18 @@ joint
 
 ## Joint-Motor Transmission
 
-As shown in {numref}`motori_kinematics`, let $\boldsymbol{q}_{m}$ denote the vector of motor joint 
-displacements (motor's rotor angle). The transmissions - assumed to be
+As shown in {numref}`motori_kinematics`, let  $\boldsymbol{q}_{m}=[\theta_{m1}, \theta_{m2}, ...\theta_{mn}]^T$
+be the vector of joint motor angles. The transmissions - assumed to be
 rigid and with no backlash - between the motor and joint motion is
 
 $$
     \boldsymbol{K}_{r} \boldsymbol{q}=\boldsymbol{q}_{m}$$(equ.transmission_model)
 
-where $\boldsymbol{K}_{r}$ is called joint-motor transmission matrix, which is $(n \times n)$ diagonal,
-typically much greater than identity. Let $\boldsymbol{\tau}_{m}$
-denotes the vector of the motor driving torques, based on principle
+where $\boldsymbol{K}_{r}=\text{diag}(k_{r_1}, k_{r_2}, ..., k_{r_n})$
+is a diagonal   joint-motor transmission matrix, and each diagonal element $k_{r_i}$ is the gear
+ratio of joint $i$ is, 
+typically much greater than identity. Let $\boldsymbol{\tau}_{m}=[\tau_{m1},\tau_{m2},...,,\tau_{mn}]^T$ denote
+the vector of all motor torques. Based on principle
 of virtual work, one has the following transmission between motor torque
 and joint input torque:
 
