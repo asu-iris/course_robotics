@@ -408,12 +408,12 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Overview of Robot Arm Control</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-joint-motors">Modeling Joint Motors</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transmissions-between-motor-and-joint">Transmissions between Motor and Joint</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#joint-motor-transmission">Joint-Motor Transmission</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#electric-motor-model">Electric Motor Model</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#manipulator-as-an-integrator">“Manipulator as an Integrator”</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#torque-controlled-system-more-general">Torque-Controlled System (more general)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#robot-arm-is-an-integrator">“Robot arm is an Integrator”</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#general-case-torque-controlled-system">General case: Torque-Controlled System</a></li>
 </ul>
 
             </nav>
@@ -465,8 +465,8 @@ control. However, the control algorithm  typically is more complex in design and
 <h1>Modeling Joint Motors<a class="headerlink" href="#modeling-joint-motors" title="Link to this heading">#</a></h1>
 <p>According to the previous lecture, the dynamics equation of a
 robot arm only with joint input torque <span class="math notranslate nohighlight">\(\boldsymbol{\tau}\)</span> is:</p>
-<div class="math notranslate nohighlight">
-\[\boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{F}_{v} \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\boldsymbol{\tau}\]</div>
+<div class="math notranslate nohighlight" id="equation-equ-robotarm-dyn">
+<span class="eqno">(51)<a class="headerlink" href="#equation-equ-robotarm-dyn" title="Link to this equation">#</a></span>\[\boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{F}_{v} \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\boldsymbol{\tau}\]</div>
 <figure class="align-default" id="motori-kinematics">
 <a class="reference internal image-reference" href="../_images/motori_kinematics.jpg"><img alt="../_images/motori_kinematics.jpg" src="../_images/motori_kinematics.jpg" style="width: 70%;" /></a>
 <figcaption>
@@ -474,28 +474,34 @@ robot arm only with joint input torque <span class="math notranslate nohighlight
 joint</span><a class="headerlink" href="#motori-kinematics" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<section id="transmissions-between-motor-and-joint">
-<h2>Transmissions between Motor and Joint<a class="headerlink" href="#transmissions-between-motor-and-joint" title="Link to this heading">#</a></h2>
+<section id="joint-motor-transmission">
+<h2>Joint-Motor Transmission<a class="headerlink" href="#joint-motor-transmission" title="Link to this heading">#</a></h2>
 <p>As shown in <a class="reference internal" href="#motori-kinematics"><span class="std std-numref">Fig. 71</span></a>, let <span class="math notranslate nohighlight">\(\boldsymbol{q}_{m}\)</span> denote the vector of motor joint
 displacements (motor’s rotor angle). The transmissions - assumed to be
 rigid and with no backlash - between the motor and joint motion is</p>
 <div class="math notranslate nohighlight" id="equation-equ-transmission-model">
-<span class="eqno">(51)<a class="headerlink" href="#equation-equ-transmission-model" title="Link to this equation">#</a></span>\[
+<span class="eqno">(52)<a class="headerlink" href="#equation-equ-transmission-model" title="Link to this equation">#</a></span>\[
     \boldsymbol{K}_{r} \boldsymbol{q}=\boldsymbol{q}_{m}\]</div>
-<p>where <span class="math notranslate nohighlight">\(\boldsymbol{K}_{r}\)</span> is a <span class="math notranslate nohighlight">\((n \times n)\)</span> diagonal matrix,
+<p>where <span class="math notranslate nohighlight">\(\boldsymbol{K}_{r}\)</span> is called joint-motor transmission matrix, which is <span class="math notranslate nohighlight">\((n \times n)\)</span> diagonal,
 typically much greater than identity. Let <span class="math notranslate nohighlight">\(\boldsymbol{\tau}_{m}\)</span>
 denotes the vector of the motor driving torques, based on principle
 of virtual work, one has the following transmission between motor torque
 and joint input torque:</p>
 <div class="math notranslate nohighlight" id="equation-equ-transmission-model2">
-<span class="eqno">(52)<a class="headerlink" href="#equation-equ-transmission-model2" title="Link to this equation">#</a></span>\[
+<span class="eqno">(53)<a class="headerlink" href="#equation-equ-transmission-model2" title="Link to this equation">#</a></span>\[
 \boldsymbol{\tau}_{m}=\boldsymbol{K}_{r}^{-1} \boldsymbol{\tau}\]</div>
 </section>
 <section id="electric-motor-model">
 <h2>Electric Motor Model<a class="headerlink" href="#electric-motor-model" title="Link to this heading">#</a></h2>
-<p>For a direct current (DC) motor, we have the following model:</p>
+<figure class="align-default" id="motor-circuit">
+<a class="reference internal image-reference" href="../_images/motor_circuit.jpg"><img alt="../_images/motor_circuit.jpg" src="../_images/motor_circuit.jpg" style="width: 99%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 72 </span><span class="caption-text">Direct current motor circuit</span><a class="headerlink" href="#motor-circuit" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>For a direct current (DC) motor <a class="reference internal" href="#motor-circuit"><span class="std std-numref">Fig. 72</span></a>, we have the following model:</p>
 <div class="math notranslate nohighlight" id="equation-equ-dc-model">
-<span class="eqno">(53)<a class="headerlink" href="#equation-equ-dc-model" title="Link to this equation">#</a></span>\[\begin{split}
+<span class="eqno">(54)<a class="headerlink" href="#equation-equ-dc-model" title="Link to this equation">#</a></span>\[\begin{split}
     \begin{aligned}
  \boldsymbol{\tau}_m&amp; =\boldsymbol{K}_{t} \boldsymbol{i}_{a} \\
 \boldsymbol{v}_{a} &amp; =\boldsymbol{R}_{a} \boldsymbol{i}_{a}+\boldsymbol{K}_{v} \dot{\boldsymbol{q}}_{m} \\
@@ -508,83 +514,81 @@ voltages; <span class="math notranslate nohighlight">\(\boldsymbol{R}_{a}\)</spa
 the voltage amplifiers; and <span class="math notranslate nohighlight">\(\boldsymbol{v}_{c}\)</span> is the voltages of the
 servomotors.</p>
 <p>Based on
-<a class="reference internal" href="#equation-equ-transmission-model">(51)</a>-<a class="reference internal" href="#equation-equ-dc-model">(53)</a>, we have</p>
-<div class="math notranslate nohighlight">
-\[\label{equ.voltage_control}
+<a class="reference internal" href="#equation-equ-transmission-model">(52)</a>-<a class="reference internal" href="#equation-equ-dc-model">(54)</a>, we have</p>
+<div class="math notranslate nohighlight" id="equation-equ-voltage-control">
+<span class="eqno">(55)<a class="headerlink" href="#equation-equ-voltage-control" title="Link to this equation">#</a></span>\[
     \boldsymbol{\tau}=\boldsymbol{K}_{r} \boldsymbol{K}_{t} \boldsymbol{R}_{a}^{-1}\left(\boldsymbol{G}_{v} \boldsymbol{v}_{c}-\boldsymbol{K}_{v} \boldsymbol{K}_{r} \dot{\boldsymbol{q}}\right)\]</div>
-<p>The above equation unveils a relationship between the applied servomotor
-voltage <span class="math notranslate nohighlight">\(\boldsymbol{v}_c\)</span>, the generated joint torque
-<span class="math notranslate nohighlight">\(\boldsymbol{\tau}\)</span>, and the joint velocity <span class="math notranslate nohighlight">\(\boldsymbol{\dot{q}}\)</span>. The
-overall diagram modeling DC motor and manipulator is shown in <a class="reference internal" href="#voltage-control"><span class="std std-numref">Fig. 72</span></a></p>
+<p>which gives a relationship between the applied motor
+voltage <span class="math notranslate nohighlight">\(\boldsymbol{v}_c\)</span>, the motor-generated joint torque
+<span class="math notranslate nohighlight">\(\boldsymbol{\tau}\)</span>, and the joint velocity <span class="math notranslate nohighlight">\(\boldsymbol{\dot{q}}\)</span>.</p>
+<p>When we consider the robot arm system joining the DC motor <a class="reference internal" href="#equation-equ-voltage-control">(55)</a> and robot arm own dynamics <a class="reference internal" href="#equation-equ-robotarm-dyn">(51)</a>,
+overall diagram is shown in <a class="reference internal" href="#voltage-control"><span class="std std-numref">Fig. 73</span></a>.</p>
 <figure class="align-default" id="voltage-control">
 <a class="reference internal image-reference" href="../_images/voltage_control.jpg"><img alt="../_images/voltage_control.jpg" src="../_images/voltage_control.jpg" style="width: 90%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 72 </span><span class="caption-text">DC motor with
-manipulator</span><a class="headerlink" href="#voltage-control" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 73 </span><span class="caption-text">The entire system joining DC motor and robot arm.</span><a class="headerlink" href="#voltage-control" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="manipulator-as-an-integrator">
-<h1>“Manipulator as an Integrator”<a class="headerlink" href="#manipulator-as-an-integrator" title="Link to this heading">#</a></h1>
-<p>If the following assumptions hold for
-(<a class="reference internal" href="#equ.voltage_control"><span class="xref myst">[equ.voltage_control]</span></a>{reference-type=”ref”
-reference=”equ.voltage_control”}):</p>
+<section class="tex2jax_ignore mathjax_ignore" id="robot-arm-is-an-integrator">
+<h1>“Robot arm is an Integrator”<a class="headerlink" href="#robot-arm-is-an-integrator" title="Link to this heading">#</a></h1>
+<p>If the following assumptions hold for <a class="reference internal" href="#equation-equ-voltage-control">(55)</a>:</p>
 <ul class="simple">
-<li><p>the elements of matrix <span class="math notranslate nohighlight">\(\boldsymbol{K}_{r}\)</span>, characterizing the
-transmissions, are much greater than unity;</p></li>
-<li><p>the elements of matrix <span class="math notranslate nohighlight">\(\boldsymbol{R}_{a}\)</span> are very small, which is
-typical in the case of high-efficiency servomotors;</p></li>
-<li><p>the values of the joint torques <span class="math notranslate nohighlight">\(\boldsymbol{\tau}\)</span> required for the
-execution of the desired motions are not too large;</p></li>
+<li><p>the joint-motor transmission value <span class="math notranslate nohighlight">\(\boldsymbol{K}_{r}\)</span> is much greater than unity;</p></li>
+<li><p>the motor resistance  <span class="math notranslate nohighlight">\(\boldsymbol{R}_{a}\)</span> is very small, which is
+the case for high-efficiency servomotors;</p></li>
+<li><p>the joint torques value <span class="math notranslate nohighlight">\(\boldsymbol{\tau}\)</span> needed for the
+operation of the robot arm  not too large (light robot arm);</p></li>
 </ul>
-<p>then</p>
+<p>then, <a class="reference internal" href="#equation-equ-voltage-control">(55)</a> can be approximated to</p>
 <div class="math notranslate nohighlight">
 \[\boldsymbol{G}_{v} \boldsymbol{v}_{c} \approx \boldsymbol{K}_{v} \boldsymbol{K}_{r} \dot{\boldsymbol{q}}\]</div>
-<p>and further</p>
-<div class="math notranslate nohighlight">
-\[\boldsymbol{v}_{c} = \boldsymbol{G}_{v}^{-1} \boldsymbol{K}_{v} \boldsymbol{K}_{r} \dot{\boldsymbol{q}}\]</div>
-<p>The above equation says that, under the above-stated assumptions, the
-whole system, i.e., DC motor plus manipulator, can be considered as a
-voltage-to-velocity system: the joint velocity of a manipulator of is
-proportional to the voltage input to the servomotor. In other words, the
-manipulator plus the drive system can be considered as an integrator!</p>
-<p>The benefit of this system is that it is a decentralized control system
+<p>further</p>
+<div class="math notranslate nohighlight" id="equation-equ-arm-integrator">
+<span class="eqno">(56)<a class="headerlink" href="#equation-equ-arm-integrator" title="Link to this equation">#</a></span>\[  \dot{\boldsymbol{q}}=\boldsymbol{K}_{r}^{-1}  \boldsymbol{K}_{v}^{-1}\boldsymbol{G}_{v}\boldsymbol{v}_{c} \]</div>
+<p><a class="reference internal" href="#equation-equ-arm-integrator">(56)</a> says, under the above-stated assumptions, the
+robot arm system, i.e., DC motor plus arm, can be considered as a
+voltage-to-velocity system: the joint velocity of the robot arm is linear to the voltage input to the servomotor. In other words, the
+robot arm system can be considered as an integrator!</p>
+<p>The benefit of  <a class="reference internal" href="#equation-equ-arm-integrator">(56)</a> is that it is a decentralized control system
 (each joint can be controlled independently of the others): the velocity
-of the <span class="math notranslate nohighlight">\(i\)</span>-th joint depends only on the <span class="math notranslate nohighlight">\(i\)</span>-th control voltage, since
+of the <span class="math notranslate nohighlight">\(i\)</span>-th joint depends only on the <span class="math notranslate nohighlight">\(i\)</span>-th  voltage input, since
 the matrix
 <span class="math notranslate nohighlight">\(\boldsymbol{G}_{v}^{-1} \boldsymbol{K}_{v} \boldsymbol{K}_{r}\)</span> is
 diagonal.</p>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="torque-controlled-system-more-general">
-<h1>Torque-Controlled System (more general)<a class="headerlink" href="#torque-controlled-system-more-general" title="Link to this heading">#</a></h1>
-<p>If the assumption in the above section does not hold, the whole system,
-for example, when <span class="math notranslate nohighlight">\(\left(\boldsymbol{K}_{r}=\boldsymbol{I}\right)\)</span>, we
-do not have such a nice property of “manipulator as an integrator”. In
-those cases, we still have the following relation between the computed
+<section class="tex2jax_ignore mathjax_ignore" id="general-case-torque-controlled-system">
+<h1>General case: Torque-Controlled System<a class="headerlink" href="#general-case-torque-controlled-system" title="Link to this heading">#</a></h1>
+<p>If the assumption in the above section does not hold,
+for example, when <span class="math notranslate nohighlight">\(\boldsymbol{K}_{r}=\boldsymbol{I}\)</span>, we
+do not have such a nice property of “robot arm as an integrator”, and then the robot will exhibit complex eletro-mechnical dynamics. How do we control the robot arm??</p>
+<p>Well, from <a class="reference internal" href="#equation-equ-voltage-control">(55)</a>,  we still have the following relation between the motor-generated
 joint torque and armature current</p>
 <div class="math notranslate nohighlight">
-\[\label{equ.current_torque}
-    \boldsymbol{K}_r^{-1}\boldsymbol{\tau}= \boldsymbol{\tau}_m =\boldsymbol{K}_{t} \boldsymbol{i}_{a}\]</div>
-<p>Thus, typically, we have a local feedback control system inside the
+\[
+     \boldsymbol{\tau}_m =\boldsymbol{K}_{t} \boldsymbol{i}_{a}=\boldsymbol{K}_r^{-1}\boldsymbol{\tau}
+     \]</div>
+<p>i.e.,</p>
+<div class="math notranslate nohighlight" id="equation-equ-current-torque">
+<span class="eqno">(57)<a class="headerlink" href="#equation-equ-current-torque" title="Link to this equation">#</a></span>\[
+     \boldsymbol{\tau}=\boldsymbol{K}_r\boldsymbol{K}_{t} \boldsymbol{i}_{a}
+     \]</div>
+<p>Thus, in reality, we have a local feedback control system inside the
 motor to regulate the armature current <span class="math notranslate nohighlight">\(\boldsymbol{i}_a\)</span>. This local
-control system will establish the following relationship between the
-voltage of the servomotor and the current:</p>
-<div class="math notranslate nohighlight">
-\[\label{equ.voltage_current}
+control system will establish the following relationship between the motor
+voltage input and the armature current:</p>
+<div class="math notranslate nohighlight" id="equation-equ-current-control">
+<span class="eqno">(58)<a class="headerlink" href="#equation-equ-current-control" title="Link to this equation">#</a></span>\[\label{equ.voltage_current}
     \boldsymbol{i}_{a}=\boldsymbol{G}_{i} \boldsymbol{v}_{c}\]</div>
-<p>Therefore, based on
-(<a class="reference internal" href="#equ.current_torque"><span class="xref myst">[equ.current_torque]</span></a>{reference-type=”ref”
-reference=”equ.current_torque”}) and
-(<a class="reference internal" href="#equ.voltage_control"><span class="xref myst">[equ.voltage_control]</span></a>{reference-type=”ref”
-reference=”equ.voltage_control”}), we have</p>
+<p>Therefore, based on <a class="reference internal" href="#equation-equ-current-torque">(57)</a> and <a class="reference internal" href="#equation-equ-current-control">(58)</a>, we have</p>
 <div class="math notranslate nohighlight">
 \[
     \boldsymbol{\tau}=\boldsymbol{K}_r\boldsymbol{K}_{t}\boldsymbol{G}_{i} \boldsymbol{v}_{c}\]</div>
 <p>The above equation says that, in the general case, the whole system,
-i.e., DC motor plus manipulator, can be considered as a
+i.e., DC motor plus robot arm, can be considered as a
 voltage-to-torque system: you can directly regulate the joint torque of
-a manipulator by regulating the voltage to the servomotor.</p>
+a robot arm by regulating the voltage to the servomotor.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -653,12 +657,12 @@ a manipulator by regulating the voltage to the servomotor.</p>
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Overview of Robot Arm Control</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-joint-motors">Modeling Joint Motors</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transmissions-between-motor-and-joint">Transmissions between Motor and Joint</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#joint-motor-transmission">Joint-Motor Transmission</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#electric-motor-model">Electric Motor Model</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#manipulator-as-an-integrator">“Manipulator as an Integrator”</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#torque-controlled-system-more-general">Torque-Controlled System (more general)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#robot-arm-is-an-integrator">“Robot arm is an Integrator”</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#general-case-torque-controlled-system">General case: Torque-Controlled System</a></li>
 </ul>
 
   </nav></div>

@@ -65,7 +65,7 @@ $\boldsymbol{x}_{e}$, which is typically challenging.
 According to the previous lecture, the dynamics equation of a
 robot arm only with joint input torque $\boldsymbol{\tau}$ is:
 
-$$\boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{F}_{v} \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\boldsymbol{\tau}$$
+$$\boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{F}_{v} \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\boldsymbol{\tau}$$(equ.robotarm_dyn)
 
 
 ```{figure} ../lec18/dynamics/motori_kinematics.jpg
@@ -78,7 +78,7 @@ joint
 ```
 
 
-## Transmissions between Motor and Joint
+## Joint-Motor Transmission
 
 As shown in {numref}`motori_kinematics`, let $\boldsymbol{q}_{m}$ denote the vector of motor joint 
 displacements (motor's rotor angle). The transmissions - assumed to be
@@ -87,7 +87,7 @@ rigid and with no backlash - between the motor and joint motion is
 $$
     \boldsymbol{K}_{r} \boldsymbol{q}=\boldsymbol{q}_{m}$$(equ.transmission_model)
 
-where $\boldsymbol{K}_{r}$ is a $(n \times n)$ diagonal matrix,
+where $\boldsymbol{K}_{r}$ is called joint-motor transmission matrix, which is $(n \times n)$ diagonal,
 typically much greater than identity. Let $\boldsymbol{\tau}_{m}$
 denotes the vector of the motor driving torques, based on principle
 of virtual work, one has the following transmission between motor torque
@@ -98,7 +98,16 @@ $$
 
 ## Electric Motor Model
 
-For a direct current (DC) motor, we have the following model:
+```{figure} ../lec19/control/motor_circuit.jpg
+---
+width: 99%
+name: motor_circuit
+---
+Direct current motor circuit
+```
+
+
+For a direct current (DC) motor {numref}`motor_circuit`, we have the following model:
 
 $$
     \begin{aligned}
@@ -117,13 +126,16 @@ servomotors.
 Based on
 {eq}`equ.transmission_model`-{eq}`equ.dc_model`, we have
 
-$$\label{equ.voltage_control}
-    \boldsymbol{\tau}=\boldsymbol{K}_{r} \boldsymbol{K}_{t} \boldsymbol{R}_{a}^{-1}\left(\boldsymbol{G}_{v} \boldsymbol{v}_{c}-\boldsymbol{K}_{v} \boldsymbol{K}_{r} \dot{\boldsymbol{q}}\right)$$
+$$
+    \boldsymbol{\tau}=\boldsymbol{K}_{r} \boldsymbol{K}_{t} \boldsymbol{R}_{a}^{-1}\left(\boldsymbol{G}_{v} \boldsymbol{v}_{c}-\boldsymbol{K}_{v} \boldsymbol{K}_{r} \dot{\boldsymbol{q}}\right)$$ (equ.voltage_control)
 
-The above equation unveils a relationship between the applied servomotor
-voltage $\boldsymbol{v}_c$, the generated joint torque
-$\boldsymbol{\tau}$, and the joint velocity $\boldsymbol{\dot{q}}$. The
-overall diagram modeling DC motor and manipulator is shown in {numref}`voltage_control`.
+which gives a relationship between the applied motor
+voltage $\boldsymbol{v}_c$, the motor-generated joint torque
+$\boldsymbol{\tau}$, and the joint velocity $\boldsymbol{\dot{q}}$. 
+
+
+When we consider the robot arm system joining the DC motor {eq}`equ.voltage_control` and robot arm own dynamics {eq}`equ.robotarm_dyn`, 
+overall diagram is shown in {numref}`voltage_control`.
 
 
 
@@ -132,76 +144,78 @@ overall diagram modeling DC motor and manipulator is shown in {numref}`voltage_c
 width: 90%
 name: voltage_control
 ---
-DC motor with
-manipulator
+The entire system joining DC motor and robot arm.
 ```
 
 
 
-# "Manipulator as an Integrator"
+# "Robot arm is an Integrator"
 
-If the following assumptions hold for
-([\[equ.voltage_control\]](#equ.voltage_control){reference-type="ref"
-reference="equ.voltage_control"}):
+If the following assumptions hold for {eq}`equ.voltage_control`:
 
--   the elements of matrix $\boldsymbol{K}_{r}$, characterizing the
-    transmissions, are much greater than unity;
+-   the joint-motor transmission value $\boldsymbol{K}_{r}$ is much greater than unity;
 
--   the elements of matrix $\boldsymbol{R}_{a}$ are very small, which is
-    typical in the case of high-efficiency servomotors;
+-   the motor resistance  $\boldsymbol{R}_{a}$ is very small, which is
+    the case for high-efficiency servomotors;
 
--   the values of the joint torques $\boldsymbol{\tau}$ required for the
-    execution of the desired motions are not too large;
+-   the joint torques value $\boldsymbol{\tau}$ needed for the
+    operation of the robot arm  not too large (light robot arm);
 
-then
+then, {eq}`equ.voltage_control` can be approximated to
 
 $$\boldsymbol{G}_{v} \boldsymbol{v}_{c} \approx \boldsymbol{K}_{v} \boldsymbol{K}_{r} \dot{\boldsymbol{q}}$$
-and further
 
-$$\boldsymbol{v}_{c} = \boldsymbol{G}_{v}^{-1} \boldsymbol{K}_{v} \boldsymbol{K}_{r} \dot{\boldsymbol{q}}$$
 
-The above equation says that, under the above-stated assumptions, the
-whole system, i.e., DC motor plus manipulator, can be considered as a
-voltage-to-velocity system: the joint velocity of a manipulator of is
-proportional to the voltage input to the servomotor. In other words, the
-manipulator plus the drive system can be considered as an integrator!
+further
 
-The benefit of this system is that it is a decentralized control system
+$$  \dot{\boldsymbol{q}}=\boldsymbol{K}_{r}^{-1}  \boldsymbol{K}_{v}^{-1}\boldsymbol{G}_{v}\boldsymbol{v}_{c} $$(equ.arm_integrator)
+
+{eq}`equ.arm_integrator` says, under the above-stated assumptions, the
+robot arm system, i.e., DC motor plus arm, can be considered as a
+voltage-to-velocity system: the joint velocity of the robot arm is linear to the voltage input to the servomotor. In other words, the
+robot arm system can be considered as an integrator!
+
+The benefit of  {eq}`equ.arm_integrator` is that it is a decentralized control system
 (each joint can be controlled independently of the others): the velocity
-of the $i$-th joint depends only on the $i$-th control voltage, since
+of the $i$-th joint depends only on the $i$-th  voltage input, since
 the matrix
 $\boldsymbol{G}_{v}^{-1} \boldsymbol{K}_{v} \boldsymbol{K}_{r}$ is
 diagonal.
 
-# Torque-Controlled System (more general)
+# General case: Torque-Controlled System
 
-If the assumption in the above section does not hold, the whole system,
-for example, when $\left(\boldsymbol{K}_{r}=\boldsymbol{I}\right)$, we
-do not have such a nice property of \"manipulator as an integrator\". In
-those cases, we still have the following relation between the computed
-joint torque and armature current
+If the assumption in the above section does not hold, 
+for example, when $\boldsymbol{K}_{r}=\boldsymbol{I}$, we
+do not have such a nice property of \"robot arm as an integrator\", and then the robot will exhibit complex eletro-mechnical dynamics. How do we control the robot arm??
 
-$$\label{equ.current_torque}
-    \boldsymbol{K}_r^{-1}\boldsymbol{\tau}= \boldsymbol{\tau}_m =\boldsymbol{K}_{t} \boldsymbol{i}_{a}$$
 
-Thus, typically, we have a local feedback control system inside the
+Well, from {eq}`equ.voltage_control`,  we still have the following relation between the motor-generated
+joint torque and armature current 
+
+$$
+     \boldsymbol{\tau}_m =\boldsymbol{K}_{t} \boldsymbol{i}_{a}=\boldsymbol{K}_r^{-1}\boldsymbol{\tau}
+     $$
+
+i.e., 
+
+$$
+     \boldsymbol{\tau}=\boldsymbol{K}_r\boldsymbol{K}_{t} \boldsymbol{i}_{a}
+     $$(equ.current_torque)
+
+Thus, in reality, we have a local feedback control system inside the
 motor to regulate the armature current $\boldsymbol{i}_a$. This local
-control system will establish the following relationship between the
-voltage of the servomotor and the current:
+control system will establish the following relationship between the motor
+voltage input and the armature current:
 
 $$\label{equ.voltage_current}
-    \boldsymbol{i}_{a}=\boldsymbol{G}_{i} \boldsymbol{v}_{c}$$
+    \boldsymbol{i}_{a}=\boldsymbol{G}_{i} \boldsymbol{v}_{c}$$(equ.current_control)
 
-Therefore, based on
-([\[equ.current_torque\]](#equ.current_torque){reference-type="ref"
-reference="equ.current_torque"}) and
-([\[equ.voltage_control\]](#equ.voltage_control){reference-type="ref"
-reference="equ.voltage_control"}), we have
+Therefore, based on {eq}`equ.current_torque` and {eq}`equ.current_control`, we have
 
 $$
     \boldsymbol{\tau}=\boldsymbol{K}_r\boldsymbol{K}_{t}\boldsymbol{G}_{i} \boldsymbol{v}_{c}$$
 
 The above equation says that, in the general case, the whole system,
-i.e., DC motor plus manipulator, can be considered as a
+i.e., DC motor plus robot arm, can be considered as a
 voltage-to-torque system: you can directly regulate the joint torque of
-a manipulator by regulating the voltage to the servomotor.
+a robot arm by regulating the voltage to the servomotor.
