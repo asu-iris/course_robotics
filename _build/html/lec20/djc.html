@@ -385,7 +385,11 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#single-joint-control-diagram">Single-Joint Control Diagram</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#single-joint-position-feedback-control">Single-Joint Position Feedback Control</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#position-feedback-control-design">Position Feedback Control Design</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#input-to-output-stability-analysis">Input-to-output stability analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#disturbance-to-output-performance">Disturbance-to-output performance</a></li>
+</ul>
+</li>
 </ul>
 
             </nav>
@@ -517,10 +521,14 @@ T_m=\frac{R_aI_m}{k_tk_v}
 <p>The  input (<span class="math notranslate nohighlight">\(v_a\)</span>) to output velocity (<span class="math notranslate nohighlight">\(\dot{\theta}_m\)</span>) transfer function is</p>
 <div class="math notranslate nohighlight">
 \[\frac{\dot{\Theta}(s)}{V_a(s)}=\frac{k_m}{1+T_ms}\]</div>
-<div class="admonition-minimal-control-background admonition">
-<p class="admonition-title">Minimal Control Background</p>
-<p>For ease of the reader, I willl provide the minimal background of
-control system. A typical closed-loop control diagram is shown below.
+<div class="admonition-minimal-material-on-control-basics admonition">
+<p class="admonition-title">Minimal material on control basics </p>
+<p>Please read my hand-writing note on control basics, in order to help you understand the following content of this chapter.</p>
+<p><a class="reference download internal" download="" href="../_downloads/af66a2a39b5480f30ad4e93bc7990bf7/control_basics.pdf"><span class="xref download myst">Minimal notes on control basics</span></a></p>
+</div>
+<div class="admonition-minimal-introduction-to-closed-loop-feedback-control-systems admonition">
+<p class="admonition-title">Minimal Introduction to Closed-Loop (Feedback) Control Systems</p>
+<p>A typical closed-loop control diagram is shown below.
 Here, <span class="math notranslate nohighlight">\(\theta_r\)</span> is the reference input; <span class="math notranslate nohighlight">\(\theta_m\)</span> is the output; <span class="math notranslate nohighlight">\(D\)</span>
 is the disturbance; <span class="math notranslate nohighlight">\(G(s)\)</span> is the transfer function of the plant to be
 controlled; <span class="math notranslate nohighlight">\(C(s)\)</span> is the controller; <span class="math notranslate nohighlight">\(H(s)\)</span> is the backward pass
@@ -561,18 +569,11 @@ characteristics equation</p>
 <div class="math notranslate nohighlight">
 \[1+C(s)G(s)H(s)=0\]</div>
 </div>
-<div class="admonition-final-value-theorem admonition">
-<p class="admonition-title">Final value theorem</p>
-<p>If a continuous signal <span class="math notranslate nohighlight">\(f(t)\)</span> has its Laplace transformation <span class="math notranslate nohighlight">\(F(s)\)</span>,
-then the final value theorem states</p>
-<div class="math notranslate nohighlight">
-\[\lim_{t\rightarrow\infty}f(t)=\lim_{s\rightarrow 0}sF(s)\]</div>
-</div>
 <p></br></br></p>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="single-joint-position-feedback-control">
-<h1>Single-Joint Position Feedback Control<a class="headerlink" href="#single-joint-position-feedback-control" title="Permalink to this heading">#</a></h1>
-<p>The single joint motor system in <a class="reference internal" href="#motor-model3"><span class="std std-numref">Fig. 75</span></a> is the plant <span class="math notranslate nohighlight">\(G(s)\)</span> we want to design the controller <span class="math notranslate nohighlight">\(C(s)\)</span> for.</p>
+<section class="tex2jax_ignore mathjax_ignore" id="position-feedback-control-design">
+<h1>Position Feedback Control Design<a class="headerlink" href="#position-feedback-control-design" title="Permalink to this heading">#</a></h1>
+<p>The single joint system in <a class="reference internal" href="#motor-model3"><span class="std std-numref">Fig. 75</span></a> is the plant <span class="math notranslate nohighlight">\(G(s)\)</span> we want to design the controller <span class="math notranslate nohighlight">\(C(s)\)</span> for.</p>
 <p>The plant
 transfer function <span class="math notranslate nohighlight">\(G(s)\)</span> is <a class="reference internal" href="#equation-equ-motortf">(68)</a>, rewritten below</p>
 <div class="math notranslate nohighlight">
@@ -606,14 +607,16 @@ G(s)C_P(s)H(s)=\frac{k_{T P}k_{m} K_{P}\left(1+s T_{P}\right)}{s^{2}\left(1+s T_
 <p>The closed-loop input/output transfer function is</p>
 <div class="math notranslate nohighlight" id="equation-equ-closed-loop">
 <span class="eqno">(69)<a class="headerlink" href="#equation-equ-closed-loop" title="Permalink to this equation">#</a></span>\[\frac{\Theta_{m}(s)}{\Theta_{r}(s)}=\frac{C_P(s)G(s)}{1+C_P(s)G(s)H(s)}=\frac{{k_{m}K_P(1+T_Ps)}}{k_{TP}k_{m}K_P(1+T_Ps)+s^2(1+sT_m)},\]</div>
-<p>To analyze the control stability of the closed-loop control system <a class="reference internal" href="#equation-equ-closed-loop">(69)</a>, we look at the roots (also called poles) of its characteristic equation, which can be factorized into the following
+</br>
+<section id="input-to-output-stability-analysis">
+<h2>Input-to-output stability analysis<a class="headerlink" href="#input-to-output-stability-analysis" title="Permalink to this heading">#</a></h2>
+<p>To analyze the input-to-output stability of the closed-loop control system <a class="reference internal" href="#equation-equ-closed-loop">(69)</a>, we look at the roots (also called poles) of its characteristic equation, which can be factorized into the following
 form</p>
 <div class="math notranslate nohighlight" id="equation-equ-cha-equ">
 <span class="eqno">(70)<a class="headerlink" href="#equation-equ-cha-equ" title="Permalink to this equation">#</a></span>\[{k_{TP}k_{m}K_P(1+T_Ps)+s^2(1+sT_m)}
 =
 {\left({\omega_{n}^{2}}+{2 \zeta }{\omega_{n}}s+{s^{2}}\right)(1+s \tau)}=0\]</div>
-<p>where <span class="math notranslate nohighlight">\(\omega_{n}\)</span> and <span class="math notranslate nohighlight">\(\zeta\)</span> are the natural frequency and damping
-ratio of the complex poles. The roots (also called poles) to the characteristics equation <a class="reference internal" href="#equation-equ-cha-equ">(70)</a> is</p>
+<p>The roots (also called poles) to the characteristics equation <a class="reference internal" href="#equation-equ-cha-equ">(70)</a> is</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{aligned}
@@ -622,14 +625,15 @@ s_2&amp;=-\zeta \omega_{n}, - j \sqrt{1-\zeta^{2}} \omega_{n}\\
 s_3&amp;=-1 / \tau
 \end{aligned}
 \end{split}\]</div>
-<p>The location of the above poles <span class="math notranslate nohighlight">\((s_1, s_2, s_3)\)</span> on <span class="math notranslate nohighlight">\(s-\)</span>plane depends on the of the open-loop gain</p>
+<p>Here,  <span class="math notranslate nohighlight">\(\omega_{n}\)</span> and <span class="math notranslate nohighlight">\(\zeta\)</span> are the natural frequency and damping
+ratio for the complex roots <span class="math notranslate nohighlight">\(s_1\)</span> and <span class="math notranslate nohighlight">\(s_2\)</span>, and <span class="math notranslate nohighlight">\(s_3\)</span> is a real pole.
+Please see my <a class="reference download internal" download="" href="../_downloads/af66a2a39b5480f30ad4e93bc7990bf7/control_basics.pdf"><span class="xref download myst">Minimal notes on control basics</span></a> for explaination of how the values of <span class="math notranslate nohighlight">\(\omega_{n}\)</span>, <span class="math notranslate nohighlight">\(\zeta\)</span> and <span class="math notranslate nohighlight">\(s_3\)</span> effect the time-domain performance of the closed-loop control system.</p>
+<p>The location of the above poles <span class="math notranslate nohighlight">\((s_1, s_2, s_3)\)</span> on s-plane depends on the of the open-loop gain</p>
 <div class="math notranslate nohighlight" id="equation-equ-ol-gain">
 <span class="eqno">(71)<a class="headerlink" href="#equation-equ-ol-gain" title="Permalink to this equation">#</a></span>\[\frac{k_{m} K_{P} k_{T P} T_{P}}{T_{m}}\]</div>
-<p>The root locus (i.e., the trajectory of the above poles on <span class="math notranslate nohighlight">\(s-\)</span>plane)  can be drawn by taking different open loop gain value <a class="reference internal" href="#equation-equ-ol-gain">(71)</a>. Here, we derive into two cases
-to plot the root locus.</p>
+<p>The root locus (i.e., the trajectory of the above poles on <span class="math notranslate nohighlight">\(s-\)</span>plane)  can be drawn by taking different open loop gain value <a class="reference internal" href="#equation-equ-ol-gain">(71)</a>. Here, we derive into two cases:</p>
 <ul>
-<li><p>If <span class="math notranslate nohighlight">\(T_{P}&lt;T_{m}\)</span>, the root locus is shown. Because there is always a pole (root) living on the right-half “s-plane” regardless of the choice of <span class="math notranslate nohighlight">\(\frac{k_{m} K_{P} k_{T P} T_{P}}{T_{m}}\)</span>, the closed-loop control system <a class="reference internal" href="#equation-equ-closed-loop">(69)</a> thus
-is inherently unstable.</p>
+<li><p>If <span class="math notranslate nohighlight">\(T_{P}&lt;T_{m}\)</span>, the root locus is shown. Because there is always a pole (root) living on the right-half s-plane regardless of the choice of <span class="math notranslate nohighlight">\(\frac{k_{m} K_{P} k_{T P} T_{P}}{T_{m}}\)</span>, the closed-loop control system <a class="reference internal" href="#equation-equ-closed-loop">(69)</a> thus is inherently unstable.</p>
 <figure class="align-default" id="p-control-rl-1">
 <a class="reference internal image-reference" href="../_images/p_control_rl_1.jpg"><img alt="../_images/p_control_rl_1.jpg" src="../_images/p_control_rl_1.jpg" style="width: 90%;" /></a>
 <figcaption>
@@ -638,9 +642,8 @@ is inherently unstable.</p>
 </figcaption>
 </figure>
 </li>
-<li><p>If <span class="math notranslate nohighlight">\(T_{P}&gt;T_{m}\)</span>, the root locus is shown as below. First of all, all poles can be located on the left half of the <span class="math notranslate nohighlight">\(s\)</span>-plane, closed-loop control system <a class="reference internal" href="#equation-equ-closed-loop">(69)</a> is stable. Also,  as you can see As <span class="math notranslate nohighlight">\(T_{P}\)</span>
-increases, the absolute value of the real part of the two complex poles, (<span class="math notranslate nohighlight">\(s_1\)</span> and <span class="math notranslate nohighlight">\(s_2\)</span>) tending towards the asymptotes increases too, and the
-system has faster time response.</p>
+<li><p>If <span class="math notranslate nohighlight">\(T_{P}&gt;T_{m}\)</span>, the root locus is shown as below. First, all poles can be located on the left half of s-plane, thus closed-loop control system <a class="reference internal" href="#equation-equ-closed-loop">(69)</a> is stable. Also,  as <span class="math notranslate nohighlight">\(T_{P}\)</span>
+increases, the absolute value of the real part of the two complex poles, (<span class="math notranslate nohighlight">\(s_1\)</span> and <span class="math notranslate nohighlight">\(s_2\)</span>) tending towards the asymptotes increases too, and the     system has faster time response (please see my <a class="reference download internal" download="" href="../_downloads/af66a2a39b5480f30ad4e93bc7990bf7/control_basics.pdf"><span class="xref download myst">Minimal notes on control basics</span></a> for explaination)</p>
 <figure class="align-default" id="p-control-rl-2">
 <a class="reference internal image-reference" href="../_images/p_control_rl_2.jpg"><img alt="../_images/p_control_rl_2.jpg" src="../_images/p_control_rl_2.jpg" style="width: 90%;" /></a>
 <figcaption>
@@ -650,10 +653,21 @@ system has faster time response.</p>
 </figure>
 </li>
 </ul>
+</br>
+</section>
+<section id="disturbance-to-output-performance">
+<h2>Disturbance-to-output performance<a class="headerlink" href="#disturbance-to-output-performance" title="Permalink to this heading">#</a></h2>
+<div class="admonition-final-value-theorem admonition">
+<p class="admonition-title">Final value theorem</p>
+<p>If a continuous signal <span class="math notranslate nohighlight">\(f(t)\)</span> has its Laplace transformation <span class="math notranslate nohighlight">\(F(s)\)</span>,
+then the final value theorem states</p>
+<div class="math notranslate nohighlight">
+\[\lim_{t\rightarrow\infty}f(t)=\lim_{s\rightarrow 0}sF(s)\]</div>
+</div>
 <p>The closed-loop disturbance-to-output transfer function is</p>
 <div class="math notranslate nohighlight">
 \[\frac{\Theta_{m}(s)}{D(s)}=-\frac{\frac{R_a}{K_t}G(s)}{1+C(s)G(s)H(s)}=-\frac{\frac{R_a}{K_t}k_ms}{k_{TP}k_{m}K_P(1+T_Ps)+s^2(1+sT_m)}\]</div>
-<p>If <span class="math notranslate nohighlight">\(\theta_r(t)=0\)</span> (i.e., no input signal), based on the final value thoerem, we have</p>
+<p>If <span class="math notranslate nohighlight">\(\theta_r(t)=0\)</span> (i.e., no input signal), based on the final value thoerem (see the above), we have</p>
 <div class="math notranslate nohighlight">
 \[\lim_{t\rightarrow \infty} {\theta_{m}(t)}= \lim_{s\rightarrow 0} s{\Theta_{m}(s)}=\lim_{s\rightarrow 0} s\frac{\Theta_{m}(s)}{D(s)}{D(s)}\]</div>
 <p>thus,</p>
@@ -782,6 +796,7 @@ can be interpreted as the disturbance rejection factor for velocity (or
 higher-order) disturbance. Increasing $K_{P}$ and $K_V$ can help with
 reducing the effect of $D$. -->
 </section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -855,7 +870,11 @@ reducing the effect of $D$. -->
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#single-joint-control-diagram">Single-Joint Control Diagram</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#single-joint-position-feedback-control">Single-Joint Position Feedback Control</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#position-feedback-control-design">Position Feedback Control Design</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#input-to-output-stability-analysis">Input-to-output stability analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#disturbance-to-output-performance">Disturbance-to-output performance</a></li>
+</ul>
+</li>
 </ul>
 
   </nav></div>

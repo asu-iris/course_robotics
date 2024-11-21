@@ -169,12 +169,21 @@ $$\frac{\dot{\Theta}(s)}{V_a(s)}=\frac{k_m}{1+T_ms}$$
 
 
 
+```{admonition} Minimal material on control basics 
 
 
-```{admonition} Minimal Control Background
+Please read my hand-writing note on control basics, in order to help you understand the following content of this chapter.
 
-For ease of the reader, I willl provide the minimal background of
-control system. A typical closed-loop control diagram is shown below.
+[Minimal notes on control basics](./control_basics.pdf)
+
+
+```
+
+
+
+```{admonition}  Minimal Introduction to Closed-Loop (Feedback) Control Systems
+
+A typical closed-loop control diagram is shown below.
 Here, $\theta_r$ is the reference input; $\theta_m$ is the output; $D$
 is the disturbance; $G(s)$ is the transfer function of the plant to be
 controlled; $C(s)$ is the controller; $H(s)$ is the backward pass
@@ -227,19 +236,18 @@ $$1+C(s)G(s)H(s)=0$$
 ```
 
 
-```{admonition} Final value theorem
 
 
-If a continuous signal $f(t)$ has its Laplace transformation $F(s)$,
-then the final value theorem states
 
-$$\lim_{t\rightarrow\infty}f(t)=\lim_{s\rightarrow 0}sF(s)$$
-```
+
+
+
+
 
 </br></br>
-# Single-Joint Position Feedback Control
+# Position Feedback Control Design
 
-The single joint motor system in {numref}`motor_model3` is the plant $G(s)$ we want to design the controller $C(s)$ for.
+The single joint system in {numref}`motor_model3` is the plant $G(s)$ we want to design the controller $C(s)$ for.
 
 The plant
 transfer function $G(s)$ is {eq}`equ.motortf`, rewritten below
@@ -286,20 +294,25 @@ $$
 
 
 
+
 The closed-loop input/output transfer function is
 
 $$\frac{\Theta_{m}(s)}{\Theta_{r}(s)}=\frac{C_P(s)G(s)}{1+C_P(s)G(s)H(s)}=\frac{{k_{m}K_P(1+T_Ps)}}{k_{TP}k_{m}K_P(1+T_Ps)+s^2(1+sT_m)},$$(equ.closed_loop)
 
 
-To analyze the control stability of the closed-loop control system {eq}`equ.closed_loop`, we look at the roots (also called poles) of its characteristic equation, which can be factorized into the following
+</br>
+
+### Input-to-output stability analysis
+
+
+To analyze the input-to-output stability of the closed-loop control system {eq}`equ.closed_loop`, we look at the roots (also called poles) of its characteristic equation, which can be factorized into the following
 form
 
 $${k_{TP}k_{m}K_P(1+T_Ps)+s^2(1+sT_m)}
 =
 {\left({\omega_{n}^{2}}+{2 \zeta }{\omega_{n}}s+{s^{2}}\right)(1+s \tau)}=0$$(equ.cha_equ)
 
-where $\omega_{n}$ and $\zeta$ are the natural frequency and damping
-ratio of the complex poles. The roots (also called poles) to the characteristics equation {eq}`equ.cha_equ` is 
+The roots (also called poles) to the characteristics equation {eq}`equ.cha_equ` is 
 
 
 $$
@@ -310,18 +323,21 @@ s_3&=-1 / \tau
 \end{aligned}
 $$
 
+Here,  $\omega_{n}$ and $\zeta$ are the natural frequency and damping
+ratio for the complex roots $s_1$ and $s_2$, and $s_3$ is a real pole.
+Please see my [Minimal notes on control basics](./control_basics.pdf) for explaination of how the values of $\omega_{n}$, $\zeta$ and $s_3$ effect the time-domain performance of the closed-loop control system.
 
-The location of the above poles $(s_1, s_2, s_3)$ on $s-$plane depends on the of the open-loop gain 
+
+
+The location of the above poles $(s_1, s_2, s_3)$ on s-plane depends on the of the open-loop gain 
 
 $$\frac{k_{m} K_{P} k_{T P} T_{P}}{T_{m}}$$(equ.ol_gain)
 
 
 
-The root locus (i.e., the trajectory of the above poles on $s-$plane)  can be drawn by taking different open loop gain value {eq}`equ.ol_gain`. Here, we derive into two cases
-to plot the root locus.
+The root locus (i.e., the trajectory of the above poles on $s-$plane)  can be drawn by taking different open loop gain value {eq}`equ.ol_gain`. Here, we derive into two cases:
 
--   If $T_{P}<T_{m}$, the root locus is shown. Because there is always a pole (root) living on the right-half "s-plane" regardless of the choice of $\frac{k_{m} K_{P} k_{T P} T_{P}}{T_{m}}$, the closed-loop control system {eq}`equ.closed_loop` thus
-    is inherently unstable.
+-   If $T_{P}<T_{m}$, the root locus is shown. Because there is always a pole (root) living on the right-half s-plane regardless of the choice of $\frac{k_{m} K_{P} k_{T P} T_{P}}{T_{m}}$, the closed-loop control system {eq}`equ.closed_loop` thus is inherently unstable.
 
     :::{figure} ../lec19/control/p_control_rl_1.jpg
     ---
@@ -334,9 +350,8 @@ to plot the root locus.
 
 
 
--   If $T_{P}>T_{m}$, the root locus is shown as below. First of all, all poles can be located on the left half of the $s$-plane, closed-loop control system {eq}`equ.closed_loop` is stable. Also,  as you can see As $T_{P}$
-    increases, the absolute value of the real part of the two complex poles, ($s_1$ and $s_2$) tending towards the asymptotes increases too, and the
-    system has faster time response.
+-   If $T_{P}>T_{m}$, the root locus is shown as below. First, all poles can be located on the left half of s-plane, thus closed-loop control system {eq}`equ.closed_loop` is stable. Also,  as $T_{P}$
+    increases, the absolute value of the real part of the two complex poles, ($s_1$ and $s_2$) tending towards the asymptotes increases too, and the     system has faster time response (please see my [Minimal notes on control basics](./control_basics.pdf) for explaination)
 
 
     :::{figure} ../lec19/control/p_control_rl_2.jpg
@@ -350,12 +365,27 @@ to plot the root locus.
 
 
 
+</br>
+
+### Disturbance-to-output performance
+
+
+
+```{admonition} Final value theorem
+
+
+If a continuous signal $f(t)$ has its Laplace transformation $F(s)$,
+then the final value theorem states
+
+$$\lim_{t\rightarrow\infty}f(t)=\lim_{s\rightarrow 0}sF(s)$$
+```
+
 
 The closed-loop disturbance-to-output transfer function is
 
 $$\frac{\Theta_{m}(s)}{D(s)}=-\frac{\frac{R_a}{K_t}G(s)}{1+C(s)G(s)H(s)}=-\frac{\frac{R_a}{K_t}k_ms}{k_{TP}k_{m}K_P(1+T_Ps)+s^2(1+sT_m)}$$
 
-If $\theta_r(t)=0$ (i.e., no input signal), based on the final value thoerem, we have
+If $\theta_r(t)=0$ (i.e., no input signal), based on the final value thoerem (see the above), we have
 
 
 $$\lim_{t\rightarrow \infty} {\theta_{m}(t)}= \lim_{s\rightarrow 0} s{\Theta_{m}(s)}=\lim_{s\rightarrow 0} s\frac{\Theta_{m}(s)}{D(s)}{D(s)}$$
@@ -376,6 +406,9 @@ which can be interpreted as the disturbance rejection factor for velocity (or
 higher-order) disturbance. Increasing $K_{P}$ can help with reducing the
 effect of $D$, but too high $K_P$ can lead to unacceptable oscillations
 of the output, as implied from the root locus.
+
+
+
 
 <!-- 
 </br></br>
