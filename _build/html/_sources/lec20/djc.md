@@ -80,81 +80,111 @@ Dynamics diagram of a motor-driven
 robot arm.
 ```
 
-As shown in both {eq}`equ.decouple_model` and {numref}`decentralized_control3`, if we don't consider the coupling term $\boldsymbol{D}$,
-then 
+As shown in both {eq}`equ.decouple_model` and {numref}`decentralized_control3`, if we don't consider the coupling term $\boldsymbol{D}$, 
 
 $$\boldsymbol{I}_m\boldsymbol{\ddot{q}}_m=\boldsymbol{\tau}_m,$$
 
 
 This means that if we don't consider the complex
-$\boldsymbol{D}$, each joint is a single-in-single-output system (i will use $\ddot{\theta}_m$ and $q_m$ interchangeably for each joint below):
+$\boldsymbol{D}$, each joint is a single-in-single-output system (because $\boldsymbol{I}_m$ is a diagonal matrix).  However, the coupling term $\boldsymbol{D}$ in {eq}`equ.decouple_model` prevents us
+from considering so.
 
-$$\label{equ.single_joint_dyn}
-    {I}_m{\ddot{\theta}_m}=\tau_m$$ 
+<!-- In the reminder of this chapter, i will use ${\theta}_m$ and $q_m$ interchangeably to denote the variable of each joint, without writing the subscript joint index. For a single joint, if no coupling term $\boldsymbol{D}$, the dynamics equation at the joint is -->
 
- However, $\boldsymbol{D}$ in {eq}`equ.decouple_model` is a coupling term that prevents us
-from doing so. To address such, in the following, we still consider the
-control each joint as a single-in-single-out system, but consider
-$\boldsymbol{D}$ as a disturbance to each joint.
 
+
+<!-- $$\label{equ.single_joint_dyn}
+    {I}_m{\ddot{\theta}_m}=\tau_m$$  -->
+
+```{important}
+ To address such, in the following, we still consider the
+ each joint as a single-in-single-out system, but consider
+$\boldsymbol{D}$ as a disturbance input to each joint.
+```
+
+</br></br>
 # Single-Joint Control Diagram
 
-For each joint (we omit the joint index $i$ below), considering
-([\[equ.single_joint_dyn\]](#equ.single_joint_dyn){reference-type="ref"
-reference="equ.single_joint_dyn"}) and the motor model in the previous
-lecture (Lecture 19), we have 
+In the reminder of this chapter, i will use ${\theta}_m$ and $q_m$ interchangeably as the variable of each joint, droping the subscript of  joint index. For a single joint,  the dynamics equation at that joint is a row of {eq}`equ.decouple_model`, writing as
 
-$$\label{equ.motor}
-I_m\ddot{\theta}_m+D=\tau_m=I_m\ddot{\theta}_m+\frac{k_t}{R_a}(\frac{DR_a}{k_t})=\tau_m=k_ti_a=k_t\frac{(v_a-k_v\dot{\theta}_m)}{R_a}=k_t\frac{(G_vv_c-k_v\dot{\theta}_m)}{R_a}
 $$
+I_m\ddot{\theta}_m+D=\tau_m
+$$(equ.single_joint_dyn)
 
-Here, $D$ is the disturbance torque in
-([\[equ.decouple_model\]](#equ.decouple_model){reference-type="ref"
-reference="equ.decouple_model"}) applied to each joint, ${k}_{t}$ is the
+Let's recall the DC motor model in our previous chapter:
+
+$$
+\tau_m=k_ti_a=k_t\frac{(v_a-k_v\dot{\theta}_m)}{R_a}=k_t\frac{(G_vv_c-k_v\dot{\theta}_m)}{R_a}
+$$(equ.single_joint_motor)
+
+where ${k}_{t}$ is the
 torque constants; ${i}_{a}$ is the armature current; ${v}_{a}$ is the
 vector of armature voltage; ${R}_{a}$ is the armature resistance;
 ${k}_{v}$ is the back EMF constant; $\boldsymbol{v}_{c}$ is the voltage
-of the servomotor, and $G_v$ is amplifier. Those motor parameters have
-been shown in previous lecture. In the following, we will suppose
-$v_c=v_a$, i.e., $G_v=1$, for notation simplicity, and so we will
-directly treat $v_a$ as the servo motor input voltage. But the analysis
-also holds for any $G_v$.
+of the servomotor, and $G_v$ is input voltage amplifier. Those  parameters have
+been shown in previous chapter. We will write $v_a=G_vv_c$ in {eq}`equ.single_joint_motor` in the following derivation. 
 
-The above ([\[equ.motor\]](#equ.motor){reference-type="ref"
-reference="equ.motor"}) corresponds to the following diagram:
+
+Equaling {eq}`equ.single_joint_dyn` and {eq}`equ.single_joint_motor`, one has
+
+
+
+$$
+I_m\ddot{\theta}_m+D=\tau_m=I_m\ddot{\theta}_m+\frac{k_t}{R_a}(\frac{DR_a}{k_t})=k_t\frac{(v_a-k_v\dot{\theta}_m)}{R_a}
+$$(equ.motor)
+
+
+
+The above {eq}`equ.motor` corresponds to the following diagram
 
 ```{figure} ../lec19/control/motor_model3.jpeg
 ---
-width: 70%
+width: 80%
 name: motor_model3
 ---
-Diagram of a motor-driven manipulator, with coupled joint terms
+Diagram of a single motor-joint model, with coupled joint term $D$
 treated as disturbance.
 ```
 
 
 
 In the above diagram, the closed loop is due to the DC motor model
-itself. We write input ($V_a$) to output ($\theta_m$) transfer function
-$$\label{equ.motortf}
-    G(s)=\frac{{\Theta}(s)}{V_a(s)}=\frac{k_m}{s(1+T_ms)}$$
+itself. For the above diagram, the input ($v_a$) to output ($\theta_m$) transfer function $G(s)$ is
 
-$$\frac{\dot{\Theta}(s)}{V_a(s)}=\frac{\frac{k_t}{R_aI_ms}}{1+\frac{k_t}{R_aI_ms}k_v}=\frac{k_m}{1+T_ms}$$
+$$
+    G(s)=\frac{{\Theta}(s)}{V_a(s)}=\frac{k_m}{s(1+T_ms)}$$(equ.motortf)
+
+with 
+
+$$
+k_m=\frac{1}{k_v} \qquad\qquad
+T_m=\frac{R_aI_m}{k_tk_v}
+% \frac{\frac{k_t}{R_aI_ms}}{1+\frac{k_t}{R_aI_ms}k_v}=
+$$
+
+The  input ($v_a$) to output velocity ($\dot{\theta}_m$) transfer function is 
+
+
+$$\frac{\dot{\Theta}(s)}{V_a(s)}=\frac{k_m}{1+T_ms}$$
+
+
+
+
 
 ```{admonition} Minimal Control Background
 
-For ease of the reader, we provide the following minimal background of
-control design. A typical closed-loop control diagram is shown below.
+For ease of the reader, I willl provide the minimal background of
+control system. A typical closed-loop control diagram is shown below.
 Here, $\theta_r$ is the reference input; $\theta_m$ is the output; $D$
 is the disturbance; $G(s)$ is the transfer function of the plant to be
 controlled; $C(s)$ is the controller; $H(s)$ is the backward pass
-transfer function (usually a constant due to sensor). The goal of
+transfer function (usually a constant to model the sensor). The goal of
 control design is to find $C(s)$ such that $\theta_m$ is able to track
-$\theta_r$ while $D$ has as little effect on $\theta_m$ as possible.
+$\theta_r$, while $D$ has as little effect on $\theta_m$ as possible.
 
 :::{figure} ../lec19/control/fd_control2.jpeg
 ---
-width: 70%
+width: 90%
 name: fd_control2
 ---
 A typical control system diagram
@@ -163,9 +193,13 @@ A typical control system diagram
 For the above control system, the forward path transfer function is
 
 
-$$P(s)=C(s)G(s)$$ 
+$$C(s)G(s)$$ 
 
-The backward path transfer function is $$H(s)$$ The
+The backward path transfer function is
+
+$$H(s)$$ 
+
+The
 open loop transfer function is 
 
 $$C(s)G(s)H(s)$$
@@ -187,11 +221,13 @@ $$
 
 The input ($\theta_r$) to output ($\theta_m$) response of the
 closed-loop system will be determined by the roots of the
-characteristics equation $$1+C(s)G(s)H(s)=0$$
+characteristics equation 
+
+$$1+C(s)G(s)H(s)=0$$
 ```
 
 
-```{admonition} Background of final value theorem
+```{admonition} Final value theorem
 
 
 If a continuous signal $f(t)$ has its Laplace transformation $F(s)$,
@@ -200,15 +236,13 @@ then the final value theorem states
 $$\lim_{t\rightarrow\infty}f(t)=\lim_{s\rightarrow 0}sF(s)$$
 ```
 
+</br></br>
+# Single-Joint Position Feedback Control
 
-# Single Joint Position feedback
+The single joint motor system in {numref}`motor_model3` is the plant $G(s)$ we want to design the controller $C(s)$ for.
 
-The single joint motor system in Fig
-[2](#fig:motor_model2){reference-type="ref"
-reference="fig:motor_model2"} is the plant we want to control. The plant
-transfer function $G(s)$ is
-([\[equ.motortf\]](#equ.motortf){reference-type="ref"
-reference="equ.motortf"}), rewritten below
+The plant
+transfer function $G(s)$ is {eq}`equ.motortf`, rewritten below
 
 
 $$G(s)=\frac{k_m}{s(1+T_ms)}$$
@@ -219,40 +253,79 @@ $$\begin{gathered}
 C_{P}(s)=K_{P} \frac{1+s T_{P}}{s} 
 \end{gathered}$$ 
 
-with $K_P$ and $T_P$ are design variable.
+with $K_P$ and $T_P$ are controller parameters.
 
-The control diagram thus is shown below (note that the backward pass
-constant $k_{TP}$ is fixed).
+The control diagram for the plant  {numref}`motor_model3` thus is shown below (note that the backward pass
+constant $k_{TP}$ is fixed, this can be thought of as the sensor gain given).
 
 :::{figure} ../lec19/control/p_control2.jpg
 ---
-width: 70%
+width: 99%
 name: p_control2
 ---
-Control diagram of position decentralized joint space
+Control diagram of singple-joint position 
 control
 :::
 
 
 
-The transfer function of the forward path is
+On the diagram {numref}`p_control2`, the transfer function of the forward path is
 
-$$P(s)=G(s)C_P(s)=\frac{k_{m} K_{P}\left(1+s T_{P}\right)}{s^{2}\left(1+s T_{m}\right)}$$
+$$G(s)C_P(s)=\frac{k_{m} K_{P}\left(1+s T_{P}\right)}{s^{2}\left(1+s T_{m}\right)}$$
 
 The transfer function of the backward pass is
 
 $$H(s)=k_{T P}$$
 
-The root locus can be plotted as a function of the gain of the position
-loop $k_{m} K_{P} k_{T P} T_{P} / T_{m}$. Here, we derive into two cases
+
+The open loop transfer function is
+
+$$
+G(s)C_P(s)H(s)=\frac{k_{T P}k_{m} K_{P}\left(1+s T_{P}\right)}{s^{2}\left(1+s T_{m}\right)}
+$$
+
+
+
+The closed-loop input/output transfer function is
+
+$$\frac{\Theta_{m}(s)}{\Theta_{r}(s)}=\frac{C_P(s)G(s)}{1+C_P(s)G(s)H(s)}=\frac{{k_{m}K_P(1+T_Ps)}}{k_{TP}k_{m}K_P(1+T_Ps)+s^2(1+sT_m)},$$(equ.closed_loop)
+
+
+To analyze the control stability of the closed-loop control system {eq}`equ.closed_loop`, we look at the roots (also called poles) of its characteristic equation, which can be factorized into the following
+form
+
+$${k_{TP}k_{m}K_P(1+T_Ps)+s^2(1+sT_m)}
+=
+{\left({\omega_{n}^{2}}+{2 \zeta }{\omega_{n}}s+{s^{2}}\right)(1+s \tau)}=0$$(equ.cha_equ)
+
+where $\omega_{n}$ and $\zeta$ are the natural frequency and damping
+ratio of the complex poles. The roots (also called poles) to the characteristics equation {eq}`equ.cha_equ` is 
+
+
+$$
+\begin{aligned}
+s_1&=-\zeta \omega_{n}, + j \sqrt{1-\zeta^{2}} \omega_{n}\\
+s_2&=-\zeta \omega_{n}, - j \sqrt{1-\zeta^{2}} \omega_{n}\\
+s_3&=-1 / \tau
+\end{aligned}
+$$
+
+
+The location of the above poles $(s_1, s_2, s_3)$ on $s-$plane depends on the of the open-loop gain 
+
+$$\frac{k_{m} K_{P} k_{T P} T_{P}}{T_{m}}$$(equ.ol_gain)
+
+
+
+The root locus (i.e., the trajectory of the above poles on $s-$plane)  can be drawn by taking different open loop gain value {eq}`equ.ol_gain`. Here, we derive into two cases
 to plot the root locus.
 
--   If $T_{P}<T_{m}$, the root locus is shown as below. Thus, the system
+-   If $T_{P}<T_{m}$, the root locus is shown. Because there is always a pole (root) living on the right-half "s-plane" regardless of the choice of $\frac{k_{m} K_{P} k_{T P} T_{P}}{T_{m}}$, the closed-loop control system {eq}`equ.closed_loop` thus
     is inherently unstable.
 
     :::{figure} ../lec19/control/p_control_rl_1.jpg
     ---
-    width: 50%
+    width: 90%
     name: p_control_rl_1
     ---
     Root locus when
@@ -261,15 +334,14 @@ to plot the root locus.
 
 
 
--   If $T_{P}>T_{m}$, the root locus is shown as below. As $T_{P}$
-    increases, the absolute value of the real part of the two roots of
-    the locus tending towards the asymptotes increases too, and the
+-   If $T_{P}>T_{m}$, the root locus is shown as below. First of all, all poles can be located on the left half of the $s$-plane, closed-loop control system {eq}`equ.closed_loop` is stable. Also,  as you can see As $T_{P}$
+    increases, the absolute value of the real part of the two complex poles, ($s_1$ and $s_2$) tending towards the asymptotes increases too, and the
     system has faster time response.
 
 
     :::{figure} ../lec19/control/p_control_rl_2.jpg
     ---
-    width: 50%
+    width: 90%
     name: p_control_rl_2
     ---
     Root locus when
@@ -278,28 +350,12 @@ to plot the root locus.
 
 
 
-The closed-loop input/output transfer function is
 
-$$\frac{\Theta_{m}(s)}{\Theta_{r}(s)}=\frac{P(s)}{1+P(s)H(s)}=\frac{{k_{m}K_P(1+T_Ps)}}{k_{TP}k_{m}K_P(1+T_Ps)+s^2(1+sT_m)},$$
+The closed-loop disturbance-to-output transfer function is
 
-and the characteristic equation can be factorized into the following
-form
+$$\frac{\Theta_{m}(s)}{D(s)}=-\frac{\frac{R_a}{K_t}G(s)}{1+C(s)G(s)H(s)}=-\frac{\frac{R_a}{K_t}k_ms}{k_{TP}k_{m}K_P(1+T_Ps)+s^2(1+sT_m)}$$
 
-$${k_{TP}k_{m}K_P(1+T_Ps)+s^2(1+sT_m)}
-=
-{\left({\omega_{n}^{2}}+{2 \zeta }{\omega_{n}}s+{s^{2}}\right)(1+s \tau)}$$
-
-where $\omega_{n}$ and $\zeta$ are the natural frequency and damping
-ratio of the complex poles:
-$\left(-\zeta \omega_{n}, \pm j \sqrt{1-\zeta^{2}} \omega_{n}\right)$,
-and $-1 / \tau$ is the real pole. These poles correspond to the ones in
-the root locus in the above figures.
-
-The closed-loop disturbance/output transfer function is
-
-$$\frac{\Theta_{m}(s)}{D(s)}=-\frac{\frac{R_a}{K_t}G(s)}{1+P(s)H(s)}=-\frac{\frac{R_a}{K_t}k_ms}{k_{TP}k_{m}K_P(1+T_Ps)+s^2(1+sT_m)}$$
-
-If $\Theta_r(t)=0$, based on the final value theory, we have
+If $\theta_r(t)=0$ (i.e., no input signal), based on the final value thoerem, we have
 
 
 $$\lim_{t\rightarrow \infty} {\theta_{m}(t)}= \lim_{s\rightarrow 0} s{\Theta_{m}(s)}=\lim_{s\rightarrow 0} s\frac{\Theta_{m}(s)}{D(s)}{D(s)}$$
@@ -311,17 +367,19 @@ $$\lim_{t\rightarrow \infty} {\theta_{m}(t)}=
         \frac{R_a}{K_t}\frac{1}{K_{P} k_{T P}} \qquad &\text{if}\quad D(t)\,\,\text{is ramp signal, such as $D(t)=vt$ }\\
     \end{cases}$$
 
-Hence, the controller can cancel the effect of constant disturbance, and
-the quantity
+Hence, the controller can mitigate the effect of disturbance, and
+the mitigation is controlled by
 
 $$K_{P} k_{T P}$$
 
-can be interpreted as the disturbance rejection factor for velocity (or
+which can be interpreted as the disturbance rejection factor for velocity (or
 higher-order) disturbance. Increasing $K_{P}$ can help with reducing the
 effect of $D$, but too high $K_P$ can lead to unacceptable oscillations
 of the output, as implied from the root locus.
 
-# Single-Joint Position and Velocity Feedback
+<!-- 
+</br></br>
+# Single-Joint Position and Velocity Feedback Control
 
 To control the motor system in Fig.
 [2](#fig:motor_model2){reference-type="ref"
@@ -428,4 +486,4 @@ $$K_{P} k_{T P} K_{V}$$
 
 can be interpreted as the disturbance rejection factor for velocity (or
 higher-order) disturbance. Increasing $K_{P}$ and $K_V$ can help with
-reducing the effect of $D$.
+reducing the effect of $D$. -->
