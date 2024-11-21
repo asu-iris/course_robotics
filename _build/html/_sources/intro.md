@@ -22,20 +22,22 @@ This note is available online as an open-source resource. The majority of its co
 ## About Me
 
 I am an Assistant Professor in the Ira A. Fulton Schools of Engineering at Arizona State University. PI of [Intelligent Robotics and Interactive Systems (IRIS)](https://asu-iris.github.io/) Lab.
-This is the lab webpage: https://asu-iris.github.io/
+This is the lab webpage: https://irislab.tech/
 
 
 
 ## About  IRIS Lab
 
 
-The [Intelligent Robotics and Interactive Systems (IRIS)](https://asu-iris.github.io/) Lab focues on:
+The [Intelligent Robotics and Interactive Systems (IRIS)](https://irislab.tech/) Lab focues on:
 
-- **Human robot alignment**: We develop methods to empower a robot with the ability to efficiently understand and be understood by human users through a variety of physical interactions. We explore how robots can aptly respond to and collaborate meaningfully with users.
 
-- **Contact-rich robot manipulation:** We leverage physical principles to derive representations/models that enable robots to interact efficiently with their surroundings. We develop algorithms to enable robots manipulate objects through contact efficiently and robustly.
+- **Human-autonomy alignment:**  We develop certifiable, efficient, and empowering methods to enable robots to align their autonomy with human users through various natural interactions.
 
-- **Fundamental methods in robotics:** We focus on developing fundamental theories and algorithms for achieving efficient, safe, and robust robot intelligence. Our methods lie at the intersection of model-based (control and optimization) and data-driven approaches, harnessing the complementary benefits of both.
+- **Contact-rich dexterous manipulation:** We develop efficient physics-based representations/modeling, planning/control methods to enable robots to gain dexterity through frequently making or breaking contacts with objects.
+
+- **Fundamental computational methods:** We develop fundamental algorithms for  efficient, safe, and robust robot intelligence, by harnessing the complementary benefits of model-based and data-driven approaches.
+
 
 
 The IRIS lab is actively looking for robotics enthusiasts to join our team. If you're interested in becoming a part of our lab, please submit your application here: <a href="https://asu-iris.github.io/joining/" target="_blank">Join IRIS Lab</a>.
