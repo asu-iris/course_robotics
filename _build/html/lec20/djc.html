@@ -409,7 +409,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-idea-of-how-we-do-decentralized-control">The idea of how we do decentralized control</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#single-joint-control-diagram">Single-Joint Control Diagram</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#single-joint-system-diagram">Single-Joint System Diagram</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#position-feedback-control-design">Position Feedback Control Design</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#input-to-output-stability-analysis">Input-to-output stability analysis</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#disturbance-to-output-performance">Disturbance-to-output performance</a></li>
@@ -497,55 +497,6 @@ from considering so. How do we overcome this in our control design?</p>
 each joint as a single-in-single-out system, but view the complex coupling effect term
 <span class="math notranslate nohighlight">\(\boldsymbol{D}\)</span> as a disturbance input to each joint.</p>
 </div>
-<p></br></br></p>
-</section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="single-joint-control-diagram">
-<h1>Single-Joint Control Diagram<a class="headerlink" href="#single-joint-control-diagram" title="Link to this heading">#</a></h1>
-<p>In the reminder of this chapter, i will use <span class="math notranslate nohighlight">\({\theta}_m\)</span> and <span class="math notranslate nohighlight">\(q_m\)</span> interchangeably as the variable of each joint, droping the subscript of  joint index. For a single joint,  the dynamics equation at that joint is a row of <a class="reference internal" href="#equation-equ-decouple-model">(64)</a>, writing as</p>
-<div class="math notranslate nohighlight" id="equation-equ-single-joint-dyn">
-<span class="eqno">(65)<a class="headerlink" href="#equation-equ-single-joint-dyn" title="Link to this equation">#</a></span>\[
-I_m\ddot{\theta}_m+D=\tau_m
-\]</div>
-<p>Let’s recall the DC motor model in our previous chapter:</p>
-<div class="math notranslate nohighlight" id="equation-equ-single-joint-motor">
-<span class="eqno">(66)<a class="headerlink" href="#equation-equ-single-joint-motor" title="Link to this equation">#</a></span>\[
-\tau_m=k_ti_a=k_t\frac{(v_a-k_v\dot{\theta}_m)}{R_a}=k_t\frac{(G_vv_c-k_v\dot{\theta}_m)}{R_a}
-\]</div>
-<p>where <span class="math notranslate nohighlight">\({k}_{t}\)</span> is the
-torque constants; <span class="math notranslate nohighlight">\({i}_{a}\)</span> is the armature current; <span class="math notranslate nohighlight">\({v}_{a}\)</span> is the
-vector of armature voltage; <span class="math notranslate nohighlight">\({R}_{a}\)</span> is the armature resistance;
-<span class="math notranslate nohighlight">\({k}_{v}\)</span> is the back EMF constant; <span class="math notranslate nohighlight">\(\boldsymbol{v}_{c}\)</span> is the voltage
-of the servomotor, and <span class="math notranslate nohighlight">\(G_v\)</span> is input voltage amplifier. Those  parameters have
-been shown in previous chapter. We will write <span class="math notranslate nohighlight">\(v_a=G_vv_c\)</span> in <a class="reference internal" href="#equation-equ-single-joint-motor">(66)</a> in the following derivation.</p>
-<p>Equaling <a class="reference internal" href="#equation-equ-single-joint-dyn">(65)</a> and <a class="reference internal" href="#equation-equ-single-joint-motor">(66)</a>, one has</p>
-<div class="math notranslate nohighlight" id="equation-equ-motor">
-<span class="eqno">(67)<a class="headerlink" href="#equation-equ-motor" title="Link to this equation">#</a></span>\[
-I_m\ddot{\theta}_m+D=\tau_m=I_m\ddot{\theta}_m+\frac{k_t}{R_a}(\frac{DR_a}{k_t})=k_t\frac{(v_a-k_v\dot{\theta}_m)}{R_a}
-\]</div>
-<p>The above <a class="reference internal" href="#equation-equ-motor">(67)</a> corresponds to the following diagram</p>
-<figure class="align-default" id="motor-model3">
-<a class="reference internal image-reference" href="../_images/motor_model3.jpeg"><img alt="../_images/motor_model3.jpeg" src="../_images/motor_model3.jpeg" style="width: 80%;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 75 </span><span class="caption-text">Diagram of a single motor-joint model, with coupled joint term <span class="math notranslate nohighlight">\(D\)</span>
-treated as disturbance.</span><a class="headerlink" href="#motor-model3" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
-<p>In the above diagram, the closed loop is due to the DC motor model
-itself. For the above diagram, the input (<span class="math notranslate nohighlight">\(v_a\)</span>) to output (<span class="math notranslate nohighlight">\(\theta_m\)</span>) transfer function <span class="math notranslate nohighlight">\(G(s)\)</span> is</p>
-<div class="math notranslate nohighlight" id="equation-equ-motortf">
-<span class="eqno">(68)<a class="headerlink" href="#equation-equ-motortf" title="Link to this equation">#</a></span>\[
-    G(s)=\frac{{\Theta}(s)}{V_a(s)}=\frac{k_m}{s(1+T_ms)}\]</div>
-<p>with</p>
-<div class="math notranslate nohighlight">
-\[
-k_m=\frac{1}{k_v} \qquad\qquad
-T_m=\frac{R_aI_m}{k_tk_v}
-% \frac{\frac{k_t}{R_aI_ms}}{1+\frac{k_t}{R_aI_ms}k_v}=
-\]</div>
-<p>The  input (<span class="math notranslate nohighlight">\(v_a\)</span>) to output velocity (<span class="math notranslate nohighlight">\(\dot{\theta}_m\)</span>) transfer function is</p>
-<div class="math notranslate nohighlight">
-\[\frac{\dot{\Theta}(s)}{V_a(s)}=\frac{k_m}{1+T_ms}\]</div>
 <div class="admonition-minimal-material-on-control-basics admonition">
 <p class="admonition-title">Minimal material on control basics</p>
 <p>Please read my hand-writing note on control basics, in order to help you understand the following content of this chapter.</p>
@@ -563,7 +514,7 @@ control design is to find <span class="math notranslate nohighlight">\(C(s)\)</s
 <figure class="align-default" id="fd-control2">
 <a class="reference internal image-reference" href="../_images/fd_control2.jpeg"><img alt="../_images/fd_control2.jpeg" src="../_images/fd_control2.jpeg" style="width: 90%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 76 </span><span class="caption-text">A typical control system diagram</span><a class="headerlink" href="#fd-control2" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 75 </span><span class="caption-text">A typical control system diagram</span><a class="headerlink" href="#fd-control2" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>For the above control system, the forward path transfer function is</p>
@@ -596,11 +547,58 @@ characteristics equation</p>
 </div>
 <p></br></br></p>
 </section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="single-joint-system-diagram">
+<h1>Single-Joint System Diagram<a class="headerlink" href="#single-joint-system-diagram" title="Link to this heading">#</a></h1>
+<p>In the reminder of this chapter, i will use <span class="math notranslate nohighlight">\({\theta}_m\)</span> and <span class="math notranslate nohighlight">\(q_m\)</span> interchangeably as the variable of each joint, droping the subscript of  joint index. For a single joint,  the dynamics equation at that joint is a row of <a class="reference internal" href="#equation-equ-decouple-model">(64)</a>, writing as</p>
+<div class="math notranslate nohighlight" id="equation-equ-single-joint-dyn">
+<span class="eqno">(65)<a class="headerlink" href="#equation-equ-single-joint-dyn" title="Link to this equation">#</a></span>\[
+I_m\ddot{\theta}_m+D=\tau_m
+\]</div>
+<p>Let’s recall the DC motor model in our previous chapter:</p>
+<div class="math notranslate nohighlight" id="equation-equ-single-joint-motor">
+<span class="eqno">(66)<a class="headerlink" href="#equation-equ-single-joint-motor" title="Link to this equation">#</a></span>\[
+\tau_m=k_ti_a=k_t\frac{(G_vv_c-k_v\dot{\theta}_m)}{R_a}=k_t\frac{(v_a-k_v\dot{\theta}_m)}{R_a}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\({k}_{t}\)</span> is the
+torque constants; <span class="math notranslate nohighlight">\({i}_{a}\)</span> is the armature current; <span class="math notranslate nohighlight">\({v}_{a}\)</span> is the
+vector of armature voltage; <span class="math notranslate nohighlight">\({R}_{a}\)</span> is the armature resistance;
+<span class="math notranslate nohighlight">\({k}_{v}\)</span> is the back EMF constant; <span class="math notranslate nohighlight">\(v_a=G_vv_c\)</span> with <span class="math notranslate nohighlight">\(\boldsymbol{v}_{c}\)</span> is the voltage input
+of the servomotor, and <span class="math notranslate nohighlight">\(G_v\)</span> is  voltage amplifier. Those  parameters have
+been shown in previous chapter.</p>
+<p>Equaling <a class="reference internal" href="#equation-equ-single-joint-dyn">(65)</a> and <a class="reference internal" href="#equation-equ-single-joint-motor">(66)</a>, one has</p>
+<div class="math notranslate nohighlight" id="equation-equ-motor">
+<span class="eqno">(67)<a class="headerlink" href="#equation-equ-motor" title="Link to this equation">#</a></span>\[
+I_m\ddot{\theta}_m+D=\tau_m=I_m\ddot{\theta}_m+\frac{k_t}{R_a}(\frac{DR_a}{k_t})=k_t\frac{(v_a-k_v\dot{\theta}_m)}{R_a}
+\]</div>
+<p>The above <a class="reference internal" href="#equation-equ-motor">(67)</a> corresponds to the following diagram</p>
+<figure class="align-default" id="motor-model3">
+<a class="reference internal image-reference" href="../_images/motor_model3.jpeg"><img alt="../_images/motor_model3.jpeg" src="../_images/motor_model3.jpeg" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 76 </span><span class="caption-text">Diagram of a single motor-joint model, with coupled joint term <span class="math notranslate nohighlight">\(D\)</span>
+treated as disturbance.</span><a class="headerlink" href="#motor-model3" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>For the above diagram, the input (<span class="math notranslate nohighlight">\(v_a\)</span>) to output (<span class="math notranslate nohighlight">\(\theta_m\)</span>) transfer function <span class="math notranslate nohighlight">\(G(s)\)</span> is</p>
+<div class="math notranslate nohighlight" id="equation-equ-motortf">
+<span class="eqno">(68)<a class="headerlink" href="#equation-equ-motortf" title="Link to this equation">#</a></span>\[
+    G(s)=\frac{{\Theta}(s)}{V_a(s)}=\frac{k_m}{s(1+T_ms)}\]</div>
+<p>with</p>
+<div class="math notranslate nohighlight">
+\[
+k_m=\frac{1}{k_v} \qquad\qquad
+T_m=\frac{R_aI_m}{k_tk_v}
+% \frac{\frac{k_t}{R_aI_ms}}{1+\frac{k_t}{R_aI_ms}k_v}=
+\]</div>
+<p>The  input (<span class="math notranslate nohighlight">\(v_a\)</span>) to output velocity (<span class="math notranslate nohighlight">\(\dot{\theta}_m\)</span>) transfer function is</p>
+<div class="math notranslate nohighlight">
+\[\frac{\dot{\Theta}(s)}{V_a(s)}=\frac{k_m}{1+T_ms}\]</div>
+<p>The single joint system in <a class="reference internal" href="#motor-model3"><span class="std std-numref">Fig. 76</span></a> is the plant <span class="math notranslate nohighlight">\(G(s)\)</span> we want to design the controller <span class="math notranslate nohighlight">\(C(s)\)</span> for.</p>
+<p></br></br></p>
+</section>
 <section class="tex2jax_ignore mathjax_ignore" id="position-feedback-control-design">
 <h1>Position Feedback Control Design<a class="headerlink" href="#position-feedback-control-design" title="Link to this heading">#</a></h1>
-<p>The single joint system in <a class="reference internal" href="#motor-model3"><span class="std std-numref">Fig. 75</span></a> is the plant <span class="math notranslate nohighlight">\(G(s)\)</span> we want to design the controller <span class="math notranslate nohighlight">\(C(s)\)</span> for.</p>
-<p>The plant
-transfer function <span class="math notranslate nohighlight">\(G(s)\)</span> is <a class="reference internal" href="#equation-equ-motortf">(68)</a>, rewritten below</p>
+<p>The transfer function <span class="math notranslate nohighlight">\(G(s)\)</span> for the single joint system (<a class="reference internal" href="#motor-model3"><span class="std std-numref">Fig. 76</span></a>) is in <a class="reference internal" href="#equation-equ-motortf">(68)</a>, rewritten below</p>
 <div class="math notranslate nohighlight">
 \[G(s)=\frac{k_m}{s(1+T_ms)}\]</div>
 <p>We want to design a proportional-integral controller</p>
@@ -609,13 +607,12 @@ transfer function <span class="math notranslate nohighlight">\(G(s)\)</span> is 
 C_{P}(s)=K_{P} \frac{1+s T_{P}}{s} 
 \end{gathered}\]</div>
 <p>with <span class="math notranslate nohighlight">\(K_P\)</span> and <span class="math notranslate nohighlight">\(T_P\)</span> are controller parameters.</p>
-<p>The control diagram for the plant  <a class="reference internal" href="#motor-model3"><span class="std std-numref">Fig. 75</span></a> thus is shown below (note that the backward pass
-constant <span class="math notranslate nohighlight">\(k_{TP}\)</span> is fixed, this can be thought of as the sensor gain given).</p>
+<p>The control diagram for the single joint system  (<a class="reference internal" href="#motor-model3"><span class="std std-numref">Fig. 76</span></a>)  is shown below (note that the backward pass
+constant <span class="math notranslate nohighlight">\(k_{TP}\)</span> is given and a constant, which can be thought of as the sensor gain).</p>
 <figure class="align-default" id="p-control2">
 <a class="reference internal image-reference" href="../_images/p_control2.jpg"><img alt="../_images/p_control2.jpg" src="../_images/p_control2.jpg" style="width: 99%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 77 </span><span class="caption-text">Control diagram of singple-joint position
-control</span><a class="headerlink" href="#p-control2" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 77 </span><span class="caption-text">Control diagram of single-joint system</span><a class="headerlink" href="#p-control2" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>On the diagram <a class="reference internal" href="#p-control2"><span class="std std-numref">Fig. 77</span></a>, the transfer function of the forward path is</p>
@@ -629,7 +626,7 @@ control</span><a class="headerlink" href="#p-control2" title="Link to this image
 \[
 G(s)C_P(s)H(s)=\frac{k_{T P}k_{m} K_{P}\left(1+s T_{P}\right)}{s^{2}\left(1+s T_{m}\right)}
 \]</div>
-<p>The closed-loop input/output transfer function is</p>
+<p>The closed-loop input-to-output transfer function is</p>
 <div class="math notranslate nohighlight" id="equation-equ-closed-loop">
 <span class="eqno">(69)<a class="headerlink" href="#equation-equ-closed-loop" title="Link to this equation">#</a></span>\[\frac{\Theta_{m}(s)}{\Theta_{r}(s)}=\frac{C_P(s)G(s)}{1+C_P(s)G(s)H(s)}=\frac{{k_{m}K_P(1+T_Ps)}}{k_{TP}k_{m}K_P(1+T_Ps)+s^2(1+sT_m)},\]</div>
 </br>
@@ -891,7 +888,7 @@ reducing the effect of $D$. -->
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-idea-of-how-we-do-decentralized-control">The idea of how we do decentralized control</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#single-joint-control-diagram">Single-Joint Control Diagram</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#single-joint-system-diagram">Single-Joint System Diagram</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#position-feedback-control-design">Position Feedback Control Design</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#input-to-output-stability-analysis">Input-to-output stability analysis</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#disturbance-to-output-performance">Disturbance-to-output performance</a></li>

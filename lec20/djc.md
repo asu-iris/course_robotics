@@ -102,72 +102,6 @@ In our control design, we  consider the
 $\boldsymbol{D}$ as a disturbance input to each joint.
 ```
 
-</br></br>
-# Single-Joint Control Diagram
-
-In the reminder of this chapter, i will use ${\theta}_m$ and $q_m$ interchangeably as the variable of each joint, droping the subscript of  joint index. For a single joint,  the dynamics equation at that joint is a row of {eq}`equ.decouple_model`, writing as
-
-$$
-I_m\ddot{\theta}_m+D=\tau_m
-$$(equ.single_joint_dyn)
-
-Let's recall the DC motor model in our previous chapter:
-
-$$
-\tau_m=k_ti_a=k_t\frac{(v_a-k_v\dot{\theta}_m)}{R_a}=k_t\frac{(G_vv_c-k_v\dot{\theta}_m)}{R_a}
-$$(equ.single_joint_motor)
-
-where ${k}_{t}$ is the
-torque constants; ${i}_{a}$ is the armature current; ${v}_{a}$ is the
-vector of armature voltage; ${R}_{a}$ is the armature resistance;
-${k}_{v}$ is the back EMF constant; $\boldsymbol{v}_{c}$ is the voltage
-of the servomotor, and $G_v$ is input voltage amplifier. Those  parameters have
-been shown in previous chapter. We will write $v_a=G_vv_c$ in {eq}`equ.single_joint_motor` in the following derivation. 
-
-
-Equaling {eq}`equ.single_joint_dyn` and {eq}`equ.single_joint_motor`, one has
-
-
-
-$$
-I_m\ddot{\theta}_m+D=\tau_m=I_m\ddot{\theta}_m+\frac{k_t}{R_a}(\frac{DR_a}{k_t})=k_t\frac{(v_a-k_v\dot{\theta}_m)}{R_a}
-$$(equ.motor)
-
-
-
-The above {eq}`equ.motor` corresponds to the following diagram
-
-```{figure} ../lec19/control/motor_model3.jpeg
----
-width: 80%
-name: motor_model3
----
-Diagram of a single motor-joint model, with coupled joint term $D$
-treated as disturbance.
-```
-
-
-
-In the above diagram, the closed loop is due to the DC motor model
-itself. For the above diagram, the input ($v_a$) to output ($\theta_m$) transfer function $G(s)$ is
-
-$$
-    G(s)=\frac{{\Theta}(s)}{V_a(s)}=\frac{k_m}{s(1+T_ms)}$$(equ.motortf)
-
-with 
-
-$$
-k_m=\frac{1}{k_v} \qquad\qquad
-T_m=\frac{R_aI_m}{k_tk_v}
-% \frac{\frac{k_t}{R_aI_ms}}{1+\frac{k_t}{R_aI_ms}k_v}=
-$$
-
-The  input ($v_a$) to output velocity ($\dot{\theta}_m$) transfer function is 
-
-
-$$\frac{\dot{\Theta}(s)}{V_a(s)}=\frac{k_m}{1+T_ms}$$
-
-
 
 ```{admonition} Minimal material on control basics 
 
@@ -238,6 +172,77 @@ $$1+C(s)G(s)H(s)=0$$
 
 
 
+</br></br>
+# Single-Joint System Diagram
+
+In the reminder of this chapter, i will use ${\theta}_m$ and $q_m$ interchangeably as the variable of each joint, droping the subscript of  joint index. For a single joint,  the dynamics equation at that joint is a row of {eq}`equ.decouple_model`, writing as
+
+$$
+I_m\ddot{\theta}_m+D=\tau_m
+$$(equ.single_joint_dyn)
+
+Let's recall the DC motor model in our previous chapter:
+
+$$
+\tau_m=k_ti_a=k_t\frac{(G_vv_c-k_v\dot{\theta}_m)}{R_a}=k_t\frac{(v_a-k_v\dot{\theta}_m)}{R_a}
+$$(equ.single_joint_motor)
+
+where ${k}_{t}$ is the
+torque constants; ${i}_{a}$ is the armature current; ${v}_{a}$ is the
+vector of armature voltage; ${R}_{a}$ is the armature resistance;
+${k}_{v}$ is the back EMF constant; $v_a=G_vv_c$ with $\boldsymbol{v}_{c}$ is the voltage input
+of the servomotor, and $G_v$ is  voltage amplifier. Those  parameters have
+been shown in previous chapter. 
+
+
+Equaling {eq}`equ.single_joint_dyn` and {eq}`equ.single_joint_motor`, one has
+
+
+
+$$
+I_m\ddot{\theta}_m+D=\tau_m=I_m\ddot{\theta}_m+\frac{k_t}{R_a}(\frac{DR_a}{k_t})=k_t\frac{(v_a-k_v\dot{\theta}_m)}{R_a}
+$$(equ.motor)
+
+
+
+The above {eq}`equ.motor` corresponds to the following diagram
+
+```{figure} ../lec19/control/motor_model3.jpeg
+---
+width: 80%
+name: motor_model3
+---
+Diagram of a single motor-joint model, with coupled joint term $D$
+treated as disturbance.
+```
+
+
+
+For the above diagram, the input ($v_a$) to output ($\theta_m$) transfer function $G(s)$ is
+
+$$
+    G(s)=\frac{{\Theta}(s)}{V_a(s)}=\frac{k_m}{s(1+T_ms)}$$(equ.motortf)
+
+with 
+
+$$
+k_m=\frac{1}{k_v} \qquad\qquad
+T_m=\frac{R_aI_m}{k_tk_v}
+% \frac{\frac{k_t}{R_aI_ms}}{1+\frac{k_t}{R_aI_ms}k_v}=
+$$
+
+The  input ($v_a$) to output velocity ($\dot{\theta}_m$) transfer function is 
+
+
+$$\frac{\dot{\Theta}(s)}{V_a(s)}=\frac{k_m}{1+T_ms}$$
+
+
+
+
+
+
+The single joint system in {numref}`motor_model3` is the plant $G(s)$ we want to design the controller $C(s)$ for.
+
 
 
 
@@ -247,10 +252,7 @@ $$1+C(s)G(s)H(s)=0$$
 </br></br>
 # Position Feedback Control Design
 
-The single joint system in {numref}`motor_model3` is the plant $G(s)$ we want to design the controller $C(s)$ for.
-
-The plant
-transfer function $G(s)$ is {eq}`equ.motortf`, rewritten below
+The transfer function $G(s)$ for the single joint system ({numref}`motor_model3`) is in {eq}`equ.motortf`, rewritten below
 
 
 $$G(s)=\frac{k_m}{s(1+T_ms)}$$
@@ -263,16 +265,15 @@ C_{P}(s)=K_{P} \frac{1+s T_{P}}{s}
 
 with $K_P$ and $T_P$ are controller parameters.
 
-The control diagram for the plant  {numref}`motor_model3` thus is shown below (note that the backward pass
-constant $k_{TP}$ is fixed, this can be thought of as the sensor gain given).
+The control diagram for the single joint system  ({numref}`motor_model3`)  is shown below (note that the backward pass
+constant $k_{TP}$ is given and a constant, which can be thought of as the sensor gain).
 
 :::{figure} ../lec19/control/p_control2.jpg
 ---
 width: 99%
 name: p_control2
 ---
-Control diagram of singple-joint position 
-control
+Control diagram of single-joint system 
 :::
 
 
@@ -295,7 +296,7 @@ $$
 
 
 
-The closed-loop input/output transfer function is
+The closed-loop input-to-output transfer function is
 
 $$\frac{\Theta_{m}(s)}{\Theta_{r}(s)}=\frac{C_P(s)G(s)}{1+C_P(s)G(s)H(s)}=\frac{{k_{m}K_P(1+T_Ps)}}{k_{TP}k_{m}K_P(1+T_Ps)+s^2(1+sT_m)},$$(equ.closed_loop)
 
