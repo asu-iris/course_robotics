@@ -80,14 +80,14 @@ Dynamics diagram of a motor-driven
 robot arm.
 ```
 
-As shown in both {eq}`equ.decouple_model` and {numref}`decentralized_control3`, if we don't consider the coupling term $\boldsymbol{D}$, 
+As shown in both {eq}`equ.decouple_model` and {numref}`decentralized_control3`, if we ignore the coupling term $\boldsymbol{D}$, 
 
 $$\boldsymbol{I}_m\boldsymbol{\ddot{q}}_m=\boldsymbol{\tau}_m,$$
 
 
-This means that if we don't consider the complex
+This means that if we ignore  complex term
 $\boldsymbol{D}$, each joint is a single-in-single-output system (because $\boldsymbol{I}_m$ is a diagonal matrix).  However, the coupling term $\boldsymbol{D}$ in {eq}`equ.decouple_model` prevents us
-from considering so.
+from considering so. How do we overcome this in our control design? 
 
 <!-- In the reminder of this chapter, i will use ${\theta}_m$ and $q_m$ interchangeably to denote the variable of each joint, without writing the subscript joint index. For a single joint, if no coupling term $\boldsymbol{D}$, the dynamics equation at the joint is -->
 
@@ -97,8 +97,8 @@ from considering so.
     {I}_m{\ddot{\theta}_m}=\tau_m$$  -->
 
 ```{important}
- To address such, in the following, we still consider the
- each joint as a single-in-single-out system, but consider
+In our control design, we  consider the
+ each joint as a single-in-single-out system, but view the complex coupling effect term
 $\boldsymbol{D}$ as a disturbance input to each joint.
 ```
 
