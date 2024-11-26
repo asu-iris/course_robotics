@@ -148,9 +148,8 @@ $$\label{equ.joint_signal}
 \boldsymbol{q}_d(t),\quad\text{with} \quad \boldsymbol{\dot{q}}_d(t)\neq\boldsymbol{0} \quad \text{and} \quad \boldsymbol{\ddot{q}}_d(t)\neq\boldsymbol{0}$$
 
 The approach of inverse dynamics control is trying to address the above
-limitation. The idea of inverse dynamics control is to find a controller
-([\[equ.controller\]](#equ.controller){reference-type="ref"
-reference="equ.controller"}) that can directly lead to linearization of
+limitation. The idea of inverse dynamics control is to find a controller {eq}`equ.cjc_controller`
+ that can directly lead to a linear 
 system dynamics. To do so, we set the controller
 ([\[equ.controller\]](#equ.controller){reference-type="ref"
 reference="equ.controller"}) in the following particular form:
