@@ -6,53 +6,43 @@ title: "Lecture 21: Centralized Joint Control"
 
 # Centralized Joint Control
 
-In the previous sections, we have discussed the design of independent
-joint controllers. These are based on a single input/single-output
-approach, and the coupling effects between the joints have been
-considered as disturbances acting on each single joint. When large
-operational speeds are required, or direct drive actuation is used
-$\left(\boldsymbol{K}_{r}=\boldsymbol{I}\right)$, the nonlinear coupling
-terms strongly influence system performance. Thus, considering the
-effects of the components of $\boldsymbol{d}$ as a disturbance may
-generate large tracking errors. In this case, it is advisable to design
-control algorithms that take advantage of a detailed knowledge of
-manipulator dynamics to compensate for the nonlinear coupling terms of
-the model. This leads to centralized control algorithms.
+In the previous sections, we have discussed the design of independent (decentralized)
+joint controllers for each joint. Each joint is viewed as a single input and single-output
+system, and the coupling effects between the joints 
+considered as disturbances. However, this has the limitation: when the coupling effects between joints is not ignorable, the decentralized performance may
+generate large tracking errors. In this case, it would be desirable to design
+control algorithms that explicitly take into considertaion  the details of coupling effect to
+compensate for it. This leads to centralized control algorithms.
 
-In the following control design for a $n$-joint manipulator, we consider
-a manipulator without external end-effector forces and any joint
-friction. The equation of motion of the manipulator thus is
+In the following control design for a $n$-joint robot arm, we consider
+a robot arm without external end-effector forces and  joint
+friction. The equation of motion of the robot arm thus is
 
-$$\label{equ.manipulator}
-    \boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\boldsymbol{\tau}.$$
+$$
+    \boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\boldsymbol{\tau}.$$(equ.cjc_robotarm)
 
-The controller we want to design is in the general form of
+The controller we want to design is
 
-$$\label{equ.controller}
-\boldsymbol{\tau}=\boldsymbol{u}=\textbf{Controller}(\boldsymbol{q}, \boldsymbol{\dot{q}}, \boldsymbol{q}_d, \boldsymbol{\dot{q}}_d)$$
+$$
+\boldsymbol{\tau}=\boldsymbol{u}=\textbf{Controller}(\boldsymbol{q}, \boldsymbol{\dot{q}}, \boldsymbol{q}_d, \boldsymbol{\dot{q}}_d)$$(equ.cjc_controller)
 
-i.e., the controller takes as input the manipulator's current joint
-position $\boldsymbol{q}$, current joint velocity
-$\boldsymbol{\dot{q}}$, the desired joint position $\boldsymbol{q}_d$,
+i.e., the controller takes as input the robot's current joint
+position $\boldsymbol{q}$, joint velocity
+$\boldsymbol{\dot{q}}$, desired joint position $\boldsymbol{q}_d$,
 and desired joint velocity $\boldsymbol{\dot{q}}_d$, and outputs the
 joint torque $\boldsymbol{u}$.
 
-Thus, the controlled manipulator with the controller is
+Thus, motion of equation for the robot arm with the controller is
 
-$$\label{equ.manipulator_control}
-    \boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\textbf{Controller}(\boldsymbol{q}, \boldsymbol{\dot{q}}, \boldsymbol{q}_d, \boldsymbol{\dot{q}}_d)$$
+$$
+    \boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\textbf{Controller}(\boldsymbol{q}, \boldsymbol{\dot{q}}, \boldsymbol{q}_d, \boldsymbol{\dot{q}}_d)$$(equ.cjc_system)
 
-# Controller I: PD Control with Gravity Compensation
+## PD Control with Gravity Compensation
 
 Given a *constant* desired joint position $\boldsymbol{q}_{d}$, we want
-to design a controller
-([\[equ.controller\]](#equ.controller){reference-type="ref"
-reference="equ.controller"}), such that from any initial configuration,
-say $\boldsymbol{q}_0$, the controlled manipulator
-([\[equ.manipulator_control\]](#equ.manipulator_control){reference-type="ref"
-reference="equ.manipulator_control"}) will eventually reach
-$\boldsymbol{q}_{d}$. If we define the joint space error as the error
-between the desired and the actual joint positions:
+to design a controller {eq}`equ.cjc_controller`, such that from any initial robot configuration,
+say $\boldsymbol{q}_0$, the controlled robot arm {eq}`equ.cjc_system` will eventually reach
+$\boldsymbol{q}_{d}$. If we define the joint error as 
 
 $${\boldsymbol{e}}=\boldsymbol{q}_{d}-\boldsymbol{q}$$
 
@@ -62,51 +52,50 @@ $$\boldsymbol{e}(t)\rightarrow \boldsymbol{0}\quad \text{as}\quad
 t\rightarrow \infty.$$
 
 Below, we will design the controller
-([\[equ.controller\]](#equ.controller){reference-type="ref"
-reference="equ.controller"}) based on the Lyapunov method (see
-background of Lyapunov method in Lecture 16-17). First, we take the
+{eq}`equ.cjc_controller` based on the Lyapunov method (see
+background of Lyapunov method in `Numerical Inverse Kinematics`). 
+
+
+First, we take the
 vector $\begin{bmatrix}\boldsymbol{e}\\
-\boldsymbol{\dot{q}}\end{bmatrix}$ as the control system state. Choose
-the following positive definite quadratic form as Lyapunov function
-candidate:
+\boldsymbol{\dot{q}}\end{bmatrix}$ as the system state vector. Choose
+the following positive quadratic form as Lyapunov function:
 
 $$V(\dot{\boldsymbol{q}}, {\boldsymbol{e}})=\frac{1}{2} \dot{\boldsymbol{q}}^{T} \boldsymbol{B}(\boldsymbol{q}) \dot{\boldsymbol{q}}+\frac{1}{2} {\boldsymbol{e}}^{T} \boldsymbol{K}_{P} {\boldsymbol{e}} \quad >0 \quad \forall \dot{\boldsymbol{q}}, {\boldsymbol{e}} \neq \mathbf{0}$$
 
 where $\boldsymbol{K}_{P}$ is an $(n \times n)$ symmetric positive
 definite matrix. Differentiating
-$V(\dot{\boldsymbol{q}}, {\boldsymbol{e}})$ with respect to time, and
+$V(\dot{\boldsymbol{q}}, {\boldsymbol{e}})$ with respect to time, by
 recalling that $\boldsymbol{q}_{d}$ is constant, yields
 
-$$\dot{V}=\dot{\boldsymbol{q}}^{T} \boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\frac{1}{2} \dot{\boldsymbol{q}}^{T} \dot{\boldsymbol{B}}(\boldsymbol{q}) \dot{\boldsymbol{q}}-\dot{\boldsymbol{q}}^{T} \boldsymbol{K}_{P} {\boldsymbol{e}}$$
+$$\dot{V}=\dot{\boldsymbol{q}}^{T} \boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\frac{1}{2} \dot{\boldsymbol{q}}^{T} \dot{\boldsymbol{B}}(\boldsymbol{q}) \dot{\boldsymbol{q}}-\dot{\boldsymbol{q}}^{T} \boldsymbol{K}_{P} {\boldsymbol{e}}$$(equ.cjc_vdot)
 
-From ([\[equ.manipulator\]](#equ.manipulator){reference-type="ref"
-reference="equ.manipulator"}), we can solve for
-$\boldsymbol{B} \ddot{\boldsymbol{q}}$ and substituting it to the above
-equation gives
+From {eq}`equ.cjc_robotarm`, we can solve for
+$\boldsymbol{B} \ddot{\boldsymbol{q}}$ and substituting it to {eq}`equ.cjc_vdot` gives
 
 $$\label{equ.lypuanovdot}
-    \dot{V}=\frac{1}{2} \dot{\boldsymbol{q}}^{T}(\dot{\boldsymbol{B}}(\boldsymbol{q})-2 \boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}})) \dot{\boldsymbol{q}}+\dot{\boldsymbol{q}}^{T}\left(\boldsymbol{u}-\boldsymbol{g}(\boldsymbol{q})-\boldsymbol{K}_{P} {\boldsymbol{e}}\right)$$
+    \dot{V}=\frac{1}{2} \underbrace{\dot{\boldsymbol{q}}^{T}(\dot{\boldsymbol{B}}(\boldsymbol{q})-2 \boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}})) \dot{\boldsymbol{q}}}_{0}+\dot{\boldsymbol{q}}^{T}\left(\boldsymbol{u}-\boldsymbol{g}(\boldsymbol{q})-\boldsymbol{K}_{P} {\boldsymbol{e}}\right)$$ (equ.cjc_vdot2)
 
 The first term on the right-hand side is zero since the matrix
-$\boldsymbol{N}=\dot{\boldsymbol{B}}-2 \boldsymbol{C}$ is a
-skew-symmetric matrix (see in the property of dynamics in Lecture 18).
-For the second term to be negative definite, we can take the controller
-([\[equ.controller\]](#equ.controller){reference-type="ref"
-reference="equ.controller"}) as the follows:
+$\dot{\boldsymbol{B}}-2 \boldsymbol{C}$ is a
+skew-symmetric matrix (see in the property of dynamics in `Dynamics`).
+For the second term to be negative definite, we can set the controller {eq}`equ.cjc_controller` as
 
 :::{important}
 $$\label{equ.controller2}
-\boldsymbol{u}=\underbrace{\boldsymbol{g}(\boldsymbol{q})}_{\text{gravitational compensation}}+\underbrace{\boldsymbol{K}_{P} \boldsymbol{e}}_{\text{proportional control}}\quad\underbrace{-\boldsymbol{K}_{D} \dot{\boldsymbol{q}}}_{\text{derivative control}}$$
+\boldsymbol{u}=\underbrace{\boldsymbol{g}(\boldsymbol{q})}_{\text{gravitational compensation}}+\underbrace{\boldsymbol{K}_{P} \boldsymbol{e}}_{\text{proportional control}}\quad\underbrace{-\boldsymbol{K}_{D} \dot{\boldsymbol{q}}}_{\text{derivative control}}$$(equ.cjc_pd)
+
+with $\boldsymbol{K}_{D}$ positive definite matrix. The above controller {eq}`equ.cjc_pd` includes a
+gravitational compensation term and linear
+proportional-derivative (PD) control term.
 :::
 
-with $\boldsymbol{K}_{D}$ positive definite, corresponding to a
-nonlinear compensation action of gravitational terms with a linear
-proportional-derivative (PD) action.
+
 
 
 ```{figure} ../lec19/control/PD_control_with_gravity_compensation.jpeg
 ---
-width: 70%
+width: 90%
 name: pv_control_rl_1
 ---
 Control diagram of PD control with gravity
@@ -115,41 +104,41 @@ compensation
 
 
 
-With the above controller
-([\[equ.controller2\]](#equ.controller2){reference-type="ref"
-reference="equ.controller2"}), the time derivative of the Lyapunov
-function in
-([\[equ.lypuanovdot\]](#equ.lypuanovdot){reference-type="ref"
-reference="equ.lypuanovdot"}) becomes
+With the above controller {eq}`equ.cjc_pd`, the time derivative of the Lyapunov
+function in {eq}`equ.cjc_vdot2` becomes
 
 $$\dot{V}=-\boldsymbol{\dot{q}}^T\boldsymbol{K}_D\boldsymbol{\dot{q}} \quad <0 \quad \forall \dot{\boldsymbol{q}}  \neq \mathbf{0}$$
 
 and thus, $V$ decreases long as $\dot{\boldsymbol{q}} \neq \mathbf{0}$
-for all system trajectories. Thus, the controller manipulator will reach
+for all system trajectories. Thus, the robot arm will reach
 an equilibrium configuration, with condition $\dot{V}= 0$ and
-$\dot{\boldsymbol{q}}=\mathbf{0}$. To find the equilibrium
-configuration, we look at the manipulator dynamics under control
+$\dot{\boldsymbol{q}}=\mathbf{0}$. 
 
-$$\boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\boldsymbol{g}(\boldsymbol{q})+\boldsymbol{K}_{P} {\boldsymbol{e}}-\boldsymbol{K}_{D} \dot{\boldsymbol{q}}$$
+
+To find the equilibrium
+configuration, we look at the robot dynamics under control (by plug the controller {eq}`equ.cjc_pd` back into {eq}`equ.cjc_system`)
+
+$$\boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\boldsymbol{g}(\boldsymbol{q})+\boldsymbol{K}_{P} {\boldsymbol{e}}-\boldsymbol{K}_{D} \dot{\boldsymbol{q}}$$(equ.cjc_system)
 
 With the condition $\dot{\boldsymbol{q}}=\mathbf{0}$, it follows that
-$\ddot{\boldsymbol{q}} =\mathbf{0}$, and then from the above dynamics,
+$\ddot{\boldsymbol{q}} =\mathbf{0}$, and then from the above dynamics {eq}`equ.cjc_system`,
 we have
 
 $$\boldsymbol{K}_{P} {\boldsymbol{e}}=\mathbf{0} \quad\rightarrow\quad {\boldsymbol{e}}=\boldsymbol{q}_{d}-\boldsymbol{q} = \mathbf{0}$$
 
-Therefore, the manipulator will eventually reach equilibrium, which is
+Therefore, the robot arm will eventually reach equilibrium, which is
 exactly the desired configuration $\boldsymbol{q}_{d}$.
 
-The above derivation rigorously shows that any manipulator equilibrium
+<!-- The above derivation rigorously shows that any manipulator equilibrium
 posture is globally asymptotically stable under a controller with a PD
 linear action and a nonlinear gravity compensating action. Stability is
 ensured for any choice of $\boldsymbol{K}_{P}$ and $\boldsymbol{K}_{D}$,
 as long as these are positive definite matrices. The control law
 requires the on-line computation of the term
-$\boldsymbol{g}(\boldsymbol{q})$.
+$\boldsymbol{g}(\boldsymbol{q})$. -->
 
-# Controller II: Inverse Dynamics Control
+</br> </br> </br>
+## Inverse Dynamics Control
 
 One limitation of the above controller is that the above controller can
 only follow a stationary desired $\boldsymbol{q}_d$, but is not good at
