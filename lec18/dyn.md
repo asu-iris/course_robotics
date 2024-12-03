@@ -6,7 +6,7 @@ title: "Lecture 18: Dynamics (Lagrange Formulation)"
 ---
 
 
-
+(chapter-dyn)=
 # Dynamics (Lagrangian formulation) 
 Compared to the previous kinematics concerning how a
 robot moves, robot dynamics concerns about why

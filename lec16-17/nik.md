@@ -5,6 +5,7 @@ date: Oct. 17, 2023 Oct. 19, 2023
 title: "Lecture 16-17: Numerical Inverse Kinematics Algorithms"
 ---
 
+(chapter-nik)=
 #  Numerical Inverse Kinematics
 
 Recall IK problems: given a desired end-effector pose
@@ -164,7 +165,10 @@ Let's next find out if the above controller can solve the IK or not, by using th
 
 
 
+
 ```{admonition} Background about Lyapunov Stability
+
+
 
 Consider the following error dynamics (ODE)
 

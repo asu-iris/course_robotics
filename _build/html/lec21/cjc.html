@@ -1,12 +1,13 @@
 
+
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="../" >
+<html lang="en" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Centralized Joint Control &#8212; Modeling and Control of Robots</title>
   
@@ -14,49 +15,52 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
-  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
-    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="../_static/doctools.js?v=9a2dae69"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="../_static/copybutton.js?v=f281be69"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'lec21/cjc';</script>
@@ -73,23 +77,19 @@
 
   
   
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
-  
-  <div id="pst-scroll-pixel-helper"></div>
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -111,20 +111,12 @@
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
-
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
-</div>
-
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
-    </header>
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
   
-
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
-      
-      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -139,13 +131,9 @@
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
-
-  
-    
   
 
 <a class="navbar-brand logo" href="../intro.html">
-  
   
   
   
@@ -155,23 +143,12 @@
       
     
     
-    <img src="../_static/iris_logo_2.png" class="logo__image only-light" alt="Modeling and Control of Robots - Home"/>
-    <script>document.write(`<img src="../_static/iris_logo_2.png" class="logo__image only-dark" alt="Modeling and Control of Robots - Home"/>`);</script>
+    <img src="../_static/iris_logo_2.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/iris_logo_2.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item">
-
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
-        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -255,7 +232,7 @@
 
       </div>
       
-      <main id="main-content" class="bd-main" role="main">
+      <main id="main-content" class="bd-main">
         
         
 
@@ -264,14 +241,14 @@
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article d-print-none">
+              <div class="bd-header-article">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</button></div>
+</label></div>
       
     </div>
   
@@ -361,28 +338,26 @@
 </button>
 
 
-
 <script>
 document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
   </button>
 `);
 </script>
 
-
 <script>
 document.write(`
-  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
   </button>
 `);
 </script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</button>
+</label>
 </div></div>
       
     </div>
@@ -404,7 +379,10 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pd-control-with-gravity-compensation">PD Control with Gravity Compensation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inverse-dynamics-control">Inverse Dynamics Control</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inverse-dynamics-control">Inverse Dynamics Control</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-choose-the-new-input-boldsymbol-y-in-the-controller-equ-u">How to choose the new input <span class="math notranslate nohighlight">\(\boldsymbol{y}\)</span> in the controller <code class="xref eq docutils literal notranslate"><span class="pre">equ.u</span></code>?</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -414,40 +392,39 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article">
+                <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="centralized-joint-control">
-<h1>Centralized Joint Control<a class="headerlink" href="#centralized-joint-control" title="Link to this heading">#</a></h1>
+<h1>Centralized Joint Control<a class="headerlink" href="#centralized-joint-control" title="Permalink to this heading">#</a></h1>
 <p>In the previous sections, we have discussed the design of independent (decentralized)
 joint controllers for each joint. Each joint is viewed as a single input and single-output
 system, and the coupling effects between the joints
-considered as disturbances. However, this has the limitation: when the coupling effects between joints is not ignorable, the decentralized performance may
-generate large tracking errors. In this case, it would be desirable to design
-control algorithms that explicitly take into considertaion  the details of coupling effect to
-compensate for it. This leads to centralized control algorithms.</p>
+considered as disturbances. However, this has the limitation: when the coupling effect is not ignorable, the decentralized performance may be bad. In this case, it would be desirable to design
+controller that explicitly take into considertaion the coupling effect and
+compensate for it! This leads to centralized control method in this chapter.</p>
 <p>In the following control design for a <span class="math notranslate nohighlight">\(n\)</span>-joint robot arm, we consider
 a robot arm without external end-effector forces and  joint
-friction. The equation of motion of the robot arm thus is</p>
+friction. The equation of motion of the robot arm  is</p>
 <div class="math notranslate nohighlight" id="equation-equ-cjc-robotarm">
-<span class="eqno">(72)<a class="headerlink" href="#equation-equ-cjc-robotarm" title="Link to this equation">#</a></span>\[
+<span class="eqno">(72)<a class="headerlink" href="#equation-equ-cjc-robotarm" title="Permalink to this equation">#</a></span>\[
     \boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\boldsymbol{\tau}.\]</div>
 <p>The controller we want to design is</p>
 <div class="math notranslate nohighlight" id="equation-equ-cjc-controller">
-<span class="eqno">(73)<a class="headerlink" href="#equation-equ-cjc-controller" title="Link to this equation">#</a></span>\[
+<span class="eqno">(73)<a class="headerlink" href="#equation-equ-cjc-controller" title="Permalink to this equation">#</a></span>\[
 \boldsymbol{\tau}=\boldsymbol{u}=\textbf{Controller}(\boldsymbol{q}, \boldsymbol{\dot{q}}, \boldsymbol{q}_d, \boldsymbol{\dot{q}}_d)\]</div>
 <p>i.e., the controller takes as input the robot’s current joint
 position <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span>, joint velocity
 <span class="math notranslate nohighlight">\(\boldsymbol{\dot{q}}\)</span>, desired joint position <span class="math notranslate nohighlight">\(\boldsymbol{q}_d\)</span>,
 and desired joint velocity <span class="math notranslate nohighlight">\(\boldsymbol{\dot{q}}_d\)</span>, and outputs the
 joint torque <span class="math notranslate nohighlight">\(\boldsymbol{u}\)</span>.</p>
-<p>Thus, motion of equation for the robot arm with the controller is</p>
+<p>Thus, motion of equation of the robot arm with the controller is</p>
 <div class="math notranslate nohighlight" id="equation-equ-cjc-system">
-<span class="eqno">(78)<a class="headerlink" href="#equation-equ-cjc-system" title="Link to this equation">#</a></span>\[
+<span class="eqno">(78)<a class="headerlink" href="#equation-equ-cjc-system" title="Permalink to this equation">#</a></span>\[
     \boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\textbf{Controller}(\boldsymbol{q}, \boldsymbol{\dot{q}}, \boldsymbol{q}_d, \boldsymbol{\dot{q}}_d)\]</div>
 <section id="pd-control-with-gravity-compensation">
-<h2>PD Control with Gravity Compensation<a class="headerlink" href="#pd-control-with-gravity-compensation" title="Link to this heading">#</a></h2>
-<p>Given a <em>constant</em> desired joint position <span class="math notranslate nohighlight">\(\boldsymbol{q}_{d}\)</span>, we want
-to design a controller <a class="reference internal" href="#equation-equ-cjc-controller">(73)</a>, such that from any initial robot configuration,
+<h2>PD Control with Gravity Compensation<a class="headerlink" href="#pd-control-with-gravity-compensation" title="Permalink to this heading">#</a></h2>
+<p>Given a <em>stationary</em> desired joint position <span class="math notranslate nohighlight">\(\boldsymbol{q}_{d}\)</span> (here <span class="math notranslate nohighlight">\(\boldsymbol{\dot q}_{d}=\boldsymbol{0}\)</span>), we want
+to design a controller <a class="reference internal" href="#equation-equ-cjc-controller">(73)</a>, such that given any initial robot configuration,
 say <span class="math notranslate nohighlight">\(\boldsymbol{q}_0\)</span>, the controlled robot arm <a class="reference internal" href="#equation-equ-cjc-system">(78)</a> will eventually reach
 <span class="math notranslate nohighlight">\(\boldsymbol{q}_{d}\)</span>. If we define the joint error as</p>
 <div class="math notranslate nohighlight">
@@ -458,7 +435,7 @@ say <span class="math notranslate nohighlight">\(\boldsymbol{q}_0\)</span>, the 
 t\rightarrow \infty.\]</div>
 <p>Below, we will design the controller
 <a class="reference internal" href="#equation-equ-cjc-controller">(73)</a> based on the Lyapunov method (see
-background of Lyapunov method in <code class="docutils literal notranslate"><span class="pre">Numerical</span> <span class="pre">Inverse</span> <span class="pre">Kinematics</span></code>).</p>
+background of Lyapunov method in <a class="reference internal" href="../lec16-17/nik.html#chapter-nik"><span class="std std-ref">Numerical Inverse Kinematics</span></a>).</p>
 <p>First, we take the
 vector <span class="math notranslate nohighlight">\(\begin{bmatrix}\boldsymbol{e}\\
 \boldsymbol{\dot{q}}\end{bmatrix}\)</span> as the system state vector. Choose
@@ -468,32 +445,29 @@ the following positive quadratic form as Lyapunov function:</p>
 <p>where <span class="math notranslate nohighlight">\(\boldsymbol{K}_{P}\)</span> is an <span class="math notranslate nohighlight">\((n \times n)\)</span> symmetric positive
 definite matrix. Differentiating
 <span class="math notranslate nohighlight">\(V(\dot{\boldsymbol{q}}, {\boldsymbol{e}})\)</span> with respect to time, by
-recalling that <span class="math notranslate nohighlight">\(\boldsymbol{q}_{d}\)</span> is constant, yields</p>
+recalling that <span class="math notranslate nohighlight">\(\boldsymbol{q}_{d}\)</span> is constant (<span class="math notranslate nohighlight">\(\boldsymbol{\dot q}_{d}=\boldsymbol{0}\)</span>), yields</p>
 <div class="math notranslate nohighlight" id="equation-equ-cjc-vdot">
-<span class="eqno">(75)<a class="headerlink" href="#equation-equ-cjc-vdot" title="Link to this equation">#</a></span>\[\dot{V}=\dot{\boldsymbol{q}}^{T} \boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\frac{1}{2} \dot{\boldsymbol{q}}^{T} \dot{\boldsymbol{B}}(\boldsymbol{q}) \dot{\boldsymbol{q}}-\dot{\boldsymbol{q}}^{T} \boldsymbol{K}_{P} {\boldsymbol{e}}\]</div>
+<span class="eqno">(75)<a class="headerlink" href="#equation-equ-cjc-vdot" title="Permalink to this equation">#</a></span>\[\dot{V}=\dot{\boldsymbol{q}}^{T} \boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\frac{1}{2} \dot{\boldsymbol{q}}^{T} \dot{\boldsymbol{B}}(\boldsymbol{q}) \dot{\boldsymbol{q}}-\dot{\boldsymbol{q}}^{T} \boldsymbol{K}_{P} {\boldsymbol{e}}\]</div>
 <p>From <a class="reference internal" href="#equation-equ-cjc-robotarm">(72)</a>, we can solve for
 <span class="math notranslate nohighlight">\(\boldsymbol{B} \ddot{\boldsymbol{q}}\)</span> and substituting it to <a class="reference internal" href="#equation-equ-cjc-vdot">(75)</a> gives</p>
 <div class="math notranslate nohighlight" id="equation-equ-cjc-vdot2">
-<span class="eqno">(76)<a class="headerlink" href="#equation-equ-cjc-vdot2" title="Link to this equation">#</a></span>\[\label{equ.lypuanovdot}
+<span class="eqno">(76)<a class="headerlink" href="#equation-equ-cjc-vdot2" title="Permalink to this equation">#</a></span>\[\label{equ.lypuanovdot}
     \dot{V}=\frac{1}{2} \underbrace{\dot{\boldsymbol{q}}^{T}(\dot{\boldsymbol{B}}(\boldsymbol{q})-2 \boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}})) \dot{\boldsymbol{q}}}_{0}+\dot{\boldsymbol{q}}^{T}\left(\boldsymbol{u}-\boldsymbol{g}(\boldsymbol{q})-\boldsymbol{K}_{P} {\boldsymbol{e}}\right)\]</div>
 <p>The first term on the right-hand side is zero since the matrix
 <span class="math notranslate nohighlight">\(\dot{\boldsymbol{B}}-2 \boldsymbol{C}\)</span> is a
-skew-symmetric matrix (see in the property of dynamics in <code class="docutils literal notranslate"><span class="pre">Dynamics</span></code>).
-For the second term to be negative definite, we can set the controller <a class="reference internal" href="#equation-equ-cjc-controller">(73)</a> as</p>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
+skew-symmetric matrix (see in the property of dynamics in <a class="reference internal" href="../lec18/dyn.html#chapter-dyn"><span class="std std-ref">Dynamics</span></a>).
+For the second term to be negative, we can set the controller <a class="reference internal" href="#equation-equ-cjc-controller">(73)</a> as</p>
 <div class="math notranslate nohighlight" id="equation-equ-cjc-pd">
-<span class="eqno">(77)<a class="headerlink" href="#equation-equ-cjc-pd" title="Link to this equation">#</a></span>\[\label{equ.controller2}
+<span class="eqno">(77)<a class="headerlink" href="#equation-equ-cjc-pd" title="Permalink to this equation">#</a></span>\[
 \boldsymbol{u}=\underbrace{\boldsymbol{g}(\boldsymbol{q})}_{\text{gravitational compensation}}+\underbrace{\boldsymbol{K}_{P} \boldsymbol{e}}_{\text{proportional control}}\quad\underbrace{-\boldsymbol{K}_{D} \dot{\boldsymbol{q}}}_{\text{derivative control}}\]</div>
 <p>with <span class="math notranslate nohighlight">\(\boldsymbol{K}_{D}\)</span> positive definite matrix. The above controller <a class="reference internal" href="#equation-equ-cjc-pd">(77)</a> includes a
 gravitational compensation term and linear
 proportional-derivative (PD) control term.</p>
-</div>
 <figure class="align-default" id="pv-control-rl-1">
 <a class="reference internal image-reference" href="../_images/PD_control_with_gravity_compensation.jpeg"><img alt="../_images/PD_control_with_gravity_compensation.jpeg" src="../_images/PD_control_with_gravity_compensation.jpeg" style="width: 90%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 80 </span><span class="caption-text">Control diagram of PD control with gravity
-compensation</span><a class="headerlink" href="#pv-control-rl-1" title="Link to this image">#</a></p>
+compensation</span><a class="headerlink" href="#pv-control-rl-1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>With the above controller <a class="reference internal" href="#equation-equ-cjc-pd">(77)</a>, the time derivative of the Lyapunov
@@ -507,14 +481,14 @@ an equilibrium configuration, with condition <span class="math notranslate nohig
 <p>To find the equilibrium
 configuration, we look at the robot dynamics under control (by plug the controller <a class="reference internal" href="#equation-equ-cjc-pd">(77)</a> back into <a class="reference internal" href="#equation-equ-cjc-system">(78)</a>)</p>
 <div class="math notranslate nohighlight" id="equation-equ-cjc-system">
-<span class="eqno">(78)<a class="headerlink" href="#equation-equ-cjc-system" title="Link to this equation">#</a></span>\[\boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\boldsymbol{g}(\boldsymbol{q})+\boldsymbol{K}_{P} {\boldsymbol{e}}-\boldsymbol{K}_{D} \dot{\boldsymbol{q}}\]</div>
-<p>With the condition <span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}}=\mathbf{0}\)</span>, it follows that
+<span class="eqno">(78)<a class="headerlink" href="#equation-equ-cjc-system" title="Permalink to this equation">#</a></span>\[\boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\boldsymbol{g}(\boldsymbol{q})+\boldsymbol{K}_{P} {\boldsymbol{e}}-\boldsymbol{K}_{D} \dot{\boldsymbol{q}}\]</div>
+<p>With  <span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}}=\mathbf{0}\)</span>, it follows that
 <span class="math notranslate nohighlight">\(\ddot{\boldsymbol{q}} =\mathbf{0}\)</span>, and then from the above dynamics <a class="reference internal" href="#equation-equ-cjc-system">(78)</a>,
 we have</p>
 <div class="math notranslate nohighlight">
 \[\boldsymbol{K}_{P} {\boldsymbol{e}}=\mathbf{0} \quad\rightarrow\quad {\boldsymbol{e}}=\boldsymbol{q}_{d}-\boldsymbol{q} = \mathbf{0}\]</div>
 <p>Therefore, the robot arm will eventually reach equilibrium, which is
-exactly the desired configuration <span class="math notranslate nohighlight">\(\boldsymbol{q}_{d}\)</span>.</p>
+exactly the desired configuration <span class="math notranslate nohighlight">\(\boldsymbol{q}_{d}\)</span>. In summary, we have the PD controller with gravity compensation for the robot arm, summarized below.</p>
 <!-- The above derivation rigorously shows that any manipulator equilibrium
 posture is globally asymptotically stable under a controller with a PD
 linear action and a nonlinear gravity compensating action. Stability is
@@ -522,111 +496,109 @@ ensured for any choice of $\boldsymbol{K}_{P}$ and $\boldsymbol{K}_{D}$,
 as long as these are positive definite matrices. The control law
 requires the on-line computation of the term
 $\boldsymbol{g}(\boldsymbol{q})$. -->
+<div class="admonition-summary-pd-control-with-gravity-compensation admonition">
+<p class="admonition-title">Summary: PD Control with Gravity Compensation</p>
+<div class="math notranslate nohighlight" id="equation-equ-cjc-pd2">
+<span class="eqno">(79)<a class="headerlink" href="#equation-equ-cjc-pd2" title="Permalink to this equation">#</a></span>\[
+\boldsymbol{u}=\underbrace{\boldsymbol{g}(\boldsymbol{q})}_{\text{gravitational compensation}}+\underbrace{\boldsymbol{K}_{P} (\boldsymbol{q}_d-\boldsymbol{q})}_{\text{proportional control}}\quad\underbrace{-\boldsymbol{K}_{D} \dot{\boldsymbol{q}}}_{\text{derivative control}}\]</div>
+<p>with <span class="math notranslate nohighlight">\(\boldsymbol{K}_{P}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{K}_{D}\)</span> are positive definite matrices.</p>
+</div>
 <p></br> </br> </br></p>
 </section>
 <section id="inverse-dynamics-control">
-<h2>Inverse Dynamics Control<a class="headerlink" href="#inverse-dynamics-control" title="Link to this heading">#</a></h2>
-<p>One limitation of the above controller is that the above controller can
+<h2>Inverse Dynamics Control<a class="headerlink" href="#inverse-dynamics-control" title="Permalink to this heading">#</a></h2>
+<p>One limitation of the PD Control with Gravity Compensation is that the  controller can
 only follow a stationary desired <span class="math notranslate nohighlight">\(\boldsymbol{q}_d\)</span>, but is not good at
-tracking a changing desired joint signal: i.e.,</p>
-<div class="math notranslate nohighlight">
-\[\label{equ.joint_signal}
+tracking a fast-changing desired joint: i.e.,</p>
+<div class="math notranslate nohighlight" id="equation-equ-joint-signal">
+<span class="eqno">(80)<a class="headerlink" href="#equation-equ-joint-signal" title="Permalink to this equation">#</a></span>\[
 \boldsymbol{q}_d(t),\quad\text{with} \quad \boldsymbol{\dot{q}}_d(t)\neq\boldsymbol{0} \quad \text{and} \quad \boldsymbol{\ddot{q}}_d(t)\neq\boldsymbol{0}\]</div>
-<p>The approach of inverse dynamics control is trying to address the above
+<p>Inverse dynamics control is  to address the above
 limitation. The idea of inverse dynamics control is to find a controller <a class="reference internal" href="#equation-equ-cjc-controller">(73)</a>
-that can directly lead to a linear
-system dynamics. To do so, we set the controller
-(<a class="reference internal" href="#equ.controller"><span class="xref myst">[equ.controller]</span></a>{reference-type=”ref”
-reference=”equ.controller”}) in the following particular form:</p>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<div class="math notranslate nohighlight">
-\[\label{equ:u}
+that can make the robot arm behave like a mass-spring-damper system.</p>
+<p>To do so, we set the controller
+<a class="reference internal" href="#equation-equ-cjc-controller">(73)</a> as the following  form:</p>
+<div class="math notranslate nohighlight" id="equation-equ-u">
+<span class="eqno">(81)<a class="headerlink" href="#equation-equ-u" title="Permalink to this equation">#</a></span>\[
     \boldsymbol{u}=\boldsymbol{B}(\boldsymbol{q}) \boldsymbol{y}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})\]</div>
-</div>
-<p>where <span class="math notranslate nohighlight">\(\boldsymbol{y}\)</span> is a new input vector whose expression is to be
-determined yet. The above controller directly leads to the controlled
-manipulator
-(<a class="reference internal" href="#equ.manipulator_control"><span class="xref myst">[equ.manipulator_control]</span></a>{reference-type=”ref”
-reference=”equ.manipulator_control”}) as</p>
+<p>where <span class="math notranslate nohighlight">\(\boldsymbol{y}\)</span> is a new input vector which will be determined later on. Plugging the above controller <a class="reference internal" href="#equation-equ-u">(81)</a> to the robot arm dynamics <a class="reference internal" href="#equation-equ-cjc-robotarm">(72)</a>, the controlled robot arm has the dynamics</p>
 <div class="math notranslate nohighlight">
 \[\boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\boldsymbol{B}(\boldsymbol{q}) \boldsymbol{y}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})\]</div>
-<p>leading to</p>
-<div class="math notranslate nohighlight">
-\[\label{equ.dyn_new}
+<p>which is simplified to</p>
+<div class="math notranslate nohighlight" id="equation-equ-dyn-new">
+<span class="eqno">(82)<a class="headerlink" href="#equation-equ-dyn-new" title="Permalink to this equation">#</a></span>\[
 \boldsymbol{\ddot{q}}=\boldsymbol{y}\]</div>
 <p>Again, we will discuss how to set
-this new control input vector <span class="math notranslate nohighlight">\(\boldsymbol{y}\)</span>, but the particular form
-of controller (<a class="reference internal" href="#equ:u"><span class="xref myst">[equ:u]</span></a>{reference-type=”ref”
-reference=”equ:u”}) leads to a linear relationship between the input
-signal <span class="math notranslate nohighlight">\(\boldsymbol{y}\)</span> and the manipulator’s joint acceleration
-<span class="math notranslate nohighlight">\(\ddot{\boldsymbol{q}}\)</span>.</p>
-<p>The control diagram corresponding to the controller
-(<a class="reference internal" href="#equ:u"><span class="xref myst">[equ:u]</span></a>{reference-type=”ref” reference=”equ:u”}) is shown
-in Fig. <a class="reference internal" href="#fig:2"><span class="xref myst">2</span></a>{reference-type=”ref” reference=”fig:2”}. The
-controller (<a class="reference internal" href="#equ:u"><span class="xref myst">[equ:u]</span></a>{reference-type=”ref” reference=”equ:u”})
-is termed inverse dynamics control as it is based on the computation of
-inverse dynamics. From
-(<a class="reference internal" href="#equ.dyn_new"><span class="xref myst">[equ.dyn_new]</span></a>{reference-type=”ref”
-reference=”equ.dyn_new”}, the controlled manipulator system is linear
-and decoupled with respect to new input <span class="math notranslate nohighlight">\(\boldsymbol{y}\)</span>.</p>
+this new control input <span class="math notranslate nohighlight">\(\boldsymbol{y}\)</span> later, but <a class="reference internal" href="#equation-equ-dyn-new">(82)</a> shows that the  controller <a class="reference internal" href="#equation-equ-u">(81)</a> leads to a linear relationship between the input
+signal <span class="math notranslate nohighlight">\(\boldsymbol{y}\)</span> and the robot arm’s joint acceleration
+<span class="math notranslate nohighlight">\(\ddot{\boldsymbol{q}}\)</span>. The following  diagram exactly shown this</p>
 <figure class="align-default" id="id1">
 <a class="reference internal image-reference" href="../_images/inverse_dynamics_control.jpeg"><img alt="../_images/inverse_dynamics_control.jpeg" src="../_images/inverse_dynamics_control.jpeg" style="width: 70%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 81 </span><span class="caption-text">Exact linearization performed by inverse dynamics
-control</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
+control</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>Thus, the manipulator control problem is reduced to that of finding a
-control input signal <span class="math notranslate nohighlight">\(\boldsymbol{y}\)</span>. To this end,</p>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<div class="math notranslate nohighlight">
-\[\label{equ.y}
+<section id="how-to-choose-the-new-input-boldsymbol-y-in-the-controller-equ-u">
+<h3>How to choose the new input <span class="math notranslate nohighlight">\(\boldsymbol{y}\)</span> in the controller <a class="reference internal" href="#equation-equ-u">(81)</a>?<a class="headerlink" href="#how-to-choose-the-new-input-boldsymbol-y-in-the-controller-equ-u" title="Permalink to this heading">#</a></h3>
+<p>For the particular form of controller <a class="reference internal" href="#equation-equ-u">(81)</a>, we choose the new input <span class="math notranslate nohighlight">\(\boldsymbol{y}\)</span> as</p>
+<div class="math notranslate nohighlight" id="equation-equ-y">
+<span class="eqno">(83)<a class="headerlink" href="#equation-equ-y" title="Permalink to this equation">#</a></span>\[
     \boldsymbol{y}=\ddot{\boldsymbol{{q}}}_d+\boldsymbol{K}_{P} ({\boldsymbol{q}}_{d}-\boldsymbol{q})+\boldsymbol{K}_{D} (\dot{\boldsymbol{q}}_{d}-\dot{\boldsymbol{q}})\]</div>
-</div>
 <p>Here, <span class="math notranslate nohighlight">\(\boldsymbol{K}_{P}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{K}_{D}\)</span> are positive
-definite matrices. Plugging the above <span class="math notranslate nohighlight">\(\boldsymbol{y}\)</span> signal into
-(<a class="reference internal" href="#equ.dyn_new"><span class="xref myst">[equ.dyn_new]</span></a>{reference-type=”ref”
-reference=”equ.dyn_new”}) leads to</p>
-<div class="math notranslate nohighlight">
-\[\label{equ.error_dyn2}
+definite matrices.</p>
+<p>Plugging the above  <a class="reference internal" href="#equation-equ-y">(83)</a>  into
+<a class="reference internal" href="#equation-equ-dyn-new">(82)</a> leads to</p>
+<div class="math notranslate nohighlight" id="equation-equ-error-dyn2">
+<span class="eqno">(84)<a class="headerlink" href="#equation-equ-error-dyn2" title="Permalink to this equation">#</a></span>\[
     (\ddot{\boldsymbol{{q}}}_d-\ddot{\boldsymbol{q}})+\boldsymbol{K}_{P} ({\boldsymbol{q}}_{d}-\boldsymbol{q})+\boldsymbol{K}_{D} (\dot{\boldsymbol{q}}_{d}-\dot{\boldsymbol{q}})=\boldsymbol{0}\]</div>
 <p>Again, if we define the error
 <span class="math notranslate nohighlight">\(\boldsymbol{e}={\boldsymbol{q}}_{d}-{\boldsymbol{q}}\)</span>, the above
-(<a class="reference internal" href="../lec16-17/nik.html#equation-equ-error-dyn">(24)</a>{reference-type=”ref”
-reference=”equ.error_dyn”}) becomes the following error dynamics</p>
-<div class="math notranslate nohighlight">
-\[\label{equ.error_dyn}
+<a class="reference internal" href="#equation-equ-error-dyn">(85)</a> becomes</p>
+<div class="math notranslate nohighlight" id="equation-equ-error-dyn">
+<span class="eqno">(85)<a class="headerlink" href="#equation-equ-error-dyn" title="Permalink to this equation">#</a></span>\[
     \ddot{\boldsymbol{e}}+\boldsymbol{K}_{P} \dot{\boldsymbol{e}}+\boldsymbol{K}_{D} {\boldsymbol{e}}=\boldsymbol{0}\]</div>
-<p>expressing the dynamics of position error while tracking the given
-trajectory. This is a standard second-order error system, where its
+<p>which is the error  dynamics. This is a standard second-order error system, where its
 convergence depends on the value of <span class="math notranslate nohighlight">\(\boldsymbol{K}_P\)</span> and
-<span class="math notranslate nohighlight">\(\boldsymbol{K}_D\)</span>. Particularly, we usually choose</p>
+<span class="math notranslate nohighlight">\(\boldsymbol{K}_D\)</span>.</p>
+<p>Usually, we usually choose</p>
+<div class="math notranslate nohighlight" id="equation-equ-kpkd">
+<span class="eqno">(86)<a class="headerlink" href="#equation-equ-kpkd" title="Permalink to this equation">#</a></span>\[
+    \boldsymbol{K}_{P}=\operatorname{diag}\left\{\omega_{1}^{2}, \ldots, \omega_{n}^{2}\right\} \quad \boldsymbol{K}_{D}=\operatorname{diag}\left\{2 \zeta_{1} \omega_{1}, \ldots, 2 \zeta_{n} \omega_{n}\right\}\]</div>
+<p>Then, the controlled robot arm can be viewed as having <span class="math notranslate nohighlight">\(n\)</span>
+decoupled (liner) second-order subsystems. Here, <span class="math notranslate nohighlight">\(\zeta_i\)</span> is the damping ratio and  <span class="math notranslate nohighlight">\(\omega_{i}\)</span>  the natural frequency  for joint <span class="math notranslate nohighlight">\(i\)</span>. For each joint <span class="math notranslate nohighlight">\(i\)</span>, the error dynamics is</p>
 <div class="math notranslate nohighlight">
-\[\label{equ.kpkd}
-    \boldsymbol{K}_{P}=\operatorname{diag}\left\{\omega_{n 1}^{2}, \ldots, \omega_{n n}^{2}\right\} \quad \boldsymbol{K}_{D}=\operatorname{diag}\left\{2 \zeta_{1} \omega_{n 1}, \ldots, 2 \zeta_{n} \omega_{n n}\right\}\]</div>
-<p>Then, the controlled manipulator dynamics is replaced with <span class="math notranslate nohighlight">\(n\)</span> linear
-and decoupled second-order subsystems. For each joint <span class="math notranslate nohighlight">\(i\)</span>, please see my
-control background notes for how the values of the damping ratio
-<span class="math notranslate nohighlight">\(\zeta_i\)</span> and natural frequency <span class="math notranslate nohighlight">\(\omega_{ni}\)</span> can affect the trajectory
-of <span class="math notranslate nohighlight">\(\boldsymbol{e}(t)\)</span>.</p>
-<p>The resulting block scheme is illustrated in Fig.
-<a class="reference internal" href="#fig:3"><span class="xref myst">3</span></a>{reference-type=”ref” reference=”fig:3”}. Notice that the
-inverse dynamics controller requires computation of the inertia matrix
-<span class="math notranslate nohighlight">\(\boldsymbol{B}(\boldsymbol{q})\)</span>,
-<span class="math notranslate nohighlight">\(\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}})\)</span>, and
-<span class="math notranslate nohighlight">\(\boldsymbol{g}(\boldsymbol{q})\)</span>. Nonetheless, this technique is based
-on the assumption of perfect cancellation of dynamic terms, and then it
-is quite natural to raise questions about sensitivity and robustness
-problems due to unavoidably imperfect compensation.</p>
+\[
+    \ddot{{e}}+ 2 \zeta_{i} \omega_{i} \dot{{e}}+ \omega_{i}^{2} {{e}}={0}\]</div>
+<p>please see my <a class="reference download internal" download="" href="../_downloads/af66a2a39b5480f30ad4e93bc7990bf7/control_basics.pdf"><span class="xref download myst">Minimal notes on control basics</span></a>
+for how the values of the damping ratio
+<span class="math notranslate nohighlight">\(\zeta_i\)</span> and natural frequency <span class="math notranslate nohighlight">\(\omega_{i}\)</span>  affect the error response
+<span class="math notranslate nohighlight">\(\boldsymbol{e}(t)\)</span> in time domain.</p>
+<p>The control block diagram for inverse dynamics control is shown below</p>
 <figure class="align-default" id="inverse-dynamics-control2">
-<a class="reference internal image-reference" href="../_images/inverse_dynamics_control2.jpeg"><img alt="../_images/inverse_dynamics_control2.jpeg" src="../_images/inverse_dynamics_control2.jpeg" style="width: 70%;" /></a>
+<a class="reference internal image-reference" href="../_images/inverse_dynamics_control2.jpeg"><img alt="../_images/inverse_dynamics_control2.jpeg" src="../_images/inverse_dynamics_control2.jpeg" style="width: 90%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 82 </span><span class="caption-text">Control diagram of joint space inverse dynamics
-control</span><a class="headerlink" href="#inverse-dynamics-control2" title="Link to this image">#</a></p>
+control</span><a class="headerlink" href="#inverse-dynamics-control2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
+<p>In sum, we recapitulate the joint space inverse dynamics control below</p>
+<div class="admonition-joint-space-inverse-dynamics-control admonition">
+<p class="admonition-title">Joint space inverse dynamics control </p>
+<div class="math notranslate nohighlight">
+\[
+    \boldsymbol{u}=\boldsymbol{B}(\boldsymbol{q}) \boldsymbol{y}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})\]</div>
+<p>with</p>
+<div class="math notranslate nohighlight">
+\[
+    \boldsymbol{y}=\ddot{\boldsymbol{{q}}}_d+\boldsymbol{K}_{P} ({\boldsymbol{q}}_{d}-\boldsymbol{q})+\boldsymbol{K}_{D} (\dot{\boldsymbol{q}}_{d}-\dot{\boldsymbol{q}})\]</div>
+<p>Here,</p>
+<div class="math notranslate nohighlight">
+\[
+    \boldsymbol{K}_{P}=\operatorname{diag}\left\{\omega_{1}^{2}, \ldots, \omega_{n}^{2}\right\} \quad \boldsymbol{K}_{D}=\operatorname{diag}\left\{2 \zeta_{1} \omega_{1}, \ldots, 2 \zeta_{n} \omega_{n}\right\}\]</div>
+<p>with <span class="math notranslate nohighlight">\(\zeta_i\)</span>  the damping ratio and  <span class="math notranslate nohighlight">\(\omega_{i}\)</span>  the natural frequency  for joint <span class="math notranslate nohighlight">\(i\)</span>.</p>
+</div>
+</section>
 </section>
 </section>
 
@@ -655,10 +627,11 @@ control</span><a class="headerlink" href="#inverse-dynamics-control2" title="Lin
 
               
               
-              
-              
-                <footer class="prev-next-footer d-print-none">
+                <footer class="bd-footer-article">
                   
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="../lec20/djc.html"
@@ -678,7 +651,10 @@ control</span><a class="headerlink" href="#inverse-dynamics-control2" title="Lin
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
+</div></div>
+  
 </div>
+
                 </footer>
               
             </div>
@@ -687,7 +663,6 @@ control</span><a class="headerlink" href="#inverse-dynamics-control2" title="Lin
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
-
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
     <i class="fa-solid fa-list"></i> Contents
@@ -695,7 +670,10 @@ control</span><a class="headerlink" href="#inverse-dynamics-control2" title="Lin
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pd-control-with-gravity-compensation">PD Control with Gravity Compensation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inverse-dynamics-control">Inverse Dynamics Control</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inverse-dynamics-control">Inverse Dynamics Control</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-choose-the-new-input-boldsymbol-y-in-the-controller-equ-u">How to choose the new input <span class="math notranslate nohighlight">\(\boldsymbol{y}\)</span> in the controller <code class="xref eq docutils literal notranslate"><span class="pre">equ.u</span></code>?</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
@@ -717,10 +695,9 @@ By Wanxin Jin @ IRIS Lab
   
   <div class="footer-item">
     
-
   <p class="copyright">
     
-      © Copyright 2023.
+      © Copyright 2022.
       <br/>
     
   </p>
@@ -744,8 +721,8 @@ By Wanxin Jin @ IRIS Lab
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
 
   <footer class="bd-footer">
   </footer>
