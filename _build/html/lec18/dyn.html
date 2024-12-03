@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Dynamics (Lagrangian formulation) &#8212; Modeling and Control of Robots</title>
   
@@ -15,52 +14,49 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'lec18/dyn';</script>
@@ -77,19 +73,23 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -111,12 +111,20 @@ const thebe_selector_output = ".output, .cell_output"
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -131,9 +139,13 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
+  
+    
   
 
 <a class="navbar-brand logo" href="../intro.html">
+  
   
   
   
@@ -143,12 +155,23 @@ const thebe_selector_output = ".output, .cell_output"
       
     
     
-    <img src="../_static/iris_logo_2.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../_static/iris_logo_2.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../_static/iris_logo_2.png" class="logo__image only-light" alt="Modeling and Control of Robots - Home"/>
+    <script>document.write(`<img src="../_static/iris_logo_2.png" class="logo__image only-dark" alt="Modeling and Control of Robots - Home"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -214,9 +237,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 <li class="toctree-l1"><a class="reference internal" href="../lec21/cjc.html">Centralized Joint Control</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lec22/osc.html">Operational Space Control</a></li>
-
-
+<li class="toctree-l1"><a class="reference internal" href="../lec22/osc.html">Operational Space Control (OSC)</a></li>
 </ul>
 
     </div>
@@ -232,7 +253,7 @@ const thebe_selector_output = ".output, .cell_output"
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -241,14 +262,14 @@ const thebe_selector_output = ".output, .cell_output"
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -338,26 +359,28 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
+
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
   </button>
 `);
 </script>
 
+
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</label>
+</button>
 </div></div>
       
     </div>
@@ -400,10 +423,10 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="dynamics-lagrangian-formulation">
-<span id="chapter-dyn"></span><h1>Dynamics (Lagrangian formulation)<a class="headerlink" href="#dynamics-lagrangian-formulation" title="Permalink to this heading">#</a></h1>
+<span id="chapter-dyn"></span><h1>Dynamics (Lagrangian formulation)<a class="headerlink" href="#dynamics-lagrangian-formulation" title="Link to this heading">#</a></h1>
 <p>Compared to the previous kinematics concerning how a
 robot moves, robot dynamics concerns about why
 a robot moves. Dynamics equation establishes a relationship between the
@@ -419,19 +442,19 @@ coordinates, the Lagrangian of the system is defined as</p>
 potential energy of the system, respectively. The dynamics
 from the Lagrangian is</p>
 <div class="math notranslate nohighlight" id="equation-equ-lf2">
-<span class="eqno">(27)<a class="headerlink" href="#equation-equ-lf2" title="Permalink to this equation">#</a></span>\[\frac{d}{d t} \frac{\partial \mathcal{L}}{\partial \dot{q}_{i}}-\frac{\partial \mathcal{L}}{\partial q_{i}}=\xi_{i} \quad i=1, \ldots, n\]</div>
+<span class="eqno">(27)<a class="headerlink" href="#equation-equ-lf2" title="Link to this equation">#</a></span>\[\frac{d}{d t} \frac{\partial \mathcal{L}}{\partial \dot{q}_{i}}-\frac{\partial \mathcal{L}}{\partial q_{i}}=\xi_{i} \quad i=1, \ldots, n\]</div>
 <p>where <span class="math notranslate nohighlight">\(\xi_{i}\)</span> is the generalized force associated with <span class="math notranslate nohighlight">\(q_{i}\)</span> (the
 generalized force <span class="math notranslate nohighlight">\(\xi_i\)</span> is dual to <span class="math notranslate nohighlight">\(q_i\)</span> in the sense that
 <span class="math notranslate nohighlight">\(\xi_i*q_i\)</span> generate power). In compact form, the above equation can be
 written as</p>
 <div class="math notranslate nohighlight" id="equation-equ-lf">
-<span class="eqno">(28)<a class="headerlink" href="#equation-equ-lf" title="Permalink to this equation">#</a></span>\[\frac{d}{d t}\left(\frac{\partial \mathcal{L}}{\partial \dot{\boldsymbol{q}}}\right)^{T}-\left(\frac{\partial \mathcal{L}}{\partial \boldsymbol{q}}\right)^{T}=\boldsymbol{\xi}\]</div>
+<span class="eqno">(28)<a class="headerlink" href="#equation-equ-lf" title="Link to this equation">#</a></span>\[\frac{d}{d t}\left(\frac{\partial \mathcal{L}}{\partial \dot{\boldsymbol{q}}}\right)^{T}-\left(\frac{\partial \mathcal{L}}{\partial \boldsymbol{q}}\right)^{T}=\boldsymbol{\xi}\]</div>
 <p>For an open-chain robot arm, the generalized
 coordinates are joint variables <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span>. The generalized forces
 are the net torque/force at each joint.</p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="kinetic-energy-of-a-robot-arm">
-<h1>Kinetic Energy of a Robot Arm<a class="headerlink" href="#kinetic-energy-of-a-robot-arm" title="Permalink to this heading">#</a></h1>
+<h1>Kinetic Energy of a Robot Arm<a class="headerlink" href="#kinetic-energy-of-a-robot-arm" title="Link to this heading">#</a></h1>
 <p>Consider a  <span class="math notranslate nohighlight">\(n\)</span>-DoF robot arm. The kinetic energy is due
 to the motion of each link.  The total kinetic energy is given by</p>
 <div class="math notranslate nohighlight">
@@ -440,12 +463,12 @@ to the motion of each link.  The total kinetic energy is given by</p>
 <figure class="align-default" id="linki-kinematics1">
 <a class="reference internal image-reference" href="../_images/linki_kinematics.jpg"><img alt="../_images/linki_kinematics.jpg" src="../_images/linki_kinematics.jpg" style="width: 50%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 67 </span><span class="caption-text">Motion of Link <span class="math notranslate nohighlight">\(i\)</span></span><a class="headerlink" href="#linki-kinematics1" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 67 </span><span class="caption-text">Motion of Link <span class="math notranslate nohighlight">\(i\)</span></span><a class="headerlink" href="#linki-kinematics1" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>As shown in  <a class="reference internal" href="#linki-kinematics1"><span class="std std-numref">Fig. 67</span></a>, the kinetic energy contribution of Link <span class="math notranslate nohighlight">\(i\)</span> is given by</p>
 <div class="math notranslate nohighlight" id="equation-equ-ke-total">
-<span class="eqno">(29)<a class="headerlink" href="#equation-equ-ke-total" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(29)<a class="headerlink" href="#equation-equ-ke-total" title="Link to this equation">#</a></span>\[
             \mathcal{T}_{\ell_{i}}=\frac{1}{2} \int_{V_{\ell_{i}}} \dot{\boldsymbol{p}}_{i}^{* T} \dot{\boldsymbol{p}}_{i}^{*} \rho d V\]</div>
 <p>where  <span class="math notranslate nohighlight">\(\rho\)</span> is the density of the elementary particle of volume
 <span class="math notranslate nohighlight">\(d V\)</span>; <span class="math notranslate nohighlight">\(\dot{\boldsymbol{p}}_{i}^{*}\)</span> denotes the linear velocity vector of the elementary particle; and  <span class="math notranslate nohighlight">\(V_{\ell_{i}}\)</span> is the volume of Link <span class="math notranslate nohighlight">\(i\)</span>. Here, the position
@@ -462,7 +485,7 @@ r_{i x} &amp; r_{i y} &amp; r_{i z}
 <p>As a result, the velocity of an elementary particle of link <span class="math notranslate nohighlight">\(i\)</span>
 can be expressed as</p>
 <div class="math notranslate nohighlight" id="equation-equ-ke-vel">
-<span class="eqno">(30)<a class="headerlink" href="#equation-equ-ke-vel" title="Permalink to this equation">#</a></span>\[\label{equ.2}
+<span class="eqno">(30)<a class="headerlink" href="#equation-equ-ke-vel" title="Link to this equation">#</a></span>\[\label{equ.2}
     \begin{aligned}
 \dot{\boldsymbol{p}}_{i}^{*} &amp; =\dot{\boldsymbol{p}}_{\ell_{i}}+\boldsymbol{\omega}_{i} \times \boldsymbol{r}_{i}  =\dot{\boldsymbol{p}}_{\ell_{i}}+\boldsymbol{S}\left(\boldsymbol{\omega}_{i}\right) \boldsymbol{r}_{i}
 \end{aligned}\]</div>
@@ -472,13 +495,13 @@ the link.</p>
 <a class="reference internal" href="#equation-equ-ke-total">(29)</a>, it leads to that the total kinetic energy of link <span class="math notranslate nohighlight">\(i\)</span>, <span class="math notranslate nohighlight">\( \mathcal{T}_{\ell_{i}}\)</span>, is the sumation of the following three terms</p>
 <p><strong>Translational term</strong></p>
 <div class="math notranslate nohighlight" id="equation-eq-term-trans">
-<span class="eqno">(31)<a class="headerlink" href="#equation-eq-term-trans" title="Permalink to this equation">#</a></span>\[\frac{1}{2} \int_{V_{\ell_{i}}} \dot{\boldsymbol{p}}_{\ell_{i}}^{T} \dot{\boldsymbol{p}}_{\ell_{i}} \rho d V=\frac{1}{2} m_{\ell_{i}} \dot{\boldsymbol{p}}_{\ell_{i}}^{T} \dot{\boldsymbol{p}}_{\ell_{i}}\]</div>
+<span class="eqno">(31)<a class="headerlink" href="#equation-eq-term-trans" title="Link to this equation">#</a></span>\[\frac{1}{2} \int_{V_{\ell_{i}}} \dot{\boldsymbol{p}}_{\ell_{i}}^{T} \dot{\boldsymbol{p}}_{\ell_{i}} \rho d V=\frac{1}{2} m_{\ell_{i}} \dot{\boldsymbol{p}}_{\ell_{i}}^{T} \dot{\boldsymbol{p}}_{\ell_{i}}\]</div>
 <p><strong>Cross term</strong></p>
 <div class="math notranslate nohighlight" id="equation-eq-term-cross">
-<span class="eqno">(32)<a class="headerlink" href="#equation-eq-term-cross" title="Permalink to this equation">#</a></span>\[2\left(\frac{1}{2} \int_{V_{\ell_{i}}} \dot{\boldsymbol{p}}_{\ell_{i}}^{T} \boldsymbol{S}\left(\boldsymbol{\omega}_{i}\right) \boldsymbol{r}_{i} \rho d V\right)=2\left(\frac{1}{2} \dot{\boldsymbol{p}}_{\ell_{i}}^{T} \boldsymbol{S}\left(\boldsymbol{\omega}_{i}\right) \int_{V_{\ell_{i}}}\left(\boldsymbol{p}_{i}^{*}-\boldsymbol{p}_{\ell_{i}}\right) \rho d V\right)=0\]</div>
+<span class="eqno">(32)<a class="headerlink" href="#equation-eq-term-cross" title="Link to this equation">#</a></span>\[2\left(\frac{1}{2} \int_{V_{\ell_{i}}} \dot{\boldsymbol{p}}_{\ell_{i}}^{T} \boldsymbol{S}\left(\boldsymbol{\omega}_{i}\right) \boldsymbol{r}_{i} \rho d V\right)=2\left(\frac{1}{2} \dot{\boldsymbol{p}}_{\ell_{i}}^{T} \boldsymbol{S}\left(\boldsymbol{\omega}_{i}\right) \int_{V_{\ell_{i}}}\left(\boldsymbol{p}_{i}^{*}-\boldsymbol{p}_{\ell_{i}}\right) \rho d V\right)=0\]</div>
 <p><strong>Rotational term</strong></p>
 <div class="math notranslate nohighlight" id="equation-eq-term-rot">
-<span class="eqno">(33)<a class="headerlink" href="#equation-eq-term-rot" title="Permalink to this equation">#</a></span>\[\frac{1}{2} \int_{V_{\ell_{i}}} \boldsymbol{r}_{i}^{T} \boldsymbol{S}^{T}\left(\boldsymbol{\omega}_{i}\right) \boldsymbol{S}\left(\boldsymbol{\omega}_{i}\right) \boldsymbol{r}_{i} \rho d V=\frac{1}{2} \boldsymbol{\omega}_{i}^{T}\left(\int_{V_{\ell_{i}}} \boldsymbol{S}^{T}\left(\boldsymbol{r}_{i}\right) \boldsymbol{S}\left(\boldsymbol{r}_{i}\right) \rho d V\right) \boldsymbol{\omega}_{i}=\frac{1}{2} \boldsymbol{\omega}_{i}^{T} \boldsymbol{I}_{\ell_{i}} \boldsymbol{\omega}_{i}\]</div>
+<span class="eqno">(33)<a class="headerlink" href="#equation-eq-term-rot" title="Link to this equation">#</a></span>\[\frac{1}{2} \int_{V_{\ell_{i}}} \boldsymbol{r}_{i}^{T} \boldsymbol{S}^{T}\left(\boldsymbol{\omega}_{i}\right) \boldsymbol{S}\left(\boldsymbol{\omega}_{i}\right) \boldsymbol{r}_{i} \rho d V=\frac{1}{2} \boldsymbol{\omega}_{i}^{T}\left(\int_{V_{\ell_{i}}} \boldsymbol{S}^{T}\left(\boldsymbol{r}_{i}\right) \boldsymbol{S}\left(\boldsymbol{r}_{i}\right) \rho d V\right) \boldsymbol{\omega}_{i}=\frac{1}{2} \boldsymbol{\omega}_{i}^{T} \boldsymbol{I}_{\ell_{i}} \boldsymbol{\omega}_{i}\]</div>
 <p>Recall that</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\boldsymbol{S}\left(\boldsymbol{r}_{i}\right)=\left[\begin{array}{ccc}
@@ -528,7 +551,7 @@ the base frame. Then, from <a class="reference internal" href="#equation-eq-term
 <p>is expressed in the body frame (link <span class="math notranslate nohighlight">\(i\)</span> frame), and thus is configuration-independent.</p>
 <p>By summing the translational and rotational terms, the total kinetic energy in <a class="reference internal" href="#equation-equ-ke-total">(29)</a> of link <span class="math notranslate nohighlight">\(i\)</span> is</p>
 <div class="math notranslate nohighlight" id="equation-equ-ke-total2">
-<span class="eqno">(34)<a class="headerlink" href="#equation-equ-ke-total2" title="Permalink to this equation">#</a></span>\[\mathcal{T}_{\ell_{i}}=\frac{1}{2} m_{\ell_{i}} \dot{\boldsymbol{p}}_{\ell_{i}}^{T} \dot{\boldsymbol{p}}_{\ell_{i}}+\frac{1}{2} \boldsymbol{\omega}_{i}^{T} \boldsymbol{R}_{i} \boldsymbol{I}_{\ell_{i}}^{i} \boldsymbol{R}_{i}^{T} \boldsymbol{\omega}_{i}\]</div>
+<span class="eqno">(34)<a class="headerlink" href="#equation-equ-ke-total2" title="Link to this equation">#</a></span>\[\mathcal{T}_{\ell_{i}}=\frac{1}{2} m_{\ell_{i}} \dot{\boldsymbol{p}}_{\ell_{i}}^{T} \dot{\boldsymbol{p}}_{\ell_{i}}+\frac{1}{2} \boldsymbol{\omega}_{i}^{T} \boldsymbol{R}_{i} \boldsymbol{I}_{\ell_{i}}^{i} \boldsymbol{R}_{i}^{T} \boldsymbol{\omega}_{i}\]</div>
 <p>Now, let’s find out the linear and angular velocities of Link <span class="math notranslate nohighlight">\(i\)</span> using Jacobian! Using our previous method to find Jacobian up to link <span class="math notranslate nohighlight">\(i\)</span>, we have</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{aligned}
@@ -537,7 +560,7 @@ the base frame. Then, from <a class="reference internal" href="#equation-eq-term
 \end{aligned}\end{split}\]</div>
 <p>where (think about why the columns after <span class="math notranslate nohighlight">\(i\)</span> is zeros?)</p>
 <div class="math notranslate nohighlight" id="equation-equ-com-jac">
-<span class="eqno">(35)<a class="headerlink" href="#equation-equ-com-jac" title="Permalink to this equation">#</a></span>\[\begin{aligned}
+<span class="eqno">(35)<a class="headerlink" href="#equation-equ-com-jac" title="Link to this equation">#</a></span>\[\begin{aligned}
 \boldsymbol{J}_{P}^{\left(\ell_{i}\right)}  =\left[\begin{array}{llllll}
 \boldsymbol{J}_{P 1}^{\left(\ell_{i}\right)} &amp; \ldots &amp; \boldsymbol{J}_{P i}^{\left(\ell_{i}\right)} &amp; \mathbf{0} &amp; \ldots &amp; \mathbf{0}
 \end{array}\right]  \qquad
@@ -650,10 +673,10 @@ $$\mathcal{T}_{m_{i}}=\frac{1}{2} m_{m_{i}} \dot{\boldsymbol{q}}^{T} \boldsymbol
 <p>Finally, by summing the kinetic energies of all Links, the total
 kinetic energy of a robot arm is</p>
 <div class="math notranslate nohighlight" id="equation-equ-ke-total-final">
-<span class="eqno">(36)<a class="headerlink" href="#equation-equ-ke-total-final" title="Permalink to this equation">#</a></span>\[\mathcal{T}=\frac{1}{2} \dot{\boldsymbol{q}}^{T} \boldsymbol{B}(\boldsymbol{q}) \dot{\boldsymbol{q}}=\frac{1}{2} \sum_{i=1}^{n} \sum_{j=1}^{n} b_{i j}(\boldsymbol{q}) \dot{q}_{i} \dot{q}_{j}\]</div>
+<span class="eqno">(36)<a class="headerlink" href="#equation-equ-ke-total-final" title="Link to this equation">#</a></span>\[\mathcal{T}=\frac{1}{2} \dot{\boldsymbol{q}}^{T} \boldsymbol{B}(\boldsymbol{q}) \dot{\boldsymbol{q}}=\frac{1}{2} \sum_{i=1}^{n} \sum_{j=1}^{n} b_{i j}(\boldsymbol{q}) \dot{q}_{i} \dot{q}_{j}\]</div>
 <p>where</p>
 <div class="math notranslate nohighlight" id="equation-equ-bmatrix222">
-<span class="eqno">(37)<a class="headerlink" href="#equation-equ-bmatrix222" title="Permalink to this equation">#</a></span>\[\begin{aligned}
+<span class="eqno">(37)<a class="headerlink" href="#equation-equ-bmatrix222" title="Link to this equation">#</a></span>\[\begin{aligned}
 \boldsymbol{B}(\boldsymbol{q})=\sum_{i=1}^{n}\left(m_{\ell_{i}}\right. &amp; \boldsymbol{J}_{P}^{\left(\ell_{i}\right) T} \boldsymbol{J}_{P}^{\left(\ell_{i}\right)}+\boldsymbol{J}_{O}^{\left(\ell_{i}\right) T} \boldsymbol{R}_{i} \boldsymbol{I}_{\ell_{i}}^{i} \boldsymbol{R}_{i}^{T} \boldsymbol{J}_{O}^{\left(\ell_{i}\right)}\left.\right)
 \end{aligned}\]</div>
 <p>is the <span class="math notranslate nohighlight">\((n \times n)\)</span> inertia matrix which is symmetric, positive
@@ -662,7 +685,7 @@ definite, and configuration - dependent.</p>
 <p></br></br></br></p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="potential-energy-of-a-robot-arm">
-<h1>Potential Energy of a Robot Arm<a class="headerlink" href="#potential-energy-of-a-robot-arm" title="Permalink to this heading">#</a></h1>
+<h1>Potential Energy of a Robot Arm<a class="headerlink" href="#potential-energy-of-a-robot-arm" title="Link to this heading">#</a></h1>
 <p>The potential energy of a robot arm is given by the sum of the contributions of each
 link:</p>
 <div class="math notranslate nohighlight">
@@ -679,7 +702,7 @@ Link <span class="math notranslate nohighlight">\(i\)</span>.</p>
 <p class="admonition-title">Important</p>
 <p>The total potential energy of the robot arm is</p>
 <div class="math notranslate nohighlight" id="equation-equ-pe-total-final">
-<span class="eqno">(38)<a class="headerlink" href="#equation-equ-pe-total-final" title="Permalink to this equation">#</a></span>\[\mathcal{U}=-\sum_{i=1}^{n}m_{\ell_{i}} \boldsymbol{g}^{T} \boldsymbol{p}_{\ell_{i}}\]</div>
+<span class="eqno">(38)<a class="headerlink" href="#equation-equ-pe-total-final" title="Link to this equation">#</a></span>\[\mathcal{U}=-\sum_{i=1}^{n}m_{\ell_{i}} \boldsymbol{g}^{T} \boldsymbol{p}_{\ell_{i}}\]</div>
 <p>which shows that potential energy is only a function of  the joint
 variable <span class="math notranslate nohighlight">\({\boldsymbol{q}}\)</span> because
 <span class="math notranslate nohighlight">\(\boldsymbol{p}_{\ell_{i}}\)</span> is a function
@@ -688,9 +711,9 @@ of <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span>,</p>
 <p></br></br></br></p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="dynamics-equation-different-forms">
-<h1>Dynamics Equation (Different Forms)<a class="headerlink" href="#dynamics-equation-different-forms" title="Permalink to this heading">#</a></h1>
+<h1>Dynamics Equation (Different Forms)<a class="headerlink" href="#dynamics-equation-different-forms" title="Link to this heading">#</a></h1>
 <section id="vector-form">
-<h2>Vector Form<a class="headerlink" href="#vector-form" title="Permalink to this heading">#</a></h2>
+<h2>Vector Form<a class="headerlink" href="#vector-form" title="Link to this heading">#</a></h2>
 <p>Having computed the total kinetic energy <span class="math notranslate nohighlight">\(\mathcal{T}(\boldsymbol{q}, \dot{\boldsymbol{q}})\)</span> in <a class="reference internal" href="#equation-equ-ke-total-final">(36)</a> and potential energy <span class="math notranslate nohighlight">\(\mathcal{U}(\boldsymbol{q})\)</span> in <a class="reference internal" href="#equation-equ-pe-total-final">(38)</a> of the robot arm,
 the Lagrangian of the system is</p>
 <div class="math notranslate nohighlight">
@@ -700,14 +723,14 @@ the Lagrangian of the system is</p>
 <p>By applying the vector form of Lagrange formulation <a class="reference internal" href="#equation-equ-lf">(28)</a>,
 we have the vector form of the dynamics equation:</p>
 <div class="math notranslate nohighlight" id="equation-equ-arm-dyn">
-<span class="eqno">(39)<a class="headerlink" href="#equation-equ-arm-dyn" title="Permalink to this equation">#</a></span>\[\boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{n}(\boldsymbol{q}, \dot{\boldsymbol{q}})=\boldsymbol{\xi}\]</div>
+<span class="eqno">(39)<a class="headerlink" href="#equation-equ-arm-dyn" title="Link to this equation">#</a></span>\[\boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{n}(\boldsymbol{q}, \dot{\boldsymbol{q}})=\boldsymbol{\xi}\]</div>
 <p>where</p>
 <div class="math notranslate nohighlight">
 \[\boldsymbol{n}(\boldsymbol{q}, \dot{\boldsymbol{q}})=\dot{\boldsymbol{B}}(\boldsymbol{q}) \dot{\boldsymbol{q}}-\frac{1}{2}\left(\frac{\partial}{\partial \boldsymbol{q}}\left(\dot{\boldsymbol{q}}^{T} \boldsymbol{B}(\boldsymbol{q}) \dot{\boldsymbol{q}}\right)\right)^{T}+\left(\frac{\partial \mathcal{U}(\boldsymbol{q})}{\partial \boldsymbol{q}}\right)^{T}\]</div>
 </div>
 </section>
 <section id="detailed-form">
-<h2>Detailed Form<a class="headerlink" href="#detailed-form" title="Permalink to this heading">#</a></h2>
+<h2>Detailed Form<a class="headerlink" href="#detailed-form" title="Link to this heading">#</a></h2>
 <p>Below, let’s also apply the detailed form of Lagrange formulation <a class="reference internal" href="#equation-equ-lf2">(27)</a>. Notice that <span class="math notranslate nohighlight">\(\mathcal{U}\)</span> does not depend on
 <span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}}\)</span> and</p>
 <div class="math notranslate nohighlight">
@@ -726,13 +749,13 @@ we have the vector form of the dynamics equation:</p>
 <p class="admonition-title">Important</p>
 <p>By applying the detailed form of Lagrange formulation <a class="reference internal" href="#equation-equ-lf2">(27)</a>, the detailed form of the dynamics equation is</p>
 <div class="math notranslate nohighlight" id="equation-equ-arm-dyn2">
-<span class="eqno">(40)<a class="headerlink" href="#equation-equ-arm-dyn2" title="Permalink to this equation">#</a></span>\[\sum_{j=1}^{n} b_{i j}(\boldsymbol{q}) \ddot{q}_{j}+\sum_{j=1}^{n} \sum_{k=1}^{n} h_{i j k}(\boldsymbol{q}) \dot{q}_{k} \dot{q}_{j}+g_{i}(\boldsymbol{q})=\xi_{i} \quad i=1, \ldots, n .\]</div>
+<span class="eqno">(40)<a class="headerlink" href="#equation-equ-arm-dyn2" title="Link to this equation">#</a></span>\[\sum_{j=1}^{n} b_{i j}(\boldsymbol{q}) \ddot{q}_{j}+\sum_{j=1}^{n} \sum_{k=1}^{n} h_{i j k}(\boldsymbol{q}) \dot{q}_{k} \dot{q}_{j}+g_{i}(\boldsymbol{q})=\xi_{i} \quad i=1, \ldots, n .\]</div>
 <p>where</p>
 <div class="math notranslate nohighlight" id="equation-equ-hmatrix">
-<span class="eqno">(41)<a class="headerlink" href="#equation-equ-hmatrix" title="Permalink to this equation">#</a></span>\[h_{i j k}=\frac{\partial b_{i j}}{\partial q_{k}}-\frac{1}{2} \frac{\partial b_{j k}}{\partial q_{i}}\]</div>
+<span class="eqno">(41)<a class="headerlink" href="#equation-equ-hmatrix" title="Link to this equation">#</a></span>\[h_{i j k}=\frac{\partial b_{i j}}{\partial q_{k}}-\frac{1}{2} \frac{\partial b_{j k}}{\partial q_{i}}\]</div>
 <p>and</p>
 <div class="math notranslate nohighlight" id="equation-equ-gmatrix">
-<span class="eqno">(42)<a class="headerlink" href="#equation-equ-gmatrix" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(42)<a class="headerlink" href="#equation-equ-gmatrix" title="Link to this equation">#</a></span>\[
 g_{i}(\boldsymbol{q})   =-\sum_{j=1}^{n}m_{\ell_{j}} \boldsymbol{g}^{T} \boldsymbol{J}_{P i}^{\left(\ell_{j}\right)}(\boldsymbol{q})
 \]</div>
 </div>
@@ -752,7 +775,7 @@ the moment generated at Joint <span class="math notranslate nohighlight">\(i\)</
 </ul>
 </section>
 <section id="christoffel-symbols-form">
-<h2>Christoffel-Symbols Form<a class="headerlink" href="#christoffel-symbols-form" title="Permalink to this heading">#</a></h2>
+<h2>Christoffel-Symbols Form<a class="headerlink" href="#christoffel-symbols-form" title="Link to this heading">#</a></h2>
 <p>In may textbooks/papers, there is another commonly-used form of dynamics equation derived from <a class="reference internal" href="#equation-equ-arm-dyn2">(40)</a>. We introduce below.  The quadratic velocity term in  <a class="reference internal" href="#equation-equ-arm-dyn2">(40)</a> has</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{aligned}
@@ -767,7 +790,7 @@ the moment generated at Joint <span class="math notranslate nohighlight">\(i\)</
 <p>which is called <em>Christoffel-symbols</em>.
 Then, the dynamics equation in <a class="reference internal" href="#equation-equ-arm-dyn2">(40)</a> becomes</p>
 <div class="math notranslate nohighlight" id="equation-equ-arm-dyn3">
-<span class="eqno">(43)<a class="headerlink" href="#equation-equ-arm-dyn3" title="Permalink to this equation">#</a></span>\[\begin{split}
+<span class="eqno">(43)<a class="headerlink" href="#equation-equ-arm-dyn3" title="Link to this equation">#</a></span>\[\begin{split}
 \begin{aligned}
 \sum_{j=1}^{n} b_{i j}(\boldsymbol{q}) \ddot{q}_{j}+\sum_{j=1}^{n} \sum_{k=1}^{n} h_{i j k}(\boldsymbol{q}) \dot{q}_{k} \dot{q}_{j}+g_{i}(\boldsymbol{q})&amp;=
 \sum_{j=1}^{n} b_{i j}(\boldsymbol{q}) \ddot{q}_{j}+\sum_{j=1}^{n} \sum_{k=1}^{n} c_{i j k}(\boldsymbol{q}) \dot{q}_{k} \dot{q}_{j}+g_{i}(\boldsymbol{q})\\
@@ -784,18 +807,18 @@ Then, the dynamics equation in <a class="reference internal" href="#equation-equ
 <p class="admonition-title">Important</p>
 <p>By writing  <a class="reference internal" href="#equation-equ-arm-dyn3">(43)</a> into a compact vector form, we have a new form of dynamics equation</p>
 <div class="math notranslate nohighlight" id="equation-equ-arm-dyn4">
-<span class="eqno">(44)<a class="headerlink" href="#equation-equ-arm-dyn4" title="Permalink to this equation">#</a></span>\[\boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})={\boldsymbol{\xi}}\]</div>
+<span class="eqno">(44)<a class="headerlink" href="#equation-equ-arm-dyn4" title="Link to this equation">#</a></span>\[\boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})={\boldsymbol{\xi}}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\boldsymbol{C}\)</span> is a  <span class="math notranslate nohighlight">\((n \times n)\)</span> matrix such that its
 elements <span class="math notranslate nohighlight">\(C_{i j}\)</span> is calculated by</p>
 <div class="math notranslate nohighlight" id="equation-equ-cmatrix">
-<span class="eqno">(45)<a class="headerlink" href="#equation-equ-cmatrix" title="Permalink to this equation">#</a></span>\[C_{ij}=\sum_{k=1}^{n}c_{ijk}\dot{q}_{k}\]</div>
+<span class="eqno">(45)<a class="headerlink" href="#equation-equ-cmatrix" title="Link to this equation">#</a></span>\[C_{ij}=\sum_{k=1}^{n}c_{ijk}\dot{q}_{k}\]</div>
 <p>with</p>
 <div class="math notranslate nohighlight" id="equation-equ-cmatrix-item">
-<span class="eqno">(46)<a class="headerlink" href="#equation-equ-cmatrix-item" title="Permalink to this equation">#</a></span>\[c_{ijk}=\frac{1}{2}\Big(\frac{\partial b_{i j}}{\partial q_{k}}+\frac{\partial b_{i k}}{\partial q_{j}}- \frac{\partial b_{j k}}{\partial q_{i}}\Big)\]</div>
+<span class="eqno">(46)<a class="headerlink" href="#equation-equ-cmatrix-item" title="Link to this equation">#</a></span>\[c_{ijk}=\frac{1}{2}\Big(\frac{\partial b_{i j}}{\partial q_{k}}+\frac{\partial b_{i k}}{\partial q_{j}}- \frac{\partial b_{j k}}{\partial q_{i}}\Big)\]</div>
 </div>
 </section>
 <section id="generalized-forces-torques">
-<h2>Generalized forces/torques<a class="headerlink" href="#generalized-forces-torques" title="Permalink to this heading">#</a></h2>
+<h2>Generalized forces/torques<a class="headerlink" href="#generalized-forces-torques" title="Link to this heading">#</a></h2>
 <p>The generalized force <span class="math notranslate nohighlight">\(\boldsymbol{\xi}\)</span> applied on the right side of <a class="reference internal" href="#equation-equ-arm-dyn">(39)</a> or <a class="reference internal" href="#equation-equ-arm-dyn2">(40)</a> includes</p>
 <div class="math notranslate nohighlight">
 \[\boldsymbol{\xi}=\underbrace{\boldsymbol{\tau}}_{\text{motor torque}}-\underbrace{\boldsymbol{F}_{v} \dot{\boldsymbol{q}}}_{\text{viscous friction torques}}-\underbrace{\boldsymbol{F}_{s} \operatorname{sgn}(\dot{\boldsymbol{q}})}_{\text{Coulomb friction torques}}-\underbrace{\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{h}_{e}}_{\text{torques  by  contact forces.}}\]</div>
@@ -809,12 +832,12 @@ the environment.</p>
 <p></br></br></p>
 </section>
 <section id="skew-symmetry-of-dot-boldsymbol-b-2-boldsymbol-c">
-<h2>Skew-symmetry of <span class="math notranslate nohighlight">\(\dot{\boldsymbol{B}}-2\boldsymbol{C}\)</span><a class="headerlink" href="#skew-symmetry-of-dot-boldsymbol-b-2-boldsymbol-c" title="Permalink to this heading">#</a></h2>
+<h2>Skew-symmetry of <span class="math notranslate nohighlight">\(\dot{\boldsymbol{B}}-2\boldsymbol{C}\)</span><a class="headerlink" href="#skew-symmetry-of-dot-boldsymbol-b-2-boldsymbol-c" title="Link to this heading">#</a></h2>
 <p>The idea: the total time derivative of kinetic energy of a robot arm equals the power generated by all the forces/torques
 including the gravity.</p>
 <p>The time derivative of the kinetic energy:</p>
 <div class="math notranslate nohighlight" id="equation-equ-dke-dt">
-<span class="eqno">(47)<a class="headerlink" href="#equation-equ-dke-dt" title="Permalink to this equation">#</a></span>\[\label{equ.diff_kinenergy}
+<span class="eqno">(47)<a class="headerlink" href="#equation-equ-dke-dt" title="Link to this equation">#</a></span>\[\label{equ.diff_kinenergy}
   \frac{d \mathcal{T}}{dt }=\frac{1}{2}\frac{d}{dt}\left(
     \dot{\boldsymbol{q}}^{T} \boldsymbol{B}(\boldsymbol{q})\dot{\boldsymbol{q}}
     \right)=\dot{\boldsymbol{q}}^{T}\boldsymbol{B}(\boldsymbol{q})\ddot{\boldsymbol{q}}+\frac{1}{2}\left(
@@ -823,17 +846,17 @@ including the gravity.</p>
 <p>The power generated by all (generalized) external forces including
 gravity:</p>
 <div class="math notranslate nohighlight" id="equation-equ-power">
-<span class="eqno">(48)<a class="headerlink" href="#equation-equ-power" title="Permalink to this equation">#</a></span>\[\label{equ.power_forces}
+<span class="eqno">(48)<a class="headerlink" href="#equation-equ-power" title="Link to this equation">#</a></span>\[\label{equ.power_forces}
 \dot{\boldsymbol{q}}^{T}(-\boldsymbol{F}_v{\dot{\boldsymbol{q}}}-\boldsymbol{F}_s\text{sgn}({\dot{\boldsymbol{q}}})-\boldsymbol{g}(\boldsymbol{q})+\boldsymbol{\tau}-\boldsymbol{J}^T(\boldsymbol{q})\boldsymbol{h}_{e})\]</div>
 <p>Equalling <a class="reference internal" href="#equation-equ-power">(48)</a> to <a class="reference internal" href="#equation-equ-dke-dt">(47)</a>, we have</p>
 <div class="math notranslate nohighlight" id="equation-equ-intermediate">
-<span class="eqno">(49)<a class="headerlink" href="#equation-equ-intermediate" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(49)<a class="headerlink" href="#equation-equ-intermediate" title="Link to this equation">#</a></span>\[
     \dot{\boldsymbol{q}}^{T}\boldsymbol{B}(\boldsymbol{q})\ddot{\boldsymbol{q}}+\frac{1}{2}\left(
     \dot{\boldsymbol{q}}^{T} \dot{\boldsymbol{B}}(\boldsymbol{q})\dot{\boldsymbol{q}}
     \right)=\dot{\boldsymbol{q}}^{T}(-\boldsymbol{F}_v{\dot{\boldsymbol{q}}}-\boldsymbol{F}_s\text{sgn}({\dot{\boldsymbol{q}}})-\boldsymbol{g}(\boldsymbol{q})+\boldsymbol{\tau}-\boldsymbol{J}^T(\boldsymbol{q})\boldsymbol{h}_{e})\]</div>
 <p>Recall the dynamics equation:</p>
 <div class="math notranslate nohighlight" id="equation-equ-dyn-equ">
-<span class="eqno">(50)<a class="headerlink" href="#equation-equ-dyn-equ" title="Permalink to this equation">#</a></span>\[\boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\boldsymbol{\tau}-\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{h}_{e}-\boldsymbol{F}_{v} \dot{\boldsymbol{q}}-\boldsymbol{F}_{s} \operatorname{sgn}(\dot{\boldsymbol{q}})
+<span class="eqno">(50)<a class="headerlink" href="#equation-equ-dyn-equ" title="Link to this equation">#</a></span>\[\boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\boldsymbol{\tau}-\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{h}_{e}-\boldsymbol{F}_{v} \dot{\boldsymbol{q}}-\boldsymbol{F}_{s} \operatorname{sgn}(\dot{\boldsymbol{q}})
 \]</div>
 <p>We multiply <span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}}^T\)</span> on both sides of <a class="reference internal" href="#equation-equ-dyn-equ">(50)</a> and subtract
 <a class="reference internal" href="#equation-equ-dyn-equ">(50)</a> from <a class="reference internal" href="#equation-equ-intermediate">(49)</a> on both sides. This yields</p>
@@ -846,12 +869,12 @@ is a skew-symmetric matrix.</p>
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="example-two-link-planar-arm">
-<h1>Example: Two-link Planar Arm<a class="headerlink" href="#example-two-link-planar-arm" title="Permalink to this heading">#</a></h1>
+<h1>Example: Two-link Planar Arm<a class="headerlink" href="#example-two-link-planar-arm" title="Link to this heading">#</a></h1>
 <p>Consider the two-link planar arm below.</p>
 <figure class="align-default" id="link-arm">
 <a class="reference internal image-reference" href="../_images/2link_arm.jpg"><img alt="../_images/2link_arm.jpg" src="../_images/2link_arm.jpg" style="width: 50%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 68 </span><span class="caption-text">wo-link planar arm</span><a class="headerlink" href="#link-arm" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 68 </span><span class="caption-text">wo-link planar arm</span><a class="headerlink" href="#link-arm" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>The vector of generalized coordinates is
@@ -977,11 +1000,10 @@ dynamics equation is</p>
 
               
               
-                <footer class="bd-footer-article">
+              
+              
+                <footer class="prev-next-footer d-print-none">
                   
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="../lec16-17/nik.html"
@@ -1001,10 +1023,7 @@ dynamics equation is</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -1012,6 +1031,7 @@ dynamics equation is</p>
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -1053,9 +1073,10 @@ By Wanxin Jin @ IRIS Lab
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
-      © Copyright 2022.
+      © Copyright 2023.
       <br/>
     
   </p>
@@ -1079,8 +1100,8 @@ By Wanxin Jin @ IRIS Lab
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>

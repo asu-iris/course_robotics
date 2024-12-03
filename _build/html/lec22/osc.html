@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Operational Space Control (OSC) &#8212; Modeling and Control of Robots</title>
   
@@ -15,52 +14,49 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'lec22/osc';</script>
@@ -76,19 +72,23 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -110,12 +110,20 @@ const thebe_selector_output = ".output, .cell_output"
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -130,9 +138,13 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
+  
+    
   
 
 <a class="navbar-brand logo" href="../intro.html">
+  
   
   
   
@@ -142,12 +154,23 @@ const thebe_selector_output = ".output, .cell_output"
       
     
     
-    <img src="../_static/iris_logo_2.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../_static/iris_logo_2.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../_static/iris_logo_2.png" class="logo__image only-light" alt="Modeling and Control of Robots - Home"/>
+    <script>document.write(`<img src="../_static/iris_logo_2.png" class="logo__image only-dark" alt="Modeling and Control of Robots - Home"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -229,7 +252,7 @@ const thebe_selector_output = ".output, .cell_output"
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -238,14 +261,14 @@ const thebe_selector_output = ".output, .cell_output"
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -335,26 +358,28 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
+
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
   </button>
 `);
 </script>
 
+
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</label>
+</button>
 </div></div>
       
     </div>
@@ -386,19 +411,19 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="operational-space-control-osc">
-<h1>Operational Space Control (OSC)<a class="headerlink" href="#operational-space-control-osc" title="Permalink to this heading">#</a></h1>
+<h1>Operational Space Control (OSC)<a class="headerlink" href="#operational-space-control-osc" title="Link to this heading">#</a></h1>
 <p>The goal of operational space control (OSC) is to control the robot to track the  desired end-effector pose    <span class="math notranslate nohighlight">\(\boldsymbol{x}_d\)</span> and velocity <span class="math notranslate nohighlight">\(\boldsymbol{\dot{x}}_d\)</span> given in the operational space.</p>
 <p>In the following control design, we consider a a <span class="math notranslate nohighlight">\(n\)</span>-joint robot arm without external end-effector forces and any joint
 friction. The equation of motion of the robot arm  is</p>
 <div class="math notranslate nohighlight" id="equation-equ-osc-dyn">
-<span class="eqno">(87)<a class="headerlink" href="#equation-equ-osc-dyn" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(87)<a class="headerlink" href="#equation-equ-osc-dyn" title="Link to this equation">#</a></span>\[
     \boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\boldsymbol{u}\]</div>
 <p>The controller we want to design is in the general form of</p>
 <div class="math notranslate nohighlight" id="equation-equ-osc-controller">
-<span class="eqno">(88)<a class="headerlink" href="#equation-equ-osc-controller" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(88)<a class="headerlink" href="#equation-equ-osc-controller" title="Link to this equation">#</a></span>\[
 \boldsymbol{u}=\textbf{Controller}(\boldsymbol{q}, \boldsymbol{\dot{q}}, \boldsymbol{x}_d, \boldsymbol{\dot{x}}_d)\]</div>
 <p>i.e., the controller takes as input the robot arm’s current joint
 position <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span>, current joint velocity
@@ -407,24 +432,24 @@ position <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span>, c
 <span class="math notranslate nohighlight">\(\boldsymbol{\dot{x}}_d\)</span>, and outputs the joint torque <span class="math notranslate nohighlight">\(\boldsymbol{u}\)</span>.</p>
 <p>Thus, the controlled robot arm with the controller has the equation of motion:</p>
 <div class="math notranslate nohighlight" id="equation-equ-osc-sys">
-<span class="eqno">(89)<a class="headerlink" href="#equation-equ-osc-sys" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(89)<a class="headerlink" href="#equation-equ-osc-sys" title="Link to this equation">#</a></span>\[
     \boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\textbf{Controller}(\boldsymbol{q}, \boldsymbol{\dot{q}}, \boldsymbol{x}_d, \boldsymbol{\dot{x}}_d)\]</div>
 </br>
 In the following, we  define
 the end-effector  pose error:
 <div class="math notranslate nohighlight" id="equation-equ-end-pose-error">
-<span class="eqno">(90)<a class="headerlink" href="#equation-equ-end-pose-error" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(90)<a class="headerlink" href="#equation-equ-end-pose-error" title="Link to this equation">#</a></span>\[
 \boldsymbol{e}=\boldsymbol{x}_{d}-\boldsymbol{x}
 \]</div>
 <p>and  end-effector velocity error:</p>
 <div class="math notranslate nohighlight" id="equation-equ-end-vel-error">
-<span class="eqno">(91)<a class="headerlink" href="#equation-equ-end-vel-error" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(91)<a class="headerlink" href="#equation-equ-end-vel-error" title="Link to this equation">#</a></span>\[
 \boldsymbol{\dot e}=\boldsymbol{\dot x}_{d}-\boldsymbol{\dot x}=\boldsymbol{\dot x}_{d}-\boldsymbol J (\boldsymbol{q})\boldsymbol{\dot q}
 \]</div>
 <p>with with <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span> the current/actual robot end-effector pose, and  <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span> the current/actual robot end-effector pose.</p>
 <p></br> </br> </br></p>
 <section id="osc-pd-control-with-gravity-compensation">
-<h2>OSC PD Control with Gravity Compensation<a class="headerlink" href="#osc-pd-control-with-gravity-compensation" title="Permalink to this heading">#</a></h2>
+<h2>OSC PD Control with Gravity Compensation<a class="headerlink" href="#osc-pd-control-with-gravity-compensation" title="Link to this heading">#</a></h2>
 <p>Given a stationary end-effector pose <span class="math notranslate nohighlight">\(\boldsymbol{x}_{d}\)</span> (i.e., <span class="math notranslate nohighlight">\(\boldsymbol{\dot x}_{ d}=\boldsymbol{0}\)</span>), we want to design a controller <a class="reference internal" href="#equation-equ-osc-controller">(88)</a>
 such that from any initial robot configuration  <span class="math notranslate nohighlight">\(\boldsymbol{q}_0\)</span>, the controlled robot arm <a class="reference internal" href="#equation-equ-osc-sys">(89)</a> will eventually reach
 <span class="math notranslate nohighlight">\(\boldsymbol{x}_{d}\)</span>. That means</p>
@@ -438,7 +463,7 @@ vector <span class="math notranslate nohighlight">\(\begin{bmatrix}\boldsymbol{e
 \boldsymbol{\dot{q}}\end{bmatrix}\)</span> as the control system state. Choose
 the following positive definite quadratic form as Lyapunov function:</p>
 <div class="math notranslate nohighlight" id="equation-equ-ocs-v">
-<span class="eqno">(92)<a class="headerlink" href="#equation-equ-ocs-v" title="Permalink to this equation">#</a></span>\[V(\dot{\boldsymbol{q}}, {\boldsymbol{e}})=\frac{1}{2} \dot{\boldsymbol{q}}^{T} \boldsymbol{B}(\boldsymbol{q}) \dot{\boldsymbol{q}}+\frac{1}{2} {\boldsymbol{e}}^{T} \boldsymbol{K}_{P} {\boldsymbol{e}}&gt;0 \quad \forall \dot{\boldsymbol{q}}, {\boldsymbol{e}} \neq \mathbf{0}\]</div>
+<span class="eqno">(92)<a class="headerlink" href="#equation-equ-ocs-v" title="Link to this equation">#</a></span>\[V(\dot{\boldsymbol{q}}, {\boldsymbol{e}})=\frac{1}{2} \dot{\boldsymbol{q}}^{T} \boldsymbol{B}(\boldsymbol{q}) \dot{\boldsymbol{q}}+\frac{1}{2} {\boldsymbol{e}}^{T} \boldsymbol{K}_{P} {\boldsymbol{e}}&gt;0 \quad \forall \dot{\boldsymbol{q}}, {\boldsymbol{e}} \neq \mathbf{0}\]</div>
 <p>with <span class="math notranslate nohighlight">\(\boldsymbol{K}_{P}\)</span> a  positive definite matrix. Then,</p>
 <div class="math notranslate nohighlight">
 \[\dot{V}=\dot{\boldsymbol{q}}^{T} \boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\frac{1}{2} \dot{\boldsymbol{q}}^{T} \dot{\boldsymbol{B}}(\boldsymbol{q}) \dot{\boldsymbol{q}}+\dot{\boldsymbol{e}}^{T} \boldsymbol{K}_{P} {\boldsymbol{e}}\]</div>
@@ -447,7 +472,7 @@ the following positive definite quadratic form as Lyapunov function:</p>
 \[\dot{{\boldsymbol{e}}}=-\dot{\boldsymbol{x}}=-\boldsymbol{J}(\boldsymbol{q}) \dot{\boldsymbol{q}}\]</div>
 <p>and then</p>
 <div class="math notranslate nohighlight" id="equation-equ-ocs-vdot">
-<span class="eqno">(93)<a class="headerlink" href="#equation-equ-ocs-vdot" title="Permalink to this equation">#</a></span>\[\dot{V}=\dot{\boldsymbol{q}}^{T} \boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\frac{1}{2} \dot{\boldsymbol{q}}^{T} \dot{\boldsymbol{B}}(\boldsymbol{q}) \dot{\boldsymbol{q}}-\dot{\boldsymbol{q}}^{T} \boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K}_{P} {\boldsymbol{e}}\]</div>
+<span class="eqno">(93)<a class="headerlink" href="#equation-equ-ocs-vdot" title="Link to this equation">#</a></span>\[\dot{V}=\dot{\boldsymbol{q}}^{T} \boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\frac{1}{2} \dot{\boldsymbol{q}}^{T} \dot{\boldsymbol{B}}(\boldsymbol{q}) \dot{\boldsymbol{q}}-\dot{\boldsymbol{q}}^{T} \boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K}_{P} {\boldsymbol{e}}\]</div>
 <p>Similar to the derivation in the  <a class="reference internal" href="../lec21/cjc.html#chapter-cjc"><span class="std std-ref">previous chapter</span></a>, we replace
 <span class="math notranslate nohighlight">\(\boldsymbol{B}\ddot{\boldsymbol{q}}\)</span> in <a class="reference internal" href="#equation-equ-ocs-vdot">(93)</a> form dynamics <a class="reference internal" href="#equation-equ-osc-dyn">(87)</a>
 and consider the property that
@@ -458,10 +483,10 @@ Then, <a class="reference internal" href="#equation-equ-ocs-vdot">(93)</a> becom
 \[\dot{V}=\dot{\boldsymbol{q}}^{T}\left(\boldsymbol{u}-\boldsymbol{g}(\boldsymbol{q})-\boldsymbol{J}_{A}^{T}(\boldsymbol{q}) \boldsymbol{K}_{P} {\boldsymbol{e}}\right) .\]</div>
 <p>For the above <span class="math notranslate nohighlight">\(\dot{V}\)</span> to be negative, we choose the controller</p>
 <div class="math notranslate nohighlight" id="equation-equ-osc-pd">
-<span class="eqno">(94)<a class="headerlink" href="#equation-equ-osc-pd" title="Permalink to this equation">#</a></span>\[\boldsymbol{u}=\boldsymbol{g}(\boldsymbol{q})+\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K}_{P} {\boldsymbol{e}}-\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K}_{D} \boldsymbol{J}(\boldsymbol{q}) \dot{\boldsymbol{q}}\]</div>
+<span class="eqno">(94)<a class="headerlink" href="#equation-equ-osc-pd" title="Link to this equation">#</a></span>\[\boldsymbol{u}=\boldsymbol{g}(\boldsymbol{q})+\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K}_{P} {\boldsymbol{e}}-\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K}_{D} \boldsymbol{J}(\boldsymbol{q}) \dot{\boldsymbol{q}}\]</div>
 <p>with <span class="math notranslate nohighlight">\(\boldsymbol{K}_{D}\)</span> positive definite, then,</p>
 <div class="math notranslate nohighlight" id="equation-equ-osc-vdot2">
-<span class="eqno">(95)<a class="headerlink" href="#equation-equ-osc-vdot2" title="Permalink to this equation">#</a></span>\[\dot{V}=-\dot{\boldsymbol{q}}^{T} \boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K}_{D} \boldsymbol{J}(\boldsymbol{q}) \dot{\boldsymbol{q}} \quad &lt;0,  \quad \forall \quad\boldsymbol{\dot{q}}\quad\text{with} \quad \boldsymbol{J}(\boldsymbol{q})\dot{\boldsymbol{q}} \neq \mathbf{0}\]</div>
+<span class="eqno">(95)<a class="headerlink" href="#equation-equ-osc-vdot2" title="Link to this equation">#</a></span>\[\dot{V}=-\dot{\boldsymbol{q}}^{T} \boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K}_{D} \boldsymbol{J}(\boldsymbol{q}) \dot{\boldsymbol{q}} \quad &lt;0,  \quad \forall \quad\boldsymbol{\dot{q}}\quad\text{with} \quad \boldsymbol{J}(\boldsymbol{q})\dot{\boldsymbol{q}} \neq \mathbf{0}\]</div>
 <p>which says the Lyapunov function decreases as long as
 <span class="math notranslate nohighlight">\(\boldsymbol{J}(\boldsymbol{q})\dot{\boldsymbol{q}} \neq \mathbf{0}\)</span>.
 Thus, the system reaches an equilibrium pose, with condition
@@ -474,24 +499,24 @@ consider the non-redundant non-singularity of matrix
 that <span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}}=\mathbf{0}\)</span> and further
 <span class="math notranslate nohighlight">\(\ddot{\boldsymbol{q}} =\mathbf{0}\)</span>. To find the robot equilibrium configuration, we look at the robot arm dynamics with controller</p>
 <div class="math notranslate nohighlight" id="equation-equ-osc-sys2">
-<span class="eqno">(96)<a class="headerlink" href="#equation-equ-osc-sys2" title="Permalink to this equation">#</a></span>\[\boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{F} \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\boldsymbol{g}(\boldsymbol{q})+\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K}_{P} {\boldsymbol{e}}-\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K}_{D} \boldsymbol{J}(\boldsymbol{q}) \dot{\boldsymbol{q}}\]</div>
+<span class="eqno">(96)<a class="headerlink" href="#equation-equ-osc-sys2" title="Link to this equation">#</a></span>\[\boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{F} \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\boldsymbol{g}(\boldsymbol{q})+\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K}_{P} {\boldsymbol{e}}-\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K}_{D} \boldsymbol{J}(\boldsymbol{q}) \dot{\boldsymbol{q}}\]</div>
 <p>With the condition <span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}}=\mathbf{0}\)</span>, it follows that
 <span class="math notranslate nohighlight">\(\ddot{\boldsymbol{q}} =\mathbf{0}\)</span>, and then the above <a class="reference internal" href="#equation-equ-osc-sys2">(96)</a> becomes</p>
 <div class="math notranslate nohighlight" id="equation-equ-osc-equiv">
-<span class="eqno">(97)<a class="headerlink" href="#equation-equ-osc-equiv" title="Permalink to this equation">#</a></span>\[\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K}_{P} {\boldsymbol{e}}=\mathbf{0}\quad \rightarrow\quad {\boldsymbol{e}}=\boldsymbol{x}_{d}-\boldsymbol{x}_{e}=\mathbf{0}\]</div>
+<span class="eqno">(97)<a class="headerlink" href="#equation-equ-osc-equiv" title="Link to this equation">#</a></span>\[\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K}_{P} {\boldsymbol{e}}=\mathbf{0}\quad \rightarrow\quad {\boldsymbol{e}}=\boldsymbol{x}_{d}-\boldsymbol{x}_{e}=\mathbf{0}\]</div>
 <p>This concludes that the controlled robot arm will asymptotically reach
 <span class="math notranslate nohighlight">\(\boldsymbol{x}_d\)</span>. The corresponding control diagram is shown below.</p>
 <figure class="align-default" id="operational-pd-gravity-compensation">
 <a class="reference internal image-reference" href="../_images/operational_PD_gravity_compensation.jpeg"><img alt="../_images/operational_PD_gravity_compensation.jpeg" src="../_images/operational_PD_gravity_compensation.jpeg" style="width: 90%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 83 </span><span class="caption-text">Block diagram of operational space PD control with gravity
-compensation</span><a class="headerlink" href="#operational-pd-gravity-compensation" title="Permalink to this image">#</a></p>
+compensation</span><a class="headerlink" href="#operational-pd-gravity-compensation" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="admonition-summary-pd-control-with-gravity-compensation admonition">
 <p class="admonition-title">Summary: PD Control with Gravity Compensation</p>
 <div class="math notranslate nohighlight" id="equation-equ-osc-pd2">
-<span class="eqno">(98)<a class="headerlink" href="#equation-equ-osc-pd2" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(98)<a class="headerlink" href="#equation-equ-osc-pd2" title="Link to this equation">#</a></span>\[
 \boldsymbol{u}=\underbrace{\boldsymbol{g}(\boldsymbol{q})}_{\text{gravitational compensation}}+
 \underbrace{\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K}_{P} {(\boldsymbol{x}_d-\boldsymbol{x})}}_{\text{proportional control}}\quad\underbrace{-\boldsymbol{J}^{T}(\boldsymbol{q})\boldsymbol{K}_{D} \boldsymbol{J}(\boldsymbol{q})\dot{\boldsymbol{q}}}_{\text{derivative control}}\]</div>
 <p>with <span class="math notranslate nohighlight">\(\boldsymbol{K}_{P}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{K}_{D}\)</span> are positive definite matrices.</p>
@@ -499,21 +524,21 @@ compensation</span><a class="headerlink" href="#operational-pd-gravity-compensat
 <p></br> </br> </br></p>
 </section>
 <section id="osc-inverse-dynamics-control">
-<h2>OSC Inverse Dynamics Control<a class="headerlink" href="#osc-inverse-dynamics-control" title="Permalink to this heading">#</a></h2>
+<h2>OSC Inverse Dynamics Control<a class="headerlink" href="#osc-inverse-dynamics-control" title="Link to this heading">#</a></h2>
 <p>One limitation of the OSC PD Control is that the controller can only follow a stationary desired <span class="math notranslate nohighlight">\(\boldsymbol{x}_d\)</span>
 , but is not good at tracking a fast-changing desired <span class="math notranslate nohighlight">\(\boldsymbol{x}_d\)</span> (i.e., <span class="math notranslate nohighlight">\(\boldsymbol{\dot x}_d\neq \boldsymbol{0}\)</span>). OSC Inverse Dynamics Control is to address so.</p>
 <p>Recall the joint space inverse dynamics control  in the  <a class="reference internal" href="../lec21/cjc.html#chapter-cjc"><span class="std std-ref">previous chapter</span></a>. If we  set the controller as
 form</p>
 <div class="math notranslate nohighlight" id="equation-equ-osc-u">
-<span class="eqno">(99)<a class="headerlink" href="#equation-equ-osc-u" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(99)<a class="headerlink" href="#equation-equ-osc-u" title="Link to this equation">#</a></span>\[
     \boldsymbol{u}=\boldsymbol{B}(\boldsymbol{q}) \boldsymbol{y}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})\]</div>
 <p>where <span class="math notranslate nohighlight">\(\boldsymbol{y}\)</span> is a new input vector. The  controller directly leads to the controlled
 robot arm <a class="reference internal" href="#equation-equ-osc-sys">(89)</a> as</p>
 <div class="math notranslate nohighlight" id="equation-equ-ocs-sys2">
-<span class="eqno">(100)<a class="headerlink" href="#equation-equ-ocs-sys2" title="Permalink to this equation">#</a></span>\[\boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\boldsymbol{B}(\boldsymbol{q}) \boldsymbol{y}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})\]</div>
+<span class="eqno">(100)<a class="headerlink" href="#equation-equ-ocs-sys2" title="Link to this equation">#</a></span>\[\boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\boldsymbol{B}(\boldsymbol{q}) \boldsymbol{y}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})\]</div>
 <p>further simplified as</p>
 <div class="math notranslate nohighlight" id="equation-equ-ocs-dyn-new">
-<span class="eqno">(101)<a class="headerlink" href="#equation-equ-ocs-dyn-new" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(101)<a class="headerlink" href="#equation-equ-ocs-dyn-new" title="Link to this equation">#</a></span>\[
 \boldsymbol{\ddot{q}}=\boldsymbol{y}\]</div>
 <p>Again, we will discuss how to set
 this new input <span class="math notranslate nohighlight">\(\boldsymbol{y}\)</span> below. The new input <span class="math notranslate nohighlight">\(\boldsymbol{y}\)</span> is designed  make the robot arm track a changing <span class="math notranslate nohighlight">\(\boldsymbol{x}_{d}(t)\)</span>. To this end, we
@@ -522,12 +547,12 @@ differentiate the jacobian equation</p>
 \[\dot{\boldsymbol{x}}=\boldsymbol{J}(\boldsymbol{q})\dot{\boldsymbol{q}}\]</div>
 <p>on both side with respect to time <span class="math notranslate nohighlight">\(t\)</span>, leading to</p>
 <div class="math notranslate nohighlight" id="equation-equ-osc-djac">
-<span class="eqno">(102)<a class="headerlink" href="#equation-equ-osc-djac" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(102)<a class="headerlink" href="#equation-equ-osc-djac" title="Link to this equation">#</a></span>\[
     \ddot{\boldsymbol{x}}=\boldsymbol{J}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\dot{\boldsymbol{J}}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}\]</div>
 <p>The above <a class="reference internal" href="#equation-equ-osc-djac">(102)</a> suggests the following choice of
 <span class="math notranslate nohighlight">\(\boldsymbol{y}\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-equ-osc-y">
-<span class="eqno">(103)<a class="headerlink" href="#equation-equ-osc-y" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(103)<a class="headerlink" href="#equation-equ-osc-y" title="Link to this equation">#</a></span>\[
     \boldsymbol{y}=\boldsymbol{J}^{-1}(\boldsymbol{q})\left(\ddot{\boldsymbol{x}}_{d}+\boldsymbol{K}_{D} \dot{{\boldsymbol{e}}}+\boldsymbol{K}_{P} {\boldsymbol{e}}-\dot{\boldsymbol{J}}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}\right)\]</div>
 <p>with <span class="math notranslate nohighlight">\(\boldsymbol{K}_{P}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{K}_{D}\)</span> positive definite
 matrices. In fact, plugging <a class="reference internal" href="#equation-equ-osc-y">(103)</a>
@@ -548,12 +573,12 @@ Then, the end-effector of the controlled robot arm will behave like a linear sec
 <a class="reference internal image-reference" href="../_images/operational_PD_gravity_compensation2.jpeg"><img alt="../_images/operational_PD_gravity_compensation2.jpeg" src="../_images/operational_PD_gravity_compensation2.jpeg" style="width: 90%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 84 </span><span class="caption-text">Block scheme of operational space PD control with gravity
-compensation</span><a class="headerlink" href="#operational-pd-gravity-compensation2" title="Permalink to this image">#</a></p>
+compensation</span><a class="headerlink" href="#operational-pd-gravity-compensation2" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>In sum, we recapitulate the operational space inverse dynamics control below</p>
 <div class="admonition-ocs-inverse-dynamics-control admonition">
-<p class="admonition-title">OCS inverse dynamics control </p>
+<p class="admonition-title">OCS inverse dynamics control</p>
 <div class="math notranslate nohighlight">
 \[
     \boldsymbol{u}=\boldsymbol{B}(\boldsymbol{q}) \boldsymbol{y}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})\]</div>
@@ -595,11 +620,10 @@ compensation</span><a class="headerlink" href="#operational-pd-gravity-compensat
 
               
               
-                <footer class="bd-footer-article">
+              
+              
+                <footer class="prev-next-footer d-print-none">
                   
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="../lec21/cjc.html"
@@ -610,10 +634,7 @@ compensation</span><a class="headerlink" href="#operational-pd-gravity-compensat
         <p class="prev-next-title">Centralized Joint Control</p>
       </div>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -621,6 +642,7 @@ compensation</span><a class="headerlink" href="#operational-pd-gravity-compensat
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -651,9 +673,10 @@ By Wanxin Jin @ IRIS Lab
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
-      © Copyright 2022.
+      © Copyright 2023.
       <br/>
     
   </p>
@@ -677,8 +700,8 @@ By Wanxin Jin @ IRIS Lab
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>

@@ -247,10 +247,37 @@ $$
 
 
 
-please see my [Minimal notes on control basics](../lec20/control_basics.pdf)
-for how the values of the damping ratio
+Please see my [Minimal notes on control basics](../lec20/control_basics.pdf) or below for how the values of the damping ratio
 $\zeta_i$ and natural frequency $\omega_{i}$  affect the error response
 $\boldsymbol{e}(t)$ in time domain.
+
+
+
+```{admonition} Second-order linear system transient response
+
+Given a characteristics equation of a second-order linear system as follows:
+
+$$
+s^2+ 2 \zeta \omega_n s+ \omega_n^{2} ={0}
+$$
+
+with $\zeta$ called  damping ratio and $\omega_n$ called 
+natural frequency. Both parameters will  affect the response of the system in time domain. We have the following empirical equations:
+
+* Settling Time: $T_s=\frac{4}{\zeta \omega_n}$
+
+* Peak Time: $T_p=\frac{\pi}{\omega_n\sqrt{1-\zeta^2}}$
+
+* Relation between  the percent overshoot ($\%OS$) and damping ratio $\zeta$: $\zeta=\frac{-\ln(\%OS/100)}{\sqrt{\pi^2+\ln^2(\%OS/100)}
+}$
+
+
+```
+
+
+
+
+
 
 The control block diagram for inverse dynamics control is shown below
 

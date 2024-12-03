@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Decentralized Joint Control &#8212; Modeling and Control of Robots</title>
   
@@ -15,52 +14,49 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'lec20/djc';</script>
@@ -77,19 +73,23 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -111,12 +111,20 @@ const thebe_selector_output = ".output, .cell_output"
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -131,9 +139,13 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
+  
+    
   
 
 <a class="navbar-brand logo" href="../intro.html">
+  
   
   
   
@@ -143,12 +155,23 @@ const thebe_selector_output = ".output, .cell_output"
       
     
     
-    <img src="../_static/iris_logo_2.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../_static/iris_logo_2.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../_static/iris_logo_2.png" class="logo__image only-light" alt="Modeling and Control of Robots - Home"/>
+    <script>document.write(`<img src="../_static/iris_logo_2.png" class="logo__image only-dark" alt="Modeling and Control of Robots - Home"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -214,9 +237,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 <li class="toctree-l1"><a class="reference internal" href="../lec21/cjc.html">Centralized Joint Control</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lec22/osc.html">Operational Space Control</a></li>
-
-
+<li class="toctree-l1"><a class="reference internal" href="../lec22/osc.html">Operational Space Control (OSC)</a></li>
 </ul>
 
     </div>
@@ -232,7 +253,7 @@ const thebe_selector_output = ".output, .cell_output"
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -241,14 +262,14 @@ const thebe_selector_output = ".output, .cell_output"
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -338,26 +359,28 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
+
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
   </button>
 `);
 </script>
 
+
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</label>
+</button>
 </div></div>
       
     </div>
@@ -398,19 +421,19 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="decentralized-joint-control">
-<h1>Decentralized Joint Control<a class="headerlink" href="#decentralized-joint-control" title="Permalink to this heading">#</a></h1>
+<h1>Decentralized Joint Control<a class="headerlink" href="#decentralized-joint-control" title="Link to this heading">#</a></h1>
 <p>The equation of motion of a manipulator without end-effector contact
 force and any joint friction is</p>
 <div class="math notranslate nohighlight" id="equation-equ-control-arm-dyn">
-<span class="eqno">(59)<a class="headerlink" href="#equation-equ-control-arm-dyn" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(59)<a class="headerlink" href="#equation-equ-control-arm-dyn" title="Link to this equation">#</a></span>\[
     \boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\boldsymbol{\tau}\]</div>
 <p>From the previous chapter, the joint-motor
 transmission gives</p>
 <div class="math notranslate nohighlight" id="equation-equ-motor-angle">
-<span class="eqno">(60)<a class="headerlink" href="#equation-equ-motor-angle" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(60)<a class="headerlink" href="#equation-equ-motor-angle" title="Link to this equation">#</a></span>\[
     \boldsymbol{q}_{m}=\boldsymbol{K}_{r} \boldsymbol{q}\]</div>
 <!-- $\boldsymbol{K}_{r}=\text{diag}(k_{r_1}, k_{r_2}, ..., k_{r_n})$ -->
 <p>where <span class="math notranslate nohighlight">\(\boldsymbol{K}_{r}\)</span>
@@ -419,20 +442,20 @@ ratio of joint <span class="math notranslate nohighlight">\(i\)</span>. Let
 <span class="math notranslate nohighlight">\(\boldsymbol{\tau}_{m}\)</span> denote
 the vector of all motor torques, one can write</p>
 <div class="math notranslate nohighlight" id="equation-equ-motor-torque">
-<span class="eqno">(61)<a class="headerlink" href="#equation-equ-motor-torque" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(61)<a class="headerlink" href="#equation-equ-motor-torque" title="Link to this equation">#</a></span>\[
 \boldsymbol{\tau}= \boldsymbol{K}_{r}\boldsymbol{\tau}_{m}\]</div>
 <p>Substituting <a class="reference internal" href="#equation-equ-motor-torque">(61)</a> and <a class="reference internal" href="#equation-equ-motor-angle">(60)</a>
 into the robot arm dynamics <a class="reference internal" href="#equation-equ-control-arm-dyn">(59)</a>
 leads to</p>
 <div class="math notranslate nohighlight" id="equation-equ-control-dyn2">
-<span class="eqno">(62)<a class="headerlink" href="#equation-equ-control-dyn2" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(62)<a class="headerlink" href="#equation-equ-control-dyn2" title="Link to this equation">#</a></span>\[
     \boldsymbol{K}_{r}^{-1} \boldsymbol{B}(\boldsymbol{q}) \boldsymbol{K}_{r}^{-1} \ddot{\boldsymbol{q}}_{m}+\boldsymbol{K}_{r}^{-1} \boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \boldsymbol{K}_{r}^{-1} \dot{\boldsymbol{q}}_{m}+\boldsymbol{K}_{r}^{-1} \boldsymbol{g}(\boldsymbol{q})=\boldsymbol{\tau}_{m}\]</div>
 <section id="the-idea-of-how-we-do-decentralized-control">
-<h2>The idea of how we do decentralized control<a class="headerlink" href="#the-idea-of-how-we-do-decentralized-control" title="Permalink to this heading">#</a></h2>
+<h2>The idea of how we do decentralized control<a class="headerlink" href="#the-idea-of-how-we-do-decentralized-control" title="Link to this heading">#</a></h2>
 <p>We have previously (in dynamics lecture) analyzed the inertia matrix
 <span class="math notranslate nohighlight">\(\boldsymbol{B}(\boldsymbol{q})\)</span>, one can write it as</p>
 <div class="math notranslate nohighlight" id="equation-equ-bmat2">
-<span class="eqno">(63)<a class="headerlink" href="#equation-equ-bmat2" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(63)<a class="headerlink" href="#equation-equ-bmat2" title="Link to this equation">#</a></span>\[
     \boldsymbol{B}(\boldsymbol{q})=\overline{\boldsymbol{B}}+\Delta \boldsymbol{B}(\boldsymbol{q})
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(\overline{\boldsymbol{B}}\)</span> is the diagonal matrix whose constant
@@ -442,7 +465,7 @@ non-diagonal part.</p>
 <p>Substituting <a class="reference internal" href="#equation-equ-bmat2">(63)</a>
 into <a class="reference internal" href="#equation-equ-control-dyn2">(62)</a> leads to</p>
 <div class="math notranslate nohighlight" id="equation-equ-decouple-model">
-<span class="eqno">(64)<a class="headerlink" href="#equation-equ-decouple-model" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(64)<a class="headerlink" href="#equation-equ-decouple-model" title="Link to this equation">#</a></span>\[
     \underbrace{\boldsymbol{K}_{r}^{-1} \overline{\boldsymbol{B}} \boldsymbol{K}_{r}^{-1}}_{\boldsymbol{I}_m} \ddot{\boldsymbol{q}}_{m}+\underbrace{\boldsymbol{K}_{r}^{-1} \Delta \boldsymbol{B}(\boldsymbol{q}) \boldsymbol{K}_{r}^{-1} \ddot{\boldsymbol{q}}_{m}+\boldsymbol{K}_{r}^{-1} \boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \boldsymbol{K}_{r}^{-1} \dot{\boldsymbol{q}}_{m}+\boldsymbol{K}_{r}^{-1} \boldsymbol{g}(\boldsymbol{q})}_{\boldsymbol{D}}=\boldsymbol{\tau}_{m}\]</div>
 <p>Here, <span class="math notranslate nohighlight">\(\boldsymbol{I}_m\)</span> is also a diagonal
 matrix, whose each diagonal entry encodes the inertia  at that joint.  <span class="math notranslate nohighlight">\(\boldsymbol{D}\)</span> in <a class="reference internal" href="#equation-equ-decouple-model">(64)</a>
@@ -452,7 +475,7 @@ is a coupling term between different joints.</p>
 <a class="reference internal image-reference" href="../_images/decentralized_control3.jpeg"><img alt="../_images/decentralized_control3.jpeg" src="../_images/decentralized_control3.jpeg" style="width: 99%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 74 </span><span class="caption-text">Dynamics diagram of a motor-driven
-robot arm.</span><a class="headerlink" href="#decentralized-control3" title="Permalink to this image">#</a></p>
+robot arm.</span><a class="headerlink" href="#decentralized-control3" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>As shown in both <a class="reference internal" href="#equation-equ-decouple-model">(64)</a> and <a class="reference internal" href="#decentralized-control3"><span class="std std-numref">Fig. 74</span></a>, if we ignore the coupling term <span class="math notranslate nohighlight">\(\boldsymbol{D}\)</span>,</p>
@@ -471,7 +494,7 @@ each joint as a single-in-single-out system, but view the complex coupling effec
 <span class="math notranslate nohighlight">\(\boldsymbol{D}\)</span> as a disturbance input to each joint.</p>
 </div>
 <div class="admonition-minimal-material-on-control-basics admonition">
-<p class="admonition-title">Minimal material on control basics </p>
+<p class="admonition-title">Minimal material on control basics</p>
 <p>Please read my hand-writing note on control basics, in order to help you understand the following content of this chapter.</p>
 <p><a class="reference download internal" download="" href="../_downloads/af66a2a39b5480f30ad4e93bc7990bf7/control_basics.pdf"><span class="xref download myst">Minimal notes on control basics</span></a></p>
 </div>
@@ -487,7 +510,7 @@ control design is to find <span class="math notranslate nohighlight">\(C(s)\)</s
 <figure class="align-default" id="fd-control2">
 <a class="reference internal image-reference" href="../_images/fd_control2.jpeg"><img alt="../_images/fd_control2.jpeg" src="../_images/fd_control2.jpeg" style="width: 90%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 75 </span><span class="caption-text">A typical control system diagram</span><a class="headerlink" href="#fd-control2" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 75 </span><span class="caption-text">A typical control system diagram</span><a class="headerlink" href="#fd-control2" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>For the above control system, the forward path transfer function is</p>
@@ -518,19 +541,35 @@ characteristics equation</p>
 <div class="math notranslate nohighlight">
 \[1+C(s)G(s)H(s)=0\]</div>
 </div>
+<div class="admonition-second-order-linear-system-transient-response admonition">
+<p class="admonition-title">Second-order linear system transient response</p>
+<p>Given a characteristics equation of a second-order linear system as follows:</p>
+<div class="math notranslate nohighlight">
+\[
+s^2+ 2 \zeta \omega_n s+ \omega_n^{2} ={0}
+\]</div>
+<p>with <span class="math notranslate nohighlight">\(\zeta\)</span> called  damping ratio and <span class="math notranslate nohighlight">\(\omega_n\)</span> called
+natural frequency. Both parameters will  affect the response of the system in time domain. We have the following empirical equations:</p>
+<ul class="simple">
+<li><p>Settling Time: <span class="math notranslate nohighlight">\(T_s=\frac{4}{\zeta \omega_n}\)</span></p></li>
+<li><p>Peak Time: <span class="math notranslate nohighlight">\(T_p=\frac{\pi}{\omega_n\sqrt{1-\zeta^2}}\)</span></p></li>
+<li><p>Relation between  the percent overshoot (<span class="math notranslate nohighlight">\(\%OS\)</span>) and damping ratio <span class="math notranslate nohighlight">\(\zeta\)</span>: <span class="math notranslate nohighlight">\(\zeta=\frac{-\ln(\%OS/100)}{\sqrt{\pi^2+\ln^2(\%OS/100)}
+}\)</span></p></li>
+</ul>
+</div>
 <p></br></br></p>
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="single-joint-system-diagram">
-<h1>Single-Joint System Diagram<a class="headerlink" href="#single-joint-system-diagram" title="Permalink to this heading">#</a></h1>
+<h1>Single-Joint System Diagram<a class="headerlink" href="#single-joint-system-diagram" title="Link to this heading">#</a></h1>
 <p>In the reminder of this chapter, i will use <span class="math notranslate nohighlight">\({\theta}_m\)</span> and <span class="math notranslate nohighlight">\(q_m\)</span> interchangeably as the variable of each joint, droping the subscript of  joint index. For a single joint,  the dynamics equation at that joint is a row of <a class="reference internal" href="#equation-equ-decouple-model">(64)</a>, writing as</p>
 <div class="math notranslate nohighlight" id="equation-equ-single-joint-dyn">
-<span class="eqno">(65)<a class="headerlink" href="#equation-equ-single-joint-dyn" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(65)<a class="headerlink" href="#equation-equ-single-joint-dyn" title="Link to this equation">#</a></span>\[
 I_m\ddot{\theta}_m+D=\tau_m
 \]</div>
 <p>Let’s recall the DC motor model in our previous chapter:</p>
 <div class="math notranslate nohighlight" id="equation-equ-single-joint-motor">
-<span class="eqno">(66)<a class="headerlink" href="#equation-equ-single-joint-motor" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(66)<a class="headerlink" href="#equation-equ-single-joint-motor" title="Link to this equation">#</a></span>\[
 \tau_m=k_ti_a=k_t\frac{(G_vv_c-k_v\dot{\theta}_m)}{R_a}=k_t\frac{(v_a-k_v\dot{\theta}_m)}{R_a}
 \]</div>
 <p>where <span class="math notranslate nohighlight">\({k}_{t}\)</span> is the
@@ -541,7 +580,7 @@ of the servomotor, and <span class="math notranslate nohighlight">\(G_v\)</span>
 been shown in previous chapter.</p>
 <p>Equaling <a class="reference internal" href="#equation-equ-single-joint-dyn">(65)</a> and <a class="reference internal" href="#equation-equ-single-joint-motor">(66)</a>, one has</p>
 <div class="math notranslate nohighlight" id="equation-equ-motor">
-<span class="eqno">(67)<a class="headerlink" href="#equation-equ-motor" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(67)<a class="headerlink" href="#equation-equ-motor" title="Link to this equation">#</a></span>\[
 I_m\ddot{\theta}_m+D=\tau_m=I_m\ddot{\theta}_m+\frac{k_t}{R_a}(\frac{DR_a}{k_t})=k_t\frac{(v_a-k_v\dot{\theta}_m)}{R_a}
 \]</div>
 <p>The above <a class="reference internal" href="#equation-equ-motor">(67)</a> corresponds to the following diagram</p>
@@ -549,12 +588,12 @@ I_m\ddot{\theta}_m+D=\tau_m=I_m\ddot{\theta}_m+\frac{k_t}{R_a}(\frac{DR_a}{k_t})
 <a class="reference internal image-reference" href="../_images/motor_model3.jpeg"><img alt="../_images/motor_model3.jpeg" src="../_images/motor_model3.jpeg" style="width: 80%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 76 </span><span class="caption-text">Diagram of a single motor-joint model, with coupled joint term <span class="math notranslate nohighlight">\(D\)</span>
-treated as disturbance.</span><a class="headerlink" href="#motor-model3" title="Permalink to this image">#</a></p>
+treated as disturbance.</span><a class="headerlink" href="#motor-model3" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>For the above diagram, the input (<span class="math notranslate nohighlight">\(v_a\)</span>) to output (<span class="math notranslate nohighlight">\(\theta_m\)</span>) transfer function <span class="math notranslate nohighlight">\(G(s)\)</span> is</p>
 <div class="math notranslate nohighlight" id="equation-equ-motortf">
-<span class="eqno">(68)<a class="headerlink" href="#equation-equ-motortf" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(68)<a class="headerlink" href="#equation-equ-motortf" title="Link to this equation">#</a></span>\[
     G(s)=\frac{{\Theta}(s)}{V_a(s)}=\frac{k_m}{s(1+T_ms)}\]</div>
 <p>with</p>
 <div class="math notranslate nohighlight">
@@ -570,7 +609,7 @@ T_m=\frac{R_aI_m}{k_tk_v}
 <p></br></br></p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="position-feedback-control-design">
-<h1>Position Feedback Control Design<a class="headerlink" href="#position-feedback-control-design" title="Permalink to this heading">#</a></h1>
+<h1>Position Feedback Control Design<a class="headerlink" href="#position-feedback-control-design" title="Link to this heading">#</a></h1>
 <p>The transfer function <span class="math notranslate nohighlight">\(G(s)\)</span> for the single joint system (<a class="reference internal" href="#motor-model3"><span class="std std-numref">Fig. 76</span></a>) is in <a class="reference internal" href="#equation-equ-motortf">(68)</a>, rewritten below</p>
 <div class="math notranslate nohighlight">
 \[G(s)=\frac{k_m}{s(1+T_ms)}\]</div>
@@ -585,7 +624,7 @@ constant <span class="math notranslate nohighlight">\(k_{TP}\)</span> is given a
 <figure class="align-default" id="p-control2">
 <a class="reference internal image-reference" href="../_images/p_control2.jpg"><img alt="../_images/p_control2.jpg" src="../_images/p_control2.jpg" style="width: 99%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 77 </span><span class="caption-text">Control diagram of single-joint system</span><a class="headerlink" href="#p-control2" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 77 </span><span class="caption-text">Control diagram of single-joint system</span><a class="headerlink" href="#p-control2" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>On the diagram <a class="reference internal" href="#p-control2"><span class="std std-numref">Fig. 77</span></a>, the transfer function of the forward path is</p>
@@ -601,14 +640,14 @@ G(s)C_P(s)H(s)=\frac{k_{T P}k_{m} K_{P}\left(1+s T_{P}\right)}{s^{2}\left(1+s T_
 \]</div>
 <p>The closed-loop input-to-output transfer function is</p>
 <div class="math notranslate nohighlight" id="equation-equ-closed-loop">
-<span class="eqno">(69)<a class="headerlink" href="#equation-equ-closed-loop" title="Permalink to this equation">#</a></span>\[\frac{\Theta_{m}(s)}{\Theta_{r}(s)}=\frac{C_P(s)G(s)}{1+C_P(s)G(s)H(s)}=\frac{{k_{m}K_P(1+T_Ps)}}{k_{TP}k_{m}K_P(1+T_Ps)+s^2(1+sT_m)},\]</div>
+<span class="eqno">(69)<a class="headerlink" href="#equation-equ-closed-loop" title="Link to this equation">#</a></span>\[\frac{\Theta_{m}(s)}{\Theta_{r}(s)}=\frac{C_P(s)G(s)}{1+C_P(s)G(s)H(s)}=\frac{{k_{m}K_P(1+T_Ps)}}{k_{TP}k_{m}K_P(1+T_Ps)+s^2(1+sT_m)},\]</div>
 </br>
 <section id="input-to-output-stability-analysis">
-<h2>Input-to-output stability analysis<a class="headerlink" href="#input-to-output-stability-analysis" title="Permalink to this heading">#</a></h2>
+<h2>Input-to-output stability analysis<a class="headerlink" href="#input-to-output-stability-analysis" title="Link to this heading">#</a></h2>
 <p>To analyze the input-to-output stability of the closed-loop control system <a class="reference internal" href="#equation-equ-closed-loop">(69)</a>, we look at the roots (also called poles) of its characteristic equation, which can be factorized into the following
 form</p>
 <div class="math notranslate nohighlight" id="equation-equ-cha-equ">
-<span class="eqno">(70)<a class="headerlink" href="#equation-equ-cha-equ" title="Permalink to this equation">#</a></span>\[{k_{TP}k_{m}K_P(1+T_Ps)+s^2(1+sT_m)}
+<span class="eqno">(70)<a class="headerlink" href="#equation-equ-cha-equ" title="Link to this equation">#</a></span>\[{k_{TP}k_{m}K_P(1+T_Ps)+s^2(1+sT_m)}
 =
 {\left({\omega_{n}^{2}}+{2 \zeta }{\omega_{n}}s+{s^{2}}\right)(1+s \tau)}=0\]</div>
 <p>The roots (also called poles) to the characteristics equation <a class="reference internal" href="#equation-equ-cha-equ">(70)</a> is</p>
@@ -625,7 +664,7 @@ ratio for the complex roots <span class="math notranslate nohighlight">\(s_1\)</
 Please see my <a class="reference download internal" download="" href="../_downloads/af66a2a39b5480f30ad4e93bc7990bf7/control_basics.pdf"><span class="xref download myst">Minimal notes on control basics</span></a> for explaination of how the values of <span class="math notranslate nohighlight">\(\omega_{n}\)</span>, <span class="math notranslate nohighlight">\(\zeta\)</span> and <span class="math notranslate nohighlight">\(s_3\)</span> effect the time-domain performance of the closed-loop control system.</p>
 <p>The location of the above poles <span class="math notranslate nohighlight">\((s_1, s_2, s_3)\)</span> on s-plane depends on the of the open-loop gain</p>
 <div class="math notranslate nohighlight" id="equation-equ-ol-gain">
-<span class="eqno">(71)<a class="headerlink" href="#equation-equ-ol-gain" title="Permalink to this equation">#</a></span>\[\frac{k_{m} K_{P} k_{T P} T_{P}}{T_{m}}\]</div>
+<span class="eqno">(71)<a class="headerlink" href="#equation-equ-ol-gain" title="Link to this equation">#</a></span>\[\frac{k_{m} K_{P} k_{T P} T_{P}}{T_{m}}\]</div>
 <p>The root locus (i.e., the trajectory of the above poles on <span class="math notranslate nohighlight">\(s-\)</span>plane)  can be drawn by taking different open loop gain value <a class="reference internal" href="#equation-equ-ol-gain">(71)</a>. Here, we derive into two cases:</p>
 <ul>
 <li><p>If <span class="math notranslate nohighlight">\(T_{P}&lt;T_{m}\)</span>, the root locus is shown. Because there is always a pole (root) living on the right-half s-plane regardless of the choice of <span class="math notranslate nohighlight">\(\frac{k_{m} K_{P} k_{T P} T_{P}}{T_{m}}\)</span>, the closed-loop control system <a class="reference internal" href="#equation-equ-closed-loop">(69)</a> thus is inherently unstable.</p>
@@ -633,7 +672,7 @@ Please see my <a class="reference download internal" download="" href="../_downl
 <a class="reference internal image-reference" href="../_images/p_control_rl_1.jpg"><img alt="../_images/p_control_rl_1.jpg" src="../_images/p_control_rl_1.jpg" style="width: 90%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 78 </span><span class="caption-text">Root locus when
-<span class="math notranslate nohighlight">\(T_{P}&lt;T_{m}\)</span></span><a class="headerlink" href="#p-control-rl-1" title="Permalink to this image">#</a></p>
+<span class="math notranslate nohighlight">\(T_{P}&lt;T_{m}\)</span></span><a class="headerlink" href="#p-control-rl-1" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </li>
@@ -643,7 +682,7 @@ increases, the absolute value of the real part of the two complex poles, (<span 
 <a class="reference internal image-reference" href="../_images/p_control_rl_2.jpg"><img alt="../_images/p_control_rl_2.jpg" src="../_images/p_control_rl_2.jpg" style="width: 90%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 79 </span><span class="caption-text">Root locus when
-<span class="math notranslate nohighlight">\(T_{P}&gt;T_{m}\)</span></span><a class="headerlink" href="#p-control-rl-2" title="Permalink to this image">#</a></p>
+<span class="math notranslate nohighlight">\(T_{P}&gt;T_{m}\)</span></span><a class="headerlink" href="#p-control-rl-2" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </li>
@@ -651,7 +690,7 @@ increases, the absolute value of the real part of the two complex poles, (<span 
 </br>
 </section>
 <section id="disturbance-to-output-performance">
-<h2>Disturbance-to-output performance<a class="headerlink" href="#disturbance-to-output-performance" title="Permalink to this heading">#</a></h2>
+<h2>Disturbance-to-output performance<a class="headerlink" href="#disturbance-to-output-performance" title="Link to this heading">#</a></h2>
 <div class="admonition-final-value-theorem admonition">
 <p class="admonition-title">Final value theorem</p>
 <p>If a continuous signal <span class="math notranslate nohighlight">\(f(t)\)</span> has its Laplace transformation <span class="math notranslate nohighlight">\(F(s)\)</span>,
@@ -818,11 +857,10 @@ reducing the effect of $D$. -->
 
               
               
-                <footer class="bd-footer-article">
+              
+              
+                <footer class="prev-next-footer d-print-none">
                   
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="../lec19/control_overview.html"
@@ -842,10 +880,7 @@ reducing the effect of $D$. -->
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -853,6 +888,7 @@ reducing the effect of $D$. -->
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -892,9 +928,10 @@ By Wanxin Jin @ IRIS Lab
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
-      © Copyright 2022.
+      © Copyright 2023.
       <br/>
     
   </p>
@@ -918,8 +955,8 @@ By Wanxin Jin @ IRIS Lab
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>
