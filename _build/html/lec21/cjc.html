@@ -66,7 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'lec21/cjc';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Operational Space Control" href="../lec22/osc.html" />
+    <link rel="next" title="Operational Space Control (OSC)" href="../lec22/osc.html" />
     <link rel="prev" title="Decentralized Joint Control" href="../lec20/djc.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -214,9 +214,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Centralized Joint Control</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lec22/osc.html">Operational Space Control</a></li>
-
-
+<li class="toctree-l1"><a class="reference internal" href="../lec22/osc.html">Operational Space Control (OSC)</a></li>
 </ul>
 
     </div>
@@ -395,7 +393,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="centralized-joint-control">
-<h1>Centralized Joint Control<a class="headerlink" href="#centralized-joint-control" title="Permalink to this heading">#</a></h1>
+<span id="chapter-cjc"></span><h1>Centralized Joint Control<a class="headerlink" href="#centralized-joint-control" title="Permalink to this heading">#</a></h1>
 <p>In the previous sections, we have discussed the design of independent (decentralized)
 joint controllers for each joint. Each joint is viewed as a single input and single-output
 system, and the coupling effects between the joints
@@ -421,6 +419,7 @@ joint torque <span class="math notranslate nohighlight">\(\boldsymbol{u}\)</span
 <div class="math notranslate nohighlight" id="equation-equ-cjc-system">
 <span class="eqno">(78)<a class="headerlink" href="#equation-equ-cjc-system" title="Permalink to this equation">#</a></span>\[
     \boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\textbf{Controller}(\boldsymbol{q}, \boldsymbol{\dot{q}}, \boldsymbol{q}_d, \boldsymbol{\dot{q}}_d)\]</div>
+<p></br> </br> </br></p>
 <section id="pd-control-with-gravity-compensation">
 <h2>PD Control with Gravity Compensation<a class="headerlink" href="#pd-control-with-gravity-compensation" title="Permalink to this heading">#</a></h2>
 <p>Given a <em>stationary</em> desired joint position <span class="math notranslate nohighlight">\(\boldsymbol{q}_{d}\)</span> (here <span class="math notranslate nohighlight">\(\boldsymbol{\dot q}_{d}=\boldsymbol{0}\)</span>), we want
@@ -566,7 +565,7 @@ convergence depends on the value of <span class="math notranslate nohighlight">\
 <span class="eqno">(86)<a class="headerlink" href="#equation-equ-kpkd" title="Permalink to this equation">#</a></span>\[
     \boldsymbol{K}_{P}=\operatorname{diag}\left\{\omega_{1}^{2}, \ldots, \omega_{n}^{2}\right\} \quad \boldsymbol{K}_{D}=\operatorname{diag}\left\{2 \zeta_{1} \omega_{1}, \ldots, 2 \zeta_{n} \omega_{n}\right\}\]</div>
 <p>Then, the controlled robot arm can be viewed as having <span class="math notranslate nohighlight">\(n\)</span>
-decoupled (liner) second-order subsystems. Here, <span class="math notranslate nohighlight">\(\zeta_i\)</span> is the damping ratio and  <span class="math notranslate nohighlight">\(\omega_{i}\)</span>  the natural frequency  for joint <span class="math notranslate nohighlight">\(i\)</span>. For each joint <span class="math notranslate nohighlight">\(i\)</span>, the error dynamics is</p>
+decoupled (liner) second-order (mass-spring-damper) subsystems. Here, <span class="math notranslate nohighlight">\(\zeta_i\)</span> is the damping ratio and  <span class="math notranslate nohighlight">\(\omega_{i}\)</span>  the natural frequency  for joint <span class="math notranslate nohighlight">\(i\)</span>. For each joint <span class="math notranslate nohighlight">\(i\)</span>, the error dynamics is</p>
 <div class="math notranslate nohighlight">
 \[
     \ddot{{e}}+ 2 \zeta_{i} \omega_{i} \dot{{e}}+ \omega_{i}^{2} {{e}}={0}\]</div>
@@ -647,7 +646,7 @@ control</span><a class="headerlink" href="#inverse-dynamics-control2" title="Per
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Operational Space Control</p>
+        <p class="prev-next-title">Operational Space Control (OSC)</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

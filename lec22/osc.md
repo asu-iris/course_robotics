@@ -5,78 +5,141 @@ title: "Lecture 22: Operational Space Control"
 ---
 
 
-# Operational Space Control
-If the motion $\boldsymbol{x}_d$ is specified in the operational space,
-the joint variable $\boldsymbol{q}$ can be transformed into the
-operational space variables through forward kinematics:
-$\boldsymbol{x}_e=\boldsymbol{k}(\boldsymbol{q})$. Then, the operational
-space error $$\label{equ.end_pose_error}
-    \boldsymbol{e}=\boldsymbol{x}_d-\boldsymbol{x}_e$$ allows the design
-of control that uses the feedback from the error operation space.
+# Operational Space Control (OSC)
 
-In the following control design for a $n$-joint manipulator, we consider
-a manipulator without external end-effector forces and any joint
-friction. The equation of motion of the manipulator thus is
 
-$$\label{equ.manipulator}
-    \boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\boldsymbol{u}$$
+The goal of operational space control (OSC) is to control the robot to track the  desired end-effector pose    $\boldsymbol{x}_d$ and velocity $\boldsymbol{\dot{x}}_d$ given in the operational space.
+
+
+
+In the following control design, we consider a a $n$-joint robot arm without external end-effector forces and any joint
+friction. The equation of motion of the robot arm  is
+
+$$
+    \boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\boldsymbol{u}$$(equ.osc_dyn)
 
 The controller we want to design is in the general form of
 
-$$\label{equ.controller}
-\boldsymbol{u}=\textbf{Controller}(\boldsymbol{q}, \boldsymbol{\dot{q}}, \boldsymbol{x}_d, \boldsymbol{\dot{x}}_d)$$
+$$
+\boldsymbol{u}=\textbf{Controller}(\boldsymbol{q}, \boldsymbol{\dot{q}}, \boldsymbol{x}_d, \boldsymbol{\dot{x}}_d)$$(equ.osc_controller)
 
-i.e., the controller takes as input the manipulator's current joint
+i.e., the controller takes as input the robot arm's current joint
 position $\boldsymbol{q}$, current joint velocity
 $\boldsymbol{\dot{q}}$, the desired end-effector pose
 $\boldsymbol{x}_d$, and desired end-effector velocity
 $\boldsymbol{\dot{x}}_d$, and outputs the joint torque $\boldsymbol{u}$.
 
-Thus, the controlled manipulator with the controller is
+Thus, the controlled robot arm with the controller has the equation of motion:
 
-$$\label{equ.manipulator_control}
-    \boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\textbf{Controller}(\boldsymbol{q}, \boldsymbol{\dot{q}}, \boldsymbol{x}_d, \boldsymbol{\dot{x}}_d)$$
+$$
+    \boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\textbf{Controller}(\boldsymbol{q}, \boldsymbol{\dot{q}}, \boldsymbol{x}_d, \boldsymbol{\dot{x}}_d)$$(equ.osc_sys)
 
-By analogy with joint space centralized control, we below will consider
-two types of controllers for the operational space control.
+</br>
+In the following, we  define
+the end-effector  pose error:
 
-# Controller I: PD Control with Gravity Compensation
+$$
+\boldsymbol{e}=\boldsymbol{x}_{d}-\boldsymbol{x}
+$$(equ.end_pose_error)
 
-Given a constant end-effector pose $\boldsymbol{x}_{d}$, one can define
-the pose error of the end-effector as in
-([\[equ.end_pose_error\]](#equ.end_pose_error){reference-type="ref"
-reference="equ.end_pose_error"}). We want to design a controller
-([\[equ.controller\]](#equ.controller){reference-type="ref"
-reference="equ.controller"}), such that from any initial configuration,
-say $\boldsymbol{q}_0$, the controlled manipulator
-([\[equ.manipulator_control\]](#equ.manipulator_control){reference-type="ref"
-reference="equ.manipulator_control"}) will eventually reach
-$\boldsymbol{x}_{d}$. That means the end-effector error in
-([\[equ.end_pose_error\]](#equ.end_pose_error){reference-type="ref"
-reference="equ.end_pose_error"}) has
+
+
+and  end-effector velocity error:
+
+$$
+\boldsymbol{\dot e}=\boldsymbol{\dot x}_{d}-\boldsymbol{\dot x}=\boldsymbol{\dot x}_{d}-\boldsymbol J (\boldsymbol{q})\boldsymbol{\dot q}
+$$(equ.end_vel_error)
+
+with with $\boldsymbol{x}$ the current/actual robot end-effector pose, and  $\boldsymbol{x}$ the current/actual robot end-effector pose. 
+
+
+</br> </br> </br>
+
+
+## OSC PD Control with Gravity Compensation
+
+Given a stationary end-effector pose $\boldsymbol{x}_{d}$ (i.e., $\boldsymbol{\dot x}_{ d}=\boldsymbol{0}$), we want to design a controller {eq}`equ.osc_controller`
+ such that from any initial robot configuration  $\boldsymbol{q}_0$, the controlled robot arm {eq}`equ.osc_sys` will eventually reach
+$\boldsymbol{x}_{d}$. That means 
 
 $$\boldsymbol{e}(t)\rightarrow \boldsymbol{0}\quad \text{as}\quad
 t\rightarrow \infty$$
 
-Below, we will design the controller
-([\[equ.controller\]](#equ.controller){reference-type="ref"
-reference="equ.controller"}) based on the Lyapunov method (see
-background of Lyapunov method in Lecture 16-17). First, we take the
+Below, we will design the controller {eq}`equ.osc_controller` based on the Lyapunov method (see
+background of Lyapunov method in [Numerical Inverse Kinematics](chapter-nik)).
+
+
+
+ First, we take the
 vector $\begin{bmatrix}\boldsymbol{e}\\
 \boldsymbol{\dot{q}}\end{bmatrix}$ as the control system state. Choose
-the following positive definite quadratic form as Lyapunov function
-candidate:
+the following positive definite quadratic form as Lyapunov function:
 
-$$V(\dot{\boldsymbol{q}}, {\boldsymbol{e}})=\frac{1}{2} \dot{\boldsymbol{q}}^{T} \boldsymbol{B}(\boldsymbol{q}) \dot{\boldsymbol{q}}+\frac{1}{2} {\boldsymbol{e}}^{T} \boldsymbol{K}_{P} {\boldsymbol{e}}>0 \quad \forall \dot{\boldsymbol{q}}, {\boldsymbol{e}} \neq \mathbf{0}$$
+$$V(\dot{\boldsymbol{q}}, {\boldsymbol{e}})=\frac{1}{2} \dot{\boldsymbol{q}}^{T} \boldsymbol{B}(\boldsymbol{q}) \dot{\boldsymbol{q}}+\frac{1}{2} {\boldsymbol{e}}^{T} \boldsymbol{K}_{P} {\boldsymbol{e}}>0 \quad \forall \dot{\boldsymbol{q}}, {\boldsymbol{e}} \neq \mathbf{0}$$(equ.ocs_v)
 
-with $\boldsymbol{K}_{P}$ a symmetric positive definite matrix. Then,
+with $\boldsymbol{K}_{P}$ a  positive definite matrix. Then,
 
 $$\dot{V}=\dot{\boldsymbol{q}}^{T} \boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\frac{1}{2} \dot{\boldsymbol{q}}^{T} \dot{\boldsymbol{B}}(\boldsymbol{q}) \dot{\boldsymbol{q}}+\dot{\boldsymbol{e}}^{T} \boldsymbol{K}_{P} {\boldsymbol{e}}$$
 
 
-```{figure} ../lec19/control/operational_PD_gravity_compensation.jpg
+
+
+
+Since $\dot{\boldsymbol{x}}_{d}=\mathbf{0}$,
+
+$$\dot{{\boldsymbol{e}}}=-\dot{\boldsymbol{x}}=-\boldsymbol{J}(\boldsymbol{q}) \dot{\boldsymbol{q}}$$
+
+and then
+
+$$\dot{V}=\dot{\boldsymbol{q}}^{T} \boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\frac{1}{2} \dot{\boldsymbol{q}}^{T} \dot{\boldsymbol{B}}(\boldsymbol{q}) \dot{\boldsymbol{q}}-\dot{\boldsymbol{q}}^{T} \boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K}_{P} {\boldsymbol{e}}$$(equ.ocs_vdot)
+
+Similar to the derivation in the  [previous chapter](chapter-cjc), we replace
+$\boldsymbol{B}\ddot{\boldsymbol{q}}$ in {eq}`equ.ocs_vdot` form dynamics {eq}`equ.osc_dyn`
+ and consider the property that
+$\dot{\boldsymbol{B}}-2 \boldsymbol{C}$ is a
+skew-symmetric matrix.
+Then, {eq}`equ.ocs_vdot` becomes
+
+$$\dot{V}=\dot{\boldsymbol{q}}^{T}\left(\boldsymbol{u}-\boldsymbol{g}(\boldsymbol{q})-\boldsymbol{J}_{A}^{T}(\boldsymbol{q}) \boldsymbol{K}_{P} {\boldsymbol{e}}\right) .$$
+
+For the above $\dot{V}$ to be negative, we choose the controller
+
+
+$$\boldsymbol{u}=\boldsymbol{g}(\boldsymbol{q})+\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K}_{P} {\boldsymbol{e}}-\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K}_{D} \boldsymbol{J}(\boldsymbol{q}) \dot{\boldsymbol{q}}$$(equ.osc_pd)
+
+
+with $\boldsymbol{K}_{D}$ positive definite, then,
+
+$$\dot{V}=-\dot{\boldsymbol{q}}^{T} \boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K}_{D} \boldsymbol{J}(\boldsymbol{q}) \dot{\boldsymbol{q}} \quad <0,  \quad \forall \quad\boldsymbol{\dot{q}}\quad\text{with} \quad \boldsymbol{J}(\boldsymbol{q})\dot{\boldsymbol{q}} \neq \mathbf{0}$$(equ.osc_vdot2)
+
+which says the Lyapunov function decreases as long as
+$\boldsymbol{J}(\boldsymbol{q})\dot{\boldsymbol{q}} \neq \mathbf{0}$.
+Thus, the system reaches an equilibrium pose, with condition
+$\dot{V}= 0$ and
+$\boldsymbol{J}(\boldsymbol{q})\dot{\boldsymbol{q}}=\mathbf{0}$.
+
+ We
+consider the non-redundant non-singularity of matrix
+$\boldsymbol{J}(\boldsymbol{q})$. Then, the equilibrium condition
+$\boldsymbol{J}(\boldsymbol{q})\dot{\boldsymbol{q}}=\mathbf{0}$ means
+that $\dot{\boldsymbol{q}}=\mathbf{0}$ and further
+$\ddot{\boldsymbol{q}} =\mathbf{0}$. To find the robot equilibrium configuration, we look at the robot arm dynamics with controller
+
+$$\boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{F} \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\boldsymbol{g}(\boldsymbol{q})+\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K}_{P} {\boldsymbol{e}}-\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K}_{D} \boldsymbol{J}(\boldsymbol{q}) \dot{\boldsymbol{q}}$$ (equ.osc_sys2)
+
+With the condition $\dot{\boldsymbol{q}}=\mathbf{0}$, it follows that
+$\ddot{\boldsymbol{q}} =\mathbf{0}$, and then the above {eq}`equ.osc_sys2` becomes
+
+$$\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K}_{P} {\boldsymbol{e}}=\mathbf{0}\quad \rightarrow\quad {\boldsymbol{e}}=\boldsymbol{x}_{d}-\boldsymbol{x}_{e}=\mathbf{0}$$(equ.osc_equiv)
+
+This concludes that the controlled robot arm will asymptotically reach
+$\boldsymbol{x}_d$. The corresponding control diagram is shown below.
+
+
+
+```{figure} ../lec19/control/operational_PD_gravity_compensation.jpeg
 ---
-width: 70%
+width: 90%
 name: operational_PD_gravity_compensation
 ---
 Block diagram of operational space PD control with gravity
@@ -84,143 +147,88 @@ compensation
 ```
 
 
+```{admonition} Summary: PD Control with Gravity Compensation
 
-Since $\dot{\boldsymbol{x}}_{d}=\mathbf{0}$,
+$$
+\boldsymbol{u}=\underbrace{\boldsymbol{g}(\boldsymbol{q})}_{\text{gravitational compensation}}+
+\underbrace{\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K}_{P} {(\boldsymbol{x}_d-\boldsymbol{x})}}_{\text{proportional control}}\quad\underbrace{-\boldsymbol{J}^{T}(\boldsymbol{q})\boldsymbol{K}_{D} \boldsymbol{J}(\boldsymbol{q})\dot{\boldsymbol{q}}}_{\text{derivative control}}$$(equ.osc_pd2)
 
-$$\dot{{\boldsymbol{e}}}=-\boldsymbol{J}_{A}(\boldsymbol{q}) \dot{\boldsymbol{q}}$$
+with $\boldsymbol{K}_{P}$ and $\boldsymbol{K}_{D}$ are positive definite matrices. 
+```
 
-and then
 
-$$\dot{V}=\dot{\boldsymbol{q}}^{T} \boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\frac{1}{2} \dot{\boldsymbol{q}}^{T} \dot{\boldsymbol{B}}(\boldsymbol{q}) \dot{\boldsymbol{q}}-\dot{\boldsymbol{q}}^{T} \boldsymbol{J}_{A}^{T}(\boldsymbol{q}) \boldsymbol{K}_{P} {\boldsymbol{e}}$$
 
-Similar to the derivation in the previous lecture, we replace
-$\boldsymbol{B}\ddot{\boldsymbol{q}}$ form dynamics
-([\[equ.manipulator\]](#equ.manipulator){reference-type="ref"
-reference="equ.manipulator"}) and consider the property that
-$\boldsymbol{N}=\dot{\boldsymbol{B}}-2 \boldsymbol{C}$ is a
-skew-symmetric matrix (see in the property of dynamics in Lecture 18).
-Then, the time derivative of Lyapunov function is
 
-$$\dot{V}=\dot{\boldsymbol{q}}^{T}\left(\boldsymbol{u}-\boldsymbol{g}(\boldsymbol{q})-\boldsymbol{J}_{A}^{T}(\boldsymbol{q}) \boldsymbol{K}_{P} {\boldsymbol{e}}\right) .$$
+</br> </br> </br>
 
-For the above $\dot{V}$ to be negative, we choose the controller
+## OSC Inverse Dynamics Control
+One limitation of the OSC PD Control is that the controller can only follow a stationary desired $\boldsymbol{x}_d$
+, but is not good at tracking a fast-changing desired $\boldsymbol{x}_d$ (i.e., $\boldsymbol{\dot x}_d\neq \boldsymbol{0}$). OSC Inverse Dynamics Control is to address so.
 
-:::{important}
-$$\boldsymbol{u}=\boldsymbol{g}(\boldsymbol{q})+\boldsymbol{J}_{A}^{T}(\boldsymbol{q}) \boldsymbol{K}_{P} {\boldsymbol{e}}-\boldsymbol{J}_{A}^{T}(\boldsymbol{q}) \boldsymbol{K}_{D} \boldsymbol{J}_{A}(\boldsymbol{q}) \dot{\boldsymbol{q}}$$
-:::
-
-with $\boldsymbol{K}_{D}$ positive definite, then,
-
-$$\dot{V}=-\dot{\boldsymbol{q}}^{T} \boldsymbol{J}_{A}^{T}(\boldsymbol{q}) \boldsymbol{K}_{D} \boldsymbol{J}_{A}(\boldsymbol{q}) \dot{\boldsymbol{q}} \quad <0,  \quad \forall \quad\boldsymbol{\dot{q}}\quad\text{with} \quad \boldsymbol{J}_A(\boldsymbol{q})\dot{\boldsymbol{q}} \neq \mathbf{0}$$
-
-which says the Lyapunov function decreases as long as
-$\boldsymbol{J}_A(\boldsymbol{q})\dot{\boldsymbol{q}} \neq \mathbf{0}$.
-Thus, the system reaches an equilibrium pose, with condition
-$\dot{V}= 0$ and
-$\boldsymbol{J}_A(\boldsymbol{q})\dot{\boldsymbol{q}}=\mathbf{0}$. We
-consider the non-redundant non-singularity of matrix
-$\boldsymbol{J}_A(\boldsymbol{q})$. Then, the equilibrium condition
-$\boldsymbol{J}_A(\boldsymbol{q})\dot{\boldsymbol{q}}=\mathbf{0}$ means
-that $\dot{\boldsymbol{q}}=\mathbf{0}$ and further
-$\ddot{\boldsymbol{q}} =\mathbf{0}$.
-
-To find the equilibrium configuration, we look at the manipulator
-dynamics under control
-
-$$\boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{F} \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\boldsymbol{g}(\boldsymbol{q})+\boldsymbol{J}_{A}^{T}(\boldsymbol{q}) \boldsymbol{K}_{P} {\boldsymbol{e}}-\boldsymbol{J}_{A}^{T}(\boldsymbol{q}) \boldsymbol{K}_{D} \boldsymbol{J}_{A}(\boldsymbol{q}) \dot{\boldsymbol{q}}$$
-
-With the condition $\dot{\boldsymbol{q}}=\mathbf{0}$, it follows that
-$\ddot{\boldsymbol{q}} =\mathbf{0}$, and then from the above dynamics,
-
-$$\boldsymbol{J}_{A}^{T}(\boldsymbol{q}) \boldsymbol{K}_{P} {\boldsymbol{e}}=\mathbf{0}\quad \rightarrow\quad {\boldsymbol{e}}=\boldsymbol{x}_{d}-\boldsymbol{x}_{e}=\mathbf{0}$$
-
-This concludes that the controlled manipulator will asymptotically reach
-$\boldsymbol{x}_d$. The control scheme is in Fig.
-[1](#fig:3){reference-type="ref" reference="fig:3"}.
-
-# Controller II: Inverse Dynamics Control
-
-Recall the joint space inverse dynamics control of a manipulator in the
-previous lecture (Lecture 21), we set the controller of the following
+Recall the joint space inverse dynamics control  in the  [previous chapter](chapter-cjc). If we  set the controller as
 form
 
-:::{important}
-$$\label{equ:u}
-    \boldsymbol{u}=\boldsymbol{B}(\boldsymbol{q}) \boldsymbol{y}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})$$
-:::
 
-where $\boldsymbol{y}$ is a new input vector whose expression is to be
-determined yet. The above controller directly leads to the controlled
-manipulator
-([\[equ.manipulator_control\]](#equ.manipulator_control){reference-type="ref"
-reference="equ.manipulator_control"}) as
+$$
+    \boldsymbol{u}=\boldsymbol{B}(\boldsymbol{q}) \boldsymbol{y}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})$$(equ.osc_u)
 
-$$\boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\boldsymbol{B}(\boldsymbol{q}) \boldsymbol{y}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})$$
 
-leading to 
+where $\boldsymbol{y}$ is a new input vector. The  controller directly leads to the controlled
+robot arm {eq}`equ.osc_sys` as
 
-$$\label{equ.dyn_new}
-\boldsymbol{\ddot{q}}=\boldsymbol{y}$$ 
+$$\boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\boldsymbol{B}(\boldsymbol{q}) \boldsymbol{y}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})$$(equ.ocs_sys2)
+
+further simplified as 
+
+$$
+\boldsymbol{\ddot{q}}=\boldsymbol{y}$$ (equ.ocs_dyn_new)
 
 Again, we will discuss how to set
-this new control input vector $\boldsymbol{y}$, but the particular form
-of controller ([\[equ:u\]](#equ:u){reference-type="ref"
-reference="equ:u"}) leads to a linear relationship between the input
-signal $\boldsymbol{y}$ and the manipulator's joint acceleration
-$\ddot{\boldsymbol{q}}$.
-
-The new control input $\boldsymbol{y}$ in
-([\[equ:u\]](#equ:u){reference-type="ref" reference="equ:u"}) is to be
-designed to track a changing $\boldsymbol{x}_{d}(t)$. To this end, we
+this new input $\boldsymbol{y}$ below. The new input $\boldsymbol{y}$ is designed  make the robot arm track a changing $\boldsymbol{x}_{d}(t)$. To this end, we
 differentiate the jacobian equation
 
-$$\dot{\boldsymbol{x}}_e=\boldsymbol{J}_A(\boldsymbol{q})\dot{\boldsymbol{q}}$$
+$$\dot{\boldsymbol{x}}=\boldsymbol{J}(\boldsymbol{q})\dot{\boldsymbol{q}}$$
 
 on both side with respect to time $t$, leading to
 
-$$\label{equ.dotjacobian}
-    \ddot{\boldsymbol{x}}_{e}=\boldsymbol{J}_{A}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\dot{\boldsymbol{J}}_{A}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}$$
+$$
+    \ddot{\boldsymbol{x}}=\boldsymbol{J}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\dot{\boldsymbol{J}}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}$$(equ.osc_djac)
 
-For a nonredundant manipulator, the above
-([\[equ.dotjacobian\]](#equ.dotjacobian){reference-type="ref"
-reference="equ.dotjacobian"}) suggests the following choice of
+The above {eq}`equ.osc_djac` suggests the following choice of
 $\boldsymbol{y}$:
 
-:::{important}
-$$\label{equ.ysignal}
-    \boldsymbol{y}=\boldsymbol{J}_{A}^{-1}(\boldsymbol{q})\left(\ddot{\boldsymbol{x}}_{d}+\boldsymbol{K}_{D} \dot{{\boldsymbol{e}}}+\boldsymbol{K}_{P} {\boldsymbol{e}}-\dot{\boldsymbol{J}}_{A}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}\right)$$
-:::
+$$
+    \boldsymbol{y}=\boldsymbol{J}^{-1}(\boldsymbol{q})\left(\ddot{\boldsymbol{x}}_{d}+\boldsymbol{K}_{D} \dot{{\boldsymbol{e}}}+\boldsymbol{K}_{P} {\boldsymbol{e}}-\dot{\boldsymbol{J}}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}\right)$$(equ.osc_y)
 
 with $\boldsymbol{K}_{P}$ and $\boldsymbol{K}_{D}$ positive definite
-matrices. In fact, plugging
-([\[equ.ysignal\]](#equ.ysignal){reference-type="ref"
-reference="equ.ysignal"}) to
-([\[equ.dyn_new\]](#equ.dyn_new){reference-type="ref"
-reference="equ.dyn_new"}) leads to the error dynamics
+matrices. In fact, plugging {eq}`equ.osc_y`
+ to {eq}`equ.osc_djac`
+ leads to the error dynamics
 
 $$\ddot{{\boldsymbol{e}}}+\boldsymbol{K}_{D} \dot{{\boldsymbol{e}}}+\boldsymbol{K}_{P} {\boldsymbol{e}}=\mathbf{0}$$
 
 which describes the operational space error dynamics, with
 $\boldsymbol{K}_{P}$ and $\boldsymbol{K}_{D}$ determining the error
-convergence rate to zero, as specified in the previous lecture (Lecture
-21). Please see my additional control background note for the response
-of the second-order system versus the values of $\boldsymbol{K}_{P}$ and
-$\boldsymbol{K}_{D}$.
+convergence rate to zero. Typicaly we choose
 
-The resulting inverse dynamics control scheme is reported in Fig.
-[2](#fig:44){reference-type="ref" reference="fig:44"}. Again in this
-case, besides $\boldsymbol{x}_{e}$ and
-$\dot{\boldsymbol{x}}_{e}, \boldsymbol{q}$ and $\dot{\boldsymbol{q}}$
-are also to be measured. If measurements of $\boldsymbol{x}_{e}$ and
-$\dot{\boldsymbol{x}}_{e}$ are indirect, the controller must compute the
-direct kinematics functions $\boldsymbol{k}(\boldsymbol{q})$ and
-$\boldsymbol{J}_{A}(\boldsymbol{q})$ on-line.
+$$
+    \boldsymbol{K}_{P}=\operatorname{diag}\left\{\omega_{1}^{2}, \ldots, \omega_{r}^{2}\right\} \quad \boldsymbol{K}_{D}=\operatorname{diag}\left\{2 \zeta_{1} \omega_{1}, \ldots, 2 \zeta_{r} \omega_{r}\right\}$$
+
+
+with with $\zeta_i$  the damping ratio and  $\omega_{i}$  the natural frequency.
+Then, the end-effector of the controlled robot arm will behave like a linear second-order (mass-spring-damper) system. 
 
 
 
-```{figure} ../lec19/control/operational_PD_gravity_compensation2.jpg
+
+
+The resulting OCS inverse dynamics control diagram is shown below.
+
+
+
+```{figure} ../lec19/control/operational_PD_gravity_compensation2.jpeg
 ---
-width: 70%
+width: 90%
 name: operational_PD_gravity_compensation2
 ---
 Block scheme of operational space PD control with gravity
@@ -229,3 +237,22 @@ compensation
 
 
 
+In sum, we recapitulate the operational space inverse dynamics control below
+
+```{admonition} OCS inverse dynamics control 
+
+$$
+    \boldsymbol{u}=\boldsymbol{B}(\boldsymbol{q}) \boldsymbol{y}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})$$
+
+with
+
+$$
+    \boldsymbol{y}=\boldsymbol{J}^{-1}(\boldsymbol{q})\left(\ddot{\boldsymbol{x}}_{d}+\boldsymbol{K}_{D} \dot{{\boldsymbol{e}}}+\boldsymbol{K}_{P} {\boldsymbol{e}}-\dot{\boldsymbol{J}}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}\right)$$
+
+Here, 
+
+$$
+    \boldsymbol{K}_{P}=\operatorname{diag}\left\{\omega_{1}^{2}, \ldots, \omega_{r}^{2}\right\} \quad \boldsymbol{K}_{D}=\operatorname{diag}\left\{2 \zeta_{1} \omega_{1}, \ldots, 2 \zeta_{r} \omega_{r}\right\}$$
+
+with with $\zeta_i$  the damping ratio and  $\omega_{i}$  the natural frequency.
+```

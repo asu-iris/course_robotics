@@ -4,6 +4,7 @@ author:
 title: "Lecture 21: Centralized Joint Control"
 ---
 
+(chapter-cjc)=
 # Centralized Joint Control
 
 In the previous sections, we have discussed the design of independent (decentralized)
@@ -35,6 +36,8 @@ Thus, motion of equation of the robot arm with the controller is
 
 $$
     \boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\textbf{Controller}(\boldsymbol{q}, \boldsymbol{\dot{q}}, \boldsymbol{q}_d, \boldsymbol{\dot{q}}_d)$$(equ.cjc_system)
+
+</br> </br> </br>
 
 ## PD Control with Gravity Compensation
 
@@ -236,7 +239,7 @@ $$
     \boldsymbol{K}_{P}=\operatorname{diag}\left\{\omega_{1}^{2}, \ldots, \omega_{n}^{2}\right\} \quad \boldsymbol{K}_{D}=\operatorname{diag}\left\{2 \zeta_{1} \omega_{1}, \ldots, 2 \zeta_{n} \omega_{n}\right\}$$(equ.kpkd)
 
 Then, the controlled robot arm can be viewed as having $n$ 
- decoupled (liner) second-order subsystems. Here, $\zeta_i$ is the damping ratio and  $\omega_{i}$  the natural frequency  for joint $i$. For each joint $i$, the error dynamics is
+ decoupled (liner) second-order (mass-spring-damper) subsystems. Here, $\zeta_i$ is the damping ratio and  $\omega_{i}$  the natural frequency  for joint $i$. For each joint $i$, the error dynamics is
 
 
 $$
