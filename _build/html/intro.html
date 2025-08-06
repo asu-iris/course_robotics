@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Welcome &#8212; Modeling and Control of Robots</title>
+    <title>Welcome and some thoughts &#8212; Modeling and Control of Robots</title>
   
   
   
@@ -28,11 +28,11 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -178,7 +178,7 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1 current active">
                 <a class="reference internal" href="#">
-                    Welcome
+                    Welcome and some thoughts
                 </a>
             </li>
         </ul>
@@ -392,7 +392,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Welcome</h1>
+    <h1>Welcome and some thoughts</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -402,11 +402,14 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#course-objectives">Course objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recommended-textbooks">Recommended textbooks</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-this-online-note">About this online note</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-me">About Me</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-iris-lab">About  IRIS Lab</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-still-modeling-and-control-of-robots">Why still modeling and control of robots?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-a-robot-arm">Why a robot arm?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-this-online-learning-materials">About this online learning materials</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-the-pi-and-iris-lab">About the PI and IRIS lab</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dexterous-manipulation-modeling-learning-planning-percpetion">Dexterous Manipulation (modeling/learning/planning/percpetion)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#robot-learning-from-humans-feedback-and-demonstrations">Robot learning from humans (feedback and demonstrations)</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -418,39 +421,82 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="welcome">
-<h1>Welcome<a class="headerlink" href="#welcome" title="Link to this heading">#</a></h1>
-<p>Welcome to the course of Modeling and Control of Robotics (MAE 547, Fall 2024).</p>
-<section id="course-objectives">
-<h2>Course objectives<a class="headerlink" href="#course-objectives" title="Link to this heading">#</a></h2>
-<p>This course covers theory and methods for modeling and control of robots. Homogeneous transforms, direct and inverse kinematics, Jacobian, statics, dynamics, and control of robotic arms will be discussed.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="welcome-and-some-thoughts">
+<h1>Welcome and some thoughts<a class="headerlink" href="#welcome-and-some-thoughts" title="Link to this heading">#</a></h1>
+<p>Welcome to the course of Modeling and Control of Robotics (MAE 547).</p>
+<section id="why-still-modeling-and-control-of-robots">
+<h2>Why still modeling and control of robots?<a class="headerlink" href="#why-still-modeling-and-control-of-robots" title="Link to this heading">#</a></h2>
+<p>In the era of big data and artificial intelligence (AI), it’s easy to assume that traditional mathematical modeling and control of robots have taken a back seat to machine learning and AI. But in robotics—where real-world physics, safety, and precision still matter—understanding how to model and control robots, as  dynamic systems, remains as essential as ever.  Whether you’re building a robot arm, a walking robot, or designing an autonomous vehicle, a principled grasp of modeling and control enables you to predict behavior, ensure stability, and build systems that not only learn—but reason and respond robustly in the physical world. MAE 547 will equip you with these skills, bridging classical techniques with modern robotics applications.</p>
 </section>
-<section id="recommended-textbooks">
-<h2>Recommended textbooks<a class="headerlink" href="#recommended-textbooks" title="Link to this heading">#</a></h2>
+<section id="why-a-robot-arm">
+<h2>Why a robot arm?<a class="headerlink" href="#why-a-robot-arm" title="Link to this heading">#</a></h2>
+<p>This course is designed to ground you in the foundational tools that make intelligent machines truly reliable: homogeneous transformations, forward and inverse kinematics, Jacobians, statics, dynamics, and feedback control.</p>
+<p>We focus on how to mathematically describe and control the motion of robots—particularly robot arms. At first glance, this might seem narrow, especially when you see humanoid robots, animal-inspired quadrupeds, or multi-fingered robotic hands performing impressive feats online. But if you look closely, the underlying building blocks of those systems are remarkably consistent. Each articulated component—whether a leg, an arm, or a finger—can be modeled as a robot arm attached to a mobile base like a pelvis, shoulder, or palm. Mastering the modeling and control of robot arms is therefore not only foundational, but also a critical stepping stone toward designing and understanding more complex robotic systems.</p>
+</section>
+<section id="about-this-online-learning-materials">
+<h2>About this online learning materials<a class="headerlink" href="#about-this-online-learning-materials" title="Link to this heading">#</a></h2>
+<p>This interactive online resource is designed for ASU MAE 547 students, global robotics learners, and industry practitioners who want to learn—or refresh—the fundamentals of robotics. The goal is to present robotics concepts in a concise, accessible format supported by visual aids, linked background references, and Python-based learning modules.</p>
+<p>Many of the current materials are adapted from  <a class="reference internal" href="#(https://people.disim.univaq.it/~costanzo.manes/EDU_stuff/Robotics_Modelling,%20Planning%20and%20Control_Sciavicco_extract.pdf)"><span class="xref myst">Robotics: Modelling, Planning and Control, by Bruno Siciliano, Lorenzo Sciavicco, Luigi Villani, Giuseppe Oriolo</span></a>, as well as selected content from <a class="reference internal" href="#(https://hades.mech.northwestern.edu/images/7/7f/MR.pdf)"><span class="xref myst">Modern Robotics by Kevin M. Lynch and Frank C. Park</span></a>. These notes are specifically tailored for students in MAE 547 but are also intended as a useful reference for anyone interested in robotics—offering a quick way to learn or review topics without needing to read an entire textbook. When possible, I recommend that students engage with the original books.</p>
 <ul class="simple">
 <li><p><strong>Robotics: Modeling, Planning and Control</strong>  by Bruno Siciliano, Lorenzo Sciavicco, Luigi Villani,
 Giuseppe Oriolo, Springer, 2009</p></li>
 <li><p><strong>Modern Robotics Mechanics, Planning, and Control</strong> by Kevin M. Lynch and Frank C. Park, Cambridge University Press, 2017</p></li>
 </ul>
-</section>
-<section id="about-this-online-note">
-<h2>About this online note<a class="headerlink" href="#about-this-online-note" title="Link to this heading">#</a></h2>
-<p>This note is available online as an open-source resource. The majority of its contents, including figures, are directly adapted from Siciliano et al.’s book and a few from Lynch’s book. The purpose of these notes is to provide a concise material specifically tailored for course students. Simultaneously, it aims to benefit general students interested in robotics by offering a quick and accessible source for learning, reference, and review, eliminating the need to read an entire book. Nevertheless, I highly encourage everyone to explore the original books by Siciliano et al. and Lynch when time permits.</p>
-</section>
-<section id="about-me">
-<h2>About Me<a class="headerlink" href="#about-me" title="Link to this heading">#</a></h2>
-<p>I am an Assistant Professor in the Ira A. Fulton Schools of Engineering at Arizona State University. PI of <a class="reference external" href="https://asu-iris.github.io/">Intelligent Robotics and Interactive Systems (IRIS)</a> Lab.
-This is the lab webpage: <a class="reference external" href="https://irislab.tech/">https://irislab.tech/</a></p>
-</section>
-<section id="about-iris-lab">
-<h2>About  IRIS Lab<a class="headerlink" href="#about-iris-lab" title="Link to this heading">#</a></h2>
-<p>The <a class="reference external" href="https://irislab.tech/">Intelligent Robotics and Interactive Systems (IRIS)</a> Lab focues on:</p>
+<p>While this site is still under active development, the goal is to continuously expand it with advanced topics such as:</p>
 <ul class="simple">
-<li><p><strong>Human-autonomy alignment:</strong>  We develop certifiable, efficient, and empowering methods to enable robots to align their autonomy with human users through various natural interactions.</p></li>
-<li><p><strong>Contact-rich dexterous manipulation:</strong> We develop efficient physics-based representations/modeling, planning/control methods to enable robots to gain dexterity through frequently making or breaking contacts with objects.</p></li>
-<li><p><strong>Fundamental computational methods:</strong> We develop fundamental algorithms for  efficient, safe, and robust robot intelligence, by harnessing the complementary benefits of model-based and data-driven approaches.</p></li>
+<li><p>MuJoCo-based simulation examples</p></li>
+<li><p>Richer visualizations and animations</p></li>
+<li><p>More tightly integrated Python code</p></li>
 </ul>
-<p>The IRIS lab is actively looking for robotics enthusiasts to join our team. If you’re interested in becoming a part of our lab, please submit your application here: <a href="https://asu-iris.github.io/joining/" target="_blank">Join IRIS Lab</a>.</p>
+<p>If you have suggestions or spot areas for improvement, feel free to <a class="reference external" href="https://github.com/asu-iris/course_robotics/issues">open an issue</a> on the GitHub repository.</p>
+<p>If you find this material helpful, please consider giving it a star <a class="reference external" href="https://github.com/asu-iris/course_robotics">here</a>. Your feedback is highly appreciated and will help improve this resource for everyone!</p>
+</section>
+<section id="about-the-pi-and-iris-lab">
+<h2>About the PI and IRIS lab<a class="headerlink" href="#about-the-pi-and-iris-lab" title="Link to this heading">#</a></h2>
+<p>I am an Assistant Professor in the Ira A. Fulton Schools of Engineering at Arizona State University. PI of <a class="reference external" href="https://asu-iris.github.io/">Intelligent Robotics and Interactive Systems (IRIS)</a> Lab.
+This is the lab webpage: <a class="reference external" href="https://irislab.tech/">https://irislab.tech/</a>.</p>
+<p>Here are some cool demos showing what we are doing:</p>
+<section id="dexterous-manipulation-modeling-learning-planning-percpetion">
+<h3>Dexterous Manipulation (modeling/learning/planning/percpetion)<a class="headerlink" href="#dexterous-manipulation-modeling-learning-planning-percpetion" title="Link to this heading">#</a></h3>
+<div style="margin-bottom: 1.5em;">
+  <div style="font-weight: bold; margin-bottom: 0.2em;">Real-time planning and control for dexterous manipulation (everything is autonomous)</div>
+  <video width="640" height="360" controls>
+    <source src="/misc/iris_demo/cf_demo.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</div>
+<div style="margin-bottom: 1.5em;">
+  <div style="font-weight: bold; margin-bottom: 0.2em;">Multi-fingered robotic hand (Allegro hand) learns in-hand rotation of objects from scratch </div>
+  <video width="640" height="360" controls>
+    <source src="/misc/iris_demo/contactSDF-media-learn.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</div>
+<div style="margin-bottom: 1.5em;">
+  <div style="font-weight: bold; margin-bottom: 0.2em;"> TwinTrack: Reality to Simulation, Simulation to Reality </div>
+  <video width="640" height="360" controls>
+    <source src="/misc/iris_demo/twintrack.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</div>
+</section>
+<section id="robot-learning-from-humans-feedback-and-demonstrations">
+<h3>Robot learning from humans (feedback and demonstrations)<a class="headerlink" href="#robot-learning-from-humans-feedback-and-demonstrations" title="Link to this heading">#</a></h3>
+<div style="margin-bottom: 1.5em;">
+  <div style="font-weight: bold; margin-bottom: 0.2em;"> Robot learning skills from YouTube </div>
+  <video width="640" height="360" controls>
+    <source src="/misc/iris_demo/lfd-llm.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</div>
+<div style="margin-bottom: 1.5em;">
+  <div style="font-weight: bold; margin-bottom: 0.2em;"> Robot learning from human physical correction </div>
+  <video width="640" height="360" controls>
+    <source src="/misc/iris_demo/safe_mpc_align4.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</div>
+</section>
 </section>
 <div class="toctree-wrapper compound">
 </div>
@@ -511,11 +557,14 @@ This is the lab webpage: <a class="reference external" href="https://irislab.tec
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#course-objectives">Course objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recommended-textbooks">Recommended textbooks</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-this-online-note">About this online note</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-me">About Me</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-iris-lab">About  IRIS Lab</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-still-modeling-and-control-of-robots">Why still modeling and control of robots?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-a-robot-arm">Why a robot arm?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-this-online-learning-materials">About this online learning materials</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-the-pi-and-iris-lab">About the PI and IRIS lab</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dexterous-manipulation-modeling-learning-planning-percpetion">Dexterous Manipulation (modeling/learning/planning/percpetion)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#robot-learning-from-humans-feedback-and-demonstrations">Robot learning from humans (feedback and demonstrations)</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

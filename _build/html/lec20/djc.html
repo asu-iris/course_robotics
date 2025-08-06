@@ -28,11 +28,11 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -177,7 +177,7 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../intro.html">
-                    Welcome
+                    Welcome and some thoughts
                 </a>
             </li>
         </ul>
@@ -472,7 +472,8 @@ matrix, whose each diagonal entry encodes the inertia  at that joint.  <span cla
 is a coupling term between different joints.</p>
 <p>The above equation <a class="reference internal" href="#equation-equ-decouple-model">(64)</a> corresponds to the following diagram</p>
 <figure class="align-default" id="decentralized-control3">
-<a class="reference internal image-reference" href="../_images/decentralized_control3.jpeg"><img alt="../_images/decentralized_control3.jpeg" src="../_images/decentralized_control3.jpeg" style="width: 99%;" /></a>
+<a class="reference internal image-reference" href="../_images/decentralized_control3.jpeg"><img alt="../_images/decentralized_control3.jpeg" src="../_images/decentralized_control3.jpeg" style="width: 99%;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 74 </span><span class="caption-text">Dynamics diagram of a motor-driven
 robot arm.</span><a class="headerlink" href="#decentralized-control3" title="Link to this image">#</a></p>
@@ -508,7 +509,8 @@ transfer function (usually a constant to model the sensor). The goal of
 control design is to find <span class="math notranslate nohighlight">\(C(s)\)</span> such that <span class="math notranslate nohighlight">\(\theta_m\)</span> is able to track
 <span class="math notranslate nohighlight">\(\theta_r\)</span>, while <span class="math notranslate nohighlight">\(D\)</span> has as little effect on <span class="math notranslate nohighlight">\(\theta_m\)</span> as possible.</p>
 <figure class="align-default" id="fd-control2">
-<a class="reference internal image-reference" href="../_images/fd_control2.jpeg"><img alt="../_images/fd_control2.jpeg" src="../_images/fd_control2.jpeg" style="width: 90%;" /></a>
+<a class="reference internal image-reference" href="../_images/fd_control2.jpeg"><img alt="../_images/fd_control2.jpeg" src="../_images/fd_control2.jpeg" style="width: 90%;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 75 </span><span class="caption-text">A typical control system diagram</span><a class="headerlink" href="#fd-control2" title="Link to this image">#</a></p>
 </figcaption>
@@ -585,7 +587,8 @@ I_m\ddot{\theta}_m+D=\tau_m=I_m\ddot{\theta}_m+\frac{k_t}{R_a}(\frac{DR_a}{k_t})
 \]</div>
 <p>The above <a class="reference internal" href="#equation-equ-motor">(67)</a> corresponds to the following diagram</p>
 <figure class="align-default" id="motor-model3">
-<a class="reference internal image-reference" href="../_images/motor_model3.jpeg"><img alt="../_images/motor_model3.jpeg" src="../_images/motor_model3.jpeg" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="../_images/motor_model3.jpeg"><img alt="../_images/motor_model3.jpeg" src="../_images/motor_model3.jpeg" style="width: 80%;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 76 </span><span class="caption-text">Diagram of a single motor-joint model, with coupled joint term <span class="math notranslate nohighlight">\(D\)</span>
 treated as disturbance.</span><a class="headerlink" href="#motor-model3" title="Link to this image">#</a></p>
@@ -622,7 +625,8 @@ C_{P}(s)=K_{P} \frac{1+s T_{P}}{s}
 <p>The control diagram for the single joint system  (<a class="reference internal" href="#motor-model3"><span class="std std-numref">Fig. 76</span></a>)  is shown below (note that the backward pass
 constant <span class="math notranslate nohighlight">\(k_{TP}\)</span> is given and a constant, which can be thought of as the sensor gain).</p>
 <figure class="align-default" id="p-control2">
-<a class="reference internal image-reference" href="../_images/p_control2.jpg"><img alt="../_images/p_control2.jpg" src="../_images/p_control2.jpg" style="width: 99%;" /></a>
+<a class="reference internal image-reference" href="../_images/p_control2.jpg"><img alt="../_images/p_control2.jpg" src="../_images/p_control2.jpg" style="width: 99%;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 77 </span><span class="caption-text">Control diagram of single-joint system</span><a class="headerlink" href="#p-control2" title="Link to this image">#</a></p>
 </figcaption>
@@ -669,7 +673,8 @@ Please see my <a class="reference download internal" download="" href="../_downl
 <ul>
 <li><p>If <span class="math notranslate nohighlight">\(T_{P}&lt;T_{m}\)</span>, the root locus is shown. Because there is always a pole (root) living on the right-half s-plane regardless of the choice of <span class="math notranslate nohighlight">\(\frac{k_{m} K_{P} k_{T P} T_{P}}{T_{m}}\)</span>, the closed-loop control system <a class="reference internal" href="#equation-equ-closed-loop">(69)</a> thus is inherently unstable.</p>
 <figure class="align-default" id="p-control-rl-1">
-<a class="reference internal image-reference" href="../_images/p_control_rl_1.jpg"><img alt="../_images/p_control_rl_1.jpg" src="../_images/p_control_rl_1.jpg" style="width: 90%;" /></a>
+<a class="reference internal image-reference" href="../_images/p_control_rl_1.jpg"><img alt="../_images/p_control_rl_1.jpg" src="../_images/p_control_rl_1.jpg" style="width: 90%;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 78 </span><span class="caption-text">Root locus when
 <span class="math notranslate nohighlight">\(T_{P}&lt;T_{m}\)</span></span><a class="headerlink" href="#p-control-rl-1" title="Link to this image">#</a></p>
@@ -679,7 +684,8 @@ Please see my <a class="reference download internal" download="" href="../_downl
 <li><p>If <span class="math notranslate nohighlight">\(T_{P}&gt;T_{m}\)</span>, the root locus is shown as below. First, all poles can be located on the left half of s-plane, thus closed-loop control system <a class="reference internal" href="#equation-equ-closed-loop">(69)</a> is stable. Also,  as <span class="math notranslate nohighlight">\(T_{P}\)</span>
 increases, the absolute value of the real part of the two complex poles, (<span class="math notranslate nohighlight">\(s_1\)</span> and <span class="math notranslate nohighlight">\(s_2\)</span>) tending towards the asymptotes increases too, and the     system has faster time response (please see my <a class="reference download internal" download="" href="../_downloads/af66a2a39b5480f30ad4e93bc7990bf7/control_basics.pdf"><span class="xref download myst">Minimal notes on control basics</span></a> for explaination)</p>
 <figure class="align-default" id="p-control-rl-2">
-<a class="reference internal image-reference" href="../_images/p_control_rl_2.jpg"><img alt="../_images/p_control_rl_2.jpg" src="../_images/p_control_rl_2.jpg" style="width: 90%;" /></a>
+<a class="reference internal image-reference" href="../_images/p_control_rl_2.jpg"><img alt="../_images/p_control_rl_2.jpg" src="../_images/p_control_rl_2.jpg" style="width: 90%;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 79 </span><span class="caption-text">Root locus when
 <span class="math notranslate nohighlight">\(T_{P}&gt;T_{m}\)</span></span><a class="headerlink" href="#p-control-rl-2" title="Link to this image">#</a></p>
