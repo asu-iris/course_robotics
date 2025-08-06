@@ -46,7 +46,7 @@ Here are some cool demos showing what we are doing:
 
 ### Dexterous Manipulation (modeling/learning/planning/percpetion)
 
-<!-- <div style="margin-bottom: 1.5em;">
+<div style="margin-bottom: 1.5em;">
   <div style="font-weight: bold; margin-bottom: 0.2em;">Real-time planning and control for dexterous manipulation (everything is autonomous)</div>
   <video width="640" height="360" controls>
     <source src="/misc/iris_demo/cf_demo.mp4" type="video/mp4">
@@ -91,4 +91,4 @@ Here are some cool demos showing what we are doing:
   </video>
 </div>
 
- -->
+
