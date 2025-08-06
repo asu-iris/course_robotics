@@ -17,7 +17,7 @@ We focus on how to mathematically describe and control the motion of robots—pa
 
 This interactive online resource is designed for ASU MAE 547 students, global robotics learners, and industry practitioners who want to learn—or refresh—the fundamentals of robotics. The goal is to present robotics concepts in a concise, accessible format supported by visual aids, linked background references, and Python-based learning modules.
 
-Many of the current materials are adapted from  [Robotics: Modelling, Planning and Control, by Bruno Siciliano, Lorenzo Sciavicco, Luigi Villani, Giuseppe Oriolo]((https://people.disim.univaq.it/~costanzo.manes/EDU_stuff/Robotics_Modelling,%20Planning%20and%20Control_Sciavicco_extract.pdf)), as well as selected content from [Modern Robotics by Kevin M. Lynch and Frank C. Park]((https://hades.mech.northwestern.edu/images/7/7f/MR.pdf)). These notes are specifically tailored for students in MAE 547 but are also intended as a useful reference for anyone interested in robotics—offering a quick way to learn or review topics without needing to read an entire textbook. When possible, I recommend that students engage with the original books.
+Many of the current materials are adapted from  [Robotics: Modelling, Planning and Control]((https://people.disim.univaq.it/~costanzo.manes/EDU_stuff/Robotics_Modelling,%20Planning%20and%20Control_Sciavicco_extract.pdf)), by Bruno Siciliano, Lorenzo Sciavicco, Luigi Villani, Giuseppe Oriolo, as well as selected content from [Modern Robotics]((https://hades.mech.northwestern.edu/images/7/7f/MR.pdf)) by Kevin M. Lynch and Frank C. Park. These notes are specifically tailored for students in MAE 547 but are also intended as a useful reference for anyone interested in robotics—offering a quick way to learn or review topics without needing to read an entire textbook. When possible, I recommend that students engage with the original books.
 
 - **Robotics: Modeling, Planning and Control**  by Bruno Siciliano, Lorenzo Sciavicco, Luigi Villani,
 Giuseppe Oriolo, Springer, 2009
@@ -49,7 +49,7 @@ Here are some cool demos showing what we are doing:
 <div style="margin-bottom: 1.5em;">
   <div style="font-weight: bold; margin-bottom: 0.2em;">Real-time planning and control for dexterous manipulation (everything is autonomous)</div>
   <video width="640" height="360" controls>
-    <source src="/misc/iris_demo/cf_demo.mp4" type="video/mp4">
+    <source src="./misc/iris_demo/cf_demo.mp4" type="video/mp4">
     Your browser does not support the video tag.
   </video>
 </div>
@@ -58,7 +58,7 @@ Here are some cool demos showing what we are doing:
 <div style="margin-bottom: 1.5em;">
   <div style="font-weight: bold; margin-bottom: 0.2em;">Multi-fingered robotic hand (Allegro hand) learns in-hand rotation of objects from scratch </div>
   <video width="640" height="360" controls>
-    <source src="/misc/iris_demo/contactSDF-media-learn.mp4" type="video/mp4">
+    <source src="./misc/iris_demo/contactSDF-media-learn.mp4" type="video/mp4">
     Your browser does not support the video tag.
   </video>
 </div>
@@ -67,7 +67,7 @@ Here are some cool demos showing what we are doing:
 <div style="margin-bottom: 1.5em;">
   <div style="font-weight: bold; margin-bottom: 0.2em;"> TwinTrack: Reality to Simulation, Simulation to Reality </div>
   <video width="640" height="360" controls>
-    <source src="/misc/iris_demo/twintrack.mp4" type="video/mp4">
+    <source src="./misc/iris_demo/twintrack.mp4" type="video/mp4">
     Your browser does not support the video tag.
   </video>
 </div>
@@ -78,7 +78,7 @@ Here are some cool demos showing what we are doing:
 <div style="margin-bottom: 1.5em;">
   <div style="font-weight: bold; margin-bottom: 0.2em;"> Robot learning skills from YouTube </div>
   <video width="640" height="360" controls>
-    <source src="/misc/iris_demo/lfd-llm.mp4" type="video/mp4">
+    <source src="./misc/iris_demo/lfd-llm.mp4" type="video/mp4">
     Your browser does not support the video tag.
   </video>
 </div>
@@ -86,7 +86,7 @@ Here are some cool demos showing what we are doing:
 <div style="margin-bottom: 1.5em;">
   <div style="font-weight: bold; margin-bottom: 0.2em;"> Robot learning from human physical correction </div>
   <video width="640" height="360" controls>
-    <source src="/misc/iris_demo/safe_mpc_align4.mp4" type="video/mp4">
+    <source src="./misc/iris_demo/safe_mpc_align4.mp4" type="video/mp4">
     Your browser does not support the video tag.
   </video>
 </div>
