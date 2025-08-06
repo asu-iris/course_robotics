@@ -56,22 +56,19 @@ Here are some cool demos showing what we are doing:
 <div style="margin-bottom: 1.5em;">
   <div style="font-weight: bold; margin-bottom: 0.2em;">Real-time planning and control for dexterous manipulation (everything is autonomous)</div>
   <video width="640" height="360" controls>
-    <source src="./misc/iris_demo/cf_demo.mp4" type="video/mp4">
+    <source src="_static/videos/cf_demo.mp4" type="video/mp4">
     Your browser does not support the video tag.
   </video>
 </div>
 
-<video controls width="100%">
-  <source src="./misc/iris_demo/cf_demo.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+
 
 
 
 <div style="margin-bottom: 1.5em;">
   <div style="font-weight: bold; margin-bottom: 0.2em;">Multi-fingered robotic hand (Allegro hand) learns in-hand rotation of objects from scratch </div>
   <video width="640" height="360" controls>
-    <source src="./misc/iris_demo/contactSDF-media-learn.mp4" type="video/mp4">
+    <source src="_static/videos/contactSDF-media-learn.mp4" type="video/mp4">
     Your browser does not support the video tag.
   </video>
 </div>
@@ -80,7 +77,7 @@ Here are some cool demos showing what we are doing:
 <div style="margin-bottom: 1.5em;">
   <div style="font-weight: bold; margin-bottom: 0.2em;"> TwinTrack: Reality to Simulation, Simulation to Reality </div>
   <video width="640" height="360" controls>
-    <source src="./misc/iris_demo/twintrack.mp4" type="video/mp4">
+    <source src="_static/videos/twintrack.mp4" type="video/mp4">
     Your browser does not support the video tag.
   </video>
 </div>
@@ -91,7 +88,7 @@ Here are some cool demos showing what we are doing:
 <div style="margin-bottom: 1.5em;">
   <div style="font-weight: bold; margin-bottom: 0.2em;"> Robot learning skills from YouTube </div>
   <video width="640" height="360" controls>
-    <source src="./misc/iris_demo/lfd-llm.mp4" type="video/mp4">
+    <source src="_static/videos/lfd-llm.mp4" type="video/mp4">
     Your browser does not support the video tag.
   </video>
 </div>
@@ -99,7 +96,7 @@ Here are some cool demos showing what we are doing:
 <div style="margin-bottom: 1.5em;">
   <div style="font-weight: bold; margin-bottom: 0.2em;"> Robot learning from human physical correction </div>
   <video width="640" height="360" controls>
-    <source src="./misc/iris_demo/safe_mpc_align4.mp4" type="video/mp4">
+    <source src="_static/videos/safe_mpc_align4.mp4" type="video/mp4">
     Your browser does not support the video tag.
   </video>
 </div>
