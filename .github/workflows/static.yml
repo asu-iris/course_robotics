@@ -43,22 +43,10 @@ jobs:
         path: _build/.jupyter_cache
         key: jupyter-book-cache-${{ hashFiles('requirements.txt') }}
 
-
     # Build the book
     - name: Build the book
       run: |
         jupyter-book build .
-
-    # Check that the built HTML exists and list contents
-    - name: Check _build/html exists
-      run: |
-        if [ -d _build/html ]; then
-          echo "_build/html exists. Listing contents:"
-          ls -l _build/html
-        else
-          echo "ERROR: _build/html does not exist!"
-          exit 1
-        fi
 
     # Upload the book's HTML as an artifact
     - name: Upload artifact
