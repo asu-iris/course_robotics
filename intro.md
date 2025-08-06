@@ -61,6 +61,12 @@ Here are some cool demos showing what we are doing:
   </video>
 </div>
 
+<video controls width="100%">
+  <source src="./misc/iris_demo/cf_demo.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+
 
 <div style="margin-bottom: 1.5em;">
   <div style="font-weight: bold; margin-bottom: 0.2em;">Multi-fingered robotic hand (Allegro hand) learns in-hand rotation of objects from scratch </div>
