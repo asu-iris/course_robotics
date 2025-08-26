@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -183,7 +183,7 @@
         </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../lec1/intro.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lec2/configuration.html">Robot Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lec2-dof/configuration.html">Robot Configuration</a></li>
 
 
 
@@ -511,7 +511,7 @@ where <span class="math notranslate nohighlight">\(\boldsymbol{k}(\cdot)\)</span
 <a class="reference internal image-reference" href="../_images/IK_jacobian_inverse.jpg"><img alt="../_images/IK_jacobian_inverse.jpg" src="../_images/IK_jacobian_inverse.jpg" style="width: 80%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 64 </span><span class="caption-text">IK algorithm with Jacobian
+<p><span class="caption-number">Fig. 63 </span><span class="caption-text">IK algorithm with Jacobian
 inverse</span><a class="headerlink" href="#ik-jacobian-inverse" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
@@ -593,7 +593,7 @@ according to Lyapunov Stablity. The block scheme for the Jacobian transpose IK a
 <a class="reference internal image-reference" href="../_images/IK_jacobian_transpose.jpg"><img alt="../_images/IK_jacobian_transpose.jpg" src="../_images/IK_jacobian_transpose.jpg" style="width: 80%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 65 </span><span class="caption-text">Block scheme of the inverse kinematics algorithm with Jacobian
+<p><span class="caption-number">Fig. 64 </span><span class="caption-text">Block scheme of the inverse kinematics algorithm with Jacobian
 transpose</span><a class="headerlink" href="#ik-jacobian-transpose" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
@@ -731,12 +731,12 @@ derivative is</p>
 \[\boldsymbol{\omega}_{e}=\boldsymbol{N}\left(\phi_{e}\right)\dot{\boldsymbol{\phi}}_{e}\]</div>
 <p>for the Euler ZYZ Angle
 <span class="math notranslate nohighlight">\({\boldsymbol{\phi}}_{e}=[{\varphi}, {\vartheta}, \psi]^T\)</span>.</p>
-<p>Recall the rotation induced from the Euler ZYZ Angle. The angualr velocities <span class="math notranslate nohighlight">\(\dot{\varphi}, \dot{\vartheta}, \dot\psi\)</span> is always with respect to the current frame, as shown in <a class="reference internal" href="#euler-angle-vel"><span class="std std-numref">Fig. 66</span></a>.</p>
+<p>Recall the rotation induced from the Euler ZYZ Angle. The angualr velocities <span class="math notranslate nohighlight">\(\dot{\varphi}, \dot{\vartheta}, \dot\psi\)</span> is always with respect to the current frame, as shown in <a class="reference internal" href="#euler-angle-vel"><span class="std std-numref">Fig. 65</span></a>.</p>
 <figure class="align-default" id="euler-angle-vel">
 <a class="reference internal image-reference" href="../_images/Euler_angle_vel.jpg"><img alt="../_images/Euler_angle_vel.jpg" src="../_images/Euler_angle_vel.jpg" style="width: 80%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 66 </span><span class="caption-text">Rotational velocities of Euler angles ZYZ in current
+<p><span class="caption-number">Fig. 65 </span><span class="caption-text">Rotational velocities of Euler angles ZYZ in current
 frame</span><a class="headerlink" href="#euler-angle-vel" title="Link to this image">#</a></p>
 </figcaption>
 </figure>

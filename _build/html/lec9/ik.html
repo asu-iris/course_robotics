@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -183,7 +183,7 @@
         </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../lec1/intro.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lec2/configuration.html">Robot Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lec2-dof/configuration.html">Robot Configuration</a></li>
 
 
 
@@ -442,18 +442,18 @@ robot arms. For more generalized case, we will leave IK in future lectures.</p>
 <a class="reference internal image-reference" href="../_images/3link_arm1.jpg"><img alt="../_images/3link_arm1.jpg" src="../_images/3link_arm1.jpg" style="width: 50%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 35 </span><span class="caption-text">A three link robot arm</span><a class="headerlink" href="#link-arm" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 34 </span><span class="caption-text">A three link robot arm</span><a class="headerlink" href="#link-arm" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Suppose the pose of the end-effector is given by
 position <span class="math notranslate nohighlight">\((p_{x}, p_{y})\)</span> and the angle <span class="math notranslate nohighlight">\(\phi\)</span> w.r.t. <span class="math notranslate nohighlight">\(x_{0}\)</span>. We
 want to use IK to find the joint variables
 <span class="math notranslate nohighlight">\(\boldsymbol{q}=[\vartheta_{1}, \vartheta_{2}, \vartheta_{3}]\)</span>.</p>
-<p>To achieve so, as shown in <a class="reference internal" href="#link-arm"><span class="std std-numref">Fig. 35</span></a>, we can first identify</p>
+<p>To achieve so, as shown in <a class="reference internal" href="#link-arm"><span class="std std-numref">Fig. 34</span></a>, we can first identify</p>
 <div class="math notranslate nohighlight" id="equation-equ-sum">
 <span class="eqno">(3)<a class="headerlink" href="#equation-equ-sum" title="Link to this equation">#</a></span>\[
     \phi=\vartheta_{1}+\vartheta_{2}+\vartheta_{3}\]</div>
-<p>Also in <a class="reference internal" href="#link-arm"><span class="std std-numref">Fig. 35</span></a>, we can find the position of point <span class="math notranslate nohighlight">\(W\)</span> is</p>
+<p>Also in <a class="reference internal" href="#link-arm"><span class="std std-numref">Fig. 34</span></a>, we can find the position of point <span class="math notranslate nohighlight">\(W\)</span> is</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{aligned}
 &amp; p_{W x}=p_{x}-a_{3} c_{\phi}=a_{1} c_{1}+a_{2} c_{12} \\
@@ -471,18 +471,18 @@ the segment  <span class="math notranslate nohighlight">\(W-0\)</span> gives</p>
 met when the given end-effector pose is outside the arm reachable workspace.</p>
 <div class="math notranslate nohighlight">
 \[\vartheta_{2}= \pm \cos ^{-1}\left(c_{2}\right)\]</div>
-<p>Thus, two solution <span class="math notranslate nohighlight">\(\vartheta_{2}\)</span> are obtained, as shown in <a class="reference internal" href="#postures-2link-arm"><span class="std std-numref">Fig. 36</span></a>: the elbow-up pose
+<p>Thus, two solution <span class="math notranslate nohighlight">\(\vartheta_{2}\)</span> are obtained, as shown in <a class="reference internal" href="#postures-2link-arm"><span class="std std-numref">Fig. 35</span></a>: the elbow-up pose
 when <span class="math notranslate nohighlight">\(\vartheta_{2} \in(-\pi, 0)\)</span>;  elbow-down
 pose when <span class="math notranslate nohighlight">\(\vartheta_{2} \in(0, \pi)\)</span>.</p>
 <figure class="align-default" id="postures-2link-arm">
 <a class="reference internal image-reference" href="../_images/postures_2link_arm.jpg"><img alt="../_images/postures_2link_arm.jpg" src="../_images/postures_2link_arm.jpg" style="width: 50%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 36 </span><span class="caption-text">Admissible postures for a two-link planar
+<p><span class="caption-number">Fig. 35 </span><span class="caption-text">Admissible postures for a two-link planar
 arm</span><a class="headerlink" href="#postures-2link-arm" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>To find <span class="math notranslate nohighlight">\(\vartheta_{1}\)</span>， consider the angles <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> in <a class="reference internal" href="#postures-2link-arm"><span class="std std-numref">Fig. 36</span></a>. Notice that   <span class="math notranslate nohighlight">\(\alpha\)</span> depends on the
+<p>To find <span class="math notranslate nohighlight">\(\vartheta_{1}\)</span>， consider the angles <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> in <a class="reference internal" href="#postures-2link-arm"><span class="std std-numref">Fig. 35</span></a>. Notice that   <span class="math notranslate nohighlight">\(\alpha\)</span> depends on the
 sign of <span class="math notranslate nohighlight">\(p_{W x}\)</span> and <span class="math notranslate nohighlight">\(p_{W y}\)</span>; then,</p>
 <div class="math notranslate nohighlight">
 \[\alpha=\operatorname{Atan} 2\left(p_{W y}, p_{W x}\right) .\]</div>
@@ -513,7 +513,7 @@ robot arm can be found, such that the IK can be decoupled into
 two lower-dimentional sub-problems. Specifically, for a robot arm with
 spherical wrist, a natural choice is to put <span class="math notranslate nohighlight">\(W\)</span> at the
 wrist position.
-As shown <a class="reference internal" href="#analytic-ik-decouple"><span class="std std-numref">Fig. 37</span></a>, if the end-effector pose is <span class="math notranslate nohighlight">\(\boldsymbol{p}_{e}\)</span> and
+As shown <a class="reference internal" href="#analytic-ik-decouple"><span class="std std-numref">Fig. 36</span></a>, if the end-effector pose is <span class="math notranslate nohighlight">\(\boldsymbol{p}_{e}\)</span> and
 <span class="math notranslate nohighlight">\(\boldsymbol{R}_{e}=\left[\begin{array}{lll}\boldsymbol{n}_{e} &amp; \boldsymbol{s}_{e} &amp; \boldsymbol{a}_{e}\end{array}\right]\)</span>,
 the wrist position will be</p>
 <div class="math notranslate nohighlight">
@@ -522,7 +522,7 @@ the wrist position will be</p>
 <a class="reference internal image-reference" href="../_images/analytic_ik_decouple.jpg"><img alt="../_images/analytic_ik_decouple.jpg" src="../_images/analytic_ik_decouple.jpg" style="width: 80%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 37 </span><span class="caption-text">Robot arm with spherical
+<p><span class="caption-number">Fig. 36 </span><span class="caption-text">Robot arm with spherical
 wrist</span><a class="headerlink" href="#analytic-ik-decouple" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
@@ -550,7 +550,7 @@ solutions for two types of arms (spherical and anthropomorphic)  and IK solution
 <a class="reference internal image-reference" href="../_images/spherical_arm1.jpg"><img alt="../_images/spherical_arm1.jpg" src="../_images/spherical_arm1.jpg" style="width: 70%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 38 </span><span class="caption-text">Spherical arm</span><a class="headerlink" href="#spherical-arm" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 37 </span><span class="caption-text">Spherical arm</span><a class="headerlink" href="#spherical-arm" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Its FK is</p>
@@ -593,7 +593,7 @@ d_{2}
 <a class="reference internal image-reference" href="../_images/anthropomorphic_arm1.jpg"><img alt="../_images/anthropomorphic_arm1.jpg" src="../_images/anthropomorphic_arm1.jpg" style="width: 70%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 39 </span><span class="caption-text">Anthropomorphic arm</span><a class="headerlink" href="#anthropomorphic-arm" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 38 </span><span class="caption-text">Anthropomorphic arm</span><a class="headerlink" href="#anthropomorphic-arm" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="math notranslate nohighlight">
@@ -649,7 +649,7 @@ different for the two pairs of solutions.</p>
 <a class="reference internal image-reference" href="../_images/4IK_solutions_anthropomorphic_arm.jpg"><img alt="../_images/4IK_solutions_anthropomorphic_arm.jpg" src="../_images/4IK_solutions_anthropomorphic_arm.jpg" style="width: 60%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 40 </span><span class="caption-text">The four configurations of an anthropomorphic arm compatible with a
+<p><span class="caption-number">Fig. 39 </span><span class="caption-text">The four configurations of an anthropomorphic arm compatible with a
 given wrist
 position</span><a class="headerlink" href="#ik-solutions-anthropomorphic-arm" title="Link to this image">#</a></p>
 </figcaption>
@@ -662,7 +662,7 @@ position</span><a class="headerlink" href="#ik-solutions-anthropomorphic-arm" ti
 <a class="reference internal image-reference" href="../_images/spherical_wrist1.jpg"><img alt="../_images/spherical_wrist1.jpg" src="../_images/spherical_wrist1.jpg" style="width: 70%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 41 </span><span class="caption-text">Spherical wrist</span><a class="headerlink" href="#spherical-wrist" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 40 </span><span class="caption-text">Spherical wrist</span><a class="headerlink" href="#spherical-wrist" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>To find the joint variables

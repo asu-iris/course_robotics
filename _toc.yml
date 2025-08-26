@@ -4,23 +4,22 @@
 format: jb-book
 root: intro
 chapters:
-- file: lec1/intro
-- file: lec2/configuration
-- file: lec3-5/basic-kinematics
-- file: lec6-8/fk
-- file: lec9/ik
-- file: opt/motion_planning
-- file: lec10/diff-trans
-- file: lec11-12/jacobian
-- file: lec13/singularity
-- file: lec14/statics
-- file: lec15/inverse_vk
-- file: lec16-17/nik
-- file: lec18/dyn
-- file: lec19/control_overview
-- file: lec20/djc
-- file: lec21/cjc
-- file: lec22/osc
-
+  - file: lec1/intro
+  - file: lec2-dof/configuration
+  - file: lec3-5/basic-kinematics
+  - file: lec6-8/fk
+  - file: lec9/ik
+  - file: opt/motion_planning
+  - file: lec10/diff-trans
+  - file: lec11-12/jacobian
+  - file: lec13/singularity
+  - file: lec14/statics
+  - file: lec15/inverse_vk
+  - file: lec16-17/nik
+  - file: lec18/dyn
+  - file: lec19/control_overview
+  - file: lec20/djc
+  - file: lec21/cjc
+  - file: lec22/osc
 # - file: notebooks
 # - file: markdown-notebooks

@@ -1,13 +1,11 @@
 ---
 author:
-- Wanxin Jin
+  - Wanxin Jin
 date: Aug. 22, 2023
 title: "Lecture 2: Robot Arm and Configuration"
 ---
 
 # Robot Configuration
-
-
 
 ```{figure} ./configuration/robotarm.png
 ---
@@ -19,84 +17,70 @@ Franka research robot arm
 
 A robot manipulator is mechanically constructed by
 
--   a set of rigid bodies, each body called a **link**,
+- a set of rigid bodies, each body called a **link**,
 
--   **joints**, connecting two consecutive links and providing motion
-    constraints (degrees of freedom)
+- **joints**, connecting two consecutive links and providing motion
+  constraints (degrees of freedom)
 
-    ```{figure} ./configuration/joints.png
-    ---
-    width: 60%
-    name: joints-types
-    ---
-    Different type of joints
-    ```
+  ```{figure} ./configuration/joints.png
+  ---
+  width: 60%
+  name: joints-types
+  ---
+  Different type of joints
+  ```
 
+- **actuators**, such as electric/hydraulic/pneumatic actuators,
+  deliver forces or torques that cause the robot's links to move,
 
+  ```{figure} ./configuration/electric_actuator.png
+  ---
+  width: 40%
+  name: electric-actuators
+  ---
+  Electric actuators
+  ```
 
--   **actuators**, such as electric/hydraulic/pneumatic actuators,
-    deliver forces or torques that cause the robot's links to move,
+  ```{figure} ./configuration/hydralic_actuator.png
+  ---
+  width: 40%
+  name: hydralic_actuator
+  ---
+  Hydralic actuator
+  ```
 
+- **an end effector**, such as a gripper or hand, is attached to a
+  specific link for specific tasks.
 
-    ```{figure} ./configuration/electric_actuator.png
-    ---
-    width: 40%
-    name: electric-actuators
-    ---
-    Electric actuators
-    ```
-
-    ```{figure} ./configuration/hydralic_actuator.png
-    ---
-    width: 40%
-    name: hydralic_actuator
-    ---
-    Hydralic actuator
-    ```
-
--   **an end effector**, such as a gripper or hand, is attached to a
-    specific link for specific tasks.
-
-    ```{figure} ./configuration/endeffector1.jpg
-    ---
-    width: 40%
-    name: endeffector1
-    ---
-    The Barrett Hand
-    ```
-    ```{figure} ./configuration/endeffector2.png
-    ---
-    width: 40%
-    name: endeffector2
-    ---
-    The Shadow Hand
-    ```
+  ```{figure} ./configuration/endeffector2.png
+  ---
+  width: 40%
+  name: endeffector2
+  ---
+  The Shadow Hand
+  ```
 
 The typical structure of a robot arm is an open
 kinematic chain. From a topological viewpoint, a kinematic chain is
- open when there is only one sequence of links connecting the two
-ends of the chain. Alternatively, 
-kinematic chain is closed when a sequence of links forms a loop.
+open when there is only one sequence of links connecting the two
+ends of the chain. Alternatively,
+kinematic chain is closed when a sequence of links forms a loop. This course mainly focuses on open chain arms.
 
 # Configuration
 
 ```{important}
 The **configuration** of a robot is a complete specification of the
 position of every point of the robot. Since a robot's links are rigid
-and of a known shape, only a few variables (coordinates in a general
-sense) are needed to represent its configuration.
+and of a known shape, only a few coordinates  are needed to represent its configuration.
 ```
-
-
 
 For example, in the following figure, the configuration of a door can be
 represented by the hinge angle $\theta$. The
 configuration of a point on a plane can be represented by two coordinates,
 $(x, y)$. The configuration of a coin lying heads up on a flat table can
-be represented by three coordinates:  $(x, y)$ that specifies
-the location of a particular point on the coin, and 
+be represented by three coordinates: $(x, y)$ that specifies
+the location of a particular point on the coin, and
 $(\theta)$ that specifies the coin's orientation.
-
 
 ```{figure} ./configuration/examples.png
 ---
@@ -108,25 +92,23 @@ name: configuration
 $(x, y)$. (c) The configuration of a coin (heads up) on a table is
 represented by $(x, y, \theta)$.
 ```
-# Degrees of Freedom
 
+# Degrees of Freedom
 
 :::{important}
 The minimum number $n$ of coordinates needed to represent
-the configuration of a robot is the number of **degrees of freedom (dof)**. The $n$-dimensional space containing all possible configurations
-of a robot is called the **configuration space (C-space)**. The
+the configuration of a robot is the **degree of freedom (dof)**. The $n$-dimensional space containing all possible configurations/coordinates
+of a robot is called the **configuration space (C-space)**. A
 configuration of a robot is represented by a point in its C-space.
 :::
-
 
 ## General Rule
 
 We have the following general rule to determine the number of dof of a robot:
 
 ::: {important}
-degrees of freedom =  number of variables - number of independent constraints
+degrees of freedom = number of variables - number of independent constraints
 :::
-
 
 ```{figure} ./configuration/coin.png
 ---
@@ -137,34 +119,15 @@ A coin in 3D
 space
 ```
 
-
-
-
-
-Example: consider a coin in 3D space in 
+Example: consider a coin in 3D space in
 {numref}`corn`, the
 coordinates for the three points $A, B$, and $C$ are given by
 $\left(x_{A}, y_{A}, z_{A}\right),\left(x_{B}, y_{B}, z_{B}\right)$, and
-$\left(x_{C}, y_{C}, z_{C}\right)$, respectively. Point $A$ can be
-placed freely (three degrees of freedom). The location of point $B$ is
-subject to the constraint $d(A, B)=d_{A B}$, meaning it must lie on the
-sphere of radius $d_{A B}$ centered at $A$. Thus we have $3-1=2$
-freedoms to specify, which can be expressed as the latitude and
-longitude for the point on the sphere. Finally, the location of point
-$C$ must lie at the intersection of spheres centered at $A$ and $B$ of
-radius $d_{A C}$ and $d_{B C}$, respectively. In the general case the
-intersection of two spheres is a circle, and the location of point $C$
-can be described by an angle that parametrizes this circle. Point $C$
-therefore adds $3-2=1$ freedom. Once the position of point $C$ is
-chosen, the coin is fixed in space. In summary, a rigid body in
-three-dimensional space has six freedoms, which can be described by the
-three coordinates parametrizing point $A$, the two angles parametrizing
-point $B$, and one angle parametrizing point $C$, provided $A, B$, and
-$C$ are noncollinear.
+$\left(x_{C}, y_{C}, z_{C}\right)$, respectively. Each point has 3 dof, and therefore total dof are 9. However, consider the rigid body assumption, meaning that distance between any two points are fixed. This introduces 3 constraints. Therefore, a rigid body moving in 3D space has 9-3=6 dof.
 
--   A rigid body moving in 3-dimensional space has 6 degrees of freedom.
+- A rigid body moving in 3-dimensional space has $m=6$ dof.
 
--   A rigid body moving in a 2-dimensional plane has 3 degrees of freedom.
+- A rigid body moving in a 2-dimensional plane has $m=3$ dof.
 
 ## DOF of Different Joint Types
 
@@ -174,16 +137,21 @@ viewed as providing constraints on the possible motions of the two rigid
 bodies it connects. The following table summarizes the freedoms and
 constraints provided by the various joint types.
 
- | Joint type |          dof  |    # of constraints  between two bodies in 3D space|
- | :----: |  :----: |    :----:  | 
-  |      Revolute (R)   |   1       |          5| 
-   |    Prismatic (P)  |    1      |      5| 
-   |      Helical (H)    |  1   |       5
-   |  Cylindrical (C)   |   2     |        4| 
-   |    Universal (U)    |  2     |    4| 
-   |    Spherical (S)   |   3     |       3| 
+|   Joint type    | dof (f) | # of constraints between two bodies in 3D space (c) |
+| :-------------: | :-----: | :-------------------------------------------------: |
+|  Revolute (R)   |    1    |                          5                          |
+|  Prismatic (P)  |    1    |                          5                          |
+|   Helical (H)   |    1    |                          5                          |
+| Cylindrical (C) |    2    |                          4                          |
+|  Universal (U)  |    2    |                          4                          |
+|  Spherical (S)  |    3    |                          3                          |
 
-## Grübler's Formula 
+Let $f$ be the number of freedoms
+provided by joint $i$, and $c$ be the number of constraints provided
+by joint $i$, where $f+c=m$. $m=3$ for planar mechanisms and
+$m=6$ for 3D mechanisms.
+
+## Grübler's Formula
 
 <!-- Since a robot consists of multiple rigid bodies,  degrees of freedom of a
 robot can be expressed as follows:
@@ -194,32 +162,28 @@ degrees of freedom =  number of variables - number of independent equations (con
 
 :::{important}
 Consider a mechanism consisting of $L$ links, where the ground is also
-regarded as a link. Let $J$ be the number of joints, $m$ be the number
-of degrees of freedom of a rigid body ($m=3$ for planar mechanisms and
+regarded as a link. Let $J$ be the number of joints, $m$ be dof of a rigid body ($m=3$ for planar mechanisms and
 $m=6$ for 3D mechanisms), $f_{i}$ be the number of freedoms
 provided by joint $i$, and $c_{i}$ be the number of constraints provided
 by joint $i$, where $f_{i}+c_{i}=m$ for all $i$. Then the Grübler's
-formula for degrees of freedom of the mechanism is
+formula for dof of the mechanism is
 
-$$\begin{aligned}
+$$
+\begin{aligned}
 \operatorname{dof} & =\underbrace{m(L-1)}_{\text {total number of freedoms for all rigid bodies }}-\underbrace{\sum_{i=1}^{J} c_{i}}_{\text {joint constraints }} \\
 & =m(L-1)-\sum_{i=1}^{J}\left(m-f_{i}\right) \\
 & =m(L-1-J)+\sum_{i=1}^{J} f_{i} .
-\end{aligned}$$
+\end{aligned}
+$$
+
 :::
 
 This formula holds only if all joint constraints are independent. If
 they are not independent then the formula provides a lower bound on the
-number of degrees of freedom. 
-
-
-
-
+number of degrees of freedom.
 
 Below are some examples of using Grubler's
 Formula to find the DoFs of different machenisms.
-
-
 
 ```{figure} ./configuration/gf_example1.png
 ---
@@ -228,13 +192,11 @@ name: gf_example1
 ---
 (a) Four-bar linkage and (b) Slider-crank mechanism.
 ```
+
 (Four-bar linkage): $L=4, J=4$, and $f_{i}=1, i=1, \ldots, 4$. Thus,
 $\operatorname{dof}$=1.\
 Slider-crank: $L=4$, $J=4,$ and $f_{i}=1, i=1, \ldots, 4$. Thus,
 $\operatorname{dof}$=1.
-
-
-
 
 ```{figure} ./configuration/gf_example2.png
 ---
@@ -245,6 +207,7 @@ name: gf_example2
 Stephenson six-bar linkage. (d) Watt six-bar
 linkage.
 ```
+
 The $k$-link planar robot: $L=k+1$, $J=k$, $f_{i}=1$ for all $i$. Thus,
 $\operatorname{dof}=3*((k+1)-1-k)+k=k$.\
 The five-bar linkage: $L=5$, $J=5$, each $f_{i}=1$. Therefore,
@@ -253,8 +216,6 @@ Stephenson six-bar linkage: $L=6, J=7$, and $f_{i}=1$ for all $i$.
 Therefore, $\operatorname{dof}=3*(6-1-7)+7=1$.\
 Watt six-bar linkage: $L=6, J=7$, and $f_{i}=1$ for all $i$. Therefore,
 $\operatorname{dof}=3*(6-1-7)+7=1$.
-
-
 
 ```{figure} ./configuration/gf_example3.png
 ---
@@ -267,13 +228,12 @@ joints.
 
 The planar mechanism in {numref}`gf_example3` has three links that meet at a single
 point on the right of the large link. Recalling that a joint by
-definition connects exactly two links, the joint at this point  should not be regarded as a single revolute joint. Rather,
+definition connects exactly two links, the joint at this point should not be regarded as a single revolute joint. Rather,
 it should be counted as two revolute joints overlapping each
 other. The mechanism consists of eight links $(L=8)$, 8 revolute
 joints, and 1 prismatic joint. The Grübler's formula:
 
 $$\operatorname{dof}=3*(8-1-9)+9*(1)=3$$
-
 
 ```{figure} ./configuration/gf_example4.png
 ---
@@ -291,10 +251,8 @@ is $14(L=14)$. There are six universal joints (for each, $f_{i}=2$ ), six prisma
 
 $$\operatorname{dof}=6*(14-1-18)+6*(1)+6*(2)+6*(3)=6 .$$
 
-
-
-<!-- 
-# Configuration Space 
+<!--
+# Configuration Space
 
 Consider a point moving on the surface of a sphere. The C-space is
 2-dimensional, as the configuration can be represented by two coordinates:
@@ -312,11 +270,6 @@ football simply by stretching, without cutting or gluing, so those two
 spaces are topologically equivalent. You cannot turn a sphere into a
 plane without cutting it, however, so a sphere and a plane are not
 topologically equivalent.
-
-
-
-
-
 
 
 ```{figure} ./configuration/topology_summary.jpeg
@@ -366,7 +319,6 @@ structure as well as mechanical joint limits. The workspace is independent of th
 Cartesian robot arm includes three prismatic joints whose axes
 typically are mutually orthogonal.
 
-
 ```{figure} ./configuration/cartesian_robot.jpg
 ---
 width: 50%
@@ -379,7 +331,6 @@ workspace
 Cylindrical robot arm differs from Cartesian in that the first
 prismatic joint is replaced with a revolute joint.
 
-
 ```{figure} ./configuration/cylindrical_robot.jpg
 ---
 width: 50%
@@ -389,10 +340,8 @@ Cylindrical robot arm and its
 workspace
 ```
 
-
 Spherical robot arm differs from cylindrical in that the 2nd prismatic
 joint is replaced with a revolute joint.
-
 
 ```{figure} ./configuration/spherical_robot.jpg
 ---
@@ -403,10 +352,8 @@ Spherical robot arm and its
 workspace
 ```
 
-
-A special robot arm is SCARA robot arm, which has the feature that 
+A special robot arm is SCARA robot arm, which has the feature that
 all the axes of motion are parallel.
-
 
 ```{figure} ./configuration/SCARA_robot.jpg
 ---
@@ -417,12 +364,9 @@ SCARA robot arm  and its
 workspace
 ```
 
-
 Anthropomorphic robot arm has three revolute joints; the
 revolute axis of the first joint is orthogonal to the axes of the other
 two which are parallel.
-
-
 
 ```{figure} ./configuration/anthropomophic_robot.jpg
 ---
@@ -432,5 +376,3 @@ name: anthropomophic_robot
 Anthropomorphic robot arm  and its
 workspace
 ```
-
-

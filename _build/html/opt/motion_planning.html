@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -183,7 +183,7 @@
         </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../lec1/intro.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lec2/configuration.html">Robot Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lec2-dof/configuration.html">Robot Configuration</a></li>
 
 
 
@@ -429,7 +429,7 @@ state to a goal state that avoids obstacles in the environment (also statisfies 
 <a class="reference internal image-reference" href="../_images/motion-planning.gif"><img alt="../_images/motion-planning.gif" src="../_images/motion-planning.gif" style="width: 70%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 42 </span><span class="caption-text">Robot arm motion planning</span><a class="headerlink" href="#link-arm" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 41 </span><span class="caption-text">Robot arm motion planning</span><a class="headerlink" href="#link-arm" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <section id="configuration-space">
@@ -458,7 +458,7 @@ C=C_{free}\cup C_{obs}
 <a class="reference internal image-reference" href="../_images/exp2_cspace.png"><img alt="../_images/exp2_cspace.png" src="../_images/exp2_cspace.png" style="width: 80%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 43 </span><span class="caption-text">(a) A circular mobile robot (open circle) and a workspace obstacle
+<p><span class="caption-number">Fig. 42 </span><span class="caption-text">(a) A circular mobile robot (open circle) and a workspace obstacle
 (gray triangle). The configuration of the robot is represented by <span class="math notranslate nohighlight">\((x, y)\)</span> at its center. (b) In  C-space, the obstacle is “grown” by the radius of the robot
 and the robot is treated as a point. Any <span class="math notranslate nohighlight">\((x, y)\)</span> configuration outside the bold line is
 collision-free.</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
@@ -468,7 +468,7 @@ collision-free.</span><a class="headerlink" href="#id1" title="Link to this imag
 <a class="reference internal image-reference" href="../_images/2rrobot_arm_cspace.png"><img alt="../_images/2rrobot_arm_cspace.png" src="../_images/2rrobot_arm_cspace.png" style="width: 80%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 44 </span><span class="caption-text">(Left) The joint angles of a 2R robot arm. (Middle) The arm navigating
+<p><span class="caption-number">Fig. 43 </span><span class="caption-text">(Left) The joint angles of a 2R robot arm. (Middle) The arm navigating
 among obstacles A, B, and C. (Right) The same motion in C-space. Three intermediate
 points, 4, 7, and 10, along the path are labeled.</span><a class="headerlink" href="#id2" title="Link to this image">#</a></p>
 </figcaption>
@@ -481,7 +481,7 @@ points, 4, 7, and 10, along the path are labeled.</span><a class="headerlink" hr
 <a class="reference internal image-reference" href="../_images/opt_mp.png"><img alt="../_images/opt_mp.png" src="../_images/opt_mp.png" style="width: 80%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 45 </span><span class="caption-text">General formulation for optimization-based robot motion planning</span><a class="headerlink" href="#id3" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 44 </span><span class="caption-text">General formulation for optimization-based robot motion planning</span><a class="headerlink" href="#id3" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Some methods (Please read the original paper if you are interested):</p>
@@ -507,45 +507,45 @@ points, 4, 7, and 10, along the path are labeled.</span><a class="headerlink" hr
 <h2>Probabilistic Roadmap (PRM)<a class="headerlink" href="#probabilistic-roadmap-prm" title="Link to this heading">#</a></h2>
 <p>Python example code (copyright, authored by IRIS Lab):
 <a class="reference external" href="https://colab.research.google.com/drive/1TvEIeUeZnZjJOjU33IVWLnP43DrFXxVY?usp=sharing">https://colab.research.google.com/drive/1TvEIeUeZnZjJOjU33IVWLnP43DrFXxVY?usp=sharing</a></p>
-<p>The basic PRM algorithm in robot configuration space <a class="reference internal" href="#prm1"><span class="std std-numref">Fig. 46</span></a> is as follows:</p>
+<p>The basic PRM algorithm in robot configuration space <a class="reference internal" href="#prm1"><span class="std std-numref">Fig. 45</span></a> is as follows:</p>
 <ul class="simple">
-<li><p>Step 1: Sample <span class="math notranslate nohighlight">\(N\)</span> configurations at random from the C-space, as shown in <a class="reference internal" href="#prm2"><span class="std std-numref">Fig. 47</span></a>. Check all sampled configurations and remove those in the obstacle sapce. Only add the samples in free space  and  start and goal to the roadmap (also known as milestones),  as shown in <a class="reference internal" href="#prm3"><span class="std std-numref">Fig. 48</span></a>.</p></li>
-<li><p>Step 2: Each milestone is linked by straight paths to its nearest neighbors. The collision-free links are retained as local paths to form the PRM, as shown in <a class="reference internal" href="#prm4"><span class="std std-numref">Fig. 49</span></a>.</p></li>
-<li><p>Step 3: Search for a path from the start to the goal using <a class="reference external" href="https://en.wikipedia.org/wiki/A*_search_algorithm">A* search</a> or <a class="reference external" href="https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm">Dijkstra’s search</a> algorithms, as shown in <a class="reference internal" href="#prm5"><span class="std std-numref">Fig. 50</span></a>.</p></li>
+<li><p>Step 1: Sample <span class="math notranslate nohighlight">\(N\)</span> configurations at random from the C-space, as shown in <a class="reference internal" href="#prm2"><span class="std std-numref">Fig. 46</span></a>. Check all sampled configurations and remove those in the obstacle sapce. Only add the samples in free space  and  start and goal to the roadmap (also known as milestones),  as shown in <a class="reference internal" href="#prm3"><span class="std std-numref">Fig. 47</span></a>.</p></li>
+<li><p>Step 2: Each milestone is linked by straight paths to its nearest neighbors. The collision-free links are retained as local paths to form the PRM, as shown in <a class="reference internal" href="#prm4"><span class="std std-numref">Fig. 48</span></a>.</p></li>
+<li><p>Step 3: Search for a path from the start to the goal using <a class="reference external" href="https://en.wikipedia.org/wiki/A*_search_algorithm">A* search</a> or <a class="reference external" href="https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm">Dijkstra’s search</a> algorithms, as shown in <a class="reference internal" href="#prm5"><span class="std std-numref">Fig. 49</span></a>.</p></li>
 </ul>
 <figure class="align-default" id="prm1">
 <a class="reference internal image-reference" href="../_images/prm-1.png"><img alt="../_images/prm-1.png" src="../_images/prm-1.png" style="width: 70%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 46 </span><span class="caption-text">Configuration space: balck blocks show obstacle space and the while show free space. The start is shown in green  and goal in red.</span><a class="headerlink" href="#prm1" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 45 </span><span class="caption-text">Configuration space: balck blocks show obstacle space and the while show free space. The start is shown in green  and goal in red.</span><a class="headerlink" href="#prm1" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="prm2">
 <a class="reference internal image-reference" href="../_images/prm-2.png"><img alt="../_images/prm-2.png" src="../_images/prm-2.png" style="width: 70%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 47 </span><span class="caption-text">Sample <span class="math notranslate nohighlight">\(N\)</span> configurations at random from the C-space.</span><a class="headerlink" href="#prm2" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 46 </span><span class="caption-text">Sample <span class="math notranslate nohighlight">\(N\)</span> configurations at random from the C-space.</span><a class="headerlink" href="#prm2" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="prm3">
 <a class="reference internal image-reference" href="../_images/prm-3.png"><img alt="../_images/prm-3.png" src="../_images/prm-3.png" style="width: 70%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 48 </span><span class="caption-text">Only add the samples in free space  and the start and goal to the roadmap (also known as milestones).</span><a class="headerlink" href="#prm3" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 47 </span><span class="caption-text">Only add the samples in free space  and the start and goal to the roadmap (also known as milestones).</span><a class="headerlink" href="#prm3" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="prm4">
 <a class="reference internal image-reference" href="../_images/prm-4.png"><img alt="../_images/prm-4.png" src="../_images/prm-4.png" style="width: 70%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 49 </span><span class="caption-text">Each milestone is linked by straight paths to its nearest neighbors. The collision-free links are retained as local paths to form the PRM</span><a class="headerlink" href="#prm4" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 48 </span><span class="caption-text">Each milestone is linked by straight paths to its nearest neighbors. The collision-free links are retained as local paths to form the PRM</span><a class="headerlink" href="#prm4" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="prm5">
 <a class="reference internal image-reference" href="../_images/prm-5.png"><img alt="../_images/prm-5.png" src="../_images/prm-5.png" style="width: 70%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 50 </span><span class="caption-text">Search for a path from the start to the goal using <a class="reference external" href="https://theory.stanford.edu/~amitp/GameProgramming/AStarComparison.html">A* search</a> algorithms.</span><a class="headerlink" href="#prm5" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 49 </span><span class="caption-text">Search for a path from the start to the goal using <a class="reference external" href="https://theory.stanford.edu/~amitp/GameProgramming/AStarComparison.html">A* search</a> algorithms.</span><a class="headerlink" href="#prm5" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
@@ -558,7 +558,7 @@ points, 4, 7, and 10, along the path are labeled.</span><a class="headerlink" hr
 <a class="reference internal image-reference" href="../_images/rrt.png"><img alt="../_images/rrt.png" src="../_images/rrt.png" style="width: 70%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 51 </span><span class="caption-text">Basic RRT algorithm</span><a class="headerlink" href="#rrt" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 50 </span><span class="caption-text">Basic RRT algorithm</span><a class="headerlink" href="#rrt" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>A visualization of how RRT works step by step in 2D space is shown as follows.</p>
@@ -567,14 +567,14 @@ points, 4, 7, and 10, along the path are labeled.</span><a class="headerlink" hr
 <a class="reference internal image-reference" href="../_images/rrt-1.png"><img alt="../_images/rrt-1.png" src="../_images/rrt-1.png" style="width: 90%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 52 </span><span class="caption-text">The 1st iteration in RRT algoritm</span><a class="headerlink" href="#rrt1" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 51 </span><span class="caption-text">The 1st iteration in RRT algoritm</span><a class="headerlink" href="#rrt1" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="rrt2">
 <a class="reference internal image-reference" href="../_images/rrt-2.png"><img alt="../_images/rrt-2.png" src="../_images/rrt-2.png" style="width: 90%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 53 </span><span class="caption-text">The 2nd iteration of RRT to n-th iteration</span><a class="headerlink" href="#rrt2" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 52 </span><span class="caption-text">The 2nd iteration of RRT to n-th iteration</span><a class="headerlink" href="#rrt2" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <section id="variants-of-rrt">
@@ -589,7 +589,7 @@ along shorter path through new point than through their original
 <a class="reference internal image-reference" href="../_images/rrt*.png"><img alt="../_images/rrt%2A.png" src="../_images/rrt%2A.png" style="width: 90%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 54 </span><span class="caption-text">(Left) The tree generated by an RRT after 5,000 nodes. The goal
+<p><span class="caption-number">Fig. 53 </span><span class="caption-text">(Left) The tree generated by an RRT after 5,000 nodes. The goal
 region is the square at the top right corner, and the shortest path is indicated. (Right)
 The tree generated by RRT* after 5,000 nodes. Figure from original paper (<a class="reference external" href="https://arxiv.org/abs/1105.1186">https://arxiv.org/abs/1105.1186</a>).</span><a class="headerlink" href="#rrts" title="Link to this image">#</a></p>
 </figcaption>

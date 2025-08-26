@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -183,7 +183,7 @@
         </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../lec1/intro.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lec2/configuration.html">Robot Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lec2-dof/configuration.html">Robot Configuration</a></li>
 
 
 
@@ -426,7 +426,7 @@ document.write(`
 actuated joints. One end of the kinematic chain is mounted to a base and
 the other end to an end-effector (gripper, tool). Joints have two tyipcal types (though we learned many):
 revolute and prismatic, as in
-<a class="reference internal" href="#end-effector-frame"><span class="std std-numref">Fig. 24</span></a>. The pose of a robot arm is
+<a class="reference internal" href="#end-effector-frame"><span class="std std-numref">Fig. 23</span></a>. The pose of a robot arm is
 described by all joints (all DoFs). Each DOF is
 typically associated with a joint variable. Forward
 kinematics (FK) is to derive the relationship between joint variables and the
@@ -435,7 +435,7 @@ pose of the end-effector.</p>
 <a class="reference internal image-reference" href="../_images/end-effector_frame.jpg"><img alt="../_images/end-effector_frame.jpg" src="../_images/end-effector_frame.jpg" style="width: 70%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 24 </span><span class="caption-text">Description of the pose (position and orientation) of the end-effector
+<p><span class="caption-number">Fig. 23 </span><span class="caption-text">Description of the pose (position and orientation) of the end-effector
 frame</span><a class="headerlink" href="#end-effector-frame" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
@@ -499,13 +499,13 @@ consecutive links.</p>
 <a class="reference internal image-reference" href="../_images/DH_convention.jpg"><img alt="../_images/DH_convention.jpg" src="../_images/DH_convention.jpg" style="width: 70%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 25 </span><span class="caption-text">Denavit-Hartenberg convention and parameters for link Frame
+<p><span class="caption-number">Fig. 24 </span><span class="caption-text">Denavit-Hartenberg convention and parameters for link Frame
 <span class="math notranslate nohighlight">\(i\)</span></span><a class="headerlink" href="#dh-convention" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>With reference to <a class="reference internal" href="#dh-convention"><span class="std std-numref">Fig. 25</span></a>, joint <span class="math notranslate nohighlight">\(i\)</span> connects Link <span class="math notranslate nohighlight">\(i-1\)</span> to Link <span class="math notranslate nohighlight">\(i\)</span>; DH
+<p>With reference to <a class="reference internal" href="#dh-convention"><span class="std std-numref">Fig. 24</span></a>, joint <span class="math notranslate nohighlight">\(i\)</span> connects Link <span class="math notranslate nohighlight">\(i-1\)</span> to Link <span class="math notranslate nohighlight">\(i\)</span>; DH
 convention sets the following rules to define link Frame
 <span class="math notranslate nohighlight">\(O_{i}-x_{i} y_{i} z_{i}\)</span>, given previous link Frame
 <span class="math notranslate nohighlight">\(O_{i-1}-x_{i-1} y_{i-1} z_{i-1}\)</span>:</p>
@@ -523,7 +523,7 @@ the common normal to <span class="math notranslate nohighlight">\(z_{i}\)</span>
 <p>Once the link frames are established by DH convention, the pose of
 link Frame <span class="math notranslate nohighlight">\(O_{i}-x_{i} y_{i} z_{i}\)</span> in the link Frame
 <span class="math notranslate nohighlight">\(O_{i-1}-x_{i-1} y_{i-1} z_{i-1}\)</span> can be determined by
-four basic parameters, with the help of an intermediate frame <span class="math notranslate nohighlight">\(O_{i^{\prime}}-x_{i^{\prime}} y_{i^{\prime}} z_{i^{\prime}}\)</span> shown in <a class="reference internal" href="#dh-convention"><span class="std std-numref">Fig. 25</span></a>:</p>
+four basic parameters, with the help of an intermediate frame <span class="math notranslate nohighlight">\(O_{i^{\prime}}-x_{i^{\prime}} y_{i^{\prime}} z_{i^{\prime}}\)</span> shown in <a class="reference internal" href="#dh-convention"><span class="std std-numref">Fig. 24</span></a>:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(a_{i}\)</span> distance between <span class="math notranslate nohighlight">\(O_{i}\)</span> and <span class="math notranslate nohighlight">\(O_{i^{\prime}}\)</span> — constant
 and depend only on the geometry of links</p></li>
@@ -640,7 +640,7 @@ Three-link Planar Arm</div>
 <a class="reference internal image-reference" href="../_images/3link_arm.jpg"><img alt="../_images/3link_arm.jpg" src="../_images/3link_arm.jpg" style="width: 60%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 26 </span><span class="caption-text">Three link robot arm</span><a class="headerlink" href="#link-arm" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 25 </span><span class="caption-text">Three link robot arm</span><a class="headerlink" href="#link-arm" title="Link to this image">#</a></p>
 <div class="legend">
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -693,7 +693,7 @@ Spherical Arm</div>
 <a class="reference internal image-reference" href="../_images/spherical_arm.jpg"><img alt="../_images/spherical_arm.jpg" src="../_images/spherical_arm.jpg" style="width: 70%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 27 </span><span class="caption-text">Three link robot arm</span><a class="headerlink" href="#spherical-arm" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 26 </span><span class="caption-text">Three link robot arm</span><a class="headerlink" href="#spherical-arm" title="Link to this image">#</a></p>
 <div class="legend">
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -746,7 +746,7 @@ Anthropomorphic Arm</div>
 <a class="reference internal image-reference" href="../_images/anthropomorphic_arm.jpg"><img alt="../_images/anthropomorphic_arm.jpg" src="../_images/anthropomorphic_arm.jpg" style="width: 70%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 28 </span><span class="caption-text">Three link robot arm</span><a class="headerlink" href="#anthropomorphic-arm" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 27 </span><span class="caption-text">Three link robot arm</span><a class="headerlink" href="#anthropomorphic-arm" title="Link to this image">#</a></p>
 <div class="legend">
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -799,7 +799,7 @@ Spherical Wrist</div>
 <a class="reference internal image-reference" href="../_images/spherical_wrist.jpg"><img alt="../_images/spherical_wrist.jpg" src="../_images/spherical_wrist.jpg" style="width: 70%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 29 </span><span class="caption-text">Three link robot arm</span><a class="headerlink" href="#spherical-wrist" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 28 </span><span class="caption-text">Three link robot arm</span><a class="headerlink" href="#spherical-wrist" title="Link to this image">#</a></p>
 <div class="legend">
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -852,7 +852,7 @@ Stanford Manipulator</div>
 <a class="reference internal image-reference" href="../_images/Stanford_manipulator.jpg"><img alt="../_images/Stanford_manipulator.jpg" src="../_images/Stanford_manipulator.jpg" style="width: 70%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 30 </span><span class="caption-text">Stanford manipulator</span><a class="headerlink" href="#stanford-manipulator" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 29 </span><span class="caption-text">Stanford manipulator</span><a class="headerlink" href="#stanford-manipulator" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="math notranslate nohighlight">
@@ -895,7 +895,7 @@ Anthropomorphic Arm with Spherical Wrist</div>
 <a class="reference internal image-reference" href="../_images/anthropomorphic_manipulator.jpg"><img alt="../_images/anthropomorphic_manipulator.jpg" src="../_images/anthropomorphic_manipulator.jpg" style="width: 80%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 31 </span><span class="caption-text">Anthropomorphic manipulator</span><a class="headerlink" href="#anthropomorphic-manipulator" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 30 </span><span class="caption-text">Anthropomorphic manipulator</span><a class="headerlink" href="#anthropomorphic-manipulator" title="Link to this image">#</a></p>
 <div class="legend">
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -1039,7 +1039,7 @@ end-effector motion.</p>
 <a class="reference internal image-reference" href="../_images/DHParameter.png"><img alt="../_images/DHParameter.png" src="../_images/DHParameter.png" style="width: 50%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 32 </span><span class="caption-text">Modified DH parameters (or called Craig’s convention). Image from
+<p><span class="caption-number">Fig. 31 </span><span class="caption-text">Modified DH parameters (or called Craig’s convention). Image from
 Wiki</span><a class="headerlink" href="#dhparameter" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
@@ -1070,14 +1070,14 @@ kinematics at</p>
 <a class="reference internal image-reference" href="../_images/dh-diagram.png"><img alt="../_images/dh-diagram.png" src="../_images/dh-diagram.png" style="width: 50%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 33 </span><span class="caption-text">Panda’s kinematic chain</span><a class="headerlink" href="#dh-diagram" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 32 </span><span class="caption-text">Panda’s kinematic chain</span><a class="headerlink" href="#dh-diagram" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="cover">
 <a class="reference internal image-reference" href="../_images/cover.png"><img alt="../_images/cover.png" src="../_images/cover.png" style="width: 50%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 34 </span><span class="caption-text">Panda’s kinematic chain (from Peter Corke’s
+<p><span class="caption-number">Fig. 33 </span><span class="caption-text">Panda’s kinematic chain (from Peter Corke’s
 Tutorial</span><a class="headerlink" href="#cover" title="Link to this image">#</a></p>
 </figcaption>
 </figure>

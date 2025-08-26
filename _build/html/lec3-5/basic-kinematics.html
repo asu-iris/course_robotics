@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -63,7 +63,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Forward Kinematics" href="../lec6-8/fk.html" />
-    <link rel="prev" title="Robot Configuration" href="../lec2/configuration.html" />
+    <link rel="prev" title="Robot Configuration" href="../lec2-dof/configuration.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -183,7 +183,7 @@
         </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../lec1/intro.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lec2/configuration.html">Robot Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lec2-dof/configuration.html">Robot Configuration</a></li>
 
 
 
@@ -435,7 +435,7 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="basic-kinematics">
 <h1>Basic Kinematics<a class="headerlink" href="#basic-kinematics" title="Link to this heading">#</a></h1>
 <p>The pose of a rigid body in 3D space is represented by its position and
-orientation with respect to a reference frame. As shown in <a class="reference internal" href="#pose-rigid-body"><span class="std std-numref">Fig. 18</span></a>, let
+orientation with respect to a reference frame. As shown in <a class="reference internal" href="#pose-rigid-body"><span class="std std-numref">Fig. 17</span></a>, let
 <span class="math notranslate nohighlight">\(O-xyz\)</span> be the reference frame and
 <span class="math notranslate nohighlight">\(\{\boldsymbol{x}, \boldsymbol{y}, \boldsymbol{z}\}\)</span> be the unit vectors
 of the frame axes.
@@ -449,7 +449,7 @@ being the unit vectors.</p>
 <a class="reference internal image-reference" href="../_images/pose_rigid_body.jpg"><img alt="../_images/pose_rigid_body.jpg" src="../_images/pose_rigid_body.jpg" style="width: 80%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 18 </span><span class="caption-text">Pose of a rigid body in a reference frame</span><a class="headerlink" href="#pose-rigid-body" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 17 </span><span class="caption-text">Pose of a rigid body in a reference frame</span><a class="headerlink" href="#pose-rigid-body" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>To describe the position of the rigid body,  define a position vector
@@ -526,11 +526,11 @@ counter-clockwise about a axis.</p>
 <a class="reference internal image-reference" href="../_images/elementary_rotations.jpg"><img alt="../_images/elementary_rotations.jpg" src="../_images/elementary_rotations.jpg" style="width: 60%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 19 </span><span class="caption-text">Rotation of frame <span class="math notranslate nohighlight">\(O- x y z\)</span> by an angle <span class="math notranslate nohighlight">\(\alpha\)</span> about axis
+<p><span class="caption-number">Fig. 18 </span><span class="caption-text">Rotation of frame <span class="math notranslate nohighlight">\(O- x y z\)</span> by an angle <span class="math notranslate nohighlight">\(\alpha\)</span> about axis
 <span class="math notranslate nohighlight">\(\boldsymbol{z}\)</span></span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>As shown in  <a class="reference internal" href="#id1"><span class="std std-numref">Fig. 19</span></a>, suppose the body frame
+<p>As shown in  <a class="reference internal" href="#id1"><span class="std std-numref">Fig. 18</span></a>, suppose the body frame
 <span class="math notranslate nohighlight">\(O- x^{\prime} y^{\prime} z^{\prime}\)</span> is a result of rotating a
 reference frame <span class="math notranslate nohighlight">\(O- x y z\)</span> by an angle <span class="math notranslate nohighlight">\(\alpha\)</span> about the axis
 <span class="math notranslate nohighlight">\(\boldsymbol{z}\)</span>. Then, the rotation matrix of
@@ -571,11 +571,11 @@ body frame.
 <a class="reference internal image-reference" href="../_images/coordinate_transformation.jpg"><img alt="../_images/coordinate_transformation.jpg" src="../_images/coordinate_transformation.jpg" style="width: 60%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 20 </span><span class="caption-text">Representation of a point <span class="math notranslate nohighlight">\(P\)</span> in two different coordinate
+<p><span class="caption-number">Fig. 19 </span><span class="caption-text">Representation of a point <span class="math notranslate nohighlight">\(P\)</span> in two different coordinate
 frames</span><a class="headerlink" href="#coordinate-transformation" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>As in <a class="reference internal" href="#coordinate-transformation"><span class="std std-numref">Fig. 20</span></a>,
+<p>As in <a class="reference internal" href="#coordinate-transformation"><span class="std std-numref">Fig. 19</span></a>,
 consider that the origin of the body frame coincides with the origin of
 the reference frame, and that a point <span class="math notranslate nohighlight">\(P\)</span> expressed in
 <span class="math notranslate nohighlight">\(O- x y z\)</span> is</p>
@@ -768,7 +768,7 @@ are used; namely, the ZYZ Euler angles and the Roll-Pitch-Yaw (RPY) (or ZYX Eule
 <a class="reference internal image-reference" href="../_images/zyz_euler_angles.jpg"><img alt="../_images/zyz_euler_angles.jpg" src="../_images/zyz_euler_angles.jpg" style="width: 80%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 21 </span><span class="caption-text">ZYZ Euler angles</span><a class="headerlink" href="#zyz-euler-angles" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 20 </span><span class="caption-text">ZYZ Euler angles</span><a class="headerlink" href="#zyz-euler-angles" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p><strong>ZYZ Euler Angles</strong>: the rotation described by ZYZ Euler angles is done
@@ -848,7 +848,7 @@ the reference frame <span class="math notranslate nohighlight">\(O- x y z\)</spa
 <a class="reference internal image-reference" href="../_images/angle_axis.jpg"><img alt="../_images/angle_axis.jpg" src="../_images/angle_axis.jpg" style="width: 60%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 22 </span><span class="caption-text">Rotation of an angle about an axis.</span><a class="headerlink" href="#zyz-euler-angles2" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 21 </span><span class="caption-text">Rotation of an angle about an axis.</span><a class="headerlink" href="#zyz-euler-angles2" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>To derive the rotation matrix
@@ -862,7 +862,7 @@ reference frame <span class="math notranslate nohighlight">\(O- x y z\)</span>, 
 transformation:</p>
 <div class="math notranslate nohighlight">
 \[\boldsymbol{R}(\vartheta, \boldsymbol{r})= \boldsymbol{R}_{1} \boldsymbol{R}_{z}(\vartheta) (\boldsymbol{R}_{1})^T\]</div>
-<p>with <span class="math notranslate nohighlight">\(\boldsymbol{R}_{1}\)</span> denoting the rotation of the body frame in reference framework. From  <a class="reference internal" href="#zyz-euler-angles2"><span class="std std-numref">Fig. 22</span></a>, we have</p>
+<p>with <span class="math notranslate nohighlight">\(\boldsymbol{R}_{1}\)</span> denoting the rotation of the body frame in reference framework. From  <a class="reference internal" href="#zyz-euler-angles2"><span class="std std-numref">Fig. 21</span></a>, we have</p>
 <div class="math notranslate nohighlight">
 \[\boldsymbol{R}_{1}=\boldsymbol{R}_{z}(\alpha) \boldsymbol{R}_{y}(\beta)\]</div>
 <p>In sum, the rotation matrix is</p>
@@ -964,7 +964,7 @@ introduced.</p>
 <a class="reference internal image-reference" href="../_images/homogenenous_transformation.jpg"><img alt="../_images/homogenenous_transformation.jpg" src="../_images/homogenenous_transformation.jpg" style="width: 80%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 23 </span><span class="caption-text">Representation of a point <span class="math notranslate nohighlight">\(P\)</span> in different coordinate
+<p><span class="caption-number">Fig. 22 </span><span class="caption-text">Representation of a point <span class="math notranslate nohighlight">\(P\)</span> in different coordinate
 frames</span><a class="headerlink" href="#homogenenous-transformation" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
@@ -1054,7 +1054,7 @@ of frame <span class="math notranslate nohighlight">\(i\)</span> with respect to
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../lec2/configuration.html"
+       href="../lec2-dof/configuration.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
