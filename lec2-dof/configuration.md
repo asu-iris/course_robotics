@@ -66,6 +66,31 @@ open when there is only one sequence of links connecting the two
 ends of the chain. Alternatively,
 kinematic chain is closed when a sequence of links forms a loop. This course mainly focuses on open chain arms.
 
+```{admonition} MuJoCo Simulator Introduction
+:class: tip
+
+MuJoCo (Multi-Joint dynamics with Contact) is a physics engine designed for the simulation and control of robots and other articulated mechanisms. It is widely used in robotics research for its speed, accuracy, and support for advanced features such as soft contacts and complex constraints.
+
+**Key Features:**
+
+- Fast and accurate simulation of rigid body dynamics
+- Support for soft and hard contacts
+- Flexible model specification using XML
+- Widely used in reinforcement learning and robotics research
+
+**Getting Started:**
+
+To use MuJoCo, you need to:
+
+1. Install MuJoCo (UI) from [https://github.com/google-deepmind/mujoco/releases](https://github.com/google-deepmind/mujoco/releases)
+2. Download Example Model:** [franka_fr3.zip](../lec2-dof/code/franka_fr3.zip)
+3. Unzip and drag it into UI to simulate the Franka Research 3 Robot arm.
+
+
+
+
+```
+
 # Configuration
 
 ```{important}

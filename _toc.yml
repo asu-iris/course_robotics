@@ -4,9 +4,9 @@
 format: jb-book
 root: intro
 chapters:
-  - file: lec1/intro
+  - file: lec1-intro/intro
   - file: lec2-dof/configuration
-  - file: lec3-5/basic-kinematics
+  - file: lec3-basic-kin/basic-kinematics
   - file: lec6-8/fk
   - file: lec9/ik
   - file: opt/motion_planning
