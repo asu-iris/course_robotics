@@ -434,7 +434,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="basic-kinematics">
 <h1>Basic Kinematics<a class="headerlink" href="#basic-kinematics" title="Link to this heading">#</a></h1>
-<p>The pose of a rigid body in 3D space is represented by its position and
+<p>The pose of a rigid body in 3D space is described by its position and
 orientation with respect to a reference frame. As in <a class="reference internal" href="#pose-rigid-body"><span class="std std-numref">Fig. 17</span></a>, let
 <span class="math notranslate nohighlight">\(O-xyz\)</span> be the reference frame and
 <span class="math notranslate nohighlight">\(\{\boldsymbol{x}, \boldsymbol{y}, \boldsymbol{z}\}\)</span> be the unit vectors
@@ -442,7 +442,7 @@ of the frame axes.
 To represent the pose of the rigid body, we
 pick a fixed point <span class="math notranslate nohighlight">\(O^\prime\)</span> on the rigid body, and attach an
 body frame <span class="math notranslate nohighlight">\(O^{\prime}-x^{\prime} y^{\prime} z^{\prime}\)</span>
-to the body, with origin in <span class="math notranslate nohighlight">\(O^{\prime}\)</span> and
+to the body, with origin <span class="math notranslate nohighlight">\(O^{\prime}\)</span> and
 <span class="math notranslate nohighlight">\(\{\boldsymbol{x}^{\prime}, \boldsymbol{y}^{\prime}, \boldsymbol{z}^{\prime}\}\)</span>
 being the unit vectors.</p>
 <figure class="align-default" id="pose-rigid-body">
@@ -452,7 +452,7 @@ being the unit vectors.</p>
 <p><span class="caption-number">Fig. 17 </span><span class="caption-text">Pose of a rigid body in a reference frame</span><a class="headerlink" href="#pose-rigid-body" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>To describe the position of the rigid body, define a position vector
+<p>The position of the rigid body is defined as a position vector
 <span class="math notranslate nohighlight">\(\boldsymbol{o}^{\prime}\)</span> pointing from the reference frame origin <span class="math notranslate nohighlight">\(O\)</span>
 to the body frame origin <span class="math notranslate nohighlight">\(O'\)</span>. We express <span class="math notranslate nohighlight">\(\boldsymbol{o}^{\prime}\)</span> in
 terms of <span class="math notranslate nohighlight">\(\{\boldsymbol{x}, \boldsymbol{y}, \boldsymbol{z}\}\)</span> of
@@ -471,13 +471,12 @@ o_{z}^{\prime}
 {\boldsymbol{o}^{\prime}}^T \boldsymbol{z}
 \end{array}\right]
 \end{split}\]</div>
-<p>where <span class="math notranslate nohighlight">\(o_{x}^{\prime}, o_{y}^{\prime}, o_{z}^{\prime}\)</span>, called the coordinates of the vector <span class="math notranslate nohighlight">\(\boldsymbol{o}^{\prime}\)</span>, are projections
+<p>where <span class="math notranslate nohighlight">\(o_{x}^{\prime}, o_{y}^{\prime}, o_{z}^{\prime}\)</span> are called the coordinates of vector <span class="math notranslate nohighlight">\(\boldsymbol{o}^{\prime}\)</span> and are the projections
 of <span class="math notranslate nohighlight">\(\boldsymbol{o}^{\prime}\)</span> in
 <span class="math notranslate nohighlight">\(\{\boldsymbol{x}, \boldsymbol{y}, \boldsymbol{z}\}\)</span>.</p>
 <p>To describe the orientation of the rigid body, we find the coordinates
 of each unit axis
-<span class="math notranslate nohighlight">\(\{\boldsymbol{x}^{\prime}, \boldsymbol{y}^{\prime}, \boldsymbol{z}^{\prime}\}\)</span>
-of the body frame, in the reference frame:</p>
+<span class="math notranslate nohighlight">\(\{\boldsymbol{x}^{\prime}, \boldsymbol{y}^{\prime}, \boldsymbol{z}^{\prime}\}\)</span> in the reference frame:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{aligned}
@@ -486,7 +485,9 @@ of the body frame, in the reference frame:</p>
 &amp; \boldsymbol{z}^{\prime}=z_{x}^{\prime} \boldsymbol{x}+z_{y}^{\prime} \boldsymbol{y}+z_{z}^{\prime} \boldsymbol{z}
 \end{aligned}
 \end{split}\]</div>
-<p>We write the above into the following compact notation:</p>
+<div class="admonition-rotation-matrix-and-its-properties admonition">
+<p class="admonition-title">Rotation Matrix and its Properties</p>
+<p>We write the above into the following matrix notation:</p>
 <div class="math notranslate nohighlight" id="equation-equ-rotation-matrix">
 <span class="eqno">(1)<a class="headerlink" href="#equation-equ-rotation-matrix" title="Link to this equation">#</a></span>\[\begin{split}
 \boldsymbol{R}=\left[\begin{array}{lll}
@@ -500,11 +501,10 @@ x_{z}^{\prime} &amp; y_{z}^{\prime} &amp; z_{z}^{\prime}
 \boldsymbol{x}^{\prime T} \boldsymbol{y} &amp; \boldsymbol{y}^{\prime T} \boldsymbol{y} &amp; \boldsymbol{z}^{\prime T} \boldsymbol{y} \\
 \boldsymbol{x}^{\prime T} \boldsymbol{z} &amp; \boldsymbol{y}^{\prime T} \boldsymbol{z} &amp; \boldsymbol{z}^{\prime T} \boldsymbol{z}
 \end{array}\right]\end{split}\]</div>
-<p>with each column being the coordinates of each unit vector
-<span class="math notranslate nohighlight">\(\{\boldsymbol{x}^{\prime}, \boldsymbol{y}^{\prime}, \boldsymbol{z}^{\prime}\}\)</span>.</p>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>The above <span class="math notranslate nohighlight">\(\boldsymbol{R}\)</span> is called rotation matrix. Some properties of
+<p>with each column being the coordinates/projections of each unit vector
+<span class="math notranslate nohighlight">\(\{\boldsymbol{x}^{\prime}, \boldsymbol{y}^{\prime}, \boldsymbol{z}^{\prime}\}\)</span>  in
+<span class="math notranslate nohighlight">\(\{\boldsymbol{x}, \boldsymbol{y}, \boldsymbol{z}\}\)</span>. <span class="math notranslate nohighlight">\(\boldsymbol{R}\)</span> is called rotation matrix.</p>
+<p>Some properties of
 Rotation Matrix:</p>
 <ul class="simple">
 <li><p>Mutual orthogonality:
@@ -516,7 +516,7 @@ Rotation Matrix:</p>
 <span class="math notranslate nohighlight">\(\boldsymbol{z}^{\prime T} \boldsymbol{z}^{\prime}=1\)</span></p></li>
 <li><p>Orthogonal matrix:
 <span class="math notranslate nohighlight">\(\boldsymbol{R}^{T} \boldsymbol{R}=\boldsymbol{I}_{3} \quad \rightarrow \quad \boldsymbol{R}^{T}=\boldsymbol{R}^{-1}\)</span></p></li>
-<li><p>The determinant of <span class="math notranslate nohighlight">\(\boldsymbol{R}\)</span>: <span class="math notranslate nohighlight">\(|\det \boldsymbol{R}|=1\)</span></p></li>
+<li><p>The determinant (righ-hand rule convention): <span class="math notranslate nohighlight">\(|\det \boldsymbol{R}|=1\)</span></p></li>
 </ul>
 </div>
 </section>
@@ -535,13 +535,14 @@ counter-clockwise about a axis.</p>
 <span class="math notranslate nohighlight">\(\boldsymbol{z}\)</span></span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>As shown in  <a class="reference internal" href="#id1"><span class="std std-numref">Fig. 18</span></a>, suppose the body frame
+<p>As shown in <a class="reference internal" href="#id1"><span class="std std-numref">Fig. 18</span></a>, suppose the body frame
 <span class="math notranslate nohighlight">\(O- x^{\prime} y^{\prime} z^{\prime}\)</span> is a result of rotating a
 reference frame <span class="math notranslate nohighlight">\(O- x y z\)</span> by an angle <span class="math notranslate nohighlight">\(\alpha\)</span> about the axis
 <span class="math notranslate nohighlight">\(\boldsymbol{z}\)</span>. Then, the rotation matrix of
 <span class="math notranslate nohighlight">\(O- x^{\prime} y^{\prime} z^{\prime}\)</span> is</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\boldsymbol{R}_{z}(\alpha)=\left[\begin{array}{ccc}
+\[\begin{split}
+\boldsymbol{R}_{z}(\alpha)=\left[\begin{array}{ccc}
 \cos \alpha &amp; -\sin \alpha &amp; 0 \\
 \sin \alpha &amp; \cos \alpha &amp; 0 \\
 0 &amp; 0 &amp; 1
@@ -567,11 +568,6 @@ reference frame <span class="math notranslate nohighlight">\(O- x y z\)</span> b
 0 &amp; \sin \gamma &amp; \cos \gamma
 \end{array}\right] .
 \end{split}\]</div>
-<!-- ```{note}
-Takeaway: the rotation matrix can be interpreted geometrically as a
-rotation about an axis in space needed to align a reference frame to a
-body frame.
-``` -->
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="transformation-via-rotation-matrix">
 <h1>Transformation via Rotation Matrix<a class="headerlink" href="#transformation-via-rotation-matrix" title="Link to this heading">#</a></h1>
@@ -606,7 +602,17 @@ p_{z}
 \[\begin{split}
 \boldsymbol{p}=p_{x}^{\prime} \boldsymbol{x}^{\prime} +
 p_{y}^{\prime} \boldsymbol{y}^{\prime} +
-p_{z}^{\prime}\boldsymbol{z}^{\prime} =\boldsymbol{R}\left[\begin{array}{c}
+p_{z}^{\prime}\boldsymbol{z}^{\prime}
+=
+\left[\begin{array}{lll}
+\boldsymbol{x}^{\prime} &amp; \boldsymbol{y}^{\prime} &amp; \boldsymbol{z}^{\prime}
+\end{array}\right]
+\left[\begin{array}{c}
+p_{x}^{\prime} \\
+p_{y}^{\prime} \\
+p_{z}^{\prime}
+\end{array}\right]=
+\boldsymbol{R}\left[\begin{array}{c}
 p_{x}^{\prime} \\
 p_{y}^{\prime} \\
 p_{z}^{\prime}
@@ -635,8 +641,8 @@ the rotation matrix $\boldsymbol{R}$. This leads to-->
 <span class="eqno">(2)<a class="headerlink" href="#equation-equ-transform" title="Link to this equation">#</a></span>\[
     \boldsymbol{p}=\boldsymbol{R}\boldsymbol{p}^{\prime}
 \]</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
+<div class="admonition-passive-rotation admonition">
+<p class="admonition-title">Passive rotation</p>
 <p><span class="math notranslate nohighlight">\(\boldsymbol{R}\)</span> is a transformation (mapping) for the
 coordinates of the same vector, from frame <span class="math notranslate nohighlight">\(O- x^{\prime} y^{\prime} z^{\prime}\)</span> to the
 to frame <span class="math notranslate nohighlight">\(O- x y z\)</span>.</p>
@@ -644,16 +650,23 @@ to frame <span class="math notranslate nohighlight">\(O- x y z\)</span>.</p>
 </section>
 <section id="active-rotation">
 <h2>Active Rotation<a class="headerlink" href="#active-rotation" title="Link to this heading">#</a></h2>
-<p>In another perspective to look at <a class="reference internal" href="#equation-equ-transform">(2)</a>, we can interpret <span class="math notranslate nohighlight">\(\boldsymbol{p}^{\prime}\)</span>
-be a vector also expressed in the reference frame <span class="math notranslate nohighlight">\(O- x y z\)</span>, that is,</p>
+<p>In another perspective to look at <a class="reference internal" href="#equation-equ-transform">(2)</a>, we can find a <code class="docutils literal notranslate"><span class="pre">mirror</span></code> point <span class="math notranslate nohighlight">\(\boldsymbol{p}^{\prime\prime}=\left[\begin{array}{c}
+p_{x}^{\prime} \\
+p_{y}^{\prime} \\
+p_{z}^{\prime}
+\end{array}\right]\)</span>   with the same cooridnates <span class="math notranslate nohighlight">\(\left[\begin{array}{c}
+p_{x}^{\prime} \\
+p_{y}^{\prime} \\
+p_{z}^{\prime}
+\end{array}\right]\)</span>  but in  the reference frame <span class="math notranslate nohighlight">\(O- x y z\)</span>, i.e.,</p>
 <div class="math notranslate nohighlight">
-\[\boldsymbol{p}=p*{x}^{\prime} \boldsymbol{x} +
-p*{y}^{\prime} \boldsymbol{y} +
-p\_{z}^{\prime}\boldsymbol{z}\]</div>
-<p><span class="math notranslate nohighlight">\(\boldsymbol{R} \boldsymbol{p}^{\prime}\)</span> turns the vector <span class="math notranslate nohighlight">\(\boldsymbol{p}^{\prime}\)</span> to a new vector <span class="math notranslate nohighlight">\(\boldsymbol{p}\)</span> in the same reference frame <span class="math notranslate nohighlight">\(O- x y z\)</span>, according to the
+\[\boldsymbol{p}^{\prime\prime}=p_x^{\prime} \boldsymbol{x} +
+p_y^{\prime} \boldsymbol{y} +
+p_z^{\prime}\boldsymbol{z}\]</div>
+<p><span class="math notranslate nohighlight">\(\boldsymbol{p}=\boldsymbol{R} \boldsymbol{p}^{\prime\prime}\)</span> turns the vector <span class="math notranslate nohighlight">\(\boldsymbol{p}^{\prime\prime}\)</span> to a new vector <span class="math notranslate nohighlight">\(\boldsymbol{p}\)</span> in the same reference frame <span class="math notranslate nohighlight">\(O- x y z\)</span>, according to the
 matrix <span class="math notranslate nohighlight">\(\boldsymbol{R}\)</span>.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
+<div class="admonition-active-rotation admonition">
+<p class="admonition-title">Active rotation</p>
 <p><span class="math notranslate nohighlight">\(\boldsymbol{R}\)</span> can be also interpreted as the rotation
 operator to rotate  a vector to a new vector in the same
 coordinate system, where both vectors are expressed.</p>
@@ -684,12 +697,11 @@ rotating <span class="math notranslate nohighlight">\(O- x_{1} y_{1} z_{1}\)</sp
 <span class="math notranslate nohighlight">\(\boldsymbol{R}_{1}^{0}\)</span> is expressed in <span class="math notranslate nohighlight">\(O- x_{0} y_{0} z_{0}\)</span>, and the
 second rotation matrix <span class="math notranslate nohighlight">\(\boldsymbol{R}_{2}^{1}\)</span> is expressed in
 <span class="math notranslate nohighlight">\(O- x_{1} y_{1} z_{1}\)</span> (we will call it current frame).</p>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>Hence, we can conclude the following <em>postmultiplication rule</em>:</p>
+<div class="admonition-rotation-around-current-frame admonition">
+<p class="admonition-title">Rotation around Current Frame</p>
+<p>We can conclude the following <em>postmultiplication rule</em>:</p>
 <ul class="simple">
-<li><p>The frame with respect to which a rotation occurs (and the rotation
-matrix is ‘expressed’) is called the current frame.</p></li>
+<li><p>The frame with respect to which a rotation occurs is called the current frame.</p></li>
 <li><p>The composition of each rotation around the current frame is
 obtained by <em>postmultiplication</em> of the rotation matrices in order.</p></li>
 </ul>
@@ -706,13 +718,11 @@ a new rotation matrix</p>
 <div class="math notranslate nohighlight">
 \[\boldsymbol{R}_{1,2}^0\]</div>
 <p>which is ‘expressed’ <em>still</em> in the initial frame <span class="math notranslate nohighlight">\(O- x_{0} y_{0} z_{0}\)</span>
-(instead of the current frame <span class="math notranslate nohighlight">\(O- x_{1} y_{1} z_{1}\)</span> itself). We call
-this type of rotation “the rotation around the fixed frame”, i.e., the rotation happens in the ‘very original’ frame.</p>
+(instead of the current frame <span class="math notranslate nohighlight">\(O- x_{1} y_{1} z_{1}\)</span>). We call
+this type of rotation “the rotation around the fixed (original) frame”</p>
 <p>To  apply the <em>postmultipcation rule</em>, we need to find out a
 rotation <span class="math notranslate nohighlight">\(\boldsymbol{R}_{2}^1\)</span>, which is equivalent to <span class="math notranslate nohighlight">\(\boldsymbol{R}_{1,2}^0\)</span>, but ‘expressed’ in the current
 frame <span class="math notranslate nohighlight">\(O- x_{1} y_{1} z_{1}\)</span>.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
 <p>To do so, let’s consider any vector <span class="math notranslate nohighlight">\(\boldsymbol{p}^1\)</span> expressed in frame <span class="math notranslate nohighlight">\(O- x_{1} y_{1} z_{1}\)</span>. We follow the following procedure.</p>
 <ul class="simple">
 <li><p>Step 1: passive rotation. Let’s first transform <span class="math notranslate nohighlight">\(\boldsymbol{p}^1\)</span> to the corrdinates in frame  0: <span class="math notranslate nohighlight">\(\boldsymbol{R}^0_1\boldsymbol{p}^1\)</span></p></li>
@@ -726,27 +736,8 @@ frame <span class="math notranslate nohighlight">\(O- x_{1} y_{1} z_{1}\)</span>
 <div class="math notranslate nohighlight">
 \[(\boldsymbol{R}^0_1)^T\boldsymbol{R}_{1,2}^0\boldsymbol{R}^0_1\boldsymbol{p}^1\]</div>
 <ul class="simple">
-<li><p>Step 4: active rotation. Now,  <span class="math notranslate nohighlight">\((\boldsymbol{R}^0_1)^T\boldsymbol{R}_{1,2}^0\boldsymbol{R}^0_1\boldsymbol{p}^1\)</span> is in frame 1, which is definitely different from our original <span class="math notranslate nohighlight">\(\boldsymbol{p}^1\)</span>.  So, we can consider this difference is due to we have applied an active rotation <span class="math notranslate nohighlight">\(\boldsymbol{R}^1_2\)</span> to turn <span class="math notranslate nohighlight">\(\boldsymbol{p}^1\)</span> into <span class="math notranslate nohighlight">\((\boldsymbol{R}^0_1)^T\boldsymbol{R}_{1,2}^0\boldsymbol{R}^0_1\boldsymbol{p}^1\)</span>. That is to say,</p></li>
+<li><p>Step 4: active rotation. Now,  <span class="math notranslate nohighlight">\((\boldsymbol{R}^0_1)^T\boldsymbol{R}_{1,2}^0\boldsymbol{R}^0_1\boldsymbol{p}^1\)</span> is in frame 1, which is definitely different from our original <span class="math notranslate nohighlight">\(\boldsymbol{p}^1\)</span>.  So, we can consider this difference is due to we have applied an active rotation <span class="math notranslate nohighlight">\(\boldsymbol{R}^1_2\)</span> to turn <span class="math notranslate nohighlight">\(\boldsymbol{p}^1\)</span> into <span class="math notranslate nohighlight">\((\boldsymbol{R}^0_1)^T\boldsymbol{R}_{1,2}^0\boldsymbol{R}^0_1\boldsymbol{p}^1\)</span>.</p></li>
 </ul>
-<div class="math notranslate nohighlight">
-\[\boldsymbol{R}^1_2\boldsymbol{p}^1=(\boldsymbol{R}^0_1)^T\boldsymbol{R}_{1,2}^0\boldsymbol{R}^0_1\boldsymbol{p}^1\]</div>
-</div>
-<!-- This will lead to the concept of
-similarity transformation derived using the perspective of \"rotation
-matrix as a active transformation\" (how?).
-
-:::{important}
-Given a rotation matrix $\boldsymbol{R}^0$ 'expressed' in the frame
-$O- x_{0} y_{0} z_{0}$, the equivalent rotation matrix
-$\boldsymbol{R}^1$ 'expressed' in another frame $O- x_{1} y_{1} z_{1}$,
-where $O- x_{1} y_{1} z_{1}$ is rotated by $\boldsymbol{R}_1^0$ from
-$O- x_{0} y_{0} z_{0}$ is
-
-$$\boldsymbol{R}^1=(\boldsymbol{R}_1^0)^T\boldsymbol{R}^0\boldsymbol{R}_1^0$$
-::: -->
-<!-- Back to the matrix $\boldsymbol{R}_{1,2}^0$, the equivalent rotation
-matrix 'expressed' in the current frame $O- x_{1} y_{1} z_{1}$ is -->
-<p>Then, we have</p>
 <div class="math notranslate nohighlight">
 \[\boldsymbol{R}_{2}^1=(\boldsymbol{R}_1^0)^T\boldsymbol{R}_{1,2}^0\boldsymbol{R}_1^0\]</div>
 <p>We call the above equation the “similarity transformation”: it is used to transform a rotation <span class="math notranslate nohighlight">\(\boldsymbol{R}_{1,2}^0\)</span> from frame 0 to frame 1.</p>
@@ -754,9 +745,9 @@ matrix 'expressed' in the current frame $O- x_{1} y_{1} z_{1}$ is -->
 the total rotation</p>
 <div class="math notranslate nohighlight">
 \[\boldsymbol{R}_{2}^{0}=\boldsymbol{R}_{1}^{0} \boldsymbol{R}_{2}^1=\boldsymbol{R}_{1}^{0} (\boldsymbol{R}_1^0)^T\boldsymbol{R}_{1,2}^0\boldsymbol{R}_1^0=\boldsymbol{R}_{1,2}^0\boldsymbol{R}_1^0\]</div>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>Hence, we can conclude the following <em>premultiplication rule</em>:</p>
+<div class="admonition-rotation-around-fixed-frame admonition">
+<p class="admonition-title">Rotation around Fixed Frame</p>
+<p>We can conclude the following <em>premultiplication rule</em>:</p>
 <ul class="simple">
 <li><p>The same frame with respect to which a rotation occurs (and the
 rotation matrix is ‘expressed’) is called the fixed frame.</p></li>
