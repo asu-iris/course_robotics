@@ -413,7 +413,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rotation-around-fixed-frame">Rotation around Fixed Frame</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#rotation-parameterization-representation">Rotation Parameterization (Representation)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#rotation-parameterization">Rotation Parameterization</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#euler-angles">Euler Angles</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#angle-axis">Angle Axis</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quaternion">Quaternion</a></li>
@@ -632,11 +632,6 @@ p_{z}^{\prime}
 \end{array}\right]
 \end{split}\]</div>
 <p>and we simply write the above as</p>
-<!-- To establish the relationship between two coordinates, we need to
-replace the unite vectors
-$\{\boldsymbol{x}^{\prime}, \boldsymbol{y}^{\prime}, \boldsymbol{x}^{\prime}\}$
-of the body frame with their coordinates in the reference frame using
-the rotation matrix $\boldsymbol{R}$. This leads to-->
 <div class="math notranslate nohighlight" id="equation-equ-transform">
 <span class="eqno">(2)<a class="headerlink" href="#equation-equ-transform" title="Link to this equation">#</a></span>\[
     \boldsymbol{p}=\boldsymbol{R}\boldsymbol{p}^{\prime}
@@ -716,7 +711,9 @@ obtained by <em>postmultiplication</em> of the rotation matrices in order.</p></
 <span class="math notranslate nohighlight">\(O- x_{1} y_{1} z_{1}\)</span> to the frame <span class="math notranslate nohighlight">\(O- x_{2} y_{2} z_{2}\)</span>, according to
 a new rotation matrix</p>
 <div class="math notranslate nohighlight">
-\[\boldsymbol{R}_{1,2}^0\]</div>
+\[
+\boldsymbol{R}_{1,2}^0
+\]</div>
 <p>which is ‘expressed’ <em>still</em> in the initial frame <span class="math notranslate nohighlight">\(O- x_{0} y_{0} z_{0}\)</span>
 (instead of the current frame <span class="math notranslate nohighlight">\(O- x_{1} y_{1} z_{1}\)</span>). We call
 this type of rotation “the rotation around the fixed (original) frame”</p>
@@ -729,46 +726,50 @@ frame <span class="math notranslate nohighlight">\(O- x_{1} y_{1} z_{1}\)</span>
 <li><p>Step 2: active rotation. In frame 0, use the rotation matrix <span class="math notranslate nohighlight">\(\boldsymbol{R}_{1,2}^0\)</span> to turn   <span class="math notranslate nohighlight">\(\boldsymbol{R}^0_1\boldsymbol{p}^1\)</span> into a new vector but still in frame 0:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[\boldsymbol{R}_{1,2}^0\boldsymbol{R}^0_1\boldsymbol{p}^1\]</div>
+\[
+\boldsymbol{R}_{1,2}^0\boldsymbol{R}^0_1\boldsymbol{p}^1
+\]</div>
 <ul class="simple">
 <li><p>Step 3: passive rotation. Since  the above <span class="math notranslate nohighlight">\(\boldsymbol{R}_{1,2}^0\boldsymbol{R}^0_1\boldsymbol{p}^1\)</span> is in frame 0, we want to transform it back to frame 1, by</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[(\boldsymbol{R}^0_1)^T\boldsymbol{R}_{1,2}^0\boldsymbol{R}^0_1\boldsymbol{p}^1\]</div>
+\[
+(\boldsymbol{R}^0_1)^T\boldsymbol{R}_{1,2}^0\boldsymbol{R}^0_1\boldsymbol{p}^1
+\]</div>
 <ul class="simple">
 <li><p>Step 4: active rotation. Now,  <span class="math notranslate nohighlight">\((\boldsymbol{R}^0_1)^T\boldsymbol{R}_{1,2}^0\boldsymbol{R}^0_1\boldsymbol{p}^1\)</span> is in frame 1, which is definitely different from our original <span class="math notranslate nohighlight">\(\boldsymbol{p}^1\)</span>.  So, we can consider this difference is due to we have applied an active rotation <span class="math notranslate nohighlight">\(\boldsymbol{R}^1_2\)</span> to turn <span class="math notranslate nohighlight">\(\boldsymbol{p}^1\)</span> into <span class="math notranslate nohighlight">\((\boldsymbol{R}^0_1)^T\boldsymbol{R}_{1,2}^0\boldsymbol{R}^0_1\boldsymbol{p}^1\)</span>.</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[\boldsymbol{R}_{2}^1=(\boldsymbol{R}_1^0)^T\boldsymbol{R}_{1,2}^0\boldsymbol{R}_1^0\]</div>
-<p>We call the above equation the “similarity transformation”: it is used to transform a rotation <span class="math notranslate nohighlight">\(\boldsymbol{R}_{1,2}^0\)</span> from frame 0 to frame 1.</p>
+\[
+\boldsymbol{R}_{2}^1=(\boldsymbol{R}_1^0)^T\boldsymbol{R}_{1,2}^0\boldsymbol{R}_1^0
+\]</div>
+<p>In fact, we call <span class="math notranslate nohighlight">\(\boldsymbol{R}_{2}^1=(\boldsymbol{R}_1^0)^T\boldsymbol{R}_{1,2}^0\boldsymbol{R}_1^0\)</span> the “similarity transformation”: it is used to transform a “rotation transformation” <span class="math notranslate nohighlight">\(\boldsymbol{R}_{1,2}^0\)</span> seen in  frame 0 to its equivalent seen in  frame 1.</p>
 <p>Following the <em>postmultipcation rule</em>, we can follow the to obtain
 the total rotation</p>
 <div class="math notranslate nohighlight">
-\[\boldsymbol{R}_{2}^{0}=\boldsymbol{R}_{1}^{0} \boldsymbol{R}_{2}^1=\boldsymbol{R}_{1}^{0} (\boldsymbol{R}_1^0)^T\boldsymbol{R}_{1,2}^0\boldsymbol{R}_1^0=\boldsymbol{R}_{1,2}^0\boldsymbol{R}_1^0\]</div>
-<div class="admonition-rotation-around-fixed-frame admonition">
-<p class="admonition-title">Rotation around Fixed Frame</p>
-<p>We can conclude the following <em>premultiplication rule</em>:</p>
-<ul class="simple">
-<li><p>The same frame with respect to which a rotation occurs (and the
-rotation matrix is ‘expressed’) is called the fixed frame.</p></li>
-<li><p>The composition of each rotation around the fixed frame is obtained
-by <em>premultiplication</em> of the rotation matrices in order.</p></li>
-</ul>
+\[
+\boldsymbol{R}_{2}^{0}=\boldsymbol{R}_{1}^{0} \boldsymbol{R}_{2}^1=\boldsymbol{R}_{1}^{0} (\boldsymbol{R}_1^0)^T\boldsymbol{R}_{1,2}^0\boldsymbol{R}_1^0=\boldsymbol{R}_{1,2}^0\boldsymbol{R}_1^0
+\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Note: composition of rotations not commutative, i.e., <span class="math notranslate nohighlight">\(R_1R_2=R_2R_1\)</span>, most of cases, does NOT hold.</p>
 </div>
-<p>Note: composition of rotations not commutative!</p>
 </section>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="rotation-parameterization-representation">
-<h1>Rotation Parameterization (Representation)<a class="headerlink" href="#rotation-parameterization-representation" title="Link to this heading">#</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="rotation-parameterization">
+<h1>Rotation Parameterization<a class="headerlink" href="#rotation-parameterization" title="Link to this heading">#</a></h1>
 <p>A rotation matrix has 9 elements, its mutual orthogonality and unity
-properties bring 6 constraints. Thus, each robotion matrix has 3DOFs! We only need to use three independent parameters
-to represent a rotation matrix.</p>
+properties bring 6 constraints. Thus, each robotion matrix has 3DOFs! We only need to use fewer (like 3) independent parameters
+to parameterize a rotation matrix.</p>
 <section id="euler-angles">
 <h2>Euler Angles<a class="headerlink" href="#euler-angles" title="Link to this heading">#</a></h2>
-<p>A rotation in space can be understood as a sequence of three elementary
-rotations. Such rotation representation is called Euler-angles represnetation, and the elementary rotation angles are called Euler angles. To fully describe all possible orientations, two successive
-rotations should not be made around parallel axes. In the following, two sets of Euler angles
-are used; namely, the ZYZ Euler angles and the Roll-Pitch-Yaw (RPY) (or ZYX Euler angles).</p>
+<p>A rotation in space can be understood as a sequence (rotating w.r.t. current frame) of three elementary
+rotations. Such representation is called Euler-angles parameterization, and the elementary rotation angles are called Euler angles, denoted as vector <span class="math notranslate nohighlight">\(\boldsymbol{
+    \phi
+}=[\varphi, \theta, \psi]^T\)</span>.</p>
+<p>In the following, two sets of Euler angles
+are used; namely, the ZYZ Euler angles and the Roll-Pitch-Yaw (RPY) (or ZYX Euler angles). Note that to fully describe all possible orientations, two successive
+rotation axis should not be made around the same axises, e.g., we are not talking about ZZY Euler angles.</p>
 <figure class="align-default" id="zyz-euler-angles">
 <a class="reference internal image-reference" href="../_images/zyz_euler_angles.jpg"><img alt="../_images/zyz_euler_angles.jpg" src="../_images/zyz_euler_angles.jpg" style="width: 80%;" />
 </a>
@@ -776,17 +777,17 @@ are used; namely, the ZYZ Euler angles and the Roll-Pitch-Yaw (RPY) (or ZYX Eule
 <p><span class="caption-number">Fig. 20 </span><span class="caption-text">ZYZ Euler angles</span><a class="headerlink" href="#zyz-euler-angles" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p><strong>ZYZ Euler Angles</strong>: the rotation described by ZYZ Euler angles is done
-by first, rotating the current frame by <span class="math notranslate nohighlight">\(\varphi\)</span> about axis
-<span class="math notranslate nohighlight">\(\boldsymbol{z}\)</span>, second, rotating the current frame by angle
-<span class="math notranslate nohighlight">\(\vartheta\)</span> about axis <span class="math notranslate nohighlight">\(\boldsymbol{y}^{\prime}\)</span>, and then, rotating the
-current frame by the angle <span class="math notranslate nohighlight">\(\psi\)</span> about axis
+<p><strong>ZYZ Euler Angles</strong>:  first, rotate the current frame by <span class="math notranslate nohighlight">\(\varphi\)</span> about axis
+<span class="math notranslate nohighlight">\(\boldsymbol{z}\)</span>, second, rotate the current frame by
+<span class="math notranslate nohighlight">\(\vartheta\)</span> about axis <span class="math notranslate nohighlight">\(\boldsymbol{y}^{\prime}\)</span>, and then, rotate the
+current frame by  <span class="math notranslate nohighlight">\(\psi\)</span> about axis
 <span class="math notranslate nohighlight">\(\boldsymbol{z}^{\prime\prime}\)</span>. Thus, the rotation matrix from ZYZ
 Euler angles
 <span class="math notranslate nohighlight">\(\boldsymbol{\phi}=\left[\begin{array}{lll}\varphi &amp; \vartheta &amp; \psi\end{array}\right]^{T}\)</span>
 is</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\begin{aligned}
+\[\begin{split}
+\begin{aligned}
 \boldsymbol{R}(\boldsymbol{\phi}) &amp; =\boldsymbol{R}_{z}(\varphi) \boldsymbol{R}_{y^{\prime}}(\vartheta) \boldsymbol{R}_{z^{\prime \prime}}(\psi) =\left[\begin{array}{ccc}
 c_{\varphi} c_{\vartheta} c_{\psi}-s_{\varphi} s_{\psi} &amp; -c_{\varphi} c_{\vartheta} s_{\psi}-s_{\varphi} c_{\psi} &amp; c_{\varphi} s_{\vartheta} \\
 s_{\varphi} c_{\vartheta} c_{\psi}+c_{\varphi} s_{\psi} &amp; -s_{\varphi} c_{\vartheta} s_{\psi}+c_{\varphi} c_{\psi} &amp; s_{\varphi} s_{\vartheta} \\
@@ -794,7 +795,7 @@ s_{\varphi} c_{\vartheta} c_{\psi}+c_{\varphi} s_{\psi} &amp; -s_{\varphi} c_{\v
 \end{array}\right] .
 \end{aligned}
 \end{split}\]</div>
-<p>Inversely, given a rotation matrix</p>
+<p>Let’s do its inverse problem. Given any rotation matrix</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \boldsymbol{R}=\left[\begin{array}{lll}
@@ -803,7 +804,7 @@ r_{21} &amp; r_{22} &amp; r_{23} \\
 r_{31} &amp; r_{32} &amp; r_{33}
 \end{array}\right] .
 \end{split}\]</div>
-<p>the corresponding ZYZ Euler angles
+<p>the underlying ZYZ Euler angles
 <span class="math notranslate nohighlight">\(\boldsymbol{\phi}=\left[\begin{array}{lll}\varphi &amp; \vartheta &amp; \psi\end{array}\right]^{T}\)</span>
 is</p>
 <div class="math notranslate nohighlight">
@@ -816,13 +817,12 @@ is</p>
 \end{split}\]</div>
 <p>if <span class="math notranslate nohighlight">\(s_{\vartheta}=0\)</span>, i.e., <span class="math notranslate nohighlight">\((r_{23}, r_{13})\not=(0,0)\)</span>; otherwise,
 only the sum or difference of <span class="math notranslate nohighlight">\(\varphi\)</span> and <span class="math notranslate nohighlight">\(\psi\)</span> is determined (why?)</p>
-<p><strong>RPY (ZYX Euler angles)</strong>: I think about RPY rotations is a process of “a fighter jet from parking –&gt; taxiing (yaw) –&gt; take-off (pitch) –&gt; fighting (roll)”. Formally, RPY is obtained by
-first, rotating the reference frame by the angle <span class="math notranslate nohighlight">\(\varphi\)</span> about the
-current axis <span class="math notranslate nohighlight">\(\boldsymbol{z}\)</span> (yaw), then, rotating the current frame
+<p><strong>RPY (ZYX) Euler Angles</strong>: Think about a fighter jet from parking –&gt; taxiing (yaw) –&gt; take-off (pitch) –&gt; fighting (roll).  RPY could be insipred by this process.
+Ffirst, rotate the reference frame by <span class="math notranslate nohighlight">\(\varphi\)</span> about the
+current axis <span class="math notranslate nohighlight">\(\boldsymbol{z}\)</span> (yaw), then, rotate the current frame
 by <span class="math notranslate nohighlight">\(\vartheta\)</span> about the current axis <span class="math notranslate nohighlight">\(\boldsymbol{y}\)</span> (pitch), and then,
-rotating the current frame by <span class="math notranslate nohighlight">\(\psi\)</span> about current axis <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span>
-(roll). Thus, the resulting rotation matrix is obtained by
-postmultiplication rule.</p>
+rotate the current frame by <span class="math notranslate nohighlight">\(\psi\)</span> about current axis <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span>
+(roll). Thus, the resulting rotation matrix is</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{aligned}
@@ -856,32 +856,40 @@ r_{31} &amp; r_{32} &amp; r_{33}
 </section>
 <section id="angle-axis">
 <h2>Angle Axis<a class="headerlink" href="#angle-axis" title="Link to this heading">#</a></h2>
-<p>Given a rotation
-defined by an angle <span class="math notranslate nohighlight">\(\vartheta\)</span> around a unit axis vector
+<p>A rotation can also be
+defined by an angle <span class="math notranslate nohighlight">\(\vartheta\)</span> around a arbitrary unit axis
 <span class="math notranslate nohighlight">\(\boldsymbol{r}=\left[r_{x}, r_{y},  r_{z}\right]^{T}\)</span> in
-the reference frame <span class="math notranslate nohighlight">\(O- x y z\)</span>, the angle-axis representation is defined as <span class="math notranslate nohighlight">\((\vartheta, \boldsymbol{r})\)</span>.</p>
-<figure class="align-default" id="zyz-euler-angles2">
+the reference frame <span class="math notranslate nohighlight">\(O- x y z\)</span>, the angle-axis parameterization is written as <span class="math notranslate nohighlight">\((\vartheta, \boldsymbol{r})\)</span>.</p>
+<figure class="align-default" id="id2">
 <a class="reference internal image-reference" href="../_images/angle_axis.jpg"><img alt="../_images/angle_axis.jpg" src="../_images/angle_axis.jpg" style="width: 60%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 21 </span><span class="caption-text">Rotation of an angle about an axis.</span><a class="headerlink" href="#zyz-euler-angles2" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 21 </span><span class="caption-text">Rotation of an angle about an axis.</span><a class="headerlink" href="#id2" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>To derive the rotation matrix
-<span class="math notranslate nohighlight">\(\boldsymbol{R}(\vartheta, \boldsymbol{r})\)</span> from
-<span class="math notranslate nohighlight">\((\vartheta, \boldsymbol{r})\)</span>, we first create a body frame
-<span class="math notranslate nohighlight">\(O_1- x_1 y_1 z_1\)</span> with its axis <span class="math notranslate nohighlight">\(\boldsymbol{z_1}\)</span> aligned with
-<span class="math notranslate nohighlight">\(\boldsymbol{r}\)</span>. Then, the rotation of <span class="math notranslate nohighlight">\(\vartheta\)</span> about <span class="math notranslate nohighlight">\(\boldsymbol{r}\)</span> can be ‘expressed’ in the current frame:
-<span class="math notranslate nohighlight">\(\boldsymbol{R}_{z}(\vartheta)\)</span>. Since our goal is to find the rotation
-matrix <span class="math notranslate nohighlight">\(\boldsymbol{R}(\vartheta, \boldsymbol{r})\)</span> ‘expressed’ in the
-reference frame <span class="math notranslate nohighlight">\(O- x y z\)</span>, we similarly apply the previous similarity
-transformation:</p>
-<div class="math notranslate nohighlight">
-\[\boldsymbol{R}(\vartheta, \boldsymbol{r})= \boldsymbol{R}_{1} \boldsymbol{R}_{z}(\vartheta) (\boldsymbol{R}_{1})^T\]</div>
-<p>with <span class="math notranslate nohighlight">\(\boldsymbol{R}_{1}\)</span> denoting the rotation of the body frame in reference framework. From <a class="reference internal" href="#zyz-euler-angles2"><span class="std std-numref">Fig. 21</span></a>, we have</p>
-<div class="math notranslate nohighlight">
-\[\boldsymbol{R}_{1}=\boldsymbol{R}_{z}(\alpha) \boldsymbol{R}_{y}(\beta)\]</div>
-<p>In sum, the rotation matrix is</p>
+<!-- To derive the rotation matrix
+$\boldsymbol{R}(\vartheta, \boldsymbol{r})$ from
+$(\vartheta, \boldsymbol{r})$, we first create a body frame
+$O_1- x_1 y_1 z_1$ with its axis $\boldsymbol{z_1}$ aligned with
+$\boldsymbol{r}$. Then, the rotation of $\vartheta$ about $\boldsymbol{r}$ can be 'expressed' in the current frame:
+$\boldsymbol{R}_{z}(\vartheta)$. Since our goal is to find the rotation
+matrix $\boldsymbol{R}(\vartheta, \boldsymbol{r})$ 'expressed' in the
+reference frame $O- x y z$, we similarly apply the previous similarity
+transformation:
+
+$$
+\boldsymbol{R}(\vartheta, \boldsymbol{r})= \boldsymbol{R}_{1} \boldsymbol{R}_{z}(\vartheta) (\boldsymbol{R}_{1})^T
+$$
+
+with $\boldsymbol{R}_{1}$ denoting the rotation of the body frame in reference framework. From {numref}`angle_axis`, we have
+
+$$
+\boldsymbol{R}_{1}=\boldsymbol{R}_{z}(\alpha) \boldsymbol{R}_{y}(\beta)
+$$
+
+In sum,  -->
+<p>Given the angle-axis parameterization  <span class="math notranslate nohighlight">\((\vartheta, \boldsymbol{r})\)</span>,
+the rotation matrix is</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \boldsymbol{R}(\vartheta, \boldsymbol{r})=\left[\begin{array}{ccc}
@@ -900,7 +908,9 @@ r_{x} r_{z}\left(1-c_{\vartheta}\right)-r_{y} s_{\vartheta} &amp; r_{y} r_{z}\le
 \]</div>
 <p>Also, the following property holds:</p>
 <div class="math notranslate nohighlight">
-\[\boldsymbol{R}(-\vartheta,-\boldsymbol{r})=\boldsymbol{R}(\vartheta, \boldsymbol{r})\]</div>
+\[
+\boldsymbol{R}(-\vartheta,-\boldsymbol{r})=\boldsymbol{R}(\vartheta, \boldsymbol{r})
+\]</div>
 <p>Inversely, given rotation matrix</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -926,20 +936,18 @@ r_{21}-r_{12}
 </section>
 <section id="quaternion">
 <h2>Quaternion<a class="headerlink" href="#quaternion" title="Link to this heading">#</a></h2>
-<p>Given a rotation
-defined by an angle <span class="math notranslate nohighlight">\(\vartheta\)</span> around a unit axis vector
-<span class="math notranslate nohighlight">\(\boldsymbol{r}=\left[r_{x}, r_{y},  r_{z}\right]^{T}\)</span> in
-the reference frame <span class="math notranslate nohighlight">\(O- x y z\)</span>, its quaternion is defined as</p>
+<p>From the angle-axis parameterization  <span class="math notranslate nohighlight">\((\vartheta, \boldsymbol{r})\)</span>, one can define the corresponding quaternion as</p>
 <div class="math notranslate nohighlight">
 \[
 \mathcal{Q}=\{\eta, \boldsymbol{\epsilon}\}, \quad\text{with}
 \quad
 \eta=\cos \frac{\vartheta}{2}, \quad \boldsymbol{\epsilon}=\sin \frac{\vartheta}{2} \boldsymbol{r}
 \]</div>
-<p><span class="math notranslate nohighlight">\(\eta\)</span> is called the scalar part while
-<span class="math notranslate nohighlight">\(\boldsymbol{\epsilon}=\left[\epsilon_{x} , \epsilon_{y} , \epsilon_{z}, \right]^{T}\)</span>
-is called vector part of the quaternion, and
-<span class="math notranslate nohighlight">\(\eta^{2}+\epsilon_{x}^{2}+\epsilon_{y}^{2}+\epsilon_{z}^{2}=1\)</span>. It is
+<p><span class="math notranslate nohighlight">\(\eta\)</span> is called the scalar part of the quaternion, and
+<span class="math notranslate nohighlight">\(\boldsymbol{\epsilon}=\left[\epsilon_{x} , \epsilon_{y} , \epsilon_{z} \right]^{T}\)</span>
+is called vector part of the quaternion. Thus, we need four elements to define  quaternion, but the four elements should be satisifying
+<span class="math notranslate nohighlight">\(\eta^{2}+\epsilon_{x}^{2}+\epsilon_{y}^{2}+\epsilon_{z}^{2}=1\)</span>.</p>
+<p>It is
 worth remarking that, unlike the angle/axis representation, a rotation
 by <span class="math notranslate nohighlight">\((-\vartheta, -\boldsymbol{r})\)</span> gives the same quaternion as that by
 <span class="math notranslate nohighlight">\((\vartheta, \boldsymbol{r})\)</span>.</p>
@@ -977,7 +985,9 @@ r_{31} &amp; r_{32} &amp; r_{33}
 <span class="math notranslate nohighlight">\(\operatorname{sgn}(x)=-1\)</span> for <span class="math notranslate nohighlight">\(x&lt;0\)</span>.</p>
 <p>Similar to the inverse of a rotation matrix <span class="math notranslate nohighlight">\(\boldsymbol{R}\)</span>, a quaternion also has its own inverse, denoted as <span class="math notranslate nohighlight">\(\mathcal{Q}^{-1}\)</span>, corresponding to <span class="math notranslate nohighlight">\(\boldsymbol{R}^{-1}=\boldsymbol{R}^{T}\)</span>. Quanternion inverse can be easily computed as</p>
 <div class="math notranslate nohighlight">
-\[\mathcal{Q}^{-1}=\{\eta,-\boldsymbol{\epsilon}\}\]</div>
+\[
+\mathcal{Q}^{-1}=\{\eta,-\boldsymbol{\epsilon}\}
+\]</div>
 <p>Let <span class="math notranslate nohighlight">\(\mathcal{Q}_{1}=\left\{\eta_{1}, \boldsymbol{\epsilon}_{1}\right\}\)</span>
 and <span class="math notranslate nohighlight">\(\mathcal{Q}_{2}=\left\{\eta_{2}, \boldsymbol{\epsilon}_{2}\right\}\)</span>
 denote the quaternions corresponding to the rotation matrices
@@ -985,9 +995,9 @@ denote the quaternions corresponding to the rotation matrices
 quaternion corresponding to the product
 <span class="math notranslate nohighlight">\(\boldsymbol{R}_{1} \boldsymbol{R}_{2}\)</span> is given by</p>
 <div class="math notranslate nohighlight">
-\[\mathcal{Q}_{1} * \mathcal{Q}_{2}=\left\{\eta_{1} \eta_{2}-\boldsymbol{\epsilon}_{1}^{T} \boldsymbol{\epsilon}_{2}, \eta_{1} \boldsymbol{\epsilon}_{2}+\eta_{2} \boldsymbol{\epsilon}_{1}+\boldsymbol{\epsilon}_{1} \times \boldsymbol{\epsilon}_{2}\right\}\]</div>
-<p>where the quaternion product operator “*” has been formally
-introduced.</p>
+\[
+\mathcal{Q}_{1} * \mathcal{Q}_{2}=\left\{\eta_{1} \eta_{2}-\boldsymbol{\epsilon}_{1}^{T} \boldsymbol{\epsilon}_{2}, \eta_{1} \boldsymbol{\epsilon}_{2}+\eta_{2} \boldsymbol{\epsilon}_{1}+\boldsymbol{\epsilon}_{1} \times \boldsymbol{\epsilon}_{2}\right\}
+\]</div>
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="homogeneous-transformations">
@@ -1007,8 +1017,10 @@ coordinate of the origin of body frame in reference frame, and
 in reference frame, and <span class="math notranslate nohighlight">\(\boldsymbol{p}^{1}\)</span> be the coordinate of the
 same point <span class="math notranslate nohighlight">\(P\)</span> in body frame. Then, we have the following relationship</p>
 <div class="math notranslate nohighlight">
-\[\boldsymbol{p}^{0}=\boldsymbol{o}_{1}^{0}+\boldsymbol{R}_{1}^{0} \boldsymbol{p}^{1}\]</div>
-<p>To achieve a compact representation, we first introduce the concept of “homogeneous coordinate” of a
+\[
+\boldsymbol{p}^{0}=\boldsymbol{o}_{1}^{0}+\boldsymbol{R}_{1}^{0} \boldsymbol{p}^{1}
+\]</div>
+<p>To achieve a compact notation, we first introduce the concept of “homogeneous coordinate” of a
 3D vector <span class="math notranslate nohighlight">\(\boldsymbol{p}\)</span>, defined as</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -1019,7 +1031,9 @@ same point <span class="math notranslate nohighlight">\(P\)</span> in body frame
 \end{split}\]</div>
 <p>Then, the above relationship can be compactly written as</p>
 <div class="math notranslate nohighlight">
-\[\widetilde{\boldsymbol{p}}^{0}=\boldsymbol{T}_{1}^{0} \widetilde{\boldsymbol{p}}^{1}\]</div>
+\[
+\widetilde{\boldsymbol{p}}^{0}=\boldsymbol{T}_{1}^{0} \widetilde{\boldsymbol{p}}^{1}
+\]</div>
 <p>with</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -1051,12 +1065,16 @@ same point <span class="math notranslate nohighlight">\(P\)</span> in body frame
 <p>Notice that for the homogeneous transformation matrix the orthogonality
 property does not hold:</p>
 <div class="math notranslate nohighlight">
-\[\boldsymbol{T}^{-1} \neq \boldsymbol{T}^{T}\]</div>
+\[
+\boldsymbol{T}^{-1} \neq \boldsymbol{T}^{T}
+\]</div>
 <p>Following the derivation of sequential rotation transformation, it is easy to
 verify that a sequence of homogeneous transformations can be composed by
 the <em>postmultiplication rule</em></p>
 <div class="math notranslate nohighlight">
-\[\widetilde{\boldsymbol{p}}^{0}=\boldsymbol{T}_{1}^{0} \boldsymbol{T}_{2}^{1} \ldots \boldsymbol{T}_{n}^{n-1} \widetilde{\boldsymbol{p}}^{n}\]</div>
+\[
+\widetilde{\boldsymbol{p}}^{0}=\boldsymbol{T}_{1}^{0} \boldsymbol{T}_{2}^{1} \ldots \boldsymbol{T}_{n}^{n-1} \widetilde{\boldsymbol{p}}^{n}
+\]</div>
 <p>where <span class="math notranslate nohighlight">\(\boldsymbol{T}_{i}^{i-1}\)</span> denotes the homogeneous transformation
 of frame <span class="math notranslate nohighlight">\(i\)</span> with respect to the <em>current</em> frame <span class="math notranslate nohighlight">\(i-1\)</span>.</p>
 </section>
@@ -1137,7 +1155,7 @@ of frame <span class="math notranslate nohighlight">\(i\)</span> with respect to
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rotation-around-fixed-frame">Rotation around Fixed Frame</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#rotation-parameterization-representation">Rotation Parameterization (Representation)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#rotation-parameterization">Rotation Parameterization</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#euler-angles">Euler Angles</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#angle-axis">Angle Axis</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quaternion">Quaternion</a></li>

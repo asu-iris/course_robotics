@@ -223,11 +223,6 @@ $$
 
 and we simply write the above as
 
-<!-- To establish the relationship between two coordinates, we need to
-replace the unite vectors
-$\{\boldsymbol{x}^{\prime}, \boldsymbol{y}^{\prime}, \boldsymbol{x}^{\prime}\}$
-of the body frame with their coordinates in the reference frame using
-the rotation matrix $\boldsymbol{R}$. This leads to-->
 
 $$
     \boldsymbol{p}=\boldsymbol{R}\boldsymbol{p}^{\prime}
@@ -325,7 +320,9 @@ $O- x_{0} y_{0} z_{0}$). Next, we rotate the current frame
 $O- x_{1} y_{1} z_{1}$ to the frame $O- x_{2} y_{2} z_{2}$, according to
 a new rotation matrix
 
-$$\boldsymbol{R}_{1,2}^0$$
+$$
+\boldsymbol{R}_{1,2}^0
+$$
 
 which is 'expressed' *still* in the initial frame $O- x_{0} y_{0} z_{0}$
 (instead of the current frame $O- x_{1} y_{1} z_{1}$). We call
@@ -335,36 +332,37 @@ To  apply the *postmultipcation rule*, we need to find out a
 rotation $\boldsymbol{R}_{2}^1$, which is equivalent to $\boldsymbol{R}_{1,2}^0$, but 'expressed' in the current
 frame $O- x_{1} y_{1} z_{1}$.
 
-
-
-
 To do so, let's consider any vector $\boldsymbol{p}^1$ expressed in frame $O- x_{1} y_{1} z_{1}$. We follow the following procedure.
 
--   Step 1: passive rotation. Let's first transform $\boldsymbol{p}^1$ to the corrdinates in frame  0: $\boldsymbol{R}^0_1\boldsymbol{p}^1$
+- Step 1: passive rotation. Let's first transform $\boldsymbol{p}^1$ to the corrdinates in frame  0: $\boldsymbol{R}^0_1\boldsymbol{p}^1$
+- Step 2: active rotation. In frame 0, use the rotation matrix $\boldsymbol{R}_{1,2}^0$ to turn   $\boldsymbol{R}^0_1\boldsymbol{p}^1$ into a new vector but still in frame 0:
 
--   Step 2: active rotation. In frame 0, use the rotation matrix $\boldsymbol{R}_{1,2}^0$ to turn   $\boldsymbol{R}^0_1\boldsymbol{p}^1$ into a new vector but still in frame 0:
+$$
+\boldsymbol{R}_{1,2}^0\boldsymbol{R}^0_1\boldsymbol{p}^1
+$$
 
-$$\boldsymbol{R}_{1,2}^0\boldsymbol{R}^0_1\boldsymbol{p}^1$$
+- Step 3: passive rotation. Since  the above $\boldsymbol{R}_{1,2}^0\boldsymbol{R}^0_1\boldsymbol{p}^1$ is in frame 0, we want to transform it back to frame 1, by
 
--   Step 3: passive rotation. Since  the above $\boldsymbol{R}_{1,2}^0\boldsymbol{R}^0_1\boldsymbol{p}^1$ is in frame 0, we want to transform it back to frame 1, by
+$$
+(\boldsymbol{R}^0_1)^T\boldsymbol{R}_{1,2}^0\boldsymbol{R}^0_1\boldsymbol{p}^1
+$$
 
+- Step 4: active rotation. Now,  $(\boldsymbol{R}^0_1)^T\boldsymbol{R}_{1,2}^0\boldsymbol{R}^0_1\boldsymbol{p}^1$ is in frame 1, which is definitely different from our original $\boldsymbol{p}^1$.  So, we can consider this difference is due to we have applied an active rotation $\boldsymbol{R}^1_2$ to turn $\boldsymbol{p}^1$ into $(\boldsymbol{R}^0_1)^T\boldsymbol{R}_{1,2}^0\boldsymbol{R}^0_1\boldsymbol{p}^1$.
 
-$$(\boldsymbol{R}^0_1)^T\boldsymbol{R}_{1,2}^0\boldsymbol{R}^0_1\boldsymbol{p}^1$$
+$$
+\boldsymbol{R}_{2}^1=(\boldsymbol{R}_1^0)^T\boldsymbol{R}_{1,2}^0\boldsymbol{R}_1^0
+$$
 
--   Step 4: active rotation. Now,  $(\boldsymbol{R}^0_1)^T\boldsymbol{R}_{1,2}^0\boldsymbol{R}^0_1\boldsymbol{p}^1$ is in frame 1, which is definitely different from our original $\boldsymbol{p}^1$.  So, we can consider this difference is due to we have applied an active rotation $\boldsymbol{R}^1_2$ to turn $\boldsymbol{p}^1$ into $(\boldsymbol{R}^0_1)^T\boldsymbol{R}_{1,2}^0\boldsymbol{R}^0_1\boldsymbol{p}^1$.
-
-$$\boldsymbol{R}_{2}^1=(\boldsymbol{R}_1^0)^T\boldsymbol{R}_{1,2}^0\boldsymbol{R}_1^0$$
-
-We call the above equation the "similarity transformation": it is used to transform a rotation $\boldsymbol{R}_{1,2}^0$ from frame 0 to frame 1.
-
+In fact, we call $\boldsymbol{R}_{2}^1=(\boldsymbol{R}_1^0)^T\boldsymbol{R}_{1,2}^0\boldsymbol{R}_1^0$ the "similarity transformation": it is used to transform a "rotation transformation" $\boldsymbol{R}_{1,2}^0$ seen in  frame 0 to its equivalent seen in  frame 1.
 
 Following the *postmultipcation rule*, we can follow the to obtain
 the total rotation
 
-$$\boldsymbol{R}_{2}^{0}=\boldsymbol{R}_{1}^{0} \boldsymbol{R}_{2}^1=\boldsymbol{R}_{1}^{0} (\boldsymbol{R}_1^0)^T\boldsymbol{R}_{1,2}^0\boldsymbol{R}_1^0=\boldsymbol{R}_{1,2}^0\boldsymbol{R}_1^0$$
+$$
+\boldsymbol{R}_{2}^{0}=\boldsymbol{R}_{1}^{0} \boldsymbol{R}_{2}^1=\boldsymbol{R}_{1}^{0} (\boldsymbol{R}_1^0)^T\boldsymbol{R}_{1,2}^0\boldsymbol{R}_1^0=\boldsymbol{R}_{1,2}^0\boldsymbol{R}_1^0
+$$
 
-
-```{admonition} Rotation around Fixed Frame
+```{admonition}
 We can conclude the following *premultiplication rule*:
 
 -   The same frame with respect to which a rotation occurs (and the
@@ -373,27 +371,27 @@ We can conclude the following *premultiplication rule*:
 -   The composition of each rotation around the fixed frame is obtained
     by *premultiplication* of the rotation matrices in order.
 ```
+```{note}
+Note: composition of rotations not commutative, i.e., $R_1R_2=R_2R_1$, most of cases, does NOT hold.
+```
 
-
-
-
-
-Note: composition of rotations not commutative!
-
-# Rotation Parameterization (Representation)
+# Rotation Parameterization
 
 A rotation matrix has 9 elements, its mutual orthogonality and unity
-properties bring 6 constraints. Thus, each robotion matrix has 3DOFs! We only need to use three independent parameters
-to represent a rotation matrix.
+properties bring 6 constraints. Thus, each robotion matrix has 3DOFs! We only need to use fewer (like 3) independent parameters
+to parameterize a rotation matrix.
 
 ## Euler Angles
 
-A rotation in space can be understood as a sequence of three elementary
-rotations. Such rotation representation is called Euler-angles represnetation, and the elementary rotation angles are called Euler angles. To fully describe all possible orientations, two successive
-rotations should not be made around parallel axes. In the following, two sets of Euler angles
-are used; namely, the ZYZ Euler angles and the Roll-Pitch-Yaw (RPY) (or ZYX Euler angles).
+A rotation in space can be understood as a sequence (rotating w.r.t. current frame) of three elementary
+rotations. Such representation is called Euler-angles parameterization, and the elementary rotation angles are called Euler angles, denoted as vector $\boldsymbol{
+    \phi
+}=[\varphi, \theta, \psi]^T$. 
 
 
+In the following, two sets of Euler angles
+are used; namely, the ZYZ Euler angles and the Roll-Pitch-Yaw (RPY) (or ZYX Euler angles). Note that to fully describe all possible orientations, two successive
+rotation axis should not be made around the same axises, e.g., we are not talking about ZZY Euler angles.
 
 ```{figure} ./kinematics/zyz_euler_angles.jpg
 ---
@@ -403,19 +401,17 @@ name: zyz_euler_angles
 ZYZ Euler angles
 ```
 
-
-
-**ZYZ Euler Angles**: the rotation described by ZYZ Euler angles is done
-by first, rotating the current frame by $\varphi$ about axis
-$\boldsymbol{z}$, second, rotating the current frame by angle
-$\vartheta$ about axis $\boldsymbol{y}^{\prime}$, and then, rotating the
-current frame by the angle $\psi$ about axis
+**ZYZ Euler Angles**:  first, rotate the current frame by $\varphi$ about axis
+$\boldsymbol{z}$, second, rotate the current frame by
+$\vartheta$ about axis $\boldsymbol{y}^{\prime}$, and then, rotate the
+current frame by  $\psi$ about axis
 $\boldsymbol{z}^{\prime\prime}$. Thus, the rotation matrix from ZYZ
 Euler angles
 $\boldsymbol{\phi}=\left[\begin{array}{lll}\varphi & \vartheta & \psi\end{array}\right]^{T}$
 is
 
-$$\begin{aligned}
+$$
+\begin{aligned}
 \boldsymbol{R}(\boldsymbol{\phi}) & =\boldsymbol{R}_{z}(\varphi) \boldsymbol{R}_{y^{\prime}}(\vartheta) \boldsymbol{R}_{z^{\prime \prime}}(\psi) =\left[\begin{array}{ccc}
 c_{\varphi} c_{\vartheta} c_{\psi}-s_{\varphi} s_{\psi} & -c_{\varphi} c_{\vartheta} s_{\psi}-s_{\varphi} c_{\psi} & c_{\varphi} s_{\vartheta} \\
 s_{\varphi} c_{\vartheta} c_{\psi}+c_{\varphi} s_{\psi} & -s_{\varphi} c_{\vartheta} s_{\psi}+c_{\varphi} c_{\psi} & s_{\varphi} s_{\vartheta} \\
@@ -424,7 +420,7 @@ s_{\varphi} c_{\vartheta} c_{\psi}+c_{\varphi} s_{\psi} & -s_{\varphi} c_{\varth
 \end{aligned}
 $$
 
-Inversely, given a rotation matrix
+Let's do its inverse problem. Given any rotation matrix
 
 $$
 \boldsymbol{R}=\left[\begin{array}{lll}
@@ -434,7 +430,7 @@ r_{31} & r_{32} & r_{33}
 \end{array}\right] .
 $$
 
-the corresponding ZYZ Euler angles
+the underlying ZYZ Euler angles
 $\boldsymbol{\phi}=\left[\begin{array}{lll}\varphi & \vartheta & \psi\end{array}\right]^{T}$
 is
 
@@ -449,13 +445,12 @@ $$
 if $s_{\vartheta}=0$, i.e., $(r_{23}, r_{13})\not=(0,0)$; otherwise,
 only the sum or difference of $\varphi$ and $\psi$ is determined (why?)
 
-**RPY (ZYX Euler angles)**: I think about RPY rotations is a process of "a fighter jet from parking --> taxiing (yaw) --> take-off (pitch) --> fighting (roll)". Formally, RPY is obtained by
-first, rotating the reference frame by the angle $\varphi$ about the
-current axis $\boldsymbol{z}$ (yaw), then, rotating the current frame
+**RPY (ZYX) Euler Angles**: Think about a fighter jet from parking --> taxiing (yaw) --> take-off (pitch) --> fighting (roll).  RPY could be insipred by this process.
+Ffirst, rotate the reference frame by $\varphi$ about the
+current axis $\boldsymbol{z}$ (yaw), then, rotate the current frame
 by $\vartheta$ about the current axis $\boldsymbol{y}$ (pitch), and then,
-rotating the current frame by $\psi$ about current axis $\boldsymbol{x}$
-(roll). Thus, the resulting rotation matrix is obtained by
-postmultiplication rule.
+rotate the current frame by $\psi$ about current axis $\boldsymbol{x}$
+(roll). Thus, the resulting rotation matrix is 
 
 $$
 \begin{aligned}
@@ -492,20 +487,20 @@ $\varphi$ and $\psi$ can be determined.
 
 ## Angle Axis
 
-Given a rotation
-defined by an angle $\vartheta$ around a unit axis vector
+A rotation can also be 
+defined by an angle $\vartheta$ around a arbitrary unit axis
 $\boldsymbol{r}=\left[r_{x}, r_{y},  r_{z}\right]^{T}$ in
-the reference frame $O- x y z$, the angle-axis representation is defined as $(\vartheta, \boldsymbol{r})$.
+the reference frame $O- x y z$, the angle-axis parameterization is written as $(\vartheta, \boldsymbol{r})$.
 
 ```{figure} ./kinematics/angle_axis.jpg
 ---
 width: 60%
-name: zyz_euler_angles2
+name: angle_axis
 ---
 Rotation of an angle about an axis.
 ```
 
-To derive the rotation matrix
+<!-- To derive the rotation matrix
 $\boldsymbol{R}(\vartheta, \boldsymbol{r})$ from
 $(\vartheta, \boldsymbol{r})$, we first create a body frame
 $O_1- x_1 y_1 z_1$ with its axis $\boldsymbol{z_1}$ aligned with
@@ -515,13 +510,19 @@ matrix $\boldsymbol{R}(\vartheta, \boldsymbol{r})$ 'expressed' in the
 reference frame $O- x y z$, we similarly apply the previous similarity
 transformation:
 
-$$\boldsymbol{R}(\vartheta, \boldsymbol{r})= \boldsymbol{R}_{1} \boldsymbol{R}_{z}(\vartheta) (\boldsymbol{R}_{1})^T$$
+$$
+\boldsymbol{R}(\vartheta, \boldsymbol{r})= \boldsymbol{R}_{1} \boldsymbol{R}_{z}(\vartheta) (\boldsymbol{R}_{1})^T
+$$
 
-with $\boldsymbol{R}_{1}$ denoting the rotation of the body frame in reference framework. From {numref}`zyz_euler_angles2`, we have
+with $\boldsymbol{R}_{1}$ denoting the rotation of the body frame in reference framework. From {numref}`angle_axis`, we have
 
-$$\boldsymbol{R}_{1}=\boldsymbol{R}_{z}(\alpha) \boldsymbol{R}_{y}(\beta)$$
+$$
+\boldsymbol{R}_{1}=\boldsymbol{R}_{z}(\alpha) \boldsymbol{R}_{y}(\beta)
+$$
 
-In sum, the rotation matrix is
+In sum,  -->
+Given the angle-axis parameterization  $(\vartheta, \boldsymbol{r})$,
+the rotation matrix is
 
 $$
 \boldsymbol{R}(\vartheta, \boldsymbol{r})=\left[\begin{array}{ccc}
@@ -542,7 +543,9 @@ $$
 
 Also, the following property holds:
 
-$$\boldsymbol{R}(-\vartheta,-\boldsymbol{r})=\boldsymbol{R}(\vartheta, \boldsymbol{r})$$
+$$
+\boldsymbol{R}(-\vartheta,-\boldsymbol{r})=\boldsymbol{R}(\vartheta, \boldsymbol{r})
+$$
 
 Inversely, given rotation matrix
 
@@ -571,10 +574,7 @@ $(\vartheta, \boldsymbol{r})$ is undefined.
 
 ## Quaternion
 
-Given a rotation
-defined by an angle $\vartheta$ around a unit axis vector
-$\boldsymbol{r}=\left[r_{x}, r_{y},  r_{z}\right]^{T}$ in
-the reference frame $O- x y z$, its quaternion is defined as
+From the angle-axis parameterization  $(\vartheta, \boldsymbol{r})$, one can define the corresponding quaternion as
 
 $$
 \mathcal{Q}=\{\eta, \boldsymbol{\epsilon}\}, \quad\text{with}
@@ -582,10 +582,13 @@ $$
 \eta=\cos \frac{\vartheta}{2}, \quad \boldsymbol{\epsilon}=\sin \frac{\vartheta}{2} \boldsymbol{r}
 $$
 
-$\eta$ is called the scalar part while
-$\boldsymbol{\epsilon}=\left[\epsilon_{x} , \epsilon_{y} , \epsilon_{z}, \right]^{T}$
-is called vector part of the quaternion, and
-$\eta^{2}+\epsilon_{x}^{2}+\epsilon_{y}^{2}+\epsilon_{z}^{2}=1$. It is
+$\eta$ is called the scalar part of the quaternion, and 
+$\boldsymbol{\epsilon}=\left[\epsilon_{x} , \epsilon_{y} , \epsilon_{z} \right]^{T}$
+is called vector part of the quaternion. Thus, we need four elements to define  quaternion, but the four elements should be satisifying 
+$\eta^{2}+\epsilon_{x}^{2}+\epsilon_{y}^{2}+\epsilon_{z}^{2}=1$.
+
+
+ It is
 worth remarking that, unlike the angle/axis representation, a rotation
 by $(-\vartheta, -\boldsymbol{r})$ gives the same quaternion as that by
 $(\vartheta, \boldsymbol{r})$.
@@ -628,7 +631,9 @@ $\operatorname{sgn}(x)=-1$ for $x<0$.
 
 Similar to the inverse of a rotation matrix $\boldsymbol{R}$, a quaternion also has its own inverse, denoted as $\mathcal{Q}^{-1}$, corresponding to $\boldsymbol{R}^{-1}=\boldsymbol{R}^{T}$. Quanternion inverse can be easily computed as
 
-$$\mathcal{Q}^{-1}=\{\eta,-\boldsymbol{\epsilon}\}$$
+$$
+\mathcal{Q}^{-1}=\{\eta,-\boldsymbol{\epsilon}\}
+$$
 
 Let $\mathcal{Q}_{1}=\left\{\eta_{1}, \boldsymbol{\epsilon}_{1}\right\}$
 and $\mathcal{Q}_{2}=\left\{\eta_{2}, \boldsymbol{\epsilon}_{2}\right\}$
@@ -637,9 +642,11 @@ $\boldsymbol{R}_{1}$ and $\boldsymbol{R}_{2}$, respectively. The
 quaternion corresponding to the product
 $\boldsymbol{R}_{1} \boldsymbol{R}_{2}$ is given by
 
-$$\mathcal{Q}_{1} * \mathcal{Q}_{2}=\left\{\eta_{1} \eta_{2}-\boldsymbol{\epsilon}_{1}^{T} \boldsymbol{\epsilon}_{2}, \eta_{1} \boldsymbol{\epsilon}_{2}+\eta_{2} \boldsymbol{\epsilon}_{1}+\boldsymbol{\epsilon}_{1} \times \boldsymbol{\epsilon}_{2}\right\}$$
-where the quaternion product operator \"\*\" has been formally
-introduced.
+$$
+\mathcal{Q}_{1} * \mathcal{Q}_{2}=\left\{\eta_{1} \eta_{2}-\boldsymbol{\epsilon}_{1}^{T} \boldsymbol{\epsilon}_{2}, \eta_{1} \boldsymbol{\epsilon}_{2}+\eta_{2} \boldsymbol{\epsilon}_{1}+\boldsymbol{\epsilon}_{1} \times \boldsymbol{\epsilon}_{2}\right\}
+$$
+
+
 
 # Homogeneous Transformations
 
@@ -659,9 +666,11 @@ $\boldsymbol{R}_{1}^{0}$ be the rotation matrix of body frame in reference frame
 in reference frame, and $\boldsymbol{p}^{1}$ be the coordinate of the
 same point $P$ in body frame. Then, we have the following relationship
 
-$$\boldsymbol{p}^{0}=\boldsymbol{o}_{1}^{0}+\boldsymbol{R}_{1}^{0} \boldsymbol{p}^{1}$$
+$$
+\boldsymbol{p}^{0}=\boldsymbol{o}_{1}^{0}+\boldsymbol{R}_{1}^{0} \boldsymbol{p}^{1}
+$$
 
-To achieve a compact representation, we first introduce the concept of "homogeneous coordinate" of a
+To achieve a compact notation, we first introduce the concept of "homogeneous coordinate" of a
 3D vector $\boldsymbol{p}$, defined as
 
 $$
@@ -673,7 +682,9 @@ $$
 
 Then, the above relationship can be compactly written as
 
-$$\widetilde{\boldsymbol{p}}^{0}=\boldsymbol{T}_{1}^{0} \widetilde{\boldsymbol{p}}^{1}$$
+$$
+\widetilde{\boldsymbol{p}}^{0}=\boldsymbol{T}_{1}^{0} \widetilde{\boldsymbol{p}}^{1}
+$$
 
 with
 
@@ -687,7 +698,9 @@ $$
 which is called _homogeneous transformation matrix_.
 
 <!-- All homogeneous -->
+
 <!-- transformation matrices belong to the *Special Euclidean Group*, denoted -->
+
 <!-- as $\boldsymbol{A}_{1}^{0}\in SE(3)$. -->
 
 The inverse of the homogeneous transformation $\boldsymbol{T}_{1}^{0}$,
@@ -711,13 +724,17 @@ $$
 Notice that for the homogeneous transformation matrix the orthogonality
 property does not hold:
 
-$$\boldsymbol{T}^{-1} \neq \boldsymbol{T}^{T}$$
+$$
+\boldsymbol{T}^{-1} \neq \boldsymbol{T}^{T}
+$$
 
 Following the derivation of sequential rotation transformation, it is easy to
 verify that a sequence of homogeneous transformations can be composed by
 the _postmultiplication rule_
 
-$$\widetilde{\boldsymbol{p}}^{0}=\boldsymbol{T}_{1}^{0} \boldsymbol{T}_{2}^{1} \ldots \boldsymbol{T}_{n}^{n-1} \widetilde{\boldsymbol{p}}^{n}$$
+$$
+\widetilde{\boldsymbol{p}}^{0}=\boldsymbol{T}_{1}^{0} \boldsymbol{T}_{2}^{1} \ldots \boldsymbol{T}_{n}^{n-1} \widetilde{\boldsymbol{p}}^{n}
+$$
 
 where $\boldsymbol{T}_{i}^{i-1}$ denotes the homogeneous transformation
 of frame $i$ with respect to the _current_ frame $i-1$.
