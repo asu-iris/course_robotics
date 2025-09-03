@@ -101,8 +101,8 @@
          class="form-control"
          name="q"
          id="search-input"
-         placeholder="Search this book..."
-         aria-label="Search this book..."
+         placeholder="Search..."
+         aria-label="Search..."
          autocomplete="off"
          autocorrect="off"
          autocapitalize="off"
@@ -174,15 +174,8 @@
  </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
-        
-        <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1 current active">
-                <a class="reference internal" href="#">
-                    Welcome and some thoughts
-                </a>
-            </li>
-        </ul>
-        <ul class="nav bd-sidenav">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Robotics Fundamentals</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="lec1-intro/intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lec2-dof/configuration.html">Robot Configuration</a></li>
 
@@ -194,7 +187,7 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="lec6-8/fk.html">Forward Kinematics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lec4-fk/fk.html">Forward Kinematics</a></li>
 
 
 
@@ -240,6 +233,10 @@
 <li class="toctree-l1"><a class="reference internal" href="lec21/cjc.html">Centralized Joint Control</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lec22/osc.html">Operational Space Control (OSC)</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Python Coding</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="python-coding/python-intro.html">Python Basics</a></li>
+</ul>
 
     </div>
 </nav></div>
@@ -280,21 +277,6 @@
         <div class="header-article-item">
 
 <div class="article-header-buttons">
-
-
-<a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fintro.html&body=Your%20issue%20content%20here." target="_blank"
-   class="btn btn-sm btn-source-issues-button"
-   title="Open an issue"
-   data-bs-placement="bottom" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-
-</a>
-
 
 
 
@@ -405,7 +387,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-still-modeling-and-control-of-robots">Why still modeling and control of robots?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-a-robot-arm">Why a robot arm?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-this-online-learning-materials">About this online learning materials</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-the-pi-and-iris-lab">About the PI and IRIS lab</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-the-pi-and-iris-lab">About the PI and IRIS lab</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dexterous-manipulation">Dexterous Manipulation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#robot-learning-from-humans-feedback-and-demonstrations">Robot learning from humans (feedback and demonstrations)</a></li>
 </ul>
@@ -504,6 +486,8 @@ Here are some cool demos showing what we are doing:</p>
 </section>
 <div class="toctree-wrapper compound">
 </div>
+<div class="toctree-wrapper compound">
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -564,7 +548,7 @@ Here are some cool demos showing what we are doing:</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-still-modeling-and-control-of-robots">Why still modeling and control of robots?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-a-robot-arm">Why a robot arm?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-this-online-learning-materials">About this online learning materials</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-the-pi-and-iris-lab">About the PI and IRIS lab</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-the-pi-and-iris-lab">About the PI and IRIS lab</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dexterous-manipulation">Dexterous Manipulation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#robot-learning-from-humans-feedback-and-demonstrations">Robot learning from humans (feedback and demonstrations)</a></li>
 </ul>

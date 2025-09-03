@@ -63,7 +63,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Motion Planning" href="../opt/motion_planning.html" />
-    <link rel="prev" title="Forward Kinematics" href="../lec6-8/fk.html" />
+    <link rel="prev" title="Forward Kinematics" href="../lec4-fk/fk.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -102,8 +102,8 @@
          class="form-control"
          name="q"
          id="search-input"
-         placeholder="Search this book..."
-         aria-label="Search this book..."
+         placeholder="Search..."
+         aria-label="Search..."
          autocomplete="off"
          autocorrect="off"
          autocapitalize="off"
@@ -173,15 +173,8 @@
  </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
-        
-        <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1">
-                <a class="reference internal" href="../intro.html">
-                    Welcome and some thoughts
-                </a>
-            </li>
-        </ul>
-        <ul class="current nav bd-sidenav">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Robotics Fundamentals</span></p>
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../lec1-intro/intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lec2-dof/configuration.html">Robot Configuration</a></li>
 
@@ -193,7 +186,7 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="../lec6-8/fk.html">Forward Kinematics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lec4-fk/fk.html">Forward Kinematics</a></li>
 
 
 
@@ -239,6 +232,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../lec21/cjc.html">Centralized Joint Control</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lec22/osc.html">Operational Space Control (OSC)</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Python Coding</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../python-coding/python-intro.html">Python Basics</a></li>
+</ul>
 
     </div>
 </nav></div>
@@ -279,21 +276,6 @@
         <div class="header-article-item">
 
 <div class="article-header-buttons">
-
-
-<a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Flec9/ik.html&body=Your%20issue%20content%20here." target="_blank"
-   class="btn btn-sm btn-source-issues-button"
-   title="Open an issue"
-   data-bs-placement="bottom" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-
-</a>
-
 
 
 
@@ -449,11 +431,11 @@ robot arms. For more generalized case, we will leave IK in future lectures.</p>
 position <span class="math notranslate nohighlight">\((p_{x}, p_{y})\)</span> and the angle <span class="math notranslate nohighlight">\(\phi\)</span> w.r.t. <span class="math notranslate nohighlight">\(x_{0}\)</span>. We
 want to use IK to find the joint variables
 <span class="math notranslate nohighlight">\(\boldsymbol{q}=[\vartheta_{1}, \vartheta_{2}, \vartheta_{3}]\)</span>.</p>
-<p>To achieve so, as shown in <a class="reference internal" href="#link-arm"><span class="std std-numref">Fig. 34</span></a>, we can first identify</p>
+<p>To achieve so, as shown in <a class="reference internal" href="../lec4-fk/fk.html#link-arm"><span class="std std-numref">Fig. 25</span></a>, we can first identify</p>
 <div class="math notranslate nohighlight" id="equation-equ-sum">
 <span class="eqno">(3)<a class="headerlink" href="#equation-equ-sum" title="Link to this equation">#</a></span>\[
     \phi=\vartheta_{1}+\vartheta_{2}+\vartheta_{3}\]</div>
-<p>Also in <a class="reference internal" href="#link-arm"><span class="std std-numref">Fig. 34</span></a>, we can find the position of point <span class="math notranslate nohighlight">\(W\)</span> is</p>
+<p>Also in <a class="reference internal" href="../lec4-fk/fk.html#link-arm"><span class="std std-numref">Fig. 25</span></a>, we can find the position of point <span class="math notranslate nohighlight">\(W\)</span> is</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{aligned}
 &amp; p_{W x}=p_{x}-a_{3} c_{\phi}=a_{1} c_{1}+a_{2} c_{12} \\
@@ -726,7 +708,7 @@ compute</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../lec6-8/fk.html"
+       href="../lec4-fk/fk.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">

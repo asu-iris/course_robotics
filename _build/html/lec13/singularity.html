@@ -102,8 +102,8 @@
          class="form-control"
          name="q"
          id="search-input"
-         placeholder="Search this book..."
-         aria-label="Search this book..."
+         placeholder="Search..."
+         aria-label="Search..."
          autocomplete="off"
          autocorrect="off"
          autocapitalize="off"
@@ -173,15 +173,8 @@
  </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
-        
-        <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1">
-                <a class="reference internal" href="../intro.html">
-                    Welcome and some thoughts
-                </a>
-            </li>
-        </ul>
-        <ul class="current nav bd-sidenav">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Robotics Fundamentals</span></p>
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../lec1-intro/intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lec2-dof/configuration.html">Robot Configuration</a></li>
 
@@ -193,7 +186,7 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="../lec6-8/fk.html">Forward Kinematics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lec4-fk/fk.html">Forward Kinematics</a></li>
 
 
 
@@ -239,6 +232,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../lec21/cjc.html">Centralized Joint Control</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lec22/osc.html">Operational Space Control (OSC)</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Python Coding</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../python-coding/python-intro.html">Python Basics</a></li>
+</ul>
 
     </div>
 </nav></div>
@@ -279,21 +276,6 @@
         <div class="header-article-item">
 
 <div class="article-header-buttons">
-
-
-<a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Flec13/singularity.html&body=Your%20issue%20content%20here." target="_blank"
-   class="btn btn-sm btn-source-issues-button"
-   title="Open an issue"
-   data-bs-placement="bottom" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-
-</a>
-
 
 
 
@@ -447,10 +429,10 @@ to decouple the computation into two
 subproblems: (1) find arm singularities for the first
 3 (or more) joints, and (2) find of wrist singularities for the wrist joints (last three joints).</p>
 <p>Let’s see an example. Consider a <span class="math notranslate nohighlight">\(6\)</span>-DoF robot arm (anthropomorphic
-robot arm) in <a class="reference internal" href="../lec6-8/fk.html#anthropomorphic-manipulator"><span class="std std-numref">Fig. 30</span></a>, where the last 3 joints are
+robot arm) in <a class="reference internal" href="#anthropomorphic-manipulator"><span class="std std-numref">Fig. 56</span></a>, where the last 3 joints are
 revolute (e.g., a spherical wrist).</p>
 <figure class="align-default" id="anthropomorphic-manipulator">
-<a class="reference internal image-reference" href="../_images/anthropomorphic_manipulator.jpg"><img alt="../_images/anthropomorphic_manipulator.jpg" src="../_images/anthropomorphic_manipulator.jpg" style="width: 80%;" />
+<a class="reference internal image-reference" href="lec6-8/kinematics/anthropomorphic_manipulator.jpg"><img alt="lec6-8/kinematics/anthropomorphic_manipulator.jpg" src="lec6-8/kinematics/anthropomorphic_manipulator.jpg" style="width: 80%;" />
 </a>
 <figcaption>
 <p><span class="caption-number">Fig. 56 </span><span class="caption-text">Anthropomorphic robot arm</span><a class="headerlink" href="#anthropomorphic-manipulator" title="Link to this image">#</a></p>
@@ -540,7 +522,7 @@ a axis orthogonal to <span class="math notranslate nohighlight">\(\boldsymbol{z}
 \[
 \operatorname{det}\left(\boldsymbol{\bar{J}}_{11}\right)=0
 \]</div>
-<p>Consider the anthropomorphic arm in <a class="reference internal" href="../lec6-8/fk.html#anthropomorphic-manipulator"><span class="std std-numref">Fig. 30</span></a>.</p>
+<p>Consider the anthropomorphic arm in <a class="reference internal" href="#anthropomorphic-manipulator"><span class="std std-numref">Fig. 56</span></a>.</p>
 <div class="math notranslate nohighlight">
 \[\operatorname{det}\left(\boldsymbol{\bar{J}}_{11}\right)=-a_{2} a_{3}  s_{3}\left(a_{2} c_{2}+a_{3} c_{23}\right)\]</div>
 <p>The determinant vanishes if <span class="math notranslate nohighlight">\(s_{3}=0\)</span> or

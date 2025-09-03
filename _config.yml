@@ -32,6 +32,16 @@ html:
   use_repository_button: false
 
 
+sphinx:
+  config:
+    html_theme_options:
+      # Keep siblings visible in the left sidebar
+      collapse_navigation: false
+      # How deep to expand the left nav (chapters/sections/subsections)
+      show_nav_level: 2     # try 2 or 3
+      # How deep the right-side in-page ToC goes (optional)
+      show_toc_level: 2
+
 # parse:
 #   myst_enable_extensions:
 #     # don't forget to list any other extensions you want enabled,

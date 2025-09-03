@@ -2,7 +2,7 @@
 author:
 - Wanxin Jin
 date: Sep. 05, 2023 Sep. 7, 2023 Sep. 12, 2023
-title: "Lecture 6-8: Denavit--Hartenberg Convention"
+title: "Lecture 4: Forward Kinematics"
 ---
 
 # Forward Kinematics
