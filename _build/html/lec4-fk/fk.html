@@ -384,7 +384,7 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Forward Kinematics</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#math-convention-in-a-robot-arm">Math Convention in a Robot Arm</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#notation-convention">Notation Convention</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#denavit-hartenberg-dh-convention">Denavit-Hartenberg (DH) Convention</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#workspace">Workspace</a></li>
@@ -425,11 +425,19 @@ frame</span><a class="headerlink" href="#end-effector-frame" title="Link to this
 With respect to a base frame <span class="math notranslate nohighlight">\(O_{b}-x_{b} y_{b} z_{b}\)</span>, the FK
 is expressed by the homogeneous transformation</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\boldsymbol{T}_{e}^{b}(\boldsymbol{q})=\left[\begin{array}{cccc}
-\boldsymbol{n}_{e}^{b}(\boldsymbol{q}) &amp; \boldsymbol{s}_{e}^{b}(\boldsymbol{q}) &amp; \boldsymbol{a}_{e}^{b}(\boldsymbol{q}) &amp; \boldsymbol{p}_{e}^{b}(\boldsymbol{q}) \\
+\[\begin{split}
+\boldsymbol{T}_{e}^{w}(\boldsymbol{q})=
+\left[\begin{array}{cccc}
+R^w_e &amp; \boldsymbol{p}_{e}^{w}(\boldsymbol{q}) \\
+\boldsymbol{0} &amp;  1
+\end{array}\right]
+=
+\left[\begin{array}{cccc}
+\boldsymbol{n}_{e}^{w}(\boldsymbol{q}) &amp; \boldsymbol{s}_{e}^{w}(\boldsymbol{q}) &amp; \boldsymbol{a}_{e}^{w}(\boldsymbol{q}) &amp; \boldsymbol{p}_{e}^{w}(\boldsymbol{q}) \\
 0 &amp; 0 &amp; 0 &amp; 1
-\end{array}\right]\end{split}\]</div>
-<p>where
+\end{array}\right]
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(R_e=[\boldsymbol{n}_{e}, \boldsymbol{s}_{e}, \boldsymbol{a}_{e}]\)</span> and
 <span class="math notranslate nohighlight">\(\{\boldsymbol{n}_{e}, \boldsymbol{s}_{e}, \boldsymbol{a}_{e}\}\)</span> are the
 unit vectors of  the end-effector frame, and
 <span class="math notranslate nohighlight">\(\boldsymbol{p}_{e}\)</span> is the position of the origin of the end-effector
@@ -439,42 +447,36 @@ chosen in the approach direction to the object, <span class="math notranslate no
 chosen in the sliding plane of the jaws,
 and <span class="math notranslate nohighlight">\(\boldsymbol{n}_{e}\)</span> is chosen to complete the right-handed rule.</p>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="math-convention-in-a-robot-arm">
-<h1>Math Convention in a Robot Arm<a class="headerlink" href="#math-convention-in-a-robot-arm" title="Link to this heading">#</a></h1>
-<!-- ```{figure} ./kinematics/forward_kin.jpg
----
-width: 70%
-name: forward_kin
----
-Kinematics of a robot
-manipulator
-```
- -->
+<section class="tex2jax_ignore mathjax_ignore" id="notation-convention">
+<h1>Notation Convention<a class="headerlink" href="#notation-convention" title="Link to this heading">#</a></h1>
 <p>A robot arm composes of <span class="math notranslate nohighlight">\(n+1\)</span> links connected by <span class="math notranslate nohighlight">\(n\)</span> joints,
-where Link 0 is conventionally fixed to the ground/base. Each joint
-variable provides one DOF. Define a frame attached to each link,
+where Link 0 refers to the base. Each joint
+variable provides 1 DOF. Define a frame attached to each link,
 from Link 0 to Link <span class="math notranslate nohighlight">\(n\)</span>. Then,  the transformation of Frame <span class="math notranslate nohighlight">\(n\)</span> with
 respect to Frame 0 is (postmultiplication rule)</p>
 <div class="math notranslate nohighlight">
-\[\boldsymbol{T}_{n}^{0}(\boldsymbol{q})=\boldsymbol{T}_{1}^{0}\left(q_{1}\right) \boldsymbol{T}_{2}^{1}\left(q_{2}\right) \ldots \boldsymbol{T}_{n}^{n-1}\left(q_{n}\right) .\]</div>
+\[
+\boldsymbol{T}_{n}^{0}(\boldsymbol{q})=\boldsymbol{T}_{1}^{0}\left(q_{1}\right) \boldsymbol{T}_{2}^{1}\left(q_{2}\right) \ldots \boldsymbol{T}_{n}^{n-1}\left(q_{n}\right) .
+\]</div>
 <p>Each homogeneous
-transformation <span class="math notranslate nohighlight">\(\boldsymbol{T}_{i}^{i-1}\left(q_{i}\right)\)</span>
-(for <span class="math notranslate nohighlight">\(\left.i=1, \ldots, n\right)\)</span> is a function of a
+transformation <span class="math notranslate nohighlight">\(\boldsymbol{T}_{i}^{i-1}\left(q_{i}\right)\)</span>, <span class="math notranslate nohighlight">\(i=1, \ldots n\)</span>, is a function of a
 corresponding joint variable <span class="math notranslate nohighlight">\(q_i\)</span>.</p>
-<p>Typically, the base frame can be different from the frame of Link 0, the end-effector frame is different from the frame of Link n.The FK describing the pose of the
+<p>Typically, the word frame can be different from the frame of Link 0 (base), the end-effector frame is different from the frame of Link n.The FK describing the pose of the
 end-effector frame with respect to the base frame is</p>
 <div class="math notranslate nohighlight">
-\[\boldsymbol{T}_{e}^{b}(\boldsymbol{q})=\boldsymbol{T}_{0}^{b} \boldsymbol{T}_{n}^{0}(\boldsymbol{q}) \boldsymbol{T}_{e}^{n}\]</div>
-<p>where <span class="math notranslate nohighlight">\(\boldsymbol{T}_{0}^{b}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{T}_{e}^{n}\)</span> are two
+\[
+\boldsymbol{T}_{e}^{w}(\boldsymbol{q})=\boldsymbol{T}_{0}^{w} \boldsymbol{T}_{n}^{0}(\boldsymbol{q}) \boldsymbol{T}_{e}^{n}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\boldsymbol{T}_{0}^{w}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{T}_{e}^{n}\)</span> are two
 constant homogeneous transformations describing the position
-and orientation of Frame 0 with respect to the base frame, and of the
+and orientation of Frame 0 with respect to the world frame, and of the
 end-effector frame with respect to Frame <span class="math notranslate nohighlight">\(n\)</span>, respectively.</p>
-<p>New question: how to neatly choose frame for each link to faciliate the computation of
-<span class="math notranslate nohighlight">\(\boldsymbol{T}_{i}^{i-1}\left(q_{i}\right)\)</span>? This is why DH convention comes to help.</p>
+<p>Question: how to choose frame for each link to faciliate the computation of
+<span class="math notranslate nohighlight">\(\boldsymbol{T}_{i}^{i-1}\left(q_{i}\right)\)</span>?</p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="denavit-hartenberg-dh-convention">
 <h1>Denavit-Hartenberg (DH) Convention<a class="headerlink" href="#denavit-hartenberg-dh-convention" title="Link to this heading">#</a></h1>
-<p>Denavit-Hartenberg (DH) Convention is to systematically and recursively
+<p>DH Convention is to systematically and recursively
 define a frame to each link and obtain the transformation between two
 consecutive links.</p>
 <figure class="align-default" id="dh-convention">
@@ -485,8 +487,8 @@ consecutive links.</p>
 <span class="math notranslate nohighlight">\(i\)</span></span><a class="headerlink" href="#dh-convention" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
+<div class="admonition-coordinate-frame-definition-in-dh-convention admonition">
+<p class="admonition-title">Coordinate Frame Definition in DH Convention</p>
 <p>With reference to <a class="reference internal" href="#dh-convention"><span class="std std-numref">Fig. 24</span></a>, joint <span class="math notranslate nohighlight">\(i\)</span> connects Link <span class="math notranslate nohighlight">\(i-1\)</span> to Link <span class="math notranslate nohighlight">\(i\)</span>; DH
 convention sets the following rules to define link Frame
 <span class="math notranslate nohighlight">\(O_{i}-x_{i} y_{i} z_{i}\)</span>, given previous link Frame
@@ -499,10 +501,7 @@ the common normal to <span class="math notranslate nohighlight">\(z_{i}\)</span>
 <li><p>Choose  <span class="math notranslate nohighlight">\(y_{i}\)</span> to complete a right-handed frame.</p></li>
 </ul>
 </div>
-<!-- Choose an
-    intermediate point $O_{i^{\prime}}$ at the intersection of the
-    common normal with axis $z_{i-1}$. -->
-<p>Once the link frames are established by DH convention, the pose of
+<p>Once the link frames are established, the pose of
 link Frame <span class="math notranslate nohighlight">\(O_{i}-x_{i} y_{i} z_{i}\)</span> in the link Frame
 <span class="math notranslate nohighlight">\(O_{i-1}-x_{i-1} y_{i-1} z_{i-1}\)</span> can be determined by
 four basic parameters, with the help of an intermediate frame <span class="math notranslate nohighlight">\(O_{i^{\prime}}-x_{i^{\prime}} y_{i^{\prime}} z_{i^{\prime}}\)</span> shown in <a class="reference internal" href="#dh-convention"><span class="std std-numref">Fig. 24</span></a>:</p>
@@ -514,39 +513,45 @@ and depend only on the geometry of links</p></li>
 <li><p><span class="math notranslate nohighlight">\(d_{i}\)</span> distance of between <span class="math notranslate nohighlight">\(O_{i-1}\)</span> and <span class="math notranslate nohighlight">\(O_{i^{\prime}}\)</span> along
 <span class="math notranslate nohighlight">\(z_{i-1}\)</span> — variable if Joint <span class="math notranslate nohighlight">\(i\)</span> is prismatic, otherwise constant</p></li>
 <li><p><span class="math notranslate nohighlight">\(\vartheta_{i}\)</span> angle between axes <span class="math notranslate nohighlight">\(x_{i-1}\)</span> and <span class="math notranslate nohighlight">\(x_{i}\)</span> about axis
-<span class="math notranslate nohighlight">\(z_{i-1}\)</span> — variable</p></li>
+<span class="math notranslate nohighlight">\(z_{i-1}\)</span> — variable if Joint <span class="math notranslate nohighlight">\(i\)</span> is revolute, otherwise constant</p></li>
 </ul>
 <p>To compute <span class="math notranslate nohighlight">\(\boldsymbol{T}_{i}^{i-1}\left(q_{i}\right)\)</span>, we perform four basic transformations. First, translate the Frame
 <span class="math notranslate nohighlight">\(O_{i-1}-x_{i-1} y_{i-1} z_{i-1}\)</span> by <span class="math notranslate nohighlight">\(d_{i}\)</span> along axis <span class="math notranslate nohighlight">\(z_{i-1}\)</span>. Second,
 Rotate the resulting frame by <span class="math notranslate nohighlight">\(\vartheta_{i}\)</span> about <span class="math notranslate nohighlight">\(z_{i-1}\)</span>. These two steps lead to the
 pose of the intermediate Frame <span class="math notranslate nohighlight">\(O_{i^{\prime}}-x_{i^{\prime}} y_{i^{\prime}} z_{i^{\prime}}\)</span> in Frame <span class="math notranslate nohighlight">\(O_{i-1}-x_{i-1} y_{i-1} z_{i-1}\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\boldsymbol{A}_{i^{\prime}}^{i-1}=\left[\begin{array}{cccc}
+\[\begin{split}
+\boldsymbol{T}_{i^{\prime}}^{i-1}=\left[\begin{array}{cccc}
 c_{\vartheta_{i}} &amp; -s_{\vartheta_{i}} &amp; 0 &amp; 0 \\
 s_{\vartheta_{i}} &amp; c_{\vartheta_{i}} &amp; 0 &amp; 0 \\
 0 &amp; 0 &amp; 1 &amp; d_{i} \\
 0 &amp; 0 &amp; 0 &amp; 1
-\end{array}\right]\end{split}\]</div>
+\end{array}\right]
+\end{split}\]</div>
 <p>Third, translate the intermediate Frame <span class="math notranslate nohighlight">\(i^{\prime}\)</span> by <span class="math notranslate nohighlight">\(a_{i}\)</span> along
 axis <span class="math notranslate nohighlight">\(x_{i^{\prime}}\)</span>, and fourth, rotate it by <span class="math notranslate nohighlight">\(\alpha_{i}\)</span> about axis
 <span class="math notranslate nohighlight">\(x_{i^{\prime}}\)</span>. The last two steps lead  to the pose of
 <span class="math notranslate nohighlight">\(O_{i}-x_{i} y_{i} z_{i}\)</span> in  Frame <span class="math notranslate nohighlight">\(O_{i^{\prime}}-x_{i^{\prime}} y_{i^{\prime}} z_{i^{\prime}}\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\boldsymbol{A}_{i}^{i^{\prime}}=\left[\begin{array}{cccc}
+\[\begin{split}
+\boldsymbol{T}_{i}^{i^{\prime}}=\left[\begin{array}{cccc}
 1 &amp; 0 &amp; 0 &amp; a_{i} \\
 0 &amp; c_{\alpha_{i}} &amp; -s_{\alpha_{i}} &amp; 0 \\
 0 &amp; s_{\alpha_{i}} &amp; c_{\alpha_{i}} &amp; 0 \\
 0 &amp; 0 &amp; 0 &amp; 1
-\end{array}\right]\end{split}\]</div>
+\end{array}\right]
+\end{split}\]</div>
 <p>In sum of the above four steps, the total transformation of link <span class="math notranslate nohighlight">\(i\)</span>’s Frame
 <span class="math notranslate nohighlight">\(O_{i}-x_{i} y_{i} z_{i}\)</span> in the link <span class="math notranslate nohighlight">\(i-1\)</span>’s Frame <span class="math notranslate nohighlight">\(O_{i-1}-x_{i-1} y_{i-1} z_{i-1}\)</span> is</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\boldsymbol{T}_{i}^{i-1}\left(q_{i}\right)=\boldsymbol{A}_{i^{\prime}}^{i-1} \boldsymbol{A}_{i}^{i^{\prime}}=\left[\begin{array}{cccc}
+\[\begin{split}
+\boldsymbol{T}_{i}^{i-1}\left(q_{i}\right)=\boldsymbol{T}_{i^{\prime}}^{i-1} \boldsymbol{T}_{i}^{i^{\prime}}=\left[\begin{array}{cccc}
 c_{\vartheta_{i}} &amp; -s_{\vartheta_{i}} c_{\alpha_{i}} &amp; s_{\vartheta_{i}} s_{\alpha_{i}} &amp; a_{i} c_{\vartheta_{i}} \\
 s_{\vartheta_{i}} &amp; c_{\vartheta_{i}} c_{\alpha_{i}} &amp; -c_{\vartheta_{i}} s_{\alpha_{i}} &amp; a_{i} s_{\vartheta_{i}} \\
 0 &amp; s_{\alpha_{i}} &amp; c_{\alpha_{i}} &amp; d_{i} \\
 0 &amp; 0 &amp; 0 &amp; 1
-\end{array}\right]\end{split}\]</div>
+\end{array}\right]
+\end{split}\]</div>
 <p>The DH convention gives a nonunique definition of the link frame in the
 following cases.</p>
 <ul class="simple">
@@ -567,10 +572,8 @@ of <span class="math notranslate nohighlight">\(z_{i-1}\)</span> is arbitrary.</
 <p>In all such cases, the principle of choosing
 frames is to simplify the procedure; for instance, the axes of
 consecutive frames can be made parallel.</p>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>To summarize, we write the following DH convention for
-a robot arm.</p>
+<div class="admonition-dh-convention admonition">
+<p class="admonition-title">DH Convention</p>
 <ol class="arabic simple">
 <li><p>Identify  each joint and set the directions of axes
 <span class="math notranslate nohighlight">\(z_{0}, \ldots, z_{n-1}\)</span></p></li>
@@ -606,9 +609,9 @@ transformation
 </ol>
 <p>Complete the assembly:</p>
 <ol class="arabic simple" start="6">
-<li><p>Given <span class="math notranslate nohighlight">\(\boldsymbol{T}_{0}^{b}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{T}_{e}^{n}\)</span>, compute
-the kinematics function as <span class="math notranslate nohighlight">\(\boldsymbol{T}_{e}^{b}(\boldsymbol{q})=\)</span>
-<span class="math notranslate nohighlight">\(\boldsymbol{T}_{0}^{b} \boldsymbol{T}_{n}^{0} \boldsymbol{T}_{e}^{n}\)</span>.</p></li>
+<li><p>Given <span class="math notranslate nohighlight">\(\boldsymbol{T}_{0}^{w}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{T}_{e}^{n}\)</span>, compute
+the kinematics function as <span class="math notranslate nohighlight">\(\boldsymbol{T}_{e}^{w}(\boldsymbol{q})=\)</span>
+<span class="math notranslate nohighlight">\(\boldsymbol{T}_{0}^{w} \boldsymbol{T}_{n}^{0} \boldsymbol{T}_{e}^{n}\)</span>.</p></li>
 </ol>
 </div>
 </section>
@@ -616,8 +619,6 @@ the kinematics function as <span class="math notranslate nohighlight">\(\boldsym
 <h1>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h1>
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm docutils">
 <div class="sd-card-body docutils">
-<div class="sd-card-title sd-font-weight-bold docutils">
-Three-link Planar Arm</div>
 <figure class="align-default" id="link-arm">
 <a class="reference internal image-reference" href="../_images/3link_arm.jpg"><img alt="../_images/3link_arm.jpg" src="../_images/3link_arm.jpg" style="width: 60%;" />
 </a>
@@ -669,8 +670,6 @@ s_{123} &amp; c_{123} &amp; 0 &amp; a_{1} s_{1}+a_{2} s_{12}+a_{3} s_{123} \\
 </div>
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm docutils">
 <div class="sd-card-body docutils">
-<div class="sd-card-title sd-font-weight-bold docutils">
-Spherical Arm</div>
 <figure class="align-default" id="spherical-arm">
 <a class="reference internal image-reference" href="../_images/spherical_arm.jpg"><img alt="../_images/spherical_arm.jpg" src="../_images/spherical_arm.jpg" style="width: 70%;" />
 </a>
@@ -722,8 +721,6 @@ s_{1} c_{2} &amp; c_{1} &amp; s_{1} s_{2} &amp; s_{1} s_{2} d_{3}+c_{1} d_{2} \\
 </div>
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm docutils">
 <div class="sd-card-body docutils">
-<div class="sd-card-title sd-font-weight-bold docutils">
-Anthropomorphic Arm</div>
 <figure class="align-default" id="anthropomorphic-arm">
 <a class="reference internal image-reference" href="../_images/anthropomorphic_arm.jpg"><img alt="../_images/anthropomorphic_arm.jpg" src="../_images/anthropomorphic_arm.jpg" style="width: 70%;" />
 </a>
@@ -775,8 +772,6 @@ s_{23} &amp; c_{23} &amp; 0 &amp; a_{2} s_{2}+a_{3} s_{23} \\
 </div>
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm docutils">
 <div class="sd-card-body docutils">
-<div class="sd-card-title sd-font-weight-bold docutils">
-Spherical Wrist</div>
 <figure class="align-default" id="spherical-wrist">
 <a class="reference internal image-reference" href="../_images/spherical_wrist.jpg"><img alt="../_images/spherical_wrist.jpg" src="../_images/spherical_wrist.jpg" style="width: 70%;" />
 </a>
@@ -828,8 +823,6 @@ s_{4} c_{5} c_{6}+c_{4} s_{6} &amp; -s_{4} c_{5} s_{6}+c_{4} c_{6} &amp; s_{4} s
 </div>
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm docutils">
 <div class="sd-card-body docutils">
-<div class="sd-card-title sd-font-weight-bold docutils">
-Stanford Manipulator</div>
 <figure class="align-default" id="stanford-manipulator">
 <a class="reference internal image-reference" href="../_images/Stanford_manipulator.jpg"><img alt="../_images/Stanford_manipulator.jpg" src="../_images/Stanford_manipulator.jpg" style="width: 70%;" />
 </a>
@@ -871,8 +864,6 @@ s_{1}\left(c_{2} c_{4} s_{5}+s_{2} c_{5}\right)+c_{1} s_{4} s_{5} \\
 </div>
 <div class="sd-card sd-sphinx-override sd-mb-3 sd-shadow-sm docutils">
 <div class="sd-card-body docutils">
-<div class="sd-card-title sd-font-weight-bold docutils">
-Anthropomorphic Arm with Spherical Wrist</div>
 <figure class="align-default" id="anthropomorphic-manipulator">
 <a class="reference internal image-reference" href="../_images/anthropomorphic_manipulator.jpg"><img alt="../_images/anthropomorphic_manipulator.jpg" src="../_images/anthropomorphic_manipulator.jpg" style="width: 80%;" />
 </a>
@@ -974,9 +965,11 @@ space that the origin of the end-effector frame can reach with at least
 one orientation.</p>
 <p>For an <span class="math notranslate nohighlight">\(n\)</span>-DOF robot arm, the reachable workspace is formally defined</p>
 <div class="math notranslate nohighlight">
-\[\{
+\[
+\{
 \boldsymbol{p}_{e}(\boldsymbol{q})\,|\, \quad q_{i m} \leq q_{i} \leq q_{i M} \quad i=1, \ldots, n,
-\}\]</div>
+\}
+\]</div>
 <p>where <span class="math notranslate nohighlight">\(q_{i m}\left(q_{i M}\right)\)</span> denotes the minimum (maximum) values
 at Joint <span class="math notranslate nohighlight">\(i\)</span>. The workspace is typically
 reported in the data sheet of a robot manufacturer in terms of a
@@ -1037,7 +1030,9 @@ the Joint <span class="math notranslate nohighlight">\(i+1\)</span> in classic D
 according to the modified convention, the transform matrix is given by
 the following order of operations:</p>
 <div class="math notranslate nohighlight">
-\[T^{i-1}_i=\text{Rot}_{x_{i-1}}(\alpha_{i-1})\text{Trans}_{x_{i-1}}(a_{i-1})\text{Rot}_{z_{i}}(\theta_{i})\text{Trans}_{z_{i}}(d_{i})\]</div>
+\[
+T^{i-1}_i=\text{Rot}_{x_{i-1}}(\alpha_{i-1})\text{Trans}_{x_{i-1}}(a_{i-1})\text{Rot}_{z_{i}}(\theta_{i})\text{Trans}_{z_{i}}(d_{i})
+\]</div>
 <p>One example of using the above modified DH convention is Franka-Emika
 Panda robot arm, an increasingly popular robot for research and
 teaching. It has 7 joints which make it a redundant robot, that is, it
@@ -1130,7 +1125,7 @@ Tutorial</span><a class="headerlink" href="#cover" title="Link to this image">#<
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Forward Kinematics</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#math-convention-in-a-robot-arm">Math Convention in a Robot Arm</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#notation-convention">Notation Convention</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#denavit-hartenberg-dh-convention">Denavit-Hartenberg (DH) Convention</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#workspace">Workspace</a></li>

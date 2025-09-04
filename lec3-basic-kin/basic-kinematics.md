@@ -362,7 +362,7 @@ $$
 \boldsymbol{R}_{2}^{0}=\boldsymbol{R}_{1}^{0} \boldsymbol{R}_{2}^1=\boldsymbol{R}_{1}^{0} (\boldsymbol{R}_1^0)^T\boldsymbol{R}_{1,2}^0\boldsymbol{R}_1^0=\boldsymbol{R}_{1,2}^0\boldsymbol{R}_1^0
 $$
 
-```{admonition}
+```{admonition} Rotation around Fixed Frame
 We can conclude the following *premultiplication rule*:
 
 -   The same frame with respect to which a rotation occurs (and the
@@ -371,6 +371,7 @@ We can conclude the following *premultiplication rule*:
 -   The composition of each rotation around the fixed frame is obtained
     by *premultiplication* of the rotation matrices in order.
 ```
+
 ```{note}
 Note: composition of rotations not commutative, i.e., $R_1R_2=R_2R_1$, most of cases, does NOT hold.
 ```
