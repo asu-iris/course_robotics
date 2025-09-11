@@ -52,6 +52,40 @@ chosen in the approach direction to the object, $\boldsymbol{s}_{e}$ is
 chosen in the sliding plane of the jaws,
 and $\boldsymbol{n}_{e}$ is chosen to complete the right-handed rule.
 
+```{admonition} MuJoCo Simulation of Franka Robot Arm
+:class: tip
+
+To run the Franka Emika Panda forward kinematics simulation locally:
+
+1. **Download the FK code files:**
+  - [Download franka_emika_panda.zip](./fk_code/franka_emika_panda.zip)
+  - Unzip the file to any folder of your choice on your local system.
+
+2. **Install MuJoCo and its Python bindings:**
+  - Make sure you have Python installed.
+  - Install MuJoCo and the Python package:
+    ```sh
+    pip install mujoco
+    ```
+
+
+3. **Run the simulation:**
+   - Open the `demo.py` script in your code editor.
+   - Set the `MODEL_PATH` variable in `demo.py` to the correct path of the `scene.xml` file in your local system. For example:
+     ```python
+     MODEL_PATH = "/path/to/your/franka_emika_panda/scene.xml"  # Use the provided scene.xml file
+     model = mujoco.MjModel.from_xml_path(MODEL_PATH)
+     ```
+   - Save the changes to `demo.py`.
+   - In your terminal, navigate to the folder containing `demo.py` and run:
+     ```sh
+     python demo.py
+     ```
+
+You should see a window displaying the Franka Emika Panda robot simulation. Press ESC in the viewer window to exit.
+```
+
+
 # Notation Convention
 
 
@@ -83,6 +117,9 @@ end-effector frame with respect to Frame $n$, respectively.
 
 Question: how to choose frame for each link to faciliate the computation of
 $\boldsymbol{T}_{i}^{i-1}\left(q_{i}\right)$? 
+
+
+
 
 # Denavit-Hartenberg (DH) Convention
 
@@ -533,5 +570,7 @@ width: 50%
 name: cover
 ---
 Panda's kinematic chain (from Peter Corke's
-Tutorial
+Tutorial)
 ```
+
+

@@ -179,7 +179,6 @@
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Robot Configuration</a></li>
 
 
-
 <li class="toctree-l1"><a class="reference internal" href="../lec3-basic-kin/basic-kinematics.html">Basic Kinematics</a></li>
 
 
@@ -384,7 +383,6 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Robot Configuration</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">Configuration</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#degrees-of-freedom">Degrees of Freedom</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general-rule">General Rule</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dof-of-different-joint-types">DOF of Different Joint Types</a></li>
@@ -462,29 +460,27 @@ kinematic chain is closed when a sequence of links forms a loop. This course mai
 <div class="tip admonition">
 <p class="admonition-title">MuJoCo Simulator Introduction</p>
 <p>MuJoCo (Multi-Joint dynamics with Contact) is a physics engine designed for the simulation and control of robots and other articulated mechanisms. It is widely used in robotics research for its speed, accuracy, and support for advanced features such as soft contacts and complex constraints.</p>
-<p><strong>Key Features:</strong></p>
+<h3 class="rubric" id="key-features">Key Features</h3>
 <ul class="simple">
 <li><p>Fast and accurate simulation of rigid body dynamics</p></li>
 <li><p>Support for soft and hard contacts</p></li>
 <li><p>Flexible model specification using XML</p></li>
 <li><p>Widely used in reinforcement learning and robotics research</p></li>
 </ul>
-<p><strong>Getting Started:</strong></p>
+<h3 class="rubric" id="getting-started">Getting Started</h3>
 <p>To use MuJoCo, you need to:</p>
 <ol class="arabic simple">
 <li><p>Install MuJoCo (UI) from <a class="github reference external" href="https://github.com/google-deepmind/mujoco/releases">google-deepmind/mujoco</a></p></li>
 <li><p>Download Example Model:** <a class="reference download internal" download="" href="../_downloads/b1702d19613f1953b687a633f7d4c5f8/franka_fr3.zip"><span class="xref download myst">franka_fr3.zip</span></a></p></li>
 <li><p>Unzip and drag it into UI to simulate the Franka Research 3 Robot arm.</p></li>
 </ol>
-</div>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="configuration">
-<h1>Configuration<a class="headerlink" href="#configuration" title="Link to this heading">#</a></h1>
+<h1 class="rubric" id="configuration">Configuration</h1>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>The <strong>configuration</strong> of a robot is a complete specification of the
 position of every point of the robot. Since a robot’s links are rigid
 and of a known shape, only a few coordinates  are needed to represent its configuration.</p>
+</div>
 </div>
 <p>For example, in the following figure, the configuration of a door can be
 represented by the hinge angle <span class="math notranslate nohighlight">\(\theta\)</span>. The
@@ -856,7 +852,6 @@ workspace</span><a class="headerlink" href="#anthropomophic-robot" title="Link t
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Robot Configuration</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">Configuration</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#degrees-of-freedom">Degrees of Freedom</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general-rule">General Rule</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dof-of-different-joint-types">DOF of Different Joint Types</a></li>

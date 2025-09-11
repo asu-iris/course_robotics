@@ -179,7 +179,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../lec2-dof/configuration.html">Robot Configuration</a></li>
 
 
-
 <li class="toctree-l1"><a class="reference internal" href="../lec3-basic-kin/basic-kinematics.html">Basic Kinematics</a></li>
 
 
@@ -446,6 +445,48 @@ frame is located at the center of the gripper, <span class="math notranslate noh
 chosen in the approach direction to the object, <span class="math notranslate nohighlight">\(\boldsymbol{s}_{e}\)</span> is
 chosen in the sliding plane of the jaws,
 and <span class="math notranslate nohighlight">\(\boldsymbol{n}_{e}\)</span> is chosen to complete the right-handed rule.</p>
+<div class="tip admonition">
+<p class="admonition-title">MuJoCo Simulation of Franka Robot Arm</p>
+<p>To run the Franka Emika Panda forward kinematics simulation locally:</p>
+<ol class="arabic simple">
+<li><p><strong>Download the FK code files:</strong></p></li>
+</ol>
+<ul class="simple">
+<li><p><a class="reference download internal" download="" href="../_downloads/10c6bc558e31a12eeb9f5554e88f6d3e/franka_emika_panda.zip"><span class="xref download myst">Download franka_emika_panda.zip</span></a></p></li>
+<li><p>Unzip the file to any folder of your choice on your local system.</p></li>
+</ul>
+<ol class="arabic simple" start="2">
+<li><p><strong>Install MuJoCo and its Python bindings:</strong></p></li>
+</ol>
+<ul>
+<li><p>Make sure you have Python installed.</p></li>
+<li><p>Install MuJoCo and the Python package:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>mujoco
+</pre></div>
+</div>
+</li>
+</ul>
+<ol class="arabic" start="3">
+<li><p><strong>Run the simulation:</strong></p>
+<ul>
+<li><p>Open the <code class="docutils literal notranslate"><span class="pre">demo.py</span></code> script in your code editor.</p></li>
+<li><p>Set the <code class="docutils literal notranslate"><span class="pre">MODEL_PATH</span></code> variable in <code class="docutils literal notranslate"><span class="pre">demo.py</span></code> to the correct path of the <code class="docutils literal notranslate"><span class="pre">scene.xml</span></code> file in your local system. For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">MODEL_PATH</span> <span class="o">=</span> <span class="s2">&quot;/path/to/your/franka_emika_panda/scene.xml&quot;</span>  <span class="c1"># Use the provided scene.xml file</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">mujoco</span><span class="o">.</span><span class="n">MjModel</span><span class="o">.</span><span class="n">from_xml_path</span><span class="p">(</span><span class="n">MODEL_PATH</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Save the changes to <code class="docutils literal notranslate"><span class="pre">demo.py</span></code>.</p></li>
+<li><p>In your terminal, navigate to the folder containing <code class="docutils literal notranslate"><span class="pre">demo.py</span></code> and run:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>demo.py
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ol>
+<p>You should see a window displaying the Franka Emika Panda robot simulation. Press ESC in the viewer window to exit.</p>
+</div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="notation-convention">
 <h1>Notation Convention<a class="headerlink" href="#notation-convention" title="Link to this heading">#</a></h1>
@@ -1055,7 +1096,7 @@ kinematics at</p>
 </a>
 <figcaption>
 <p><span class="caption-number">Fig. 33 </span><span class="caption-text">Panda’s kinematic chain (from Peter Corke’s
-Tutorial</span><a class="headerlink" href="#cover" title="Link to this image">#</a></p>
+Tutorial)</span><a class="headerlink" href="#cover" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
