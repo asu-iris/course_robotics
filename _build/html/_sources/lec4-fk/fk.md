@@ -457,7 +457,7 @@ s_{23} c_{4} s_{5}-c_{23} c_{5}
 
 # Workspace
 
-The robot arm workspace is the space reached by the origin of the
+The workspace of a robot arm is the space reached by the origin of the
 end-effector frame when the robot arm's joints take all allowable
 values. The workspace includes reachable workspace and dexterous
 workspace. The latter is the space that the origin of the end-effector
@@ -481,11 +481,11 @@ top view and a side view.
 In a robot arm, if actual mechanical parameters differ from the
 nominal value in data sheet, an error arises between
 actual position reached and  theorical position computed via direct
-kinematics. Such error is called accuracy. Nowdays, accuracy level of a decent-sized robot arm is typically below 1mm.
+kinematics. Such error is called accuracy. 
 
-Another parameter  of a robot arm is repeatability
+Another meric  of a robot arm is repeatability
 which gives a measure of the robot's ability to return to a
-previously reached position. Repeatability depends on external disturbance and also on internal controller; it is typically smaller than accuracy. For
+previously reached position. Repeatability depends on external disturbance and also on controller; it is typically smaller than accuracy. For
 instance, for a robot arm with a maximum reach of $1.5 \mathrm{~m}$,
 accuracy varies from 0.2 to $1 \mathrm{~mm}$, while
 repeatability varies from 0.02 to $0.2 \mathrm{~mm}$.
@@ -493,14 +493,12 @@ repeatability varies from 0.02 to $0.2 \mathrm{~mm}$.
 # Kinematic Redundancy
 
 A robot arm is kinematically redundant when its
-DOF $n$ is greater than dimension $m$ of the task space (also named operational space), typically refering to the  motion space of end-effector (frame). Redundancy is a concept relative to the task space; a robot arm can be redundant with respect to a
+DOF $n$ is greater than dimension $m$ of the task space (also named operational space), typically refering to the motion space of end-effector. Redundancy is a concept relative to the task space; a robot arm can be redundant with respect to a
 task and nonredundant with respect to another.
 
-Consider the three-DOF planar arm. If one only cares about the end effector's
-position (i.e., the operation space is only the positional space of end effector), the robot arm is a
-functional redundancy $(n=3, n=2)$. When one care about both position and angle of the end-effector, then the robot is nonredundant, i.e., $n=3, n=3$. On the
-other hand, a four-DOF planar arm is intrinsically redundant
-$(n=4, m=3)$.
+Consider the 3-DOF planar arm. If one only cares about the end effector's
+position, the robot arm is a
+functional redundancy $(n=3, m=2)$. When one care about both position and angle of the end-effector, then the robot is nonredundant, i.e., $n=3, m=3$. 
 
 At this point, a question may arise: Why to
 intentionally utilize a redundant robot arm? This is because  redundancy can provide a robot arm with dexterity and

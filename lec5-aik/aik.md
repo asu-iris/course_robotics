@@ -8,24 +8,23 @@ title: "Lecture 9: Analytic Inverse Kinematics (IK)"
 # Inverse Kinematics
 
 The inverse kinematics (IK) is to determine  joint variables
-given end-effector position and orientation.  IK is important in robotics because it allows to transform  motion specification of  operational space into that of joint space. But IK  is complex, because
+given end-effector position and orientation.  IK is important in robotics because it allows to transform  motion in the operational space into that of joint space. But IK  is complex, because
 
 -   FK is nonlinear, and thus IK is not
-    always possible to find closed-form solutions.
+    always possible to find a closed-form solution.
 
 -   Multiple IK solutions may exist, e.g., for a redundant robot arm.
 
 -   There might be no feasbile IK solutions, e.g., due to
     mechanical limits.
 
-In this lecture, we only talk about IK  that has a
-closed-form solution. This is only the case for some special-structured
-robot arms. For more generalized case, we will leave IK in future lectures.
+Below, we only talk about IK  that has a
+closed-form solution. For more generalized case, we will leave IK in numerical solution of future chapters.
 
 # IK of Three-link Planar Arm
 
 
-```{figure} ./kinematics/3link_arm.jpg
+```{figure} ./aik/3link_arm.jpg
 ---
 width: 50%
 name: 3link_arm
@@ -52,7 +51,7 @@ $$\begin{aligned}
 
 
 Applying cosine theorem to the triangle formed by  $a_{1}, a_{2}$ and
-the segment  $W-0$ gives
+the segment OW gives
 
 $$p_{W x}^{2}+p_{W y}^{2}=a_{1}^{2}+a_{2}^{2}-2 a_{1} a_{2} \cos \left(\pi-\vartheta_{2}\right) ;$$
 
@@ -60,9 +59,6 @@ Thus,
 
 $$c_{2}=\frac{p_{W x}^{2}+p_{W y}^{2}-a_{1}^{2}-a_{2}^{2}}{2 a_{1} a_{2}}$$
 
-For the existence of the triangle, it must be
-$\sqrt{p_{W x}^{2}+p_{W y}^{2}} \leq a_{1}+a_{2}$. This condition is not
-met when the given end-effector pose is outside the arm reachable workspace.
 
 
 
@@ -74,7 +70,7 @@ when $\vartheta_{2} \in(-\pi, 0)$;  elbow-down
 pose when $\vartheta_{2} \in(0, \pi)$.
 
 
-```{figure} ./kinematics/postures_2link_arm.jpg
+```{figure} ./aik/postures_2link_arm.jpg
 ---
 width: 50%
 name: postures_2link_arm
@@ -103,8 +99,8 @@ sign for $\vartheta_{2}>0$. Finally, $\vartheta_{3}$ is computed from
 
 # IK of Manipulators of Spherical Wrist
 
-Most of industrial robot arms are kinematically simple, the design is partly motivated
-by easing IK. In particular, a
+Most of practical robot arms are kinematically simple, the design is partly motivated
+by easing IK. A
 6-DOF robot has closed-form IK if:
 
 -   three consecutive revolute joint axes intersect at a common point,
@@ -113,18 +109,21 @@ by easing IK. In particular, a
 -   three consecutive revolute joint axes are parallel, like the
     three-link robot arm
 
-Inspired by our above IK process to a three-link planar arm, an itermediate point $W$ on the
+To solve IK for those robot arms, an itermediate point $W$ on the
 robot arm can be found, such that the IK can be decoupled into
-two lower-dimentional sub-problems. Specifically, for a robot arm with
+two lower-dimentional sub-problems. 
+
+
+Specifically, for a robot arm with
 spherical wrist, a natural choice is to put $W$ at the
-wrist position. 
+wrist center (position). 
 As shown {numref}`analytic_ik_decouple`, if the end-effector pose is $\boldsymbol{p}_{e}$ and
 $\boldsymbol{R}_{e}=\left[\begin{array}{lll}\boldsymbol{n}_{e} & \boldsymbol{s}_{e} & \boldsymbol{a}_{e}\end{array}\right]$,
 the wrist position will be
 
 $$\boldsymbol{p}_{W}=\boldsymbol{p}_{e}-d_{6} \boldsymbol{a}_{e}$$
 
-```{figure} ./kinematics/analytic_ik_decouple.jpg
+```{figure} ./aik/analytic_ik_decouple.jpg
 ---
 width: 80%
 name: analytic_ik_decouple
@@ -150,7 +149,7 @@ IK can be solved by the following steps:
 -   Compute $\boldsymbol{R}_{3}^{0}\left(q_{1}, q_{2}, q_{3}\right)$.
 
 -   Compute
-    $\boldsymbol{R}_{e}^{3}\left(\vartheta_{4}, \vartheta_{5}, \vartheta_{6}\right)=\boldsymbol{R}_{3}^{0 T} \boldsymbol{R}_e$
+    $\boldsymbol{R}_{e}^{3}\left(\vartheta_{4}, \vartheta_{5}, \vartheta_{6}\right)=\boldsymbol{R}_{0}^{3} \boldsymbol{R}_e$
 
 -   Solve inverse kinematics for orientation
     $\left(\vartheta_{4}, \vartheta_{5}, \vartheta_{6}\right)$
@@ -159,14 +158,14 @@ Therefore, IK is decoupled into: (1) IK for the arm (Step 1-2); and  (2) the IK 
 
 
 Below are presented IK
-solutions for two types of arms (spherical and anthropomorphic)  and IK solution for the spherical wrist.
+solutions for two types of arms  and IK solution for the spherical wrist.
 
 ## IK for Spherical Arm
 
 Consider the spherical arm:
 
 
-```{figure} ./kinematics/spherical_arm.jpg
+```{figure} ./aik/spherical_arm.jpg
 ---
 width: 70%
 name: spherical_arm
@@ -215,7 +214,7 @@ $$d_{3}=\sqrt{\left(p_{W x} c_{1}+p_{W y} s_{1}\right)^{2}+p_{W z}^{2}}$$
 Consider the anthropomorphic arm:
 
 
-```{figure} ./kinematics/anthropomorphic_arm.jpg
+```{figure} ./aik/anthropomorphic_arm.jpg
 ---
 width: 70%
 name: anthropomorphic_arm
@@ -283,7 +282,7 @@ shoulder-left/elbow-down; obviously, the forearm orientation is
 different for the two pairs of solutions.
 
 
-```{figure} ./kinematics/4IK_solutions_anthropomorphic_arm.jpg
+```{figure} ./aik/4IK_solutions_anthropomorphic_arm.jpg
 ---
 width: 60%
 name: 4IK_solutions_anthropomorphic_arm
@@ -298,7 +297,7 @@ position
 Consider the spherical wrist below.
 
 
-```{figure} ./kinematics/spherical_wrist.jpg
+```{figure} ./aik/spherical_wrist.jpg
 ---
 width: 70%
 name: spherical_wrist
