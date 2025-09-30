@@ -384,8 +384,8 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-space">Configuration Space</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling-based-motion-planning">Sampling-based motion planning</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probabilistic-roadmap-prm">Probabilistic Roadmap (PRM)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rapidly-exploring-random-trees-rrts">Rapidly-exploring Random Trees (RRTs)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probabilistic-roadmap-prm">Probabilistic Roadmap (PRM) </a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rapidly-exploring-random-trees-rrts">Rapidly-exploring Random Trees (RRTs) </a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variants-of-rrt">Variants of RRT</a></li>
 </ul>
 </li>
@@ -449,9 +449,7 @@ points, 4, 7, and 10, along the path are labeled.</span><a class="headerlink" hr
 <section id="sampling-based-motion-planning">
 <h2>Sampling-based motion planning<a class="headerlink" href="#sampling-based-motion-planning" title="Link to this heading">#</a></h2>
 <section id="probabilistic-roadmap-prm">
-<h3>Probabilistic Roadmap (PRM)<a class="headerlink" href="#probabilistic-roadmap-prm" title="Link to this heading">#</a></h3>
-<p>Python example code (copyright, authored by IRIS Lab):
-<a class="reference external" href="https://colab.research.google.com/drive/1TvEIeUeZnZjJOjU33IVWLnP43DrFXxVY?usp=sharing">https://colab.research.google.com/drive/1TvEIeUeZnZjJOjU33IVWLnP43DrFXxVY?usp=sharing</a></p>
+<h3>Probabilistic Roadmap (PRM) <a class="reference external" href="https://colab.research.google.com/drive/1TvEIeUeZnZjJOjU33IVWLnP43DrFXxVY?usp=sharing"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a><a class="headerlink" href="#probabilistic-roadmap-prm" title="Link to this heading">#</a></h3>
 <p>The basic PRM algorithm in robot configuration space <a class="reference internal" href="#prm1"><span class="std std-numref">Fig. 44</span></a> is as follows:</p>
 <ul class="simple">
 <li><p>Step 1: Sample <span class="math notranslate nohighlight">\(N\)</span> configurations at random from the C-space, as shown in <a class="reference internal" href="#prm2"><span class="std std-numref">Fig. 45</span></a>. Check all sampled configurations and remove those in the obstacle sapce. Only add the samples in free space  and  start and goal to the roadmap (also known as milestones),  as shown in <a class="reference internal" href="#prm3"><span class="std std-numref">Fig. 46</span></a>.</p></li>
@@ -495,10 +493,8 @@ points, 4, 7, and 10, along the path are labeled.</span><a class="headerlink" hr
 </figure>
 </section>
 <section id="rapidly-exploring-random-trees-rrts">
-<h3>Rapidly-exploring Random Trees (RRTs)<a class="headerlink" href="#rapidly-exploring-random-trees-rrts" title="Link to this heading">#</a></h3>
-<p>Python example code (copyright, authored by IRIS Lab):
-<a class="reference external" href="https://colab.research.google.com/drive/1fxMlKzIWIWr6Qq49wTmTsIAJz5pp0ing?usp=sharing">https://colab.research.google.com/drive/1fxMlKzIWIWr6Qq49wTmTsIAJz5pp0ing?usp=sharing</a></p>
-<p>The basic RRT algorithm is as follows (from <a class="reference external" href="https://arxiv.org/pdf/1105.1186">https://arxiv.org/pdf/1105.1186</a>)</p>
+<h3>Rapidly-exploring Random Trees (RRTs) <a class="reference external" href="https://colab.research.google.com/drive/1fxMlKzIWIWr6Qq49wTmTsIAJz5pp0ing?usp=sharing"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a><a class="headerlink" href="#rapidly-exploring-random-trees-rrts" title="Link to this heading">#</a></h3>
+<!-- The basic RRT algorithm is as follows (from https://arxiv.org/pdf/1105.1186) -->
 <p>A visualization of how RRT works step by step in 2D space is shown as follows.</p>
 <p><strong>CREDIT: all the figures are taken from rey’s blog (<a class="reference external" href="https://rrwiyatn.github.io/blog/robotik/2020/05/16/rrt.html">https://rrwiyatn.github.io/blog/robotik/2020/05/16/rrt.html</a>)</strong></p>
 <figure class="align-default" id="rrt1">
@@ -618,8 +614,8 @@ shorter path, it subdivides again; and so on.</p></li>
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-space">Configuration Space</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling-based-motion-planning">Sampling-based motion planning</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probabilistic-roadmap-prm">Probabilistic Roadmap (PRM)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rapidly-exploring-random-trees-rrts">Rapidly-exploring Random Trees (RRTs)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probabilistic-roadmap-prm">Probabilistic Roadmap (PRM) </a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rapidly-exploring-random-trees-rrts">Rapidly-exploring Random Trees (RRTs) </a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variants-of-rrt">Variants of RRT</a></li>
 </ul>
 </li>

@@ -51,10 +51,7 @@ points, 4, 7, and 10, along the path are labeled.
 
 ## Sampling-based motion planning
 
-### Probabilistic Roadmap (PRM)
-
-Python example code (copyright, authored by IRIS Lab):
-https://colab.research.google.com/drive/1TvEIeUeZnZjJOjU33IVWLnP43DrFXxVY?usp=sharing
+### Probabilistic Roadmap (PRM) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1TvEIeUeZnZjJOjU33IVWLnP43DrFXxVY?usp=sharing)
 
 The basic PRM algorithm in robot configuration space {numref}`prm1` is as follows:
 
@@ -97,12 +94,11 @@ name: prm5
 ---
 Search for a path from the start to the goal using [A* search](https://theory.stanford.edu/~amitp/GameProgramming/AStarComparison.html) algorithms.
 ```
-### Rapidly-exploring Random Trees (RRTs)
+### Rapidly-exploring Random Trees (RRTs) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1fxMlKzIWIWr6Qq49wTmTsIAJz5pp0ing?usp=sharing)
 
-Python example code (copyright, authored by IRIS Lab):
-https://colab.research.google.com/drive/1fxMlKzIWIWr6Qq49wTmTsIAJz5pp0ing?usp=sharing
 
-The basic RRT algorithm is as follows (from https://arxiv.org/pdf/1105.1186)
+
+<!-- The basic RRT algorithm is as follows (from https://arxiv.org/pdf/1105.1186) -->
 
 ```{figure}
 ---
