@@ -414,10 +414,10 @@ both schemes, the control diagram is closed-loops</p>
 <a class="reference internal image-reference" href="../_images/joint_control.jpg"><img alt="../_images/joint_control.jpg" src="../_images/joint_control.jpg" style="width: 99%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 66 </span><span class="caption-text">Joint space control</span><a class="headerlink" href="#joint-control222" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 67 </span><span class="caption-text">Joint space control</span><a class="headerlink" href="#joint-control222" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>The joint space control is shown in <a class="reference internal" href="#joint-control222"><span class="std std-numref">Fig. 66</span></a>. Here, inverse kinematics is
+<p>The joint space control is shown in <a class="reference internal" href="#joint-control222"><span class="std std-numref">Fig. 67</span></a>. Here, inverse kinematics is
 use to convert the specified end-effector motion
 <span class="math notranslate nohighlight">\(\boldsymbol{x}_{d}\)</span> to the desired joint motion
 <span class="math notranslate nohighlight">\(\boldsymbol{q}_{d}\)</span>. Then, a joint space controller
@@ -429,10 +429,10 @@ regulates the joint tracking error <span class="math notranslate nohighlight">\(
 <a class="reference internal image-reference" href="../_images/operational_space_control.jpg"><img alt="../_images/operational_space_control.jpg" src="../_images/operational_space_control.jpg" style="width: 99%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 67 </span><span class="caption-text">Operational space control</span><a class="headerlink" href="#operational-space-control222" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 68 </span><span class="caption-text">Operational space control</span><a class="headerlink" href="#operational-space-control222" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>The operational space control is shown in <a class="reference internal" href="#operational-space-control222"><span class="std std-numref">Fig. 67</span></a>.
+<p>The operational space control is shown in <a class="reference internal" href="#operational-space-control222"><span class="std std-numref">Fig. 68</span></a>.
 Here, the operational space motion <span class="math notranslate nohighlight">\(\boldsymbol{x}_{e}\)</span> is directly fed back
 to the controller. Thus, it addresses the drawbacks of joint space
 control. However, the control algorithm  typically is more complex in design and it requires  measuring the operational space motion
@@ -449,13 +449,13 @@ robot arm only with joint input torque <span class="math notranslate nohighlight
 <a class="reference internal image-reference" href="../_images/motori_kinematics.jpg"><img alt="../_images/motori_kinematics.jpg" src="../_images/motori_kinematics.jpg" style="width: 70%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 68 </span><span class="caption-text">Transmission between  motor and
+<p><span class="caption-number">Fig. 69 </span><span class="caption-text">Transmission between  motor and
 joint</span><a class="headerlink" href="#motori-kinematics" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <section id="joint-motor-transmission">
 <h2>Joint-Motor Transmission<a class="headerlink" href="#joint-motor-transmission" title="Link to this heading">#</a></h2>
-<p>As shown in <a class="reference internal" href="#motori-kinematics"><span class="std std-numref">Fig. 68</span></a>, let  <span class="math notranslate nohighlight">\(\boldsymbol{q}_{m}=[\theta_{m1}, \theta_{m2}, ...\theta_{mn}]^T\)</span>
+<p>As shown in <a class="reference internal" href="#motori-kinematics"><span class="std std-numref">Fig. 69</span></a>, let  <span class="math notranslate nohighlight">\(\boldsymbol{q}_{m}=[\theta_{m1}, \theta_{m2}, ...\theta_{mn}]^T\)</span>
 be the vector of joint motor angles. The transmissions - assumed to be
 rigid and with no backlash - between the motor and joint motion is</p>
 <div class="math notranslate nohighlight" id="equation-equ-transmission-model">
@@ -478,10 +478,10 @@ and joint input torque:</p>
 <a class="reference internal image-reference" href="../_images/motor_circuit.jpg"><img alt="../_images/motor_circuit.jpg" src="../_images/motor_circuit.jpg" style="width: 99%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 69 </span><span class="caption-text">Direct current motor circuit</span><a class="headerlink" href="#motor-circuit" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 70 </span><span class="caption-text">Direct current motor circuit</span><a class="headerlink" href="#motor-circuit" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>For a direct current (DC) motor <a class="reference internal" href="#motor-circuit"><span class="std std-numref">Fig. 69</span></a>, we have the following model:</p>
+<p>For a direct current (DC) motor <a class="reference internal" href="#motor-circuit"><span class="std std-numref">Fig. 70</span></a>, we have the following model:</p>
 <div class="math notranslate nohighlight" id="equation-equ-dc-model">
 <span class="eqno">(54)<a class="headerlink" href="#equation-equ-dc-model" title="Link to this equation">#</a></span>\[\begin{split}
     \begin{aligned}
@@ -504,12 +504,12 @@ servomotors.</p>
 voltage <span class="math notranslate nohighlight">\(\boldsymbol{v}_c\)</span>, the motor-generated joint torque
 <span class="math notranslate nohighlight">\(\boldsymbol{\tau}\)</span>, and the joint velocity <span class="math notranslate nohighlight">\(\boldsymbol{\dot{q}}\)</span>.</p>
 <p>When we consider the robot arm system joining the DC motor <a class="reference internal" href="#equation-equ-voltage-control">(55)</a> and robot arm own dynamics <a class="reference internal" href="#equation-equ-robotarm-dyn">(51)</a>,
-overall diagram is shown in <a class="reference internal" href="#voltage-control"><span class="std std-numref">Fig. 70</span></a>.</p>
+overall diagram is shown in <a class="reference internal" href="#voltage-control"><span class="std std-numref">Fig. 71</span></a>.</p>
 <figure class="align-default" id="voltage-control">
 <a class="reference internal image-reference" href="../_images/voltage_control.jpg"><img alt="../_images/voltage_control.jpg" src="../_images/voltage_control.jpg" style="width: 90%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 70 </span><span class="caption-text">The entire system joining DC motor and robot arm.</span><a class="headerlink" href="#voltage-control" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 71 </span><span class="caption-text">The entire system joining DC motor and robot arm.</span><a class="headerlink" href="#voltage-control" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
