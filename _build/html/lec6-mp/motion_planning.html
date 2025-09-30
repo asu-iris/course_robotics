@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Statics &#8212; Modeling and Control of Robots</title>
+    <title>Motion Planning &#8212; Modeling and Control of Robots</title>
   
   
   
@@ -59,11 +59,11 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'lec14/statics';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lec6-mp/motion_planning';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Inverse Velocity Kinematics" href="../lec15/inverse_vk.html" />
-    <link rel="prev" title="Singularity &amp; Redundancy" href="../lec13/singularity.html" />
+    <link rel="next" title="Velocity Kinematics" href="../lec10/diff-trans.html" />
+    <link rel="prev" title="Inverse Kinematics" href="../lec5-aik/aik.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -195,7 +195,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../lec5-aik/aik.html">Inverse Kinematics</a></li>
 
 
-<li class="toctree-l1"><a class="reference internal" href="../lec6-mp/motion_planning.html">Motion Planning</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Motion Planning</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lec10/diff-trans.html">Velocity Kinematics</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="../lec11-12/jacobian.html">Jacobian</a></li>
@@ -207,7 +207,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../lec13/singularity.html">Singularity &amp; Redundancy</a></li>
 
 
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Statics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lec14/statics.html">Statics</a></li>
 
 
 <li class="toctree-l1"><a class="reference internal" href="../lec15/inverse_vk.html">Inverse Velocity Kinematics</a></li>
@@ -288,7 +288,7 @@
       
       
       
-      <li><a href="../_sources/lec14/statics.md" target="_blank"
+      <li><a href="../_sources/lec6-mp/motion_planning.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -372,7 +372,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Statics</h1>
+    <h1>Motion Planning</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -382,11 +382,15 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Statics</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#kineto-statics-duality">Kineto-Statics Duality</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#velocity-and-force-transformation-optional">Velocity and Force Transformation (Optional)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-space">Configuration Space</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling-based-motion-planning">Sampling-based motion planning</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probabilistic-roadmap-prm">Probabilistic Roadmap (PRM)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rapidly-exploring-random-trees-rrts">Rapidly-exploring Random Trees (RRTs)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variants-of-rrt">Variants of RRT</a></li>
 </ul>
-
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#smoothing">Smoothing</a></li>
+</ul>
             </nav>
         </div>
     </div>
@@ -397,138 +401,155 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="statics">
-<h1>Statics<a class="headerlink" href="#statics" title="Link to this heading">#</a></h1>
-<p>The concept of statics in robotics is to find the relationship between  force
-applied to the end-effector and the generalized torques applied to the
-joints when the robot arm is at equilibrium.  We will apply the <a class="reference external" href="https://en.wikipedia.org/wiki/Virtual_work#:~:text=The%20principle%20of%20virtual%20work%20states%20that%20in%20equilibrium%20the,the%20reaction%2C%20or%20constraint%20forces.">principle of
-virtual work</a> to determine this relationship.</p>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>The principle of virtual work states that in equilibrium the virtual work of the forces applied to a system is zero</p>
-</div>
-<p>Let <span class="math notranslate nohighlight">\(\boldsymbol{\tau}\)</span>
-be the <span class="math notranslate nohighlight">\((n \times 1)\)</span> joint torques and <span class="math notranslate nohighlight">\(\boldsymbol{\gamma}_{e}=\begin{bmatrix}
-\boldsymbol{f}_{e}\\
-\boldsymbol{\mu}_{e}
-\end{bmatrix}\)</span> the
-<span class="math notranslate nohighlight">\((r \times 1)\)</span> end-effector forces, including linear force <span class="math notranslate nohighlight">\(\boldsymbol{f}_{e}\)</span> and moment
-<span class="math notranslate nohighlight">\(\boldsymbol{\mu}_{e}\)</span>.</p>
-<p>The visual work by the joint torques:</p>
-<div class="math notranslate nohighlight">
-\[d W_{\tau}=\boldsymbol{\tau}^{T} d \boldsymbol{q}\]</div>
-<p>where <span class="math notranslate nohighlight">\(d \boldsymbol{q}\)</span> is  the  joint virtual displacement.</p>
-<p>The visual work by the end-effector forces:</p>
-<div class="math notranslate nohighlight">
-\[d W_{\gamma}=\boldsymbol{f}_{e}^{T} d \boldsymbol{p}_{e}+\boldsymbol{\mu}_{e}^{T} \boldsymbol{\omega}_{e} d t =\boldsymbol{f}_{e}^{T} \boldsymbol{J}_{P}(\boldsymbol{q}) d \boldsymbol{q}+\boldsymbol{\mu}_{e}^{T} \boldsymbol{J}_{O}(\boldsymbol{q}) d \boldsymbol{q}  =\boldsymbol{\gamma}_{e}^{T} \boldsymbol{J}(\boldsymbol{q}) d \boldsymbol{q}\]</div>
-<p>where <span class="math notranslate nohighlight">\(d \boldsymbol{p}_{e}\)</span> is the linear virtual displacement and
-<span class="math notranslate nohighlight">\(\boldsymbol{\omega}_{e} d t\)</span> is the angular virtual displacement of the end-effector.</p>
-<p>According to the principle of virtual work, the manipulator is at static
-equilibrium if and only if</p>
-<div class="math notranslate nohighlight">
-\[\delta W_{\tau}=\delta W_{\gamma}, \quad \forall \delta \boldsymbol{q}\]</div>
-<p>This leads to the statics equation:</p>
-<div class="math notranslate nohighlight">
-\[\boldsymbol{\tau}=\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{\gamma}_{e}\]</div>
-<p>stating a relationship between the end-effector forces and joint
-torques when the robot is at its equilibrium.</p>
-</br>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="kineto-statics-duality">
-<h1>Kineto-Statics Duality<a class="headerlink" href="#kineto-statics-duality" title="Link to this heading">#</a></h1>
-<p>The kineto-statics duality states that</p>
-<div class="math notranslate nohighlight">
-\[\begin{aligned}
-    \boldsymbol{v}_{e}=\boldsymbol{J}(\boldsymbol{q}) \dot{\boldsymbol{q}} \quad\quad\quad 
-    \boldsymbol{\tau}=\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{\gamma}_{e}
-\end{aligned}\]</div>
+  <section class="tex2jax_ignore mathjax_ignore" id="motion-planning">
+<h1>Motion Planning<a class="headerlink" href="#motion-planning" title="Link to this heading">#</a></h1>
+<p>Motion planning is the problem of finding a robot motion from start
+state to a goal state that avoids obstacles in the environment (also statisfies other constraints).</p>
+<figure class="align-default" id="link-arm">
+<a class="reference internal image-reference" href="../_images/motion-planning.gif"><img alt="../_images/motion-planning.gif" src="../_images/motion-planning.gif" style="width: 70%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 41 </span><span class="caption-text">Robot arm motion planning</span><a class="headerlink" href="#link-arm" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<section id="configuration-space">
+<h2>Configuration Space<a class="headerlink" href="#configuration-space" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>The range space <span class="math notranslate nohighlight">\(\mathcal{R}\left(\boldsymbol{J}^{T}\right)\)</span> of <span class="math notranslate nohighlight">\(\boldsymbol{J}^{T}\)</span> is the subspace
-in <span class="math notranslate nohighlight">\(\mathbb{R}^{n}\)</span>, where the
-the joint torques that can balance the end-effector forces at robot pose <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span>.</p></li>
-<li><p>The null space <span class="math notranslate nohighlight">\(\mathcal{N}\left(\boldsymbol{J}^{T}\right)\)</span> of <span class="math notranslate nohighlight">\(\boldsymbol{J}^{T}\)</span> is the subspace
-in <span class="math notranslate nohighlight">\(\mathbb{R}^{r}\)</span> of
-the end-effector forces that do not require any balancing joint
-torques at robot pose <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span>.</p></li>
+<li><p><strong>Configuration of a robot</strong>:  a representation of a robot pose, typically using the joint vector <span class="math notranslate nohighlight">\(q\in R^n\)</span>.</p></li>
+<li><p><strong>Configuration space (C-Space)</strong>: the space that contains all possible robot configurations.</p></li>
+<li><p><strong>Free space</strong> <span class="math notranslate nohighlight">\(C_{free}\)</span>: the subset of configurations where the robot does not contact any obstacle.</p></li>
+<li><p><strong>Obstacle space</strong> <span class="math notranslate nohighlight">\(C_{obs}\)</span>: the subset of configurations where the robot is in collision with an obstacle.</p></li>
+<li><p>The robot configuration space <span class="math notranslate nohighlight">\(C\)</span> is a union of free space <span class="math notranslate nohighlight">\(C_{free}\)</span> and obstacle space <span class="math notranslate nohighlight">\(C_{obs}\)</span>:</p></li>
 </ul>
-<figure class="align-default" id="coordinate-mapping">
-<a class="reference internal image-reference" href="../_images/operation_to_joint.jpg"><img alt="../_images/operation_to_joint.jpg" src="../_images/operation_to_joint.jpg" style="width: 70%;" />
-</a>
-<figcaption>
-<p><span class="caption-number">Fig. 59 </span><span class="caption-text">Mapping between the end-effector force space and the joint torque
-space</span><a class="headerlink" href="#coordinate-mapping" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
-<p>It is worth remarking that the end-effector forces
-<span class="math notranslate nohighlight">\(\gamma_{e} \in \mathcal{N}\left(\boldsymbol{J}^{T}\right)\)</span> are entirely
-absorbed by the mechanical structure of the robot arm.</p>
-<p>From fundamental relationship in linear algebra, the relations between the two subspaces are established by</p>
 <div class="math notranslate nohighlight">
-\[\mathcal{N}(\boldsymbol{J}) \equiv \mathcal{R}^{\perp}\left(\boldsymbol{J}^{T}\right) \quad \mathcal{R}(\boldsymbol{J}) \equiv \mathcal{N}^{\perp}\left(\boldsymbol{J}^{T}\right)\]</div>
-<p>and then, once the manipulator Jacobian is known, it is possible to
-characterize completely differential kinematics and statics in terms of
-the range and null spaces of the Jacobian and its transpose.</p>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="velocity-and-force-transformation-optional">
-<h1>Velocity and Force Transformation (Optional)<a class="headerlink" href="#velocity-and-force-transformation-optional" title="Link to this heading">#</a></h1>
+\[
+C=C_{free}\cup C_{obs}
+\]</div>
+<p>Some examples:</p>
 <figure class="align-default" id="id1">
-<a class="reference internal image-reference" href="../_images/coordinate_mapping.jpg"><img alt="../_images/coordinate_mapping.jpg" src="../_images/coordinate_mapping.jpg" style="width: 70%;" />
+<a class="reference internal image-reference" href="../_images/exp2_cspace.png"><img alt="../_images/exp2_cspace.png" src="../_images/exp2_cspace.png" style="width: 80%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 60 </span><span class="caption-text">Representation of linear and angular velocities in different
-coordinate frames on the same rigid
-body</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 42 </span><span class="caption-text">(a) A circular mobile robot (open circle) and a workspace obstacle
+(gray triangle). The configuration of the robot is represented by <span class="math notranslate nohighlight">\((x, y)\)</span> at its center. (b) In  C-space, the obstacle is “grown” by the radius of the robot
+and the robot is treated as a point. Any <span class="math notranslate nohighlight">\((x, y)\)</span> configuration outside the bold line is
+collision-free.</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>The kineto-statics duality  can be useful to
-find the transformation of velocities and forces between two
-coordinate frames. Consider a reference coordinate frame
-<span class="math notranslate nohighlight">\(O_{0}-x_{0} y_{0} z_{0}\)</span> and a rigid body moving with respect to such a
-frame. Then let <span class="math notranslate nohighlight">\(O_{1}-x_{1} y_{1} z_{1}\)</span> and <span class="math notranslate nohighlight">\(O_{2}-x_{2} y_{2} z_{2}\)</span>
-be two coordinate frames attached to the body. The relationships between
-translational and rotational velocities of the two frames with respect
-to the reference frame are given by</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\begin{aligned}
-\boldsymbol{\omega}_{2} &amp; =\boldsymbol{\omega}_{1} \\
-\dot{\boldsymbol{p}}_{2} &amp; =\dot{\boldsymbol{p}}_{1}+\boldsymbol{\omega}_{1} \times \boldsymbol{r}_{12} .
-\end{aligned}\end{split}\]</div>
-<p>The above relations can be compactly written as</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\left[\begin{array}{c}
-\dot{\boldsymbol{p}}_{2} \\
-\boldsymbol{\omega}_{2}
-\end{array}\right]=\left[\begin{array}{cc}
-\boldsymbol{I} &amp; -\boldsymbol{S}\left(\boldsymbol{r}_{12}\right) \\
-\boldsymbol{O} &amp; \boldsymbol{I}
-\end{array}\right]\left[\begin{array}{c}
-\dot{\boldsymbol{p}}_{1} \\
-\boldsymbol{\omega}_{1}
-\end{array}\right]\end{split}\]</div>
-<p>On the other hand, if vectors are referred to their own frames, it is</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\left[\begin{array}{c}
-\dot{\boldsymbol{p}}_{2}^{2} \\
-\boldsymbol{\omega}_{2}^{2}
-\end{array}\right]=\left[\begin{array}{cc}
-\boldsymbol{R}_{1}^{2} &amp; -\boldsymbol{R}_{1}^{2} \boldsymbol{S}\left(\boldsymbol{r}_{12}^{1}\right) \\
-\boldsymbol{O} &amp; \boldsymbol{R}_{1}^{2}
-\end{array}\right]\left[\begin{array}{c}
-\dot{\boldsymbol{p}}_{1}^{1} \\
-\boldsymbol{\omega}_{1}^{1}
-\end{array}\right]\end{split}\]</div>
-<p>giving the relationship of velocity transformation between two frames.
-The above can be compactly written as</p>
-<div class="math notranslate nohighlight">
-\[\boldsymbol{v}_{2}^{2}=\boldsymbol{J}_{1}^{2} \boldsymbol{v}_{1}^{1}\]</div>
-<p>By virtue of the kineto-statics duality, the force transformation
-between two frames is</p>
-<div class="math notranslate nohighlight">
-\[\boldsymbol{\gamma}_{1}^{1}=\boldsymbol{J}_{1}^{2 T} \boldsymbol{\gamma}_{2}^{2}\]</div>
-<p>Finally, notice that the above analysis is instantaneous in that, if a
-coordinate frame varies with respect to the other, it is necessary to
-recompute the Jacobian of the transformation through the computation of
-the related rotation matrix of one frame with respect to the other.</p>
+<figure class="align-default" id="id2">
+<a class="reference internal image-reference" href="../_images/2rrobot_arm_cspace.png"><img alt="../_images/2rrobot_arm_cspace.png" src="../_images/2rrobot_arm_cspace.png" style="width: 80%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 43 </span><span class="caption-text">(Left) The joint angles of a 2R robot arm. (Middle) The arm navigating
+among obstacles A, B, and C. (Right) The same motion in C-space. Three intermediate
+points, 4, 7, and 10, along the path are labeled.</span><a class="headerlink" href="#id2" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="sampling-based-motion-planning">
+<h2>Sampling-based motion planning<a class="headerlink" href="#sampling-based-motion-planning" title="Link to this heading">#</a></h2>
+<section id="probabilistic-roadmap-prm">
+<h3>Probabilistic Roadmap (PRM)<a class="headerlink" href="#probabilistic-roadmap-prm" title="Link to this heading">#</a></h3>
+<p>Python example code (copyright, authored by IRIS Lab):
+<a class="reference external" href="https://colab.research.google.com/drive/1TvEIeUeZnZjJOjU33IVWLnP43DrFXxVY?usp=sharing">https://colab.research.google.com/drive/1TvEIeUeZnZjJOjU33IVWLnP43DrFXxVY?usp=sharing</a></p>
+<p>The basic PRM algorithm in robot configuration space <a class="reference internal" href="#prm1"><span class="std std-numref">Fig. 44</span></a> is as follows:</p>
+<ul class="simple">
+<li><p>Step 1: Sample <span class="math notranslate nohighlight">\(N\)</span> configurations at random from the C-space, as shown in <a class="reference internal" href="#prm2"><span class="std std-numref">Fig. 45</span></a>. Check all sampled configurations and remove those in the obstacle sapce. Only add the samples in free space  and  start and goal to the roadmap (also known as milestones),  as shown in <a class="reference internal" href="#prm3"><span class="std std-numref">Fig. 46</span></a>.</p></li>
+<li><p>Step 2: Each milestone is linked by straight paths to its nearest neighbors. The collision-free links are retained as local paths to form the PRM, as shown in <a class="reference internal" href="#prm4"><span class="std std-numref">Fig. 47</span></a>.</p></li>
+<li><p>Step 3: Search for a path from the start to the goal using <a class="reference external" href="https://en.wikipedia.org/wiki/A*_search_algorithm">A* search</a> or <a class="reference external" href="https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm">Dijkstra’s search</a> algorithms, as shown in <a class="reference internal" href="#prm5"><span class="std std-numref">Fig. 48</span></a>.</p></li>
+</ul>
+<figure class="align-default" id="prm1">
+<a class="reference internal image-reference" href="../_images/prm-1.png"><img alt="../_images/prm-1.png" src="../_images/prm-1.png" style="width: 70%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 44 </span><span class="caption-text">Configuration space: balck blocks show obstacle space and the while show free space. The start is shown in green  and goal in red.</span><a class="headerlink" href="#prm1" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="prm2">
+<a class="reference internal image-reference" href="../_images/prm-2.png"><img alt="../_images/prm-2.png" src="../_images/prm-2.png" style="width: 70%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 45 </span><span class="caption-text">Sample <span class="math notranslate nohighlight">\(N\)</span> configurations at random from the C-space.</span><a class="headerlink" href="#prm2" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="prm3">
+<a class="reference internal image-reference" href="../_images/prm-3.png"><img alt="../_images/prm-3.png" src="../_images/prm-3.png" style="width: 70%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 46 </span><span class="caption-text">Only add the samples in free space  and the start and goal to the roadmap (also known as milestones).</span><a class="headerlink" href="#prm3" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="prm4">
+<a class="reference internal image-reference" href="../_images/prm-4.png"><img alt="../_images/prm-4.png" src="../_images/prm-4.png" style="width: 70%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 47 </span><span class="caption-text">Each milestone is linked by straight paths to its nearest neighbors. The collision-free links are retained as local paths to form the PRM</span><a class="headerlink" href="#prm4" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="prm5">
+<a class="reference internal image-reference" href="../_images/prm-5.png"><img alt="../_images/prm-5.png" src="../_images/prm-5.png" style="width: 70%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 48 </span><span class="caption-text">Search for a path from the start to the goal using <a class="reference external" href="https://theory.stanford.edu/~amitp/GameProgramming/AStarComparison.html">A* search</a> algorithms.</span><a class="headerlink" href="#prm5" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="rapidly-exploring-random-trees-rrts">
+<h3>Rapidly-exploring Random Trees (RRTs)<a class="headerlink" href="#rapidly-exploring-random-trees-rrts" title="Link to this heading">#</a></h3>
+<p>Python example code (copyright, authored by IRIS Lab):
+<a class="reference external" href="https://colab.research.google.com/drive/1fxMlKzIWIWr6Qq49wTmTsIAJz5pp0ing?usp=sharing">https://colab.research.google.com/drive/1fxMlKzIWIWr6Qq49wTmTsIAJz5pp0ing?usp=sharing</a></p>
+<p>The basic RRT algorithm is as follows (from <a class="reference external" href="https://arxiv.org/pdf/1105.1186">https://arxiv.org/pdf/1105.1186</a>)</p>
+<p>A visualization of how RRT works step by step in 2D space is shown as follows.</p>
+<p><strong>CREDIT: all the figures are taken from rey’s blog (<a class="reference external" href="https://rrwiyatn.github.io/blog/robotik/2020/05/16/rrt.html">https://rrwiyatn.github.io/blog/robotik/2020/05/16/rrt.html</a>)</strong></p>
+<figure class="align-default" id="rrt1">
+<a class="reference internal image-reference" href="../_images/rrt-1.png"><img alt="../_images/rrt-1.png" src="../_images/rrt-1.png" style="width: 90%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 49 </span><span class="caption-text">The 1st iteration in RRT algoritm</span><a class="headerlink" href="#rrt1" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="rrt2">
+<a class="reference internal image-reference" href="../_images/rrt-2.png"><img alt="../_images/rrt-2.png" src="../_images/rrt-2.png" style="width: 90%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 50 </span><span class="caption-text">The 2nd iteration of RRT to n-th iteration</span><a class="headerlink" href="#rrt2" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="variants-of-rrt">
+<h3>Variants of RRT<a class="headerlink" href="#variants-of-rrt" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>bidirectional or multi-directional RRT</p></li>
+<li><p><a class="reference external" href="https://arxiv.org/abs/1105.1186">RRT*</a>: Swap new point in as parent for nearby vertices who can be reached
+along shorter path through new point than through their original
+(current) parent.</p></li>
+</ul>
+<figure class="align-default" id="rrts">
+<a class="reference internal image-reference" href="../_images/rrt*.png"><img alt="../_images/rrt%2A.png" src="../_images/rrt%2A.png" style="width: 90%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 51 </span><span class="caption-text">(Left) The tree generated by an RRT after 5,000 nodes. The goal
+region is the square at the top right corner, and the shortest path is indicated. (Right)
+The tree generated by RRT* after 5,000 nodes. Figure from original paper (<a class="reference external" href="https://arxiv.org/abs/1105.1186">https://arxiv.org/abs/1105.1186</a>).</span><a class="headerlink" href="#rrts" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="smoothing">
+<h2>Smoothing<a class="headerlink" href="#smoothing" title="Link to this heading">#</a></h2>
+<p>Randomized motion planners tend to find not so great paths for
+execution: very jagged, often dynamially infeasbile. So, people usually do smoothing before using the planned path.</p>
+<ul class="simple">
+<li><p>Subdividing and Reconnecting: A local planner can be used to attempt a connection between two distant points on a path. If this new connection is collision free, it replaces the original path segment. Since the local planner is designed to
+produce short, smooth, paths, the new path is likely to be shorter and smoother
+than the original. This test-and-replace procedure can be applied iteratively to
+randomly chosen points on the path. Another possibility is to use a recursive
+procedure that subdivides the path first into two pieces and attempts to replace
+each piece with a shorter path; then, if either portion cannot be replaced by a
+shorter path, it subdivides again; and so on.</p></li>
+<li><p>Nonlinear Optimization: With the obtained path as initial condition, one can define an objective function that includes smoothness in state, control, small control inputs, etc, and optimize such objective function for smoother path.</p></li>
+</ul>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -544,7 +565,7 @@ the related rotation matrix of one frame with respect to the other.</p>
         },
         kernelOptions: {
             name: "python3",
-            path: "./lec14"
+            path: "./lec6-mp"
         },
         predefinedOutput: true
     }
@@ -562,20 +583,20 @@ the related rotation matrix of one frame with respect to the other.</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../lec13/singularity.html"
+       href="../lec5-aik/aik.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Singularity &amp; Redundancy</p>
+        <p class="prev-next-title">Inverse Kinematics</p>
       </div>
     </a>
     <a class="right-next"
-       href="../lec15/inverse_vk.html"
+       href="../lec10/diff-trans.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Inverse Velocity Kinematics</p>
+        <p class="prev-next-title">Velocity Kinematics</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -595,11 +616,15 @@ the related rotation matrix of one frame with respect to the other.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Statics</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#kineto-statics-duality">Kineto-Statics Duality</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#velocity-and-force-transformation-optional">Velocity and Force Transformation (Optional)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-space">Configuration Space</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling-based-motion-planning">Sampling-based motion planning</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probabilistic-roadmap-prm">Probabilistic Roadmap (PRM)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rapidly-exploring-random-trees-rrts">Rapidly-exploring Random Trees (RRTs)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variants-of-rrt">Variants of RRT</a></li>
 </ul>
-
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#smoothing">Smoothing</a></li>
+</ul>
   </nav></div>
 
 </div></div>

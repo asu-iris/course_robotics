@@ -195,7 +195,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../lec5-aik/aik.html">Inverse Kinematics</a></li>
 
 
-<li class="toctree-l1"><a class="reference internal" href="../opt/motion_planning.html">Motion Planning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lec6-mp/motion_planning.html">Motion Planning</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lec10/diff-trans.html">Velocity Kinematics</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="../lec11-12/jacobian.html">Jacobian</a></li>
@@ -428,13 +428,13 @@ to decouple the computation into two
 subproblems: (1) find arm singularities for the first
 3 (or more) joints, and (2) find of wrist singularities for the wrist joints (last three joints).</p>
 <p>Let’s see an example. Consider a <span class="math notranslate nohighlight">\(6\)</span>-DoF robot arm (anthropomorphic
-robot arm) in <a class="reference internal" href="#anthropomorphic-manipulator"><span class="std std-numref">Fig. 56</span></a>, where the last 3 joints are
+robot arm) in <a class="reference internal" href="#anthropomorphic-manipulator"><span class="std std-numref">Fig. 54</span></a>, where the last 3 joints are
 revolute (e.g., a spherical wrist).</p>
 <figure class="align-default" id="anthropomorphic-manipulator">
 <a class="reference internal image-reference" href="lec6-8/kinematics/anthropomorphic_manipulator.jpg"><img alt="lec6-8/kinematics/anthropomorphic_manipulator.jpg" src="lec6-8/kinematics/anthropomorphic_manipulator.jpg" style="width: 80%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 56 </span><span class="caption-text">Anthropomorphic robot arm</span><a class="headerlink" href="#anthropomorphic-manipulator" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 54 </span><span class="caption-text">Anthropomorphic robot arm</span><a class="headerlink" href="#anthropomorphic-manipulator" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>The Jacobian can be partitioned into <span class="math notranslate nohighlight">\((2 \times 2)\)</span> block matrix</p>
@@ -501,14 +501,14 @@ determine the arm singularities and wrist singularities, respectively.</p>
 <a class="reference internal image-reference" href="../_images/spherical_wrist_singularity.jpg"><img alt="../_images/spherical_wrist_singularity.jpg" src="../_images/spherical_wrist_singularity.jpg" style="width: 80%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 57 </span><span class="caption-text">Spherical wrist at a singularity</span><a class="headerlink" href="#spherical-wrist-singularity" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 55 </span><span class="caption-text">Spherical wrist at a singularity</span><a class="headerlink" href="#spherical-wrist-singularity" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>In fact, the wrist is at singularity
 whenever the unit vectors
 <span class="math notranslate nohighlight">\(\boldsymbol{z}_{3}, \boldsymbol{z}_{4}, \boldsymbol{z}_{5}\)</span> are
 linearly dependent. The wrist  structure shows that this occurs when <span class="math notranslate nohighlight">\(\boldsymbol{z}_{3}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{z}_{5}\)</span>
-are aligned, which is shown in <a class="reference internal" href="#spherical-wrist-singularity"><span class="std std-numref">Fig. 57</span></a>. That is,</p>
+are aligned, which is shown in <a class="reference internal" href="#spherical-wrist-singularity"><span class="std std-numref">Fig. 55</span></a>. That is,</p>
 <div class="math notranslate nohighlight">
 \[\vartheta_{5}=0 \quad \text{or}\quad \vartheta_{5}=\pi\]</div>
 <p>At wrist singularity, the end-effector loses the rotation mobility  about
@@ -521,7 +521,7 @@ a axis orthogonal to <span class="math notranslate nohighlight">\(\boldsymbol{z}
 \[
 \operatorname{det}\left(\boldsymbol{\bar{J}}_{11}\right)=0
 \]</div>
-<p>Consider the anthropomorphic arm in <a class="reference internal" href="#anthropomorphic-manipulator"><span class="std std-numref">Fig. 56</span></a>.</p>
+<p>Consider the anthropomorphic arm in <a class="reference internal" href="#anthropomorphic-manipulator"><span class="std std-numref">Fig. 54</span></a>.</p>
 <div class="math notranslate nohighlight">
 \[\operatorname{det}\left(\boldsymbol{\bar{J}}_{11}\right)=-a_{2} a_{3}  s_{3}\left(a_{2} c_{2}+a_{3} c_{23}\right)\]</div>
 <p>The determinant vanishes if <span class="math notranslate nohighlight">\(s_{3}=0\)</span> or
@@ -530,25 +530,25 @@ a axis orthogonal to <span class="math notranslate nohighlight">\(\boldsymbol{z}
 singularity. This means that</p>
 <div class="math notranslate nohighlight">
 \[\vartheta_{3}=0 \quad \text{or}\quad  \vartheta_{3}=\pi\]</div>
-<p>showing that the elbow is outstretched or retracted, as in <a class="reference internal" href="#elbow-singularity"><span class="std std-numref">Fig. 58</span></a>. In this singularity, the end-effector will lose the linear motion along the direction of the third link (i.e., the direction
+<p>showing that the elbow is outstretched or retracted, as in <a class="reference internal" href="#elbow-singularity"><span class="std std-numref">Fig. 56</span></a>. In this singularity, the end-effector will lose the linear motion along the direction of the third link (i.e., the direction
 perpendicular to <span class="math notranslate nohighlight">\(\boldsymbol{z}_2\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{z}_0\)</span>).</p>
 <figure class="align-default" id="elbow-singularity">
 <a class="reference internal image-reference" href="../_images/elbow_singularity.jpg"><img alt="../_images/elbow_singularity.jpg" src="../_images/elbow_singularity.jpg" style="width: 70%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 58 </span><span class="caption-text">Anthropomorphic arm at an elbow
+<p><span class="caption-number">Fig. 56 </span><span class="caption-text">Anthropomorphic arm at an elbow
 singularity</span><a class="headerlink" href="#elbow-singularity" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>The case <span class="math notranslate nohighlight">\(\left(a_{2} c_{2}+a_{3} c_{23}\right)=0\)</span> indicates that the wrist point
-lies on axis <span class="math notranslate nohighlight">\(z_{0}\)</span>, as shown in <a class="reference internal" href="#shoulder-singularity"><span class="std std-numref">Fig. 59</span></a>. This is called shoulder singularity. In this singularity, the end-effector loses the linear motion
+lies on axis <span class="math notranslate nohighlight">\(z_{0}\)</span>, as shown in <a class="reference internal" href="#shoulder-singularity"><span class="std std-numref">Fig. 57</span></a>. This is called shoulder singularity. In this singularity, the end-effector loses the linear motion
 along the
 <span class="math notranslate nohighlight">\(z_{1}\)</span> direction.</p>
 <figure class="align-default" id="shoulder-singularity">
 <a class="reference internal image-reference" href="../_images/shoulder_singularity.jpg"><img alt="../_images/shoulder_singularity.jpg" src="../_images/shoulder_singularity.jpg" style="width: 70%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 59 </span><span class="caption-text">Anthropomorphic arm at a shoulder
+<p><span class="caption-number">Fig. 57 </span><span class="caption-text">Anthropomorphic arm at a shoulder
 singularity</span><a class="headerlink" href="#shoulder-singularity" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
@@ -566,7 +566,7 @@ end-effector velocity;
 <span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}}\)</span> is the <span class="math notranslate nohighlight">\((n \times 1)\)</span> vector of joint velocities;
 and <span class="math notranslate nohighlight">\(\boldsymbol{J}\)</span> is  <span class="math notranslate nohighlight">\((r \times n)\)</span> matrix. If <span class="math notranslate nohighlight">\(r&lt;n\)</span>, the robot arm
 is kinematically redundant and there exist <span class="math notranslate nohighlight">\((n-r)\)</span> redundant DOFs.</p>
-<p>Let’s now abstract <a class="reference internal" href="#equation-equ-jacobian-mapping">(22)</a> and understand it from the perspective of linear algebra, as shown in <a class="reference internal" href="#joint-to-operation"><span class="std std-numref">Fig. 60</span></a>.</p>
+<p>Let’s now abstract <a class="reference internal" href="#equation-equ-jacobian-mapping">(22)</a> and understand it from the perspective of linear algebra, as shown in <a class="reference internal" href="#joint-to-operation"><span class="std std-numref">Fig. 58</span></a>.</p>
 <ul class="simple">
 <li><p>The range space of <span class="math notranslate nohighlight">\(\boldsymbol{J}\)</span> is the subspace
 <span class="math notranslate nohighlight">\(\mathcal{R}(\boldsymbol{J})\subseteq \mathbb{R}^r\)</span> of the
@@ -580,7 +580,7 @@ velocities that do not produce any end-effector velocity,  at robot arm configur
 <a class="reference internal image-reference" href="../_images/joint_to_operation.jpg"><img alt="../_images/joint_to_operation.jpg" src="../_images/joint_to_operation.jpg" style="width: 90%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 60 </span><span class="caption-text">Mapping between the joint velocity space and the end-effector velocity
+<p><span class="caption-number">Fig. 58 </span><span class="caption-text">Mapping between the joint velocity space and the end-effector velocity
 space</span><a class="headerlink" href="#joint-to-operation" title="Link to this image">#</a></p>
 </figcaption>
 </figure>

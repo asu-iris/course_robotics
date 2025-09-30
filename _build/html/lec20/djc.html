@@ -179,7 +179,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../lec2-dof/configuration.html">Robot Configuration</a></li>
 
 
-
 <li class="toctree-l1"><a class="reference internal" href="../lec3-basic-kin/basic-kinematics.html">Basic Kinematics</a></li>
 
 
@@ -193,10 +192,10 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="../lec9/ik.html">Inverse Kinematics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lec5-aik/aik.html">Inverse Kinematics</a></li>
 
 
-<li class="toctree-l1"><a class="reference internal" href="../opt/motion_planning.html">Motion Planning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lec6-mp/motion_planning.html">Motion Planning</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lec10/diff-trans.html">Velocity Kinematics</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="../lec11-12/jacobian.html">Jacobian</a></li>
@@ -457,11 +456,11 @@ is a coupling term between different joints.</p>
 <a class="reference internal image-reference" href="../_images/decentralized_control3.jpeg"><img alt="../_images/decentralized_control3.jpeg" src="../_images/decentralized_control3.jpeg" style="width: 99%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 73 </span><span class="caption-text">Dynamics diagram of a motor-driven
+<p><span class="caption-number">Fig. 71 </span><span class="caption-text">Dynamics diagram of a motor-driven
 robot arm.</span><a class="headerlink" href="#decentralized-control3" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>As shown in both <a class="reference internal" href="#equation-equ-decouple-model">(64)</a> and <a class="reference internal" href="#decentralized-control3"><span class="std std-numref">Fig. 73</span></a>, if we ignore the coupling term <span class="math notranslate nohighlight">\(\boldsymbol{D}\)</span>,</p>
+<p>As shown in both <a class="reference internal" href="#equation-equ-decouple-model">(64)</a> and <a class="reference internal" href="#decentralized-control3"><span class="std std-numref">Fig. 71</span></a>, if we ignore the coupling term <span class="math notranslate nohighlight">\(\boldsymbol{D}\)</span>,</p>
 <div class="math notranslate nohighlight">
 \[\boldsymbol{I}_m\boldsymbol{\ddot{q}}_m=\boldsymbol{\tau}_m,\]</div>
 <p>This means that if we ignore  complex term
@@ -494,7 +493,7 @@ control design is to find <span class="math notranslate nohighlight">\(C(s)\)</s
 <a class="reference internal image-reference" href="../_images/fd_control2.jpeg"><img alt="../_images/fd_control2.jpeg" src="../_images/fd_control2.jpeg" style="width: 90%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 74 </span><span class="caption-text">A typical control system diagram</span><a class="headerlink" href="#fd-control2" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 72 </span><span class="caption-text">A typical control system diagram</span><a class="headerlink" href="#fd-control2" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>For the above control system, the forward path transfer function is</p>
@@ -572,7 +571,7 @@ I_m\ddot{\theta}_m+D=\tau_m=I_m\ddot{\theta}_m+\frac{k_t}{R_a}(\frac{DR_a}{k_t})
 <a class="reference internal image-reference" href="../_images/motor_model3.jpeg"><img alt="../_images/motor_model3.jpeg" src="../_images/motor_model3.jpeg" style="width: 80%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 75 </span><span class="caption-text">Diagram of a single motor-joint model, with coupled joint term <span class="math notranslate nohighlight">\(D\)</span>
+<p><span class="caption-number">Fig. 73 </span><span class="caption-text">Diagram of a single motor-joint model, with coupled joint term <span class="math notranslate nohighlight">\(D\)</span>
 treated as disturbance.</span><a class="headerlink" href="#motor-model3" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
@@ -590,12 +589,12 @@ T_m=\frac{R_aI_m}{k_tk_v}
 <p>The  input (<span class="math notranslate nohighlight">\(v_a\)</span>) to output velocity (<span class="math notranslate nohighlight">\(\dot{\theta}_m\)</span>) transfer function is</p>
 <div class="math notranslate nohighlight">
 \[\frac{\dot{\Theta}(s)}{V_a(s)}=\frac{k_m}{1+T_ms}\]</div>
-<p>The single joint system in <a class="reference internal" href="#motor-model3"><span class="std std-numref">Fig. 75</span></a> is the plant <span class="math notranslate nohighlight">\(G(s)\)</span> we want to design the controller <span class="math notranslate nohighlight">\(C(s)\)</span> for.</p>
+<p>The single joint system in <a class="reference internal" href="#motor-model3"><span class="std std-numref">Fig. 73</span></a> is the plant <span class="math notranslate nohighlight">\(G(s)\)</span> we want to design the controller <span class="math notranslate nohighlight">\(C(s)\)</span> for.</p>
 <p></br></br></p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="position-feedback-control-design">
 <h1>Position Feedback Control Design<a class="headerlink" href="#position-feedback-control-design" title="Link to this heading">#</a></h1>
-<p>The transfer function <span class="math notranslate nohighlight">\(G(s)\)</span> for the single joint system (<a class="reference internal" href="#motor-model3"><span class="std std-numref">Fig. 75</span></a>) is in <a class="reference internal" href="#equation-equ-motortf">(68)</a>, rewritten below</p>
+<p>The transfer function <span class="math notranslate nohighlight">\(G(s)\)</span> for the single joint system (<a class="reference internal" href="#motor-model3"><span class="std std-numref">Fig. 73</span></a>) is in <a class="reference internal" href="#equation-equ-motortf">(68)</a>, rewritten below</p>
 <div class="math notranslate nohighlight">
 \[G(s)=\frac{k_m}{s(1+T_ms)}\]</div>
 <p>We want to design a proportional-integral controller</p>
@@ -604,16 +603,16 @@ T_m=\frac{R_aI_m}{k_tk_v}
 C_{P}(s)=K_{P} \frac{1+s T_{P}}{s} 
 \end{gathered}\]</div>
 <p>with <span class="math notranslate nohighlight">\(K_P\)</span> and <span class="math notranslate nohighlight">\(T_P\)</span> are controller parameters.</p>
-<p>The control diagram for the single joint system  (<a class="reference internal" href="#motor-model3"><span class="std std-numref">Fig. 75</span></a>)  is shown below (note that the backward pass
+<p>The control diagram for the single joint system  (<a class="reference internal" href="#motor-model3"><span class="std std-numref">Fig. 73</span></a>)  is shown below (note that the backward pass
 constant <span class="math notranslate nohighlight">\(k_{TP}\)</span> is given and a constant, which can be thought of as the sensor gain).</p>
 <figure class="align-default" id="p-control2">
 <a class="reference internal image-reference" href="../_images/p_control2.jpg"><img alt="../_images/p_control2.jpg" src="../_images/p_control2.jpg" style="width: 99%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 76 </span><span class="caption-text">Control diagram of single-joint system</span><a class="headerlink" href="#p-control2" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 74 </span><span class="caption-text">Control diagram of single-joint system</span><a class="headerlink" href="#p-control2" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>On the diagram <a class="reference internal" href="#p-control2"><span class="std std-numref">Fig. 76</span></a>, the transfer function of the forward path is</p>
+<p>On the diagram <a class="reference internal" href="#p-control2"><span class="std std-numref">Fig. 74</span></a>, the transfer function of the forward path is</p>
 <div class="math notranslate nohighlight">
 \[G(s)C_P(s)=\frac{k_{m} K_{P}\left(1+s T_{P}\right)}{s^{2}\left(1+s T_{m}\right)}\]</div>
 <p>The transfer function of the backward pass is</p>
@@ -658,7 +657,7 @@ Please see my <a class="reference download internal" download="" href="../_downl
 <a class="reference internal image-reference" href="../_images/p_control_rl_1.jpg"><img alt="../_images/p_control_rl_1.jpg" src="../_images/p_control_rl_1.jpg" style="width: 90%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 77 </span><span class="caption-text">Root locus when
+<p><span class="caption-number">Fig. 75 </span><span class="caption-text">Root locus when
 <span class="math notranslate nohighlight">\(T_{P}&lt;T_{m}\)</span></span><a class="headerlink" href="#p-control-rl-1" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
@@ -669,7 +668,7 @@ increases, the absolute value of the real part of the two complex poles, (<span 
 <a class="reference internal image-reference" href="../_images/p_control_rl_2.jpg"><img alt="../_images/p_control_rl_2.jpg" src="../_images/p_control_rl_2.jpg" style="width: 90%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 78 </span><span class="caption-text">Root locus when
+<p><span class="caption-number">Fig. 76 </span><span class="caption-text">Root locus when
 <span class="math notranslate nohighlight">\(T_{P}&gt;T_{m}\)</span></span><a class="headerlink" href="#p-control-rl-2" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
