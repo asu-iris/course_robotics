@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -62,7 +62,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'lec5-aik/aik';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Motion Planning" href="../opt/motion_planning.html" />
+    <link rel="next" title="Motion Planning" href="../lec6-mp/motion_planning.html" />
     <link rel="prev" title="Forward Kinematics" href="../lec4-fk/fk.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -195,8 +195,8 @@
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Inverse Kinematics</a></li>
 
 
-<li class="toctree-l1"><a class="reference internal" href="../opt/motion_planning.html">Motion Planning</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lec10/diff-trans.html">Velocity Kinematics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lec6-mp/motion_planning.html">Motion Planning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lec7-dk/dk.html">Velocity Kinematics</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="../lec11-12/jacobian.html">Jacobian</a></li>
 
@@ -429,11 +429,11 @@ closed-form solution. For more generalized case, we will leave IK in numerical s
 position <span class="math notranslate nohighlight">\((p_{x}, p_{y})\)</span> and the angle <span class="math notranslate nohighlight">\(\phi\)</span> w.r.t. <span class="math notranslate nohighlight">\(x_{0}\)</span>. We
 want to use IK to find the joint variables
 <span class="math notranslate nohighlight">\(\boldsymbol{q}=[\vartheta_{1}, \vartheta_{2}, \vartheta_{3}]\)</span>.</p>
-<p>To achieve so, as shown in <a class="reference internal" href="#link-arm"><span class="std std-numref">Fig. 34</span></a>, we can first identify</p>
+<p>To achieve so, as shown in <a class="reference internal" href="../lec6-mp/motion_planning.html#link-arm"><span class="std std-numref">Fig. 41</span></a>, we can first identify</p>
 <div class="math notranslate nohighlight" id="equation-equ-sum">
 <span class="eqno">(3)<a class="headerlink" href="#equation-equ-sum" title="Link to this equation">#</a></span>\[
     \phi=\vartheta_{1}+\vartheta_{2}+\vartheta_{3}\]</div>
-<p>Also in <a class="reference internal" href="#link-arm"><span class="std std-numref">Fig. 34</span></a>, we can find the position of point <span class="math notranslate nohighlight">\(W\)</span> is</p>
+<p>Also in <a class="reference internal" href="../lec6-mp/motion_planning.html#link-arm"><span class="std std-numref">Fig. 41</span></a>, we can find the position of point <span class="math notranslate nohighlight">\(W\)</span> is</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{aligned}
 &amp; p_{W x}=p_{x}-a_{3} c_{\phi}=a_{1} c_{1}+a_{2} c_{12} \\
@@ -713,7 +713,7 @@ compute</p>
       </div>
     </a>
     <a class="right-next"
-       href="../opt/motion_planning.html"
+       href="../lec6-mp/motion_planning.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>

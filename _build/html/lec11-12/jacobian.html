@@ -63,7 +63,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Singularity &amp; Redundancy" href="../lec13/singularity.html" />
-    <link rel="prev" title="Velocity Kinematics" href="../lec10/diff-trans.html" />
+    <link rel="prev" title="Velocity Kinematics" href="../lec7-dk/dk.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -196,7 +196,7 @@
 
 
 <li class="toctree-l1"><a class="reference internal" href="../lec6-mp/motion_planning.html">Motion Planning</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lec10/diff-trans.html">Velocity Kinematics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lec7-dk/dk.html">Velocity Kinematics</a></li>
 
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Jacobian</a></li>
 
@@ -524,7 +524,7 @@ end-effector when all the other joints hold still. The following derivation is b
 <p>where at the <span class="math notranslate nohighlight">\(i\)</span>-th column,</p>
 <p>if the corresponding joint <span class="math notranslate nohighlight">\(i\)</span> is prismatic joint, then</p>
 <div class="math notranslate nohighlight" id="equation-equ-jac-pris">
-<span class="eqno">(20)<a class="headerlink" href="#equation-equ-jac-pris" title="Link to this equation">#</a></span>\[\begin{split}
+<span class="eqno">(19)<a class="headerlink" href="#equation-equ-jac-pris" title="Link to this equation">#</a></span>\[\begin{split}
 \begin{bmatrix}
 \boldsymbol{J}_{P,i} \\
 \boldsymbol{J}_{O,i}
@@ -536,7 +536,7 @@ end-effector when all the other joints hold still. The following derivation is b
 \end{split}\]</div>
 <p>if the corresponding joint <span class="math notranslate nohighlight">\(i\)</span> is revolute joint, then</p>
 <div class="math notranslate nohighlight" id="equation-equ-jac-revo">
-<span class="eqno">(21)<a class="headerlink" href="#equation-equ-jac-revo" title="Link to this equation">#</a></span>\[\begin{split}
+<span class="eqno">(20)<a class="headerlink" href="#equation-equ-jac-revo" title="Link to this equation">#</a></span>\[\begin{split}
 \begin{bmatrix}
 \boldsymbol{J}_{P,i} \\
 \boldsymbol{J}_{O,i}
@@ -546,7 +546,7 @@ end-effector when all the other joints hold still. The following derivation is b
 \boldsymbol{z}_{i-1}
     \end{bmatrix}
 \end{split}\]</div>
-<p>In the above <a class="reference internal" href="#equation-equ-jac-pris">(20)</a> or <a class="reference internal" href="#equation-equ-jac-revo">(21)</a>, the vectors
+<p>In the above <a class="reference internal" href="#equation-equ-jac-pris">(19)</a> or <a class="reference internal" href="#equation-equ-jac-revo">(20)</a>, the vectors
 <span class="math notranslate nohighlight">\(\boldsymbol{z}_{i-1}, \boldsymbol{p}_{e}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{p}_{i-1}\)</span>
 are all functions of the joint variables, and can be obtained from FK. In particular,</p>
 <ul class="simple">
@@ -811,7 +811,7 @@ parameters in the operational space, say</p>
 \[\boldsymbol{\omega}_{e}=\boldsymbol{N}\left(\phi_{e}\right)\dot{\boldsymbol{\phi}}_{e}\]</div>
 <p>for the Euler ZYZ Angle
 <span class="math notranslate nohighlight">\({\boldsymbol{\phi}}_{e}=[{\varphi}, {\vartheta}, \psi]^T\)</span>.</p>
-<p>Recall the rotation induced from the Euler ZYZ Angle. The angualr velocities <span class="math notranslate nohighlight">\(\dot{\varphi}, \dot{\vartheta}, \dot\psi\)</span> is always with respect to the current frame, as shown in <a class="reference internal" href="#euler-angle-vel"><span class="std std-numref">Fig. 54</span></a>.</p>
+<p>Recall the rotation induced from the Euler ZYZ Angle. The angualr velocities <span class="math notranslate nohighlight">\(\dot{\varphi}, \dot{\vartheta}, \dot\psi\)</span> is always with respect to the current frame, as shown in <a class="reference internal" href="../lec16-17/nik.html#euler-angle-vel"><span class="std std-numref">Fig. 64</span></a>.</p>
 <figure class="align-default" id="euler-angle-vel">
 <a class="reference internal image-reference" href="../_images/Euler_angle_vel.jpg"><img alt="../_images/Euler_angle_vel.jpg" src="../_images/Euler_angle_vel.jpg" style="width: 80%;" />
 </a>
@@ -898,7 +898,7 @@ seen in the following example.</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../lec10/diff-trans.html"
+       href="../lec7-dk/dk.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">

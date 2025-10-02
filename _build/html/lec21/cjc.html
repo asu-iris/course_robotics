@@ -196,7 +196,7 @@
 
 
 <li class="toctree-l1"><a class="reference internal" href="../lec6-mp/motion_planning.html">Motion Planning</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lec10/diff-trans.html">Velocity Kinematics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lec7-dk/dk.html">Velocity Kinematics</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="../lec11-12/jacobian.html">Jacobian</a></li>
 
@@ -410,11 +410,11 @@ compensate for it! This leads to centralized control method in this chapter.</p>
 a robot arm without external end-effector forces and  joint
 friction. The equation of motion of the robot arm  is</p>
 <div class="math notranslate nohighlight" id="equation-equ-cjc-robotarm">
-<span class="eqno">(72)<a class="headerlink" href="#equation-equ-cjc-robotarm" title="Link to this equation">#</a></span>\[
+<span class="eqno">(71)<a class="headerlink" href="#equation-equ-cjc-robotarm" title="Link to this equation">#</a></span>\[
     \boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\boldsymbol{\tau}.\]</div>
 <p>The controller we want to design is</p>
 <div class="math notranslate nohighlight" id="equation-equ-cjc-controller">
-<span class="eqno">(73)<a class="headerlink" href="#equation-equ-cjc-controller" title="Link to this equation">#</a></span>\[
+<span class="eqno">(72)<a class="headerlink" href="#equation-equ-cjc-controller" title="Link to this equation">#</a></span>\[
 \boldsymbol{\tau}=\boldsymbol{u}=\textbf{Controller}(\boldsymbol{q}, \boldsymbol{\dot{q}}, \boldsymbol{q}_d, \boldsymbol{\dot{q}}_d)\]</div>
 <p>i.e., the controller takes as input the robot’s current joint
 position <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span>, joint velocity
@@ -423,14 +423,14 @@ and desired joint velocity <span class="math notranslate nohighlight">\(\boldsym
 joint torque <span class="math notranslate nohighlight">\(\boldsymbol{u}\)</span>.</p>
 <p>Thus, motion of equation of the robot arm with the controller is</p>
 <div class="math notranslate nohighlight" id="equation-equ-cjc-system">
-<span class="eqno">(78)<a class="headerlink" href="#equation-equ-cjc-system" title="Link to this equation">#</a></span>\[
+<span class="eqno">(77)<a class="headerlink" href="#equation-equ-cjc-system" title="Link to this equation">#</a></span>\[
     \boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\textbf{Controller}(\boldsymbol{q}, \boldsymbol{\dot{q}}, \boldsymbol{q}_d, \boldsymbol{\dot{q}}_d)\]</div>
 <p></br> </br> </br></p>
 <section id="pd-control-with-gravity-compensation">
 <h2>PD Control with Gravity Compensation<a class="headerlink" href="#pd-control-with-gravity-compensation" title="Link to this heading">#</a></h2>
 <p>Given a <em>stationary</em> desired joint position <span class="math notranslate nohighlight">\(\boldsymbol{q}_{d}\)</span> (here <span class="math notranslate nohighlight">\(\boldsymbol{\dot q}_{d}=\boldsymbol{0}\)</span>), we want
-to design a controller <a class="reference internal" href="#equation-equ-cjc-controller">(73)</a>, such that given any initial robot configuration,
-say <span class="math notranslate nohighlight">\(\boldsymbol{q}_0\)</span>, the controlled robot arm <a class="reference internal" href="#equation-equ-cjc-system">(78)</a> will eventually reach
+to design a controller <a class="reference internal" href="#equation-equ-cjc-controller">(72)</a>, such that given any initial robot configuration,
+say <span class="math notranslate nohighlight">\(\boldsymbol{q}_0\)</span>, the controlled robot arm <a class="reference internal" href="#equation-equ-cjc-system">(77)</a> will eventually reach
 <span class="math notranslate nohighlight">\(\boldsymbol{q}_{d}\)</span>. If we define the joint error as</p>
 <div class="math notranslate nohighlight">
 \[{\boldsymbol{e}}=\boldsymbol{q}_{d}-\boldsymbol{q}\]</div>
@@ -439,7 +439,7 @@ say <span class="math notranslate nohighlight">\(\boldsymbol{q}_0\)</span>, the 
 \[\boldsymbol{e}(t)\rightarrow \boldsymbol{0}\quad \text{as}\quad
 t\rightarrow \infty.\]</div>
 <p>Below, we will design the controller
-<a class="reference internal" href="#equation-equ-cjc-controller">(73)</a> based on the Lyapunov method (see
+<a class="reference internal" href="#equation-equ-cjc-controller">(72)</a> based on the Lyapunov method (see
 background of Lyapunov method in <a class="reference internal" href="../lec16-17/nik.html#chapter-nik"><span class="std std-ref">Numerical Inverse Kinematics</span></a>).</p>
 <p>First, we take the
 vector <span class="math notranslate nohighlight">\(\begin{bmatrix}\boldsymbol{e}\\
@@ -452,20 +452,20 @@ definite matrix. Differentiating
 <span class="math notranslate nohighlight">\(V(\dot{\boldsymbol{q}}, {\boldsymbol{e}})\)</span> with respect to time, by
 recalling that <span class="math notranslate nohighlight">\(\boldsymbol{q}_{d}\)</span> is constant (<span class="math notranslate nohighlight">\(\boldsymbol{\dot q}_{d}=\boldsymbol{0}\)</span>), yields</p>
 <div class="math notranslate nohighlight" id="equation-equ-cjc-vdot">
-<span class="eqno">(75)<a class="headerlink" href="#equation-equ-cjc-vdot" title="Link to this equation">#</a></span>\[\dot{V}=\dot{\boldsymbol{q}}^{T} \boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\frac{1}{2} \dot{\boldsymbol{q}}^{T} \dot{\boldsymbol{B}}(\boldsymbol{q}) \dot{\boldsymbol{q}}-\dot{\boldsymbol{q}}^{T} \boldsymbol{K}_{P} {\boldsymbol{e}}\]</div>
-<p>From <a class="reference internal" href="#equation-equ-cjc-robotarm">(72)</a>, we can solve for
-<span class="math notranslate nohighlight">\(\boldsymbol{B} \ddot{\boldsymbol{q}}\)</span> and substituting it to <a class="reference internal" href="#equation-equ-cjc-vdot">(75)</a> gives</p>
+<span class="eqno">(74)<a class="headerlink" href="#equation-equ-cjc-vdot" title="Link to this equation">#</a></span>\[\dot{V}=\dot{\boldsymbol{q}}^{T} \boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\frac{1}{2} \dot{\boldsymbol{q}}^{T} \dot{\boldsymbol{B}}(\boldsymbol{q}) \dot{\boldsymbol{q}}-\dot{\boldsymbol{q}}^{T} \boldsymbol{K}_{P} {\boldsymbol{e}}\]</div>
+<p>From <a class="reference internal" href="#equation-equ-cjc-robotarm">(71)</a>, we can solve for
+<span class="math notranslate nohighlight">\(\boldsymbol{B} \ddot{\boldsymbol{q}}\)</span> and substituting it to <a class="reference internal" href="#equation-equ-cjc-vdot">(74)</a> gives</p>
 <div class="math notranslate nohighlight" id="equation-equ-cjc-vdot2">
-<span class="eqno">(76)<a class="headerlink" href="#equation-equ-cjc-vdot2" title="Link to this equation">#</a></span>\[\label{equ.lypuanovdot}
+<span class="eqno">(75)<a class="headerlink" href="#equation-equ-cjc-vdot2" title="Link to this equation">#</a></span>\[\label{equ.lypuanovdot}
     \dot{V}=\frac{1}{2} \underbrace{\dot{\boldsymbol{q}}^{T}(\dot{\boldsymbol{B}}(\boldsymbol{q})-2 \boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}})) \dot{\boldsymbol{q}}}_{0}+\dot{\boldsymbol{q}}^{T}\left(\boldsymbol{u}-\boldsymbol{g}(\boldsymbol{q})-\boldsymbol{K}_{P} {\boldsymbol{e}}\right)\]</div>
 <p>The first term on the right-hand side is zero since the matrix
 <span class="math notranslate nohighlight">\(\dot{\boldsymbol{B}}-2 \boldsymbol{C}\)</span> is a
 skew-symmetric matrix (see in the property of dynamics in <a class="reference internal" href="../lec18/dyn.html#chapter-dyn"><span class="std std-ref">Dynamics</span></a>).
-For the second term to be negative, we can set the controller <a class="reference internal" href="#equation-equ-cjc-controller">(73)</a> as</p>
+For the second term to be negative, we can set the controller <a class="reference internal" href="#equation-equ-cjc-controller">(72)</a> as</p>
 <div class="math notranslate nohighlight" id="equation-equ-cjc-pd">
-<span class="eqno">(77)<a class="headerlink" href="#equation-equ-cjc-pd" title="Link to this equation">#</a></span>\[
+<span class="eqno">(76)<a class="headerlink" href="#equation-equ-cjc-pd" title="Link to this equation">#</a></span>\[
 \boldsymbol{u}=\underbrace{\boldsymbol{g}(\boldsymbol{q})}_{\text{gravitational compensation}}+\underbrace{\boldsymbol{K}_{P} \boldsymbol{e}}_{\text{proportional control}}\quad\underbrace{-\boldsymbol{K}_{D} \dot{\boldsymbol{q}}}_{\text{derivative control}}\]</div>
-<p>with <span class="math notranslate nohighlight">\(\boldsymbol{K}_{D}\)</span> positive definite matrix. The above controller <a class="reference internal" href="#equation-equ-cjc-pd">(77)</a> includes a
+<p>with <span class="math notranslate nohighlight">\(\boldsymbol{K}_{D}\)</span> positive definite matrix. The above controller <a class="reference internal" href="#equation-equ-cjc-pd">(76)</a> includes a
 gravitational compensation term and linear
 proportional-derivative (PD) control term.</p>
 <figure class="align-default" id="pv-control-rl-1">
@@ -476,8 +476,8 @@ proportional-derivative (PD) control term.</p>
 compensation</span><a class="headerlink" href="#pv-control-rl-1" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>With the above controller <a class="reference internal" href="#equation-equ-cjc-pd">(77)</a>, the time derivative of the Lyapunov
-function in <a class="reference internal" href="#equation-equ-cjc-vdot2">(76)</a> becomes</p>
+<p>With the above controller <a class="reference internal" href="#equation-equ-cjc-pd">(76)</a>, the time derivative of the Lyapunov
+function in <a class="reference internal" href="#equation-equ-cjc-vdot2">(75)</a> becomes</p>
 <div class="math notranslate nohighlight">
 \[\dot{V}=-\boldsymbol{\dot{q}}^T\boldsymbol{K}_D\boldsymbol{\dot{q}} \quad &lt;0 \quad \forall \dot{\boldsymbol{q}}  \neq \mathbf{0}\]</div>
 <p>and thus, <span class="math notranslate nohighlight">\(V\)</span> decreases long as <span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}} \neq \mathbf{0}\)</span>
@@ -485,11 +485,11 @@ for all system trajectories. Thus, the robot arm will reach
 an equilibrium configuration, with condition <span class="math notranslate nohighlight">\(\dot{V}= 0\)</span> and
 <span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}}=\mathbf{0}\)</span>.</p>
 <p>To find the equilibrium
-configuration, we look at the robot dynamics under control (by plug the controller <a class="reference internal" href="#equation-equ-cjc-pd">(77)</a> back into <a class="reference internal" href="#equation-equ-cjc-system">(78)</a>)</p>
+configuration, we look at the robot dynamics under control (by plug the controller <a class="reference internal" href="#equation-equ-cjc-pd">(76)</a> back into <a class="reference internal" href="#equation-equ-cjc-system">(77)</a>)</p>
 <div class="math notranslate nohighlight" id="equation-equ-cjc-system">
-<span class="eqno">(78)<a class="headerlink" href="#equation-equ-cjc-system" title="Link to this equation">#</a></span>\[\boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\boldsymbol{g}(\boldsymbol{q})+\boldsymbol{K}_{P} {\boldsymbol{e}}-\boldsymbol{K}_{D} \dot{\boldsymbol{q}}\]</div>
+<span class="eqno">(77)<a class="headerlink" href="#equation-equ-cjc-system" title="Link to this equation">#</a></span>\[\boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\boldsymbol{g}(\boldsymbol{q})+\boldsymbol{K}_{P} {\boldsymbol{e}}-\boldsymbol{K}_{D} \dot{\boldsymbol{q}}\]</div>
 <p>With  <span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}}=\mathbf{0}\)</span>, it follows that
-<span class="math notranslate nohighlight">\(\ddot{\boldsymbol{q}} =\mathbf{0}\)</span>, and then from the above dynamics <a class="reference internal" href="#equation-equ-cjc-system">(78)</a>,
+<span class="math notranslate nohighlight">\(\ddot{\boldsymbol{q}} =\mathbf{0}\)</span>, and then from the above dynamics <a class="reference internal" href="#equation-equ-cjc-system">(77)</a>,
 we have</p>
 <div class="math notranslate nohighlight">
 \[\boldsymbol{K}_{P} {\boldsymbol{e}}=\mathbf{0} \quad\rightarrow\quad {\boldsymbol{e}}=\boldsymbol{q}_{d}-\boldsymbol{q} = \mathbf{0}\]</div>
@@ -505,7 +505,7 @@ $\boldsymbol{g}(\boldsymbol{q})$. -->
 <div class="admonition-summary-pd-control-with-gravity-compensation admonition">
 <p class="admonition-title">Summary: PD Control with Gravity Compensation</p>
 <div class="math notranslate nohighlight" id="equation-equ-cjc-pd2">
-<span class="eqno">(79)<a class="headerlink" href="#equation-equ-cjc-pd2" title="Link to this equation">#</a></span>\[
+<span class="eqno">(78)<a class="headerlink" href="#equation-equ-cjc-pd2" title="Link to this equation">#</a></span>\[
 \boldsymbol{u}=\underbrace{\boldsymbol{g}(\boldsymbol{q})}_{\text{gravitational compensation}}+\underbrace{\boldsymbol{K}_{P} (\boldsymbol{q}_d-\boldsymbol{q})}_{\text{proportional control}}\quad\underbrace{-\boldsymbol{K}_{D} \dot{\boldsymbol{q}}}_{\text{derivative control}}\]</div>
 <p>with <span class="math notranslate nohighlight">\(\boldsymbol{K}_{P}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{K}_{D}\)</span> are positive definite matrices.</p>
 </div>
@@ -517,25 +517,25 @@ $\boldsymbol{g}(\boldsymbol{q})$. -->
 only follow a stationary desired <span class="math notranslate nohighlight">\(\boldsymbol{q}_d\)</span>, but is not good at
 tracking a fast-changing desired joint: i.e.,</p>
 <div class="math notranslate nohighlight" id="equation-equ-joint-signal">
-<span class="eqno">(80)<a class="headerlink" href="#equation-equ-joint-signal" title="Link to this equation">#</a></span>\[
+<span class="eqno">(79)<a class="headerlink" href="#equation-equ-joint-signal" title="Link to this equation">#</a></span>\[
 \boldsymbol{q}_d(t),\quad\text{with} \quad \boldsymbol{\dot{q}}_d(t)\neq\boldsymbol{0} \quad \text{and} \quad \boldsymbol{\ddot{q}}_d(t)\neq\boldsymbol{0}\]</div>
 <p>Inverse dynamics control is  to address the above
-limitation. The idea of inverse dynamics control is to find a controller <a class="reference internal" href="#equation-equ-cjc-controller">(73)</a>
+limitation. The idea of inverse dynamics control is to find a controller <a class="reference internal" href="#equation-equ-cjc-controller">(72)</a>
 that can make the robot arm behave like a mass-spring-damper system.</p>
 <p>To do so, we set the controller
-<a class="reference internal" href="#equation-equ-cjc-controller">(73)</a> as the following  form:</p>
+<a class="reference internal" href="#equation-equ-cjc-controller">(72)</a> as the following  form:</p>
 <div class="math notranslate nohighlight" id="equation-equ-u">
-<span class="eqno">(81)<a class="headerlink" href="#equation-equ-u" title="Link to this equation">#</a></span>\[
+<span class="eqno">(80)<a class="headerlink" href="#equation-equ-u" title="Link to this equation">#</a></span>\[
     \boldsymbol{u}=\boldsymbol{B}(\boldsymbol{q}) \boldsymbol{y}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})\]</div>
-<p>where <span class="math notranslate nohighlight">\(\boldsymbol{y}\)</span> is a new input vector which will be determined later on. Plugging the above controller <a class="reference internal" href="#equation-equ-u">(81)</a> to the robot arm dynamics <a class="reference internal" href="#equation-equ-cjc-robotarm">(72)</a>, the controlled robot arm has the dynamics</p>
+<p>where <span class="math notranslate nohighlight">\(\boldsymbol{y}\)</span> is a new input vector which will be determined later on. Plugging the above controller <a class="reference internal" href="#equation-equ-u">(80)</a> to the robot arm dynamics <a class="reference internal" href="#equation-equ-cjc-robotarm">(71)</a>, the controlled robot arm has the dynamics</p>
 <div class="math notranslate nohighlight">
 \[\boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\boldsymbol{B}(\boldsymbol{q}) \boldsymbol{y}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})\]</div>
 <p>which is simplified to</p>
 <div class="math notranslate nohighlight" id="equation-equ-dyn-new">
-<span class="eqno">(82)<a class="headerlink" href="#equation-equ-dyn-new" title="Link to this equation">#</a></span>\[
+<span class="eqno">(81)<a class="headerlink" href="#equation-equ-dyn-new" title="Link to this equation">#</a></span>\[
 \boldsymbol{\ddot{q}}=\boldsymbol{y}\]</div>
 <p>Again, we will discuss how to set
-this new control input <span class="math notranslate nohighlight">\(\boldsymbol{y}\)</span> later, but <a class="reference internal" href="#equation-equ-dyn-new">(82)</a> shows that the  controller <a class="reference internal" href="#equation-equ-u">(81)</a> leads to a linear relationship between the input
+this new control input <span class="math notranslate nohighlight">\(\boldsymbol{y}\)</span> later, but <a class="reference internal" href="#equation-equ-dyn-new">(81)</a> shows that the  controller <a class="reference internal" href="#equation-equ-u">(80)</a> leads to a linear relationship between the input
 signal <span class="math notranslate nohighlight">\(\boldsymbol{y}\)</span> and the robot arm’s joint acceleration
 <span class="math notranslate nohighlight">\(\ddot{\boldsymbol{q}}\)</span>. The following  diagram exactly shown this</p>
 <figure class="align-default" id="id1">
@@ -547,30 +547,30 @@ control</span><a class="headerlink" href="#id1" title="Link to this image">#</a>
 </figcaption>
 </figure>
 <section id="how-to-choose-the-new-input-boldsymbol-y-in-the-controller-equ-u">
-<h3>How to choose the new input <span class="math notranslate nohighlight">\(\boldsymbol{y}\)</span> in the controller <a class="reference internal" href="#equation-equ-u">(81)</a>?<a class="headerlink" href="#how-to-choose-the-new-input-boldsymbol-y-in-the-controller-equ-u" title="Link to this heading">#</a></h3>
-<p>For the particular form of controller <a class="reference internal" href="#equation-equ-u">(81)</a>, we choose the new input <span class="math notranslate nohighlight">\(\boldsymbol{y}\)</span> as</p>
+<h3>How to choose the new input <span class="math notranslate nohighlight">\(\boldsymbol{y}\)</span> in the controller <a class="reference internal" href="#equation-equ-u">(80)</a>?<a class="headerlink" href="#how-to-choose-the-new-input-boldsymbol-y-in-the-controller-equ-u" title="Link to this heading">#</a></h3>
+<p>For the particular form of controller <a class="reference internal" href="#equation-equ-u">(80)</a>, we choose the new input <span class="math notranslate nohighlight">\(\boldsymbol{y}\)</span> as</p>
 <div class="math notranslate nohighlight" id="equation-equ-y">
-<span class="eqno">(83)<a class="headerlink" href="#equation-equ-y" title="Link to this equation">#</a></span>\[
+<span class="eqno">(82)<a class="headerlink" href="#equation-equ-y" title="Link to this equation">#</a></span>\[
     \boldsymbol{y}=\ddot{\boldsymbol{{q}}}_d+\boldsymbol{K}_{P} ({\boldsymbol{q}}_{d}-\boldsymbol{q})+\boldsymbol{K}_{D} (\dot{\boldsymbol{q}}_{d}-\dot{\boldsymbol{q}})\]</div>
 <p>Here, <span class="math notranslate nohighlight">\(\boldsymbol{K}_{P}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{K}_{D}\)</span> are positive
 definite matrices.</p>
-<p>Plugging the above  <a class="reference internal" href="#equation-equ-y">(83)</a>  into
-<a class="reference internal" href="#equation-equ-dyn-new">(82)</a> leads to</p>
+<p>Plugging the above  <a class="reference internal" href="#equation-equ-y">(82)</a>  into
+<a class="reference internal" href="#equation-equ-dyn-new">(81)</a> leads to</p>
 <div class="math notranslate nohighlight" id="equation-equ-error-dyn2">
-<span class="eqno">(84)<a class="headerlink" href="#equation-equ-error-dyn2" title="Link to this equation">#</a></span>\[
+<span class="eqno">(83)<a class="headerlink" href="#equation-equ-error-dyn2" title="Link to this equation">#</a></span>\[
     (\ddot{\boldsymbol{{q}}}_d-\ddot{\boldsymbol{q}})+\boldsymbol{K}_{P} ({\boldsymbol{q}}_{d}-\boldsymbol{q})+\boldsymbol{K}_{D} (\dot{\boldsymbol{q}}_{d}-\dot{\boldsymbol{q}})=\boldsymbol{0}\]</div>
 <p>Again, if we define the error
 <span class="math notranslate nohighlight">\(\boldsymbol{e}={\boldsymbol{q}}_{d}-{\boldsymbol{q}}\)</span>, the above
-<a class="reference internal" href="#equation-equ-error-dyn">(85)</a> becomes</p>
+<a class="reference internal" href="../lec16-17/nik.html#equation-equ-error-dyn">(23)</a> becomes</p>
 <div class="math notranslate nohighlight" id="equation-equ-error-dyn">
-<span class="eqno">(85)<a class="headerlink" href="#equation-equ-error-dyn" title="Link to this equation">#</a></span>\[
+<span class="eqno">(84)<a class="headerlink" href="#equation-equ-error-dyn" title="Link to this equation">#</a></span>\[
     \ddot{\boldsymbol{e}}+\boldsymbol{K}_{P} \dot{\boldsymbol{e}}+\boldsymbol{K}_{D} {\boldsymbol{e}}=\boldsymbol{0}\]</div>
 <p>which is the error  dynamics. This is a standard second-order error system, where its
 convergence depends on the value of <span class="math notranslate nohighlight">\(\boldsymbol{K}_P\)</span> and
 <span class="math notranslate nohighlight">\(\boldsymbol{K}_D\)</span>.</p>
 <p>Usually, we usually choose</p>
 <div class="math notranslate nohighlight" id="equation-equ-kpkd">
-<span class="eqno">(86)<a class="headerlink" href="#equation-equ-kpkd" title="Link to this equation">#</a></span>\[
+<span class="eqno">(85)<a class="headerlink" href="#equation-equ-kpkd" title="Link to this equation">#</a></span>\[
     \boldsymbol{K}_{P}=\operatorname{diag}\left\{\omega_{1}^{2}, \ldots, \omega_{n}^{2}\right\} \quad \boldsymbol{K}_{D}=\operatorname{diag}\left\{2 \zeta_{1} \omega_{1}, \ldots, 2 \zeta_{n} \omega_{n}\right\}\]</div>
 <p>Then, the controlled robot arm can be viewed as having <span class="math notranslate nohighlight">\(n\)</span>
 decoupled (liner) second-order (mass-spring-damper) subsystems. Here, <span class="math notranslate nohighlight">\(\zeta_i\)</span> is the damping ratio and  <span class="math notranslate nohighlight">\(\omega_{i}\)</span>  the natural frequency  for joint <span class="math notranslate nohighlight">\(i\)</span>. For each joint <span class="math notranslate nohighlight">\(i\)</span>, the error dynamics is</p>

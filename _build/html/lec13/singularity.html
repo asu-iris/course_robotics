@@ -196,7 +196,7 @@
 
 
 <li class="toctree-l1"><a class="reference internal" href="../lec6-mp/motion_planning.html">Motion Planning</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lec10/diff-trans.html">Velocity Kinematics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lec7-dk/dk.html">Velocity Kinematics</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="../lec11-12/jacobian.html">Jacobian</a></li>
 
@@ -560,13 +560,13 @@ singularity</span><a class="headerlink" href="#shoulder-singularity" title="Link
 <p>The Jacobian defines a linear mapping from the joint velocity space
 to the end-effector velocity space:</p>
 <div class="math notranslate nohighlight" id="equation-equ-jacobian-mapping">
-<span class="eqno">(22)<a class="headerlink" href="#equation-equ-jacobian-mapping" title="Link to this equation">#</a></span>\[\boldsymbol{v}_{e}=\boldsymbol{J}(\boldsymbol{q}) \dot{\boldsymbol{q}}\]</div>
+<span class="eqno">(21)<a class="headerlink" href="#equation-equ-jacobian-mapping" title="Link to this equation">#</a></span>\[\boldsymbol{v}_{e}=\boldsymbol{J}(\boldsymbol{q}) \dot{\boldsymbol{q}}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\boldsymbol{v}_{e}\)</span> is the <span class="math notranslate nohighlight">\((r \times 1)\)</span> vector of
 end-effector velocity;
 <span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}}\)</span> is the <span class="math notranslate nohighlight">\((n \times 1)\)</span> vector of joint velocities;
 and <span class="math notranslate nohighlight">\(\boldsymbol{J}\)</span> is  <span class="math notranslate nohighlight">\((r \times n)\)</span> matrix. If <span class="math notranslate nohighlight">\(r&lt;n\)</span>, the robot arm
 is kinematically redundant and there exist <span class="math notranslate nohighlight">\((n-r)\)</span> redundant DOFs.</p>
-<p>Let’s now abstract <a class="reference internal" href="#equation-equ-jacobian-mapping">(22)</a> and understand it from the perspective of linear algebra, as shown in <a class="reference internal" href="#joint-to-operation"><span class="std std-numref">Fig. 59</span></a>.</p>
+<p>Let’s now abstract <a class="reference internal" href="#equation-equ-jacobian-mapping">(21)</a> and understand it from the perspective of linear algebra, as shown in <a class="reference internal" href="#joint-to-operation"><span class="std std-numref">Fig. 59</span></a>.</p>
 <ul class="simple">
 <li><p>The range space of <span class="math notranslate nohighlight">\(\boldsymbol{J}\)</span> is the subspace
 <span class="math notranslate nohighlight">\(\mathcal{R}(\boldsymbol{J})\subseteq \mathbb{R}^r\)</span> of the

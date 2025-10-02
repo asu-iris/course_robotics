@@ -196,7 +196,7 @@
 
 
 <li class="toctree-l1"><a class="reference internal" href="../lec6-mp/motion_planning.html">Motion Planning</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lec10/diff-trans.html">Velocity Kinematics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lec7-dk/dk.html">Velocity Kinematics</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="../lec11-12/jacobian.html">Jacobian</a></li>
 
@@ -418,12 +418,12 @@ document.write(`
 between the desired <span class="math notranslate nohighlight">\(\boldsymbol{x}_{d}\)</span> and the current end-effector
 pose <span class="math notranslate nohighlight">\(\boldsymbol{x}_{e}\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-equ-error">
-<span class="eqno">(23)<a class="headerlink" href="#equation-equ-error" title="Link to this equation">#</a></span>\[\boldsymbol{e}=\boldsymbol{x}_{d}-\boldsymbol{x}_{e}=\boldsymbol{x}_{d}-\boldsymbol{k}(\boldsymbol{q})
+<span class="eqno">(22)<a class="headerlink" href="#equation-equ-error" title="Link to this equation">#</a></span>\[\boldsymbol{e}=\boldsymbol{x}_{d}-\boldsymbol{x}_{e}=\boldsymbol{x}_{d}-\boldsymbol{k}(\boldsymbol{q})
 \]</div>
-<p>Consider the time derivative of <a class="reference internal" href="#equation-equ-error">(23)</a></p>
+<p>Consider the time derivative of <a class="reference internal" href="#equation-equ-error">(22)</a></p>
 <div class="math notranslate nohighlight" id="equation-equ-error-dyn">
-<span class="eqno">(24)<a class="headerlink" href="#equation-equ-error-dyn" title="Link to this equation">#</a></span>\[\dot{\boldsymbol{e}}=\dot{\boldsymbol{x}}_{d}-\dot{\boldsymbol{x}}_{e}=\dot{\boldsymbol{x}}_{d}-\boldsymbol{J}_{A}(\boldsymbol{q}) \dot{\boldsymbol{q}}\]</div>
-<p>The above <a class="reference internal" href="../lec21/cjc.html#equation-equ-error-dyn">(85)</a> is called <em>error dynamics</em>, as it show ODE of end-effector pose error
+<span class="eqno">(23)<a class="headerlink" href="#equation-equ-error-dyn" title="Link to this equation">#</a></span>\[\dot{\boldsymbol{e}}=\dot{\boldsymbol{x}}_{d}-\dot{\boldsymbol{x}}_{e}=\dot{\boldsymbol{x}}_{d}-\boldsymbol{J}_{A}(\boldsymbol{q}) \dot{\boldsymbol{q}}\]</div>
+<p>The above <a class="reference internal" href="#equation-equ-error-dyn">(23)</a> is called <em>error dynamics</em>, as it show ODE of end-effector pose error
 <span class="math notranslate nohighlight">\(\boldsymbol{e}(t)\)</span> over time <span class="math notranslate nohighlight">\(t\)</span>. Here, <span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}}\)</span> can be
 viewed as the control input. From a control perspective, we want to find
 a feedback control law</p>
@@ -452,9 +452,9 @@ is converging to 0.
 Submitting the above controllers into the error dynamics, it easy to
 verify that</p>
 <div class="math notranslate nohighlight" id="equation-equ-method1">
-<span class="eqno">(25)<a class="headerlink" href="#equation-equ-method1" title="Link to this equation">#</a></span>\[\dot{\boldsymbol{e}}+\boldsymbol{K} \boldsymbol{e}=0 .\]</div>
+<span class="eqno">(24)<a class="headerlink" href="#equation-equ-method1" title="Link to this equation">#</a></span>\[\dot{\boldsymbol{e}}+\boldsymbol{K} \boldsymbol{e}=0 .\]</div>
 <p>If <span class="math notranslate nohighlight">\(\boldsymbol{K}\)</span> is a positive definite (usually diagonal) matrix,
-<a class="reference internal" href="#equation-equ-method1">(25)</a> is asymptotically stable. The error tends to zero along the
+<a class="reference internal" href="#equation-equ-method1">(24)</a> is asymptotically stable. The error tends to zero along the
 trajectory with a convergence rate that depends on the eigenvalues of
 <span class="math notranslate nohighlight">\(\boldsymbol{K}\)</span>.</p>
 <div class="admonition-background-from-linear-control-systems-course admonition">
@@ -489,7 +489,7 @@ e^{-\lambda_1t}&amp; &amp; &amp;\\
 <p>The block scheme for the above IK algorithm is shown below (non-redundant robot arm),
 where <span class="math notranslate nohighlight">\(\boldsymbol{k}(\cdot)\)</span> means the direct kinematics function.</p>
 <figure class="align-default" id="ik-jacobian-inverse">
-<a class="reference internal image-reference" href="../_images/IK_jacobian_inverse.jpg"><img alt="../_images/IK_jacobian_inverse.jpg" src="../_images/IK_jacobian_inverse.jpg" style="width: 80%;" />
+<a class="reference internal image-reference" href="lec10/diff_kinematics/IK_jacobian_inverse.jpg"><img alt="lec10/diff_kinematics/IK_jacobian_inverse.jpg" src="lec10/diff_kinematics/IK_jacobian_inverse.jpg" style="width: 80%;" />
 </a>
 <figcaption>
 <p><span class="caption-number">Fig. 62 </span><span class="caption-text">IK algorithm with Jacobian
@@ -501,10 +501,10 @@ inverse</span><a class="headerlink" href="#ik-jacobian-inverse" title="Link to t
 <p>The naming of Newton-Raphson method comes from the perspective of “IK as solving nonlinear equations”</p>
 <p>Specifically, consider the following nonlinear equation from FK</p>
 <div class="math notranslate nohighlight" id="equation-equ-ik-fk">
-<span class="eqno">(26)<a class="headerlink" href="#equation-equ-ik-fk" title="Link to this equation">#</a></span>\[\boldsymbol{k}(\boldsymbol{q})=\boldsymbol{x}_d\]</div>
+<span class="eqno">(25)<a class="headerlink" href="#equation-equ-ik-fk" title="Link to this equation">#</a></span>\[\boldsymbol{k}(\boldsymbol{q})=\boldsymbol{x}_d\]</div>
 <p>given <span class="math notranslate nohighlight">\(\boldsymbol{x}_d\)</span>.</p>
 <p>Assume we have an initial guess <span class="math notranslate nohighlight">\(\boldsymbol{q}_t\)</span>. One
-can approximate <a class="reference internal" href="#equation-equ-ik-fk">(26)</a> at <span class="math notranslate nohighlight">\(\boldsymbol{q}_k\)</span> using the
+can approximate <a class="reference internal" href="#equation-equ-ik-fk">(25)</a> at <span class="math notranslate nohighlight">\(\boldsymbol{q}_k\)</span> using the
 first-order Tyler expension:</p>
 <div class="math notranslate nohighlight">
 \[\boldsymbol{k}(\boldsymbol{q})\approx\boldsymbol{k}(\boldsymbol{q}_t)+\boldsymbol{J}_{A}(\boldsymbol{q}_t)(\boldsymbol{q}-\boldsymbol{q}_t)=\boldsymbol{x}_d\]</div>
@@ -548,7 +548,7 @@ specifically as</p>
 <span class="math notranslate nohighlight">\(t\rightarrow \infty\)</span> (the error is converging).</p>
 </div>
 <p>Consider <span class="math notranslate nohighlight">\(\dot{\boldsymbol{x}}_{d}=\mathbf{0}\)</span>. Let’s use Lyapunov
-function to find controller such that the error dynamics <a class="reference internal" href="../lec21/cjc.html#equation-equ-error-dyn">(85)</a> is
+function to find controller such that the error dynamics <a class="reference internal" href="#equation-equ-error-dyn">(23)</a> is
 stablizing. Let’s choose Lyapunov function</p>
 <div class="math notranslate nohighlight">
 \[V(\boldsymbol{e})=\frac{1}{2} \boldsymbol{e}^{T} \boldsymbol{K} \boldsymbol{e}\]</div>
@@ -571,7 +571,7 @@ choose</p>
 error dynamics will stabilize to <span class="math notranslate nohighlight">\(\boldsymbol{e}=\mathbf{0}\)</span>,
 according to Lyapunov Stablity. The block scheme for the Jacobian transpose IK algorithm is  shown below.</p>
 <figure class="align-default" id="ik-jacobian-transpose">
-<a class="reference internal image-reference" href="../_images/IK_jacobian_transpose.jpg"><img alt="../_images/IK_jacobian_transpose.jpg" src="../_images/IK_jacobian_transpose.jpg" style="width: 80%;" />
+<a class="reference internal image-reference" href="lec10/diff_kinematics/IK_jacobian_transpose.jpg"><img alt="lec10/diff_kinematics/IK_jacobian_transpose.jpg" src="lec10/diff_kinematics/IK_jacobian_transpose.jpg" style="width: 80%;" />
 </a>
 <figcaption>
 <p><span class="caption-number">Fig. 63 </span><span class="caption-text">Block scheme of the inverse kinematics algorithm with Jacobian
@@ -712,7 +712,7 @@ derivative is</p>
 \[\boldsymbol{\omega}_{e}=\boldsymbol{N}\left(\phi_{e}\right)\dot{\boldsymbol{\phi}}_{e}\]</div>
 <p>for the Euler ZYZ Angle
 <span class="math notranslate nohighlight">\({\boldsymbol{\phi}}_{e}=[{\varphi}, {\vartheta}, \psi]^T\)</span>.</p>
-<p>Recall the rotation induced from the Euler ZYZ Angle. The angualr velocities <span class="math notranslate nohighlight">\(\dot{\varphi}, \dot{\vartheta}, \dot\psi\)</span> is always with respect to the current frame, as shown in <a class="reference internal" href="../lec11-12/jacobian.html#euler-angle-vel"><span class="std std-numref">Fig. 54</span></a>.</p>
+<p>Recall the rotation induced from the Euler ZYZ Angle. The angualr velocities <span class="math notranslate nohighlight">\(\dot{\varphi}, \dot{\vartheta}, \dot\psi\)</span> is always with respect to the current frame, as shown in <a class="reference internal" href="#euler-angle-vel"><span class="std std-numref">Fig. 64</span></a>.</p>
 <figure class="align-default" id="euler-angle-vel">
 <a class="reference internal image-reference" href="../_images/Euler_angle_vel.jpg"><img alt="../_images/Euler_angle_vel.jpg" src="../_images/Euler_angle_vel.jpg" style="width: 80%;" />
 </a>

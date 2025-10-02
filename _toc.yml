@@ -12,7 +12,7 @@ parts:
       - file: lec4-fk/fk
       - file: lec5-aik/aik
       - file: lec6-mp/motion_planning
-      - file: lec10/diff-trans
+      - file: lec7-dk/dk
       - file: lec11-12/jacobian
       - file: lec13/singularity
       - file: lec14/statics
