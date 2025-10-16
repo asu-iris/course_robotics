@@ -59,7 +59,7 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'lec11-12/jacobian';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lec8-jac/jac';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Singularity &amp; Redundancy" href="../lec13/singularity.html" />
@@ -288,7 +288,7 @@
       
       
       
-      <li><a href="../_sources/lec11-12/jacobian.md" target="_blank"
+      <li><a href="../_sources/lec8-jac/jac.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -402,15 +402,16 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="jacobian">
 <h1>Jacobian<a class="headerlink" href="#jacobian" title="Link to this heading">#</a></h1>
+<p>Notation convention warning of this lecture: if a vector has no superscript, it means this vector is expressed in the world frame by default; otherwise, the frame the coordinates of this vector is with respect to will be specified on its superscript.</p>
 <p>Recall that FK of a <span class="math notranslate nohighlight">\(n\)</span>-DOF robot arm is</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\boldsymbol{T}_{e}(\boldsymbol{q})=\left[\begin{array}{cc}
 \boldsymbol{R}_{e}(\boldsymbol{q}) &amp; \boldsymbol{p}_{e}(\boldsymbol{q}) \\
 \mathbf{0}^{T} &amp; 1
 \end{array}\right]\end{split}\]</div>
-<p>where <span class="math notranslate nohighlight">\(\boldsymbol{q}=\left[q_{1},\ldots, q_{n}\right]^{T}\)</span>. The concept of
-<em>Jacobian</em> is to find the relationship between the
-joint velocities and the end-effector linear (translational) and angular velocities. In
+<p>where the joint variable vector <span class="math notranslate nohighlight">\(\boldsymbol{q}=\left[q_{1},\ldots, q_{n}\right]^{T}\)</span>. The concept of
+<em>Jacobian</em> is to  the relationship between the
+joint velocities and the end-effector linear  and angular velocities. In
 other words, we want to find the end-effector’s linear velocity
 <span class="math notranslate nohighlight">\(\dot{\boldsymbol{p}}_{e}\)</span> and angular velocity
 <span class="math notranslate nohighlight">\(\boldsymbol{\omega}_{e}\)</span> as a function of the joint velocities
@@ -420,27 +421,24 @@ other words, we want to find the end-effector’s linear velocity
 &amp; \dot{\boldsymbol{p}}_{e}=\boldsymbol{J}_{P}(\boldsymbol{q}) \dot{\boldsymbol{q}} \\
 &amp; \boldsymbol{\omega}_{e}=\boldsymbol{J}_{O}(\boldsymbol{q}) \dot{\boldsymbol{q}}
 \end{aligned}\end{split}\]</div>
-<p>Here, the matrices <span class="math notranslate nohighlight">\(\boldsymbol{J}_{P}(\boldsymbol{q})\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{J}_{O}(\boldsymbol{q})\)</span> are called translational (linear) Jacobian and Angular Jacobian, respectively. Those  matrices (Jacobians) themselves are a function of joint variable <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span>.</p>
-<p>In compact form, we use <span class="math notranslate nohighlight">\(\boldsymbol{v}_{e}\)</span> to describe the six-vector velocity of the end-effector, combining the linear and angular velocities. <span class="math notranslate nohighlight">\(\boldsymbol{v}_{e}\)</span> will be written as</p>
+<p>Here, the matrices <span class="math notranslate nohighlight">\(\boldsymbol{J}_{P}(\boldsymbol{q})\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{J}_{O}(\boldsymbol{q})\)</span> are called  linear Jacobian and angular Jacobian, respectively. Those  matrices themselves are functions of  <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span>.</p>
+<p>In compact form, we use <span class="math notranslate nohighlight">\(\boldsymbol{v}_{e}\)</span> to combine the linear and angular velocities (<span class="math notranslate nohighlight">\(\boldsymbol{v}_{e}\)</span> is often called the twist of the end-effector):</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\boldsymbol{v}_{e}=\left[\begin{array}{c}
 \dot{\boldsymbol{p}}_{e} \\
 \boldsymbol{\omega}_{e}
-\end{array}\right]=\boldsymbol{J}(\boldsymbol{q}) \dot{\boldsymbol{q}}\end{split}\]</div>
-<p>where</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\boldsymbol{J}(\boldsymbol{q})=\left[\begin{array}{l}
+\end{array}\right]=\left[\begin{array}{l}
 \boldsymbol{J}_{P}(\boldsymbol{q}) \\
 \boldsymbol{J}_{O}(\boldsymbol{q})
-\end{array}\right]\end{split}\]</div>
-<p>The stacked <span class="math notranslate nohighlight">\((6 \times n)\)</span> matrix <span class="math notranslate nohighlight">\(\boldsymbol{J}(\boldsymbol{q})\)</span> is sometimes also called geometric Jacobian. And <span class="math notranslate nohighlight">\(\boldsymbol{v}_{e}\)</span> is often called the twist of the end-effector.</p>
+\end{array}\right]\dot{\boldsymbol{q}}=\boldsymbol{J}(\boldsymbol{q}) \dot{\boldsymbol{q}}\end{split}\]</div>
+<p>The stacked <span class="math notranslate nohighlight">\((6 \times n)\)</span> matrix <span class="math notranslate nohighlight">\(\boldsymbol{J}(\boldsymbol{q})\)</span> is  also called geometric Jacobian.</p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="linear-jacobian">
 <h1>Linear Jacobian<a class="headerlink" href="#linear-jacobian" title="Link to this heading">#</a></h1>
 <p>To compute linear Jacobian <span class="math notranslate nohighlight">\(\boldsymbol{J}_{P}(\boldsymbol{q})\)</span>, we can
 write</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\dot{\boldsymbol{p}}_{e}=\boldsymbol{J}_{P}(\boldsymbol{q}) \dot{\boldsymbol{q}}=\sum_{i=1}^{n} \boldsymbol{J}_{P,i} \dot{q}_{i}
+\[\begin{split}\dot{\boldsymbol{p}}_{e}=\boldsymbol{J}_{P}(\boldsymbol{q}) \dot{\boldsymbol{q}}
 =
 \begin{bmatrix}
 \boldsymbol{J}_{P,1} &amp; \boldsymbol{J}_{P,2}&amp; \cdots &amp; \boldsymbol{J}_{P,n}
@@ -448,11 +446,13 @@ write</p>
 \begin{bmatrix}
 \dot{q}_{1} \\ \dot{q}_{2}\\ \vdots \\ \dot{q}_{n}
 \end{bmatrix}
+=
+\sum_{i=1}^{n} \dot{q}_{i}\boldsymbol{J}_{P,i} 
 \end{split}\]</div>
-<p>This expression shows how <span class="math notranslate nohighlight">\(\dot{\boldsymbol{p}}_{e}\)</span> can be obtained as
-the sum of the terms <span class="math notranslate nohighlight">\(\dot{q}_{i} \boldsymbol{J}_{P,i}\)</span>. Each <span class="math notranslate nohighlight">\(\dot{q}_{i} \boldsymbol{J}_{P,i}\)</span>
+<p>Thus, <span class="math notranslate nohighlight">\(\dot{\boldsymbol{p}}_{e}\)</span> is
+the sum of <span class="math notranslate nohighlight">\(\dot{q}_{i} \boldsymbol{J}_{P,i}\)</span>. Each <span class="math notranslate nohighlight">\(\dot{q}_{i} \boldsymbol{J}_{P,i}\)</span>
 represents the contribution of the velocity of Joint <span class="math notranslate nohighlight">\(i\)</span> to the linear velocity of the
-end-effector when all the other joints hold still. The following derivation is based on the  previous velocity kinematics.</p>
+end-effector when all the other joints hold still.</p>
 <p>If Joint <span class="math notranslate nohighlight">\(i\)</span> is prismatic,</p>
 <div class="math notranslate nohighlight">
 \[\dot{q}_{i} \boldsymbol{J}_{P, i}=\dot{d}_{i} \boldsymbol{z}_{i-1}\]</div>
@@ -470,20 +470,19 @@ end-effector when all the other joints hold still. The following derivation is b
 <h1>Angular Jacobian<a class="headerlink" href="#angular-jacobian" title="Link to this heading">#</a></h1>
 <p>To compute angular Jacobian <span class="math notranslate nohighlight">\(\boldsymbol{J}_{O}(\boldsymbol{q})\)</span>, we can write</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\boldsymbol{\omega}_{e}=\sum_{i=1}^{n} \boldsymbol{J}_{O, i} \dot{q}_{i}
+\[\begin{split}\boldsymbol{\omega}_{e}
 =
 \begin{bmatrix}
 \boldsymbol{J}_{O,1} &amp; \boldsymbol{J}_{O,2}&amp; \cdots &amp; \boldsymbol{J}_{O,n}
 \end{bmatrix}
 \begin{bmatrix}
 \dot{q}_{1} \\ \dot{q}_{2}\\ \vdots \\ \dot{q}_{n}
-\end{bmatrix}
+\end{bmatrix}=\sum_{i=1}^{n} \dot{q}_{i}\boldsymbol{J}_{O, i} 
 \end{split}\]</div>
-<!-- \sum_{i=1}^{n} \boldsymbol{\omega}_{i-1, i}= -->
-<p>This expression shows how <span class="math notranslate nohighlight">\(\dot{\boldsymbol{p}}_{e}\)</span> can be obtained as
+<p><span class="math notranslate nohighlight">\(\dot{\boldsymbol{\omega}}_{e}\)</span> is
 the sum of the terms <span class="math notranslate nohighlight">\(\dot{q}_{i} \boldsymbol{J}_{O,i}\)</span>. Each <span class="math notranslate nohighlight">\(\dot{q}_{i} \boldsymbol{J}_{O,i}\)</span>
-represents the contribution of the velocity of Joint <span class="math notranslate nohighlight">\(i\)</span> to the angular velocity of the
-end-effector when all the other joints hold still. The following derivation is based on the  previous velocity kinematics.</p>
+is the contribution of the velocity of Joint <span class="math notranslate nohighlight">\(i\)</span> to the angular velocity of the
+end-effector when all the other joints hold still.</p>
 <p>If Joint <span class="math notranslate nohighlight">\(i\)</span> is prismatic, it is</p>
 <div class="math notranslate nohighlight">
 \[\dot{q}_{i} \boldsymbol{J}_{O,i}=\mathbf{0}\]</div>
@@ -512,7 +511,7 @@ end-effector when all the other joints hold still. The following derivation is b
 \dot{q}_{1} \\ \dot{q}_{2}\\ \vdots \\ \dot{q}_{n}
 \end{bmatrix}
 \end{split}\]</div>
-<p>Here, Jacobian can be partitioned into</p>
+<p>Here, Jacobian is</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\boldsymbol{J}(\boldsymbol{q})=
 \begin{bmatrix}
@@ -521,8 +520,7 @@ end-effector when all the other joints hold still. The following derivation is b
 \end{bmatrix}
 \
 \end{split}\]</div>
-<p>where at the <span class="math notranslate nohighlight">\(i\)</span>-th column,</p>
-<p>if the corresponding joint <span class="math notranslate nohighlight">\(i\)</span> is prismatic joint, then</p>
+<p>For the <span class="math notranslate nohighlight">\(i\)</span>-th column, if the joint <span class="math notranslate nohighlight">\(i\)</span> is prismatic, then</p>
 <div class="math notranslate nohighlight" id="equation-equ-jac-pris">
 <span class="eqno">(19)<a class="headerlink" href="#equation-equ-jac-pris" title="Link to this equation">#</a></span>\[\begin{split}
 \begin{bmatrix}
@@ -534,7 +532,7 @@ end-effector when all the other joints hold still. The following derivation is b
 \mathbf{0}
     \end{bmatrix}
 \end{split}\]</div>
-<p>if the corresponding joint <span class="math notranslate nohighlight">\(i\)</span> is revolute joint, then</p>
+<p>if the joint <span class="math notranslate nohighlight">\(i\)</span> is revolute joint, then</p>
 <div class="math notranslate nohighlight" id="equation-equ-jac-revo">
 <span class="eqno">(20)<a class="headerlink" href="#equation-equ-jac-revo" title="Link to this equation">#</a></span>\[\begin{split}
 \begin{bmatrix}
@@ -546,27 +544,25 @@ end-effector when all the other joints hold still. The following derivation is b
 \boldsymbol{z}_{i-1}
     \end{bmatrix}
 \end{split}\]</div>
-<p>In the above <a class="reference internal" href="#equation-equ-jac-pris">(19)</a> or <a class="reference internal" href="#equation-equ-jac-revo">(20)</a>, the vectors
+<p>In  above <a class="reference internal" href="#equation-equ-jac-pris">(19)</a> or <a class="reference internal" href="#equation-equ-jac-revo">(20)</a>,
 <span class="math notranslate nohighlight">\(\boldsymbol{z}_{i-1}, \boldsymbol{p}_{e}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{p}_{i-1}\)</span>
-are all functions of the joint variables, and can be obtained from FK. In particular,</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\boldsymbol{z}_{i-1}\)</span> is given by the third column of
-the rotation matrix</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[\boldsymbol{R}_{i-1}^{0}=\boldsymbol{R}_{1}^{0}\left(q_{1}\right) \ldots \boldsymbol{R}_{i-1}^{i-2}\left(q_{i-1}\right)\]</div>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\boldsymbol{p}_{e}\)</span> is the
-first three elements of the fourth column of the transformation matrix</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[\boldsymbol{T}_{e}^{0}=\boldsymbol{T}_{1}^{0}\left(q_{1}\right) \ldots \boldsymbol{T}_{n}^{n-1}\left(q_{n}\right)\boldsymbol{T}_{e}^{n}\]</div>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\boldsymbol{p}_{i-1}\)</span> is the
-first three elements of the fourth column of the transformation matrix</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[\boldsymbol{T}_{i-1}^{0}=\boldsymbol{T}_{1}^{0}\left(q_{1}\right) \ldots \boldsymbol{T}_{i-1}^{i-2}\left(q_{i-1}\right).\]</div>
+can be obtained from FK.</p>
+<!-- In particular, 
+
+- $\boldsymbol{z}_{i-1}$ is given by the third column of
+the rotation matrix 
+
+$$\boldsymbol{R}_{i-1}^{0}=\boldsymbol{R}_{1}^{0}\left(q_{1}\right) \ldots \boldsymbol{R}_{i-1}^{i-2}\left(q_{i-1}\right)$$
+
+ - $\boldsymbol{p}_{e}$ is the
+first three elements of the fourth column of the transformation matrix
+
+$$\boldsymbol{T}_{e}^{0}=\boldsymbol{T}_{1}^{0}\left(q_{1}\right) \ldots \boldsymbol{T}_{n}^{n-1}\left(q_{n}\right)\boldsymbol{T}_{e}^{n}$$
+
+- $\boldsymbol{p}_{i-1}$ is the
+first three elements of the fourth column of the transformation matrix
+
+$$\boldsymbol{T}_{i-1}^{0}=\boldsymbol{T}_{1}^{0}\left(q_{1}\right) \ldots \boldsymbol{T}_{i-1}^{i-2}\left(q_{i-1}\right).$$ -->
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="examples">
@@ -576,7 +572,7 @@ first three elements of the fourth column of the transformation matrix</p></li>
 <div class="sd-card-title sd-font-weight-bold docutils">
 Three-link Planar Arm</div>
 <figure class="align-default" id="link-arm">
-<a class="reference internal image-reference" href="lec6-8/kinematics/3link_arm.jpg"><img alt="lec6-8/kinematics/3link_arm.jpg" src="lec6-8/kinematics/3link_arm.jpg" style="width: 60%;" />
+<a class="reference internal image-reference" href="../_images/3link_arm2.jpg"><img alt="../_images/3link_arm2.jpg" src="../_images/3link_arm2.jpg" style="width: 60%;" />
 </a>
 </figure>
 <p class="sd-card-text">The Jacobian formula is</p>
@@ -630,7 +626,7 @@ a_{1} c_{1}+a_{2} c_{12}+a_{3} c_{123} &amp; a_{2} c_{12}+a_{3} c_{123} &amp; a_
 <div class="sd-card-title sd-font-weight-bold docutils">
 Anthropomorphic Arm</div>
 <figure class="align-default" id="anthropomorphic-arm">
-<a class="reference internal image-reference" href="lec6-8/kinematics/anthropomorphic_arm.jpg"><img alt="lec6-8/kinematics/anthropomorphic_arm.jpg" src="lec6-8/kinematics/anthropomorphic_arm.jpg" style="width: 70%;" />
+<a class="reference internal image-reference" href="../_images/anthropomorphic_arm2.jpg"><img alt="../_images/anthropomorphic_arm2.jpg" src="../_images/anthropomorphic_arm2.jpg" style="width: 70%;" />
 </a>
 </figure>
 <p class="sd-card-text">The Jacobian formula is</p>
@@ -749,20 +745,20 @@ Final assembly is too large to fit here.
 <section class="tex2jax_ignore mathjax_ignore" id="analytical-jacobian-optional">
 <h1>Analytical Jacobian (Optional)<a class="headerlink" href="#analytical-jacobian-optional" title="Link to this heading">#</a></h1>
 <p>The above derived Jacobian is a mapping from joint velocities to the
-end-effector linear and angular velocity</p>
+end-effector’s linear and angular velocity</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\boldsymbol{v}_{e}=\left[\begin{array}{c}
 \dot{\boldsymbol{p}}_{e} \\
 \boldsymbol{\omega}_{e}
 \end{array}\right]=\boldsymbol{J}(\boldsymbol{q}) \dot{\boldsymbol{q}}\end{split}\]</div>
-<p>If the end-effector pose is specified in terms of a minimal number of
-parameters in the operational space, say</p>
+<p>If the end-effector’s orientation is specified in terms of a minimal number of
+parameters instead of rotation matrix, say</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}{\boldsymbol{x}}_{e}=\left[\begin{array}{c}
 {\boldsymbol{p}}_{e} \\
 {\boldsymbol{\phi}}_{e}
 \end{array}\right]\end{split}\]</div>
-<p>we need to find a Jacobian in terms of</p>
+<p>we need to find a Jacobian</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\dot{\boldsymbol{x}}_{e}=\left[\begin{array}{c}
 \dot{\boldsymbol{p}}_{e} \\
@@ -775,7 +771,7 @@ parameters in the operational space, say</p>
 \end{bmatrix}
 \dot{\boldsymbol{q}}
 \end{split}\]</div>
-<p>As you can see, the linear Jacobian remains the same as before, the only difference is the angular Jacobian <span class="math notranslate nohighlight">\(\boldsymbol{J}_{O}(\boldsymbol{q})\)</span> becomes</p>
+<p>Here, the linear Jacobian remains the same as before, the only difference is the angular Jacobian <span class="math notranslate nohighlight">\(\boldsymbol{J}_{O}(\boldsymbol{q})\)</span> becomes</p>
 <div class="math notranslate nohighlight">
 \[
 \dot{\boldsymbol{\phi}}_{e}=
@@ -790,7 +786,7 @@ parameters in the operational space, say</p>
 \end{bmatrix}
 \end{split}\]</div>
 <p>the <em>analytical Jacobian</em>(recall <span class="math notranslate nohighlight">\(\boldsymbol{J}\)</span> is called geometrical Jacobian or Jacobian).</p>
-<p>Next question, how do we find <span class="math notranslate nohighlight">\(\boldsymbol{J}_{A}(\boldsymbol{q})\)</span> from <span class="math notranslate nohighlight">\(\boldsymbol{J}\)</span>? To do so,  we may need find a mapping</p>
+<p>How do we find <span class="math notranslate nohighlight">\(\boldsymbol{J}_{A}(\boldsymbol{q})\)</span> from <span class="math notranslate nohighlight">\(\boldsymbol{J}\)</span>? To do so,  we  need  a mapping</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\left[\begin{array}{c}
 \dot{\boldsymbol{p}}_{e} \\
@@ -811,7 +807,7 @@ parameters in the operational space, say</p>
 \[\boldsymbol{\omega}_{e}=\boldsymbol{N}\left(\phi_{e}\right)\dot{\boldsymbol{\phi}}_{e}\]</div>
 <p>for the Euler ZYZ Angle
 <span class="math notranslate nohighlight">\({\boldsymbol{\phi}}_{e}=[{\varphi}, {\vartheta}, \psi]^T\)</span>.</p>
-<p>Recall the rotation induced from the Euler ZYZ Angle. The angualr velocities <span class="math notranslate nohighlight">\(\dot{\varphi}, \dot{\vartheta}, \dot\psi\)</span> is always with respect to the current frame, as shown in <a class="reference internal" href="../lec16-17/nik.html#euler-angle-vel"><span class="std std-numref">Fig. 64</span></a>.</p>
+<p>Recall the rotation induced from the Euler ZYZ Angle. The angualr velocities <span class="math notranslate nohighlight">\(\dot{\varphi}, \dot{\vartheta}, \dot\psi\)</span> is always with respect to the current frame, as shown in <a class="reference internal" href="#euler-angle-vel"><span class="std std-numref">Fig. 54</span></a>.</p>
 <figure class="align-default" id="euler-angle-vel">
 <a class="reference internal image-reference" href="../_images/Euler_angle_vel.jpg"><img alt="../_images/Euler_angle_vel.jpg" src="../_images/Euler_angle_vel.jpg" style="width: 80%;" />
 </a>
@@ -852,19 +848,18 @@ velocity
 0 &amp; c_{\varphi} &amp; s_{\varphi} s_{\vartheta} \\
 1 &amp; 0 &amp; c_{\vartheta}
 \end{array}\right] .\end{split}\]</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Takeaway: From a physical viewpoint, the meaning of <span class="math notranslate nohighlight">\(\omega_{e}\)</span> is
-more intuitive than that of <span class="math notranslate nohighlight">\(\dot{\boldsymbol{\phi}}_{e}\)</span>. The three
-components of <span class="math notranslate nohighlight">\(\boldsymbol{\omega}_{e}\)</span> represent the components of
+<!-- ```{note}
+Takeaway: From a physical viewpoint, the meaning of $\omega_{e}$ is
+more intuitive than that of $\dot{\boldsymbol{\phi}}_{e}$. The three
+components of $\boldsymbol{\omega}_{e}$ represent the components of
 angular velocity with respect to the base frame. Instead, the three
-elements of <span class="math notranslate nohighlight">\(\dot{\phi}_{e}\)</span> represent nonorthogonal components of
+elements of $\dot{\phi}_{e}$ represent nonorthogonal components of
 angular velocity defined with respect to the axes of a frame that varies
 as the end-effector orientation varies. On the other hand, while the
-integral of <span class="math notranslate nohighlight">\(\dot{\phi}_{e}\)</span> over time gives <span class="math notranslate nohighlight">\(\phi_{e}\)</span>, the integral of
-<span class="math notranslate nohighlight">\(\omega_{e}\)</span> does not admit a clear physical interpretation, as can be
-seen in the following example.</p>
-</div>
+integral of $\dot{\phi}_{e}$ over time gives $\phi_{e}$, the integral of
+$\omega_{e}$ does not admit a clear physical interpretation, as can be
+seen in the following example.
+``` -->
 </section>
 
     <script type="text/x-thebe-config">
@@ -880,7 +875,7 @@ seen in the following example.</p>
         },
         kernelOptions: {
             name: "python3",
-            path: "./lec11-12"
+            path: "./lec8-jac"
         },
         predefinedOutput: true
     }

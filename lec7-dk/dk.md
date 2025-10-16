@@ -107,21 +107,6 @@ In  {eq}`equ.vkin1`, when  $P$ is moving on the body,  it will have a local velo
 
 
 
-<!-- Since
-$\boldsymbol{R}_{1}^{0} \boldsymbol{p}^{1}=\boldsymbol{p}^{0}$ and $\boldsymbol{S}\left(\boldsymbol{\omega}_{1}^{0}\right)=[\omega_{1}^{0} \times] $, the above equation {eq}`equ.vkin1` becomes
-
-$$\dot{\boldsymbol{p}}^{0}=\dot{\boldsymbol{o}}_{1}^{0}+\boldsymbol{R}_{1}^{0} \dot{\boldsymbol{p}}^{1}+\omega_{1}^{0} \times \boldsymbol{p}^{0}$$(equ.vkin2) -->
-
-
-
-<!-- Here are some explaination of each term on the right side of {eq}`equ.vkin2`:
-* $\dot{\boldsymbol{o}}_{1}^{0}$ is the contribution to point $P$'s total velocity (in reference frame) by the translation of body frame.
-
-* $\boldsymbol{R}_{1}^{0} \dot{\boldsymbol{p}}^{1}$ is the contribution to point $P$'s total velocity (in reference frame)  by the local movement of $P$ on the body frame. Here, $\dot{\boldsymbol{p}}^{1}$ is the local velocity in the body frame, and $\boldsymbol{R}_{1}^{0} \dot{\boldsymbol{p}}^{1}$ is the transformed local velocity to the reference frame.
-
-* $\boldsymbol{S}\left(\boldsymbol{\omega}_{1}^{0}\right) \boldsymbol{R}_{1}^{0} \boldsymbol{p}^{1}=\omega_{1}^{0} \times \boldsymbol{p}^{0}$ is the contribution to point $P$'s total velocity by the rotation of the body frame. -->
-
-
 
 Notice that, if $\boldsymbol{p}^{1}$ is fixed in the moving body frame , {eq}`equ.vkin1` becomes
 
@@ -237,16 +222,15 @@ $$\boldsymbol{\omega}_{i}=\boldsymbol{\omega}_{i-1}+\boldsymbol{R}_{i-1} \boldsy
 
 Thus,  the angular velocity $\boldsymbol{\omega}_{i}$ of Link $i$ depends only on the angular velocity $\boldsymbol{\omega}_{i-1}$ of Link $i-1$ and their relative angular velocity $\boldsymbol{\omega}_{i-1, i}$.
 
+**If Joint $i$ is revolute**
 
-If joint $i$ is revolute joint, 
 
 $$
 \boldsymbol{\omega}_{i}  =\boldsymbol{\omega}_{i-1}+\dot{\vartheta}_{i} \boldsymbol{z}_{i-1}
 $$
 
 
-
-If joint $i$ is prismatic. 
+**If Joint $i$ is prismatic**
 
 $$
 \boldsymbol{\omega}_{i}  =\boldsymbol{\omega}_{i-1}
@@ -261,9 +245,6 @@ $$
 
 
 ## Summary
-
-Considering different joint types for Joint $i$ at a robot arm, according to {eq}`equ.linki_pos_vel` and {eq}`equ.linki_rot_vel3`, we can obtain
-
 
 :::{important}
 **If Joint $i$ is prismatic**

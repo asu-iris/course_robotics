@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -62,7 +62,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'lec7-dk/dk';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Jacobian" href="../lec11-12/jacobian.html" />
+    <link rel="next" title="Singularity &amp; Redundancy" href="../lec13/singularity.html" />
     <link rel="prev" title="Motion Planning" href="../lec6-mp/motion_planning.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -197,12 +197,6 @@
 
 <li class="toctree-l1"><a class="reference internal" href="../lec6-mp/motion_planning.html">Motion Planning</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Velocity Kinematics</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="../lec11-12/jacobian.html">Jacobian</a></li>
-
-
-
-
 
 <li class="toctree-l1"><a class="reference internal" href="../lec13/singularity.html">Singularity &amp; Redundancy</a></li>
 
@@ -478,16 +472,6 @@ the derivative to  both sides of <a class="reference internal" href="#equation-e
 \end{aligned}
 \end{split}\]</div>
 <p>In  <a class="reference internal" href="#equation-equ-vkin1">(10)</a>, when  <span class="math notranslate nohighlight">\(P\)</span> is moving on the body,  it will have a local velocity <span class="math notranslate nohighlight">\(\dot{{\boldsymbol{p}}}^{1}\)</span> in the <em>in the body frame</em>.  Note that the second line is derived due to <span class="math notranslate nohighlight">\(\boldsymbol{R}_{1}^{0} \boldsymbol{p}^{1}=\boldsymbol{p}^{0}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{S}\left(\boldsymbol{\omega}_{1}^{0}\right)=[\omega_{1}^{0} \times] \)</span>.</p>
-<!-- Since
-$\boldsymbol{R}_{1}^{0} \boldsymbol{p}^{1}=\boldsymbol{p}^{0}$ and $\boldsymbol{S}\left(\boldsymbol{\omega}_{1}^{0}\right)=[\omega_{1}^{0} \times] $, the above equation {eq}`equ.vkin1` becomes
-
-$$\dot{\boldsymbol{p}}^{0}=\dot{\boldsymbol{o}}_{1}^{0}+\boldsymbol{R}_{1}^{0} \dot{\boldsymbol{p}}^{1}+\omega_{1}^{0} \times \boldsymbol{p}^{0}$$(equ.vkin2) -->
-<!-- Here are some explaination of each term on the right side of {eq}`equ.vkin2`:
-* $\dot{\boldsymbol{o}}_{1}^{0}$ is the contribution to point $P$'s total velocity (in reference frame) by the translation of body frame.
-
-* $\boldsymbol{R}_{1}^{0} \dot{\boldsymbol{p}}^{1}$ is the contribution to point $P$'s total velocity (in reference frame)  by the local movement of $P$ on the body frame. Here, $\dot{\boldsymbol{p}}^{1}$ is the local velocity in the body frame, and $\boldsymbol{R}_{1}^{0} \dot{\boldsymbol{p}}^{1}$ is the transformed local velocity to the reference frame.
-
-* $\boldsymbol{S}\left(\boldsymbol{\omega}_{1}^{0}\right) \boldsymbol{R}_{1}^{0} \boldsymbol{p}^{1}=\omega_{1}^{0} \times \boldsymbol{p}^{0}$ is the contribution to point $P$'s total velocity by the rotation of the body frame. -->
 <p>Notice that, if <span class="math notranslate nohighlight">\(\boldsymbol{p}^{1}\)</span> is fixed in the moving body frame , <a class="reference internal" href="#equation-equ-vkin1">(10)</a> becomes</p>
 <div class="math notranslate nohighlight">
 \[\dot{\boldsymbol{p}}^{0}=\dot{\boldsymbol{o}}_{1}^{0}+\boldsymbol{\omega}_{1}^{0} \times \boldsymbol{p}^{0}\]</div>
@@ -563,12 +547,12 @@ second term on the right-hand side of <a class="reference internal" href="#equat
 <div class="math notranslate nohighlight" id="equation-equ-linki-rot-vel3">
 <span class="eqno">(18)<a class="headerlink" href="#equation-equ-linki-rot-vel3" title="Link to this equation">#</a></span>\[\boldsymbol{\omega}_{i}=\boldsymbol{\omega}_{i-1}+\boldsymbol{R}_{i-1} \boldsymbol{\omega}_{i-1, i}^{i-1}=\boldsymbol{\omega}_{i-1}+\boldsymbol{\omega}_{i-1, i}\]</div>
 <p>Thus,  the angular velocity <span class="math notranslate nohighlight">\(\boldsymbol{\omega}_{i}\)</span> of Link <span class="math notranslate nohighlight">\(i\)</span> depends only on the angular velocity <span class="math notranslate nohighlight">\(\boldsymbol{\omega}_{i-1}\)</span> of Link <span class="math notranslate nohighlight">\(i-1\)</span> and their relative angular velocity <span class="math notranslate nohighlight">\(\boldsymbol{\omega}_{i-1, i}\)</span>.</p>
-<p>If joint <span class="math notranslate nohighlight">\(i\)</span> is revolute joint,</p>
+<p><strong>If Joint <span class="math notranslate nohighlight">\(i\)</span> is revolute</strong></p>
 <div class="math notranslate nohighlight">
 \[
 \boldsymbol{\omega}_{i}  =\boldsymbol{\omega}_{i-1}+\dot{\vartheta}_{i} \boldsymbol{z}_{i-1}
 \]</div>
-<p>If joint <span class="math notranslate nohighlight">\(i\)</span> is prismatic.</p>
+<p><strong>If Joint <span class="math notranslate nohighlight">\(i\)</span> is prismatic</strong></p>
 <div class="math notranslate nohighlight">
 \[
 \boldsymbol{\omega}_{i}  =\boldsymbol{\omega}_{i-1}
@@ -576,7 +560,6 @@ second term on the right-hand side of <a class="reference internal" href="#equat
 </section>
 <section id="summary">
 <h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
-<p>Considering different joint types for Joint <span class="math notranslate nohighlight">\(i\)</span> at a robot arm, according to <a class="reference internal" href="#equation-equ-linki-pos-vel">(12)</a> and <a class="reference internal" href="#equation-equ-linki-rot-vel3">(18)</a>, we can obtain</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p><strong>If Joint <span class="math notranslate nohighlight">\(i\)</span> is prismatic</strong></p>
@@ -635,11 +618,11 @@ second term on the right-hand side of <a class="reference internal" href="#equat
       </div>
     </a>
     <a class="right-next"
-       href="../lec11-12/jacobian.html"
+       href="../lec13/singularity.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Jacobian</p>
+        <p class="prev-next-title">Singularity &amp; Redundancy</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
