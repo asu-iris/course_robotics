@@ -7,7 +7,7 @@ title: "Lecture 13: Singularity and Redundancy"
 
 # Singularity & Redundancy
 
-The Jacobian of a robot arm defines
+The Jacobian of a robot arm is defined as
 
 $$\boldsymbol{v}_{e}=\boldsymbol{J}(\boldsymbol{q}) \dot{\boldsymbol{q}}$$
 
@@ -15,8 +15,12 @@ between joint velocity $\dot{\boldsymbol{q}}$ and the end-effector
 velocity
 $\boldsymbol{v}_{e}=\left[\begin{array}{ll}\dot{\boldsymbol{p}}_{e}^{T} & \boldsymbol{\omega}_{e}^{T}\end{array}\right]^{T}$.
 Jacobian is a function of the configuration $\boldsymbol{q}$. We call the 
-configurations $\boldsymbol{q}$ at which $\boldsymbol{J}(\boldsymbol{q})$ is rank-deficient as
+configurations $\boldsymbol{q}$ at which $\boldsymbol{J}(\boldsymbol{q})$ is rank-deficient  as
 __singularity__. Or, we say the robot is at singularity.
+
+Formally, for a non-redundant ($n=r$) or redundant ($n> r$) robot arm ($r$ is the dimension of the end-effector task space, $n$ is the dimension of the joint space), a  singularity occurs when the Jacobian matrix $\boldsymbol{J}(\boldsymbol{q})$ loses ranks:
+
+$$ \text{rank}(\boldsymbol{J}(\boldsymbol{q})) < r$$
 
 Here are reasons why we need to care about
 singularities?
@@ -29,19 +33,21 @@ singularities?
 </br>
 
 # Singularity Decoupling
-
-Computing singularity configurations based on definition (i.e. find  $\boldsymbol{q}$ such that the  determinant of a Jacobian is zero if it is a square matrix) may
+Computing singularity configurations based on definition (i.e. find  $\boldsymbol{q}$ such that $ \text{rank}(\boldsymbol{J}(\boldsymbol{q})) < m$) can
 be  complex. However, for robot arms having a spherical wrist, it is possible
 to decouple the computation into two 
 subproblems: (1) find arm singularities for the first
 3 (or more) joints, and (2) find of wrist singularities for the wrist joints (last three joints).
 
-Let's see an example. Consider a $6$-DoF robot arm (anthropomorphic
+Let's see an example of a non-redundant ($r=n=6$) robot arm. Consider a $6$-DoF robot arm (anthropomorphic
 robot arm) in {numref}`anthropomorphic_manipulator`, where the last 3 joints are 
-revolute (e.g., a spherical wrist).
+revolute (e.g., a spherical wrist). Note that the Frame 6 is the end-effector frame $\boldsymbol{p}_{6}=\boldsymbol{p}_{e}$.
 
 
-```{figure} ../lec6-8/kinematics/anthropomorphic_manipulator.jpg
+
+
+
+```{figure} ./singu/anthropomorphic_manipulator.jpg
 ---
 width: 80%
 name: anthropomorphic_manipulator
@@ -63,10 +69,10 @@ with
 $$\begin{equation}
 \begin{aligned}
 \boldsymbol{J}_{11}&=\left[\begin{array}{ccc}
-\boldsymbol{z}_{0} \times\left(\boldsymbol{p}_{e}-\boldsymbol{p}_{0}\right) & \boldsymbol{z}_{1} \times\left(\boldsymbol{p}_{e}-\boldsymbol{p}_{1}\right) & \boldsymbol{z}_{2} 
+\boldsymbol{z}_{0} \times\left(\boldsymbol{p}_{e}-\boldsymbol{p}_{0}\right) & \boldsymbol{z}_{1} \times\left(\boldsymbol{p}_{e}-\boldsymbol{p}_{1}\right) & \boldsymbol{z}_{2}\times \left(\boldsymbol{p}_{e}-\boldsymbol{p}_{0}\right) 
 \end{array}\right] \\
 \boldsymbol{J}_{21}&=\left[\begin{array}{lll}
-\boldsymbol{z}_{0} & \boldsymbol{z}_{1} & \boldsymbol{0}
+\boldsymbol{z}_{0} & \boldsymbol{z}_{1} & \boldsymbol{z}_{2}
 \end{array}\right] \\
 \boldsymbol{J}_{12}&=\left[\begin{array}{ccc}
 \boldsymbol{z}_{3} \times\left(\boldsymbol{p}_{e}-\boldsymbol{p}_{3}\right) & \boldsymbol{z}_{4} \times\left(\boldsymbol{p}_{e}-\boldsymbol{p}_{4}\right) & \boldsymbol{z}_{5} \times\left(\boldsymbol{p}_{e}-\boldsymbol{p}_{5}\right)
@@ -77,8 +83,7 @@ $$\begin{equation}
 \end{aligned}
 \end{equation}$$
 
-By conducting row operations on the above
-$\boldsymbol{J}$, we
+Because $\boldsymbol{p}_3=\boldsymbol{p}_4=\boldsymbol{p}_5$ (i.e., the Frames 3, 4, 5 share the same origin), we can conduct row operations by multiple second row block matrices with $\left(\boldsymbol{p}_{e}-\boldsymbol{p}_{3}\right)$ and subtract from the first row block matrices. Thus, we
  obtain
 
 $$\boldsymbol{\bar{J}}=\left[\begin{array}{ll}
@@ -89,10 +94,10 @@ $$\boldsymbol{\bar{J}}=\left[\begin{array}{ll}
 $$\begin{equation}
 \begin{aligned}
 \boldsymbol{\bar{J}}_{11}&=\left[\begin{array}{ccc}
-\boldsymbol{z}_{0} \times\left(\boldsymbol{p}_{3}-\boldsymbol{p}_{0}\right) & \boldsymbol{z}_{1} \times\left(\boldsymbol{p}_{3}-\boldsymbol{p}_{1}\right) & \boldsymbol{z}_{2}
+\boldsymbol{z}_{0} \times\left(\boldsymbol{p}_{3}-\boldsymbol{p}_{0}\right) & \boldsymbol{z}_{1} \times\left(\boldsymbol{p}_{3}-\boldsymbol{p}_{1}\right) & \boldsymbol{z}_{2}\times \left(\boldsymbol{p}_{3}-\boldsymbol{p}_{1}\right)
 \end{array}\right] \\
 \boldsymbol{\bar{J}}_{21}&=\left[\begin{array}{lll}
-\boldsymbol{z}_{0} & \boldsymbol{z}_{1} & \boldsymbol{0}
+\boldsymbol{z}_{0} & \boldsymbol{z}_{1} & \boldsymbol{z}_{2}
 \end{array}\right] \\
 \boldsymbol{\bar{J}}_{22}&=\left[\begin{array}{lll}
 \boldsymbol{z}_{3} & \boldsymbol{z}_{4} & \boldsymbol{z}_{5}
@@ -100,9 +105,9 @@ $$\begin{equation}
 \end{aligned}
 \end{equation}$$
 
-Since row operations maintain the matrix rank, we have (based on matrix rank property)
+Since the above row operations maintain the matrix rank and determinant, we can find the singularity by solving
 
-$$\operatorname{det}\left(\boldsymbol{{J}}_{}\right)=\operatorname{det}\left(\boldsymbol{\bar{J}}_{}\right)=\operatorname{det}\left(\boldsymbol{\bar{J}}_{11}\right)\operatorname{det}\left(\boldsymbol{\bar{J}}_{22}\right)$$
+$$\operatorname{det}\left(\boldsymbol{{J}}_{}\right)=\operatorname{det}\left(\boldsymbol{\bar{J}}_{}\right)=\operatorname{det}\left(\boldsymbol{\bar{J}}_{11}\right)\operatorname{det}\left(\boldsymbol{\bar{J}}_{22}\right)=0$$
 
 Thus, singularity decoupling is achieved: we can use
 $\operatorname{det}\left(\boldsymbol{\bar{J}}_{11}\right)=0$ and
@@ -119,9 +124,9 @@ $$
 $$
 
 
-```{figure} ../lec11-12/diff_kinematics/spherical_wrist_singularity.jpg
+```{figure} ./singu/spherical_wrist_singularity.jpg
 ---
-width: 80%
+width: 60%
 name: spherical_wrist_singularity
 ---
 Spherical wrist at a singularity
@@ -167,9 +172,9 @@ $$\vartheta_{3}=0 \quad \text{or}\quad  \vartheta_{3}=\pi$$
 showing that the elbow is outstretched or retracted, as in {numref}`elbow_singularity`. In this singularity, the end-effector will lose the linear motion along the direction of the third link (i.e., the direction
 perpendicular to $\boldsymbol{z}_2$ and $\boldsymbol{z}_0$).
 
-```{figure} ../lec11-12/diff_kinematics/elbow_singularity.jpg
+```{figure} ./singu/elbow_singularity.jpg
 ---
-width: 70%
+width: 60%
 name: elbow_singularity
 ---
 Anthropomorphic arm at an elbow
@@ -184,9 +189,9 @@ $z_{1}$ direction.
 
 
 
-```{figure} ../lec11-12/diff_kinematics/shoulder_singularity.jpg
+```{figure} ./singu/shoulder_singularity.jpg
 ---
-width: 70%
+width: 60%
 name: shoulder_singularity
 ---
 Anthropomorphic arm at a shoulder
@@ -208,35 +213,36 @@ $\dot{\boldsymbol{q}}$ is the $(n \times 1)$ vector of joint velocities;
 and $\boldsymbol{J}$ is  $(r \times n)$ matrix. If $r<n$, the robot arm
 is kinematically redundant and there exist $(n-r)$ redundant DOFs.
 
-
-Let's now abstract {eq}`equ.jacobian_mapping` and understand it from the perspective of linear algebra, as shown in {numref}`joint_to_operation`.
-
--   The range space of $\boldsymbol{J}$ is the subspace
-    $\mathcal{R}(\boldsymbol{J})\subseteq \mathbb{R}^r$ of the
-    end-effector velocities that can be generated by the joint
-    velocities, at robot arm configuration $\boldsymbol{q}$.
-
--   The null space of $\boldsymbol{J}$ is the subspace
-    $\mathcal{N}(\boldsymbol{J})\subseteq \mathbb{R}^n$ of the joint
-    velocities that do not produce any end-effector velocity,  at robot arm configuration $\boldsymbol{q}$.
-
-
-
-```{figure} ../lec11-12/diff_kinematics/joint_to_operation.jpg
+```{figure} ./singu/joint_to_operation.jpg
 ---
-width: 90%
+width: 60%
 name: joint_to_operation
 ---
 Mapping between the joint velocity space and the end-effector velocity
 space
 ```
 
+Let's now abstract {eq}`equ.jacobian_mapping`  from the perspective of linear algebra, as shown in {numref}`joint_to_operation`.
+
+-   The range of $\boldsymbol{J}$ is the subspace
+    $\mathcal{R}(\boldsymbol{J})\subseteq \mathbb{R}^r$ of the
+    end-effector velocities that can be generated by the joint
+    velocities.
+
+-   The null space of $\boldsymbol{J}$ is the subspace
+    $\mathcal{N}(\boldsymbol{J})\subseteq \mathbb{R}^n$ of the joint
+    velocities that do not produce any end-effector velocity.
 
 
 
 
 
-Consider a rundant robot arm (i.e., $n>r$). If the Jacobian has full rank at  configuration $\boldsymbol{q}$, one has
+
+
+
+
+
+If the Jacobian has full rank at  configuration $\boldsymbol{q}$, one has
 
 $$\operatorname{dim}(\mathcal{R}(\boldsymbol{J}))=r \quad \operatorname{dim}(\mathcal{N}(\boldsymbol{J}))=n-r$$
 
@@ -247,7 +253,7 @@ $\mathbb{R}^{r}$. This means that we can theoretically command the velocity of j
 
 Otherwise, if the Jacobian is rank-deficient at  configuration $\boldsymbol{q}$, i.e., the robot arm is a singularity at $\boldsymbol{q}$,
 the dimension of the range space decreases while the dimension of the
-null space increases, but they must satisify (recall your linear algebra)
+null space increases, but they must satisify (recall  linear algebra)
 
 $$\operatorname{dim}(\mathcal{R}(\boldsymbol{J}))+\operatorname{dim}(\mathcal{N}(\boldsymbol{J}))=n$$
 
@@ -261,10 +267,11 @@ $$\mathcal{R}(\boldsymbol{P}) \equiv \mathcal{N}(\boldsymbol{J})$$
 The projection matrix $\boldsymbol{P}$ has the closed-form solution:
 
 $$
-\boldsymbol{P}=\boldsymbol{I}-\boldsymbol{J}^T(\boldsymbol{J}\boldsymbol{J}^T)^{-1}\boldsymbol{J}
+\boldsymbol{P}=\boldsymbol{I}-\boldsymbol{J}^T(\boldsymbol{J}\boldsymbol{J}^T)^{{\dagger}}\boldsymbol{J}
 $$
 
-where $\boldsymbol{I}$ is $n\times n$ identity.
+where $\boldsymbol{I}$ is $n\times n$ identity, and $A^{\dagger}$ is the Moore–Penrose pseudoinverse of $A$.
+
 
 
 

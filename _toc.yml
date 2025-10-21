@@ -14,7 +14,7 @@ parts:
       - file: lec6-mp/motion_planning
       - file: lec7-dk/dk
       - file: lec8-jac/jac
-      - file: lec13/singularity
+      - file: lec9-singu/singularity
       - file: lec14/statics
       - file: lec15/inverse_vk
       - file: lec16-17/nik

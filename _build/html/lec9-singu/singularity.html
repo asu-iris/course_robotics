@@ -59,7 +59,7 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'lec13/singularity';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lec9-singu/singularity';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Statics" href="../lec14/statics.html" />
@@ -288,7 +288,7 @@
       
       
       
-      <li><a href="../_sources/lec13/singularity.md" target="_blank"
+      <li><a href="../_sources/lec9-singu/singularity.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -403,15 +403,18 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="singularity-redundancy">
 <h1>Singularity &amp; Redundancy<a class="headerlink" href="#singularity-redundancy" title="Link to this heading">#</a></h1>
-<p>The Jacobian of a robot arm defines</p>
+<p>The Jacobian of a robot arm is defined as</p>
 <div class="math notranslate nohighlight">
 \[\boldsymbol{v}_{e}=\boldsymbol{J}(\boldsymbol{q}) \dot{\boldsymbol{q}}\]</div>
 <p>between joint velocity <span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}}\)</span> and the end-effector
 velocity
 <span class="math notranslate nohighlight">\(\boldsymbol{v}_{e}=\left[\begin{array}{ll}\dot{\boldsymbol{p}}_{e}^{T} &amp; \boldsymbol{\omega}_{e}^{T}\end{array}\right]^{T}\)</span>.
 Jacobian is a function of the configuration <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span>. We call the
-configurations <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span> at which <span class="math notranslate nohighlight">\(\boldsymbol{J}(\boldsymbol{q})\)</span> is rank-deficient as
+configurations <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span> at which <span class="math notranslate nohighlight">\(\boldsymbol{J}(\boldsymbol{q})\)</span> is rank-deficient  as
 <strong>singularity</strong>. Or, we say the robot is at singularity.</p>
+<p>Formally, for a non-redundant (<span class="math notranslate nohighlight">\(n=r\)</span>) or redundant (<span class="math notranslate nohighlight">\(n&gt; r\)</span>) robot arm (<span class="math notranslate nohighlight">\(r\)</span> is the dimension of the end-effector task space, <span class="math notranslate nohighlight">\(n\)</span> is the dimension of the joint space), a  singularity occurs when the Jacobian matrix <span class="math notranslate nohighlight">\(\boldsymbol{J}(\boldsymbol{q})\)</span> loses ranks:</p>
+<div class="math notranslate nohighlight">
+\[ \text{rank}(\boldsymbol{J}(\boldsymbol{q})) &lt; r\]</div>
 <p>Here are reasons why we need to care about
 singularities?</p>
 <ul class="simple">
@@ -422,16 +425,16 @@ singularities?</p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="singularity-decoupling">
 <h1>Singularity Decoupling<a class="headerlink" href="#singularity-decoupling" title="Link to this heading">#</a></h1>
-<p>Computing singularity configurations based on definition (i.e. find  <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span> such that the  determinant of a Jacobian is zero if it is a square matrix) may
+<p>Computing singularity configurations based on definition (i.e. find  <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span> such that <span class="math notranslate nohighlight">\( \text{rank}(\boldsymbol{J}(\boldsymbol{q})) &lt; m\)</span>) can
 be  complex. However, for robot arms having a spherical wrist, it is possible
 to decouple the computation into two
 subproblems: (1) find arm singularities for the first
 3 (or more) joints, and (2) find of wrist singularities for the wrist joints (last three joints).</p>
-<p>Let’s see an example. Consider a <span class="math notranslate nohighlight">\(6\)</span>-DoF robot arm (anthropomorphic
+<p>Let’s see an example of a non-redundant (<span class="math notranslate nohighlight">\(r=n=6\)</span>) robot arm. Consider a <span class="math notranslate nohighlight">\(6\)</span>-DoF robot arm (anthropomorphic
 robot arm) in <a class="reference internal" href="#anthropomorphic-manipulator"><span class="std std-numref">Fig. 55</span></a>, where the last 3 joints are
-revolute (e.g., a spherical wrist).</p>
+revolute (e.g., a spherical wrist). Note that the Frame 6 is the end-effector frame <span class="math notranslate nohighlight">\(\boldsymbol{p}_{6}=\boldsymbol{p}_{e}\)</span>.</p>
 <figure class="align-default" id="anthropomorphic-manipulator">
-<a class="reference internal image-reference" href="lec6-8/kinematics/anthropomorphic_manipulator.jpg"><img alt="lec6-8/kinematics/anthropomorphic_manipulator.jpg" src="lec6-8/kinematics/anthropomorphic_manipulator.jpg" style="width: 80%;" />
+<a class="reference internal image-reference" href="../_images/anthropomorphic_manipulator1.jpg"><img alt="../_images/anthropomorphic_manipulator1.jpg" src="../_images/anthropomorphic_manipulator1.jpg" style="width: 80%;" />
 </a>
 <figcaption>
 <p><span class="caption-number">Fig. 55 </span><span class="caption-text">Anthropomorphic robot arm</span><a class="headerlink" href="#anthropomorphic-manipulator" title="Link to this image">#</a></p>
@@ -448,10 +451,10 @@ revolute (e.g., a spherical wrist).</p>
 \[\begin{split}\begin{equation}
 \begin{aligned}
 \boldsymbol{J}_{11}&amp;=\left[\begin{array}{ccc}
-\boldsymbol{z}_{0} \times\left(\boldsymbol{p}_{e}-\boldsymbol{p}_{0}\right) &amp; \boldsymbol{z}_{1} \times\left(\boldsymbol{p}_{e}-\boldsymbol{p}_{1}\right) &amp; \boldsymbol{z}_{2} 
+\boldsymbol{z}_{0} \times\left(\boldsymbol{p}_{e}-\boldsymbol{p}_{0}\right) &amp; \boldsymbol{z}_{1} \times\left(\boldsymbol{p}_{e}-\boldsymbol{p}_{1}\right) &amp; \boldsymbol{z}_{2}\times \left(\boldsymbol{p}_{e}-\boldsymbol{p}_{0}\right) 
 \end{array}\right] \\
 \boldsymbol{J}_{21}&amp;=\left[\begin{array}{lll}
-\boldsymbol{z}_{0} &amp; \boldsymbol{z}_{1} &amp; \boldsymbol{0}
+\boldsymbol{z}_{0} &amp; \boldsymbol{z}_{1} &amp; \boldsymbol{z}_{2}
 \end{array}\right] \\
 \boldsymbol{J}_{12}&amp;=\left[\begin{array}{ccc}
 \boldsymbol{z}_{3} \times\left(\boldsymbol{p}_{e}-\boldsymbol{p}_{3}\right) &amp; \boldsymbol{z}_{4} \times\left(\boldsymbol{p}_{e}-\boldsymbol{p}_{4}\right) &amp; \boldsymbol{z}_{5} \times\left(\boldsymbol{p}_{e}-\boldsymbol{p}_{5}\right)
@@ -461,8 +464,7 @@ revolute (e.g., a spherical wrist).</p>
 \end{array}\right] 
 \end{aligned}
 \end{equation}\end{split}\]</div>
-<p>By conducting row operations on the above
-<span class="math notranslate nohighlight">\(\boldsymbol{J}\)</span>, we
+<p>Because <span class="math notranslate nohighlight">\(\boldsymbol{p}_3=\boldsymbol{p}_4=\boldsymbol{p}_5\)</span> (i.e., the Frames 3, 4, 5 share the same origin), we can conduct row operations by multiple second row block matrices with <span class="math notranslate nohighlight">\(\left(\boldsymbol{p}_{e}-\boldsymbol{p}_{3}\right)\)</span> and subtract from the first row block matrices. Thus, we
 obtain</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\boldsymbol{\bar{J}}=\left[\begin{array}{ll}
@@ -473,19 +475,19 @@ obtain</p>
 \[\begin{split}\begin{equation}
 \begin{aligned}
 \boldsymbol{\bar{J}}_{11}&amp;=\left[\begin{array}{ccc}
-\boldsymbol{z}_{0} \times\left(\boldsymbol{p}_{3}-\boldsymbol{p}_{0}\right) &amp; \boldsymbol{z}_{1} \times\left(\boldsymbol{p}_{3}-\boldsymbol{p}_{1}\right) &amp; \boldsymbol{z}_{2}
+\boldsymbol{z}_{0} \times\left(\boldsymbol{p}_{3}-\boldsymbol{p}_{0}\right) &amp; \boldsymbol{z}_{1} \times\left(\boldsymbol{p}_{3}-\boldsymbol{p}_{1}\right) &amp; \boldsymbol{z}_{2}\times \left(\boldsymbol{p}_{3}-\boldsymbol{p}_{1}\right)
 \end{array}\right] \\
 \boldsymbol{\bar{J}}_{21}&amp;=\left[\begin{array}{lll}
-\boldsymbol{z}_{0} &amp; \boldsymbol{z}_{1} &amp; \boldsymbol{0}
+\boldsymbol{z}_{0} &amp; \boldsymbol{z}_{1} &amp; \boldsymbol{z}_{2}
 \end{array}\right] \\
 \boldsymbol{\bar{J}}_{22}&amp;=\left[\begin{array}{lll}
 \boldsymbol{z}_{3} &amp; \boldsymbol{z}_{4} &amp; \boldsymbol{z}_{5}
 \end{array}\right] 
 \end{aligned}
 \end{equation}\end{split}\]</div>
-<p>Since row operations maintain the matrix rank, we have (based on matrix rank property)</p>
+<p>Since the above row operations maintain the matrix rank and determinant, we can find the singularity by solving</p>
 <div class="math notranslate nohighlight">
-\[\operatorname{det}\left(\boldsymbol{{J}}_{}\right)=\operatorname{det}\left(\boldsymbol{\bar{J}}_{}\right)=\operatorname{det}\left(\boldsymbol{\bar{J}}_{11}\right)\operatorname{det}\left(\boldsymbol{\bar{J}}_{22}\right)\]</div>
+\[\operatorname{det}\left(\boldsymbol{{J}}_{}\right)=\operatorname{det}\left(\boldsymbol{\bar{J}}_{}\right)=\operatorname{det}\left(\boldsymbol{\bar{J}}_{11}\right)\operatorname{det}\left(\boldsymbol{\bar{J}}_{22}\right)=0\]</div>
 <p>Thus, singularity decoupling is achieved: we can use
 <span class="math notranslate nohighlight">\(\operatorname{det}\left(\boldsymbol{\bar{J}}_{11}\right)=0\)</span> and
 <span class="math notranslate nohighlight">\(\operatorname{det}\left(\boldsymbol{\bar{J}}_{22}\right)=0\)</span>  to
@@ -498,7 +500,7 @@ determine the arm singularities and wrist singularities, respectively.</p>
 \operatorname{det}\left(\boldsymbol{\bar{J}}_{22}\right)=0
 \]</div>
 <figure class="align-default" id="spherical-wrist-singularity">
-<a class="reference internal image-reference" href="lec11-12/diff_kinematics/spherical_wrist_singularity.jpg"><img alt="lec11-12/diff_kinematics/spherical_wrist_singularity.jpg" src="lec11-12/diff_kinematics/spherical_wrist_singularity.jpg" style="width: 80%;" />
+<a class="reference internal image-reference" href="../_images/spherical_wrist_singularity.jpg"><img alt="../_images/spherical_wrist_singularity.jpg" src="../_images/spherical_wrist_singularity.jpg" style="width: 60%;" />
 </a>
 <figcaption>
 <p><span class="caption-number">Fig. 56 </span><span class="caption-text">Spherical wrist at a singularity</span><a class="headerlink" href="#spherical-wrist-singularity" title="Link to this image">#</a></p>
@@ -533,7 +535,7 @@ singularity. This means that</p>
 <p>showing that the elbow is outstretched or retracted, as in <a class="reference internal" href="#elbow-singularity"><span class="std std-numref">Fig. 57</span></a>. In this singularity, the end-effector will lose the linear motion along the direction of the third link (i.e., the direction
 perpendicular to <span class="math notranslate nohighlight">\(\boldsymbol{z}_2\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{z}_0\)</span>).</p>
 <figure class="align-default" id="elbow-singularity">
-<a class="reference internal image-reference" href="lec11-12/diff_kinematics/elbow_singularity.jpg"><img alt="lec11-12/diff_kinematics/elbow_singularity.jpg" src="lec11-12/diff_kinematics/elbow_singularity.jpg" style="width: 70%;" />
+<a class="reference internal image-reference" href="../_images/elbow_singularity.jpg"><img alt="../_images/elbow_singularity.jpg" src="../_images/elbow_singularity.jpg" style="width: 60%;" />
 </a>
 <figcaption>
 <p><span class="caption-number">Fig. 57 </span><span class="caption-text">Anthropomorphic arm at an elbow
@@ -545,7 +547,7 @@ lies on axis <span class="math notranslate nohighlight">\(z_{0}\)</span>, as sho
 along the
 <span class="math notranslate nohighlight">\(z_{1}\)</span> direction.</p>
 <figure class="align-default" id="shoulder-singularity">
-<a class="reference internal image-reference" href="lec11-12/diff_kinematics/shoulder_singularity.jpg"><img alt="lec11-12/diff_kinematics/shoulder_singularity.jpg" src="lec11-12/diff_kinematics/shoulder_singularity.jpg" style="width: 70%;" />
+<a class="reference internal image-reference" href="../_images/shoulder_singularity.jpg"><img alt="../_images/shoulder_singularity.jpg" src="../_images/shoulder_singularity.jpg" style="width: 60%;" />
 </a>
 <figcaption>
 <p><span class="caption-number">Fig. 58 </span><span class="caption-text">Anthropomorphic arm at a shoulder
@@ -566,32 +568,32 @@ end-effector velocity;
 <span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}}\)</span> is the <span class="math notranslate nohighlight">\((n \times 1)\)</span> vector of joint velocities;
 and <span class="math notranslate nohighlight">\(\boldsymbol{J}\)</span> is  <span class="math notranslate nohighlight">\((r \times n)\)</span> matrix. If <span class="math notranslate nohighlight">\(r&lt;n\)</span>, the robot arm
 is kinematically redundant and there exist <span class="math notranslate nohighlight">\((n-r)\)</span> redundant DOFs.</p>
-<p>Let’s now abstract <a class="reference internal" href="#equation-equ-jacobian-mapping">(21)</a> and understand it from the perspective of linear algebra, as shown in <a class="reference internal" href="#joint-to-operation"><span class="std std-numref">Fig. 59</span></a>.</p>
-<ul class="simple">
-<li><p>The range space of <span class="math notranslate nohighlight">\(\boldsymbol{J}\)</span> is the subspace
-<span class="math notranslate nohighlight">\(\mathcal{R}(\boldsymbol{J})\subseteq \mathbb{R}^r\)</span> of the
-end-effector velocities that can be generated by the joint
-velocities, at robot arm configuration <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span>.</p></li>
-<li><p>The null space of <span class="math notranslate nohighlight">\(\boldsymbol{J}\)</span> is the subspace
-<span class="math notranslate nohighlight">\(\mathcal{N}(\boldsymbol{J})\subseteq \mathbb{R}^n\)</span> of the joint
-velocities that do not produce any end-effector velocity,  at robot arm configuration <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span>.</p></li>
-</ul>
 <figure class="align-default" id="joint-to-operation">
-<a class="reference internal image-reference" href="lec11-12/diff_kinematics/joint_to_operation.jpg"><img alt="lec11-12/diff_kinematics/joint_to_operation.jpg" src="lec11-12/diff_kinematics/joint_to_operation.jpg" style="width: 90%;" />
+<a class="reference internal image-reference" href="../_images/joint_to_operation.jpg"><img alt="../_images/joint_to_operation.jpg" src="../_images/joint_to_operation.jpg" style="width: 60%;" />
 </a>
 <figcaption>
 <p><span class="caption-number">Fig. 59 </span><span class="caption-text">Mapping between the joint velocity space and the end-effector velocity
 space</span><a class="headerlink" href="#joint-to-operation" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>Consider a rundant robot arm (i.e., <span class="math notranslate nohighlight">\(n&gt;r\)</span>). If the Jacobian has full rank at  configuration <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span>, one has</p>
+<p>Let’s now abstract <a class="reference internal" href="#equation-equ-jacobian-mapping">(21)</a>  from the perspective of linear algebra, as shown in <a class="reference internal" href="#joint-to-operation"><span class="std std-numref">Fig. 59</span></a>.</p>
+<ul class="simple">
+<li><p>The range of <span class="math notranslate nohighlight">\(\boldsymbol{J}\)</span> is the subspace
+<span class="math notranslate nohighlight">\(\mathcal{R}(\boldsymbol{J})\subseteq \mathbb{R}^r\)</span> of the
+end-effector velocities that can be generated by the joint
+velocities.</p></li>
+<li><p>The null space of <span class="math notranslate nohighlight">\(\boldsymbol{J}\)</span> is the subspace
+<span class="math notranslate nohighlight">\(\mathcal{N}(\boldsymbol{J})\subseteq \mathbb{R}^n\)</span> of the joint
+velocities that do not produce any end-effector velocity.</p></li>
+</ul>
+<p>If the Jacobian has full rank at  configuration <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span>, one has</p>
 <div class="math notranslate nohighlight">
 \[\operatorname{dim}(\mathcal{R}(\boldsymbol{J}))=r \quad \operatorname{dim}(\mathcal{N}(\boldsymbol{J}))=n-r\]</div>
 <p>and the range of <span class="math notranslate nohighlight">\(\boldsymbol{J}\)</span> spans the entire space
 <span class="math notranslate nohighlight">\(\mathbb{R}^{r}\)</span>. This means that we can theoretically command the velocity of joints to generate any end-effector velocity we want at  configuration <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span>.</p>
 <p>Otherwise, if the Jacobian is rank-deficient at  configuration <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span>, i.e., the robot arm is a singularity at <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span>,
 the dimension of the range space decreases while the dimension of the
-null space increases, but they must satisify (recall your linear algebra)</p>
+null space increases, but they must satisify (recall  linear algebra)</p>
 <div class="math notranslate nohighlight">
 \[\operatorname{dim}(\mathcal{R}(\boldsymbol{J}))+\operatorname{dim}(\mathcal{N}(\boldsymbol{J}))=n\]</div>
 <p>This means that there is a set of end-effector velocities which we will never be able to generate no matter what velocity of joints  we command at  configuration <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span>.</p>
@@ -602,9 +604,9 @@ for the null space of <span class="math notranslate nohighlight">\(\boldsymbol{J
 <p>The projection matrix <span class="math notranslate nohighlight">\(\boldsymbol{P}\)</span> has the closed-form solution:</p>
 <div class="math notranslate nohighlight">
 \[
-\boldsymbol{P}=\boldsymbol{I}-\boldsymbol{J}^T(\boldsymbol{J}\boldsymbol{J}^T)^{-1}\boldsymbol{J}
+\boldsymbol{P}=\boldsymbol{I}-\boldsymbol{J}^T(\boldsymbol{J}\boldsymbol{J}^T)^{{\dagger}}\boldsymbol{J}
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(\boldsymbol{I}\)</span> is <span class="math notranslate nohighlight">\(n\times n\)</span> identity.</p>
+<p>where <span class="math notranslate nohighlight">\(\boldsymbol{I}\)</span> is <span class="math notranslate nohighlight">\(n\times n\)</span> identity, and <span class="math notranslate nohighlight">\(A^{\dagger}\)</span> is the Moore–Penrose pseudoinverse of <span class="math notranslate nohighlight">\(A\)</span>.</p>
 <!-- the joint velocity vector with arbitrary $\dot{\boldsymbol{q}}_{0}$
 
 $$\dot{\boldsymbol{q}}=\dot{\boldsymbol{q}}^{*}+\boldsymbol{P} \dot{\boldsymbol{q}}_{0}$$
@@ -633,7 +635,7 @@ the redundant DOFs. -->
         },
         kernelOptions: {
             name: "python3",
-            path: "./lec13"
+            path: "./lec9-singu"
         },
         predefinedOutput: true
     }

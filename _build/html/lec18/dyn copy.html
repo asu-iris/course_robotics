@@ -198,7 +198,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../lec6-mp/motion_planning.html">Motion Planning</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lec7-dk/dk.html">Velocity Kinematics</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="../lec13/singularity.html">Singularity &amp; Redundancy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lec8-jac/jac.html">Jacobian</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec9-singu/singularity.html">Singularity &amp; Redundancy</a></li>
 
 
 <li class="toctree-l1"><a class="reference internal" href="../lec14/statics.html">Statics</a></li>
@@ -776,7 +782,7 @@ Recall the dynamics equation we have previously introduced,</p>
 \[\boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{F}_{v} \dot{\boldsymbol{q}}+\boldsymbol{F}_{s} \operatorname{sgn}(\dot{\boldsymbol{q}})+\boldsymbol{g}(\boldsymbol{q})=\boldsymbol{\tau}-\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{h}_{e}\]</div>
 <p>We multiply <span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}}^T\)</span> on both sides of the above dynamics
 equation and subtract
-(<a class="reference internal" href="dyn.html#equation-equ-intermediate">(46)</a>{reference-type=”ref”
+(<a class="reference internal" href="dyn.html#equation-equ-intermediate">(48)</a>{reference-type=”ref”
 reference=”equ.intermediate”}) on both sides. This yields</p>
 <div class="math notranslate nohighlight">
 \[\frac{1}{2}  \dot{\boldsymbol{q}}^{T} \boldsymbol{B}(\boldsymbol{q})\dot{\boldsymbol{q}}-\dot{\boldsymbol{q}}^T\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}=\frac{1}{2}  \dot{\boldsymbol{q}}^{T} \big( \boldsymbol{B}(\boldsymbol{q})\dot{\boldsymbol{q}}-2\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}})\big) \dot{\boldsymbol{q}}=\boldsymbol{0}\]</div>
