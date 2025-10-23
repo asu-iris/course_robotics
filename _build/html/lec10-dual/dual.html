@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Statics &#8212; Modeling and Control of Robots</title>
+    <title>Duality &#8212; Modeling and Control of Robots</title>
   
   
   
@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -59,10 +59,10 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'lec14/statics';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lec10-dual/dual';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Inverse Velocity Kinematics" href="../lec15/inverse_vk.html" />
+    <link rel="next" title="Numerical Inverse Kinematics" href="../lec16-17/nik.html" />
     <link rel="prev" title="Singularity &amp; Redundancy" href="../lec9-singu/singularity.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -207,12 +207,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../lec9-singu/singularity.html">Singularity &amp; Redundancy</a></li>
 
 
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Statics</a></li>
-
-
-<li class="toctree-l1"><a class="reference internal" href="../lec15/inverse_vk.html">Inverse Velocity Kinematics</a></li>
-
-
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Duality</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="../lec16-17/nik.html">Numerical Inverse Kinematics</a></li>
 
@@ -288,7 +283,7 @@
       
       
       
-      <li><a href="../_sources/lec14/statics.md" target="_blank"
+      <li><a href="../_sources/lec10-dual/dual.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -372,7 +367,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Statics</h1>
+    <h1>Duality</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -382,9 +377,11 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Statics</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Duality</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statics">Statics</a></li>
+</ul>
+</li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#kineto-statics-duality">Kineto-Statics Duality</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#velocity-and-force-transformation-optional">Velocity and Force Transformation (Optional)</a></li>
 </ul>
 
             </nav>
@@ -397,42 +394,44 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="statics">
-<h1>Statics<a class="headerlink" href="#statics" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="duality">
+<h1>Duality<a class="headerlink" href="#duality" title="Link to this heading">#</a></h1>
+<section id="statics">
+<h2>Statics<a class="headerlink" href="#statics" title="Link to this heading">#</a></h2>
 <p>The concept of statics in robotics is to find the relationship between  force
 applied to the end-effector and the generalized torques applied to the
 joints when the robot arm is at equilibrium.  We will apply the <a class="reference external" href="https://en.wikipedia.org/wiki/Virtual_work#:~:text=The%20principle%20of%20virtual%20work%20states%20that%20in%20equilibrium%20the,the%20reaction%2C%20or%20constraint%20forces.">principle of
 virtual work</a> to determine this relationship.</p>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
+<div class="admonition-the-principle-of-virtual-work admonition">
+<p class="admonition-title">The principle of virtual work</p>
 <p>The principle of virtual work states that in equilibrium the virtual work of the forces applied to a system is zero</p>
 </div>
-<p>Let <span class="math notranslate nohighlight">\(\boldsymbol{\tau}\)</span>
-be the <span class="math notranslate nohighlight">\((n \times 1)\)</span> joint torques and <span class="math notranslate nohighlight">\(\boldsymbol{\gamma}_{e}=\begin{bmatrix}
+<p>Let <span class="math notranslate nohighlight">\(\boldsymbol{\gamma}_{e}=\begin{bmatrix}
 \boldsymbol{f}_{e}\\
 \boldsymbol{\mu}_{e}
-\end{bmatrix}\)</span> the
-<span class="math notranslate nohighlight">\((r \times 1)\)</span> end-effector forces, including linear force <span class="math notranslate nohighlight">\(\boldsymbol{f}_{e}\)</span> and moment
-<span class="math notranslate nohighlight">\(\boldsymbol{\mu}_{e}\)</span>.</p>
-<p>The visual work by the joint torques:</p>
-<div class="math notranslate nohighlight">
-\[d W_{\tau}=\boldsymbol{\tau}^{T} d \boldsymbol{q}\]</div>
-<p>where <span class="math notranslate nohighlight">\(d \boldsymbol{q}\)</span> is  the  joint virtual displacement.</p>
-<p>The visual work by the end-effector forces:</p>
+\end{bmatrix}\in \mathbb{R}^{r}\)</span> be the wrench applied to the robot
+end-effector. It includes the linear force <span class="math notranslate nohighlight">\(\boldsymbol{f}_{e}\)</span> and moment
+<span class="math notranslate nohighlight">\(\boldsymbol{\mu}_{e}\)</span>. The visual work by this end-effector wrench:</p>
 <div class="math notranslate nohighlight">
 \[d W_{\gamma}=\boldsymbol{f}_{e}^{T} d \boldsymbol{p}_{e}+\boldsymbol{\mu}_{e}^{T} \boldsymbol{\omega}_{e} d t =\boldsymbol{f}_{e}^{T} \boldsymbol{J}_{P}(\boldsymbol{q}) d \boldsymbol{q}+\boldsymbol{\mu}_{e}^{T} \boldsymbol{J}_{O}(\boldsymbol{q}) d \boldsymbol{q}  =\boldsymbol{\gamma}_{e}^{T} \boldsymbol{J}(\boldsymbol{q}) d \boldsymbol{q}\]</div>
 <p>where <span class="math notranslate nohighlight">\(d \boldsymbol{p}_{e}\)</span> is the linear virtual displacement and
 <span class="math notranslate nohighlight">\(\boldsymbol{\omega}_{e} d t\)</span> is the angular virtual displacement of the end-effector.</p>
-<p>According to the principle of virtual work, the manipulator is at static
+<p>Let <span class="math notranslate nohighlight">\(\boldsymbol{\tau}\in\mathbb{R}^{n}\)</span>
+be the joint torques. The visual work by the joint torques:</p>
+<div class="math notranslate nohighlight">
+\[d W_{\tau}=\boldsymbol{\tau}^{T} d \boldsymbol{q}\]</div>
+<p>where <span class="math notranslate nohighlight">\(d \boldsymbol{q}\)</span> is  the  joint virtual displacement.</p>
+<p>According to the principle of virtual work, the robot arm is at static
 equilibrium if and only if</p>
 <div class="math notranslate nohighlight">
-\[\delta W_{\tau}=\delta W_{\gamma}, \quad \forall \delta \boldsymbol{q}\]</div>
+\[\delta W_{\tau}=\delta W_{\gamma}\]</div>
 <p>This leads to the statics equation:</p>
 <div class="math notranslate nohighlight">
 \[\boldsymbol{\tau}=\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{\gamma}_{e}\]</div>
 <p>stating a relationship between the end-effector forces and joint
 torques when the robot is at its equilibrium.</p>
 </br>
+</section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="kineto-statics-duality">
 <h1>Kineto-Statics Duality<a class="headerlink" href="#kineto-statics-duality" title="Link to this heading">#</a></h1>
@@ -443,92 +442,99 @@ torques when the robot is at its equilibrium.</p>
     \boldsymbol{\tau}=\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{\gamma}_{e}
 \end{aligned}\]</div>
 <ul class="simple">
-<li><p>The range space <span class="math notranslate nohighlight">\(\mathcal{R}\left(\boldsymbol{J}^{T}\right)\)</span> of <span class="math notranslate nohighlight">\(\boldsymbol{J}^{T}\)</span> is the subspace
+<li><p>The range space <span class="math notranslate nohighlight">\(\mathcal{R}\left(\boldsymbol{J}^{T}\right)\)</span>  is the subspace
 in <span class="math notranslate nohighlight">\(\mathbb{R}^{n}\)</span>, where the
-the joint torques that can balance the end-effector forces at robot pose <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span>.</p></li>
-<li><p>The null space <span class="math notranslate nohighlight">\(\mathcal{N}\left(\boldsymbol{J}^{T}\right)\)</span> of <span class="math notranslate nohighlight">\(\boldsymbol{J}^{T}\)</span> is the subspace
+the joint torques that can balance the end-effector wrench.</p></li>
+<li><p>The null space <span class="math notranslate nohighlight">\(\mathcal{N}\left(\boldsymbol{J}^{T}\right)\)</span>  is the subspace
 in <span class="math notranslate nohighlight">\(\mathbb{R}^{r}\)</span> of
-the end-effector forces that do not require any balancing joint
-torques at robot pose <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span>.</p></li>
+the end-effector wrench that does not require any balancing joint
+torques. This means that the end-effector wrenches
+<span class="math notranslate nohighlight">\(\gamma_{e} \in \mathcal{N}\left(\boldsymbol{J}^{T}\right)\)</span> are entirely
+absorbed by the mechanical structure of the robot arm.</p></li>
 </ul>
 <figure class="align-default" id="coordinate-mapping">
-<a class="reference internal image-reference" href="lec11-12/diff_kinematics/operation_to_joint.jpg"><img alt="lec11-12/diff_kinematics/operation_to_joint.jpg" src="lec11-12/diff_kinematics/operation_to_joint.jpg" style="width: 70%;" />
+<a class="reference internal image-reference" href="../_images/operation_to_joint.jpg"><img alt="../_images/operation_to_joint.jpg" src="../_images/operation_to_joint.jpg" style="width: 50%;" />
 </a>
 <figcaption>
 <p><span class="caption-number">Fig. 60 </span><span class="caption-text">Mapping between the end-effector force space and the joint torque
 space</span><a class="headerlink" href="#coordinate-mapping" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>It is worth remarking that the end-effector forces
-<span class="math notranslate nohighlight">\(\gamma_{e} \in \mathcal{N}\left(\boldsymbol{J}^{T}\right)\)</span> are entirely
-absorbed by the mechanical structure of the robot arm.</p>
-<p>From fundamental relationship in linear algebra, the relations between the two subspaces are established by</p>
+<p>From fundamental relationship in linear algebra, we have the following relationships:</p>
 <div class="math notranslate nohighlight">
 \[\mathcal{N}(\boldsymbol{J}) \equiv \mathcal{R}^{\perp}\left(\boldsymbol{J}^{T}\right) \quad \mathcal{R}(\boldsymbol{J}) \equiv \mathcal{N}^{\perp}\left(\boldsymbol{J}^{T}\right)\]</div>
-<p>and then, once the manipulator Jacobian is known, it is possible to
+<!-- and then, once the  Jacobian is known, it is possible to
 characterize completely differential kinematics and statics in terms of
-the range and null spaces of the Jacobian and its transpose.</p>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="velocity-and-force-transformation-optional">
-<h1>Velocity and Force Transformation (Optional)<a class="headerlink" href="#velocity-and-force-transformation-optional" title="Link to this heading">#</a></h1>
-<figure class="align-default" id="id1">
-<a class="reference internal image-reference" href="lec11-12/diff_kinematics/coordinate_mapping.jpg"><img alt="lec11-12/diff_kinematics/coordinate_mapping.jpg" src="lec11-12/diff_kinematics/coordinate_mapping.jpg" style="width: 70%;" />
-</a>
-<figcaption>
-<p><span class="caption-number">Fig. 61 </span><span class="caption-text">Representation of linear and angular velocities in different
+the range and null spaces of the Jacobian and its transpose. -->
+<!-- 
+# Velocity and Force Transformation (Optional)
+
+
+```{figure} ../lec11-12/diff_kinematics/coordinate_mapping.jpg
+---
+width: 70%
+name: coordinate_mapping
+---
+Representation of linear and angular velocities in different
 coordinate frames on the same rigid
-body</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
-<p>The kineto-statics duality  can be useful to
+body
+```
+
+
+The kineto-statics duality  can be useful to
 find the transformation of velocities and forces between two
 coordinate frames. Consider a reference coordinate frame
-<span class="math notranslate nohighlight">\(O_{0}-x_{0} y_{0} z_{0}\)</span> and a rigid body moving with respect to such a
-frame. Then let <span class="math notranslate nohighlight">\(O_{1}-x_{1} y_{1} z_{1}\)</span> and <span class="math notranslate nohighlight">\(O_{2}-x_{2} y_{2} z_{2}\)</span>
+$O_{0}-x_{0} y_{0} z_{0}$ and a rigid body moving with respect to such a
+frame. Then let $O_{1}-x_{1} y_{1} z_{1}$ and $O_{2}-x_{2} y_{2} z_{2}$
 be two coordinate frames attached to the body. The relationships between
 translational and rotational velocities of the two frames with respect
-to the reference frame are given by</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\begin{aligned}
-\boldsymbol{\omega}_{2} &amp; =\boldsymbol{\omega}_{1} \\
-\dot{\boldsymbol{p}}_{2} &amp; =\dot{\boldsymbol{p}}_{1}+\boldsymbol{\omega}_{1} \times \boldsymbol{r}_{12} .
-\end{aligned}\end{split}\]</div>
-<p>The above relations can be compactly written as</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\left[\begin{array}{c}
+to the reference frame are given by
+
+$$\begin{aligned}
+\boldsymbol{\omega}_{2} & =\boldsymbol{\omega}_{1} \\
+\dot{\boldsymbol{p}}_{2} & =\dot{\boldsymbol{p}}_{1}+\boldsymbol{\omega}_{1} \times \boldsymbol{r}_{12} .
+\end{aligned}$$
+
+The above relations can be compactly written as
+
+$$\left[\begin{array}{c}
 \dot{\boldsymbol{p}}_{2} \\
 \boldsymbol{\omega}_{2}
 \end{array}\right]=\left[\begin{array}{cc}
-\boldsymbol{I} &amp; -\boldsymbol{S}\left(\boldsymbol{r}_{12}\right) \\
-\boldsymbol{O} &amp; \boldsymbol{I}
+\boldsymbol{I} & -\boldsymbol{S}\left(\boldsymbol{r}_{12}\right) \\
+\boldsymbol{O} & \boldsymbol{I}
 \end{array}\right]\left[\begin{array}{c}
 \dot{\boldsymbol{p}}_{1} \\
 \boldsymbol{\omega}_{1}
-\end{array}\right]\end{split}\]</div>
-<p>On the other hand, if vectors are referred to their own frames, it is</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\left[\begin{array}{c}
+\end{array}\right]$$
+
+On the other hand, if vectors are referred to their own frames, it is
+
+$$\left[\begin{array}{c}
 \dot{\boldsymbol{p}}_{2}^{2} \\
 \boldsymbol{\omega}_{2}^{2}
 \end{array}\right]=\left[\begin{array}{cc}
-\boldsymbol{R}_{1}^{2} &amp; -\boldsymbol{R}_{1}^{2} \boldsymbol{S}\left(\boldsymbol{r}_{12}^{1}\right) \\
-\boldsymbol{O} &amp; \boldsymbol{R}_{1}^{2}
+\boldsymbol{R}_{1}^{2} & -\boldsymbol{R}_{1}^{2} \boldsymbol{S}\left(\boldsymbol{r}_{12}^{1}\right) \\
+\boldsymbol{O} & \boldsymbol{R}_{1}^{2}
 \end{array}\right]\left[\begin{array}{c}
 \dot{\boldsymbol{p}}_{1}^{1} \\
 \boldsymbol{\omega}_{1}^{1}
-\end{array}\right]\end{split}\]</div>
-<p>giving the relationship of velocity transformation between two frames.
-The above can be compactly written as</p>
-<div class="math notranslate nohighlight">
-\[\boldsymbol{v}_{2}^{2}=\boldsymbol{J}_{1}^{2} \boldsymbol{v}_{1}^{1}\]</div>
-<p>By virtue of the kineto-statics duality, the force transformation
-between two frames is</p>
-<div class="math notranslate nohighlight">
-\[\boldsymbol{\gamma}_{1}^{1}=\boldsymbol{J}_{1}^{2 T} \boldsymbol{\gamma}_{2}^{2}\]</div>
-<p>Finally, notice that the above analysis is instantaneous in that, if a
+\end{array}\right]$$
+
+giving the relationship of velocity transformation between two frames.
+The above can be compactly written as
+
+$$\boldsymbol{v}_{2}^{2}=\boldsymbol{J}_{1}^{2} \boldsymbol{v}_{1}^{1}$$
+
+By virtue of the kineto-statics duality, the force transformation
+between two frames is
+
+$$\boldsymbol{\gamma}_{1}^{1}=\boldsymbol{J}_{1}^{2 T} \boldsymbol{\gamma}_{2}^{2}$$
+
+Finally, notice that the above analysis is instantaneous in that, if a
 coordinate frame varies with respect to the other, it is necessary to
 recompute the Jacobian of the transformation through the computation of
-the related rotation matrix of one frame with respect to the other.</p>
+the related rotation matrix of one frame with respect to the other. -->
 </section>
 
     <script type="text/x-thebe-config">
@@ -544,7 +550,7 @@ the related rotation matrix of one frame with respect to the other.</p>
         },
         kernelOptions: {
             name: "python3",
-            path: "./lec14"
+            path: "./lec10-dual"
         },
         predefinedOutput: true
     }
@@ -571,11 +577,11 @@ the related rotation matrix of one frame with respect to the other.</p>
       </div>
     </a>
     <a class="right-next"
-       href="../lec15/inverse_vk.html"
+       href="../lec16-17/nik.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Inverse Velocity Kinematics</p>
+        <p class="prev-next-title">Numerical Inverse Kinematics</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -595,9 +601,11 @@ the related rotation matrix of one frame with respect to the other.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Statics</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Duality</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statics">Statics</a></li>
+</ul>
+</li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#kineto-statics-duality">Kineto-Statics Duality</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#velocity-and-force-transformation-optional">Velocity and Force Transformation (Optional)</a></li>
 </ul>
 
   </nav></div>

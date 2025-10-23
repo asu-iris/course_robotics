@@ -15,8 +15,8 @@ parts:
       - file: lec7-dk/dk
       - file: lec8-jac/jac
       - file: lec9-singu/singularity
-      - file: lec14/statics
-      - file: lec15/inverse_vk
+      - file: lec10-dual/dual
+      # - file: lec15/inverse_vk
       - file: lec16-17/nik
       - file: lec18/dyn
       - file: lec19/control_overview

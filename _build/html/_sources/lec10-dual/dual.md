@@ -5,44 +5,48 @@ date: Oct. 5, 2023
 title: "Lecture 14: Statics and Duality"
 ---
 
-# Statics
+# Duality
+
+## Statics
 
 The concept of statics in robotics is to find the relationship between  force
 applied to the end-effector and the generalized torques applied to the
 joints when the robot arm is at equilibrium.  We will apply the [principle of
 virtual work](https://en.wikipedia.org/wiki/Virtual_work#:~:text=The%20principle%20of%20virtual%20work%20states%20that%20in%20equilibrium%20the,the%20reaction%2C%20or%20constraint%20forces.) to determine this relationship.
 
-```{important}
+```{admonition} The principle of virtual work
 The principle of virtual work states that in equilibrium the virtual work of the forces applied to a system is zero
 ```
 
 
-Let $\boldsymbol{\tau}$
-be the $(n \times 1)$ joint torques and $\boldsymbol{\gamma}_{e}=\begin{bmatrix}
+Let $\boldsymbol{\gamma}_{e}=\begin{bmatrix}
 \boldsymbol{f}_{e}\\
 \boldsymbol{\mu}_{e}
-\end{bmatrix}$ the
-$(r \times 1)$ end-effector forces, including linear force $\boldsymbol{f}_{e}$ and moment
-$\boldsymbol{\mu}_{e}$.
-
-
-The visual work by the joint torques:
-
-$$d W_{\tau}=\boldsymbol{\tau}^{T} d \boldsymbol{q}$$
-
-where $d \boldsymbol{q}$ is  the  joint virtual displacement.
-
-The visual work by the end-effector forces:
+\end{bmatrix}\in \mathbb{R}^{r}$ be the wrench applied to the robot 
+ end-effector. It includes the linear force $\boldsymbol{f}_{e}$ and moment
+$\boldsymbol{\mu}_{e}$. The visual work by this end-effector wrench:
 
 $$d W_{\gamma}=\boldsymbol{f}_{e}^{T} d \boldsymbol{p}_{e}+\boldsymbol{\mu}_{e}^{T} \boldsymbol{\omega}_{e} d t =\boldsymbol{f}_{e}^{T} \boldsymbol{J}_{P}(\boldsymbol{q}) d \boldsymbol{q}+\boldsymbol{\mu}_{e}^{T} \boldsymbol{J}_{O}(\boldsymbol{q}) d \boldsymbol{q}  =\boldsymbol{\gamma}_{e}^{T} \boldsymbol{J}(\boldsymbol{q}) d \boldsymbol{q}$$
 
 where $d \boldsymbol{p}_{e}$ is the linear virtual displacement and
 $\boldsymbol{\omega}_{e} d t$ is the angular virtual displacement of the end-effector.
 
-According to the principle of virtual work, the manipulator is at static
+
+
+
+Let $\boldsymbol{\tau}\in\mathbb{R}^{n}$
+be the joint torques. The visual work by the joint torques:
+
+$$d W_{\tau}=\boldsymbol{\tau}^{T} d \boldsymbol{q}$$
+
+where $d \boldsymbol{q}$ is  the  joint virtual displacement.
+
+
+
+According to the principle of virtual work, the robot arm is at static
 equilibrium if and only if
 
-$$\delta W_{\tau}=\delta W_{\gamma}, \quad \forall \delta \boldsymbol{q}$$
+$$\delta W_{\tau}=\delta W_{\gamma}$$
 
 This leads to the statics equation:
 
@@ -63,20 +67,22 @@ $$\begin{aligned}
     \boldsymbol{\tau}=\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{\gamma}_{e}
 \end{aligned}$$
 
--   The range space $\mathcal{R}\left(\boldsymbol{J}^{T}\right)$ of $\boldsymbol{J}^{T}$ is the subspace
+-   The range space $\mathcal{R}\left(\boldsymbol{J}^{T}\right)$  is the subspace
      in $\mathbb{R}^{n}$, where the
-    the joint torques that can balance the end-effector forces at robot pose $\boldsymbol{q}$.
+    the joint torques that can balance the end-effector wrench.
 
--   The null space $\mathcal{N}\left(\boldsymbol{J}^{T}\right)$ of $\boldsymbol{J}^{T}$ is the subspace
+-   The null space $\mathcal{N}\left(\boldsymbol{J}^{T}\right)$  is the subspace
      in $\mathbb{R}^{r}$ of
-    the end-effector forces that do not require any balancing joint
-    torques at robot pose $\boldsymbol{q}$.
+    the end-effector wrench that does not require any balancing joint
+    torques. This means that the end-effector wrenches
+$\gamma_{e} \in \mathcal{N}\left(\boldsymbol{J}^{T}\right)$ are entirely
+absorbed by the mechanical structure of the robot arm. 
 
 
 
-```{figure} ../lec11-12/diff_kinematics/operation_to_joint.jpg
+```{figure}  ./dual/operation_to_joint.jpg
 ---
-width: 70%
+width: 50%
 name: coordinate_mapping
 ---
 Mapping between the end-effector force space and the joint torque
@@ -84,19 +90,21 @@ space
 ```
 
 
-It is worth remarking that the end-effector forces
-$\gamma_{e} \in \mathcal{N}\left(\boldsymbol{J}^{T}\right)$ are entirely
-absorbed by the mechanical structure of the robot arm. 
 
 
-From fundamental relationship in linear algebra, the relations between the two subspaces are established by
+
+From fundamental relationship in linear algebra, we have the following relationships: 
 
 $$\mathcal{N}(\boldsymbol{J}) \equiv \mathcal{R}^{\perp}\left(\boldsymbol{J}^{T}\right) \quad \mathcal{R}(\boldsymbol{J}) \equiv \mathcal{N}^{\perp}\left(\boldsymbol{J}^{T}\right)$$
 
-and then, once the manipulator Jacobian is known, it is possible to
+<!-- and then, once the  Jacobian is known, it is possible to
 characterize completely differential kinematics and statics in terms of
-the range and null spaces of the Jacobian and its transpose.
+the range and null spaces of the Jacobian and its transpose. -->
 
+
+
+
+<!-- 
 # Velocity and Force Transformation (Optional)
 
 
@@ -164,4 +172,4 @@ $$\boldsymbol{\gamma}_{1}^{1}=\boldsymbol{J}_{1}^{2 T} \boldsymbol{\gamma}_{2}^{
 Finally, notice that the above analysis is instantaneous in that, if a
 coordinate frame varies with respect to the other, it is necessary to
 recompute the Jacobian of the transformation through the computation of
-the related rotation matrix of one frame with respect to the other.
+the related rotation matrix of one frame with respect to the other. -->

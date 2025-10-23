@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -63,7 +63,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Dynamics (Lagrangian formulation)" href="../lec18/dyn.html" />
-    <link rel="prev" title="Inverse Velocity Kinematics" href="../lec15/inverse_vk.html" />
+    <link rel="prev" title="Duality" href="../lec10-dual/dual.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -207,12 +207,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../lec9-singu/singularity.html">Singularity &amp; Redundancy</a></li>
 
 
-<li class="toctree-l1"><a class="reference internal" href="../lec14/statics.html">Statics</a></li>
-
-
-<li class="toctree-l1"><a class="reference internal" href="../lec15/inverse_vk.html">Inverse Velocity Kinematics</a></li>
-
-
+<li class="toctree-l1"><a class="reference internal" href="../lec10-dual/dual.html">Duality</a></li>
 
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Numerical Inverse Kinematics</a></li>
 
@@ -423,7 +418,7 @@ pose <span class="math notranslate nohighlight">\(\boldsymbol{x}_{e}\)</span>:</
 <p>Consider the time derivative of <a class="reference internal" href="#equation-equ-error">(22)</a></p>
 <div class="math notranslate nohighlight" id="equation-equ-error-dyn">
 <span class="eqno">(23)<a class="headerlink" href="#equation-equ-error-dyn" title="Link to this equation">#</a></span>\[\dot{\boldsymbol{e}}=\dot{\boldsymbol{x}}_{d}-\dot{\boldsymbol{x}}_{e}=\dot{\boldsymbol{x}}_{d}-\boldsymbol{J}_{A}(\boldsymbol{q}) \dot{\boldsymbol{q}}\]</div>
-<p>The above <a class="reference internal" href="#equation-equ-error-dyn">(23)</a> is called <em>error dynamics</em>, as it show ODE of end-effector pose error
+<p>The above <a class="reference internal" href="../lec21/cjc.html#equation-equ-error-dyn">(84)</a> is called <em>error dynamics</em>, as it show ODE of end-effector pose error
 <span class="math notranslate nohighlight">\(\boldsymbol{e}(t)\)</span> over time <span class="math notranslate nohighlight">\(t\)</span>. Here, <span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}}\)</span> can be
 viewed as the control input. From a control perspective, we want to find
 a feedback control law</p>
@@ -492,7 +487,7 @@ where <span class="math notranslate nohighlight">\(\boldsymbol{k}(\cdot)\)</span
 <a class="reference internal image-reference" href="lec10/diff_kinematics/IK_jacobian_inverse.jpg"><img alt="lec10/diff_kinematics/IK_jacobian_inverse.jpg" src="lec10/diff_kinematics/IK_jacobian_inverse.jpg" style="width: 80%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 62 </span><span class="caption-text">IK algorithm with Jacobian
+<p><span class="caption-number">Fig. 61 </span><span class="caption-text">IK algorithm with Jacobian
 inverse</span><a class="headerlink" href="#ik-jacobian-inverse" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
@@ -548,7 +543,7 @@ specifically as</p>
 <span class="math notranslate nohighlight">\(t\rightarrow \infty\)</span> (the error is converging).</p>
 </div>
 <p>Consider <span class="math notranslate nohighlight">\(\dot{\boldsymbol{x}}_{d}=\mathbf{0}\)</span>. Let’s use Lyapunov
-function to find controller such that the error dynamics <a class="reference internal" href="#equation-equ-error-dyn">(23)</a> is
+function to find controller such that the error dynamics <a class="reference internal" href="../lec21/cjc.html#equation-equ-error-dyn">(84)</a> is
 stablizing. Let’s choose Lyapunov function</p>
 <div class="math notranslate nohighlight">
 \[V(\boldsymbol{e})=\frac{1}{2} \boldsymbol{e}^{T} \boldsymbol{K} \boldsymbol{e}\]</div>
@@ -574,7 +569,7 @@ according to Lyapunov Stablity. The block scheme for the Jacobian transpose IK a
 <a class="reference internal image-reference" href="lec10/diff_kinematics/IK_jacobian_transpose.jpg"><img alt="lec10/diff_kinematics/IK_jacobian_transpose.jpg" src="lec10/diff_kinematics/IK_jacobian_transpose.jpg" style="width: 80%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 63 </span><span class="caption-text">Block scheme of the inverse kinematics algorithm with Jacobian
+<p><span class="caption-number">Fig. 62 </span><span class="caption-text">Block scheme of the inverse kinematics algorithm with Jacobian
 transpose</span><a class="headerlink" href="#ik-jacobian-transpose" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
@@ -712,12 +707,12 @@ derivative is</p>
 \[\boldsymbol{\omega}_{e}=\boldsymbol{N}\left(\phi_{e}\right)\dot{\boldsymbol{\phi}}_{e}\]</div>
 <p>for the Euler ZYZ Angle
 <span class="math notranslate nohighlight">\({\boldsymbol{\phi}}_{e}=[{\varphi}, {\vartheta}, \psi]^T\)</span>.</p>
-<p>Recall the rotation induced from the Euler ZYZ Angle. The angualr velocities <span class="math notranslate nohighlight">\(\dot{\varphi}, \dot{\vartheta}, \dot\psi\)</span> is always with respect to the current frame, as shown in <a class="reference internal" href="#euler-angle-vel"><span class="std std-numref">Fig. 64</span></a>.</p>
+<p>Recall the rotation induced from the Euler ZYZ Angle. The angualr velocities <span class="math notranslate nohighlight">\(\dot{\varphi}, \dot{\vartheta}, \dot\psi\)</span> is always with respect to the current frame, as shown in <a class="reference internal" href="../lec8-jac/jac.html#euler-angle-vel"><span class="std std-numref">Fig. 54</span></a>.</p>
 <figure class="align-default" id="euler-angle-vel">
 <a class="reference internal image-reference" href="lec11-12/diff_kinematics/Euler_angle_vel.jpg"><img alt="lec11-12/diff_kinematics/Euler_angle_vel.jpg" src="lec11-12/diff_kinematics/Euler_angle_vel.jpg" style="width: 80%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 64 </span><span class="caption-text">Rotational velocities of Euler angles ZYZ in current
+<p><span class="caption-number">Fig. 63 </span><span class="caption-text">Rotational velocities of Euler angles ZYZ in current
 frame</span><a class="headerlink" href="#euler-angle-vel" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
@@ -961,12 +956,12 @@ accelerations chosen to optimize another objective function. -->
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../lec15/inverse_vk.html"
+       href="../lec10-dual/dual.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Inverse Velocity Kinematics</p>
+        <p class="prev-next-title">Duality</p>
       </div>
     </a>
     <a class="right-next"
