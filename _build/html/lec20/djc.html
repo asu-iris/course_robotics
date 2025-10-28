@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -209,7 +209,7 @@
 
 <li class="toctree-l1"><a class="reference internal" href="../lec10-dual/dual.html">Duality</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="../lec16-17/nik.html">Numerical Inverse Kinematics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lec11-nik/nik.html">Numerical Inverse Kinematics</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="../lec18/dyn.html">Dynamics (Lagrangian formulation)</a></li>
 
@@ -404,12 +404,12 @@ document.write(`
 <p>The equation of motion of a manipulator without end-effector contact
 force and any joint friction is</p>
 <div class="math notranslate nohighlight" id="equation-equ-control-arm-dyn">
-<span class="eqno">(58)<a class="headerlink" href="#equation-equ-control-arm-dyn" title="Link to this equation">#</a></span>\[
+<span class="eqno">(59)<a class="headerlink" href="#equation-equ-control-arm-dyn" title="Link to this equation">#</a></span>\[
     \boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\boldsymbol{\tau}\]</div>
 <p>From the previous chapter, the joint-motor
 transmission gives</p>
 <div class="math notranslate nohighlight" id="equation-equ-motor-angle">
-<span class="eqno">(59)<a class="headerlink" href="#equation-equ-motor-angle" title="Link to this equation">#</a></span>\[
+<span class="eqno">(60)<a class="headerlink" href="#equation-equ-motor-angle" title="Link to this equation">#</a></span>\[
     \boldsymbol{q}_{m}=\boldsymbol{K}_{r} \boldsymbol{q}\]</div>
 <!-- $\boldsymbol{K}_{r}=\text{diag}(k_{r_1}, k_{r_2}, ..., k_{r_n})$ -->
 <p>where <span class="math notranslate nohighlight">\(\boldsymbol{K}_{r}\)</span>
@@ -418,48 +418,48 @@ ratio of joint <span class="math notranslate nohighlight">\(i\)</span>. Let
 <span class="math notranslate nohighlight">\(\boldsymbol{\tau}_{m}\)</span> denote
 the vector of all motor torques, one can write</p>
 <div class="math notranslate nohighlight" id="equation-equ-motor-torque">
-<span class="eqno">(60)<a class="headerlink" href="#equation-equ-motor-torque" title="Link to this equation">#</a></span>\[
+<span class="eqno">(61)<a class="headerlink" href="#equation-equ-motor-torque" title="Link to this equation">#</a></span>\[
 \boldsymbol{\tau}= \boldsymbol{K}_{r}\boldsymbol{\tau}_{m}\]</div>
-<p>Substituting <a class="reference internal" href="#equation-equ-motor-torque">(60)</a> and <a class="reference internal" href="#equation-equ-motor-angle">(59)</a>
-into the robot arm dynamics <a class="reference internal" href="#equation-equ-control-arm-dyn">(58)</a>
+<p>Substituting <a class="reference internal" href="#equation-equ-motor-torque">(61)</a> and <a class="reference internal" href="#equation-equ-motor-angle">(60)</a>
+into the robot arm dynamics <a class="reference internal" href="#equation-equ-control-arm-dyn">(59)</a>
 leads to</p>
 <div class="math notranslate nohighlight" id="equation-equ-control-dyn2">
-<span class="eqno">(61)<a class="headerlink" href="#equation-equ-control-dyn2" title="Link to this equation">#</a></span>\[
+<span class="eqno">(62)<a class="headerlink" href="#equation-equ-control-dyn2" title="Link to this equation">#</a></span>\[
     \boldsymbol{K}_{r}^{-1} \boldsymbol{B}(\boldsymbol{q}) \boldsymbol{K}_{r}^{-1} \ddot{\boldsymbol{q}}_{m}+\boldsymbol{K}_{r}^{-1} \boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \boldsymbol{K}_{r}^{-1} \dot{\boldsymbol{q}}_{m}+\boldsymbol{K}_{r}^{-1} \boldsymbol{g}(\boldsymbol{q})=\boldsymbol{\tau}_{m}\]</div>
 <section id="the-idea-of-how-we-do-decentralized-control">
 <h2>The idea of how we do decentralized control<a class="headerlink" href="#the-idea-of-how-we-do-decentralized-control" title="Link to this heading">#</a></h2>
 <p>We have previously (in dynamics lecture) analyzed the inertia matrix
 <span class="math notranslate nohighlight">\(\boldsymbol{B}(\boldsymbol{q})\)</span>, one can write it as</p>
 <div class="math notranslate nohighlight" id="equation-equ-bmat2">
-<span class="eqno">(62)<a class="headerlink" href="#equation-equ-bmat2" title="Link to this equation">#</a></span>\[
+<span class="eqno">(63)<a class="headerlink" href="#equation-equ-bmat2" title="Link to this equation">#</a></span>\[
     \boldsymbol{B}(\boldsymbol{q})=\overline{\boldsymbol{B}}+\Delta \boldsymbol{B}(\boldsymbol{q})
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(\overline{\boldsymbol{B}}\)</span> is the diagonal matrix whose constant
 elements represent the average inertia at each joint, and elements in
 <span class="math notranslate nohighlight">\(\Delta \boldsymbol{B}(\boldsymbol{q})\)</span> represent the matrix of
 non-diagonal part.</p>
-<p>Substituting <a class="reference internal" href="#equation-equ-bmat2">(62)</a>
-into <a class="reference internal" href="#equation-equ-control-dyn2">(61)</a> leads to</p>
+<p>Substituting <a class="reference internal" href="#equation-equ-bmat2">(63)</a>
+into <a class="reference internal" href="#equation-equ-control-dyn2">(62)</a> leads to</p>
 <div class="math notranslate nohighlight" id="equation-equ-decouple-model">
-<span class="eqno">(63)<a class="headerlink" href="#equation-equ-decouple-model" title="Link to this equation">#</a></span>\[
+<span class="eqno">(64)<a class="headerlink" href="#equation-equ-decouple-model" title="Link to this equation">#</a></span>\[
     \underbrace{\boldsymbol{K}_{r}^{-1} \overline{\boldsymbol{B}} \boldsymbol{K}_{r}^{-1}}_{\boldsymbol{I}_m} \ddot{\boldsymbol{q}}_{m}+\underbrace{\boldsymbol{K}_{r}^{-1} \Delta \boldsymbol{B}(\boldsymbol{q}) \boldsymbol{K}_{r}^{-1} \ddot{\boldsymbol{q}}_{m}+\boldsymbol{K}_{r}^{-1} \boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \boldsymbol{K}_{r}^{-1} \dot{\boldsymbol{q}}_{m}+\boldsymbol{K}_{r}^{-1} \boldsymbol{g}(\boldsymbol{q})}_{\boldsymbol{D}}=\boldsymbol{\tau}_{m}\]</div>
 <p>Here, <span class="math notranslate nohighlight">\(\boldsymbol{I}_m\)</span> is also a diagonal
-matrix, whose each diagonal entry encodes the inertia  at that joint.  <span class="math notranslate nohighlight">\(\boldsymbol{D}\)</span> in <a class="reference internal" href="#equation-equ-decouple-model">(63)</a>
+matrix, whose each diagonal entry encodes the inertia  at that joint.  <span class="math notranslate nohighlight">\(\boldsymbol{D}\)</span> in <a class="reference internal" href="#equation-equ-decouple-model">(64)</a>
 is a coupling term between different joints.</p>
-<p>The above equation <a class="reference internal" href="#equation-equ-decouple-model">(63)</a> corresponds to the following diagram</p>
+<p>The above equation <a class="reference internal" href="#equation-equ-decouple-model">(64)</a> corresponds to the following diagram</p>
 <figure class="align-default" id="decentralized-control3">
 <a class="reference internal image-reference" href="../_images/decentralized_control3.jpeg"><img alt="../_images/decentralized_control3.jpeg" src="../_images/decentralized_control3.jpeg" style="width: 99%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 71 </span><span class="caption-text">Dynamics diagram of a motor-driven
+<p><span class="caption-number">Fig. 70 </span><span class="caption-text">Dynamics diagram of a motor-driven
 robot arm.</span><a class="headerlink" href="#decentralized-control3" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>As shown in both <a class="reference internal" href="#equation-equ-decouple-model">(63)</a> and <a class="reference internal" href="#decentralized-control3"><span class="std std-numref">Fig. 71</span></a>, if we ignore the coupling term <span class="math notranslate nohighlight">\(\boldsymbol{D}\)</span>,</p>
+<p>As shown in both <a class="reference internal" href="#equation-equ-decouple-model">(64)</a> and <a class="reference internal" href="#decentralized-control3"><span class="std std-numref">Fig. 70</span></a>, if we ignore the coupling term <span class="math notranslate nohighlight">\(\boldsymbol{D}\)</span>,</p>
 <div class="math notranslate nohighlight">
 \[\boldsymbol{I}_m\boldsymbol{\ddot{q}}_m=\boldsymbol{\tau}_m,\]</div>
 <p>This means that if we ignore  complex term
-<span class="math notranslate nohighlight">\(\boldsymbol{D}\)</span>, each joint is a single-in-single-output system (because <span class="math notranslate nohighlight">\(\boldsymbol{I}_m\)</span> is a diagonal matrix).  However, the coupling term <span class="math notranslate nohighlight">\(\boldsymbol{D}\)</span> in <a class="reference internal" href="#equation-equ-decouple-model">(63)</a> prevents us
+<span class="math notranslate nohighlight">\(\boldsymbol{D}\)</span>, each joint is a single-in-single-output system (because <span class="math notranslate nohighlight">\(\boldsymbol{I}_m\)</span> is a diagonal matrix).  However, the coupling term <span class="math notranslate nohighlight">\(\boldsymbol{D}\)</span> in <a class="reference internal" href="#equation-equ-decouple-model">(64)</a> prevents us
 from considering so. How do we overcome this in our control design?</p>
 <!-- In the reminder of this chapter, i will use ${\theta}_m$ and $q_m$ interchangeably to denote the variable of each joint, without writing the subscript joint index. For a single joint, if no coupling term $\boldsymbol{D}$, the dynamics equation at the joint is -->
 <!-- $$\label{equ.single_joint_dyn}
@@ -488,7 +488,7 @@ control design is to find <span class="math notranslate nohighlight">\(C(s)\)</s
 <a class="reference internal image-reference" href="../_images/fd_control2.jpeg"><img alt="../_images/fd_control2.jpeg" src="../_images/fd_control2.jpeg" style="width: 90%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 72 </span><span class="caption-text">A typical control system diagram</span><a class="headerlink" href="#fd-control2" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 71 </span><span class="caption-text">A typical control system diagram</span><a class="headerlink" href="#fd-control2" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>For the above control system, the forward path transfer function is</p>
@@ -540,14 +540,14 @@ natural frequency. Both parameters will  affect the response of the system in ti
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="single-joint-system-diagram">
 <h1>Single-Joint System Diagram<a class="headerlink" href="#single-joint-system-diagram" title="Link to this heading">#</a></h1>
-<p>In the reminder of this chapter, i will use <span class="math notranslate nohighlight">\({\theta}_m\)</span> and <span class="math notranslate nohighlight">\(q_m\)</span> interchangeably as the variable of each joint, droping the subscript of  joint index. For a single joint,  the dynamics equation at that joint is a row of <a class="reference internal" href="#equation-equ-decouple-model">(63)</a>, writing as</p>
+<p>In the reminder of this chapter, i will use <span class="math notranslate nohighlight">\({\theta}_m\)</span> and <span class="math notranslate nohighlight">\(q_m\)</span> interchangeably as the variable of each joint, droping the subscript of  joint index. For a single joint,  the dynamics equation at that joint is a row of <a class="reference internal" href="#equation-equ-decouple-model">(64)</a>, writing as</p>
 <div class="math notranslate nohighlight" id="equation-equ-single-joint-dyn">
-<span class="eqno">(64)<a class="headerlink" href="#equation-equ-single-joint-dyn" title="Link to this equation">#</a></span>\[
+<span class="eqno">(65)<a class="headerlink" href="#equation-equ-single-joint-dyn" title="Link to this equation">#</a></span>\[
 I_m\ddot{\theta}_m+D=\tau_m
 \]</div>
 <p>Let’s recall the DC motor model in our previous chapter:</p>
 <div class="math notranslate nohighlight" id="equation-equ-single-joint-motor">
-<span class="eqno">(65)<a class="headerlink" href="#equation-equ-single-joint-motor" title="Link to this equation">#</a></span>\[
+<span class="eqno">(66)<a class="headerlink" href="#equation-equ-single-joint-motor" title="Link to this equation">#</a></span>\[
 \tau_m=k_ti_a=k_t\frac{(G_vv_c-k_v\dot{\theta}_m)}{R_a}=k_t\frac{(v_a-k_v\dot{\theta}_m)}{R_a}
 \]</div>
 <p>where <span class="math notranslate nohighlight">\({k}_{t}\)</span> is the
@@ -556,23 +556,23 @@ vector of armature voltage; <span class="math notranslate nohighlight">\({R}_{a}
 <span class="math notranslate nohighlight">\({k}_{v}\)</span> is the back EMF constant; <span class="math notranslate nohighlight">\(v_a=G_vv_c\)</span> with <span class="math notranslate nohighlight">\(\boldsymbol{v}_{c}\)</span> is the voltage input
 of the servomotor, and <span class="math notranslate nohighlight">\(G_v\)</span> is  voltage amplifier. Those  parameters have
 been shown in previous chapter.</p>
-<p>Equaling <a class="reference internal" href="#equation-equ-single-joint-dyn">(64)</a> and <a class="reference internal" href="#equation-equ-single-joint-motor">(65)</a>, one has</p>
+<p>Equaling <a class="reference internal" href="#equation-equ-single-joint-dyn">(65)</a> and <a class="reference internal" href="#equation-equ-single-joint-motor">(66)</a>, one has</p>
 <div class="math notranslate nohighlight" id="equation-equ-motor">
-<span class="eqno">(66)<a class="headerlink" href="#equation-equ-motor" title="Link to this equation">#</a></span>\[
+<span class="eqno">(67)<a class="headerlink" href="#equation-equ-motor" title="Link to this equation">#</a></span>\[
 I_m\ddot{\theta}_m+D=\tau_m=I_m\ddot{\theta}_m+\frac{k_t}{R_a}(\frac{DR_a}{k_t})=k_t\frac{(v_a-k_v\dot{\theta}_m)}{R_a}
 \]</div>
-<p>The above <a class="reference internal" href="#equation-equ-motor">(66)</a> corresponds to the following diagram</p>
+<p>The above <a class="reference internal" href="#equation-equ-motor">(67)</a> corresponds to the following diagram</p>
 <figure class="align-default" id="motor-model3">
 <a class="reference internal image-reference" href="../_images/motor_model3.jpeg"><img alt="../_images/motor_model3.jpeg" src="../_images/motor_model3.jpeg" style="width: 80%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 73 </span><span class="caption-text">Diagram of a single motor-joint model, with coupled joint term <span class="math notranslate nohighlight">\(D\)</span>
+<p><span class="caption-number">Fig. 72 </span><span class="caption-text">Diagram of a single motor-joint model, with coupled joint term <span class="math notranslate nohighlight">\(D\)</span>
 treated as disturbance.</span><a class="headerlink" href="#motor-model3" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>For the above diagram, the input (<span class="math notranslate nohighlight">\(v_a\)</span>) to output (<span class="math notranslate nohighlight">\(\theta_m\)</span>) transfer function <span class="math notranslate nohighlight">\(G(s)\)</span> is</p>
 <div class="math notranslate nohighlight" id="equation-equ-motortf">
-<span class="eqno">(67)<a class="headerlink" href="#equation-equ-motortf" title="Link to this equation">#</a></span>\[
+<span class="eqno">(68)<a class="headerlink" href="#equation-equ-motortf" title="Link to this equation">#</a></span>\[
     G(s)=\frac{{\Theta}(s)}{V_a(s)}=\frac{k_m}{s(1+T_ms)}\]</div>
 <p>with</p>
 <div class="math notranslate nohighlight">
@@ -584,12 +584,12 @@ T_m=\frac{R_aI_m}{k_tk_v}
 <p>The  input (<span class="math notranslate nohighlight">\(v_a\)</span>) to output velocity (<span class="math notranslate nohighlight">\(\dot{\theta}_m\)</span>) transfer function is</p>
 <div class="math notranslate nohighlight">
 \[\frac{\dot{\Theta}(s)}{V_a(s)}=\frac{k_m}{1+T_ms}\]</div>
-<p>The single joint system in <a class="reference internal" href="#motor-model3"><span class="std std-numref">Fig. 73</span></a> is the plant <span class="math notranslate nohighlight">\(G(s)\)</span> we want to design the controller <span class="math notranslate nohighlight">\(C(s)\)</span> for.</p>
+<p>The single joint system in <a class="reference internal" href="#motor-model3"><span class="std std-numref">Fig. 72</span></a> is the plant <span class="math notranslate nohighlight">\(G(s)\)</span> we want to design the controller <span class="math notranslate nohighlight">\(C(s)\)</span> for.</p>
 <p></br></br></p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="position-feedback-control-design">
 <h1>Position Feedback Control Design<a class="headerlink" href="#position-feedback-control-design" title="Link to this heading">#</a></h1>
-<p>The transfer function <span class="math notranslate nohighlight">\(G(s)\)</span> for the single joint system (<a class="reference internal" href="#motor-model3"><span class="std std-numref">Fig. 73</span></a>) is in <a class="reference internal" href="#equation-equ-motortf">(67)</a>, rewritten below</p>
+<p>The transfer function <span class="math notranslate nohighlight">\(G(s)\)</span> for the single joint system (<a class="reference internal" href="#motor-model3"><span class="std std-numref">Fig. 72</span></a>) is in <a class="reference internal" href="#equation-equ-motortf">(68)</a>, rewritten below</p>
 <div class="math notranslate nohighlight">
 \[G(s)=\frac{k_m}{s(1+T_ms)}\]</div>
 <p>We want to design a proportional-integral controller</p>
@@ -598,16 +598,16 @@ T_m=\frac{R_aI_m}{k_tk_v}
 C_{P}(s)=K_{P} \frac{1+s T_{P}}{s} 
 \end{gathered}\]</div>
 <p>with <span class="math notranslate nohighlight">\(K_P\)</span> and <span class="math notranslate nohighlight">\(T_P\)</span> are controller parameters.</p>
-<p>The control diagram for the single joint system  (<a class="reference internal" href="#motor-model3"><span class="std std-numref">Fig. 73</span></a>)  is shown below (note that the backward pass
+<p>The control diagram for the single joint system  (<a class="reference internal" href="#motor-model3"><span class="std std-numref">Fig. 72</span></a>)  is shown below (note that the backward pass
 constant <span class="math notranslate nohighlight">\(k_{TP}\)</span> is given and a constant, which can be thought of as the sensor gain).</p>
 <figure class="align-default" id="p-control2">
 <a class="reference internal image-reference" href="../_images/p_control2.jpg"><img alt="../_images/p_control2.jpg" src="../_images/p_control2.jpg" style="width: 99%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 74 </span><span class="caption-text">Control diagram of single-joint system</span><a class="headerlink" href="#p-control2" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 73 </span><span class="caption-text">Control diagram of single-joint system</span><a class="headerlink" href="#p-control2" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>On the diagram <a class="reference internal" href="#p-control2"><span class="std std-numref">Fig. 74</span></a>, the transfer function of the forward path is</p>
+<p>On the diagram <a class="reference internal" href="#p-control2"><span class="std std-numref">Fig. 73</span></a>, the transfer function of the forward path is</p>
 <div class="math notranslate nohighlight">
 \[G(s)C_P(s)=\frac{k_{m} K_{P}\left(1+s T_{P}\right)}{s^{2}\left(1+s T_{m}\right)}\]</div>
 <p>The transfer function of the backward pass is</p>
@@ -620,17 +620,17 @@ G(s)C_P(s)H(s)=\frac{k_{T P}k_{m} K_{P}\left(1+s T_{P}\right)}{s^{2}\left(1+s T_
 \]</div>
 <p>The closed-loop input-to-output transfer function is</p>
 <div class="math notranslate nohighlight" id="equation-equ-closed-loop">
-<span class="eqno">(68)<a class="headerlink" href="#equation-equ-closed-loop" title="Link to this equation">#</a></span>\[\frac{\Theta_{m}(s)}{\Theta_{r}(s)}=\frac{C_P(s)G(s)}{1+C_P(s)G(s)H(s)}=\frac{{k_{m}K_P(1+T_Ps)}}{k_{TP}k_{m}K_P(1+T_Ps)+s^2(1+sT_m)},\]</div>
+<span class="eqno">(69)<a class="headerlink" href="#equation-equ-closed-loop" title="Link to this equation">#</a></span>\[\frac{\Theta_{m}(s)}{\Theta_{r}(s)}=\frac{C_P(s)G(s)}{1+C_P(s)G(s)H(s)}=\frac{{k_{m}K_P(1+T_Ps)}}{k_{TP}k_{m}K_P(1+T_Ps)+s^2(1+sT_m)},\]</div>
 </br>
 <section id="input-to-output-stability-analysis">
 <h2>Input-to-output stability analysis<a class="headerlink" href="#input-to-output-stability-analysis" title="Link to this heading">#</a></h2>
-<p>To analyze the input-to-output stability of the closed-loop control system <a class="reference internal" href="#equation-equ-closed-loop">(68)</a>, we look at the roots (also called poles) of its characteristic equation, which can be factorized into the following
+<p>To analyze the input-to-output stability of the closed-loop control system <a class="reference internal" href="#equation-equ-closed-loop">(69)</a>, we look at the roots (also called poles) of its characteristic equation, which can be factorized into the following
 form</p>
 <div class="math notranslate nohighlight" id="equation-equ-cha-equ">
-<span class="eqno">(69)<a class="headerlink" href="#equation-equ-cha-equ" title="Link to this equation">#</a></span>\[{k_{TP}k_{m}K_P(1+T_Ps)+s^2(1+sT_m)}
+<span class="eqno">(70)<a class="headerlink" href="#equation-equ-cha-equ" title="Link to this equation">#</a></span>\[{k_{TP}k_{m}K_P(1+T_Ps)+s^2(1+sT_m)}
 =
 {\left({\omega_{n}^{2}}+{2 \zeta }{\omega_{n}}s+{s^{2}}\right)(1+s \tau)}=0\]</div>
-<p>The roots (also called poles) to the characteristics equation <a class="reference internal" href="#equation-equ-cha-equ">(69)</a> is</p>
+<p>The roots (also called poles) to the characteristics equation <a class="reference internal" href="#equation-equ-cha-equ">(70)</a> is</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{aligned}
@@ -644,26 +644,26 @@ ratio for the complex roots <span class="math notranslate nohighlight">\(s_1\)</
 Please see my <a class="reference download internal" download="" href="../_downloads/af66a2a39b5480f30ad4e93bc7990bf7/control_basics.pdf"><span class="xref download myst">Minimal notes on control basics</span></a> for explaination of how the values of <span class="math notranslate nohighlight">\(\omega_{n}\)</span>, <span class="math notranslate nohighlight">\(\zeta\)</span> and <span class="math notranslate nohighlight">\(s_3\)</span> effect the time-domain performance of the closed-loop control system.</p>
 <p>The location of the above poles <span class="math notranslate nohighlight">\((s_1, s_2, s_3)\)</span> on s-plane depends on the of the open-loop gain</p>
 <div class="math notranslate nohighlight" id="equation-equ-ol-gain">
-<span class="eqno">(70)<a class="headerlink" href="#equation-equ-ol-gain" title="Link to this equation">#</a></span>\[\frac{k_{m} K_{P} k_{T P} T_{P}}{T_{m}}\]</div>
-<p>The root locus (i.e., the trajectory of the above poles on <span class="math notranslate nohighlight">\(s-\)</span>plane)  can be drawn by taking different open loop gain value <a class="reference internal" href="#equation-equ-ol-gain">(70)</a>. Here, we derive into two cases:</p>
+<span class="eqno">(71)<a class="headerlink" href="#equation-equ-ol-gain" title="Link to this equation">#</a></span>\[\frac{k_{m} K_{P} k_{T P} T_{P}}{T_{m}}\]</div>
+<p>The root locus (i.e., the trajectory of the above poles on <span class="math notranslate nohighlight">\(s-\)</span>plane)  can be drawn by taking different open loop gain value <a class="reference internal" href="#equation-equ-ol-gain">(71)</a>. Here, we derive into two cases:</p>
 <ul>
-<li><p>If <span class="math notranslate nohighlight">\(T_{P}&lt;T_{m}\)</span>, the root locus is shown. Because there is always a pole (root) living on the right-half s-plane regardless of the choice of <span class="math notranslate nohighlight">\(\frac{k_{m} K_{P} k_{T P} T_{P}}{T_{m}}\)</span>, the closed-loop control system <a class="reference internal" href="#equation-equ-closed-loop">(68)</a> thus is inherently unstable.</p>
+<li><p>If <span class="math notranslate nohighlight">\(T_{P}&lt;T_{m}\)</span>, the root locus is shown. Because there is always a pole (root) living on the right-half s-plane regardless of the choice of <span class="math notranslate nohighlight">\(\frac{k_{m} K_{P} k_{T P} T_{P}}{T_{m}}\)</span>, the closed-loop control system <a class="reference internal" href="#equation-equ-closed-loop">(69)</a> thus is inherently unstable.</p>
 <figure class="align-default" id="p-control-rl-1">
 <a class="reference internal image-reference" href="../_images/p_control_rl_1.jpg"><img alt="../_images/p_control_rl_1.jpg" src="../_images/p_control_rl_1.jpg" style="width: 90%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 75 </span><span class="caption-text">Root locus when
+<p><span class="caption-number">Fig. 74 </span><span class="caption-text">Root locus when
 <span class="math notranslate nohighlight">\(T_{P}&lt;T_{m}\)</span></span><a class="headerlink" href="#p-control-rl-1" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </li>
-<li><p>If <span class="math notranslate nohighlight">\(T_{P}&gt;T_{m}\)</span>, the root locus is shown as below. First, all poles can be located on the left half of s-plane, thus closed-loop control system <a class="reference internal" href="#equation-equ-closed-loop">(68)</a> is stable. Also,  as <span class="math notranslate nohighlight">\(T_{P}\)</span>
+<li><p>If <span class="math notranslate nohighlight">\(T_{P}&gt;T_{m}\)</span>, the root locus is shown as below. First, all poles can be located on the left half of s-plane, thus closed-loop control system <a class="reference internal" href="#equation-equ-closed-loop">(69)</a> is stable. Also,  as <span class="math notranslate nohighlight">\(T_{P}\)</span>
 increases, the absolute value of the real part of the two complex poles, (<span class="math notranslate nohighlight">\(s_1\)</span> and <span class="math notranslate nohighlight">\(s_2\)</span>) tending towards the asymptotes increases too, and the     system has faster time response (please see my <a class="reference download internal" download="" href="../_downloads/af66a2a39b5480f30ad4e93bc7990bf7/control_basics.pdf"><span class="xref download myst">Minimal notes on control basics</span></a> for explaination)</p>
 <figure class="align-default" id="p-control-rl-2">
 <a class="reference internal image-reference" href="../_images/p_control_rl_2.jpg"><img alt="../_images/p_control_rl_2.jpg" src="../_images/p_control_rl_2.jpg" style="width: 90%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 76 </span><span class="caption-text">Root locus when
+<p><span class="caption-number">Fig. 75 </span><span class="caption-text">Root locus when
 <span class="math notranslate nohighlight">\(T_{P}&gt;T_{m}\)</span></span><a class="headerlink" href="#p-control-rl-2" title="Link to this image">#</a></p>
 </figcaption>
 </figure>

@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -59,7 +59,7 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'lec16-17/nik';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lec11-nik/nik';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Dynamics (Lagrangian formulation)" href="../lec18/dyn.html" />
@@ -283,7 +283,7 @@
       
       
       
-      <li><a href="../_sources/lec16-17/nik.md" target="_blank"
+      <li><a href="../_sources/lec11-nik/nik.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -378,14 +378,11 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Numerical Inverse Kinematics</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jacobian-inverse-or-newton-raphson-method">Jacobian Inverse or Newton-Raphson Method</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jacobian-transpose-or-gradient-based-method">Jacobian Transpose or Gradient-Based Method</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jacobian-inverse-newton-raphson-method">Jacobian Inverse (Newton-Raphson) Method</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jacobian-transpose-gradient-based-method">Jacobian Transpose (Gradient-Based) Method</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#definition-of-end-effector-error">Definition of End-effector Error</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#euler-angles-error">Euler-Angles Error</a></li>
-</ul>
-</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-define-end-effector-error">How to define End-effector Error</a></li>
 </ul>
 
             </nav>
@@ -401,9 +398,9 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="numerical-inverse-kinematics">
 <span id="chapter-nik"></span><h1>Numerical Inverse Kinematics<a class="headerlink" href="#numerical-inverse-kinematics" title="Link to this heading">#</a></h1>
 <p>Recall IK problems: given a desired end-effector pose
-<span class="math notranslate nohighlight">\(\boldsymbol{x}_{d}\)</span> (in operational space), we want to find the joint vector <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span> such that
-<span class="math notranslate nohighlight">\(\boldsymbol{k}(\boldsymbol{q})=\boldsymbol{x}_d\)</span>. Here,
-<span class="math notranslate nohighlight">\(\boldsymbol{k}(\cdot)\)</span> is the forward kinematics. In this chapter, we will show how to use Jacobian to solve this problem numerically. Let’s consider</p>
+<span class="math notranslate nohighlight">\(\boldsymbol{x}_{d}\)</span> (in the operational space), we want to find the joint values <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span> such that
+<span class="math notranslate nohighlight">\(\mathbb{FK}(\boldsymbol{q})=\boldsymbol{x}_d\)</span>. Here,
+<span class="math notranslate nohighlight">\(\mathbb{FK}(\cdot)\)</span> is the forward kinematics. In this chapter, we will show how to use Jacobian to solve this problem numerically. Let’s consider</p>
 <div class="math notranslate nohighlight">
 \[
 \dot{\boldsymbol{x}}_{e}=\boldsymbol{J}_{A}(\boldsymbol{q}) \dot{\boldsymbol{q}}
@@ -413,47 +410,43 @@ document.write(`
 between the desired <span class="math notranslate nohighlight">\(\boldsymbol{x}_{d}\)</span> and the current end-effector
 pose <span class="math notranslate nohighlight">\(\boldsymbol{x}_{e}\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-equ-error">
-<span class="eqno">(22)<a class="headerlink" href="#equation-equ-error" title="Link to this equation">#</a></span>\[\boldsymbol{e}=\boldsymbol{x}_{d}-\boldsymbol{x}_{e}=\boldsymbol{x}_{d}-\boldsymbol{k}(\boldsymbol{q})
+<span class="eqno">(22)<a class="headerlink" href="#equation-equ-error" title="Link to this equation">#</a></span>\[\boldsymbol{e}=\boldsymbol{x}_{d}-\boldsymbol{x}_{e}=\boldsymbol{x}_{d}-\mathbb{FK}(\boldsymbol{q})
 \]</div>
 <p>Consider the time derivative of <a class="reference internal" href="#equation-equ-error">(22)</a></p>
 <div class="math notranslate nohighlight" id="equation-equ-error-dyn">
 <span class="eqno">(23)<a class="headerlink" href="#equation-equ-error-dyn" title="Link to this equation">#</a></span>\[\dot{\boldsymbol{e}}=\dot{\boldsymbol{x}}_{d}-\dot{\boldsymbol{x}}_{e}=\dot{\boldsymbol{x}}_{d}-\boldsymbol{J}_{A}(\boldsymbol{q}) \dot{\boldsymbol{q}}\]</div>
-<p>The above <a class="reference internal" href="../lec21/cjc.html#equation-equ-error-dyn">(84)</a> is called <em>error dynamics</em>, as it show ODE of end-effector pose error
+<p>The above <a class="reference internal" href="#equation-equ-error-dyn">(23)</a> is called <em>error dynamics</em>, as it shows ODE of end-effector pose error
 <span class="math notranslate nohighlight">\(\boldsymbol{e}(t)\)</span> over time <span class="math notranslate nohighlight">\(t\)</span>. Here, <span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}}\)</span> can be
-viewed as the control input. From a control perspective, we want to find
-a feedback control law</p>
+viewed as the control input. From a control perspective, we want to design
+a  control law</p>
 <div class="math notranslate nohighlight">
-\[\dot{\boldsymbol{q}}= \text{Controller}({\boldsymbol{x}}_d, \dot{\boldsymbol{x}}_d,  {\boldsymbol{q}}, {\boldsymbol{e}})\]</div>
-<p>such that, when plug the controller to the error dynamics,
-<span class="math notranslate nohighlight">\(\boldsymbol{e}(t)\rightarrow 0\)</span> as <span class="math notranslate nohighlight">\(t\rightarrow \infty\)</span>. The different
-controllers leads to different  IK algorithms.</p>
-<section id="jacobian-inverse-or-newton-raphson-method">
-<h2>Jacobian Inverse or Newton-Raphson Method<a class="headerlink" href="#jacobian-inverse-or-newton-raphson-method" title="Link to this heading">#</a></h2>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>In Jacobian Inverse IK method, we set
-<span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}}= \text{Controller}({\boldsymbol{x}}_d, \dot{\boldsymbol{x}}_d,  {\boldsymbol{q}}, {\boldsymbol{e}})\)</span>
-specifically as</p>
+\[\dot{\boldsymbol{q}}= \text{controller}({\boldsymbol{x}}_d, \dot{\boldsymbol{x}}_d,  {\boldsymbol{q}}, {\boldsymbol{e}})\]</div>
+<p>which depends on all current information <span class="math notranslate nohighlight">\(({\boldsymbol{x}}_d, \dot{\boldsymbol{x}}_d,  {\boldsymbol{q}}, {\boldsymbol{e}})\)</span>,
+such that, when plug the controller to the error dynamics, we have
+<span class="math notranslate nohighlight">\(\boldsymbol{e}(t)\rightarrow 0\)</span> as <span class="math notranslate nohighlight">\(t\rightarrow \infty\)</span>. At convergence, the resulting <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span> is the IK solution!</p>
+<section id="jacobian-inverse-newton-raphson-method">
+<h2>Jacobian Inverse (Newton-Raphson) Method<a class="headerlink" href="#jacobian-inverse-newton-raphson-method" title="Link to this heading">#</a></h2>
+<div class="admonition-jacobian-inverse-method admonition">
+<p class="admonition-title">Jacobian Inverse  Method</p>
+<p>We set
+<span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}}= \text{controller}({\boldsymbol{x}}_d, \dot{\boldsymbol{x}}_d,  {\boldsymbol{q}}, {\boldsymbol{e}})\)</span>
+as</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\dot{\boldsymbol{q}}=
 \begin{cases}
 \boldsymbol{J}_{A}^{-1}(\boldsymbol{q})\left(\dot{\boldsymbol{x}}_{d}+\boldsymbol{K} \boldsymbol{e}\right)  \quad\quad\text{for non-redundant robot arms} \\[10pt]
 \boldsymbol{J}_{A}^{\dagger}\left(\dot{\boldsymbol{x}}_{d}+\boldsymbol{K e}\right)+\left(\boldsymbol{I}_{n}-\boldsymbol{J}_{A}^{\dagger} \boldsymbol{J}_{A}\right) \dot{\boldsymbol{q}}_{\text{ref}} \quad\quad\text{for redundant robot arms}
 \end{cases}\end{split}\]</div>
-<p>Here <span class="math notranslate nohighlight">\(\boldsymbol{K}\)</span> is a positive definite (usually diagonal) matrix, and <span class="math notranslate nohighlight">\({\boldsymbol{q}}_{\text{ref}}\)</span> is any reference joint velocity, which can be set based on a second objective in the previous chapter. <span class="math notranslate nohighlight">\(\boldsymbol{J}_{A}^{\dagger}\)</span> is the pseudo-inverse of Jacobian: <span class="math notranslate nohighlight">\(\boldsymbol{J}_{A}^{\dagger}=\boldsymbol{J}_{A}^{T}\left(\boldsymbol{J}_{A} \boldsymbol{J}_{A}^{T}\right)^{-1}\)</span>.</p>
+<p>Here <span class="math notranslate nohighlight">\(\boldsymbol{K}\)</span> is a positive definite (usually diagonal) matrix, and <span class="math notranslate nohighlight">\({\boldsymbol{q}}_{\text{ref}}\)</span> is any reference joint velocity that makes the robot move aways from the singularity. <span class="math notranslate nohighlight">\(\boldsymbol{J}_{A}^{\dagger}\)</span> is the pseudo-inverse of Jacobian. For non-singular robot arm configurations, <span class="math notranslate nohighlight">\(\boldsymbol{J}_{A}^{\dagger}=\boldsymbol{J}_{A}^{T}\left(\boldsymbol{J}_{A} \boldsymbol{J}_{A}^{T}\right)^{-1}\)</span>.</p>
 </div>
-<p>Let’s next verify if the above controller can solve the IK or not, by examining if the error dynamics
-is converging to 0.
-Submitting the above controllers into the error dynamics, it easy to
+<p>To verify if the above controller can solve  IK, we next examine if the error dynamics
+converges to 0.
+Submitting the above controllers into the error dynamics <a class="reference internal" href="#equation-equ-error-dyn">(23)</a>, it easy to
 verify that</p>
 <div class="math notranslate nohighlight" id="equation-equ-method1">
 <span class="eqno">(24)<a class="headerlink" href="#equation-equ-method1" title="Link to this equation">#</a></span>\[\dot{\boldsymbol{e}}+\boldsymbol{K} \boldsymbol{e}=0 .\]</div>
-<p>If <span class="math notranslate nohighlight">\(\boldsymbol{K}\)</span> is a positive definite (usually diagonal) matrix,
-<a class="reference internal" href="#equation-equ-method1">(24)</a> is asymptotically stable. The error tends to zero along the
-trajectory with a convergence rate that depends on the eigenvalues of
-<span class="math notranslate nohighlight">\(\boldsymbol{K}\)</span>.</p>
-<div class="admonition-background-from-linear-control-systems-course admonition">
-<p class="admonition-title">Background from Linear Control Systems course</p>
+<div class="admonition-background-from-linear-control-systems admonition">
+<p class="admonition-title">Background from Linear Control Systems</p>
 <p>Generally, given an ordinary differential equation (ODE)</p>
 <div class="math notranslate nohighlight">
 \[\dot{\boldsymbol{e}}+\boldsymbol{K} \boldsymbol{e}=0\]</div>
@@ -481,10 +474,14 @@ e^{-\lambda_1t}&amp; &amp; &amp;\\
 <span class="math notranslate nohighlight">\(\lambda_1, \lambda_2, ...\lambda_r&gt;0\)</span>,
 <span class="math notranslate nohighlight">\(\boldsymbol{e}(t)\rightarrow \boldsymbol{0}\)</span> as <span class="math notranslate nohighlight">\(t\rightarrow \infty\)</span>.</p>
 </div>
+<p>Thus, if <span class="math notranslate nohighlight">\(\boldsymbol{K}\)</span> is a positive definite (usually diagonal) matrix,
+<a class="reference internal" href="#equation-equ-method1">(24)</a> is asymptotically stable. The error tends to zero along the
+trajectory with a convergence rate that depends on the eigenvalues of
+<span class="math notranslate nohighlight">\(\boldsymbol{K}\)</span>.</p>
 <p>The block scheme for the above IK algorithm is shown below (non-redundant robot arm),
-where <span class="math notranslate nohighlight">\(\boldsymbol{k}(\cdot)\)</span> means the direct kinematics function.</p>
+where <span class="math notranslate nohighlight">\(\boldsymbol{k}(\cdot)\)</span> means the forward kinematics.</p>
 <figure class="align-default" id="ik-jacobian-inverse">
-<a class="reference internal image-reference" href="lec10/diff_kinematics/IK_jacobian_inverse.jpg"><img alt="lec10/diff_kinematics/IK_jacobian_inverse.jpg" src="lec10/diff_kinematics/IK_jacobian_inverse.jpg" style="width: 80%;" />
+<a class="reference internal image-reference" href="../_images/IK_jacobian_inverse.jpg"><img alt="../_images/IK_jacobian_inverse.jpg" src="../_images/IK_jacobian_inverse.jpg" style="width: 60%;" />
 </a>
 <figcaption>
 <p><span class="caption-number">Fig. 61 </span><span class="caption-text">IK algorithm with Jacobian
@@ -493,58 +490,64 @@ inverse</span><a class="headerlink" href="#ik-jacobian-inverse" title="Link to t
 </figure>
 <div class="admonition-why-it-s-also-named-newton-raphson-method admonition">
 <p class="admonition-title">Why it’s also named Newton-Raphson method?</p>
-<p>The naming of Newton-Raphson method comes from the perspective of “IK as solving nonlinear equations”</p>
-<p>Specifically, consider the following nonlinear equation from FK</p>
+<p>The naming of Newton-Raphson method comes from optimization perspective to solve a nonlinear equation.
+Generally, IK is to solve the following nonlinear equation where the variable is <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-equ-ik-fk">
-<span class="eqno">(25)<a class="headerlink" href="#equation-equ-ik-fk" title="Link to this equation">#</a></span>\[\boldsymbol{k}(\boldsymbol{q})=\boldsymbol{x}_d\]</div>
-<p>given <span class="math notranslate nohighlight">\(\boldsymbol{x}_d\)</span>.</p>
+<span class="eqno">(25)<a class="headerlink" href="#equation-equ-ik-fk" title="Link to this equation">#</a></span>\[\mathbb{FK}(\boldsymbol{q})=\boldsymbol{x}_d\]</div>
 <p>Assume we have an initial guess <span class="math notranslate nohighlight">\(\boldsymbol{q}_t\)</span>. One
 can approximate <a class="reference internal" href="#equation-equ-ik-fk">(25)</a> at <span class="math notranslate nohighlight">\(\boldsymbol{q}_k\)</span> using the
 first-order Tyler expension:</p>
 <div class="math notranslate nohighlight">
-\[\boldsymbol{k}(\boldsymbol{q})\approx\boldsymbol{k}(\boldsymbol{q}_t)+\boldsymbol{J}_{A}(\boldsymbol{q}_t)(\boldsymbol{q}-\boldsymbol{q}_t)=\boldsymbol{x}_d\]</div>
+\[\mathbb{FK}(\boldsymbol{q})\approx\mathbb{FK}(\boldsymbol{q}_t)+\boldsymbol{J}_{A}(\boldsymbol{q}_t)(\boldsymbol{q}-\boldsymbol{q}_t)=\boldsymbol{x}_d\]</div>
 <p>By solving the above equation for <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span>, one can obtain the
 next updated guess</p>
 <div class="math notranslate nohighlight">
 \[\boldsymbol{q}_{t+1}=\boldsymbol{q}_t+\text{inv}\left(\boldsymbol{J}_{A}(\boldsymbol{q}_t)\right)(\boldsymbol{x}_d-\boldsymbol{t}(\boldsymbol{q}_t))=\boldsymbol{q}_t+\text{inv}\left(\boldsymbol{J}_{A}(\boldsymbol{q}_t)\right)\boldsymbol{e}_t\]</div>
 <p>where <span class="math notranslate nohighlight">\(\text{inv}\)</span> is the general inverse operation (inverse for square
 matrix or pseudo-inverse for non-square matrix). Typically, one also
-needs a step size before
-<span class="math notranslate nohighlight">\(\text{inv}\left(\boldsymbol{J}_{A}(\boldsymbol{q}_t)\right)\)</span> to stabilize
-the Newton-Raphson algorithm. The above results can be considered as the
+needs a step size <span class="math notranslate nohighlight">\(\eta\)</span>  to stabilize
+the update, i.e.,</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{q}_{t+1}=\boldsymbol{q}_t+\eta *\text{inv}\left(\boldsymbol{J}_{A}(\boldsymbol{q}_t)\right)\boldsymbol{e}_t\]</div>
+<p>The above results can be considered as the
 discrete-time version of the Jacobian Inverse IK algorithm with
 <span class="math notranslate nohighlight">\(\dot{\boldsymbol{x}}_d=\boldsymbol{0}\)</span>.</p>
 </div>
 </section>
-<section id="jacobian-transpose-or-gradient-based-method">
-<h2>Jacobian Transpose or Gradient-Based Method<a class="headerlink" href="#jacobian-transpose-or-gradient-based-method" title="Link to this heading">#</a></h2>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>In Jacobian Transpose IK method, we set
-<span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}}= \text{Controller}({\boldsymbol{x}}_d, \dot{\boldsymbol{x}}_d,  {\boldsymbol{q}}, {\boldsymbol{e}})\)</span>
-specifically as</p>
+<section id="jacobian-transpose-gradient-based-method">
+<h2>Jacobian Transpose (Gradient-Based) Method<a class="headerlink" href="#jacobian-transpose-gradient-based-method" title="Link to this heading">#</a></h2>
+<div class="admonition-jacobian-transpose-method admonition">
+<p class="admonition-title">Jacobian Transpose Method</p>
+<p>We set
+<span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}}= \text{controller}({\boldsymbol{x}}_d, \dot{\boldsymbol{x}}_d,  {\boldsymbol{q}}, {\boldsymbol{e}})\)</span>
+as</p>
 <div class="math notranslate nohighlight">
 \[\dot{\boldsymbol{q}}=\boldsymbol{J}_{A}^{T}(\boldsymbol{q}) \boldsymbol{K} \boldsymbol{e}\]</div>
-<p>Here <span class="math notranslate nohighlight">\(\boldsymbol{K}\)</span> is a positive definite (usually diagonal) matrix,</p>
+<p>Here <span class="math notranslate nohighlight">\(\boldsymbol{K}\)</span> is a positive definite (usually diagonal) matrix.</p>
 </div>
-<p>Let’s next find out if the above controller can solve the IK or not, by using the Lyapunov Stability.</p>
-<div class="admonition-background-about-lyapunov-stability admonition">
-<p class="admonition-title">Background about Lyapunov Stability</p>
-<p>Consider the following error dynamics (ODE)</p>
+<p>To see if the above controller  solves the IK, we have to use the theory of Lyapunov Stability.</p>
+<div class="admonition-lyapunov-stability admonition">
+<p class="admonition-title">Lyapunov Stability</p>
+<p>Consider the  dynamics</p>
 <div class="math notranslate nohighlight">
 \[\dot{\boldsymbol{x}}(t)=\boldsymbol{f}(\boldsymbol{x}),\quad \text{given}\quad \boldsymbol{x}(0)\]</div>
 <p>If there exists a Lyapunov function <span class="math notranslate nohighlight">\(V(\boldsymbol{x})\)</span> such that</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(V(\boldsymbol{x})&gt;0 \quad \forall \boldsymbol{x} \neq \mathbf{0}\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(V(\mathbf{0})=0 \quad \text{only for} \quad \boldsymbol{x}=\boldsymbol{0}\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(\dot{V}=\frac{dV}{dt}=(\frac{d V}{d\boldsymbol{x}})^T\dot{\boldsymbol{x}}=(\frac{d V}{d\boldsymbol{x}})^T \boldsymbol{f}(\boldsymbol{x})&lt;0 \quad \forall \boldsymbol{x}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(V(\boldsymbol{x})&gt;0 \quad \)</span> for all non-zero  <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(V(\mathbf{0})=0\quad\)</span> only when  <span class="math notranslate nohighlight">\(\boldsymbol{x}=\boldsymbol{0}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\dot{V}=(\nabla_{\boldsymbol{x}}{V})^T\dot{\boldsymbol{x}}=(\nabla_{\boldsymbol{x}}{V})^T \boldsymbol{f}(\boldsymbol{x})&lt;0 \quad\)</span> for all non-zero  <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span></p></li>
 </ul>
 <p>then, <span class="math notranslate nohighlight">\({\boldsymbol{x}}(t)\rightarrow \boldsymbol{0}\)</span> as
-<span class="math notranslate nohighlight">\(t\rightarrow \infty\)</span> (the error is converging).</p>
+<span class="math notranslate nohighlight">\(t\rightarrow \infty\)</span>. It means that the system state is convergening/stablizing to zero.</p>
 </div>
-<p>Consider <span class="math notranslate nohighlight">\(\dot{\boldsymbol{x}}_{d}=\mathbf{0}\)</span>. Let’s use Lyapunov
-function to find controller such that the error dynamics <a class="reference internal" href="../lec21/cjc.html#equation-equ-error-dyn">(84)</a> is
-stablizing. Let’s choose Lyapunov function</p>
+<p>Consider <span class="math notranslate nohighlight">\(\dot{\boldsymbol{x}_d}=0\)</span>.
+Let’s use Lyapunov
+Theory to find if the above controller makes the error dynamics <a class="reference internal" href="#equation-equ-error-dyn">(23)</a> stablize to zero or not. Plugging <span class="math notranslate nohighlight">\( \dot{\boldsymbol{q}}=\boldsymbol{J}_{A}^{T}(\boldsymbol{q}) \boldsymbol{K} \boldsymbol{e}\)</span> to the error dynamics <a class="reference internal" href="#equation-equ-error-dyn">(23)</a>,</p>
+<div class="math notranslate nohighlight" id="equation-equ-closed-loop-dyn">
+<span class="eqno">(26)<a class="headerlink" href="#equation-equ-closed-loop-dyn" title="Link to this equation">#</a></span>\[
+\dot{\boldsymbol{e}}=\dot{\boldsymbol{x}}_{d}-\boldsymbol{J}_{A}(\boldsymbol{q}) \boldsymbol{J}_{A}^{T}(\boldsymbol{q}) \boldsymbol{K} \boldsymbol{e}=-\boldsymbol{J}_{A}(\boldsymbol{q}) \boldsymbol{J}_{A}^{T}(\boldsymbol{q}) \boldsymbol{K} \boldsymbol{e} 
+\]</div>
+<p>Let’s choose Lyapunov function</p>
 <div class="math notranslate nohighlight">
 \[V(\boldsymbol{e})=\frac{1}{2} \boldsymbol{e}^{T} \boldsymbol{K} \boldsymbol{e}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\boldsymbol{K}\)</span> is a symmetric positive definite matrix.
@@ -553,20 +556,17 @@ Obviously,</p>
 \[V(\boldsymbol{e})&gt;0 \quad \forall \boldsymbol{e} \neq \mathbf{0}, \quad V(\mathbf{0})=0 \quad \text{only for} \quad \boldsymbol{e}=\boldsymbol{0}\]</div>
 <p>Differentiating <span class="math notranslate nohighlight">\(V(\boldsymbol{e})\)</span> with respect to time gives</p>
 <div class="math notranslate nohighlight">
-\[\dot{V}=\boldsymbol{e}^{T} \boldsymbol{K} \dot{\boldsymbol{x}}_{d}-\boldsymbol{e}^{T} \boldsymbol{K} \dot{\boldsymbol{x}}_{e}=\boldsymbol{e}^{T} \boldsymbol{K} \dot{\boldsymbol{x}}_{d}-\boldsymbol{e}^{T} \boldsymbol{K} \boldsymbol{J}_{A}(\boldsymbol{q}) \dot{\boldsymbol{q}}\]</div>
-<p>At this point, since <span class="math notranslate nohighlight">\(\boldsymbol{\dot{x}}_d=\boldsymbol{0}\)</span>, if we
-choose</p>
+\[\dot{V}=\boldsymbol{e}^{T} \boldsymbol{K} \dot{\boldsymbol{e}}\]</div>
+<p>Due to <a class="reference internal" href="#equation-equ-closed-loop-dyn">(26)</a>,</p>
 <div class="math notranslate nohighlight">
-\[\dot{\boldsymbol{q}}=\boldsymbol{J}_{A}^{T}(\boldsymbol{q}) \boldsymbol{K} \boldsymbol{e}\]</div>
-<p>This leads to</p>
-<div class="math notranslate nohighlight">
-\[\dot{V}=-\boldsymbol{e}^{T} \boldsymbol{K} \boldsymbol{J}_{A}(\boldsymbol{q}) \boldsymbol{J}_{A}^{T}(\boldsymbol{q}) \boldsymbol{K} \boldsymbol{e}\]</div>
-<p><span class="math notranslate nohighlight">\(\dot{V}\)</span> is negative definite, under the assumption of full rank for
-<span class="math notranslate nohighlight">\(\boldsymbol{J}_{A}(\boldsymbol{q})\)</span>. <span class="math notranslate nohighlight">\(\dot{V}&lt;0\)</span> with <span class="math notranslate nohighlight">\(V&gt;0\)</span> implies the
-error dynamics will stabilize to <span class="math notranslate nohighlight">\(\boldsymbol{e}=\mathbf{0}\)</span>,
-according to Lyapunov Stablity. The block scheme for the Jacobian transpose IK algorithm is  shown below.</p>
+\[\dot{V}=-\boldsymbol{e}^{T} \boldsymbol{K} \boldsymbol{J}_{A}(\boldsymbol{q}) \boldsymbol{J}_{A}^{T}(\boldsymbol{q}) \boldsymbol{K} \boldsymbol{e}=-||\boldsymbol{J}_{A}^{T}(\boldsymbol{q}) \boldsymbol{K} \boldsymbol{e}||^2\]</div>
+<p><span class="math notranslate nohighlight">\(\dot{V}\)</span> is negative for all <span class="math notranslate nohighlight">\(\boldsymbol{e}\)</span> of non zeros.</p>
+<p>Therefore, by applying the Lyapunov Stability theory, we have <span class="math notranslate nohighlight">\({\boldsymbol{e}}(t)\rightarrow \boldsymbol{0}\)</span> as
+<span class="math notranslate nohighlight">\(t\rightarrow \infty\)</span> for the error dynamics <a class="reference internal" href="#equation-equ-closed-loop-dyn">(26)</a>. This means that the controller <span class="math notranslate nohighlight">\( \dot{\boldsymbol{q}}=\boldsymbol{J}_{A}^{T}(\boldsymbol{q}) \boldsymbol{K} \boldsymbol{e}\)</span> works!</p>
+<p>The block scheme for the Jacobian transpose IK algorithm is  shown below,
+where <span class="math notranslate nohighlight">\(\boldsymbol{k}(\cdot)\)</span> means the forward kinematics.</p>
 <figure class="align-default" id="ik-jacobian-transpose">
-<a class="reference internal image-reference" href="lec10/diff_kinematics/IK_jacobian_transpose.jpg"><img alt="lec10/diff_kinematics/IK_jacobian_transpose.jpg" src="lec10/diff_kinematics/IK_jacobian_transpose.jpg" style="width: 80%;" />
+<a class="reference internal image-reference" href="../_images/IK_jacobian_transpose.jpg"><img alt="../_images/IK_jacobian_transpose.jpg" src="../_images/IK_jacobian_transpose.jpg" style="width: 60%;" />
 </a>
 <figcaption>
 <p><span class="caption-number">Fig. 62 </span><span class="caption-text">Block scheme of the inverse kinematics algorithm with Jacobian
@@ -575,14 +575,14 @@ transpose</span><a class="headerlink" href="#ik-jacobian-transpose" title="Link 
 </figure>
 <div class="admonition-why-it-s-also-named-gradient-based-method admonition">
 <p class="admonition-title">Why it’s also named Gradient-Based Method?</p>
-<p>Specifically, when <span class="math notranslate nohighlight">\(\dot{\boldsymbol{x}}_d=\boldsymbol{0}\)</span>, consider we
-want to find the joint value <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span> by minimizing the error of</p>
+<p>Consider <span class="math notranslate nohighlight">\(\dot{\boldsymbol{x}}_d=\boldsymbol{0}\)</span>. Solving IK problem is to
+find the joint value <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span> which minimizes</p>
 <div class="math notranslate nohighlight">
-\[\min_{\boldsymbol{q}}\quad\frac{1}{2}||\boldsymbol{k}(\boldsymbol{q})-\boldsymbol{x}_d||^2\]</div>
+\[\min_{\boldsymbol{q}}\quad\frac{1}{2}||\mathbb{FK} (\boldsymbol{q})-\boldsymbol{x}_d||^2\]</div>
 <p>The gradient descent to update current guess <span class="math notranslate nohighlight">\(\boldsymbol{q}_k\)</span> to next
 <span class="math notranslate nohighlight">\(\boldsymbol{q}_{k+1}\)</span></p>
 <div class="math notranslate nohighlight">
-\[\boldsymbol{q}_{k+1}=\boldsymbol{q}_{k}-\alpha{\left(\frac{d\boldsymbol{k}(\boldsymbol{q})}{d\boldsymbol{q}}\bigg\rvert_{\boldsymbol{q}=\boldsymbol{q}_k}\right)}^{T}(\boldsymbol{k}(\boldsymbol{q})-\boldsymbol{x}_d)=\boldsymbol{q}_{k}+\alpha{\boldsymbol{J}_{A}(\boldsymbol{q}_k)}^{T}\boldsymbol{e}_k\]</div>
+\[\boldsymbol{q}_{k+1}=\boldsymbol{q}_{k}-\alpha{\left(\frac{d\mathbb{FK} (\boldsymbol{q})}{d\boldsymbol{q}}\bigg\rvert_{\boldsymbol{q}=\boldsymbol{q}_k}\right)}^{T}(\mathbb{FK} (\boldsymbol{q})-\boldsymbol{x}_d)=\boldsymbol{q}_{k}+\alpha{\boldsymbol{J}_{A}(\boldsymbol{q}_k)}^{T}\boldsymbol{e}_k\]</div>
 <p>where <span class="math notranslate nohighlight">\(\alpha\)</span> is the gradient step size. The above results can be
 considered as the discrete-time version of the Jacobian transpose
 IK algorithm if <span class="math notranslate nohighlight">\(\boldsymbol{\dot{x}}_d=0\)</span>.</p>
@@ -628,9 +628,10 @@ transpose controller.
 </br>
 </section>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="definition-of-end-effector-error">
-<h1>Definition of End-effector Error<a class="headerlink" href="#definition-of-end-effector-error" title="Link to this heading">#</a></h1>
-<p>Both IK algorithms above  require computing the end-effector error. It is straightforward to define the position
+<section class="tex2jax_ignore mathjax_ignore" id="how-to-define-end-effector-error">
+<h1>How to define End-effector Error<a class="headerlink" href="#how-to-define-end-effector-error" title="Link to this heading">#</a></h1>
+<p>Both IK algorithms above  require computing the end-effector error <span class="math notranslate nohighlight">\(\boldsymbol{e}=\boldsymbol{x}_{d}-\boldsymbol{x}_{e}
+\)</span>. It is straightforward to define the position
 error of the end-effector</p>
 <div class="math notranslate nohighlight">
 \[\boldsymbol{e}_{P}=\boldsymbol{p}_{d}-\boldsymbol{p}_{e}(\boldsymbol{q})\]</div>
@@ -638,13 +639,10 @@ error of the end-effector</p>
 the desired and computed end-effector positions. Its time derivative is</p>
 <div class="math notranslate nohighlight">
 \[\dot{\boldsymbol{e}}_{P}=\dot{\boldsymbol{p}}_{d}-\dot{\boldsymbol{p}}_{e} .\]</div>
-<p>However, the problem arises when we define the end-effector orientation
-error. In the
-following, let’s consider the typical Euler-Angles
-representations and its error definition.</p>
-<section id="euler-angles-error">
-<h2>Euler-Angles Error<a class="headerlink" href="#euler-angles-error" title="Link to this heading">#</a></h2>
-<p>The orientation error using Euler angles is</p>
+<p>When we define the end-effector orientation
+error, we use Euler-Angles
+representation for end-effector orientation.
+The orientation error using Euler angles is</p>
 <div class="math notranslate nohighlight">
 \[\boldsymbol{e}_{O}=\boldsymbol{\phi}_{d}-\boldsymbol{\phi}_{e}(\boldsymbol{q})\]</div>
 <p>where <span class="math notranslate nohighlight">\(\boldsymbol{\phi}_{d}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{\phi}_{e}\)</span> denote
@@ -652,7 +650,15 @@ respectively the desired and computed Euler angles of the end-effector. Its time
 derivative is</p>
 <div class="math notranslate nohighlight">
 \[\dot{\boldsymbol{e}}_{O}=\dot{\boldsymbol{\phi}}_{d}-\dot{\boldsymbol{\phi}}_{e}\]</div>
-<p>In order to apply any of the above IK algorithms, we need to find a Jacobian in terms of</p>
+<p>Therefore,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\boldsymbol{e}=\boldsymbol{x}_{d}-\boldsymbol{x}_{e}=\begin{bmatrix}
+\boldsymbol{e}_{P}\\
+\boldsymbol{e}_{O}
+\end{bmatrix}
+\end{split}\]</div>
+<p>and</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\dot{\boldsymbol{x}}_{e}=\left[\begin{array}{c}
 \dot{\boldsymbol{p}}_{e} \\
@@ -667,79 +673,95 @@ derivative is</p>
 \end{bmatrix}
 \dot{\boldsymbol{q}}
 \end{split}\]</div>
-<p>As you can see, compared to the Jacobian <span class="math notranslate nohighlight">\(
+<p><span class="math notranslate nohighlight">\(\boldsymbol{J}_{A}\)</span> is the analytical Jacobian learned in the chapter of Jacobian.</p>
+<!-- 
+As you can see, compared to the Jacobian $
 \boldsymbol{J}=\begin{bmatrix}
 \boldsymbol{J}_{P}(\boldsymbol{q})\\
 \boldsymbol{J}_{O}(\boldsymbol{q})
-\end{bmatrix}\)</span>  we have learned in the Jacobian lecture, the linear Jacobian <span class="math notranslate nohighlight">\(\boldsymbol{J}_{P}(\boldsymbol{q})\)</span> remains the same as before, the only difference is the angular Jacobian <span class="math notranslate nohighlight">\(\boldsymbol{J}_{O}(\boldsymbol{q})\)</span> becomes</p>
-<div class="math notranslate nohighlight">
-\[
+\end{bmatrix}$  we have learned in the Jacobian lecture, the linear Jacobian $\boldsymbol{J}_{P}(\boldsymbol{q})$ remains the same as before, the only difference is the angular Jacobian $\boldsymbol{J}_{O}(\boldsymbol{q})$ becomes
+
+$$
 \dot{\boldsymbol{\phi}}_{e}=
 \boldsymbol{J}_{\phi}(\boldsymbol{q}) \dot{\boldsymbol{q}}
-\]</div>
-<p>We call the new Jacobian matrix</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
+$$
+
+We call the new Jacobian matrix
+
+$$
 \boldsymbol{J}_{A}(\boldsymbol{q})=\begin{bmatrix}
 \boldsymbol{J}_{P}(\boldsymbol{q})\\
 \boldsymbol{J}_{\phi}(\boldsymbol{q})
 \end{bmatrix}
-\end{split}\]</div>
-<p>the <em>analytical Jacobian</em>(recall <span class="math notranslate nohighlight">\(\boldsymbol{J}\)</span> is called geometrical Jacobian or Jacobian). This is the reason why we in the above used <span class="math notranslate nohighlight">\(\boldsymbol{J}_{A}\)</span> instead of <span class="math notranslate nohighlight">\(\boldsymbol{J}\)</span>!</p>
-<p>Next question, how do we find <span class="math notranslate nohighlight">\(\boldsymbol{J}_{A}(\boldsymbol{q})\)</span> from <span class="math notranslate nohighlight">\(\boldsymbol{J}\)</span>? To do so,  we may need find a mapping</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\left[\begin{array}{c}
+$$
+
+the _analytical Jacobian_(recall $\boldsymbol{J}$ is called geometrical Jacobian or Jacobian). This is the reason why we in the above used $\boldsymbol{J}_{A}$ instead of $\boldsymbol{J}$!
+
+
+Next question, how do we find $\boldsymbol{J}_{A}(\boldsymbol{q})$ from $\boldsymbol{J}$? To do so,  we may need find a mapping
+
+$$\left[\begin{array}{c}
 \dot{\boldsymbol{p}}_{e} \\
 \boldsymbol{\omega}_{e}
 \end{array}\right] =  \underbrace{\begin{bmatrix}
-\boldsymbol{I} &amp; \boldsymbol{0} \\
-\boldsymbol{0} &amp; \boldsymbol{N}\left(\phi_{e}\right)
+\boldsymbol{I} & \boldsymbol{0} \\
+\boldsymbol{0} & \boldsymbol{N}\left(\phi_{e}\right)
 \end{bmatrix}}_{\boldsymbol{T}}
 \left[\begin{array}{c}
 \dot{\boldsymbol{p}}_{e} \\
 \dot{\boldsymbol{\phi}}_{e}
-\end{array}\right]\end{split}\]</div>
-<p>such that</p>
-<div class="math notranslate nohighlight">
-\[\boldsymbol{J}_{A}(\boldsymbol{q}) = \boldsymbol{T}^{-1} \boldsymbol{J}(\boldsymbol{q})\]</div>
-<p>In the following, we will find out the mapping</p>
-<div class="math notranslate nohighlight">
-\[\boldsymbol{\omega}_{e}=\boldsymbol{N}\left(\phi_{e}\right)\dot{\boldsymbol{\phi}}_{e}\]</div>
-<p>for the Euler ZYZ Angle
-<span class="math notranslate nohighlight">\({\boldsymbol{\phi}}_{e}=[{\varphi}, {\vartheta}, \psi]^T\)</span>.</p>
-<p>Recall the rotation induced from the Euler ZYZ Angle. The angualr velocities <span class="math notranslate nohighlight">\(\dot{\varphi}, \dot{\vartheta}, \dot\psi\)</span> is always with respect to the current frame, as shown in <a class="reference internal" href="../lec8-jac/jac.html#euler-angle-vel"><span class="std std-numref">Fig. 54</span></a>.</p>
-<figure class="align-default" id="euler-angle-vel">
-<a class="reference internal image-reference" href="lec11-12/diff_kinematics/Euler_angle_vel.jpg"><img alt="lec11-12/diff_kinematics/Euler_angle_vel.jpg" src="lec11-12/diff_kinematics/Euler_angle_vel.jpg" style="width: 80%;" />
-</a>
-<figcaption>
-<p><span class="caption-number">Fig. 63 </span><span class="caption-text">Rotational velocities of Euler angles ZYZ in current
-frame</span><a class="headerlink" href="#euler-angle-vel" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
-<p>Therefore, to compute <span class="math notranslate nohighlight">\(\boldsymbol{\omega}_{e}\)</span>, we just need to first,  express each Euler angle velocity <span class="math notranslate nohighlight">\(\dot{\varphi}, \dot{\vartheta}, \dot\psi\)</span> from its respective current from to the reference
-frame, and second, sum them up!</p>
-<ul class="simple">
-<li><p>The angular velocity corresponding to <span class="math notranslate nohighlight">\(\dot{\varphi}\)</span> is</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[\dot{\varphi}\left[\begin{array}{lll}0 &amp; 0 &amp; 1\end{array}\right]^{T}\]</div>
-<ul class="simple">
-<li><p>The angular velocity corresponding to  <span class="math notranslate nohighlight">\(\dot{\vartheta}\)</span> is</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[\dot{\vartheta}\left[\begin{array}{lll}-s_{\varphi} &amp; c_{\varphi} &amp; 0\end{array}\right]^{T}\]</div>
-<ul class="simple">
-<li><p>The angular velocity corresponding to <span class="math notranslate nohighlight">\(\dot{\psi}\)</span> is</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[\dot{\psi}\left[\begin{array}{lll}c_{\varphi} s_{\vartheta} &amp; s_{\varphi} s_{\vartheta} &amp; c_{\vartheta}\end{array}\right]^{T}\]</div>
-<p>Thus,</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\boldsymbol{N}\left(\phi_{e}\right) =\left[\begin{array}{ccc}
-0 &amp; -s_{\varphi} &amp; c_{\varphi} s_{\vartheta} \\
-0 &amp; c_{\varphi} &amp; s_{\varphi} s_{\vartheta} \\
-1 &amp; 0 &amp; c_{\vartheta}
-\end{array}\right] .\end{split}\]</div>
+\end{array}\right]$$
+
+
+such that
+
+$$\boldsymbol{J}_{A}(\boldsymbol{q}) = \boldsymbol{T}^{-1} \boldsymbol{J}(\boldsymbol{q})$$
+
+
+
+In the following, we will find out the mapping
+
+$$\boldsymbol{\omega}_{e}=\boldsymbol{N}\left(\phi_{e}\right)\dot{\boldsymbol{\phi}}_{e}$$
+
+for the Euler ZYZ Angle 
+${\boldsymbol{\phi}}_{e}=[{\varphi}, {\vartheta}, \psi]^T$.
+
+Recall the rotation induced from the Euler ZYZ Angle. The angualr velocities $\dot{\varphi}, \dot{\vartheta}, \dot\psi$ is always with respect to the current frame, as shown in {numref}`Euler_angle_vel`. 
+
+
+```{figure} ../lec11-12/diff_kinematics/Euler_angle_vel.jpg
+---
+width: 80%
+name: Euler_angle_vel
+---
+Rotational velocities of Euler angles ZYZ in current
+frame
+```
+Therefore, to compute $\boldsymbol{\omega}_{e}$, we just need to first,  express each Euler angle velocity $\dot{\varphi}, \dot{\vartheta}, \dot\psi$ from its respective current from to the reference
+frame, and second, sum them up!
+
+
+
+
+- The angular velocity corresponding to $\dot{\varphi}$ is
+
+$$\dot{\varphi}\left[\begin{array}{lll}0 & 0 & 1\end{array}\right]^{T}$$
+
+- The angular velocity corresponding to  $\dot{\vartheta}$ is
+
+$$\dot{\vartheta}\left[\begin{array}{lll}-s_{\varphi} & c_{\varphi} & 0\end{array}\right]^{T}$$
+
+- The angular velocity corresponding to $\dot{\psi}$ is
+
+$$\dot{\psi}\left[\begin{array}{lll}c_{\varphi} s_{\vartheta} & s_{\varphi} s_{\vartheta} & c_{\vartheta}\end{array}\right]^{T}$$
+
+Thus,
+
+$$\boldsymbol{N}\left(\phi_{e}\right) =\left[\begin{array}{ccc}
+0 & -s_{\varphi} & c_{\varphi} s_{\vartheta} \\
+0 & c_{\varphi} & s_{\varphi} s_{\vartheta} \\
+1 & 0 & c_{\vartheta}
+\end{array}\right] .$$ -->
 <!-- 
 
 
@@ -923,7 +945,6 @@ $$\ddot{\boldsymbol{q}}=\boldsymbol{J}_{A}^{\dagger}\left(\ddot{\boldsymbol{x}}_
 where the vector $\ddot{\boldsymbol{q}}_{0}$ represents arbitrary joint
 accelerations chosen to optimize another objective function. -->
 </section>
-</section>
 
     <script type="text/x-thebe-config">
     {
@@ -938,7 +959,7 @@ accelerations chosen to optimize another objective function. -->
         },
         kernelOptions: {
             name: "python3",
-            path: "./lec16-17"
+            path: "./lec11-nik"
         },
         predefinedOutput: true
     }
@@ -990,14 +1011,11 @@ accelerations chosen to optimize another objective function. -->
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Numerical Inverse Kinematics</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jacobian-inverse-or-newton-raphson-method">Jacobian Inverse or Newton-Raphson Method</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jacobian-transpose-or-gradient-based-method">Jacobian Transpose or Gradient-Based Method</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jacobian-inverse-newton-raphson-method">Jacobian Inverse (Newton-Raphson) Method</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jacobian-transpose-gradient-based-method">Jacobian Transpose (Gradient-Based) Method</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#definition-of-end-effector-error">Definition of End-effector Error</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#euler-angles-error">Euler-Angles Error</a></li>
-</ul>
-</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-define-end-effector-error">How to define End-effector Error</a></li>
 </ul>
 
   </nav></div>

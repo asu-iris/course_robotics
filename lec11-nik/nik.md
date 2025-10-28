@@ -9,9 +9,9 @@ title: "Lecture 16-17: Numerical Inverse Kinematics Algorithms"
 #  Numerical Inverse Kinematics
 
 Recall IK problems: given a desired end-effector pose
-$\boldsymbol{x}_{d}$ (in operational space), we want to find the joint vector $\boldsymbol{q}$ such that
-$\boldsymbol{k}(\boldsymbol{q})=\boldsymbol{x}_d$. Here,
-$\boldsymbol{k}(\cdot)$ is the forward kinematics. In this chapter, we will show how to use Jacobian to solve this problem numerically. Let's consider 
+$\boldsymbol{x}_{d}$ (in the operational space), we want to find the joint values $\boldsymbol{q}$ such that
+$\mathbb{FK}(\boldsymbol{q})=\boldsymbol{x}_d$. Here,
+$\mathbb{FK}(\cdot)$ is the forward kinematics. In this chapter, we will show how to use Jacobian to solve this problem numerically. Let's consider 
 
 $$
 \dot{\boldsymbol{x}}_{e}=\boldsymbol{J}_{A}(\boldsymbol{q}) \dot{\boldsymbol{q}}
@@ -23,30 +23,30 @@ To solve the above IK, we define the following operational space error
 between the desired $\boldsymbol{x}_{d}$ and the current end-effector
 pose $\boldsymbol{x}_{e}$:
 
-$$\boldsymbol{e}=\boldsymbol{x}_{d}-\boldsymbol{x}_{e}=\boldsymbol{x}_{d}-\boldsymbol{k}(\boldsymbol{q})
+$$\boldsymbol{e}=\boldsymbol{x}_{d}-\boldsymbol{x}_{e}=\boldsymbol{x}_{d}-\mathbb{FK}(\boldsymbol{q})
 $$(equ.error)
 
 Consider the time derivative of {eq}`equ.error`
 
 $$\dot{\boldsymbol{e}}=\dot{\boldsymbol{x}}_{d}-\dot{\boldsymbol{x}}_{e}=\dot{\boldsymbol{x}}_{d}-\boldsymbol{J}_{A}(\boldsymbol{q}) \dot{\boldsymbol{q}}$$(equ.error_dyn)
 
-The above {eq}`equ.error_dyn` is called *error dynamics*, as it show ODE of end-effector pose error
+The above {eq}`equ.error_dyn` is called *error dynamics*, as it shows ODE of end-effector pose error
 $\boldsymbol{e}(t)$ over time $t$. Here, $\dot{\boldsymbol{q}}$ can be
-viewed as the control input. From a control perspective, we want to find
-a feedback control law
+viewed as the control input. From a control perspective, we want to design
+a  control law
 
-$$\dot{\boldsymbol{q}}= \text{Controller}({\boldsymbol{x}}_d, \dot{\boldsymbol{x}}_d,  {\boldsymbol{q}}, {\boldsymbol{e}})$$
+$$\dot{\boldsymbol{q}}= \text{controller}({\boldsymbol{x}}_d, \dot{\boldsymbol{x}}_d,  {\boldsymbol{q}}, {\boldsymbol{e}})$$
 
-such that, when plug the controller to the error dynamics,
-$\boldsymbol{e}(t)\rightarrow 0$ as $t\rightarrow \infty$. The different
-controllers leads to different  IK algorithms.
+which depends on all current information $({\boldsymbol{x}}_d, \dot{\boldsymbol{x}}_d,  {\boldsymbol{q}}, {\boldsymbol{e}})$,
+such that, when plug the controller to the error dynamics, we have 
+$\boldsymbol{e}(t)\rightarrow 0$ as $t\rightarrow \infty$. At convergence, the resulting $\boldsymbol{q}$ is the IK solution!
 
-## Jacobian Inverse or Newton-Raphson Method
+## Jacobian Inverse (Newton-Raphson) Method
 
-```{important}
-In Jacobian Inverse IK method, we set
-$\dot{\boldsymbol{q}}= \text{Controller}({\boldsymbol{x}}_d, \dot{\boldsymbol{x}}_d,  {\boldsymbol{q}}, {\boldsymbol{e}})$
-specifically as
+```{admonition} Jacobian Inverse  Method
+We set
+$\dot{\boldsymbol{q}}= \text{controller}({\boldsymbol{x}}_d, \dot{\boldsymbol{x}}_d,  {\boldsymbol{q}}, {\boldsymbol{e}})$
+ as
 
 $$\dot{\boldsymbol{q}}=
 \begin{cases}
@@ -54,23 +54,20 @@ $$\dot{\boldsymbol{q}}=
 \boldsymbol{J}_{A}^{\dagger}\left(\dot{\boldsymbol{x}}_{d}+\boldsymbol{K e}\right)+\left(\boldsymbol{I}_{n}-\boldsymbol{J}_{A}^{\dagger} \boldsymbol{J}_{A}\right) \dot{\boldsymbol{q}}_{\text{ref}} \quad\quad\text{for redundant robot arms}
 \end{cases}$$
 
-Here $\boldsymbol{K}$ is a positive definite (usually diagonal) matrix, and ${\boldsymbol{q}}_{\text{ref}}$ is any reference joint velocity, which can be set based on a second objective in the previous chapter. $\boldsymbol{J}_{A}^{\dagger}$ is the pseudo-inverse of Jacobian: $\boldsymbol{J}_{A}^{\dagger}=\boldsymbol{J}_{A}^{T}\left(\boldsymbol{J}_{A} \boldsymbol{J}_{A}^{T}\right)^{-1}$.
+Here $\boldsymbol{K}$ is a positive definite (usually diagonal) matrix, and ${\boldsymbol{q}}_{\text{ref}}$ is any reference joint velocity that makes the robot move aways from the singularity. $\boldsymbol{J}_{A}^{\dagger}$ is the pseudo-inverse of Jacobian. For non-singular robot arm configurations, $\boldsymbol{J}_{A}^{\dagger}=\boldsymbol{J}_{A}^{T}\left(\boldsymbol{J}_{A} \boldsymbol{J}_{A}^{T}\right)^{-1}$.
 ```
 
 
-Let's next verify if the above controller can solve the IK or not, by examining if the error dynamics 
-is converging to 0. 
-Submitting the above controllers into the error dynamics, it easy to
+To verify if the above controller can solve  IK, we next examine if the error dynamics 
+converges to 0. 
+Submitting the above controllers into the error dynamics {eq}`equ.error_dyn`, it easy to
 verify that
 
 $$\dot{\boldsymbol{e}}+\boldsymbol{K} \boldsymbol{e}=0 .$$(equ.method1)
 
-If $\boldsymbol{K}$ is a positive definite (usually diagonal) matrix,
-{eq}`equ.method1` is asymptotically stable. The error tends to zero along the
-trajectory with a convergence rate that depends on the eigenvalues of
-$\boldsymbol{K}$.
 
-```{admonition} Background from Linear Control Systems course
+
+```{admonition} Background from Linear Control Systems
 
 
 Generally, given an ordinary differential equation (ODE)
@@ -105,33 +102,45 @@ $\lambda_1, \lambda_2, ...\lambda_r>0$,
 $\boldsymbol{e}(t)\rightarrow \boldsymbol{0}$ as $t\rightarrow \infty$.
 ```
 
-The block scheme for the above IK algorithm is shown below (non-redundant robot arm),
-where $\boldsymbol{k}(\cdot)$ means the direct kinematics function.
+Thus, if $\boldsymbol{K}$ is a positive definite (usually diagonal) matrix,
+{eq}`equ.method1` is asymptotically stable. The error tends to zero along the
+trajectory with a convergence rate that depends on the eigenvalues of
+$\boldsymbol{K}$.
 
-```{figure} ../lec10/diff_kinematics/IK_jacobian_inverse.jpg
+
+
+The block scheme for the above IK algorithm is shown below (non-redundant robot arm),
+where $\boldsymbol{k}(\cdot)$ means the forward kinematics.
+
+```{figure} ./nik/IK_jacobian_inverse.jpg
 ---
-width: 80%
+width: 60%
 name: IK_jacobian_inverse
 ---
 IK algorithm with Jacobian
 inverse
 ```
 
+
+
+
+
+
 ```{admonition} Why it's also named Newton-Raphson method?
 
-The naming of Newton-Raphson method comes from the perspective of "IK as solving nonlinear equations"
+The naming of Newton-Raphson method comes from optimization perspective to solve a nonlinear equation.
+Generally, IK is to solve the following nonlinear equation where the variable is $\boldsymbol{q}$:
 
-Specifically, consider the following nonlinear equation from FK
 
-$$\boldsymbol{k}(\boldsymbol{q})=\boldsymbol{x}_d$$(equ.ik_fk)
+$$\mathbb{FK}(\boldsymbol{q})=\boldsymbol{x}_d$$(equ.ik_fk)
 
-given $\boldsymbol{x}_d$.
+
 
 Assume we have an initial guess $\boldsymbol{q}_t$. One
 can approximate {eq}`equ.ik_fk` at $\boldsymbol{q}_k$ using the
 first-order Tyler expension:
 
-$$\boldsymbol{k}(\boldsymbol{q})\approx\boldsymbol{k}(\boldsymbol{q}_t)+\boldsymbol{J}_{A}(\boldsymbol{q}_t)(\boldsymbol{q}-\boldsymbol{q}_t)=\boldsymbol{x}_d$$
+$$\mathbb{FK}(\boldsymbol{q})\approx\mathbb{FK}(\boldsymbol{q}_t)+\boldsymbol{J}_{A}(\boldsymbol{q}_t)(\boldsymbol{q}-\boldsymbol{q}_t)=\boldsymbol{x}_d$$
 
 By solving the above equation for $\boldsymbol{q}$, one can obtain the
 next updated guess
@@ -140,25 +149,30 @@ $$\boldsymbol{q}_{t+1}=\boldsymbol{q}_t+\text{inv}\left(\boldsymbol{J}_{A}(\bold
 
 where $\text{inv}$ is the general inverse operation (inverse for square
 matrix or pseudo-inverse for non-square matrix). Typically, one also
-needs a step size before
-$\text{inv}\left(\boldsymbol{J}_{A}(\boldsymbol{q}_t)\right)$ to stabilize
-the Newton-Raphson algorithm. The above results can be considered as the
+needs a step size $\eta$  to stabilize
+the update, i.e., 
+
+$$\boldsymbol{q}_{t+1}=\boldsymbol{q}_t+\eta *\text{inv}\left(\boldsymbol{J}_{A}(\boldsymbol{q}_t)\right)\boldsymbol{e}_t$$
+
+
+ The above results can be considered as the
 discrete-time version of the Jacobian Inverse IK algorithm with
 $\dot{\boldsymbol{x}}_d=\boldsymbol{0}$.
 ```
 
-## Jacobian Transpose or Gradient-Based Method
-```{important}
-In Jacobian Transpose IK method, we set
-$\dot{\boldsymbol{q}}= \text{Controller}({\boldsymbol{x}}_d, \dot{\boldsymbol{x}}_d,  {\boldsymbol{q}}, {\boldsymbol{e}})$
-specifically as
+## Jacobian Transpose (Gradient-Based) Method
+
+```{admonition} Jacobian Transpose Method
+We set
+$\dot{\boldsymbol{q}}= \text{controller}({\boldsymbol{x}}_d, \dot{\boldsymbol{x}}_d,  {\boldsymbol{q}}, {\boldsymbol{e}})$
+ as
 
 $$\dot{\boldsymbol{q}}=\boldsymbol{J}_{A}^{T}(\boldsymbol{q}) \boldsymbol{K} \boldsymbol{e}$$
 
-Here $\boldsymbol{K}$ is a positive definite (usually diagonal) matrix,
+Here $\boldsymbol{K}$ is a positive definite (usually diagonal) matrix.
 ```
 
-Let's next find out if the above controller can solve the IK or not, by using the Lyapunov Stability.
+To see if the above controller  solves the IK, we have to use the theory of Lyapunov Stability.
 
 
 
@@ -166,29 +180,36 @@ Let's next find out if the above controller can solve the IK or not, by using th
 
 
 
-```{admonition} Background about Lyapunov Stability
+```{admonition} Lyapunov Stability
 
 
 
-Consider the following error dynamics (ODE)
+Consider the  dynamics 
 
 $$\dot{\boldsymbol{x}}(t)=\boldsymbol{f}(\boldsymbol{x}),\quad \text{given}\quad \boldsymbol{x}(0)$$
 
 If there exists a Lyapunov function $V(\boldsymbol{x})$ such that
 
--   $V(\boldsymbol{x})>0 \quad \forall \boldsymbol{x} \neq \mathbf{0}$
+-    $V(\boldsymbol{x})>0 \quad $ for all non-zero  $\boldsymbol{x}$
 
--   $V(\mathbf{0})=0 \quad \text{only for} \quad \boldsymbol{x}=\boldsymbol{0}$
+-   $V(\mathbf{0})=0\quad$ only when  $\boldsymbol{x}=\boldsymbol{0}$
 
--   $\dot{V}=\frac{dV}{dt}=(\frac{d V}{d\boldsymbol{x}})^T\dot{\boldsymbol{x}}=(\frac{d V}{d\boldsymbol{x}})^T \boldsymbol{f}(\boldsymbol{x})<0 \quad \forall \boldsymbol{x}$
+-   $\dot{V}=(\nabla_{\boldsymbol{x}}{V})^T\dot{\boldsymbol{x}}=(\nabla_{\boldsymbol{x}}{V})^T \boldsymbol{f}(\boldsymbol{x})<0 \quad$ for all non-zero  $\boldsymbol{x}$
 
 then, ${\boldsymbol{x}}(t)\rightarrow \boldsymbol{0}$ as
-$t\rightarrow \infty$ (the error is converging).
+$t\rightarrow \infty$. It means that the system state is convergening/stablizing to zero.
 ```
 
-Consider $\dot{\boldsymbol{x}}_{d}=\mathbf{0}$. Let's use Lyapunov
-function to find controller such that the error dynamics {eq}`equ.error_dyn` is
-stablizing. Let's choose Lyapunov function
+Consider $\dot{\boldsymbol{x}_d}=0$.
+Let's use Lyapunov
+Theory to find if the above controller makes the error dynamics {eq}`equ.error_dyn` stablize to zero or not. Plugging $ \dot{\boldsymbol{q}}=\boldsymbol{J}_{A}^{T}(\boldsymbol{q}) \boldsymbol{K} \boldsymbol{e}$ to the error dynamics {eq}`equ.error_dyn`,
+
+$$
+\dot{\boldsymbol{e}}=\dot{\boldsymbol{x}}_{d}-\boldsymbol{J}_{A}(\boldsymbol{q}) \boldsymbol{J}_{A}^{T}(\boldsymbol{q}) \boldsymbol{K} \boldsymbol{e}=-\boldsymbol{J}_{A}(\boldsymbol{q}) \boldsymbol{J}_{A}^{T}(\boldsymbol{q}) \boldsymbol{K} \boldsymbol{e} 
+$$(equ.closed_loop_dyn)
+
+
+Let's choose Lyapunov function
 
 $$V(\boldsymbol{e})=\frac{1}{2} \boldsymbol{e}^{T} \boldsymbol{K} \boldsymbol{e}$$
 
@@ -199,27 +220,29 @@ $$V(\boldsymbol{e})>0 \quad \forall \boldsymbol{e} \neq \mathbf{0}, \quad V(\mat
 
 Differentiating $V(\boldsymbol{e})$ with respect to time gives
 
-$$\dot{V}=\boldsymbol{e}^{T} \boldsymbol{K} \dot{\boldsymbol{x}}_{d}-\boldsymbol{e}^{T} \boldsymbol{K} \dot{\boldsymbol{x}}_{e}=\boldsymbol{e}^{T} \boldsymbol{K} \dot{\boldsymbol{x}}_{d}-\boldsymbol{e}^{T} \boldsymbol{K} \boldsymbol{J}_{A}(\boldsymbol{q}) \dot{\boldsymbol{q}}$$
+$$\dot{V}=\boldsymbol{e}^{T} \boldsymbol{K} \dot{\boldsymbol{e}}$$
 
-At this point, since $\boldsymbol{\dot{x}}_d=\boldsymbol{0}$, if we
-choose
+Due to {eq}`equ.closed_loop_dyn`,
 
-$$\dot{\boldsymbol{q}}=\boldsymbol{J}_{A}^{T}(\boldsymbol{q}) \boldsymbol{K} \boldsymbol{e}$$
 
-This leads to
+$$\dot{V}=-\boldsymbol{e}^{T} \boldsymbol{K} \boldsymbol{J}_{A}(\boldsymbol{q}) \boldsymbol{J}_{A}^{T}(\boldsymbol{q}) \boldsymbol{K} \boldsymbol{e}=-||\boldsymbol{J}_{A}^{T}(\boldsymbol{q}) \boldsymbol{K} \boldsymbol{e}||^2$$
 
-$$\dot{V}=-\boldsymbol{e}^{T} \boldsymbol{K} \boldsymbol{J}_{A}(\boldsymbol{q}) \boldsymbol{J}_{A}^{T}(\boldsymbol{q}) \boldsymbol{K} \boldsymbol{e}$$
+$\dot{V}$ is negative for all $\boldsymbol{e}$ of non zeros. 
 
-$\dot{V}$ is negative definite, under the assumption of full rank for
-$\boldsymbol{J}_{A}(\boldsymbol{q})$. $\dot{V}<0$ with $V>0$ implies the
-error dynamics will stabilize to $\boldsymbol{e}=\mathbf{0}$,
-according to Lyapunov Stablity. The block scheme for the Jacobian transpose IK algorithm is  shown below.
+Therefore, by applying the Lyapunov Stability theory, we have ${\boldsymbol{e}}(t)\rightarrow \boldsymbol{0}$ as
+$t\rightarrow \infty$ for the error dynamics {eq}`equ.closed_loop_dyn`. This means that the controller $ \dot{\boldsymbol{q}}=\boldsymbol{J}_{A}^{T}(\boldsymbol{q}) \boldsymbol{K} \boldsymbol{e}$ works!
 
 
 
-```{figure} ../lec10/diff_kinematics/IK_jacobian_transpose.jpg
+
+The block scheme for the Jacobian transpose IK algorithm is  shown below,
+where $\boldsymbol{k}(\cdot)$ means the forward kinematics.
+
+
+
+```{figure} ./nik/IK_jacobian_transpose.jpg
 ---
-width: 80%
+width: 60%
 name: IK_jacobian_transpose
 ---
 Block scheme of the inverse kinematics algorithm with Jacobian
@@ -232,15 +255,15 @@ transpose
 ```{admonition} Why it's also named Gradient-Based Method?
 
 
-Specifically, when $\dot{\boldsymbol{x}}_d=\boldsymbol{0}$, consider we
-want to find the joint value $\boldsymbol{q}$ by minimizing the error of
+Consider $\dot{\boldsymbol{x}}_d=\boldsymbol{0}$. Solving IK problem is to 
+ find the joint value $\boldsymbol{q}$ which minimizes  
 
-$$\min_{\boldsymbol{q}}\quad\frac{1}{2}||\boldsymbol{k}(\boldsymbol{q})-\boldsymbol{x}_d||^2$$
+$$\min_{\boldsymbol{q}}\quad\frac{1}{2}||\mathbb{FK} (\boldsymbol{q})-\boldsymbol{x}_d||^2$$
 
 The gradient descent to update current guess $\boldsymbol{q}_k$ to next
 $\boldsymbol{q}_{k+1}$
 
-$$\boldsymbol{q}_{k+1}=\boldsymbol{q}_{k}-\alpha{\left(\frac{d\boldsymbol{k}(\boldsymbol{q})}{d\boldsymbol{q}}\bigg\rvert_{\boldsymbol{q}=\boldsymbol{q}_k}\right)}^{T}(\boldsymbol{k}(\boldsymbol{q})-\boldsymbol{x}_d)=\boldsymbol{q}_{k}+\alpha{\boldsymbol{J}_{A}(\boldsymbol{q}_k)}^{T}\boldsymbol{e}_k$$
+$$\boldsymbol{q}_{k+1}=\boldsymbol{q}_{k}-\alpha{\left(\frac{d\mathbb{FK} (\boldsymbol{q})}{d\boldsymbol{q}}\bigg\rvert_{\boldsymbol{q}=\boldsymbol{q}_k}\right)}^{T}(\mathbb{FK} (\boldsymbol{q})-\boldsymbol{x}_d)=\boldsymbol{q}_{k}+\alpha{\boldsymbol{J}_{A}(\boldsymbol{q}_k)}^{T}\boldsymbol{e}_k$$
 
 where $\alpha$ is the gradient step size. The above results can be
 considered as the discrete-time version of the Jacobian transpose
@@ -286,9 +309,10 @@ transpose controller.
 </br>
 </br>
 
-# Definition of End-effector Error
+# How to define End-effector Error
 
-Both IK algorithms above  require computing the end-effector error. It is straightforward to define the position
+Both IK algorithms above  require computing the end-effector error $\boldsymbol{e}=\boldsymbol{x}_{d}-\boldsymbol{x}_{e}
+$. It is straightforward to define the position
 error of the end-effector
 
 $$\boldsymbol{e}_{P}=\boldsymbol{p}_{d}-\boldsymbol{p}_{e}(\boldsymbol{q})$$
@@ -298,13 +322,9 @@ the desired and computed end-effector positions. Its time derivative is
 
 $$\dot{\boldsymbol{e}}_{P}=\dot{\boldsymbol{p}}_{d}-\dot{\boldsymbol{p}}_{e} .$$
 
-However, the problem arises when we define the end-effector orientation
-error. In the
-following, let's consider the typical Euler-Angles
-representations and its error definition.
-
-## Euler-Angles Error
-
+When we define the end-effector orientation
+error, we use Euler-Angles
+representation for end-effector orientation.
 The orientation error using Euler angles is
 
 $$\boldsymbol{e}_{O}=\boldsymbol{\phi}_{d}-\boldsymbol{\phi}_{e}(\boldsymbol{q})$$
@@ -316,7 +336,17 @@ derivative is
 $$\dot{\boldsymbol{e}}_{O}=\dot{\boldsymbol{\phi}}_{d}-\dot{\boldsymbol{\phi}}_{e}$$
 
 
-In order to apply any of the above IK algorithms, we need to find a Jacobian in terms of
+
+Therefore, 
+
+$$
+\boldsymbol{e}=\boldsymbol{x}_{d}-\boldsymbol{x}_{e}=\begin{bmatrix}
+\boldsymbol{e}_{P}\\
+\boldsymbol{e}_{O}
+\end{bmatrix}
+$$
+
+and
 
 $$\dot{\boldsymbol{x}}_{e}=\left[\begin{array}{c}
 \dot{\boldsymbol{p}}_{e} \\
@@ -332,6 +362,11 @@ $$\dot{\boldsymbol{x}}_{e}=\left[\begin{array}{c}
 \dot{\boldsymbol{q}}
 $$
 
+
+$\boldsymbol{J}_{A}$ is the analytical Jacobian learned in the chapter of Jacobian.
+
+
+<!-- 
 As you can see, compared to the Jacobian $
 \boldsymbol{J}=\begin{bmatrix}
 \boldsymbol{J}_{P}(\boldsymbol{q})\\
@@ -418,7 +453,7 @@ $$\boldsymbol{N}\left(\phi_{e}\right) =\left[\begin{array}{ccc}
 0 & -s_{\varphi} & c_{\varphi} s_{\vartheta} \\
 0 & c_{\varphi} & s_{\varphi} s_{\vartheta} \\
 1 & 0 & c_{\vartheta}
-\end{array}\right] .$$
+\end{array}\right] .$$ -->
 
 
 
