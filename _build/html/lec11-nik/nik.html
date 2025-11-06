@@ -62,7 +62,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'lec11-nik/nik';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Dynamics (Lagrangian formulation)" href="../lec18/dyn.html" />
+    <link rel="next" title="Dynamics" href="../lec12/dyn.html" />
     <link rel="prev" title="Duality" href="../lec10-dual/dual.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -211,7 +211,7 @@
 
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Numerical Inverse Kinematics</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="../lec18/dyn.html">Dynamics (Lagrangian formulation)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lec12/dyn.html">Dynamics</a></li>
 
 
 
@@ -415,7 +415,7 @@ pose <span class="math notranslate nohighlight">\(\boldsymbol{x}_{e}\)</span>:</
 <p>Consider the time derivative of <a class="reference internal" href="#equation-equ-error">(22)</a></p>
 <div class="math notranslate nohighlight" id="equation-equ-error-dyn">
 <span class="eqno">(23)<a class="headerlink" href="#equation-equ-error-dyn" title="Link to this equation">#</a></span>\[\dot{\boldsymbol{e}}=\dot{\boldsymbol{x}}_{d}-\dot{\boldsymbol{x}}_{e}=\dot{\boldsymbol{x}}_{d}-\boldsymbol{J}_{A}(\boldsymbol{q}) \dot{\boldsymbol{q}}\]</div>
-<p>The above <a class="reference internal" href="#equation-equ-error-dyn">(23)</a> is called <em>error dynamics</em>, as it shows ODE of end-effector pose error
+<p>The above <a class="reference internal" href="../lec21/cjc.html#equation-equ-error-dyn">(85)</a> is called <em>error dynamics</em>, as it shows ODE of end-effector pose error
 <span class="math notranslate nohighlight">\(\boldsymbol{e}(t)\)</span> over time <span class="math notranslate nohighlight">\(t\)</span>. Here, <span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}}\)</span> can be
 viewed as the control input. From a control perspective, we want to design
 a  control law</p>
@@ -441,7 +441,7 @@ as</p>
 </div>
 <p>To verify if the above controller can solve  IK, we next examine if the error dynamics
 converges to 0.
-Submitting the above controllers into the error dynamics <a class="reference internal" href="#equation-equ-error-dyn">(23)</a>, it easy to
+Submitting the above controllers into the error dynamics <a class="reference internal" href="../lec21/cjc.html#equation-equ-error-dyn">(85)</a>, it easy to
 verify that</p>
 <div class="math notranslate nohighlight" id="equation-equ-method1">
 <span class="eqno">(24)<a class="headerlink" href="#equation-equ-method1" title="Link to this equation">#</a></span>\[\dot{\boldsymbol{e}}+\boldsymbol{K} \boldsymbol{e}=0 .\]</div>
@@ -542,7 +542,7 @@ as</p>
 </div>
 <p>Consider <span class="math notranslate nohighlight">\(\dot{\boldsymbol{x}_d}=0\)</span>.
 Let’s use Lyapunov
-Theory to find if the above controller makes the error dynamics <a class="reference internal" href="#equation-equ-error-dyn">(23)</a> stablize to zero or not. Plugging <span class="math notranslate nohighlight">\( \dot{\boldsymbol{q}}=\boldsymbol{J}_{A}^{T}(\boldsymbol{q}) \boldsymbol{K} \boldsymbol{e}\)</span> to the error dynamics <a class="reference internal" href="#equation-equ-error-dyn">(23)</a>,</p>
+Theory to find if the above controller makes the error dynamics <a class="reference internal" href="../lec21/cjc.html#equation-equ-error-dyn">(85)</a> stablize to zero or not. Plugging <span class="math notranslate nohighlight">\( \dot{\boldsymbol{q}}=\boldsymbol{J}_{A}^{T}(\boldsymbol{q}) \boldsymbol{K} \boldsymbol{e}\)</span> to the error dynamics <a class="reference internal" href="../lec21/cjc.html#equation-equ-error-dyn">(85)</a>,</p>
 <div class="math notranslate nohighlight" id="equation-equ-closed-loop-dyn">
 <span class="eqno">(26)<a class="headerlink" href="#equation-equ-closed-loop-dyn" title="Link to this equation">#</a></span>\[
 \dot{\boldsymbol{e}}=\dot{\boldsymbol{x}}_{d}-\boldsymbol{J}_{A}(\boldsymbol{q}) \boldsymbol{J}_{A}^{T}(\boldsymbol{q}) \boldsymbol{K} \boldsymbol{e}=-\boldsymbol{J}_{A}(\boldsymbol{q}) \boldsymbol{J}_{A}^{T}(\boldsymbol{q}) \boldsymbol{K} \boldsymbol{e} 
@@ -986,11 +986,11 @@ accelerations chosen to optimize another objective function. -->
       </div>
     </a>
     <a class="right-next"
-       href="../lec18/dyn.html"
+       href="../lec12/dyn.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Dynamics (Lagrangian formulation)</p>
+        <p class="prev-next-title">Dynamics</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

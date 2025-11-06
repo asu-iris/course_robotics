@@ -18,7 +18,7 @@ parts:
       - file: lec10-dual/dual
       # - file: lec15/inverse_vk
       - file: lec11-nik/nik
-      - file: lec18/dyn
+      - file: lec12/dyn
       - file: lec19/control_overview
       - file: lec20/djc
       - file: lec21/cjc
