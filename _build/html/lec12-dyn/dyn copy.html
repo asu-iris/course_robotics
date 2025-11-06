@@ -59,7 +59,7 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'lec18/dyn copy';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lec12-dyn/dyn copy';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -211,10 +211,7 @@
 
 <li class="toctree-l1"><a class="reference internal" href="../lec11-nik/nik.html">Numerical Inverse Kinematics</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="dyn.html">Dynamics (Lagrangian formulation)</a></li>
-
-
-
+<li class="toctree-l1"><a class="reference internal" href="dyn.html">Dynamics</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="../lec19/control_overview.html">Overview of Robot Arm Control</a></li>
 
@@ -283,7 +280,7 @@
       
       
       
-      <li><a href="../_sources/lec18/dyn copy.md" target="_blank"
+      <li><a href="../_sources/lec12-dyn/dyn copy.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -777,7 +774,7 @@ Recall the dynamics equation we have previously introduced,</p>
 \[\boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{F}_{v} \dot{\boldsymbol{q}}+\boldsymbol{F}_{s} \operatorname{sgn}(\dot{\boldsymbol{q}})+\boldsymbol{g}(\boldsymbol{q})=\boldsymbol{\tau}-\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{h}_{e}\]</div>
 <p>We multiply <span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}}^T\)</span> on both sides of the above dynamics
 equation and subtract
-(<a class="reference internal" href="dyn.html#equation-equ-intermediate">(48)</a>{reference-type=”ref”
+(<a class="reference internal" href="dyn.html#equation-equ-intermediate">(49)</a>{reference-type=”ref”
 reference=”equ.intermediate”}) on both sides. This yields</p>
 <div class="math notranslate nohighlight">
 \[\frac{1}{2}  \dot{\boldsymbol{q}}^{T} \boldsymbol{B}(\boldsymbol{q})\dot{\boldsymbol{q}}-\dot{\boldsymbol{q}}^T\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}=\frac{1}{2}  \dot{\boldsymbol{q}}^{T} \big( \boldsymbol{B}(\boldsymbol{q})\dot{\boldsymbol{q}}-2\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}})\big) \dot{\boldsymbol{q}}=\boldsymbol{0}\]</div>
@@ -944,7 +941,7 @@ joints.</p>
         },
         kernelOptions: {
             name: "python3",
-            path: "./lec18"
+            path: "./lec12-dyn"
         },
         predefinedOutput: true
     }

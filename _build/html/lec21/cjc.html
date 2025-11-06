@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -211,10 +211,7 @@
 
 <li class="toctree-l1"><a class="reference internal" href="../lec11-nik/nik.html">Numerical Inverse Kinematics</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="../lec12/dyn.html">Dynamics</a></li>
-
-
-
+<li class="toctree-l1"><a class="reference internal" href="../lec12-dyn/dyn.html">Dynamics</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="../lec19/control_overview.html">Overview of Robot Arm Control</a></li>
 
@@ -455,7 +452,7 @@ recalling that <span class="math notranslate nohighlight">\(\boldsymbol{q}_{d}\)
     \dot{V}=\frac{1}{2} \underbrace{\dot{\boldsymbol{q}}^{T}(\dot{\boldsymbol{B}}(\boldsymbol{q})-2 \boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}})) \dot{\boldsymbol{q}}}_{0}+\dot{\boldsymbol{q}}^{T}\left(\boldsymbol{u}-\boldsymbol{g}(\boldsymbol{q})-\boldsymbol{K}_{P} {\boldsymbol{e}}\right)\]</div>
 <p>The first term on the right-hand side is zero since the matrix
 <span class="math notranslate nohighlight">\(\dot{\boldsymbol{B}}-2 \boldsymbol{C}\)</span> is a
-skew-symmetric matrix (see in the property of dynamics in <a class="reference internal" href="../lec12/dyn.html#chapter-dyn"><span class="std std-ref">Dynamics</span></a>).
+skew-symmetric matrix (see in the property of dynamics in <a class="reference internal" href="../lec12-dyn/dyn.html#chapter-dyn"><span class="std std-ref">Dynamics</span></a>).
 For the second term to be negative, we can set the controller <a class="reference internal" href="#equation-equ-cjc-controller">(73)</a> as</p>
 <div class="math notranslate nohighlight" id="equation-equ-cjc-pd">
 <span class="eqno">(77)<a class="headerlink" href="#equation-equ-cjc-pd" title="Link to this equation">#</a></span>\[
