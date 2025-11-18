@@ -5,14 +5,11 @@ title: "Lecture 22: Operational Space Control"
 ---
 
 
-# Operational Space Control (OSC)
+# Operational Space Control
 
 
 The goal of operational space control (OSC) is to control the robot to track the  desired end-effector pose    $\boldsymbol{x}_d$ and velocity $\boldsymbol{\dot{x}}_d$ given in the operational space.
-
-
-
-In the following control design, we consider a a $n$-joint robot arm without external end-effector forces and any joint
+Consider a a $n$-joint robot arm without external end-effector forces and any joint
 friction. The equation of motion of the robot arm  is
 
 $$
@@ -21,7 +18,7 @@ $$
 The controller we want to design is in the general form of
 
 $$
-\boldsymbol{u}=\textbf{Controller}(\boldsymbol{q}, \boldsymbol{\dot{q}}, \boldsymbol{x}_d, \boldsymbol{\dot{x}}_d)$$(equ.osc_controller)
+\boldsymbol{u}=\textbf{controller}(\boldsymbol{q}, \boldsymbol{\dot{q}}, \boldsymbol{x}_d, \boldsymbol{\dot{x}}_d)$$(equ.osc_controller)
 
 i.e., the controller takes as input the robot arm's current joint
 position $\boldsymbol{q}$, current joint velocity
@@ -29,13 +26,14 @@ $\boldsymbol{\dot{q}}$, the desired end-effector pose
 $\boldsymbol{x}_d$, and desired end-effector velocity
 $\boldsymbol{\dot{x}}_d$, and outputs the joint torque $\boldsymbol{u}$.
 
-Thus, the controlled robot arm with the controller has the equation of motion:
+The closed-loop dynamics with controller is
 
 $$
-    \boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\textbf{Controller}(\boldsymbol{q}, \boldsymbol{\dot{q}}, \boldsymbol{x}_d, \boldsymbol{\dot{x}}_d)$$(equ.osc_sys)
+    \boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\textbf{controller}(\boldsymbol{q}, \boldsymbol{\dot{q}}, \boldsymbol{x}_d, \boldsymbol{\dot{x}}_d)$$(equ.osc_sys)
 
 </br>
-In the following, we  define
+
+We  define
 the end-effector  pose error:
 
 $$
@@ -53,17 +51,31 @@ $$(equ.end_vel_error)
 with with $\boldsymbol{x}$ the current/actual robot end-effector pose, and  $\boldsymbol{x}$ the current/actual robot end-effector pose. 
 
 
-</br> </br> </br>
+</br> 
 
 
-## OSC PD Control with Gravity Compensation
+## PD Control with Gravity Compensation
 
-Given a stationary end-effector pose $\boldsymbol{x}_{d}$ (i.e., $\boldsymbol{\dot x}_{ d}=\boldsymbol{0}$), we want to design a controller {eq}`equ.osc_controller`
+Given a stationary end-effector pose $\boldsymbol{x}_{d}$ ($\boldsymbol{\dot x}_{ d}=\boldsymbol{0}$), we want to design a controller {eq}`equ.osc_controller`
  such that from any initial robot configuration  $\boldsymbol{q}_0$, the controlled robot arm {eq}`equ.osc_sys` will eventually reach
 $\boldsymbol{x}_{d}$. That means 
 
 $$\boldsymbol{e}(t)\rightarrow \boldsymbol{0}\quad \text{as}\quad
 t\rightarrow \infty$$
+
+```{admonition} PD Control with Gravity Compensation
+The controller for PD control with gravity compensation follows
+
+
+$$
+\boldsymbol{u}=\underbrace{\boldsymbol{g}(\boldsymbol{q})}_{\text{gravitational compensation}}+
+\underbrace{\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K}_{P} {(\boldsymbol{x}_d-\boldsymbol{x})}}_{\text{proportional control}}\quad\underbrace{-\boldsymbol{J}^{T}(\boldsymbol{q})\boldsymbol{K}_{D} \boldsymbol{J}(\boldsymbol{q})\dot{\boldsymbol{q}}}_{\text{derivative control}}$$(equ.osc_pd2)
+
+with $\boldsymbol{K}_{P}$ and $\boldsymbol{K}_{D}$ are positive definite matrices. 
+```
+
+
+
 
 Below, we will design the controller {eq}`equ.osc_controller` based on the Lyapunov method (see
 background of Lyapunov method in [Numerical Inverse Kinematics](chapter-nik)).
@@ -147,14 +159,6 @@ compensation
 ```
 
 
-```{admonition} Summary: PD Control with Gravity Compensation
-
-$$
-\boldsymbol{u}=\underbrace{\boldsymbol{g}(\boldsymbol{q})}_{\text{gravitational compensation}}+
-\underbrace{\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K}_{P} {(\boldsymbol{x}_d-\boldsymbol{x})}}_{\text{proportional control}}\quad\underbrace{-\boldsymbol{J}^{T}(\boldsymbol{q})\boldsymbol{K}_{D} \boldsymbol{J}(\boldsymbol{q})\dot{\boldsymbol{q}}}_{\text{derivative control}}$$(equ.osc_pd2)
-
-with $\boldsymbol{K}_{P}$ and $\boldsymbol{K}_{D}$ are positive definite matrices. 
-```
 
 
 

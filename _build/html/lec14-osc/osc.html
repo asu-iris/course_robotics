@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Operational Space Control (OSC) &#8212; Modeling and Control of Robots</title>
+    <title>Operational Space Control &#8212; Modeling and Control of Robots</title>
   
   
   
@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -59,11 +59,11 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'lec22/osc';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lec14-osc/osc';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Python Basics" href="../python-coding/python-intro.html" />
-    <link rel="prev" title="Centralized Joint Control" href="../lec21/cjc.html" />
+    <link rel="prev" title="Joint Space Control" href="../lec13-jsc/jsc.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -213,15 +213,10 @@
 
 <li class="toctree-l1"><a class="reference internal" href="../lec12-dyn/dyn.html">Dynamics</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="../lec19/control_overview.html">Overview of Robot Arm Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lec13-jsc/jsc.html">Joint Space Control</a></li>
 
 
-
-<li class="toctree-l1"><a class="reference internal" href="../lec20/djc.html">Decentralized Joint Control</a></li>
-
-
-<li class="toctree-l1"><a class="reference internal" href="../lec21/cjc.html">Centralized Joint Control</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Operational Space Control (OSC)</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Operational Space Control</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Python Coding</span></p>
 <ul class="nav bd-sidenav">
@@ -280,7 +275,7 @@
       
       
       
-      <li><a href="../_sources/lec22/osc.md" target="_blank"
+      <li><a href="../_sources/lec14-osc/osc.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -364,7 +359,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Operational Space Control (OSC)</h1>
+    <h1>Operational Space Control</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -374,7 +369,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#osc-pd-control-with-gravity-compensation">OSC PD Control with Gravity Compensation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pd-control-with-gravity-compensation">PD Control with Gravity Compensation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#osc-inverse-dynamics-control">OSC Inverse Dynamics Control</a></li>
 </ul>
             </nav>
@@ -387,57 +382,66 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="operational-space-control-osc">
-<h1>Operational Space Control (OSC)<a class="headerlink" href="#operational-space-control-osc" title="Link to this heading">#</a></h1>
-<p>The goal of operational space control (OSC) is to control the robot to track the  desired end-effector pose    <span class="math notranslate nohighlight">\(\boldsymbol{x}_d\)</span> and velocity <span class="math notranslate nohighlight">\(\boldsymbol{\dot{x}}_d\)</span> given in the operational space.</p>
-<p>In the following control design, we consider a a <span class="math notranslate nohighlight">\(n\)</span>-joint robot arm without external end-effector forces and any joint
+  <section class="tex2jax_ignore mathjax_ignore" id="operational-space-control">
+<h1>Operational Space Control<a class="headerlink" href="#operational-space-control" title="Link to this heading">#</a></h1>
+<p>The goal of operational space control (OSC) is to control the robot to track the  desired end-effector pose    <span class="math notranslate nohighlight">\(\boldsymbol{x}_d\)</span> and velocity <span class="math notranslate nohighlight">\(\boldsymbol{\dot{x}}_d\)</span> given in the operational space.
+Consider a a <span class="math notranslate nohighlight">\(n\)</span>-joint robot arm without external end-effector forces and any joint
 friction. The equation of motion of the robot arm  is</p>
 <div class="math notranslate nohighlight" id="equation-equ-osc-dyn">
-<span class="eqno">(87)<a class="headerlink" href="#equation-equ-osc-dyn" title="Link to this equation">#</a></span>\[
+<span class="eqno">(64)<a class="headerlink" href="#equation-equ-osc-dyn" title="Link to this equation">#</a></span>\[
     \boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\boldsymbol{u}\]</div>
 <p>The controller we want to design is in the general form of</p>
 <div class="math notranslate nohighlight" id="equation-equ-osc-controller">
-<span class="eqno">(88)<a class="headerlink" href="#equation-equ-osc-controller" title="Link to this equation">#</a></span>\[
-\boldsymbol{u}=\textbf{Controller}(\boldsymbol{q}, \boldsymbol{\dot{q}}, \boldsymbol{x}_d, \boldsymbol{\dot{x}}_d)\]</div>
+<span class="eqno">(65)<a class="headerlink" href="#equation-equ-osc-controller" title="Link to this equation">#</a></span>\[
+\boldsymbol{u}=\textbf{controller}(\boldsymbol{q}, \boldsymbol{\dot{q}}, \boldsymbol{x}_d, \boldsymbol{\dot{x}}_d)\]</div>
 <p>i.e., the controller takes as input the robot arm’s current joint
 position <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span>, current joint velocity
 <span class="math notranslate nohighlight">\(\boldsymbol{\dot{q}}\)</span>, the desired end-effector pose
 <span class="math notranslate nohighlight">\(\boldsymbol{x}_d\)</span>, and desired end-effector velocity
 <span class="math notranslate nohighlight">\(\boldsymbol{\dot{x}}_d\)</span>, and outputs the joint torque <span class="math notranslate nohighlight">\(\boldsymbol{u}\)</span>.</p>
-<p>Thus, the controlled robot arm with the controller has the equation of motion:</p>
+<p>The closed-loop dynamics with controller is</p>
 <div class="math notranslate nohighlight" id="equation-equ-osc-sys">
-<span class="eqno">(89)<a class="headerlink" href="#equation-equ-osc-sys" title="Link to this equation">#</a></span>\[
-    \boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\textbf{Controller}(\boldsymbol{q}, \boldsymbol{\dot{q}}, \boldsymbol{x}_d, \boldsymbol{\dot{x}}_d)\]</div>
+<span class="eqno">(66)<a class="headerlink" href="#equation-equ-osc-sys" title="Link to this equation">#</a></span>\[
+    \boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\textbf{controller}(\boldsymbol{q}, \boldsymbol{\dot{q}}, \boldsymbol{x}_d, \boldsymbol{\dot{x}}_d)\]</div>
 </br>
-In the following, we  define
-the end-effector  pose error:
+<p>We  define
+the end-effector  pose error:</p>
 <div class="math notranslate nohighlight" id="equation-equ-end-pose-error">
-<span class="eqno">(90)<a class="headerlink" href="#equation-equ-end-pose-error" title="Link to this equation">#</a></span>\[
+<span class="eqno">(67)<a class="headerlink" href="#equation-equ-end-pose-error" title="Link to this equation">#</a></span>\[
 \boldsymbol{e}=\boldsymbol{x}_{d}-\boldsymbol{x}
 \]</div>
 <p>and  end-effector velocity error:</p>
 <div class="math notranslate nohighlight" id="equation-equ-end-vel-error">
-<span class="eqno">(91)<a class="headerlink" href="#equation-equ-end-vel-error" title="Link to this equation">#</a></span>\[
+<span class="eqno">(68)<a class="headerlink" href="#equation-equ-end-vel-error" title="Link to this equation">#</a></span>\[
 \boldsymbol{\dot e}=\boldsymbol{\dot x}_{d}-\boldsymbol{\dot x}=\boldsymbol{\dot x}_{d}-\boldsymbol J (\boldsymbol{q})\boldsymbol{\dot q}
 \]</div>
 <p>with with <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span> the current/actual robot end-effector pose, and  <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span> the current/actual robot end-effector pose.</p>
-<p></br> </br> </br></p>
-<section id="osc-pd-control-with-gravity-compensation">
-<h2>OSC PD Control with Gravity Compensation<a class="headerlink" href="#osc-pd-control-with-gravity-compensation" title="Link to this heading">#</a></h2>
-<p>Given a stationary end-effector pose <span class="math notranslate nohighlight">\(\boldsymbol{x}_{d}\)</span> (i.e., <span class="math notranslate nohighlight">\(\boldsymbol{\dot x}_{ d}=\boldsymbol{0}\)</span>), we want to design a controller <a class="reference internal" href="#equation-equ-osc-controller">(88)</a>
-such that from any initial robot configuration  <span class="math notranslate nohighlight">\(\boldsymbol{q}_0\)</span>, the controlled robot arm <a class="reference internal" href="#equation-equ-osc-sys">(89)</a> will eventually reach
+</br> 
+<section id="pd-control-with-gravity-compensation">
+<h2>PD Control with Gravity Compensation<a class="headerlink" href="#pd-control-with-gravity-compensation" title="Link to this heading">#</a></h2>
+<p>Given a stationary end-effector pose <span class="math notranslate nohighlight">\(\boldsymbol{x}_{d}\)</span> (<span class="math notranslate nohighlight">\(\boldsymbol{\dot x}_{ d}=\boldsymbol{0}\)</span>), we want to design a controller <a class="reference internal" href="#equation-equ-osc-controller">(65)</a>
+such that from any initial robot configuration  <span class="math notranslate nohighlight">\(\boldsymbol{q}_0\)</span>, the controlled robot arm <a class="reference internal" href="#equation-equ-osc-sys">(66)</a> will eventually reach
 <span class="math notranslate nohighlight">\(\boldsymbol{x}_{d}\)</span>. That means</p>
 <div class="math notranslate nohighlight">
 \[\boldsymbol{e}(t)\rightarrow \boldsymbol{0}\quad \text{as}\quad
 t\rightarrow \infty\]</div>
-<p>Below, we will design the controller <a class="reference internal" href="#equation-equ-osc-controller">(88)</a> based on the Lyapunov method (see
+<div class="admonition-pd-control-with-gravity-compensation admonition">
+<p class="admonition-title">PD Control with Gravity Compensation</p>
+<p>The controller for PD control with gravity compensation follows</p>
+<div class="math notranslate nohighlight" id="equation-equ-osc-pd2">
+<span class="eqno">(69)<a class="headerlink" href="#equation-equ-osc-pd2" title="Link to this equation">#</a></span>\[
+\boldsymbol{u}=\underbrace{\boldsymbol{g}(\boldsymbol{q})}_{\text{gravitational compensation}}+
+\underbrace{\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K}_{P} {(\boldsymbol{x}_d-\boldsymbol{x})}}_{\text{proportional control}}\quad\underbrace{-\boldsymbol{J}^{T}(\boldsymbol{q})\boldsymbol{K}_{D} \boldsymbol{J}(\boldsymbol{q})\dot{\boldsymbol{q}}}_{\text{derivative control}}\]</div>
+<p>with <span class="math notranslate nohighlight">\(\boldsymbol{K}_{P}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{K}_{D}\)</span> are positive definite matrices.</p>
+</div>
+<p>Below, we will design the controller <a class="reference internal" href="#equation-equ-osc-controller">(65)</a> based on the Lyapunov method (see
 background of Lyapunov method in <a class="reference internal" href="../lec11-nik/nik.html#chapter-nik"><span class="std std-ref">Numerical Inverse Kinematics</span></a>).</p>
 <p>First, we take the
 vector <span class="math notranslate nohighlight">\(\begin{bmatrix}\boldsymbol{e}\\
 \boldsymbol{\dot{q}}\end{bmatrix}\)</span> as the control system state. Choose
 the following positive definite quadratic form as Lyapunov function:</p>
 <div class="math notranslate nohighlight" id="equation-equ-ocs-v">
-<span class="eqno">(92)<a class="headerlink" href="#equation-equ-ocs-v" title="Link to this equation">#</a></span>\[V(\dot{\boldsymbol{q}}, {\boldsymbol{e}})=\frac{1}{2} \dot{\boldsymbol{q}}^{T} \boldsymbol{B}(\boldsymbol{q}) \dot{\boldsymbol{q}}+\frac{1}{2} {\boldsymbol{e}}^{T} \boldsymbol{K}_{P} {\boldsymbol{e}}&gt;0 \quad \forall \dot{\boldsymbol{q}}, {\boldsymbol{e}} \neq \mathbf{0}\]</div>
+<span class="eqno">(70)<a class="headerlink" href="#equation-equ-ocs-v" title="Link to this equation">#</a></span>\[V(\dot{\boldsymbol{q}}, {\boldsymbol{e}})=\frac{1}{2} \dot{\boldsymbol{q}}^{T} \boldsymbol{B}(\boldsymbol{q}) \dot{\boldsymbol{q}}+\frac{1}{2} {\boldsymbol{e}}^{T} \boldsymbol{K}_{P} {\boldsymbol{e}}&gt;0 \quad \forall \dot{\boldsymbol{q}}, {\boldsymbol{e}} \neq \mathbf{0}\]</div>
 <p>with <span class="math notranslate nohighlight">\(\boldsymbol{K}_{P}\)</span> a  positive definite matrix. Then,</p>
 <div class="math notranslate nohighlight">
 \[\dot{V}=\dot{\boldsymbol{q}}^{T} \boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\frac{1}{2} \dot{\boldsymbol{q}}^{T} \dot{\boldsymbol{B}}(\boldsymbol{q}) \dot{\boldsymbol{q}}+\dot{\boldsymbol{e}}^{T} \boldsymbol{K}_{P} {\boldsymbol{e}}\]</div>
@@ -446,21 +450,21 @@ the following positive definite quadratic form as Lyapunov function:</p>
 \[\dot{{\boldsymbol{e}}}=-\dot{\boldsymbol{x}}=-\boldsymbol{J}(\boldsymbol{q}) \dot{\boldsymbol{q}}\]</div>
 <p>and then</p>
 <div class="math notranslate nohighlight" id="equation-equ-ocs-vdot">
-<span class="eqno">(93)<a class="headerlink" href="#equation-equ-ocs-vdot" title="Link to this equation">#</a></span>\[\dot{V}=\dot{\boldsymbol{q}}^{T} \boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\frac{1}{2} \dot{\boldsymbol{q}}^{T} \dot{\boldsymbol{B}}(\boldsymbol{q}) \dot{\boldsymbol{q}}-\dot{\boldsymbol{q}}^{T} \boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K}_{P} {\boldsymbol{e}}\]</div>
-<p>Similar to the derivation in the  <a class="reference internal" href="../lec21/cjc.html#chapter-cjc"><span class="std std-ref">previous chapter</span></a>, we replace
-<span class="math notranslate nohighlight">\(\boldsymbol{B}\ddot{\boldsymbol{q}}\)</span> in <a class="reference internal" href="#equation-equ-ocs-vdot">(93)</a> form dynamics <a class="reference internal" href="#equation-equ-osc-dyn">(87)</a>
+<span class="eqno">(71)<a class="headerlink" href="#equation-equ-ocs-vdot" title="Link to this equation">#</a></span>\[\dot{V}=\dot{\boldsymbol{q}}^{T} \boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\frac{1}{2} \dot{\boldsymbol{q}}^{T} \dot{\boldsymbol{B}}(\boldsymbol{q}) \dot{\boldsymbol{q}}-\dot{\boldsymbol{q}}^{T} \boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K}_{P} {\boldsymbol{e}}\]</div>
+<p>Similar to the derivation in the  <a class="reference internal" href="#chapter-cjc"><span class="xref myst">previous chapter</span></a>, we replace
+<span class="math notranslate nohighlight">\(\boldsymbol{B}\ddot{\boldsymbol{q}}\)</span> in <a class="reference internal" href="#equation-equ-ocs-vdot">(71)</a> form dynamics <a class="reference internal" href="#equation-equ-osc-dyn">(64)</a>
 and consider the property that
 <span class="math notranslate nohighlight">\(\dot{\boldsymbol{B}}-2 \boldsymbol{C}\)</span> is a
 skew-symmetric matrix.
-Then, <a class="reference internal" href="#equation-equ-ocs-vdot">(93)</a> becomes</p>
+Then, <a class="reference internal" href="#equation-equ-ocs-vdot">(71)</a> becomes</p>
 <div class="math notranslate nohighlight">
 \[\dot{V}=\dot{\boldsymbol{q}}^{T}\left(\boldsymbol{u}-\boldsymbol{g}(\boldsymbol{q})-\boldsymbol{J}_{A}^{T}(\boldsymbol{q}) \boldsymbol{K}_{P} {\boldsymbol{e}}\right) .\]</div>
 <p>For the above <span class="math notranslate nohighlight">\(\dot{V}\)</span> to be negative, we choose the controller</p>
 <div class="math notranslate nohighlight" id="equation-equ-osc-pd">
-<span class="eqno">(94)<a class="headerlink" href="#equation-equ-osc-pd" title="Link to this equation">#</a></span>\[\boldsymbol{u}=\boldsymbol{g}(\boldsymbol{q})+\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K}_{P} {\boldsymbol{e}}-\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K}_{D} \boldsymbol{J}(\boldsymbol{q}) \dot{\boldsymbol{q}}\]</div>
+<span class="eqno">(72)<a class="headerlink" href="#equation-equ-osc-pd" title="Link to this equation">#</a></span>\[\boldsymbol{u}=\boldsymbol{g}(\boldsymbol{q})+\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K}_{P} {\boldsymbol{e}}-\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K}_{D} \boldsymbol{J}(\boldsymbol{q}) \dot{\boldsymbol{q}}\]</div>
 <p>with <span class="math notranslate nohighlight">\(\boldsymbol{K}_{D}\)</span> positive definite, then,</p>
 <div class="math notranslate nohighlight" id="equation-equ-osc-vdot2">
-<span class="eqno">(95)<a class="headerlink" href="#equation-equ-osc-vdot2" title="Link to this equation">#</a></span>\[\dot{V}=-\dot{\boldsymbol{q}}^{T} \boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K}_{D} \boldsymbol{J}(\boldsymbol{q}) \dot{\boldsymbol{q}} \quad &lt;0,  \quad \forall \quad\boldsymbol{\dot{q}}\quad\text{with} \quad \boldsymbol{J}(\boldsymbol{q})\dot{\boldsymbol{q}} \neq \mathbf{0}\]</div>
+<span class="eqno">(73)<a class="headerlink" href="#equation-equ-osc-vdot2" title="Link to this equation">#</a></span>\[\dot{V}=-\dot{\boldsymbol{q}}^{T} \boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K}_{D} \boldsymbol{J}(\boldsymbol{q}) \dot{\boldsymbol{q}} \quad &lt;0,  \quad \forall \quad\boldsymbol{\dot{q}}\quad\text{with} \quad \boldsymbol{J}(\boldsymbol{q})\dot{\boldsymbol{q}} \neq \mathbf{0}\]</div>
 <p>which says the Lyapunov function decreases as long as
 <span class="math notranslate nohighlight">\(\boldsymbol{J}(\boldsymbol{q})\dot{\boldsymbol{q}} \neq \mathbf{0}\)</span>.
 Thus, the system reaches an equilibrium pose, with condition
@@ -473,47 +477,39 @@ consider the non-redundant non-singularity of matrix
 that <span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}}=\mathbf{0}\)</span> and further
 <span class="math notranslate nohighlight">\(\ddot{\boldsymbol{q}} =\mathbf{0}\)</span>. To find the robot equilibrium configuration, we look at the robot arm dynamics with controller</p>
 <div class="math notranslate nohighlight" id="equation-equ-osc-sys2">
-<span class="eqno">(96)<a class="headerlink" href="#equation-equ-osc-sys2" title="Link to this equation">#</a></span>\[\boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{F} \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\boldsymbol{g}(\boldsymbol{q})+\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K}_{P} {\boldsymbol{e}}-\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K}_{D} \boldsymbol{J}(\boldsymbol{q}) \dot{\boldsymbol{q}}\]</div>
+<span class="eqno">(74)<a class="headerlink" href="#equation-equ-osc-sys2" title="Link to this equation">#</a></span>\[\boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{F} \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\boldsymbol{g}(\boldsymbol{q})+\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K}_{P} {\boldsymbol{e}}-\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K}_{D} \boldsymbol{J}(\boldsymbol{q}) \dot{\boldsymbol{q}}\]</div>
 <p>With the condition <span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}}=\mathbf{0}\)</span>, it follows that
-<span class="math notranslate nohighlight">\(\ddot{\boldsymbol{q}} =\mathbf{0}\)</span>, and then the above <a class="reference internal" href="#equation-equ-osc-sys2">(96)</a> becomes</p>
+<span class="math notranslate nohighlight">\(\ddot{\boldsymbol{q}} =\mathbf{0}\)</span>, and then the above <a class="reference internal" href="#equation-equ-osc-sys2">(74)</a> becomes</p>
 <div class="math notranslate nohighlight" id="equation-equ-osc-equiv">
-<span class="eqno">(97)<a class="headerlink" href="#equation-equ-osc-equiv" title="Link to this equation">#</a></span>\[\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K}_{P} {\boldsymbol{e}}=\mathbf{0}\quad \rightarrow\quad {\boldsymbol{e}}=\boldsymbol{x}_{d}-\boldsymbol{x}_{e}=\mathbf{0}\]</div>
+<span class="eqno">(75)<a class="headerlink" href="#equation-equ-osc-equiv" title="Link to this equation">#</a></span>\[\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K}_{P} {\boldsymbol{e}}=\mathbf{0}\quad \rightarrow\quad {\boldsymbol{e}}=\boldsymbol{x}_{d}-\boldsymbol{x}_{e}=\mathbf{0}\]</div>
 <p>This concludes that the controlled robot arm will asymptotically reach
 <span class="math notranslate nohighlight">\(\boldsymbol{x}_d\)</span>. The corresponding control diagram is shown below.</p>
 <figure class="align-default" id="operational-pd-gravity-compensation">
 <a class="reference internal image-reference" href="../_images/operational_PD_gravity_compensation.jpeg"><img alt="../_images/operational_PD_gravity_compensation.jpeg" src="../_images/operational_PD_gravity_compensation.jpeg" style="width: 90%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 79 </span><span class="caption-text">Block diagram of operational space PD control with gravity
+<p><span class="caption-number">Fig. 69 </span><span class="caption-text">Block diagram of operational space PD control with gravity
 compensation</span><a class="headerlink" href="#operational-pd-gravity-compensation" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<div class="admonition-summary-pd-control-with-gravity-compensation admonition">
-<p class="admonition-title">Summary: PD Control with Gravity Compensation</p>
-<div class="math notranslate nohighlight" id="equation-equ-osc-pd2">
-<span class="eqno">(98)<a class="headerlink" href="#equation-equ-osc-pd2" title="Link to this equation">#</a></span>\[
-\boldsymbol{u}=\underbrace{\boldsymbol{g}(\boldsymbol{q})}_{\text{gravitational compensation}}+
-\underbrace{\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K}_{P} {(\boldsymbol{x}_d-\boldsymbol{x})}}_{\text{proportional control}}\quad\underbrace{-\boldsymbol{J}^{T}(\boldsymbol{q})\boldsymbol{K}_{D} \boldsymbol{J}(\boldsymbol{q})\dot{\boldsymbol{q}}}_{\text{derivative control}}\]</div>
-<p>with <span class="math notranslate nohighlight">\(\boldsymbol{K}_{P}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{K}_{D}\)</span> are positive definite matrices.</p>
-</div>
 <p></br> </br> </br></p>
 </section>
 <section id="osc-inverse-dynamics-control">
 <h2>OSC Inverse Dynamics Control<a class="headerlink" href="#osc-inverse-dynamics-control" title="Link to this heading">#</a></h2>
 <p>One limitation of the OSC PD Control is that the controller can only follow a stationary desired <span class="math notranslate nohighlight">\(\boldsymbol{x}_d\)</span>
 , but is not good at tracking a fast-changing desired <span class="math notranslate nohighlight">\(\boldsymbol{x}_d\)</span> (i.e., <span class="math notranslate nohighlight">\(\boldsymbol{\dot x}_d\neq \boldsymbol{0}\)</span>). OSC Inverse Dynamics Control is to address so.</p>
-<p>Recall the joint space inverse dynamics control  in the  <a class="reference internal" href="../lec21/cjc.html#chapter-cjc"><span class="std std-ref">previous chapter</span></a>. If we  set the controller as
+<p>Recall the joint space inverse dynamics control  in the  <a class="reference internal" href="#chapter-cjc"><span class="xref myst">previous chapter</span></a>. If we  set the controller as
 form</p>
 <div class="math notranslate nohighlight" id="equation-equ-osc-u">
-<span class="eqno">(99)<a class="headerlink" href="#equation-equ-osc-u" title="Link to this equation">#</a></span>\[
+<span class="eqno">(76)<a class="headerlink" href="#equation-equ-osc-u" title="Link to this equation">#</a></span>\[
     \boldsymbol{u}=\boldsymbol{B}(\boldsymbol{q}) \boldsymbol{y}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})\]</div>
 <p>where <span class="math notranslate nohighlight">\(\boldsymbol{y}\)</span> is a new input vector. The  controller directly leads to the controlled
-robot arm <a class="reference internal" href="#equation-equ-osc-sys">(89)</a> as</p>
+robot arm <a class="reference internal" href="#equation-equ-osc-sys">(66)</a> as</p>
 <div class="math notranslate nohighlight" id="equation-equ-ocs-sys2">
-<span class="eqno">(100)<a class="headerlink" href="#equation-equ-ocs-sys2" title="Link to this equation">#</a></span>\[\boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\boldsymbol{B}(\boldsymbol{q}) \boldsymbol{y}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})\]</div>
+<span class="eqno">(77)<a class="headerlink" href="#equation-equ-ocs-sys2" title="Link to this equation">#</a></span>\[\boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\boldsymbol{B}(\boldsymbol{q}) \boldsymbol{y}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})\]</div>
 <p>further simplified as</p>
 <div class="math notranslate nohighlight" id="equation-equ-ocs-dyn-new">
-<span class="eqno">(101)<a class="headerlink" href="#equation-equ-ocs-dyn-new" title="Link to this equation">#</a></span>\[
+<span class="eqno">(78)<a class="headerlink" href="#equation-equ-ocs-dyn-new" title="Link to this equation">#</a></span>\[
 \boldsymbol{\ddot{q}}=\boldsymbol{y}\]</div>
 <p>Again, we will discuss how to set
 this new input <span class="math notranslate nohighlight">\(\boldsymbol{y}\)</span> below. The new input <span class="math notranslate nohighlight">\(\boldsymbol{y}\)</span> is designed  make the robot arm track a changing <span class="math notranslate nohighlight">\(\boldsymbol{x}_{d}(t)\)</span>. To this end, we
@@ -522,16 +518,16 @@ differentiate the jacobian equation</p>
 \[\dot{\boldsymbol{x}}=\boldsymbol{J}(\boldsymbol{q})\dot{\boldsymbol{q}}\]</div>
 <p>on both side with respect to time <span class="math notranslate nohighlight">\(t\)</span>, leading to</p>
 <div class="math notranslate nohighlight" id="equation-equ-osc-djac">
-<span class="eqno">(102)<a class="headerlink" href="#equation-equ-osc-djac" title="Link to this equation">#</a></span>\[
+<span class="eqno">(79)<a class="headerlink" href="#equation-equ-osc-djac" title="Link to this equation">#</a></span>\[
     \ddot{\boldsymbol{x}}=\boldsymbol{J}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\dot{\boldsymbol{J}}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}\]</div>
-<p>The above <a class="reference internal" href="#equation-equ-osc-djac">(102)</a> suggests the following choice of
+<p>The above <a class="reference internal" href="#equation-equ-osc-djac">(79)</a> suggests the following choice of
 <span class="math notranslate nohighlight">\(\boldsymbol{y}\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-equ-osc-y">
-<span class="eqno">(103)<a class="headerlink" href="#equation-equ-osc-y" title="Link to this equation">#</a></span>\[
+<span class="eqno">(80)<a class="headerlink" href="#equation-equ-osc-y" title="Link to this equation">#</a></span>\[
     \boldsymbol{y}=\boldsymbol{J}^{-1}(\boldsymbol{q})\left(\ddot{\boldsymbol{x}}_{d}+\boldsymbol{K}_{D} \dot{{\boldsymbol{e}}}+\boldsymbol{K}_{P} {\boldsymbol{e}}-\dot{\boldsymbol{J}}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}\right)\]</div>
 <p>with <span class="math notranslate nohighlight">\(\boldsymbol{K}_{P}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{K}_{D}\)</span> positive definite
-matrices. In fact, plugging <a class="reference internal" href="#equation-equ-osc-y">(103)</a>
-to <a class="reference internal" href="#equation-equ-osc-djac">(102)</a>
+matrices. In fact, plugging <a class="reference internal" href="#equation-equ-osc-y">(80)</a>
+to <a class="reference internal" href="#equation-equ-osc-djac">(79)</a>
 leads to the error dynamics</p>
 <div class="math notranslate nohighlight">
 \[\ddot{{\boldsymbol{e}}}+\boldsymbol{K}_{D} \dot{{\boldsymbol{e}}}+\boldsymbol{K}_{P} {\boldsymbol{e}}=\mathbf{0}\]</div>
@@ -548,7 +544,7 @@ Then, the end-effector of the controlled robot arm will behave like a linear sec
 <a class="reference internal image-reference" href="../_images/operational_PD_gravity_compensation2.jpeg"><img alt="../_images/operational_PD_gravity_compensation2.jpeg" src="../_images/operational_PD_gravity_compensation2.jpeg" style="width: 90%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 80 </span><span class="caption-text">Block scheme of operational space PD control with gravity
+<p><span class="caption-number">Fig. 70 </span><span class="caption-text">Block scheme of operational space PD control with gravity
 compensation</span><a class="headerlink" href="#operational-pd-gravity-compensation2" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
@@ -584,7 +580,7 @@ compensation</span><a class="headerlink" href="#operational-pd-gravity-compensat
         },
         kernelOptions: {
             name: "python3",
-            path: "./lec22"
+            path: "./lec14-osc"
         },
         predefinedOutput: true
     }
@@ -602,12 +598,12 @@ compensation</span><a class="headerlink" href="#operational-pd-gravity-compensat
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../lec21/cjc.html"
+       href="../lec13-jsc/jsc.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Centralized Joint Control</p>
+        <p class="prev-next-title">Joint Space Control</p>
       </div>
     </a>
     <a class="right-next"
@@ -635,7 +631,7 @@ compensation</span><a class="headerlink" href="#operational-pd-gravity-compensat
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#osc-pd-control-with-gravity-compensation">OSC PD Control with Gravity Compensation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pd-control-with-gravity-compensation">PD Control with Gravity Compensation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#osc-inverse-dynamics-control">OSC Inverse Dynamics Control</a></li>
 </ul>
   </nav></div>

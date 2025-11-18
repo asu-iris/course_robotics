@@ -213,15 +213,10 @@
 
 <li class="toctree-l1"><a class="reference internal" href="../lec12-dyn/dyn.html">Dynamics</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="../lec19/control_overview.html">Overview of Robot Arm Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lec13-jsc/jsc.html">Joint Space Control</a></li>
 
 
-
-<li class="toctree-l1"><a class="reference internal" href="../lec20/djc.html">Decentralized Joint Control</a></li>
-
-
-<li class="toctree-l1"><a class="reference internal" href="../lec21/cjc.html">Centralized Joint Control</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lec22/osc.html">Operational Space Control (OSC)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lec14-osc/osc.html">Operational Space Control</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Python Coding</span></p>
 <ul class="nav bd-sidenav">
@@ -412,7 +407,7 @@ pose <span class="math notranslate nohighlight">\(\boldsymbol{x}_{e}\)</span>:</
 <p>Consider the time derivative of <a class="reference internal" href="#equation-equ-error">(22)</a></p>
 <div class="math notranslate nohighlight" id="equation-equ-error-dyn">
 <span class="eqno">(23)<a class="headerlink" href="#equation-equ-error-dyn" title="Link to this equation">#</a></span>\[\dot{\boldsymbol{e}}=\dot{\boldsymbol{x}}_{d}-\dot{\boldsymbol{x}}_{e}=\dot{\boldsymbol{x}}_{d}-\boldsymbol{J}_{A}(\boldsymbol{q}) \dot{\boldsymbol{q}}\]</div>
-<p>The above <a class="reference internal" href="../lec21/cjc.html#equation-equ-error-dyn">(85)</a> is called <em>error dynamics</em>, as it shows ODE of end-effector pose error
+<p>The above <a class="reference internal" href="../lec13-jsc/jsc.html#equation-equ-error-dyn">(63)</a> is called <em>error dynamics</em>, as it shows ODE of end-effector pose error
 <span class="math notranslate nohighlight">\(\boldsymbol{e}(t)\)</span> over time <span class="math notranslate nohighlight">\(t\)</span>. Here, <span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}}\)</span> can be
 viewed as the control input. From a control perspective, we want to design
 a  control law</p>
@@ -438,7 +433,7 @@ as</p>
 </div>
 <p>To verify if the above controller can solve  IK, we next examine if the error dynamics
 converges to 0.
-Submitting the above controllers into the error dynamics <a class="reference internal" href="../lec21/cjc.html#equation-equ-error-dyn">(85)</a>, it easy to
+Submitting the above controllers into the error dynamics <a class="reference internal" href="../lec13-jsc/jsc.html#equation-equ-error-dyn">(63)</a>, it easy to
 verify that</p>
 <div class="math notranslate nohighlight" id="equation-equ-method1">
 <span class="eqno">(24)<a class="headerlink" href="#equation-equ-method1" title="Link to this equation">#</a></span>\[\dot{\boldsymbol{e}}+\boldsymbol{K} \boldsymbol{e}=0 .\]</div>
@@ -539,7 +534,7 @@ as</p>
 </div>
 <p>Consider <span class="math notranslate nohighlight">\(\dot{\boldsymbol{x}_d}=0\)</span>.
 Let’s use Lyapunov
-Theory to find if the above controller makes the error dynamics <a class="reference internal" href="../lec21/cjc.html#equation-equ-error-dyn">(85)</a> stablize to zero or not. Plugging <span class="math notranslate nohighlight">\( \dot{\boldsymbol{q}}=\boldsymbol{J}_{A}^{T}(\boldsymbol{q}) \boldsymbol{K} \boldsymbol{e}\)</span> to the error dynamics <a class="reference internal" href="../lec21/cjc.html#equation-equ-error-dyn">(85)</a>,</p>
+Theory to find if the above controller makes the error dynamics <a class="reference internal" href="../lec13-jsc/jsc.html#equation-equ-error-dyn">(63)</a> stablize to zero or not. Plugging <span class="math notranslate nohighlight">\( \dot{\boldsymbol{q}}=\boldsymbol{J}_{A}^{T}(\boldsymbol{q}) \boldsymbol{K} \boldsymbol{e}\)</span> to the error dynamics <a class="reference internal" href="../lec13-jsc/jsc.html#equation-equ-error-dyn">(63)</a>,</p>
 <div class="math notranslate nohighlight" id="equation-equ-closed-loop-dyn">
 <span class="eqno">(26)<a class="headerlink" href="#equation-equ-closed-loop-dyn" title="Link to this equation">#</a></span>\[
 \dot{\boldsymbol{e}}=\dot{\boldsymbol{x}}_{d}-\boldsymbol{J}_{A}(\boldsymbol{q}) \boldsymbol{J}_{A}^{T}(\boldsymbol{q}) \boldsymbol{K} \boldsymbol{e}=-\boldsymbol{J}_{A}(\boldsymbol{q}) \boldsymbol{J}_{A}^{T}(\boldsymbol{q}) \boldsymbol{K} \boldsymbol{e} 

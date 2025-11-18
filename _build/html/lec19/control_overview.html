@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -62,8 +62,6 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'lec19/control_overview';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Decentralized Joint Control" href="../lec20/djc.html" />
-    <link rel="prev" title="Dynamics" href="../lec12-dyn/dyn.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -126,6 +124,8 @@
       
       
       
+        
+      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -174,7 +174,7 @@
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Robotics Fundamentals</span></p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../lec1-intro/intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lec2-dof/configuration.html">Robot Configuration</a></li>
 
@@ -213,15 +213,10 @@
 
 <li class="toctree-l1"><a class="reference internal" href="../lec12-dyn/dyn.html">Dynamics</a></li>
 
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Overview of Robot Arm Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lec13-jsc/jsc.html">Joint Space Control</a></li>
 
 
-
-<li class="toctree-l1"><a class="reference internal" href="../lec20/djc.html">Decentralized Joint Control</a></li>
-
-
-<li class="toctree-l1"><a class="reference internal" href="../lec21/cjc.html">Centralized Joint Control</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lec22/osc.html">Operational Space Control (OSC)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lec14-osc/osc.html">Operational Space Control</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Python Coding</span></p>
 <ul class="nav bd-sidenav">
@@ -403,13 +398,13 @@ control inputs (joint torque) is usually made in the joint space. There are two
 control schemes: joint space control and operational space control. In
 both schemes, the control diagram is closed-loops</p>
 <figure class="align-default" id="joint-control222">
-<a class="reference internal image-reference" href="../_images/joint_control.jpg"><img alt="../_images/joint_control.jpg" src="../_images/joint_control.jpg" style="width: 99%;" />
+<a class="reference internal image-reference" href="../_images/joint_control1.jpg"><img alt="../_images/joint_control1.jpg" src="../_images/joint_control1.jpg" style="width: 99%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 65 </span><span class="caption-text">Joint space control</span><a class="headerlink" href="#joint-control222" title="Link to this image">#</a></p>
+<p><span class="caption-text">Joint space control</span><a class="headerlink" href="#joint-control222" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>The joint space control is shown in <a class="reference internal" href="#joint-control222"><span class="std std-numref">Fig. 65</span></a>. Here, inverse kinematics is
+<p>The joint space control is shown in <code class="xref std std-numref docutils literal notranslate"><span class="pre">joint_control222</span></code>. Here, inverse kinematics is
 use to convert the specified end-effector motion
 <span class="math notranslate nohighlight">\(\boldsymbol{x}_{d}\)</span> to the desired joint motion
 <span class="math notranslate nohighlight">\(\boldsymbol{q}_{d}\)</span>. Then, a joint space controller
@@ -418,13 +413,13 @@ track <span class="math notranslate nohighlight">\(\boldsymbol{q}_{d}\)</span>. 
 regulates the joint tracking error <span class="math notranslate nohighlight">\(\boldsymbol{q}_{d}-\boldsymbol{q}_{}\)</span>, instead of operational space error <span class="math notranslate nohighlight">\(\boldsymbol{x}_{d}-\boldsymbol{x}_{e}\)</span>. Thus, the end-effector pose
 <span class="math notranslate nohighlight">\(\boldsymbol{x}_{e}\)</span> is controlled in an open-loop fashion (instead, <span class="math notranslate nohighlight">\(\boldsymbol{q}_{}\)</span> is controlled in closed-loop way). This can lead to operational space control error if IK has some error.</p>
 <figure class="align-default" id="operational-space-control222">
-<a class="reference internal image-reference" href="../_images/operational_space_control.jpg"><img alt="../_images/operational_space_control.jpg" src="../_images/operational_space_control.jpg" style="width: 99%;" />
+<a class="reference internal image-reference" href="../_images/operational_space_control1.jpg"><img alt="../_images/operational_space_control1.jpg" src="../_images/operational_space_control1.jpg" style="width: 99%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 66 </span><span class="caption-text">Operational space control</span><a class="headerlink" href="#operational-space-control222" title="Link to this image">#</a></p>
+<p><span class="caption-text">Operational space control</span><a class="headerlink" href="#operational-space-control222" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>The operational space control is shown in <a class="reference internal" href="#operational-space-control222"><span class="std std-numref">Fig. 66</span></a>.
+<p>The operational space control is shown in <code class="xref std std-numref docutils literal notranslate"><span class="pre">operational_space_control222</span></code>.
 Here, the operational space motion <span class="math notranslate nohighlight">\(\boldsymbol{x}_{e}\)</span> is directly fed back
 to the controller. Thus, it addresses the drawbacks of joint space
 control. However, the control algorithm  typically is more complex in design and it requires  measuring the operational space motion
@@ -436,22 +431,22 @@ control. However, the control algorithm  typically is more complex in design and
 <p>According to the previous lecture, the dynamics equation of a
 robot arm only with joint input torque <span class="math notranslate nohighlight">\(\boldsymbol{\tau}\)</span> is:</p>
 <div class="math notranslate nohighlight" id="equation-equ-robotarm-dyn">
-<span class="eqno">(51)<a class="headerlink" href="#equation-equ-robotarm-dyn" title="Link to this equation">#</a></span>\[\boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{F}_{v} \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\boldsymbol{\tau}\]</div>
+<span class="eqno">()<a class="headerlink" href="#equation-equ-robotarm-dyn" title="Link to this equation">#</a></span>\[\boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{F}_{v} \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\boldsymbol{\tau}\]</div>
 <figure class="align-default" id="motori-kinematics">
 <a class="reference internal image-reference" href="lec18/dynamics/motori_kinematics.jpg"><img alt="lec18/dynamics/motori_kinematics.jpg" src="lec18/dynamics/motori_kinematics.jpg" style="width: 70%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 67 </span><span class="caption-text">Transmission between  motor and
+<p><span class="caption-text">Transmission between  motor and
 joint</span><a class="headerlink" href="#motori-kinematics" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <section id="joint-motor-transmission">
 <h2>Joint-Motor Transmission<a class="headerlink" href="#joint-motor-transmission" title="Link to this heading">#</a></h2>
-<p>As shown in <a class="reference internal" href="#motori-kinematics"><span class="std std-numref">Fig. 67</span></a>, let  <span class="math notranslate nohighlight">\(\boldsymbol{q}_{m}=[\theta_{m1}, \theta_{m2}, ...\theta_{mn}]^T\)</span>
+<p>As shown in <code class="xref std std-numref docutils literal notranslate"><span class="pre">motori_kinematics</span></code>, let  <span class="math notranslate nohighlight">\(\boldsymbol{q}_{m}=[\theta_{m1}, \theta_{m2}, ...\theta_{mn}]^T\)</span>
 be the vector of joint motor angles. The transmissions - assumed to be
 rigid and with no backlash - between the motor and joint motion is</p>
 <div class="math notranslate nohighlight" id="equation-equ-transmission-model">
-<span class="eqno">(52)<a class="headerlink" href="#equation-equ-transmission-model" title="Link to this equation">#</a></span>\[
+<span class="eqno">()<a class="headerlink" href="#equation-equ-transmission-model" title="Link to this equation">#</a></span>\[
     \boldsymbol{K}_{r} \boldsymbol{q}=\boldsymbol{q}_{m}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\boldsymbol{K}_{r}=\text{diag}(k_{r_1}, k_{r_2}, ..., k_{r_n})\)</span>
 is a diagonal   joint-motor transmission matrix, and each diagonal element <span class="math notranslate nohighlight">\(k_{r_i}\)</span> is the gear
@@ -461,7 +456,7 @@ the vector of all motor torques. Based on principle
 of virtual work, one has the following transmission between motor torque
 and joint input torque:</p>
 <div class="math notranslate nohighlight" id="equation-equ-transmission-model2">
-<span class="eqno">(53)<a class="headerlink" href="#equation-equ-transmission-model2" title="Link to this equation">#</a></span>\[
+<span class="eqno">()<a class="headerlink" href="#equation-equ-transmission-model2" title="Link to this equation">#</a></span>\[
 \boldsymbol{\tau}_{m}=\boldsymbol{K}_{r}^{-1} \boldsymbol{\tau}\]</div>
 </section>
 <section id="electric-motor-model">
@@ -470,12 +465,12 @@ and joint input torque:</p>
 <a class="reference internal image-reference" href="../_images/motor_circuit.jpg"><img alt="../_images/motor_circuit.jpg" src="../_images/motor_circuit.jpg" style="width: 99%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 68 </span><span class="caption-text">Direct current motor circuit</span><a class="headerlink" href="#motor-circuit" title="Link to this image">#</a></p>
+<p><span class="caption-text">Direct current motor circuit</span><a class="headerlink" href="#motor-circuit" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>For a direct current (DC) motor <a class="reference internal" href="#motor-circuit"><span class="std std-numref">Fig. 68</span></a>, we have the following model:</p>
+<p>For a direct current (DC) motor <code class="xref std std-numref docutils literal notranslate"><span class="pre">motor_circuit</span></code>, we have the following model:</p>
 <div class="math notranslate nohighlight" id="equation-equ-dc-model">
-<span class="eqno">(54)<a class="headerlink" href="#equation-equ-dc-model" title="Link to this equation">#</a></span>\[\begin{split}
+<span class="eqno">()<a class="headerlink" href="#equation-equ-dc-model" title="Link to this equation">#</a></span>\[\begin{split}
     \begin{aligned}
  \boldsymbol{\tau}_m&amp; =\boldsymbol{K}_{t} \boldsymbol{i}_{a} \\
 \boldsymbol{v}_{a} &amp; =\boldsymbol{R}_{a} \boldsymbol{i}_{a}+\boldsymbol{K}_{v} \dot{\boldsymbol{q}}_{m} \\
@@ -488,27 +483,27 @@ voltages; <span class="math notranslate nohighlight">\(\boldsymbol{R}_{a}\)</spa
 the voltage amplifiers; and <span class="math notranslate nohighlight">\(\boldsymbol{v}_{c}\)</span> is the voltages of the
 servomotors.</p>
 <p>Based on
-<a class="reference internal" href="#equation-equ-transmission-model">(52)</a>-<a class="reference internal" href="#equation-equ-dc-model">(54)</a>, we have</p>
+<a class="reference internal" href="#equation-equ-transmission-model">()</a>-<a class="reference internal" href="#equation-equ-dc-model">()</a>, we have</p>
 <div class="math notranslate nohighlight" id="equation-equ-voltage-control">
-<span class="eqno">(55)<a class="headerlink" href="#equation-equ-voltage-control" title="Link to this equation">#</a></span>\[
+<span class="eqno">()<a class="headerlink" href="#equation-equ-voltage-control" title="Link to this equation">#</a></span>\[
     \boldsymbol{\tau}=\boldsymbol{K}_{r} \boldsymbol{K}_{t} \boldsymbol{R}_{a}^{-1}\left(\boldsymbol{G}_{v} \boldsymbol{v}_{c}-\boldsymbol{K}_{v} \boldsymbol{K}_{r} \dot{\boldsymbol{q}}\right)\]</div>
 <p>which gives a relationship between the applied motor
 voltage <span class="math notranslate nohighlight">\(\boldsymbol{v}_c\)</span>, the motor-generated joint torque
 <span class="math notranslate nohighlight">\(\boldsymbol{\tau}\)</span>, and the joint velocity <span class="math notranslate nohighlight">\(\boldsymbol{\dot{q}}\)</span>.</p>
-<p>When we consider the robot arm system joining the DC motor <a class="reference internal" href="#equation-equ-voltage-control">(55)</a> and robot arm own dynamics <a class="reference internal" href="#equation-equ-robotarm-dyn">(51)</a>,
-overall diagram is shown in <a class="reference internal" href="#voltage-control"><span class="std std-numref">Fig. 69</span></a>.</p>
+<p>When we consider the robot arm system joining the DC motor <a class="reference internal" href="#equation-equ-voltage-control">()</a> and robot arm own dynamics <a class="reference internal" href="#equation-equ-robotarm-dyn">()</a>,
+overall diagram is shown in <code class="xref std std-numref docutils literal notranslate"><span class="pre">voltage_control</span></code>.</p>
 <figure class="align-default" id="voltage-control">
 <a class="reference internal image-reference" href="../_images/voltage_control.jpg"><img alt="../_images/voltage_control.jpg" src="../_images/voltage_control.jpg" style="width: 90%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 69 </span><span class="caption-text">The entire system joining DC motor and robot arm.</span><a class="headerlink" href="#voltage-control" title="Link to this image">#</a></p>
+<p><span class="caption-text">The entire system joining DC motor and robot arm.</span><a class="headerlink" href="#voltage-control" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="robot-arm-is-an-integrator">
 <h1>“Robot arm is an Integrator”<a class="headerlink" href="#robot-arm-is-an-integrator" title="Link to this heading">#</a></h1>
-<p>If the following assumptions hold for <a class="reference internal" href="#equation-equ-voltage-control">(55)</a>:</p>
+<p>If the following assumptions hold for <a class="reference internal" href="#equation-equ-voltage-control">()</a>:</p>
 <ul class="simple">
 <li><p>the joint-motor transmission value <span class="math notranslate nohighlight">\(\boldsymbol{K}_{r}\)</span> is much greater than unity;</p></li>
 <li><p>the motor resistance  <span class="math notranslate nohighlight">\(\boldsymbol{R}_{a}\)</span> is very small, which is
@@ -516,17 +511,17 @@ the case for high-efficiency servomotors;</p></li>
 <li><p>the joint torques value <span class="math notranslate nohighlight">\(\boldsymbol{\tau}\)</span> needed for the
 operation of the robot arm  not too large (light robot arm);</p></li>
 </ul>
-<p>then, <a class="reference internal" href="#equation-equ-voltage-control">(55)</a> can be approximated to</p>
+<p>then, <a class="reference internal" href="#equation-equ-voltage-control">()</a> can be approximated to</p>
 <div class="math notranslate nohighlight">
 \[\boldsymbol{G}_{v} \boldsymbol{v}_{c} \approx \boldsymbol{K}_{v} \boldsymbol{K}_{r} \dot{\boldsymbol{q}}\]</div>
 <p>further</p>
 <div class="math notranslate nohighlight" id="equation-equ-arm-integrator">
-<span class="eqno">(56)<a class="headerlink" href="#equation-equ-arm-integrator" title="Link to this equation">#</a></span>\[  \dot{\boldsymbol{q}}=\boldsymbol{K}_{r}^{-1}  \boldsymbol{K}_{v}^{-1}\boldsymbol{G}_{v}\boldsymbol{v}_{c} \]</div>
-<p><a class="reference internal" href="#equation-equ-arm-integrator">(56)</a> says, under the above-stated assumptions, the
+<span class="eqno">()<a class="headerlink" href="#equation-equ-arm-integrator" title="Link to this equation">#</a></span>\[  \dot{\boldsymbol{q}}=\boldsymbol{K}_{r}^{-1}  \boldsymbol{K}_{v}^{-1}\boldsymbol{G}_{v}\boldsymbol{v}_{c} \]</div>
+<p><a class="reference internal" href="#equation-equ-arm-integrator">()</a> says, under the above-stated assumptions, the
 robot arm system, i.e., DC motor plus arm, can be considered as a
 voltage-to-velocity system: the joint velocity of the robot arm is linear to the voltage input to the servomotor. In other words, the
 robot arm system can be considered as an integrator!</p>
-<p>The benefit of  <a class="reference internal" href="#equation-equ-arm-integrator">(56)</a> is that it is a decentralized control system
+<p>The benefit of  <a class="reference internal" href="#equation-equ-arm-integrator">()</a> is that it is a decentralized control system
 (each joint can be controlled independently of the others): the velocity
 of the <span class="math notranslate nohighlight">\(i\)</span>-th joint depends only on the <span class="math notranslate nohighlight">\(i\)</span>-th  voltage input, since
 the matrix
@@ -538,7 +533,7 @@ diagonal.</p>
 <p>If the assumption in the above section does not hold,
 for example, when <span class="math notranslate nohighlight">\(\boldsymbol{K}_{r}=\boldsymbol{I}\)</span>, we
 do not have such a nice property of “robot arm as an integrator”, and then the robot will exhibit complex eletro-mechnical dynamics. How do we control the robot arm??</p>
-<p>Well, from <a class="reference internal" href="#equation-equ-voltage-control">(55)</a>,  we still have the following relation between the motor-generated
+<p>Well, from <a class="reference internal" href="#equation-equ-voltage-control">()</a>,  we still have the following relation between the motor-generated
 joint torque and armature current</p>
 <div class="math notranslate nohighlight">
 \[
@@ -546,7 +541,7 @@ joint torque and armature current</p>
      \]</div>
 <p>i.e.,</p>
 <div class="math notranslate nohighlight" id="equation-equ-current-torque">
-<span class="eqno">(57)<a class="headerlink" href="#equation-equ-current-torque" title="Link to this equation">#</a></span>\[
+<span class="eqno">()<a class="headerlink" href="#equation-equ-current-torque" title="Link to this equation">#</a></span>\[
      \boldsymbol{\tau}=\boldsymbol{K}_r\boldsymbol{K}_{t} \boldsymbol{i}_{a}
      \]</div>
 <p>Thus, in reality, we have a local feedback control system inside the
@@ -554,9 +549,9 @@ motor to regulate the armature current <span class="math notranslate nohighlight
 control system will establish the following relationship between the motor
 voltage input and the armature current:</p>
 <div class="math notranslate nohighlight" id="equation-equ-current-control">
-<span class="eqno">(58)<a class="headerlink" href="#equation-equ-current-control" title="Link to this equation">#</a></span>\[\label{equ.voltage_current}
+<span class="eqno">()<a class="headerlink" href="#equation-equ-current-control" title="Link to this equation">#</a></span>\[\label{equ.voltage_current}
     \boldsymbol{i}_{a}=\boldsymbol{G}_{i} \boldsymbol{v}_{c}\]</div>
-<p>Therefore, based on <a class="reference internal" href="#equation-equ-current-torque">(57)</a> and <a class="reference internal" href="#equation-equ-current-control">(58)</a>, we have</p>
+<p>Therefore, based on <a class="reference internal" href="#equation-equ-current-torque">()</a> and <a class="reference internal" href="#equation-equ-current-control">()</a>, we have</p>
 <div class="math notranslate nohighlight">
 \[
     \boldsymbol{\tau}=\boldsymbol{K}_r\boldsymbol{K}_{t}\boldsymbol{G}_{i} \boldsymbol{v}_{c}\]</div>
@@ -596,24 +591,6 @@ a robot arm by regulating the voltage to the servomotor.</p>
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="../lec12-dyn/dyn.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Dynamics</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="../lec20/djc.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Decentralized Joint Control</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               

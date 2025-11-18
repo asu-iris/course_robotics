@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="380" viewBox="0 0 1200 380">
+  <style>
+    .blk { fill:#ffffff; stroke:#222; stroke-width:2; rx:6; ry:6 }
+    .blk-weak { fill:#f7f7f7; stroke:#888; stroke-width:1.5; rx:6; ry:6 }
+    .txt { font-family: 'DejaVu Sans', Arial, sans-serif; font-size:14px; fill:#111 }
+    .title { font-size:16px; font-weight:700 }
+    .arrow { stroke:#222; stroke-width:2; fill:none; marker-end:url(#arrowhead) }
+    .sum { fill:#fff; stroke:#222; stroke-width:2 }
+    .note { font-size:12px; fill:#333 }
+  </style>
+
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="8" refX="10" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 z" fill="#222" />
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="20" y="24" class="title txt">PD Controller with Gravity Compensation</text>
+
+  <!-- Desired input q_d -->
+  <text x="20" y="70" class="txt">q_d (desired)</text>
+  <line x1="140" y1="70" x2="210" y2="70" class="arrow" />
+
+  <!-- Summation: q_d - q -->
+  <g transform="translate(210,50)">
+    <circle cx="0" cy="20" r="20" class="sum" />
+    <text x="-6" y="25" class="txt">+</text>
+    <text x="-6" y="13" class="txt">-</text>
+  </g>
+
+  <line x1="230" y1="70" x2="330" y2="70" class="arrow" />
+  <text x="280" y="54" class="txt">e = q_d - q</text>
+
+  <!-- Kp block -->
+  <rect x="330" y="46" width="100" height="48" class="blk"/>
+  <text x="380" y="76" text-anchor="middle" class="txt">K_P</text>
+  <line x1="430" y1="70" x2="500" y2="70" class="arrow" />
+
+  <!-- Sum for controller combining Kp, Kd, g(q) -->
+  <g transform="translate(500,50)">
+    <circle cx="0" cy="20" r="20" class="sum" />
+    <text x="-10" y="26" class="txt">+</text>
+    <text x="-10" y="12" class="txt">+</text>
+  </g>
+
+  <line x1="520" y1="70" x2="620" y2="70" class="arrow" />
+  <text x="620" y="54" class="txt">u (control torque)</text>
+
+  <!-- Manipulator block -->
+  <rect x="620" y="36" width="220" height="96" class="blk-weak"/>
+  <text x="730" y="76" text-anchor="middle" class="txt">Manipulator</text>
+
+  <!-- Outputs q_dot and q -->
+  <line x1="840" y1="70" x2="920" y2="70" class="arrow" />
+  <text x="925" y="65" class="txt">q_dot</text>
+  <line x1="840" y1="95" x2="920" y2="120" class="arrow" />
+  <text x="925" y="125" class="txt">q (measured)</text>
+
+  <!-- Feedback q to first summation (negative) -->
+  <path d="M920 125 L1060 125 L1060 55 L930 55" stroke="#222" stroke-width="2" fill="none" marker-end="url(#arrowhead)" />
+  <text x="1066" y="80" class="note">q (feedback)</text>
+  <line x1="930" y1="55" x2="910" y2="70" stroke="#222" stroke-width="2" fill="none" marker-end="url(#arrowhead)" />
+
+  <!-- Kd block from q_dot to controller (derivative) -->
+  <rect x="330" y="120" width="100" height="48" class="blk"/>
+  <text x="380" y="150" text-anchor="middle" class="txt">K_D</text>
+  <line x1="430" y1="144" x2="500" y2="84" class="arrow" />
+  <text x="415" y="132" class="note">Deriv. path</text>
+  <line x1="840" y1="70" x2="740" y2="144" class="arrow" />
+  <text x="750" y="160" class="note">q_dot</text>
+
+  <!-- Gravity compensation g(q) block -->
+  <rect x="500" y="-6" width="120" height="36" class="blk"/>
+  <text x="560" y="18" text-anchor="middle" class="txt">g(q)</text>
+  <path d="M740 84 L720 20 L620 20" stroke="#222" stroke-width="2" fill="none" marker-end="url(#arrowhead)" />
+  <text x="725" y="40" class="note">gravity term</text>
+  <path d="M940 120 L740 120 L740 36" stroke="#222" stroke-width="2" fill="none" marker-end="url(#arrowhead)" />
+
+  <!-- Wire from Kp output into controller sum (already drawn) -> also draw label for Kp arrow -->
+  <text x="460" y="90" class="note">proportional</text>
+
+  <!-- Small legend/explanation -->
+  <rect x="20" y="260" width="370" height="100" class="blk-weak"/>
+  <text x="30" y="282" class="txt" style="font-weight:700">Legend / Notes</text>
+  <text x="30" y="302" class="note">• q_d : desired joint positions</text>
+  <text x="30" y="320" class="note">• e = q_d - q : tracking error</text>
+  <text x="30" y="338" class="note">• K_P : proportional gain, K_D : derivative gain</text>
+  <text x="30" y="356" class="note">• g(q) : gravitational compensation added to control input</text>
+
+</svg>

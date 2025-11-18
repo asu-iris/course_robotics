@@ -19,10 +19,10 @@ parts:
       # - file: lec15/inverse_vk
       - file: lec11-nik/nik
       - file: lec12-dyn/dyn
-      - file: lec19/control_overview
-      - file: lec20/djc
-      - file: lec21/cjc
-      - file: lec22/osc
+      # - file: lec19/control_overview
+      # - file: lec20/djc
+      - file: lec13-jsc/jsc
+      - file: lec14-osc/osc
   - caption: "Python Coding"
     chapters:
       - file: python-coding/python-intro

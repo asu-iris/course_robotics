@@ -1,0 +1,798 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Joint Space Control &#8212; Modeling and Control of Robots</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lec13-jsc/jsc';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Operational Space Control" href="../lec14-osc/osc.html" />
+    <link rel="prev" title="Dynamics" href="../lec12-dyn/dyn.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/iris_logo_2.png" class="logo__image only-light" alt="Modeling and Control of Robots - Home"/>
+    <script>document.write(`<img src="../_static/iris_logo_2.png" class="logo__image only-dark" alt="Modeling and Control of Robots - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Robotics Fundamentals</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../lec1-intro/intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lec2-dof/configuration.html">Robot Configuration</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec3-basic-kin/basic-kinematics.html">Basic Kinematics</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec4-fk/fk.html">Forward Kinematics</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec5-aik/aik.html">Inverse Kinematics</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec6-mp/motion_planning.html">Motion Planning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lec7-dk/dk.html">Velocity Kinematics</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../lec8-jac/jac.html">Jacobian</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec9-singu/singularity.html">Singularity &amp; Redundancy</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec10-dual/dual.html">Duality</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../lec11-nik/nik.html">Numerical Inverse Kinematics</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../lec12-dyn/dyn.html">Dynamics</a></li>
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Joint Space Control</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lec14-osc/osc.html">Operational Space Control</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Python Coding</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../python-coding/python-intro.html">Python Basics</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/lec13-jsc/jsc.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Joint Space Control</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Joint Space Control</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-of-robot-control">Overview of Robot Control</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Joint Space Control</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#controller-1-pd-control-with-gravity-compensation">Controller 1: PD Control with Gravity Compensation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#controller-2-inverse-dynamics-control">Controller 2: Inverse Dynamics Control</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#controller-3-impedance-control">Controller 3: Impedance Control</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="joint-space-control">
+<h1>Joint Space Control<a class="headerlink" href="#joint-space-control" title="Link to this heading">#</a></h1>
+<br>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="overview-of-robot-control">
+<h1>Overview of Robot Control<a class="headerlink" href="#overview-of-robot-control" title="Link to this heading">#</a></h1>
+<p>The control of a robot arm is to determine the time sequence of
+control inputs (i.e., joint torques) to achieve a specified task. A task is specified usually in the
+operational space (such as end-effector motion and forces), whereas
+control inputs (joint torque) is usually made in the joint space. There are two
+control schemes: joint space control and operational space control.</p>
+<figure class="align-default" id="joint-control2">
+<a class="reference internal image-reference" href="../_images/joint_control.jpg"><img alt="../_images/joint_control.jpg" src="../_images/joint_control.jpg" style="width: 80%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 65 </span><span class="caption-text">Joint space control</span><a class="headerlink" href="#joint-control2" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The joint space control is shown in <a class="reference internal" href="#joint-control2"><span class="std std-numref">Fig. 65</span></a>. Here, inverse kinematics is
+use to convert the specified end-effector motion
+<span class="math notranslate nohighlight">\(\boldsymbol{x}_{d}\)</span> to the desired joint motion
+<span class="math notranslate nohighlight">\(\boldsymbol{q}_{d}\)</span>. Then, a joint space controller
+is designed to allow the actual joint value <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span> to
+track <span class="math notranslate nohighlight">\(\boldsymbol{q}_{d}\)</span>. The controller   <em>directly</em>
+regulates the joint tracking error <span class="math notranslate nohighlight">\(\boldsymbol{q}_{d}-\boldsymbol{q}_{}\)</span>, instead of operational space error <span class="math notranslate nohighlight">\(\boldsymbol{x}_{d}-\boldsymbol{x}_{e}\)</span>. Thus, the end-effector pose
+<span class="math notranslate nohighlight">\(\boldsymbol{x}_{e}\)</span> is controlled in an open-loop fashion.</p>
+<figure class="align-default" id="operational-space-control2">
+<a class="reference internal image-reference" href="../_images/operational_space_control.jpg"><img alt="../_images/operational_space_control.jpg" src="../_images/operational_space_control.jpg" style="width: 70%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 66 </span><span class="caption-text">Operational space control</span><a class="headerlink" href="#operational-space-control2" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The operational space control is shown in <a class="reference internal" href="#operational-space-control2"><span class="std std-numref">Fig. 66</span></a>.
+Here, the operational space motion <span class="math notranslate nohighlight">\(\boldsymbol{x}_{e}\)</span> is directly fed back
+to the controller. Thus, it addresses the drawbacks of joint space
+control. However, the control   typically is more complex in design and  requires  measuring the operational space motion
+<span class="math notranslate nohighlight">\(\boldsymbol{x}_{e}\)</span>.</p>
+<p></br> </br></p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>Joint Space Control<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<p>For a <span class="math notranslate nohighlight">\(n\)</span>-joint robot arm, we consider
+a robot arm without external end-effector forces and  joint
+friction. The equation of motion of the robot arm  is</p>
+<div class="math notranslate nohighlight" id="equation-equ-cjc-robotarm">
+<span class="eqno">(51)<a class="headerlink" href="#equation-equ-cjc-robotarm" title="Link to this equation">#</a></span>\[
+    \boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\boldsymbol{\tau}.\]</div>
+<p>The controller we want to design is</p>
+<div class="math notranslate nohighlight" id="equation-equ-cjc-controller">
+<span class="eqno">(52)<a class="headerlink" href="#equation-equ-cjc-controller" title="Link to this equation">#</a></span>\[
+\boldsymbol{\tau}=\boldsymbol{u}=\textbf{controller}(\boldsymbol{q}, \boldsymbol{\dot{q}}, \boldsymbol{q}_d, \boldsymbol{\dot{q}}_d)\]</div>
+<p>i.e., the controller takes the robot current joint
+position <span class="math notranslate nohighlight">\(\boldsymbol{q}\)</span>, joint velocity
+<span class="math notranslate nohighlight">\(\boldsymbol{\dot{q}}\)</span>, desired joint position <span class="math notranslate nohighlight">\(\boldsymbol{q}_d\)</span>,
+and desired joint velocity <span class="math notranslate nohighlight">\(\boldsymbol{\dot{q}}_d\)</span>, and outputs
+joint torque <span class="math notranslate nohighlight">\(\boldsymbol{u}\)</span>.</p>
+<p>The  motion of equation of the robot arm with the controller is (also called closed-loop dynamics):</p>
+<div class="math notranslate nohighlight" id="equation-equ-cjc-system">
+<span class="eqno">(57)<a class="headerlink" href="#equation-equ-cjc-system" title="Link to this equation">#</a></span>\[
+    \boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\textbf{controller}(\boldsymbol{q}, \boldsymbol{\dot{q}}, \boldsymbol{q}_d, \boldsymbol{\dot{q}}_d)\]</div>
+<section id="controller-1-pd-control-with-gravity-compensation">
+<h2>Controller 1: PD Control with Gravity Compensation<a class="headerlink" href="#controller-1-pd-control-with-gravity-compensation" title="Link to this heading">#</a></h2>
+<p>Consider a <em>stationary</em> desired joint position <span class="math notranslate nohighlight">\(\boldsymbol{q}_{d}\)</span> (<span class="math notranslate nohighlight">\(\boldsymbol{\dot q}_{d}=\boldsymbol{0}\)</span>), we want
+to design a controller <a class="reference internal" href="#equation-equ-cjc-controller">(52)</a>, such that given any initial robot pose,
+say <span class="math notranslate nohighlight">\(\boldsymbol{q}_0\)</span>, the controlled robot arm <a class="reference internal" href="#equation-equ-cjc-system">(57)</a> will eventually reach
+<span class="math notranslate nohighlight">\(\boldsymbol{q}_{d}\)</span>. In other words, if we define the joint error as</p>
+<div class="math notranslate nohighlight">
+\[{\boldsymbol{e}}=\boldsymbol{q}_{d}-\boldsymbol{q}\]</div>
+<p>we want to design a controller <span class="math notranslate nohighlight">\(
+\boldsymbol{u}=\textbf{controller}(\boldsymbol{q}, \boldsymbol{\dot{q}}, \boldsymbol{q}_d, \boldsymbol{\dot{q}}_d)\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{e}(t)\rightarrow \boldsymbol{0}\quad \text{as}\quad
+t\rightarrow \infty.\]</div>
+<div class="admonition-pd-controller-with-gravity-compensation admonition">
+<p class="admonition-title">PD Controller with Gravity Compensation</p>
+<p>Controller for PD control with gravity compensation follows</p>
+<div class="math notranslate nohighlight" id="equation-equ-cjc-pd2">
+<span class="eqno">(54)<a class="headerlink" href="#equation-equ-cjc-pd2" title="Link to this equation">#</a></span>\[
+\boldsymbol{u}=\underbrace{\boldsymbol{g}(\boldsymbol{q})}_{\text{gravitational compensation}}+\underbrace{\boldsymbol{K}_{P} (\boldsymbol{q}_d-\boldsymbol{q})}_{\text{proportional control}}\quad\underbrace{-\boldsymbol{K}_{D} \dot{\boldsymbol{q}}}_{\text{derivative control}}\]</div>
+<p>with <span class="math notranslate nohighlight">\(\boldsymbol{K}_{P}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{K}_{D}\)</span> are positive definite matrices.</p>
+</div>
+<p>Below, we will use the Lyapunov method (see
+background of Lyapunov method in <a class="reference internal" href="../lec11-nik/nik.html#chapter-nik"><span class="std std-ref">Numerical Inverse Kinematics</span></a>) to prove that the controller
+<a class="reference internal" href="#equation-equ-cjc-pd2">(54)</a> works.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Lyapunov stability proof for PD controller (click to expand)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">First, we define the error state
+vector <span class="math notranslate nohighlight">\(\begin{bmatrix}\boldsymbol{e}\\
+\boldsymbol{\dot{q}}\end{bmatrix}\)</span>, and choose
+the following Lyapunov function:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}V({\boldsymbol{e}},\dot{\boldsymbol{q}})=\frac{1}{2} \dot{\boldsymbol{q}}^{T} \boldsymbol{B}(\boldsymbol{q}) \dot{\boldsymbol{q}}+\frac{1}{2} {\boldsymbol{e}}^{T} \boldsymbol{K}_{P} {\boldsymbol{e}} \quad &gt;0 \quad \forall \begin{bmatrix}\boldsymbol{e}\\
+\boldsymbol{\dot{q}}\end{bmatrix}   \neq \mathbf{0}\end{split}\]</div>
+<p class="sd-card-text">where <span class="math notranslate nohighlight">\(\boldsymbol{K}_{P}\)</span> is an <span class="math notranslate nohighlight">\((n \times n)\)</span> symmetric positive
+definite matrix.</p>
+<p class="sd-card-text">Differentiating
+<span class="math notranslate nohighlight">\(V({\boldsymbol{e}},\dot{\boldsymbol{q}})\)</span> with respect to time  yields</p>
+<div class="math notranslate nohighlight" id="equation-equ-cjc-vdot">
+<span class="eqno">(55)<a class="headerlink" href="#equation-equ-cjc-vdot" title="Link to this equation">#</a></span>\[\dot{V}=\dot{\boldsymbol{q}}^{T} \boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\frac{1}{2} \dot{\boldsymbol{q}}^{T} \dot{\boldsymbol{B}}(\boldsymbol{q}) \dot{\boldsymbol{q}}-\dot{\boldsymbol{q}}^{T} \boldsymbol{K}_{P} {\boldsymbol{e}}\]</div>
+<p class="sd-card-text">From <a class="reference internal" href="#equation-equ-cjc-robotarm">(51)</a>, we can solve for
+<span class="math notranslate nohighlight">\(\boldsymbol{B} \ddot{\boldsymbol{q}}\)</span> and substituting it to <a class="reference internal" href="#equation-equ-cjc-vdot">(55)</a> gives</p>
+<div class="math notranslate nohighlight" id="equation-equ-cjc-vdot2">
+<span class="eqno">(56)<a class="headerlink" href="#equation-equ-cjc-vdot2" title="Link to this equation">#</a></span>\[\label{equ.lypuanovdot}
+    \dot{V}=\frac{1}{2} \underbrace{\dot{\boldsymbol{q}}^{T}(\dot{\boldsymbol{B}}(\boldsymbol{q})-2 \boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}})) \dot{\boldsymbol{q}}}_{0}+\dot{\boldsymbol{q}}^{T}\left(\boldsymbol{u}-\boldsymbol{g}(\boldsymbol{q})-\boldsymbol{K}_{P} {\boldsymbol{e}}\right)\]</div>
+<p class="sd-card-text">The first term is zero since
+<span class="math notranslate nohighlight">\(\dot{\boldsymbol{B}}-2 \boldsymbol{C}\)</span> is a
+skew-symmetric matrix (see in the property of dynamics in <a class="reference internal" href="../lec12-dyn/dyn.html#chapter-dyn"><span class="std std-ref">Dynamics</span></a>).
+For the second term, we substitute the controller <a class="reference internal" href="#equation-equ-cjc-pd2">(54)</a> in, and this leads to</p>
+<div class="math notranslate nohighlight">
+\[\dot{V}=-\boldsymbol{\dot{q}}^T\boldsymbol{K}_D\boldsymbol{\dot{q}} \quad &lt;0 \quad \forall \dot{\boldsymbol{q}}  \neq \mathbf{0}\]</div>
+<p class="sd-card-text">and thus, <span class="math notranslate nohighlight">\(V\)</span> decreases as long as <span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}} \neq \mathbf{0}\)</span>. Thus, the robot arm will reach
+an equilibrium configuration where
+<span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}}=\mathbf{0}\)</span>.
+To find the equilibrium
+configuration, we look at the closed-loop dynamics under control</p>
+<div class="math notranslate nohighlight" id="equation-equ-cjc-system">
+<span class="eqno">(57)<a class="headerlink" href="#equation-equ-cjc-system" title="Link to this equation">#</a></span>\[\boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\boldsymbol{g}(\boldsymbol{q})+\boldsymbol{K}_{P} {\boldsymbol{e}}-\boldsymbol{K}_{D} \dot{\boldsymbol{q}}\]</div>
+<p class="sd-card-text">With  <span class="math notranslate nohighlight">\(\dot{\boldsymbol{q}}=\mathbf{0}\)</span>, it follows that
+<span class="math notranslate nohighlight">\(\ddot{\boldsymbol{q}} =\mathbf{0}\)</span>, and then from the above dynamics <a class="reference internal" href="#equation-equ-cjc-system">(57)</a>,
+we have</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{K}_{P} {\boldsymbol{e}}=\mathbf{0} \quad\rightarrow\quad {\boldsymbol{e}}=\boldsymbol{q}_{d}-\boldsymbol{q} = \mathbf{0}\]</div>
+<p class="sd-card-text">Therefore, the robot arm will eventually reach equilibrium, which is
+exactly the desired configuration <span class="math notranslate nohighlight">\(\boldsymbol{q}_{d}\)</span>.</p>
+<p class="sd-card-text">The control block diagram for PD control with gravity compensation is shown below</p>
+</div>
+</details><figure class="align-default" id="pv-control-rl-1">
+<a class="reference internal image-reference" href="../_images/PD_control_with_gravity_compensation.jpeg"><img alt="../_images/PD_control_with_gravity_compensation.jpeg" src="../_images/PD_control_with_gravity_compensation.jpeg" style="width: 90%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 67 </span><span class="caption-text">Control diagram of PD control with gravity
+compensation</span><a class="headerlink" href="#pv-control-rl-1" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</br> 
+</section>
+<section id="controller-2-inverse-dynamics-control">
+<h2>Controller 2: Inverse Dynamics Control<a class="headerlink" href="#controller-2-inverse-dynamics-control" title="Link to this heading">#</a></h2>
+<p>One limitation of the PD Control with Gravity Compensation is that the  controller can
+only follow a stationary desired <span class="math notranslate nohighlight">\(\boldsymbol{q}_d\)</span>, not good at
+tracking a fast-changing desired joint:</p>
+<div class="math notranslate nohighlight" id="equation-equ-joint-signal">
+<span class="eqno">(58)<a class="headerlink" href="#equation-equ-joint-signal" title="Link to this equation">#</a></span>\[
+\boldsymbol{\dot{q}}_d(t)\neq\boldsymbol{0} \quad \text{and} \quad \boldsymbol{\ddot{q}}_d(t)\neq\boldsymbol{0}\]</div>
+<p>Inverse dynamics control is  to address the above
+limitation. The idea of inverse dynamics control is to find a controller <a class="reference internal" href="#equation-equ-cjc-controller">(52)</a>
+that can make the robot arm behave like a mass-spring-damper system.</p>
+<div class="admonition-inverse-dynamics-control admonition">
+<p class="admonition-title">Inverse Dynamics Control</p>
+<p>Controller for inverse dynamics control  follows</p>
+<div class="math notranslate nohighlight" id="equation-equ-idc-1">
+<span class="eqno">(59)<a class="headerlink" href="#equation-equ-idc-1" title="Link to this equation">#</a></span>\[
+    \boldsymbol{u}=\boldsymbol{B}(\boldsymbol{q}) \boldsymbol{y}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})\]</div>
+<p>with</p>
+<div class="math notranslate nohighlight" id="equation-equ-idc-2">
+<span class="eqno">(60)<a class="headerlink" href="#equation-equ-idc-2" title="Link to this equation">#</a></span>\[
+    \boldsymbol{y}=\ddot{\boldsymbol{{q}}}_d+\boldsymbol{K}_{P} ({\boldsymbol{q}}_{d}-\boldsymbol{q})+\boldsymbol{K}_{D} (\dot{\boldsymbol{q}}_{d}-\dot{\boldsymbol{q}})\]</div>
+<p>Here,</p>
+<div class="math notranslate nohighlight">
+\[
+    \boldsymbol{K}_{P}=\operatorname{diag}\left\{\omega_{1}^{2}, \ldots, \omega_{n}^{2}\right\} \quad \boldsymbol{K}_{D}=\operatorname{diag}\left\{2 \zeta_{1} \omega_{1}, \ldots, 2 \zeta_{n} \omega_{n}\right\}\]</div>
+<p>with <span class="math notranslate nohighlight">\(\zeta_i\)</span>  the damping ratio and  <span class="math notranslate nohighlight">\(\omega_{i}\)</span>  the natural frequency  for joint <span class="math notranslate nohighlight">\(i\)</span>.</p>
+</div>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Stability proof for Inverse Dynamics Control (click to expand)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Plugging the controller <a class="reference internal" href="#equation-equ-idc-1">(59)</a> into the robot arm dynamics <a class="reference internal" href="#equation-equ-cjc-robotarm">(51)</a>, we have</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\boldsymbol{B}(\boldsymbol{q}) \boldsymbol{y}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})\]</div>
+<p class="sd-card-text">which is simplified to</p>
+<div class="math notranslate nohighlight" id="equation-equ-dyn-new">
+<span class="eqno">(61)<a class="headerlink" href="#equation-equ-dyn-new" title="Link to this equation">#</a></span>\[
+\boldsymbol{\ddot{q}}=\boldsymbol{y}\]</div>
+<p class="sd-card-text">Considering <a class="reference internal" href="#equation-equ-idc-2">(60)</a>, we have</p>
+<div class="math notranslate nohighlight" id="equation-equ-error-dyn2">
+<span class="eqno">(62)<a class="headerlink" href="#equation-equ-error-dyn2" title="Link to this equation">#</a></span>\[
+    (\ddot{\boldsymbol{{q}}}_d-\ddot{\boldsymbol{q}})+\boldsymbol{K}_{P} ({\boldsymbol{q}}_{d}-\boldsymbol{q})+\boldsymbol{K}_{D} (\dot{\boldsymbol{q}}_{d}-\dot{\boldsymbol{q}})=\boldsymbol{0}\]</div>
+<p class="sd-card-text">Again, if we define the error
+<span class="math notranslate nohighlight">\(\boldsymbol{e}={\boldsymbol{q}}_{d}-{\boldsymbol{q}}\)</span>, the above
+<a class="reference internal" href="#equation-equ-error-dyn">(63)</a> becomes</p>
+<div class="math notranslate nohighlight" id="equation-equ-error-dyn">
+<span class="eqno">(63)<a class="headerlink" href="#equation-equ-error-dyn" title="Link to this equation">#</a></span>\[
+    \ddot{\boldsymbol{e}}+\boldsymbol{K}_{P} \dot{\boldsymbol{e}}+\boldsymbol{K}_{D} {\boldsymbol{e}}=\boldsymbol{0}\]</div>
+<p class="sd-card-text">which is the error  dynamics. This is a standard second-order error (mass-spring-damper) system, where its
+convergence depends on the value of <span class="math notranslate nohighlight">\(\boldsymbol{K}_P\)</span> and
+<span class="math notranslate nohighlight">\(\boldsymbol{K}_D\)</span>.</p>
+<p class="sd-card-text">Then, the controlled robot arm can be viewed as having <span class="math notranslate nohighlight">\(n\)</span>
+decoupled (liner) second-order (mass-spring-damper) subsystems. Here, <span class="math notranslate nohighlight">\(\zeta_i\)</span> is the damping ratio and  <span class="math notranslate nohighlight">\(\omega_{i}\)</span>  the natural frequency  for joint <span class="math notranslate nohighlight">\(i\)</span>. For each joint <span class="math notranslate nohighlight">\(i\)</span>, the error dynamics is</p>
+<div class="math notranslate nohighlight">
+\[
+    \ddot{{e}}+ 2 \zeta_{i} \omega_{i} \dot{{e}}+ \omega_{i}^{2} {{e}}={0}\]</div>
+<p class="sd-card-text">Please see my <a class="reference download internal" download="" href="../_downloads/af66a2a39b5480f30ad4e93bc7990bf7/control_basics.pdf"><span class="xref download myst">Minimal notes on control basics</span></a> or below for how the values of the damping ratio
+<span class="math notranslate nohighlight">\(\zeta_i\)</span> and natural frequency <span class="math notranslate nohighlight">\(\omega_{i}\)</span>  affect the error response
+<span class="math notranslate nohighlight">\(\boldsymbol{e}(t)\)</span> in time domain.</p>
+</div>
+</details><!-- 
+```{admonition} Second-order linear system transient response
+
+Given a characteristics equation of a second-order linear system as follows:
+
+$$
+s^2+ 2 \zeta \omega_n s+ \omega_n^{2} ={0}
+$$
+
+with $\zeta$ called  damping ratio and $\omega_n$ called 
+natural frequency. Both parameters will  affect the response of the system in time domain. We have the following empirical equations:
+
+* Settling Time: $T_s=\frac{4}{\zeta \omega_n}$
+
+* Peak Time: $T_p=\frac{\pi}{\omega_n\sqrt{1-\zeta^2}}$
+
+* Relation between  the percent overshoot ($\%OS$) and damping ratio $\zeta$: $\zeta=\frac{-\ln(\%OS/100)}{\sqrt{\pi^2+\ln^2(\%OS/100)}
+}$
+
+
+``` -->
+<p>The control block diagram for inverse dynamics control is shown below</p>
+<figure class="align-default" id="inverse-dynamics-control2">
+<a class="reference internal image-reference" href="../_images/inverse_dynamics_control2.jpeg"><img alt="../_images/inverse_dynamics_control2.jpeg" src="../_images/inverse_dynamics_control2.jpeg" style="width: 90%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 68 </span><span class="caption-text">Control diagram of joint space inverse dynamics
+control</span><a class="headerlink" href="#inverse-dynamics-control2" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="controller-3-impedance-control">
+<h2>Controller 3: Impedance Control<a class="headerlink" href="#controller-3-impedance-control" title="Link to this heading">#</a></h2>
+<p>Impedance control specifies a desired dynamic relationship between the joint tracking error and the applied torque so that the robot behaves like a virtual mass-damper-spring system in joint space. In joint coordinates, a common impedance law is</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{M}_d\ddot{\tilde{\boldsymbol{e}}}+\boldsymbol{D}_d\dot{\tilde{\boldsymbol{e}}}+\boldsymbol{K}_d\tilde{\boldsymbol{e}}=\boldsymbol{\tau}_{cmd},\]</div>
+<p>where</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\tilde{\boldsymbol{e}}=\boldsymbol{q}-\boldsymbol{q}_d\)</span> is the tracking error (note sign convention),</p></li>
+<li><p><span class="math notranslate nohighlight">\(\boldsymbol{M}_d,\boldsymbol{D}_d,\boldsymbol{K}_d\)</span> are the (positive definite) desired inertia, damping and stiffness matrices in joint space,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\boldsymbol{\tau}_{cmd}\)</span> is the commanded joint torque that enforces the impedance.</p></li>
+</ul>
+<p>One practical controller that implements joint-space impedance while compensating robot dynamics is</p>
+<div class="admonition-joint-impedance-control admonition">
+<p class="admonition-title">Joint impedance control</p>
+<p>The controller for joint impedance control follows:</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{\tau}=\boldsymbol{B}(\boldsymbol{q})\boldsymbol{M}_d^{-1}\big(\boldsymbol{K}_d(\boldsymbol{q}_d-\boldsymbol{q})-\boldsymbol{D}_d\dot{\boldsymbol{q}}\big)+\boldsymbol{C}(\boldsymbol{q},\dot{\boldsymbol{q}})\dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q}).\]</div>
+<p>with <span class="math notranslate nohighlight">\(\boldsymbol{M}_d,\boldsymbol{D}_d,\boldsymbol{K}_d\)</span> are  (positive definite) desired inertia, damping and stiffness matrices in joint space.</p>
+</div>
+<p>This controller uses model compensation (the <span class="math notranslate nohighlight">\(\boldsymbol{B},\boldsymbol{C},\boldsymbol{g}\)</span> terms) so that the closed-loop joint dynamics approximate</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{M}_d(\ddot{\boldsymbol{q}}-\ddot{\boldsymbol{q}}_d)+\boldsymbol{D}_d(\dot{\boldsymbol{q}}-\dot{\boldsymbol{q}}_d)+\boldsymbol{K}_d(\boldsymbol{q}-\boldsymbol{q}_d)=\boldsymbol{0}.\]</div>
+<p>Remarks and design notes:</p>
+<ul class="simple">
+<li><p>Choosing <span class="math notranslate nohighlight">\(\boldsymbol{M}_d\)</span> small makes the system more responsive (low apparent inertia); larger <span class="math notranslate nohighlight">\(\boldsymbol{K}_d\)</span> increases stiffness around the desired pose.</p></li>
+<li><p>Diagonal <span class="math notranslate nohighlight">\(\boldsymbol{M}_d,\boldsymbol{D}_d,\boldsymbol{K}_d\)</span> are common and simplify tuning: pick each joint’s stiffness and damping independently.</p></li>
+<li><p>If the robot model is uncertain, reduce reliance on full model compensation and add robust terms (e.g., higher damping) or use adaptive/robust control techniques.</p></li>
+</ul>
+<p>Simple discrete-time implementation (control loop at rate <span class="math notranslate nohighlight">\(1/\Delta t\)</span>):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># assume numpy imported as np, and functions get_q(), get_qdot(), send_torque(tau)</span>
+<span class="n">M_d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="mf">0.5</span><span class="p">]</span><span class="o">*</span><span class="n">n</span><span class="p">)</span>    <span class="c1"># desired inertia (example)</span>
+<span class="n">D_d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="mf">5.0</span><span class="p">]</span><span class="o">*</span><span class="n">n</span><span class="p">)</span>    <span class="c1"># desired damping</span>
+<span class="n">K_d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="mf">50.0</span><span class="p">]</span><span class="o">*</span><span class="n">n</span><span class="p">)</span>   <span class="c1"># desired stiffness</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">impedance_step</span><span class="p">(</span><span class="n">q_d</span><span class="p">,</span> <span class="n">q_d_dot</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">q_dot</span><span class="p">):</span>
+    <span class="n">e</span> <span class="o">=</span> <span class="n">q</span> <span class="o">-</span> <span class="n">q_d</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">q_dot</span> <span class="o">-</span> <span class="n">q_d_dot</span>
+    <span class="c1"># feedforward term (can include desired accel if available)</span>
+    <span class="n">tau</span> <span class="o">=</span> <span class="n">B</span><span class="p">(</span><span class="n">q</span><span class="p">)</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">M_d</span><span class="p">,</span> <span class="p">(</span><span class="n">K_d</span> <span class="o">@</span> <span class="p">(</span><span class="o">-</span><span class="n">e</span><span class="p">)</span> <span class="o">-</span> <span class="n">D_d</span> <span class="o">@</span> <span class="n">v</span><span class="p">))</span> <span class="o">+</span> <span class="n">C</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">q_dot</span><span class="p">)</span> <span class="o">@</span> <span class="n">q_dot</span> <span class="o">+</span> <span class="n">g</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">tau</span>
+
+<span class="c1"># in real loop:</span>
+<span class="c1"># q, q_dot = read_sensors()</span>
+<span class="c1"># tau_cmd = impedance_step(q_d, q_d_dot, q, q_dot)</span>
+<span class="c1"># send_torque(tau_cmd)</span>
+</pre></div>
+</div>
+<p>Include this section as a basis for experiments in class: students can vary <span class="math notranslate nohighlight">\(\boldsymbol{K}_d\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{D}_d\)</span> to observe compliant vs stiff behavior in simulation or on hardware.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./lec13-jsc"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../lec12-dyn/dyn.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Dynamics</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../lec14-osc/osc.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Operational Space Control</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Joint Space Control</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-of-robot-control">Overview of Robot Control</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Joint Space Control</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#controller-1-pd-control-with-gravity-compensation">Controller 1: PD Control with Gravity Compensation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#controller-2-inverse-dynamics-control">Controller 2: Inverse Dynamics Control</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#controller-3-impedance-control">Controller 3: Impedance Control</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Wanxin Jin @ IRIS Lab
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
