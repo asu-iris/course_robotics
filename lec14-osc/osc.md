@@ -54,7 +54,7 @@ with with $\boldsymbol{x}$ the current/actual robot end-effector pose, and  $\bo
 </br> 
 
 
-## PD Control with Gravity Compensation
+## Controller 1: PD Control with Gravity Compensation
 
 Given a stationary end-effector pose $\boldsymbol{x}_{d}$ ($\boldsymbol{\dot x}_{ d}=\boldsymbol{0}$), we want to design a controller {eq}`equ.osc_controller`
  such that from any initial robot configuration  $\boldsymbol{q}_0$, the controlled robot arm {eq}`equ.osc_sys` will eventually reach
@@ -75,21 +75,25 @@ with $\boldsymbol{K}_{P}$ and $\boldsymbol{K}_{D}$ are positive definite matrice
 ```
 
 
+```{dropdown} Lyapunov stability proof for PD controller (click to expand)
 
-
-Below, we will design the controller {eq}`equ.osc_controller` based on the Lyapunov method (see
+Below, we will prove {eq}`equ.osc_pd2` is stablizing the robot to the desired end-effector position, based on the Lyapunov method (see
 background of Lyapunov method in [Numerical Inverse Kinematics](chapter-nik)).
 
 
 
  First, we take the
 vector $\begin{bmatrix}\boldsymbol{e}\\
-\boldsymbol{\dot{q}}\end{bmatrix}$ as the control system state. Choose
+\boldsymbol{\dot{q}}\end{bmatrix}$ as the system state. Choose
 the following positive definite quadratic form as Lyapunov function:
 
-$$V(\dot{\boldsymbol{q}}, {\boldsymbol{e}})=\frac{1}{2} \dot{\boldsymbol{q}}^{T} \boldsymbol{B}(\boldsymbol{q}) \dot{\boldsymbol{q}}+\frac{1}{2} {\boldsymbol{e}}^{T} \boldsymbol{K}_{P} {\boldsymbol{e}}>0 \quad \forall \dot{\boldsymbol{q}}, {\boldsymbol{e}} \neq \mathbf{0}$$(equ.ocs_v)
+$$V(\dot{\boldsymbol{q}}, {\boldsymbol{e}})=\frac{1}{2} \dot{\boldsymbol{q}}^{T} \boldsymbol{B}(\boldsymbol{q}) \dot{\boldsymbol{q}}+\frac{1}{2} {\boldsymbol{e}}^{T} \boldsymbol{K}_{P} {\boldsymbol{e}}>0 \quad \forall \begin{bmatrix}\boldsymbol{e}\\
+\boldsymbol{\dot{q}}\end{bmatrix} \neq \mathbf{0}$$(equ.ocs_v)
 
-with $\boldsymbol{K}_{P}$ a  positive definite matrix. Then,
+with $\boldsymbol{K}_{P}$ a  positive definite matrix. 
+
+
+Then,
 
 $$\dot{V}=\dot{\boldsymbol{q}}^{T} \boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\frac{1}{2} \dot{\boldsymbol{q}}^{T} \dot{\boldsymbol{B}}(\boldsymbol{q}) \dot{\boldsymbol{q}}+\dot{\boldsymbol{e}}^{T} \boldsymbol{K}_{P} {\boldsymbol{e}}$$
 
@@ -105,24 +109,18 @@ and then
 
 $$\dot{V}=\dot{\boldsymbol{q}}^{T} \boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\frac{1}{2} \dot{\boldsymbol{q}}^{T} \dot{\boldsymbol{B}}(\boldsymbol{q}) \dot{\boldsymbol{q}}-\dot{\boldsymbol{q}}^{T} \boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K}_{P} {\boldsymbol{e}}$$(equ.ocs_vdot)
 
-Similar to the derivation in the  [previous chapter](chapter-cjc), we replace
-$\boldsymbol{B}\ddot{\boldsymbol{q}}$ in {eq}`equ.ocs_vdot` form dynamics {eq}`equ.osc_dyn`
- and consider the property that
+Similar to the derivation in  [joint space PD controller](chapter-cjc), we replace
+$\boldsymbol{B}\ddot{\boldsymbol{q}}$ in {eq}`equ.ocs_vdot` form closed-loop dynamics 
+
+$$\boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{F} \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\boldsymbol{g}(\boldsymbol{q})+\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K}_{P} {\boldsymbol{e}}-\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K}_{D} \boldsymbol{J}(\boldsymbol{q}) \dot{\boldsymbol{q}}$$ (equ.osc_sys2)
+
+ and consider the property 
 $\dot{\boldsymbol{B}}-2 \boldsymbol{C}$ is a
 skew-symmetric matrix.
 Then, {eq}`equ.ocs_vdot` becomes
 
-$$\dot{V}=\dot{\boldsymbol{q}}^{T}\left(\boldsymbol{u}-\boldsymbol{g}(\boldsymbol{q})-\boldsymbol{J}_{A}^{T}(\boldsymbol{q}) \boldsymbol{K}_{P} {\boldsymbol{e}}\right) .$$
 
-For the above $\dot{V}$ to be negative, we choose the controller
-
-
-$$\boldsymbol{u}=\boldsymbol{g}(\boldsymbol{q})+\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K}_{P} {\boldsymbol{e}}-\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K}_{D} \boldsymbol{J}(\boldsymbol{q}) \dot{\boldsymbol{q}}$$(equ.osc_pd)
-
-
-with $\boldsymbol{K}_{D}$ positive definite, then,
-
-$$\dot{V}=-\dot{\boldsymbol{q}}^{T} \boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K}_{D} \boldsymbol{J}(\boldsymbol{q}) \dot{\boldsymbol{q}} \quad <0,  \quad \forall \quad\boldsymbol{\dot{q}}\quad\text{with} \quad \boldsymbol{J}(\boldsymbol{q})\dot{\boldsymbol{q}} \neq \mathbf{0}$$(equ.osc_vdot2)
+$$\dot{V}=-\dot{\boldsymbol{q}}^{T} \boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K}_{D} \boldsymbol{J}(\boldsymbol{q}) \dot{\boldsymbol{q}} \quad <0,  \quad \forall \boldsymbol{\dot{q}}\quad\text{with} \quad \boldsymbol{J}(\boldsymbol{q})\dot{\boldsymbol{q}} \neq \mathbf{0}$$(equ.osc_vdot2)
 
 which says the Lyapunov function decreases as long as
 $\boldsymbol{J}(\boldsymbol{q})\dot{\boldsymbol{q}} \neq \mathbf{0}$.
@@ -135,17 +133,18 @@ consider the non-redundant non-singularity of matrix
 $\boldsymbol{J}(\boldsymbol{q})$. Then, the equilibrium condition
 $\boldsymbol{J}(\boldsymbol{q})\dot{\boldsymbol{q}}=\mathbf{0}$ means
 that $\dot{\boldsymbol{q}}=\mathbf{0}$ and further
-$\ddot{\boldsymbol{q}} =\mathbf{0}$. To find the robot equilibrium configuration, we look at the robot arm dynamics with controller
-
-$$\boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{F} \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\boldsymbol{g}(\boldsymbol{q})+\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K}_{P} {\boldsymbol{e}}-\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K}_{D} \boldsymbol{J}(\boldsymbol{q}) \dot{\boldsymbol{q}}$$ (equ.osc_sys2)
-
+$\ddot{\boldsymbol{q}} =\mathbf{0}$. To find the robot equilibrium configuration, we look at {eq}`equ.osc_sys2`.
 With the condition $\dot{\boldsymbol{q}}=\mathbf{0}$, it follows that
-$\ddot{\boldsymbol{q}} =\mathbf{0}$, and then the above {eq}`equ.osc_sys2` becomes
+$\ddot{\boldsymbol{q}} =\mathbf{0}$, and then the above  becomes
 
 $$\boldsymbol{J}^{T}(\boldsymbol{q}) \boldsymbol{K}_{P} {\boldsymbol{e}}=\mathbf{0}\quad \rightarrow\quad {\boldsymbol{e}}=\boldsymbol{x}_{d}-\boldsymbol{x}_{e}=\mathbf{0}$$(equ.osc_equiv)
 
 This concludes that the controlled robot arm will asymptotically reach
-$\boldsymbol{x}_d$. The corresponding control diagram is shown below.
+$\boldsymbol{x}_d$. 
+
+```
+
+The corresponding control diagram is shown below.
 
 
 
@@ -163,51 +162,36 @@ compensation
 
 
 
-</br> </br> </br>
+</br> 
 
-## OSC Inverse Dynamics Control
+##  Controller 2: Inverse Dynamics Control
 One limitation of the OSC PD Control is that the controller can only follow a stationary desired $\boldsymbol{x}_d$
-, but is not good at tracking a fast-changing desired $\boldsymbol{x}_d$ (i.e., $\boldsymbol{\dot x}_d\neq \boldsymbol{0}$). OSC Inverse Dynamics Control is to address so.
+, but is not good at tracking a fast-changing desired $\boldsymbol{x}_d$ (i.e., $\boldsymbol{\dot x}_d\neq \boldsymbol{0}$). Inverse Dynamics Control can be used.
 
-Recall the joint space inverse dynamics control  in the  [previous chapter](chapter-cjc). If we  set the controller as
-form
 
+```{admonition} Inverse dynamics control 
 
 $$
     \boldsymbol{u}=\boldsymbol{B}(\boldsymbol{q}) \boldsymbol{y}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})$$(equ.osc_u)
 
-
-where $\boldsymbol{y}$ is a new input vector. The  controller directly leads to the controlled
-robot arm {eq}`equ.osc_sys` as
-
-$$\boldsymbol{B}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})=\boldsymbol{B}(\boldsymbol{q}) \boldsymbol{y}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})$$(equ.ocs_sys2)
-
-further simplified as 
+with
 
 $$
-\boldsymbol{\ddot{q}}=\boldsymbol{y}$$ (equ.ocs_dyn_new)
+    \boldsymbol{y}=\boldsymbol{J}^{-1}(\boldsymbol{q})\left(\ddot{\boldsymbol{x}}_{d}+\boldsymbol{K}_{D} \dot{{\boldsymbol{e}}}+\boldsymbol{K}_{P} {\boldsymbol{e}}-\dot{\boldsymbol{J}}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}\right)$$(equ.ocs_sys2)
 
-Again, we will discuss how to set
-this new input $\boldsymbol{y}$ below. The new input $\boldsymbol{y}$ is designed  make the robot arm track a changing $\boldsymbol{x}_{d}(t)$. To this end, we
-differentiate the jacobian equation
-
-$$\dot{\boldsymbol{x}}=\boldsymbol{J}(\boldsymbol{q})\dot{\boldsymbol{q}}$$
-
-on both side with respect to time $t$, leading to
+Here, 
 
 $$
-    \ddot{\boldsymbol{x}}=\boldsymbol{J}(\boldsymbol{q}) \ddot{\boldsymbol{q}}+\dot{\boldsymbol{J}}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}$$(equ.osc_djac)
+    \boldsymbol{K}_{P}=\operatorname{diag}\left\{\omega_{1}^{2}, \ldots, \omega_{r}^{2}\right\} \quad \boldsymbol{K}_{D}=\operatorname{diag}\left\{2 \zeta_{1} \omega_{1}, \ldots, 2 \zeta_{r} \omega_{r}\right\}$$
 
-The above {eq}`equ.osc_djac` suggests the following choice of
-$\boldsymbol{y}$:
+with with $\zeta_i$  the damping ratio and  $\omega_{i}$  the natural frequency.
+```
 
-$$
-    \boldsymbol{y}=\boldsymbol{J}^{-1}(\boldsymbol{q})\left(\ddot{\boldsymbol{x}}_{d}+\boldsymbol{K}_{D} \dot{{\boldsymbol{e}}}+\boldsymbol{K}_{P} {\boldsymbol{e}}-\dot{\boldsymbol{J}}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}\right)$$(equ.osc_y)
 
-with $\boldsymbol{K}_{P}$ and $\boldsymbol{K}_{D}$ positive definite
-matrices. In fact, plugging {eq}`equ.osc_y`
- to {eq}`equ.osc_djac`
- leads to the error dynamics
+```{dropdown} Stability proof for Inverse Dynamics Control (click to expand)
+
+Plugging {eq}`equ.osc_u`
+ to {eq}`equ.ocs_sys2` to the closed-loop dynamics {eq}`equ.osc_sys`, we have the following error dynamics
 
 $$\ddot{{\boldsymbol{e}}}+\boldsymbol{K}_{D} \dot{{\boldsymbol{e}}}+\boldsymbol{K}_{P} {\boldsymbol{e}}=\mathbf{0}$$
 
@@ -222,7 +206,7 @@ $$
 with with $\zeta_i$  the damping ratio and  $\omega_{i}$  the natural frequency.
 Then, the end-effector of the controlled robot arm will behave like a linear second-order (mass-spring-damper) system. 
 
-
+```
 
 
 
@@ -240,23 +224,3 @@ compensation
 ```
 
 
-
-In sum, we recapitulate the operational space inverse dynamics control below
-
-```{admonition} OCS inverse dynamics control 
-
-$$
-    \boldsymbol{u}=\boldsymbol{B}(\boldsymbol{q}) \boldsymbol{y}+\boldsymbol{C}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}+\boldsymbol{g}(\boldsymbol{q})$$
-
-with
-
-$$
-    \boldsymbol{y}=\boldsymbol{J}^{-1}(\boldsymbol{q})\left(\ddot{\boldsymbol{x}}_{d}+\boldsymbol{K}_{D} \dot{{\boldsymbol{e}}}+\boldsymbol{K}_{P} {\boldsymbol{e}}-\dot{\boldsymbol{J}}(\boldsymbol{q}, \dot{\boldsymbol{q}}) \dot{\boldsymbol{q}}\right)$$
-
-Here, 
-
-$$
-    \boldsymbol{K}_{P}=\operatorname{diag}\left\{\omega_{1}^{2}, \ldots, \omega_{r}^{2}\right\} \quad \boldsymbol{K}_{D}=\operatorname{diag}\left\{2 \zeta_{1} \omega_{1}, \ldots, 2 \zeta_{r} \omega_{r}\right\}$$
-
-with with $\zeta_i$  the damping ratio and  $\omega_{i}$  the natural frequency.
-```
